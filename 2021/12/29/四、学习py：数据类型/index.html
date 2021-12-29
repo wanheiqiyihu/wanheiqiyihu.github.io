@@ -20,30 +20,36 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="记录学习路上的一些东西">
-<meta property="og:type" content="website">
-<meta property="og:title" content="十三の博客">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="四、学习py：数据类型1.整型1.1定义12number &#x3D; 10age &#x3D; 123  1.2独有功能1234v1 &#x3D; 5#调用v1的独有功能，获取v1的二进制有多少个位组成。result &#x3D; v1.bit_length()print(result)#3    1.3公共功能加减乘除 123v1 &#x3D; 2v2 &#x3D; 3v3 &#x3D; v1 + v2  1.4转换 2.布尔类型2.1定义12dhk_is_a_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="四、学习py：数据类型">
+<meta property="og:url" content="http://example.com/2021/12/29/%E5%9B%9B%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
 <meta property="og:site_name" content="十三の博客">
-<meta property="og:description" content="记录学习路上的一些东西">
+<meta property="og:description" content="四、学习py：数据类型1.整型1.1定义12number &#x3D; 10age &#x3D; 123  1.2独有功能1234v1 &#x3D; 5#调用v1的独有功能，获取v1的二进制有多少个位组成。result &#x3D; v1.bit_length()print(result)#3    1.3公共功能加减乘除 123v1 &#x3D; 2v2 &#x3D; 3v3 &#x3D; v1 + v2  1.4转换 2.布尔类型2.1定义12dhk_is_a_">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/12/29/%E5%9B%9B%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/image-20211228212654320.png">
+<meta property="og:image" content="http://example.com/2021/12/29/%E5%9B%9B%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/image-20211229211248169.png">
+<meta property="og:image" content="http://example.com/2021/12/29/%E5%9B%9B%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/image-20211229212513337.png">
+<meta property="article:published_time" content="2021-12-29T15:16:16.000Z">
+<meta property="article:modified_time" content="2021-12-29T15:21:11.293Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/12/29/%E5%9B%9B%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/image-20211228212654320.png">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2021/12/29/%E5%9B%9B%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>十三の博客</title>
+  <title>四、学习py：数据类型 | 十三の博客</title>
   
 
 
@@ -151,9 +157,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -169,10 +176,9 @@
       <meta itemprop="name" content="十三の博客">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/29/%E5%9B%9B%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">四、学习py：数据类型</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          四、学习py：数据类型
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -205,7 +211,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="四、学习py：数据类型"><a href="#四、学习py：数据类型" class="headerlink" title="四、学习py：数据类型"></a>四、学习py：数据类型</h1><h2 id="1-整型"><a href="#1-整型" class="headerlink" title="1.整型"></a>1.整型</h2><h3 id="1-1定义"><a href="#1-1定义" class="headerlink" title="1.1定义"></a>1.1定义</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">number = <span class="number">10</span></span><br><span class="line">age = <span class="number">123</span></span><br></pre></td></tr></table></figure>
+        <h1 id="四、学习py：数据类型"><a href="#四、学习py：数据类型" class="headerlink" title="四、学习py：数据类型"></a>四、学习py：数据类型</h1><h2 id="1-整型"><a href="#1-整型" class="headerlink" title="1.整型"></a>1.整型</h2><h3 id="1-1定义"><a href="#1-1定义" class="headerlink" title="1.1定义"></a>1.1定义</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">number = <span class="number">10</span></span><br><span class="line">age = <span class="number">123</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="1-2独有功能"><a href="#1-2独有功能" class="headerlink" title="1.2独有功能"></a>1.2独有功能</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">v1 = <span class="number">5</span></span><br><span class="line"><span class="comment">#调用v1的独有功能，获取v1的二进制有多少个位组成。</span></span><br><span class="line">result = v1.bit_length()</span><br><span class="line"><span class="built_in">print</span>(result)<span class="comment">#3</span></span><br></pre></td></tr></table></figure>
 
@@ -454,741 +460,31 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> decimal</span><br><span class="line">v1 = decimal.Decimal(<span class="string">&quot;0.1&quot;</span>)</span><br><span class="line">v2 = decimal.Decimal(<span class="string">&quot;0.2&quot;</span>)</span><br><span class="line">v3 = v1 + v2</span><br><span class="line"><span class="built_in">print</span>(v3)<span class="comment">#0.3</span></span><br></pre></td></tr></table></figure>
 
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/28/%E4%B8%89%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A-%E4%BB%A3%E7%A0%81%E7%9A%84%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F-%E8%BF%9B%E5%88%B6-%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E7%9A%84%E5%8D%95%E4%BD%8D-%E7%BC%96%E7%A0%81/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/28/%E4%B8%89%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A-%E4%BB%A3%E7%A0%81%E7%9A%84%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F-%E8%BF%9B%E5%88%B6-%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E7%9A%84%E5%8D%95%E4%BD%8D-%E7%BC%96%E7%A0%81/" class="post-title-link" itemprop="url">三、学习py： 代码的运行方式 进制 计算机中的单位 编码</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-12-28 21:06:03 / 修改时间：21:06:31" itemprop="dateCreated datePublished" datetime="2021-12-28T21:06:03+08:00">2021-12-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">-python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="三、学习py：-代码的运行方式-进制-计算机中的单位-编码"><a href="#三、学习py：-代码的运行方式-进制-计算机中的单位-编码" class="headerlink" title="三、学习py： 代码的运行方式 进制 计算机中的单位 编码"></a>三、学习py： 代码的运行方式 进制 计算机中的单位 编码</h1><h2 id="1-python代码的运行方式"><a href="#1-python代码的运行方式" class="headerlink" title="1.python代码的运行方式"></a>1.python代码的运行方式</h2><h3 id="1-1脚本式"><a href="#1-1脚本式" class="headerlink" title="1.1脚本式"></a>1.1脚本式</h3><p>文件，用解释器运行。</p>
-<p>本质上pycharm也是脚本式。</p>
-<h3 id="1-2交互式"><a href="#1-2交互式" class="headerlink" title="1.2交互式"></a>1.2交互式</h3><p>在终端直接进入python解释器，即为交互式。（也可以称进入了py的交互式环境。）</p>
-<p>在pycharm中进入Terminal 也可以进入交互式环境。</p>
-<h2 id="2-进制"><a href="#2-进制" class="headerlink" title="2.进制"></a>2.进制</h2><p>计算机中底层所有的数据都是以二进制存在。</p>
-<h2 id="3-计算机中的单位"><a href="#3-计算机中的单位" class="headerlink" title="3.计算机中的单位"></a>3.计算机中的单位</h2><h3 id="3-1单位b-bit-位"><a href="#3-1单位b-bit-位" class="headerlink" title="3.1单位b(bit),位"></a>3.1单位b(bit),位</h3><p>1,1位</p>
-<p>101，3位</p>
-<h3 id="3-2单位B（byte），字节"><a href="#3-2单位B（byte），字节" class="headerlink" title="3.2单位B（byte），字节"></a>3.2单位B（byte），字节</h3><p>8位是一个字节</p>
-<h3 id="3-3单位KB（kilobyte），千字节"><a href="#3-3单位KB（kilobyte），千字节" class="headerlink" title="3.3单位KB（kilobyte），千字节"></a>3.3单位KB（kilobyte），千字节</h3><p>1024个字节就是1KB</p>
-<h3 id="3-4单位m-g-t"><a href="#3-4单位m-g-t" class="headerlink" title="3.4单位m g t"></a>3.4单位m g t</h3><h2 id="4-编码"><a href="#4-编码" class="headerlink" title="4.编码"></a>4.编码</h2><p>编码，文字和二进制之间的一个对照表。</p>
-<h3 id="4-1-ASCII编码"><a href="#4-1-ASCII编码" class="headerlink" title="4.1 ASCII编码"></a>4.1 ASCII编码</h3><p>ascii码规定使用一个字节来表示字母与二进制的对应关系。</p>
-<h3 id="4-2-gb-2312编码"><a href="#4-2-gb-2312编码" class="headerlink" title="4.2 gb-2312编码"></a>4.2 gb-2312编码</h3><p>gb-2312编码，只有中文的文字。</p>
-<p>gbk编码，对gb2312进行扩展，包含了中日韩等文字。（其中包含了两万多的对应关系）</p>
-<h3 id="4-3Unicode"><a href="#4-3Unicode" class="headerlink" title="4.3Unicode"></a>4.3Unicode</h3><p>Unicode也被称为万国码，为全球的每个文字都分配了一个码位（二进制表示）。</p>
-<p>ucs2：用两个字节表示一个文字</p>
-<p>ucs4：用四个字节表示一个文字</p>
-<h3 id="4-4-utf-8编码"><a href="#4-4-utf-8编码" class="headerlink" title="4.4 utf-8编码"></a>4.4 utf-8编码</h3><p>包含了所有文字与二进制对应的关系，也是全球应用最广泛的一种编码。</p>
-<p>本质上：utf-8是对Unicode的一种压缩，用尽量少的二进制去与文字进行对应。</p>
-<h3 id="4-5python相关的代码"><a href="#4-5python相关的代码" class="headerlink" title="4.5python相关的代码"></a>4.5python相关的代码</h3><p>字符串（str） “dhk是一个小丑”   Unicode处理  一般在内存</p>
-<p>字节（byte）   “dongganshixiaochou“    utf-8编码  or  gbk编码   一般用于文件  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">v1 = <span class="string">&quot;越江&quot;</span>.encode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">v2 = <span class="string">&quot;越江&quot;</span>.encode(<span class="string">&quot;gbk&quot;</span>)</span><br><span class="line"><span class="comment">#将文字转化为编码</span></span><br></pre></td></tr></table></figure>
-
-<p>将一个字符串写入到一个文件中。所以在存储写入wb文件的时候，需要把str转化为utf-8.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&quot;dhk是一个小丑&quot;</span></span><br><span class="line">data = name.encode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"><span class="comment">#打开一个文件</span></span><br><span class="line">file_object = <span class="built_in">open</span>(<span class="string">&quot;log.txt&quot;</span>,mode = <span class="string">&quot;wb&quot;</span>)</span><br><span class="line"><span class="comment">#在文件中写内容</span></span><br><span class="line">file_object.write(data)</span><br><span class="line"><span class="comment">#关闭文件</span></span><br><span class="line">file_object.close()</span><br></pre></td></tr></table></figure>
-
-<p>file函数的相关操作：<a target="_blank" rel="noopener" href="https://www.runoob.com/python/file-methods.html">Python File(文件) 方法 | 菜鸟教程 (runoob.com)</a></p>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/28/%E4%B8%89%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A-%E4%BB%A3%E7%A0%81%E7%9A%84%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F-%E8%BF%9B%E5%88%B6-%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E7%9A%84%E5%8D%95%E4%BD%8D-%E7%BC%96%E7%A0%81/" rel="prev" title="三、学习py： 代码的运行方式 进制 计算机中的单位 编码">
+      <i class="fa fa-chevron-left"></i> 三、学习py： 代码的运行方式 进制 计算机中的单位 编码
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
   
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/28/%E4%BA%8C%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5%EF%BC%88while%EF%BC%89break-continue-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96-%E8%BF%90%E7%AE%97%E7%AC%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/28/%E4%BA%8C%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5%EF%BC%88while%EF%BC%89break-continue-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96-%E8%BF%90%E7%AE%97%E7%AC%A6/" class="post-title-link" itemprop="url">二、学习py：循环语句（while）break continue 字符串格式化 运算符</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-12-28 18:19:04 / 修改时间：18:20:52" itemprop="dateCreated datePublished" datetime="2021-12-28T18:19:04+08:00">2021-12-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">-python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="二、学习py：循环语句（while）break-continue-字符串格式化-运算符"><a href="#二、学习py：循环语句（while）break-continue-字符串格式化-运算符" class="headerlink" title="二、学习py：循环语句（while）break continue 字符串格式化 运算符"></a>二、学习py：循环语句（while）break continue 字符串格式化 运算符</h2><h2 id="1-1while循环格式"><a href="#1-1while循环格式" class="headerlink" title="1.1while循环格式"></a>1.1while循环格式</h2><p>while  条件 :</p>
-<p>​    代码    </p>
-<p>其中若是while中的条件一直成立，则会一直执行代码块。</p>
-<h2 id="1-2-定义布尔类型的时候记得首字母大写"><a href="#1-2-定义布尔类型的时候记得首字母大写" class="headerlink" title="1.2.定义布尔类型的时候记得首字母大写"></a>1.2.定义布尔类型的时候记得首字母大写</h2><h2 id="1-3-break"><a href="#1-3-break" class="headerlink" title="1.3.break"></a>1.3.break</h2><p>用于在while循环中帮助你终止循环，也就是说while代码中，break后面的代码则不会执行，当前循环立即终止。（所以学会了两种方式终止循环，条件判断和break终止）</p>
-<h2 id="1-4-continue"><a href="#1-4-continue" class="headerlink" title="1.4.continue"></a>1.4.continue</h2><p>在循环中用于结束本次循环，开始下一次循环。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开始&quot;</span>)</span><br><span class="line"><span class="keyword">while</span> 	<span class="literal">True</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;你好&quot;</span>)</span><br><span class="line">    <span class="keyword">continue</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;hi&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>输出</p>
-<p>你好</p>
-<p>你好</p>
-<p>你好</p>
-<p>…</p>
-<h3 id="ex2"><a href="#ex2" class="headerlink" title="ex2:"></a>ex2:</h3><p><img src="/2021/12/28/%E4%BA%8C%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5%EF%BC%88while%EF%BC%89break-continue-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96-%E8%BF%90%E7%AE%97%E7%AC%A6/image-20211228165707621.png" alt="image-20211228165707621"></p>
-<h3 id="ex3"><a href="#ex3" class="headerlink" title="ex3"></a>ex3</h3><p><img src="/2021/12/28/%E4%BA%8C%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5%EF%BC%88while%EF%BC%89break-continue-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96-%E8%BF%90%E7%AE%97%E7%AC%A6/image-20211228170016635.png" alt="image-20211228170016635"></p>
-<h2 id="1-5-while-else"><a href="#1-5-while-else" class="headerlink" title="1.5 while else"></a>1.5 while else</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> 条件：</span><br><span class="line"></span><br><span class="line">​    代码</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">​    代码</span><br></pre></td></tr></table></figure>
-
-<p>注：如果用break跳出代码，else在条件成立的时候依然不会执行。也就是说else只会在条件不成立的时候执行。</p>
-<h2 id="2-字符串格式化"><a href="#2-字符串格式化" class="headerlink" title="2.字符串格式化"></a>2.字符串格式化</h2><p>使用更加便携的形式实现字符串的拼接。</p>
-<h2 id="2-1"><a href="#2-1" class="headerlink" title="2.1 %"></a>2.1 %</h2><h4 id="2-1-1基本格式化操作-基于循序"><a href="#2-1-1基本格式化操作-基于循序" class="headerlink" title="2.1.1基本格式化操作(基于循序)"></a>2.1.1基本格式化操作(基于循序)</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&quot;越江&quot;</span></span><br><span class="line"></span><br><span class="line">age = <span class="number">123</span></span><br><span class="line"></span><br><span class="line">text = <span class="string">&quot;我叫%s ，今年%s岁.&quot;</span> %(name,age)</span><br></pre></td></tr></table></figure>
-
-<p>占位符分类：</p>
-<p>%s：字符串</p>
-<p>%d：整型</p>
-<h4 id="2-1-2基于名字的排序"><a href="#2-1-2基于名字的排序" class="headerlink" title="2.1.2基于名字的排序"></a>2.1.2基于名字的排序</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">message = <span class="string">&quot;%(name)s，你好！&quot;</span>%&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;dhk&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="2-1-3如果内容中包含了百分号"><a href="#2-1-3如果内容中包含了百分号" class="headerlink" title="2.1.3如果内容中包含了百分号"></a>2.1.3如果内容中包含了百分号</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">&quot;%s,这个东西我下了90%%了，但是断网了！&quot;</span>%<span class="string">&quot;兄弟&quot;</span></span><br><span class="line"><span class="built_in">print</span>(text)</span><br></pre></td></tr></table></figure>
-
-<p>注：要在内容的百分号后面多加一个百分号（也就是要用两个百分号）。</p>
-<h2 id="2-2-format（推荐）"><a href="#2-2-format（推荐）" class="headerlink" title="2.2 format（推荐）"></a>2.2 format（推荐）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">&quot;我叫&#123;0&#125;,今年&#123;1&#125;岁,真正的名字叫做&#123;0&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;越江&quot;</span>,<span class="string">&quot;99&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">&quot;我叫&#123;n1&#125;&quot;</span>.<span class="built_in">format</span>(n1 = <span class="string">&quot;越江&quot;</span>)</span><br><span class="line"><span class="comment">#data = text.format(n1=&quot;越江&quot;)</span></span><br><span class="line"><span class="comment">#模板复用</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-3-f-其實我個人更喜歡這種"><a href="#2-3-f-其實我個人更喜歡這種" class="headerlink" title="2.3 f(其實我個人更喜歡這種)"></a>2.3 f(其實我個人更喜歡這種)</h2><p>到python3.6版本之后，更便捷。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dhk = <span class="string">&quot;動感&quot;</span></span><br><span class="line">age = <span class="number">12</span></span><br><span class="line">text = <span class="string">f&quot;<span class="subst">&#123;dhk&#125;</span>是一個小丑，今年<span class="subst">&#123;age:#b&#125;</span>岁了&quot;</span></span><br><span class="line"><span class="comment">#将数字转换成二进制进行显示（一个扩展罢了，其中进制的代表符号和数电里面一样。）</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="3-运算符"><a href="#3-运算符" class="headerlink" title="3.运算符"></a>3.运算符</h2><h3 id="3-1一些平时见过的运算符"><a href="#3-1一些平时见过的运算符" class="headerlink" title="3.1一些平时见过的运算符"></a>3.1一些平时见过的运算符</h3><p>// 取整除</p>
-<p>** 幂</p>
-<p>c += a  等效于 c = c = a（其他运算符也以此类推）</p>
-<h3 id="3-1-2成员运算"><a href="#3-1-2成员运算" class="headerlink" title="3.1.2成员运算"></a>3.1.2成员运算</h3><p>in 如果在指定序列中找到值返回True</p>
-<p>not in 就是in的取反</p>
-<h3 id="3-1-3逻辑运算的优先级"><a href="#3-1-3逻辑运算的优先级" class="headerlink" title="3.1.3逻辑运算的优先级"></a>3.1.3逻辑运算的优先级</h3><p>加减乘除&gt;比较&gt;not and or</p>
-<p>and 优先级是在 or 前面</p>
-<p>如果要改变则使用圆括号进行改变（就和小学的加减乘除一样。）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/28/%E4%B8%80%EF%BC%8C%E5%AD%A6%E4%B9%A0py%EF%BC%9A-%E5%B8%83%E5%B0%94-del-insert-input-int%EF%BC%88%EF%BC%89%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%BA%E7%A9%BA%E7%9A%84%E5%88%A4%E6%96%AD-elif/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/28/%E4%B8%80%EF%BC%8C%E5%AD%A6%E4%B9%A0py%EF%BC%9A-%E5%B8%83%E5%B0%94-del-insert-input-int%EF%BC%88%EF%BC%89%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%BA%E7%A9%BA%E7%9A%84%E5%88%A4%E6%96%AD-elif/" class="post-title-link" itemprop="url">一，学习py：{} 布尔 del insert input int（）字符串为空的判断 elif</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-12-28 15:59:48 / 修改时间：16:00:33" itemprop="dateCreated datePublished" datetime="2021-12-28T15:59:48+08:00">2021-12-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">-python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>一，学习py：{} 布尔 del insert input int（）字符串为空的判断 elif</p>
-<p>1.”a in b”返回布尔值，判断b列表中是否有a。</p>
-<p>2.”x.insert(位置，”内容”)”在列表x中插入数据。</p>
-<p>3.“del .x”可以用来删除变量和列表中的值。</p>
-<p>4.input 读取的值都是字符串</p>
-<p>5.使用“int”关键字来将变量转换为int类型，ex：print( int(a) )</p>
-<p>6.使用“{}”在字符串中引用变量（需要在字符串最前面引号前面加上“f”）</p>
-<p>7.关于字符串为空的判断</p>
-<p>len(s) ==0</p>
-<p>ex：len(s) ==0 则字符串为空if len(username) ==0 or len(password) == 0: #判断输入的用户名或密码是否为空</p>
-<p>isspace判断是否字符串全部是空格</p>
-<p>s.isspace() == Trueif username.isspace() or password.isspace(): #判断输入的用户名或密码是否为空</p>
-<p>8.</p>
-<p>去两边空格：str.strip()</p>
-<p>去左空格：str.lstrip()</p>
-<p>去右空格：str.rstrip()</p>
-<p>去两边字符串：str.strip(‘d’)，相应的也有lstrip，rstrip。</p>
-<p>9.”if”后面用冒号”:{}”</p>
-<p>10.py中的else if = elif</p>
-<p>参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39725118/article/details/111822050">https://blog.csdn.net/weixin_39725118/article/details/111822050</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/27/%E5%BC%BA%E7%BD%91%E6%9D%AF-%E9%9A%8F%E4%BE%BF%E6%B3%A8%EF%BC%88sql%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8Aselect%E7%BB%95%E8%BF%87%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/27/%E5%BC%BA%E7%BD%91%E6%9D%AF-%E9%9A%8F%E4%BE%BF%E6%B3%A8%EF%BC%88sql%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8Aselect%E7%BB%95%E8%BF%87%EF%BC%89/" class="post-title-link" itemprop="url">强网杯 随便注（sql堆叠注入以及select绕过）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-12-27 20:08:44 / 修改时间：20:09:11" itemprop="dateCreated datePublished" datetime="2021-12-27T20:08:44+08:00">2021-12-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>强网杯 随便注（sql堆叠注入以及select绕过）</p>
-<p>[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/chalan630/p/12583667.html">强网杯 2019]随便注 - chalan630 - 博客园 (cnblogs.com)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/27/%E5%B9%B3%E6%97%B6%E8%A6%81%E6%B3%A8%E6%84%8Furl%E5%9C%B0%E5%9D%80%E9%87%8C%E9%9D%A2%E7%9A%84%E4%B8%9C%E8%A5%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/27/%E5%B9%B3%E6%97%B6%E8%A6%81%E6%B3%A8%E6%84%8Furl%E5%9C%B0%E5%9D%80%E9%87%8C%E9%9D%A2%E7%9A%84%E4%B8%9C%E8%A5%BF/" class="post-title-link" itemprop="url">平时要注意url地址里面的东西</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-12-27 20:08:08 / 修改时间：20:08:29" itemprop="dateCreated datePublished" datetime="2021-12-27T20:08:08+08:00">2021-12-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>有可能会有重要的参数<br>然后base64之类的</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/" class="post-title-link" itemprop="url">可变变量 {}代替[] eval</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-12-27 20:05:57 / 修改时间：20:07:53" itemprop="dateCreated datePublished" datetime="2021-12-27T20:05:57+08:00">2021-12-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="bugku做题心得-闪电十六鞭"><a href="#bugku做题心得-闪电十六鞭" class="headerlink" title="bugku做题心得  闪电十六鞭"></a>bugku做题心得  闪电十六鞭</h4><h1 id><a href="#" class="headerlink" title></a><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109185349070.png" alt="image-20211109185349070"></h1><p>关于php短标签知识</p>
-<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20211109190406505.png" alt="image-20211109190406505"></p>
-<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109191650731.png" alt="image-20211109191650731"></p>
-<p>关于php中大括号中的知识（这里使用{}代替了[]）</p>
-<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109192111707.png" alt="image-20211109192111707"></p>
-<p>然后就是用可变变量（变量覆盖）绕过了关键词检测。</p>
-<p>还有就是eval函数自带了&lt;?php 不用在继续补充了</p>
-<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109193424609.png" alt="image-20211109193424609"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/27/sha1%E5%92%8Cmd5%E7%BB%95%E8%BF%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/27/sha1%E5%92%8Cmd5%E7%BB%95%E8%BF%87/" class="post-title-link" itemprop="url">sha1和md5绕过</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-12-27 20:05:20 / 修改时间：20:05:46" itemprop="dateCreated datePublished" datetime="2021-12-27T20:05:20+08:00">2021-12-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>sha1和md5这两个加密函数无法处理数组<br>可用数组让两个数据内容不同但是加密之后都返回false</p>
-<p>还有一种绕过方法md5的</p>
-<p>$str1 = $_GET[‘str1’];<br>$str2 = $_GET[‘str2’];<br>if (md5($str1) == md5($str2)){<br>die(‘OK’); }</p>
-<p>php弱类型比较产生的漏洞</p>
-<p>想要满足这个判断只需要构造出MD5值为0e开头的字符串，这样的话弱类型比较会认为是科学技术法，0的多少次方都是0，因此可以绕过<br>有一些字符串的MD5值为0e开头，这里记录一下</p>
-<p>QNKCDZO<br>240610708<br>s878926199a<br>s155964671a<br>s214587387a<br>还有MD5和双MD5以后的值都是0e开头的</p>
-<p>CbDLytmyGm2xQyaLNhWn<br>770hQgrBOjrcqftrlaZk<br>7r4lGXCH2Ksu2JNT3BYM</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/" class="post-title-link" itemprop="url">preg_replace()函数的e漏洞</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-12-27 20:03:11 / 修改时间：20:04:55" itemprop="dateCreated datePublished" datetime="2021-12-27T20:03:11+08:00">2021-12-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="preg-replace-函数的-e漏洞"><a href="#preg-replace-函数的-e漏洞" class="headerlink" title="preg_replace()函数的/e漏洞"></a>preg_replace()函数的/e漏洞</h3><p><img src="/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/image-20211124220045332.png" alt="image-20211124220045332">使用案例：</p>
-<p><img src="/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3pod2hv,size_16,color_FFFFFF,t_70" alt="运用实例"></p>
-<p>以及php中的system命令</p>
-<p>cd  &amp;&amp;ls 是进入文件夹然后显示全部文件</p>
-<p>cat用于打开php文件</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">preg_match绕过总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-12-27 20:01:07 / 修改时间：20:02:55" itemprop="dateCreated datePublished" datetime="2021-12-27T20:01:07+08:00">2021-12-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="preg-match绕过总结"><a href="#preg-match绕过总结" class="headerlink" title="preg_match绕过总结"></a>preg_match绕过总结</h1><h2 id="什么是preg-match"><a href="#什么是preg-match" class="headerlink" title="什么是preg_match"></a>什么是preg_match</h2><p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127190707622.png" alt="image-20211127190707622"></p>
-<p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127190733516.png" alt="image-20211127190733516"></p>
-<h2 id="绕过方法"><a href="#绕过方法" class="headerlink" title="绕过方法"></a>绕过方法</h2><p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127191003150.png" alt="image-20211127191003150"></p>
-<p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127191733611.png" alt="image-20211127191733611"></p>
-<p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127191742739.png" alt="image-20211127191742739"></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/20175211lyz/p/12198258.html">preg_match绕过总结 - MustaphaMond - 博客园 (cnblogs.com)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
 
 
 
@@ -1240,6 +536,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">四、学习py：数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%95%B4%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">1.整型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2%E7%8B%AC%E6%9C%89%E5%8A%9F%E8%83%BD"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2独有功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3%E5%85%AC%E5%85%B1%E5%8A%9F%E8%83%BD"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3公共功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.4转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%B8%83%E5%B0%94%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">2.布尔类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1%E5%AE%9A%E4%B9%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2%E7%8B%AC%E6%9C%89%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2独有功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3%E5%85%AC%E5%85%B1%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3公共功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5%E5%85%B6%E4%BB%96"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">3.字符串类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1%E5%AE%9A%E4%B9%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2%E7%8B%AC%E6%9C%89%E5%8A%9F%E8%83%BD%EF%BC%8813-48%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2独有功能（13&#x2F;48）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E6%98%AF%E4%BB%A5xx%E5%BC%80%E5%A4%B4%EF%BC%9F%E5%BE%97%E5%88%B0%E4%B8%80%E4%B8%AA%E5%B8%83%E5%B0%94%E5%80%BC"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">3.2.1判断字符串是否是以xx开头？得到一个布尔值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%BB%A5xx%E7%BB%93%E5%B0%BE%EF%BC%9F%E5%BE%97%E5%88%B0%E4%B8%80%E4%B8%AA%E5%B8%83%E5%B0%94%E5%80%BC"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">3.2.2判断字符串是否以xx结尾？得到一个布尔值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-3%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E5%8D%81%E8%BF%9B%E5%88%B6%E6%95%B0%EF%BC%9F%E5%BE%97%E5%88%B0%E4%B8%80%E4%B8%AA%E5%B8%83%E5%B0%94%E5%80%BC"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">3.2.3判断一个字符串是否为十进制数？得到一个布尔值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-4%E5%8E%BB%E9%99%A4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%A4%E8%BE%B9%E7%9A%84%E7%A9%BA%E6%A0%BC%E3%80%81%E6%8D%A2%E8%A1%8C%E7%AC%A6%E3%80%81%E5%88%B6%E8%A1%A8%E7%AC%A6%E3%80%81%E5%BE%97%E5%88%B0%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.3.2.4.</span> <span class="nav-text">3.2.4去除字符串两边的空格、换行符、制表符、得到一个新的字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-5%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%98%E6%88%90%E5%A4%A7%E5%86%99%EF%BC%8C%E5%BE%97%E5%88%B0%E4%B8%80%E4%B8%AA%E6%96%B0%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.3.2.5.</span> <span class="nav-text">3.2.5字符串变成大写，得到一个新字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-6%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%98%E6%88%90%E5%B0%8F%E5%86%99%EF%BC%8C%E5%BE%97%E5%88%B0%E4%B8%80%E4%B8%AA%E6%96%B0%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.3.2.6.</span> <span class="nav-text">3.2.6字符串变成小写，得到一个新字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-7%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%86%85%E5%AE%B9%E7%9A%84%E6%9B%BF%E6%8D%A2%EF%BC%8C%E5%BE%97%E5%88%B0%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.3.2.7.</span> <span class="nav-text">3.2.7字符串的内容的替换，得到一个新的字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-8%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%87%E5%89%B2%EF%BC%8C%E5%BE%97%E5%88%B0%E4%B8%80%E4%B8%AA%E5%88%97%E8%A1%A8"><span class="nav-number">1.3.2.8.</span> <span class="nav-text">3.2.8字符串切割，得到一个列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-9%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5%EF%BC%8C%E5%BE%97%E5%88%B0%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.3.2.9.</span> <span class="nav-text">3.2.9字符串拼接，得到一个新的字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-10%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%EF%BC%8C%E5%BE%97%E5%88%B0%E6%96%B0%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.3.2.10.</span> <span class="nav-text">3.2.10字符串格式化，得到新的字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-11%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%AD%97%E8%8A%82%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.2.11.</span> <span class="nav-text">3.2.11字符串转换为字节类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-12%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%85%E5%AE%B9%E5%B1%85%E4%B8%AD%EF%BC%8C%E5%B1%85%E5%B7%A6%EF%BC%8C%E5%B1%85%E5%8F%B3"><span class="nav-number">1.3.2.12.</span> <span class="nav-text">3.2.12将字符串内容居中，居左，居右</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-13-%E5%A1%AB%E5%85%850"><span class="nav-number">1.3.2.13.</span> <span class="nav-text">3.2.13 填充0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-14%E8%A1%A5%E5%85%85%E5%87%BD%E6%95%B0random-%E5%90%8E%E9%9D%A2%E4%BC%9A%E5%86%99random%E6%A8%A1%E5%9D%97"><span class="nav-number">1.3.2.14.</span> <span class="nav-text">3.2.14补充函数random(后面会写random模块)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3%E5%85%AC%E5%85%B1%E5%8A%9F%E8%83%BD"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3公共功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1%E7%9B%B8%E5%8A%A0-str-str"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">3.3.1相加(str+str)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-2%E7%9B%B8%E4%B9%98%EF%BC%88str-int%EF%BC%89"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">3.3.2相乘（str*int）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-3%E9%95%BF%E5%BA%A6"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">3.3.3长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-4%E8%8E%B7%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%EF%BC%8C%E5%9F%BA%E4%BA%8E%E7%B4%A2%E5%BC%95"><span class="nav-number">1.3.3.4.</span> <span class="nav-text">3.3.4获取字符串中的字符，基于索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-5%E8%8E%B7%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%8C%E5%88%87%E7%89%87"><span class="nav-number">1.3.3.5.</span> <span class="nav-text">3.3.5获取字符串中的子序列，切片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-6%E6%AD%A5%E9%95%BF"><span class="nav-number">1.3.3.6.</span> <span class="nav-text">3.3.6步长</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-7%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.3.3.7.</span> <span class="nav-text">3.3.7循环</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8D%E5%8F%AF%E8%A2%AB%E4%BF%AE%E6%94%B9"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.5字符串不可被修改</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%88%97%E8%A1%A8%EF%BC%88list%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">4.列表（list）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1%E5%AE%9A%E4%B9%89"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2%E7%8B%AC%E6%9C%89%E5%8A%9F%E8%83%BD"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2独有功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-1%E8%BF%BD%E5%8A%A0%EF%BC%8C%E5%9C%A8%E5%8E%9F%E5%88%97%E8%A1%A8%E4%B8%AD%E5%B0%BE%E9%83%A8%E8%BF%BD%E5%8A%A0%E5%80%BC"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">4.2.1追加，在原列表中尾部追加值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-2%E6%89%B9%E9%87%8F%E8%BF%BD%E5%8A%A0"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">4.2.2批量追加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-3%E6%8F%92%E5%85%A5%EF%BC%8C%E5%9C%A8%E5%8E%9F%E5%88%97%E8%A1%A8%E7%9A%84%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E6%8F%92%E5%85%A5%E5%80%BC"><span class="nav-number">1.4.2.3.</span> <span class="nav-text">4.2.3插入，在原列表的指定位置插入值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-4%E5%9C%A8%E5%8E%9F%E5%88%97%E8%A1%A8%E4%B8%AD%E6%A0%B9%E6%8D%AE%E5%80%BC%E5%88%A0%E9%99%A4%EF%BC%88%E4%BB%8E%E5%B7%A6%E5%88%B0%E5%8F%B3%E6%89%BE%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%88%A0%E9%99%A4%EF%BC%89%E3%80%90%E5%A6%82%E6%9E%9C%E9%87%8C%E9%9D%A2%E6%89%BE%E4%B8%8D%E5%88%B0%E9%82%A3%E4%B8%AA%E5%80%BC%E5%B0%B1%E4%BC%9A%E6%8A%A5%E9%94%99%E3%80%91"><span class="nav-number">1.4.2.4.</span> <span class="nav-text">4.2.4在原列表中根据值删除（从左到右找到第一个删除）【如果里面找不到那个值就会报错】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-5%E5%9C%A8%E5%8E%9F%E5%88%97%E8%A1%A8%E4%B8%AD%E6%A0%B9%E6%8D%AE%E7%B4%A2%E5%BC%95%E5%88%A0%E9%99%A4%E6%9F%90%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="nav-number">1.4.2.5.</span> <span class="nav-text">4.2.5在原列表中根据索引删除某个元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-6%E6%B8%85%E7%A9%BA%E5%8E%9F%E5%88%97%E8%A1%A8"><span class="nav-number">1.4.2.6.</span> <span class="nav-text">4.2.6清空原列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-7%E6%A0%B9%E6%8D%AE%E5%80%BC%E8%8E%B7%E5%8F%96%E7%B4%A2%E5%BC%95%EF%BC%88%E4%BB%8E%E5%B7%A6%E5%88%B0%E5%8F%B3%E6%89%BE%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%88%A0%E9%99%A4%EF%BC%89%E3%80%90%E6%85%8E%E7%94%A8%EF%BC%8C%E6%89%BE%E4%B8%8D%E5%88%B0%E6%8A%A5%E9%94%99%E3%80%91"><span class="nav-number">1.4.2.7.</span> <span class="nav-text">4.2.7根据值获取索引（从左到右找到第一个删除）【慎用，找不到报错】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-8%E5%88%97%E8%A1%A8%E5%85%83%E7%B4%A0%E6%8E%92%E5%BA%8F"><span class="nav-number">1.4.2.8.</span> <span class="nav-text">4.2.8列表元素排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-9%E5%8F%8D%E8%BD%AC%E5%8E%9F%E5%88%97%E8%A1%A8"><span class="nav-number">1.4.2.9.</span> <span class="nav-text">4.2.9反转原列表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3%E5%85%AC%E5%85%B1%E5%8A%9F%E8%83%BD"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3公共功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-1%E7%9B%B8%E5%8A%A0"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">4.3.1相加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-2%E7%9B%B8%E4%B9%98"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">4.3.2相乘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-3%E8%BF%90%E7%AE%97%E7%AC%A6in%E5%8C%85%E5%90%AB"><span class="nav-number">1.4.3.3.</span> <span class="nav-text">4.3.3运算符in包含</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-4%E8%8E%B7%E5%8F%96%E9%95%BF%E5%BA%A6"><span class="nav-number">1.4.3.4.</span> <span class="nav-text">4.3.4获取长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-5%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.3.5.</span> <span class="nav-text">4.3.5索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-6%E5%88%87%E7%89%87"><span class="nav-number">1.4.3.6.</span> <span class="nav-text">4.3.6切片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-7%E6%AD%A5%E9%95%BF"><span class="nav-number">1.4.3.7.</span> <span class="nav-text">4.3.7步长</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-8%E6%80%9D%E7%BB%B4%E6%8B%93%E5%B1%95%EF%BC%88%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%88%A0%E9%99%A4%E5%A7%93%E8%91%A3%E7%9A%84%E5%8A%9F%E8%83%BD%EF%BC%89"><span class="nav-number">1.4.3.8.</span> <span class="nav-text">4.3.8思维拓展（实现一个删除姓董的功能）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.4类型的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5%E5%B5%8C%E5%A5%97"><span class="nav-number">1.4.5.</span> <span class="nav-text">4.5嵌套</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%85%83%E7%BB%84"><span class="nav-number">1.5.</span> <span class="nav-text">5.元组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1%E5%AE%9A%E4%B9%89"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2%E7%8B%AC%E6%9C%89%E5%8A%9F%E8%83%BD"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2独有功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3%E5%85%AC%E5%85%B1%E5%8A%9F%E8%83%BD"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.3公共功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.5.4.</span> <span class="nav-text">5.4转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5%E5%B5%8C%E5%A5%97"><span class="nav-number">1.5.5.</span> <span class="nav-text">5.5嵌套</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-1%E5%BA%94%E7%94%A8%E6%89%A9%E5%B1%95%EF%BC%8C%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86"><span class="nav-number">1.5.5.1.</span> <span class="nav-text">5.5.1应用扩展，实现用户登陆</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E9%9B%86%E5%90%88%EF%BC%88set%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">6.集合（set）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1%E5%AE%9A%E4%B9%89"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2%E7%8B%AC%E6%9C%89%E5%8A%9F%E8%83%BD"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2独有功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-1%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">6.2.1添加元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-2%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0"><span class="nav-number">1.6.2.2.</span> <span class="nav-text">6.2.2删除元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-3%E4%BA%A4%E9%9B%86"><span class="nav-number">1.6.2.3.</span> <span class="nav-text">6.2.3交集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-4%E5%B9%B6%E9%9B%86"><span class="nav-number">1.6.2.4.</span> <span class="nav-text">6.2.4并集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-5%E5%B7%AE%E9%9B%86"><span class="nav-number">1.6.2.5.</span> <span class="nav-text">6.2.5差集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3%E5%85%AC%E5%85%B1%E5%8A%9F%E8%83%BD"><span class="nav-number">1.6.3.</span> <span class="nav-text">6.3公共功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-1%E5%87%8F%EF%BC%8C%E5%B0%B1%E6%98%AF%E8%AE%A1%E7%AE%97%E5%B7%AE%E9%9B%86"><span class="nav-number">1.6.3.1.</span> <span class="nav-text">6.3.1减，就是计算差集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-2%E5%8A%A0%EF%BC%8C%E5%B0%B1%E6%98%AF%E8%AE%A1%E7%AE%97%E4%BA%A4%E9%9B%86"><span class="nav-number">1.6.3.2.</span> <span class="nav-text">6.3.2加，就是计算交集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-3-%EF%BC%8C%E8%AE%A1%E7%AE%97%E5%B9%B6%E9%9B%86"><span class="nav-number">1.6.3.3.</span> <span class="nav-text">6.3.3|，计算并集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-4%E9%95%BF%E5%BA%A6"><span class="nav-number">1.6.3.4.</span> <span class="nav-text">6.3.4长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-5for%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.6.3.5.</span> <span class="nav-text">6.3.5for循环</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.6.4.</span> <span class="nav-text">6.4转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5%E5%85%B6%E4%BB%96"><span class="nav-number">1.6.5.</span> <span class="nav-text">6.5其他</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-1%E9%9B%86%E5%90%88%E7%9A%84%E5%82%A8%E5%AD%98%E5%8E%9F%E7%90%86"><span class="nav-number">1.6.5.1.</span> <span class="nav-text">6.5.1集合的储存原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-2%E5%85%83%E7%B4%A0%E5%BF%85%E9%A1%BB%E5%8F%AF%E5%93%88%E5%B8%8C-%E6%89%80%E4%BB%A5%E4%BC%9A%E5%AD%98%E5%9C%A8hash%E7%A2%B0%E6%92%9E%E5%90%8E%E9%9D%A2%E4%BC%9A%E8%AF%B4"><span class="nav-number">1.6.5.2.</span> <span class="nav-text">6.5.2元素必须可哈希(所以会存在hash碰撞后面会说)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-3%E6%9F%A5%E6%89%BE%E7%9A%84%E9%80%9F%E5%BA%A6%E7%89%B9%E5%88%AB%E5%BF%AB"><span class="nav-number">1.6.5.3.</span> <span class="nav-text">6.5.3查找的速度特别快</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-4%E5%AF%B9%E6%AF%94%E5%92%8C%E5%B5%8C%E5%A5%97"><span class="nav-number">1.6.5.4.</span> <span class="nav-text">6.5.4对比和嵌套</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%AD%97%E5%85%B8%EF%BC%88dict%EF%BC%89"><span class="nav-number">1.7.</span> <span class="nav-text">7.字典（dict）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1%E5%AE%9A%E4%B9%89-%E9%94%AE%E5%BF%85%E9%A1%BB%E6%98%AF%E5%8F%AF%E5%93%88%E5%B8%8C%E7%9A%84"><span class="nav-number">1.7.1.</span> <span class="nav-text">7.1定义(键必须是可哈希的)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-1%E4%B8%80%E8%88%AC%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8%E5%AD%97%E5%85%B8"><span class="nav-number">1.7.1.1.</span> <span class="nav-text">7.1.1一般什么时候使用字典</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2%E7%8B%AC%E6%9C%89%E5%8A%9F%E8%83%BD"><span class="nav-number">1.7.2.</span> <span class="nav-text">7.2独有功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-1%E8%8E%B7%E5%8F%96%E5%80%BC"><span class="nav-number">1.7.2.1.</span> <span class="nav-text">7.2.1获取值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-2%E6%89%80%E6%9C%89%E7%9A%84%E9%94%AE"><span class="nav-number">1.7.2.2.</span> <span class="nav-text">7.2.2所有的键</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-3%E6%89%80%E6%9C%89%E7%9A%84%E5%80%BC"><span class="nav-number">1.7.2.3.</span> <span class="nav-text">7.2.3所有的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-4%E6%89%80%E6%9C%89%E7%9A%84%E9%94%AE%E5%80%BC"><span class="nav-number">1.7.2.4.</span> <span class="nav-text">7.2.4所有的键值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-5%E6%9B%B4%E6%96%B0%E5%AD%97%E5%85%B8%E9%94%AE%E5%80%BC%E5%AF%B9"><span class="nav-number">1.7.2.5.</span> <span class="nav-text">7.2.5更新字典键值对</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-6%E4%B8%80%E5%A4%84%E6%8C%87%E5%AE%9A%E9%94%AE%E5%80%BC%E5%AF%B9"><span class="nav-number">1.7.2.6.</span> <span class="nav-text">7.2.6一处指定键值对</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-6%E6%A1%88%E4%BE%8B%E6%89%A9%E5%B1%95"><span class="nav-number">1.7.2.7.</span> <span class="nav-text">7.2.6案例扩展</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3%E5%85%AC%E5%85%B1%E5%8A%9F%E8%83%BD"><span class="nav-number">1.7.3.</span> <span class="nav-text">7.3公共功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B9%9F%E5%B7%AE%E4%B8%8D%E5%A4%9A%E5%95%A6%EF%BC%8C%E5%B9%B6%E9%9B%86%EF%BC%8C%E9%95%BF%E5%BA%A6%EF%BC%8C%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%EF%BC%8C%E7%B4%A2%E5%BC%95%EF%BC%88%E9%94%AE%EF%BC%89%EF%BC%8C%E6%A0%B9%E6%8D%AE%E9%94%AE%E4%BF%AE%E6%94%B9%E5%80%BC%E5%92%8C%E5%88%A0%E9%99%A4%E5%80%BC%EF%BC%8Cfor%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.7.3.1.</span> <span class="nav-text">也差不多啦，并集，长度，是否包含，索引（键），根据键修改值和删除值，for循环</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4%E8%BD%AC%E6%8D%A2%E5%92%8C%E5%B5%8C%E5%A5%97"><span class="nav-number">1.7.4.</span> <span class="nav-text">7.4转换和嵌套</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%B5%AE%E7%82%B9%E5%9E%8B%EF%BC%88float%EF%BC%89"><span class="nav-number">1.8.</span> <span class="nav-text">8.浮点型（float）</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
