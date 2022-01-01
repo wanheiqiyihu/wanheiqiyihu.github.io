@@ -157,6 +157,242 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/01/Git%E4%B8%8EGit%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="记录学习路上的一些东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/01/Git%E4%B8%8EGit%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2/" class="post-title-link" itemprop="url">Git与Git文件导致源码泄露</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-01-01 22:26:49 / 修改时间：22:35:26" itemprop="dateCreated datePublished" datetime="2022-01-01T22:26:49+08:00">2022-01-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">-python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Git与Git文件导致源码泄露"><a href="#Git与Git文件导致源码泄露" class="headerlink" title="Git与Git文件导致源码泄露"></a>Git与Git文件导致源码泄露</h1><p>Git是目前世界上最先进的<strong>分布式版本控制系统</strong></p>
+<p>git泄露是常见的ctf题型，来看几个例子</p>
+<h2 id="Hello-World-i春秋-第二届春秋欢乐赛-web"><a href="#Hello-World-i春秋-第二届春秋欢乐赛-web" class="headerlink" title="Hello World (i春秋 第二届春秋欢乐赛 web)"></a>Hello World (i春秋 第二届春秋欢乐赛 web)</h2><p>这里只说git利用的点</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-615612ba7e3c7914.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/369/format/webp" alt="img"></p>
+<p>由上可知有git泄露<br>之后尝试使用常用工具GitHack<br><a target="_blank" rel="noopener" href="https://github.com/BugScanTeam/GitHack">https://github.com/BugScanTeam/GitHack</a></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-585b35b487c7a4d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/693/format/webp" alt="img"></p>
+<p>这里应该是通过.git/refs/heads/master中存储的commit的object来提取了master分支</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-c6ea2ef7681a2c38.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/414/format/webp" alt="img"></p>
+<p>但是这并不够，因为本题的考点原意是.git/logs/HEAD文件的利用，而githack并没有对其中的hash提取，因此遗漏了部分的object，即下图中的部分hash</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-17011a2e0aa78d61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1114/format/webp" alt="img"></p>
+<p>这里使用JGitHack是可以获取到这些遗漏的object的</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-5f8dd5ec2fdeb41e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666/format/webp" alt="img"></p>
+<p>之后需要手动提取object<br>这里使用git的底层命令，cat-file和ls-tree<br>看一下logs中的提交记录</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-a2d083652835b1b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/846/format/webp" alt="img"></p>
+<p>可以发现有两个commit，并且hash值是不一样的，说明有文件出现改动<br>于是这里手动查看一下</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-24acb3c8ce970283.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/675/format/webp" alt="img"></p>
+<p>可见他们的tree的hash也是不一样的，说明其中有文件改变，这里继续看两个tree</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-0de1938ca18d91ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/596/format/webp" alt="img"></p>
+<p>由此可见其中的flag.js是变动了，他们的hash值不一样，说明文件不一样，分别是<br> f2b45f1e5af6dc1a8607c11e4ddc5fd077276c45<br> 04bb09bb63fe48e6cab3e1c72a7ef51dda9634b8<br> 所以flag应该就是在这其中<br> 之后可以使用git cat-file命令提取文件</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-ae203287f9ffafec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/586/format/webp" alt="img"></p>
+<p>之后再sublime中diff一下这两个文件</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-c1ace39cda328b1d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/704/format/webp" alt="img"></p>
+<p> 会发现有不同，很明显的区别就是flag了，这前三个差异的字符分别是f,l,a，再往后看便是flag了<br> 到这里，这题做完了，但是过程有些繁琐，而且是可以自动完成的<br> 原先我的想法是使用几个git命令自动完成这个，但发现效率有些低<br> 于是我写了这个工具<br> <a target="_blank" rel="noopener" href="https://github.com/gakki429/Git_Extract">https://github.com/gakki429/Git_Extract</a><br> 我们试试这个工具</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-1c10b475d2b36001.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/576/format/webp" alt="img"></p>
+<p>看下获取到的文件，与之前的对比</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-7d9201cc8bc9ac39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/438/format/webp" alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-05a3a46139dab261.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/479/format/webp" alt="img"></p>
+<p>之后直接diff其中的flag.js和f2b45f_flag.js就可以了</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-c691aff459782dd7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/723/format/webp" alt="img"></p>
+<h2 id="登录-百度杯CTF比赛-十月场-web"><a href="#登录-百度杯CTF比赛-十月场-web" class="headerlink" title="登录 (百度杯CTF比赛 十月场 web)"></a>登录 (百度杯CTF比赛 十月场 web)</h2><p>前面是注入<br>最后可以得到用户<br>username: bctf3dm1n<br>password: adminqwe123666<br>登录之后如下</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-f0fde8b99202a2bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/503/format/webp" alt="img"></p>
+<p>可见.bctfg1t，应该是git泄露<br>这题的主要考点是.git/refs/stash</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-40844349a4e2b466.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/943/format/webp" alt="img"></p>
+<p>stash是一个用于保存git工作进度的文件<br>之后利用Git_Extract获取<br>这里获取了master分值，之后也解析了stash中的存的hash的object</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-4814b39438ff3f93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/691/format/webp" alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-75dd391740af9970.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/481/format/webp" alt="img"></p>
+<p>由此可获得提示信息</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-c03796b23bab5313.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/442/format/webp" alt="img"></p>
+<p>之后打开这个71ec9d5ca5580c58d1872962c596ea71.php<br>就可以看到flag了</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-fdbd521dd90d9dc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/754/format/webp" alt="img"></p>
+<p>如果这里使用GitHack也是可以完成的</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-dff9e68d61d64e5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/675/format/webp" alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-362526efaad7f461.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/447/format/webp" alt="img"></p>
+<p>之后我们手动查看stash中的object就可以了</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-3faed573f040e3d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/645/format/webp" alt="img"></p>
+<p>从这个commit中的tree继续获取</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-12f63e9852ff8012.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/577/format/webp" alt="img"></p>
+<h2 id="Backdoor-百度杯CTF比赛-十月场-web"><a href="#Backdoor-百度杯CTF比赛-十月场-web" class="headerlink" title="Backdoor (百度杯CTF比赛 十月场 web)"></a>Backdoor (百度杯CTF比赛 十月场 web)</h2><p>依旧是git的logs/HEAD，但是这里的commit有些多</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-f3a942027001d519.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/968/format/webp" alt="img"></p>
+<p>使用Git_Extract会帮助你自动解析提取这些commit</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-22fc37de8cba7400.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/670/format/webp" alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-46d77de7b34ad8a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/579/format/webp" alt="img"></p>
+<p>查看这几个flag文件可以发下如下提示，之后继续做就好了</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-dc18ada5dad0b203.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/448/format/webp" alt="img"></p>
+<p>如果使用GitHack也可以完成，但是这些commit需要你手动提取，相当的难受</p>
+<h4 id="Git常见的利用"><a href="#Git常见的利用" class="headerlink" title="Git常见的利用"></a>Git常见的利用</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.git/index中会缓存git add的文件，这里在没有commit的情况下，也是存在的</span><br><span class="line">https://github.com/lijiejie/GitHack lijiejie的这个就是获取的这个</span><br><span class="line">.git/refs/heads/master 记录了master的commit的hash，由此可以解析出这个commit的所有文件</span><br><span class="line">.git/logs/HEAD其中存储了git的log信息，可以找到历史的commit项</span><br><span class="line">.git/refs/stash 工作进度的临时保存</span><br><span class="line">最后说一个pack的问题，这个好像还没看见有ctf中考到，这里也做了恢复</span><br><span class="line">.git/info/packs packs文件提取恢复</span><br><span class="line"></span><br><span class="line">去除了原本的不存在文件的下载失败的提示</span><br><span class="line">增加对windows字体颜色输出的支持，并同步默认背景色，linux中背景色也修改为与默认同步</span><br><span class="line">更换了帅气的Logo（手动滑稽）</span><br><span class="line">觉得好用的话就给个star吧</span><br></pre></td></tr></table></figure>
+
+<p>下载地址<br><a target="_blank" rel="noopener" href="https://github.com/gakki429/Git_Extract">https://github.com/gakki429/Git_Extract</a></p>
+<p>此文章为转载：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/0ea09975169d">CTF中的几种git泄露 - 简书 (jianshu.com)</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="记录学习路上的一些东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/" class="post-title-link" itemprop="url">群友发的一个题目心得 敏感文件 git泄露 flag的隐藏</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-01-01 22:26:07 / 修改时间：22:33:40" itemprop="dateCreated datePublished" datetime="2022-01-01T22:26:07+08:00">2022-01-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">-python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="群友发的一个题目心得"><a href="#群友发的一个题目心得" class="headerlink" title="群友发的一个题目心得"></a>群友发的一个题目心得</h1><p><a target="_blank" rel="noopener" href="http://182.254.215.168:8090/">http://182.254.215.168:8090/</a></p>
+<p>打开题目一共有五道题</p>
+<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101160426265.png" alt="image-20220101160426265"></p>
+<h2 id="1-第一题"><a href="#1-第一题" class="headerlink" title="1.第一题"></a>1.第一题</h2><p>直接查看源代码，flag就在注释里面</p>
+<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101160729201.png" alt="image-20220101160729201"></p>
+<h2 id="2-第二题"><a href="#2-第二题" class="headerlink" title="2.第二题"></a>2.第二题</h2><p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101160832507.png" alt="image-20220101160832507"></p>
+<p>打开之后，bp抓包就是这样，才开始我以为是找敏感文件。找了半天没有找到，后来才发现。</p>
+<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101161005749.png" alt="image-20220101161005749"></p>
+<p>要从这里开始拦截</p>
+<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101161049259.png" alt="image-20220101161049259"></p>
+<p>在返回注释中拿到flag</p>
+<h2 id="3-第三题"><a href="#3-第三题" class="headerlink" title="3.第三题"></a>3.第三题</h2><p>第三题点进去是这样<img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101161621911.png" alt="image-20220101161621911"></p>
+<p>多半就是xff伪造</p>
+<p>在参数中加入X-Forwarded-For: 127.0.0.1</p>
+<p>提示<img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101161819908.png" alt="image-20220101161819908"></p>
+<p>又在参数中发现</p>
+<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101161833771.png" alt="image-20220101161833771"></p>
+<p>将0改为1，试试</p>
+<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101161852223.png" alt="image-20220101161852223"></p>
+<p>成功获取flag</p>
+<h2 id="4-第四题"><a href="#4-第四题" class="headerlink" title="4.第四题"></a>4.第四题</h2><p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101162229249.png" alt="image-20220101162229249"></p>
+<p>都提示是敏感文件了</p>
+<p>第一个肯定想到的是robot.txt</p>
+<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101163642673.png" alt="image-20220101163642673"></p>
+<p>发现flag的文件，并访问得到flag1？</p>
+<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101163717926.png" alt="image-20220101163717926"></p>
+<p>那第二个敏感文件就是gedit备份文件，在index.php地址后面添加~符号，发现要让我们下载，然后txt打开,得到flag2</p>
+<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101164432699.png" alt="image-20220101164432699"></p>
+<p>注：  默认情况下使用Vim编程，在修改文件后系统会自动生成一个带~的备份文件，某些情况下可以对其下载进行查看；</p>
+<p>第三个是vim的临时文件 swp文件</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38133867/article/details/78671626">(27条消息) SWP文件详细介绍与利用_James_zjm的博客-CSDN博客_swp文件</a></p>
+<p>访问.index.php.swp下载</p>
+<p>在虚拟机中用vim打开它</p>
+<p>用vim -r  filename复原文件</p>
+<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101183736286.png" alt="image-20220101183736286"></p>
+<p>发现第三个flag</p>
+<h2 id="5-第五题"><a href="#5-第五题" class="headerlink" title="5.第五题"></a>5.第五题</h2><p>点进去之后发现是</p>
+<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101183857645.png" alt="image-20220101183857645"></p>
+<p>这样一个界面，慢慢看。</p>
+<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101184514591.png" alt="image-20220101184514591"></p>
+<p>提示我们是git泄露</p>
+<p>用githack一弄就弄出来了，没想到这东西只能在py2中运行。</p>
+<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101222431174.png" alt="image-20220101222431174"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/31/%E5%85%AD%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1268,146 +1504,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/" class="post-title-link" itemprop="url">可变变量 {}代替[] eval</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-12-27 20:05:57 / 修改时间：20:07:53" itemprop="dateCreated datePublished" datetime="2021-12-27T20:05:57+08:00">2021-12-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="bugku做题心得-闪电十六鞭"><a href="#bugku做题心得-闪电十六鞭" class="headerlink" title="bugku做题心得  闪电十六鞭"></a>bugku做题心得  闪电十六鞭</h4><h1 id><a href="#" class="headerlink" title></a><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109185349070.png" alt="image-20211109185349070"></h1><p>关于php短标签知识</p>
-<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20211109190406505.png" alt="image-20211109190406505"></p>
-<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109191650731.png" alt="image-20211109191650731"></p>
-<p>关于php中大括号中的知识（这里使用{}代替了[]）</p>
-<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109192111707.png" alt="image-20211109192111707"></p>
-<p>然后就是用可变变量（变量覆盖）绕过了关键词检测。</p>
-<p>还有就是eval函数自带了&lt;?php 不用在继续补充了</p>
-<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109193424609.png" alt="image-20211109193424609"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/27/sha1%E5%92%8Cmd5%E7%BB%95%E8%BF%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/27/sha1%E5%92%8Cmd5%E7%BB%95%E8%BF%87/" class="post-title-link" itemprop="url">sha1和md5绕过</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-12-27 20:05:20 / 修改时间：20:05:46" itemprop="dateCreated datePublished" datetime="2021-12-27T20:05:20+08:00">2021-12-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>sha1和md5这两个加密函数无法处理数组<br>可用数组让两个数据内容不同但是加密之后都返回false</p>
-<p>还有一种绕过方法md5的</p>
-<p>$str1 = $_GET[‘str1’];<br>$str2 = $_GET[‘str2’];<br>if (md5($str1) == md5($str2)){<br>die(‘OK’); }</p>
-<p>php弱类型比较产生的漏洞</p>
-<p>想要满足这个判断只需要构造出MD5值为0e开头的字符串，这样的话弱类型比较会认为是科学技术法，0的多少次方都是0，因此可以绕过<br>有一些字符串的MD5值为0e开头，这里记录一下</p>
-<p>QNKCDZO<br>240610708<br>s878926199a<br>s155964671a<br>s214587387a<br>还有MD5和双MD5以后的值都是0e开头的</p>
-<p>CbDLytmyGm2xQyaLNhWn<br>770hQgrBOjrcqftrlaZk<br>7r4lGXCH2Ksu2JNT3BYM</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1479,7 +1575,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1511,7 +1607,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
