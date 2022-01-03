@@ -20,19 +20,28 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="记录学习路上的一些东西">
+  <meta name="description" content="攻防世界 Cat url编码超过 @参数 打开题目，是这样一个界面 先随便输入一个域名  发现url中有了参数， 再尝试输入127.0.0.1  是一个ping命令功能框，经过尝试，127.0.0.1&amp;&amp;dir、127.0.0.1&amp;&amp;ls、127.0.0.1|ls均被屏蔽。 在url处 发现当传入url编码的值后，可以解析。当传入%80等之后的值发现报错。 由于ur">
 <meta property="og:type" content="article">
-<meta property="og:title" content="欢迎━(*｀∀´*)ノ亻!">
-<meta property="og:url" content="http://example.com/2021/12/27/hello-world/index.html">
+<meta property="og:title" content="攻防世界 Cat url编码超过 @参数">
+<meta property="og:url" content="http://example.com/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/index.html">
 <meta property="og:site_name" content="十三の博客">
-<meta property="og:description" content="记录学习路上的一些东西">
+<meta property="og:description" content="攻防世界 Cat url编码超过 @参数 打开题目，是这样一个界面 先随便输入一个域名  发现url中有了参数， 再尝试输入127.0.0.1  是一个ping命令功能框，经过尝试，127.0.0.1&amp;&amp;dir、127.0.0.1&amp;&amp;ls、127.0.0.1|ls均被屏蔽。 在url处 发现当传入url编码的值后，可以解析。当传入%80等之后的值发现报错。 由于ur">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-27T07:46:45.990Z">
-<meta property="article:modified_time" content="2021-12-27T10:58:33.425Z">
+<meta property="og:image" content="http://example.com/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103085511643.png">
+<meta property="og:image" content="http://example.com/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103085846359.png">
+<meta property="og:image" content="http://example.com/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103090800111.png">
+<meta property="og:image" content="http://example.com/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103100316436.png">
+<meta property="og:image" content="http://example.com/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103100617946.png">
+<meta property="og:image" content="http://example.com/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103100659567.png">
+<meta property="og:image" content="http://example.com/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2t1bGxlcl9ZYW4=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="http://example.com/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103103926563.png">
+<meta property="article:published_time" content="2022-01-03T02:59:26.000Z">
+<meta property="article:modified_time" content="2022-01-03T03:03:11.574Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103085511643.png">
 
-<link rel="canonical" href="http://example.com/2021/12/27/hello-world/">
+<link rel="canonical" href="http://example.com/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/">
 
 
 <script id="page-configurations">
@@ -45,7 +54,7 @@
   };
 </script>
 
-  <title>欢迎━(*｀∀´*)ノ亻! | 十三の博客</title>
+  <title>攻防世界 Cat url编码超过 @参数 | 十三の博客</title>
   
 
 
@@ -160,7 +169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/27/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -173,7 +182,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          欢迎━(*｀∀´*)ノ亻!
+          攻防世界 Cat url编码超过 @参数
         </h1>
 
         <div class="post-meta">
@@ -184,7 +193,16 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-12-27 15:46:45 / 修改时间：18:58:33" itemprop="dateCreated datePublished" datetime="2021-12-27T15:46:45+08:00">2021-12-27</time>
+              <time title="创建时间：2022-01-03 10:59:26 / 修改时间：11:03:11" itemprop="dateCreated datePublished" datetime="2022-01-03T10:59:26+08:00">2022-01-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
+                </span>
             </span>
 
           
@@ -198,7 +216,33 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="攻防世界-Cat-url编码超过-参数"><a href="#攻防世界-Cat-url编码超过-参数" class="headerlink" title="攻防世界 Cat url编码超过 @参数"></a>攻防世界 Cat url编码超过 @参数</h1><p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103085511643.png" alt="image-20220103085511643"></p>
+<p>打开题目，是这样一个界面</p>
+<p>先随便输入一个域名</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103085846359.png" alt="image-20220103085846359"></p>
+<p>发现url中有了参数，</p>
+<p>再尝试输入127.0.0.1</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103090800111.png" alt="image-20220103090800111"></p>
+<p>是一个ping命令功能框，经过尝试，127.0.0.1&amp;&amp;dir、127.0.0.1&amp;&amp;ls、127.0.0.1|ls均被屏蔽。</p>
+<p>在url处 发现当传入url编码的值后，可以解析。当传入%80等之后的值发现报错。</p>
+<p>由于url编码是16进制 ascii范围是0-127 所以%80大于127 导致了报错。</p>
+<p>附上一张ASCII编码的表<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/ASCII/309296?fr=aladdin">ASCII_百度百科 (baidu.com)</a></p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103100316436.png" alt="image-20220103100316436"></p>
+<p>发现使用的框架</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103100617946.png" alt="image-20220103100617946"></p>
+<p>发现了数据库信息</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103100659567.png" alt="image-20220103100659567"></p>
+<p>记录关键地址opt/api/database.sqlite</p>
+<p>百度了一下发现了@参数没有被禁止</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2t1bGxlcl9ZYW4=,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>输入@opt/api/database.sqlite</p>
+<p>出现一个新的页面，通过关键词搜索ctf发现了flag</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103103926563.png" alt="image-20220103103926563"></p>
+<p>总结：</p>
+<p>1.url编码超过%80报错</p>
+<p>2.datebase里面的关键信息</p>
+<p>3.@参数的使用</p>
+
     </div>
 
     
@@ -212,11 +256,11 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2021/12/27/bugku-never-give-up%E8%A7%A3%E9%A2%98%E5%BF%83%E5%BE%97/" rel="next" title="bugku   never_give_up解题心得">
-      bugku   never_give_up解题心得 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/" rel="prev" title="攻防世界 mfw git泄露">
+      <i class="fa fa-chevron-left"></i> 攻防世界 mfw git泄露
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -275,6 +319,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87-%E5%8F%82%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">攻防世界 Cat url编码超过 @参数</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
