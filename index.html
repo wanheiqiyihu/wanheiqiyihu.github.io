@@ -182,7 +182,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-01-05 16:47:33 / 修改时间：16:48:18" itemprop="dateCreated datePublished" datetime="2022-01-05T16:47:33+08:00">2022-01-05</time>
+              <time title="创建时间：2022-01-05 16:47:33 / 修改时间：16:51:41" itemprop="dateCreated datePublished" datetime="2022-01-05T16:47:33+08:00">2022-01-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,6 +246,9 @@
 
 <h3 id="3-3对cmp参数的使用（效率key-gt-cmp）"><a href="#3-3对cmp参数的使用（效率key-gt-cmp）" class="headerlink" title="3.3对cmp参数的使用（效率key&gt;cmp）"></a>3.3对cmp参数的使用（效率key&gt;cmp）</h3><p>发现在py3中取消了cmp参数，那就不写啦！</p>
 <h3 id="3-4reverse"><a href="#3-4reverse" class="headerlink" title="3.4reverse"></a>3.4reverse</h3><p>和上面的一样的</p>
+<h2 id="4-应用扩展"><a href="#4-应用扩展" class="headerlink" title="4.应用扩展"></a>4.应用扩展</h2><p>输入名字（英文），名字在前面形式在后面中间用空格分离，要求根据姓氏排序，姓氏首字母一样就用名字排序，然后输出一个列表，每一个元素装一个名字。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sName=<span class="built_in">input</span>(<span class="string">&quot;输入名字，名前后姓，quit退出&quot;</span>) <span class="keyword">or</span> <span class="string">&quot;quit&quot;</span></span><br><span class="line">a=[]</span><br><span class="line"><span class="keyword">while</span> sName!=<span class="string">&quot;quit&quot;</span>:</span><br><span class="line">    a.append(sName)</span><br><span class="line">    sName=<span class="built_in">input</span>() <span class="keyword">or</span> <span class="string">&quot;quit&quot;</span></span><br><span class="line"><span class="comment"># 把名字和姓氏组成一个列表嵌套进一个列表中</span></span><br><span class="line">Allname=[x.split() <span class="keyword">for</span> x <span class="keyword">in</span> a]</span><br><span class="line"><span class="comment">#排序</span></span><br><span class="line">Allname.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]))</span><br><span class="line">final=[]</span><br><span class="line"><span class="comment">#把嵌套的列表转换回来</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(Allname)):</span><br><span class="line">    final.append(<span class="string">&quot; &quot;</span>.join(y <span class="keyword">for</span> y <span class="keyword">in</span> Allname[x]))</span><br><span class="line"><span class="built_in">print</span>(final)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
