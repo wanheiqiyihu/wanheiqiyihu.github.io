@@ -162,6 +162,99 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="记录学习路上的一些东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/" class="post-title-link" itemprop="url">攻防世界 Cat url编码超过 @参数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">نُشر في</span>
+              
+
+              <time title="أُنشأ: 2022-01-03 10:59:26 / عُدل: 11:03:11" itemprop="dateCreated datePublished" datetime="2022-01-03T10:59:26+08:00">2022-01-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">في</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="攻防世界-Cat-url编码超过-参数"><a href="#攻防世界-Cat-url编码超过-参数" class="headerlink" title="攻防世界 Cat url编码超过 @参数"></a>攻防世界 Cat url编码超过 @参数</h1><p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103085511643.png" alt="image-20220103085511643"></p>
+<p>打开题目，是这样一个界面</p>
+<p>先随便输入一个域名</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103085846359.png" alt="image-20220103085846359"></p>
+<p>发现url中有了参数，</p>
+<p>再尝试输入127.0.0.1</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103090800111.png" alt="image-20220103090800111"></p>
+<p>是一个ping命令功能框，经过尝试，127.0.0.1&amp;&amp;dir、127.0.0.1&amp;&amp;ls、127.0.0.1|ls均被屏蔽。</p>
+<p>在url处 发现当传入url编码的值后，可以解析。当传入%80等之后的值发现报错。</p>
+<p>由于url编码是16进制 ascii范围是0-127 所以%80大于127 导致了报错。</p>
+<p>附上一张ASCII编码的表<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/ASCII/309296?fr=aladdin">ASCII_百度百科 (baidu.com)</a></p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103100316436.png" alt="image-20220103100316436"></p>
+<p>发现使用的框架</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103100617946.png" alt="image-20220103100617946"></p>
+<p>发现了数据库信息</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103100659567.png" alt="image-20220103100659567"></p>
+<p>记录关键地址opt/api/database.sqlite</p>
+<p>百度了一下发现了@参数没有被禁止</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2t1bGxlcl9ZYW4=,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>输入@opt/api/database.sqlite</p>
+<p>出现一个新的页面，通过关键词搜索ctf发现了flag</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103103926563.png" alt="image-20220103103926563"></p>
+<p>总结：</p>
+<p>1.url编码超过%80报错</p>
+<p>2.datebase里面的关键信息</p>
+<p>3.@参数的使用</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1471,75 +1564,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/27/%E5%BC%BA%E7%BD%91%E6%9D%AF-%E9%9A%8F%E4%BE%BF%E6%B3%A8%EF%BC%88sql%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8Aselect%E7%BB%95%E8%BF%87%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/27/%E5%BC%BA%E7%BD%91%E6%9D%AF-%E9%9A%8F%E4%BE%BF%E6%B3%A8%EF%BC%88sql%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8Aselect%E7%BB%95%E8%BF%87%EF%BC%89/" class="post-title-link" itemprop="url">强网杯 随便注（sql堆叠注入以及select绕过）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">نُشر في</span>
-              
-
-              <time title="أُنشأ: 2021-12-27 20:08:44 / عُدل: 20:09:11" itemprop="dateCreated datePublished" datetime="2021-12-27T20:08:44+08:00">2021-12-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">في</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>强网杯 随便注（sql堆叠注入以及select绕过）</p>
-<p>[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/chalan630/p/12583667.html">强网杯 2019]随便注 - chalan630 - 博客园 (cnblogs.com)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1611,7 +1635,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">المقالات</span>
         </a>
       </div>
