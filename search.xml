@@ -1,6 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>BUUCTF刷题日志2</title>
+    <url>/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/</url>
+    <content><![CDATA[<h1 id="BUUCTF刷题日志2"><a href="#BUUCTF刷题日志2" class="headerlink" title="BUUCTF刷题日志2"></a>BUUCTF刷题日志2</h1><h2 id="第一题-极客大挑战-2019-Upload"><a href="#第一题-极客大挑战-2019-Upload" class="headerlink" title="第一题 [极客大挑战 2019]Upload"></a>第一题 [极客大挑战 2019]Upload</h2><p>一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image/jpeg</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png" alt="image-20220117150427298"></p>
+<p>但是我们的马里面的&lt;?又被过滤了，所以用<code>&lt;script language=&quot;php&quot;&gt;   &lt;/script&gt; </code>来进行绕过</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png" alt="image-20220117151055301"></p>
+<p>添加一个gif的文件头进去，绕过这个判断</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png" alt="image-20220117151122705"></p>
+<p>上传成功</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png" alt="image-20220117151158231"></p>
+<p>猜测路径为<code>/upload/新建文本文档.phtml</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png" alt="image-20220117152049720"></p>
+<p>成功在根目录找到flag</p>
+<h2 id="第二题-文件上传"><a href="#第二题-文件上传" class="headerlink" title="第二题 文件上传"></a>第二题 文件上传</h2><p>一个前端绕过罢了，还是用phtml文件</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png" alt="image-20220117154044267"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png" alt="image-20220117154204041"></p>
+<p>在根目录找到flag</p>
+<h2 id="第三题-php解析特性-char绕过"><a href="#第三题-php解析特性-char绕过" class="headerlink" title="第三题 php解析特性 char绕过"></a>第三题 php解析特性 char绕过</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png" alt="image-20220117154748431"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png" alt="image-20220117154838651"></p>
+<p>有前端验证</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png" alt="image-20220117155745159"></p>
+<p>在源码中发现了calc.php<img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png" alt="image-20220117161601913"></p>
+<p>写不来了，看了别人的wp，</p>
+<p>然后说waf无法识别加了空格的num参数，” num”和”num”，加了空格就不是num参数了，但是php解析的时候会自动把空格去掉，然后就绕过了waf。</p>
+<p>然后使用scandir()函数，scandir(“/“)但是/被过滤了，所以用char(“47”)来代替</p>
+<p><code>? num=print_r(scandir(chr(47)));</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png" alt="image-20220117162229698"></p>
+<p>发现flag，然后就访问这个flag</p>
+<p>calc.php? <code>num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</code></p>
+<h2 id="第四题-sql注入-极客大挑战-2019-BabySQL"><a href="#第四题-sql注入-极客大挑战-2019-BabySQL" class="headerlink" title="第四题 sql注入[极客大挑战 2019]BabySQL"></a>第四题 sql注入[极客大挑战 2019]BabySQL</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png" alt="image-20220117170804546"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png" alt="image-20220117170814134"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png" alt="image-20220117171730895"></p>
+<p>但是可以双写绕过select和union</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png" alt="image-20220117171950628"></p>
+<p>爆出列数有三个</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png" alt="image-20220117172055414"></p>
+<p>然后又是枯燥的爆表爆字段</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png" alt="image-20220117172428770"></p>
+<p>人嘛了，information里面的or都被过滤了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png" alt="image-20220117172541108"></p>
+<p>反正一步一步爆，然后就出来了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png" alt="image-20220117173343401"></p>
+<h2 id="第五题-备份文件-代码审计-弱类型"><a href="#第五题-备份文件-代码审计-弱类型" class="headerlink" title="第五题 备份文件 代码审计 弱类型"></a>第五题 备份文件 代码审计 弱类型</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png" alt="image-20220117201827743"></p>
+<p>发现备份文件,又是代码审计</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$key</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric(<span class="variable">$key</span>)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&quot;Just num!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$key</span> = intval(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span> == <span class="variable">$str</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Try to find out source file!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>弱比较：如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行，在比较时该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</p>
+<p>所以我们直接传值key=123</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png" alt="image-20220117202715872"></p>
+<p>得到flag</p>
+<h2 id="第六题-模板注入"><a href="#第六题-模板注入" class="headerlink" title="第六题 模板注入"></a>第六题 模板注入</h2><p>经典老题目了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png" alt="image-20220117202952675"></p>
+<p>flag中提示了flag的位置<code>flag in /fllllllllllllag</code></p>
+<p>welcome中提示了<code>render</code>模板渲染用的函数</p>
+<p>hints中提示了filehash的加密方法<code>md5(cookie_secret+md5(filename))</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png" alt="image-20220117203315129"></p>
+<p>然后就开始模板注入，我们的目的就是获取cookie_secret</p>
+<p>[(33条消息) BUUCTF <a href="https://blog.csdn.net/weixin_45642610/article/details/112519061">护网杯 2018]easy_tornado 1_wow小华的博客-CSDN博客</a></p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
     <title>BUUCTF 的一些签到题 内有sql 命令执行(内联)</title>
     <url>/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/</url>
     <content><![CDATA[<h1 id="BUUCTF-的一些签到题-内有sql-命令执行"><a href="#BUUCTF-的一些签到题-内有sql-命令执行" class="headerlink" title="BUUCTF 的一些签到题 内有sql 命令执行"></a>BUUCTF 的一些签到题 内有sql 命令执行</h1><h2 id="第一题-easy-sql"><a href="#第一题-easy-sql" class="headerlink" title="第一题 easy sql"></a>第一题 easy sql</h2><p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115110256458.png" alt="image-20220115110256458"></p>
@@ -128,70 +192,6 @@
       </categories>
   </entry>
   <entry>
-    <title>BUUCTF刷题日志2</title>
-    <url>/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/</url>
-    <content><![CDATA[<h1 id="BUUCTF刷题日志2"><a href="#BUUCTF刷题日志2" class="headerlink" title="BUUCTF刷题日志2"></a>BUUCTF刷题日志2</h1><h2 id="第一题-极客大挑战-2019-Upload"><a href="#第一题-极客大挑战-2019-Upload" class="headerlink" title="第一题 [极客大挑战 2019]Upload"></a>第一题 [极客大挑战 2019]Upload</h2><p>一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image/jpeg</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png" alt="image-20220117150427298"></p>
-<p>但是我们的马里面的&lt;?又被过滤了，所以用<code>&lt;script language=&quot;php&quot;&gt;   &lt;/script&gt; </code>来进行绕过</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png" alt="image-20220117151055301"></p>
-<p>添加一个gif的文件头进去，绕过这个判断</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png" alt="image-20220117151122705"></p>
-<p>上传成功</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png" alt="image-20220117151158231"></p>
-<p>猜测路径为<code>/upload/新建文本文档.phtml</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png" alt="image-20220117152049720"></p>
-<p>成功在根目录找到flag</p>
-<h2 id="第二题-文件上传"><a href="#第二题-文件上传" class="headerlink" title="第二题 文件上传"></a>第二题 文件上传</h2><p>一个前端绕过罢了，还是用phtml文件</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png" alt="image-20220117154044267"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png" alt="image-20220117154204041"></p>
-<p>在根目录找到flag</p>
-<h2 id="第三题-php解析特性-char绕过"><a href="#第三题-php解析特性-char绕过" class="headerlink" title="第三题 php解析特性 char绕过"></a>第三题 php解析特性 char绕过</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png" alt="image-20220117154748431"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png" alt="image-20220117154838651"></p>
-<p>有前端验证</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png" alt="image-20220117155745159"></p>
-<p>在源码中发现了calc.php<img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png" alt="image-20220117161601913"></p>
-<p>写不来了，看了别人的wp，</p>
-<p>然后说waf无法识别加了空格的num参数，” num”和”num”，加了空格就不是num参数了，但是php解析的时候会自动把空格去掉，然后就绕过了waf。</p>
-<p>然后使用scandir()函数，scandir(“/“)但是/被过滤了，所以用char(“47”)来代替</p>
-<p><code>? num=print_r(scandir(chr(47)));</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png" alt="image-20220117162229698"></p>
-<p>发现flag，然后就访问这个flag</p>
-<p>calc.php? <code>num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</code></p>
-<h2 id="第四题-sql注入-极客大挑战-2019-BabySQL"><a href="#第四题-sql注入-极客大挑战-2019-BabySQL" class="headerlink" title="第四题 sql注入[极客大挑战 2019]BabySQL"></a>第四题 sql注入[极客大挑战 2019]BabySQL</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png" alt="image-20220117170804546"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png" alt="image-20220117170814134"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png" alt="image-20220117171730895"></p>
-<p>但是可以双写绕过select和union</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png" alt="image-20220117171950628"></p>
-<p>爆出列数有三个</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png" alt="image-20220117172055414"></p>
-<p>然后又是枯燥的爆表爆字段</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png" alt="image-20220117172428770"></p>
-<p>人嘛了，information里面的or都被过滤了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png" alt="image-20220117172541108"></p>
-<p>反正一步一步爆，然后就出来了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png" alt="image-20220117173343401"></p>
-<h2 id="第五题-备份文件-代码审计-弱类型"><a href="#第五题-备份文件-代码审计-弱类型" class="headerlink" title="第五题 备份文件 代码审计 弱类型"></a>第五题 备份文件 代码审计 弱类型</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png" alt="image-20220117201827743"></p>
-<p>发现备份文件,又是代码审计</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$key</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric(<span class="variable">$key</span>)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&quot;Just num!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$key</span> = intval(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span> == <span class="variable">$str</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Try to find out source file!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>弱比较：如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行，在比较时该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</p>
-<p>所以我们直接传值key=123</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png" alt="image-20220117202715872"></p>
-<p>得到flag</p>
-<h2 id="第六题-模板注入"><a href="#第六题-模板注入" class="headerlink" title="第六题 模板注入"></a>第六题 模板注入</h2><p>经典老题目了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png" alt="image-20220117202952675"></p>
-<p>flag中提示了flag的位置<code>flag in /fllllllllllllag</code></p>
-<p>welcome中提示了<code>render</code>模板渲染用的函数</p>
-<p>hints中提示了filehash的加密方法<code>md5(cookie_secret+md5(filename))</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png" alt="image-20220117203315129"></p>
-<p>然后就开始模板注入，我们的目的就是获取cookie_secret</p>
-<p>[(33条消息) BUUCTF <a href="https://blog.csdn.net/weixin_45642610/article/details/112519061">护网杯 2018]easy_tornado 1_wow小华的博客-CSDN博客</a></p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Git与Git文件导致源码泄露</title>
     <url>/2022/01/01/Git%E4%B8%8EGit%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2/</url>
     <content><![CDATA[<h1 id="Git与Git文件导致源码泄露"><a href="#Git与Git文件导致源码泄露" class="headerlink" title="Git与Git文件导致源码泄露"></a>Git与Git文件导致源码泄露</h1><p>Git是目前世界上最先进的<strong>分布式版本控制系统</strong></p>
@@ -293,22 +293,6 @@
       </categories>
   </entry>
   <entry>
-    <title>bugku做题心得 备份是个好习惯</title>
-    <url>/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/</url>
-    <content><![CDATA[<h4 id="bugku做题心得-备份是个好习惯"><a href="#bugku做题心得-备份是个好习惯" class="headerlink" title="bugku做题心得 备份是个好习惯"></a>bugku做题心得 备份是个好习惯</h4><p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20211108160122664.png" alt="image-20211108160122664"></p>
-<p>函数拓展</p>
-<p>PHP ini_set用来设置php.ini的值，在函数执行的时候生效，脚本结束后，设置失效。无需打开php.ini文件，就能修改配置，对于虚拟空间来说，很方便。 </p>
-<p>函数格式：string ini_set(string $varname, string $newvalue) </p>
-<p>strstr函数</p>
-<p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/image-20211108160329851.png" alt="image-20211108160329851"></p>
-<p>关于函数str_replace的绕过</p>
-<p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/image-20211108160933783.png" alt="image-20211108160933783"></p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
     <title>bugku—source  用 kali Linux 里面的工具下载git源码</title>
     <url>/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/</url>
     <content><![CDATA[<h1 id="bugku—source-用-kali-Linux-里面的工具下载git源码"><a href="#bugku—source-用-kali-Linux-里面的工具下载git源码" class="headerlink" title="bugku—source  用 kali Linux 里面的工具下载git源码"></a>bugku—source  用 kali Linux 里面的工具下载git源码</h1><p><img src="/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/image-20220104190602170.png" alt="image-20220104190602170"></p>
@@ -330,6 +314,22 @@
 <p>然后用git show （加开头黄色那坨字符串）去一个一个查看</p>
 <p><img src="/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/image-20220104191454285.png" alt="image-20220104191454285"></p>
 <p>发现flag</p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>bugku做题心得 备份是个好习惯</title>
+    <url>/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/</url>
+    <content><![CDATA[<h4 id="bugku做题心得-备份是个好习惯"><a href="#bugku做题心得-备份是个好习惯" class="headerlink" title="bugku做题心得 备份是个好习惯"></a>bugku做题心得 备份是个好习惯</h4><p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20211108160122664.png" alt="image-20211108160122664"></p>
+<p>函数拓展</p>
+<p>PHP ini_set用来设置php.ini的值，在函数执行的时候生效，脚本结束后，设置失效。无需打开php.ini文件，就能修改配置，对于虚拟空间来说，很方便。 </p>
+<p>函数格式：string ini_set(string $varname, string $newvalue) </p>
+<p>strstr函数</p>
+<p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/image-20211108160329851.png" alt="image-20211108160329851"></p>
+<p>关于函数str_replace的绕过</p>
+<p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/image-20211108160933783.png" alt="image-20211108160933783"></p>
 ]]></content>
       <categories>
         <category>-Experience</category>
@@ -367,28 +367,14 @@
       </categories>
   </entry>
   <entry>
-    <title>file_get_contents绕过</title>
-    <url>/2021/12/27/file-get-contents%E7%BB%95%E8%BF%87/</url>
-    <content><![CDATA[<p>file_get_contents<br>用php伪协议php://input可以直接决定此函数返回的值</p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
     <title>欢迎━(*｀∀´*)ノ亻!</title>
     <url>/2021/12/27/hello-world/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>preg_match绕过总结</title>
-    <url>/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h1 id="preg-match绕过总结"><a href="#preg-match绕过总结" class="headerlink" title="preg_match绕过总结"></a>preg_match绕过总结</h1><h2 id="什么是preg-match"><a href="#什么是preg-match" class="headerlink" title="什么是preg_match"></a>什么是preg_match</h2><p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127190707622.png" alt="image-20211127190707622"></p>
-<p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127190733516.png" alt="image-20211127190733516"></p>
-<h2 id="绕过方法"><a href="#绕过方法" class="headerlink" title="绕过方法"></a>绕过方法</h2><p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127191003150.png" alt="image-20211127191003150"></p>
-<p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127191733611.png" alt="image-20211127191733611"></p>
-<p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127191742739.png" alt="image-20211127191742739"></p>
-<p><a href="https://www.cnblogs.com/20175211lyz/p/12198258.html">preg_match绕过总结 - MustaphaMond - 博客园 (cnblogs.com)</a></p>
+    <title>file_get_contents绕过</title>
+    <url>/2021/12/27/file-get-contents%E7%BB%95%E8%BF%87/</url>
+    <content><![CDATA[<p>file_get_contents<br>用php伪协议php://input可以直接决定此函数返回的值</p>
 ]]></content>
       <categories>
         <category>-Experience</category>
@@ -487,6 +473,20 @@
 <p>我不能休息我还能学    ⊂(‘ω’⊂ )))Σ≡=─༄༅༄༅༄༅༄༅༄༅</p>
 <p>还有汇编没怎么懂</p>
 <p><a href="https://www.cnblogs.com/fate-/p/12880508.html">如何运行汇编程序 - ice–cream - 博客园 (cnblogs.com)</a></p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>preg_match绕过总结</title>
+    <url>/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="preg-match绕过总结"><a href="#preg-match绕过总结" class="headerlink" title="preg_match绕过总结"></a>preg_match绕过总结</h1><h2 id="什么是preg-match"><a href="#什么是preg-match" class="headerlink" title="什么是preg_match"></a>什么是preg_match</h2><p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127190707622.png" alt="image-20211127190707622"></p>
+<p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127190733516.png" alt="image-20211127190733516"></p>
+<h2 id="绕过方法"><a href="#绕过方法" class="headerlink" title="绕过方法"></a>绕过方法</h2><p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127191003150.png" alt="image-20211127191003150"></p>
+<p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127191733611.png" alt="image-20211127191733611"></p>
+<p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127191742739.png" alt="image-20211127191742739"></p>
+<p><a href="https://www.cnblogs.com/20175211lyz/p/12198258.html">preg_match绕过总结 - MustaphaMond - 博客园 (cnblogs.com)</a></p>
 ]]></content>
       <categories>
         <category>-Experience</category>
@@ -787,6 +787,58 @@
       </categories>
   </entry>
   <entry>
+    <title>一、拓展py：方法和函数拓展 sort sorted</title>
+    <url>/2022/01/05/%E4%B8%80%E3%80%81%E6%8B%93%E5%B1%95py%EF%BC%9A%E6%96%B9%E6%B3%95%E5%92%8C%E5%87%BD%E6%95%B0%E6%8B%93%E5%B1%95-sort-sorted/</url>
+    <content><![CDATA[<h1 id="python方法和函数拓展-sort-sorted"><a href="#python方法和函数拓展-sort-sorted" class="headerlink" title="python方法和函数拓展 sort sorted"></a>python方法和函数拓展 sort sorted</h1><h2 id="1-sort-与-sorted的区别"><a href="#1-sort-与-sorted的区别" class="headerlink" title="1.sort 与 sorted的区别"></a>1.sort 与 sorted的区别</h2><p>sort是对列表本身进行永久性的排序。</p>
+<p>sorted则会返回一个排序之后的列表，不会对列表本身进行修改。</p>
+<p>sort 是应用在 list 上的方法，sorted 可以对所有可迭代的对象进行排序操作。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line"><span class="built_in">list</span>.sort()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[1, 2, 3]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">new_list = <span class="built_in">sorted</span>(<span class="built_in">list</span>)</span><br><span class="line"><span class="built_in">print</span>(new_list)<span class="comment">#[1, 2, 3]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-sort"><a href="#2-sort" class="headerlink" title="2.sort"></a>2.sort</h2><h3 id="2-1参数"><a href="#2-1参数" class="headerlink" title="2.1参数"></a>2.1参数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span>.sort(cmp=<span class="literal">None</span>, key=<span class="literal">None</span>, reverse=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>cmp – 可选参数, 如果指定了该参数会使用该参数的方法进行排序。</li>
+<li>key – 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。</li>
+<li>reverse – 排序规则，<strong>reverse = True</strong> 降序， <strong>reverse = False</strong> 升序（默认）。</li>
+</ul>
+<h3 id="2-2key参数的应用"><a href="#2-2key参数的应用" class="headerlink" title="2.2key参数的应用"></a>2.2key参数的应用</h3><p>根据列表中指定的元素进行排序</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#定义一个取第二个元素的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">takesecond</span>(<span class="params">item</span>):</span></span><br><span class="line">    <span class="keyword">return</span> item[<span class="number">1</span>]</span><br><span class="line"><span class="comment">#循环列表中的每一个元素，并且根据元素中的第二个元素进行排序。</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=takesecond)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[12, 1], [32, 2], [1, 3]]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#定义了一个匿名函数，参数x，返回x中的第二个元素</span></span><br><span class="line"><span class="comment">#key 指定了根据x的第二个元素进行排序</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[12, 1], [32, 2], [1, 3]]</span></span><br></pre></td></tr></table></figure>
+
+<p>key会把列表的元素作为参数传入后面的函数，然后把函数的返回值作为排序的依据。</p>
+<h4 id="2-2-1扩展"><a href="#2-2-1扩展" class="headerlink" title="2.2.1扩展"></a>2.2.1扩展</h4><p>如果key接受了两个返回值，那么第一个返回值就会是首要排序依据，如果第一个返回值相等，那么会根据第二个返回值进行排序。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>],[<span class="number">31</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#定义了一个匿名函数，返回第一个元素和第二个元素</span></span><br><span class="line"><span class="comment">#key就会让x[1]成为首要排序依据，另一个成为次要依据</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[12, 1], [31, 2], [32, 2], [1, 3]]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-3reverse参数的应用"><a href="#2-3reverse参数的应用" class="headerlink" title="2.3reverse参数的应用"></a>2.3reverse参数的应用</h3><p><strong>reverse = True</strong> 降序， <strong>reverse = False</strong> 升序（默认）。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>],[<span class="number">31</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#设置为降序，从大到小。</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]),reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[1, 3], [32, 2], [31, 2], [12, 1]]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-sorted"><a href="#3-sorted" class="headerlink" title="3.sorted"></a>3.sorted</h2><h3 id="3-1参数"><a href="#3-1参数" class="headerlink" title="3.1参数"></a>3.1参数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sorted</span>(iterable, cmp=<span class="literal">None</span>, key=<span class="literal">None</span>, reverse=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>iterable – 可迭代对象。</li>
+<li>cmp – 比较的函数，这个具有两个参数，参数的值都是从可迭代对象中取出，此函数必须遵守的规则为，大于则返回1，小于则返回-1，等于则返回0。</li>
+<li>key – 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。</li>
+<li>reverse – 排序规则，reverse = True 降序 ， reverse = False 升序（默认）。</li>
+</ul>
+<h3 id="3-2对key参数的应用"><a href="#3-2对key参数的应用" class="headerlink" title="3.2对key参数的应用"></a>3.2对key参数的应用</h3><p>按value值对字典排序</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d = &#123;<span class="string">&quot;a&quot;</span>:<span class="number">3</span>,<span class="string">&quot;b&quot;</span>:<span class="number">1</span>,<span class="string">&quot;c&quot;</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="comment">#指定迭代对象是字典中的每一个键值对</span></span><br><span class="line"><span class="comment">#将键值对作为参数传入匿名函数，返回值，将value作为排序的标准</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sorted</span>(d.items(),key=<span class="keyword">lambda</span> item:item[<span class="number">1</span>]))</span><br><span class="line"><span class="comment">#[(&#x27;b&#x27;, 1), (&#x27;c&#x27;, 2), (&#x27;a&#x27;, 3)]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3对cmp参数的使用（效率key-gt-cmp）"><a href="#3-3对cmp参数的使用（效率key-gt-cmp）" class="headerlink" title="3.3对cmp参数的使用（效率key&gt;cmp）"></a>3.3对cmp参数的使用（效率key&gt;cmp）</h3><p>发现在py3中取消了cmp参数，那就不写啦！</p>
+<h3 id="3-4reverse"><a href="#3-4reverse" class="headerlink" title="3.4reverse"></a>3.4reverse</h3><p>和上面的一样的</p>
+<h2 id="4-应用扩展"><a href="#4-应用扩展" class="headerlink" title="4.应用扩展"></a>4.应用扩展</h2><p>输入名字（英文），名字在前面形式在后面中间用空格分离，要求根据姓氏排序，姓氏首字母一样就用名字排序，然后输出一个列表，每一个元素装一个名字。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">sName=<span class="built_in">input</span>(<span class="string">&quot;输入名字，名前后姓，quit退出&quot;</span>) <span class="keyword">or</span> <span class="string">&quot;quit&quot;</span></span><br><span class="line">a=[]</span><br><span class="line"><span class="keyword">while</span> sName!=<span class="string">&quot;quit&quot;</span>:</span><br><span class="line">    a.append(sName)</span><br><span class="line">    sName=<span class="built_in">input</span>() <span class="keyword">or</span> <span class="string">&quot;quit&quot;</span></span><br><span class="line"><span class="comment"># 把名字和姓氏组成一个列表嵌套进一个列表中</span></span><br><span class="line">Allname=[x.split() <span class="keyword">for</span> x <span class="keyword">in</span> a]</span><br><span class="line"><span class="comment">#排序</span></span><br><span class="line">Allname.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]))</span><br><span class="line">final=[]</span><br><span class="line"><span class="comment">#把嵌套的列表转换回来</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(Allname)):</span><br><span class="line">    final.append(<span class="string">&quot; &quot;</span>.join(y <span class="keyword">for</span> y <span class="keyword">in</span> Allname[x]))</span><br><span class="line"><span class="built_in">print</span>(final)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>-python</category>
+      </categories>
+  </entry>
+  <entry>
     <title>sql必知必会</title>
     <url>/2022/01/11/sql%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</url>
     <content><![CDATA[<h1 id="sql必知必会"><a href="#sql必知必会" class="headerlink" title="sql必知必会"></a>sql必知必会</h1><h1 id="第一课-了解sql"><a href="#第一课-了解sql" class="headerlink" title="第一课 了解sql"></a>第一课 了解sql</h1><p>数据库（database）</p>
@@ -1056,58 +1108,6 @@
       </categories>
   </entry>
   <entry>
-    <title>一、拓展py：方法和函数拓展 sort sorted</title>
-    <url>/2022/01/05/%E4%B8%80%E3%80%81%E6%8B%93%E5%B1%95py%EF%BC%9A%E6%96%B9%E6%B3%95%E5%92%8C%E5%87%BD%E6%95%B0%E6%8B%93%E5%B1%95-sort-sorted/</url>
-    <content><![CDATA[<h1 id="python方法和函数拓展-sort-sorted"><a href="#python方法和函数拓展-sort-sorted" class="headerlink" title="python方法和函数拓展 sort sorted"></a>python方法和函数拓展 sort sorted</h1><h2 id="1-sort-与-sorted的区别"><a href="#1-sort-与-sorted的区别" class="headerlink" title="1.sort 与 sorted的区别"></a>1.sort 与 sorted的区别</h2><p>sort是对列表本身进行永久性的排序。</p>
-<p>sorted则会返回一个排序之后的列表，不会对列表本身进行修改。</p>
-<p>sort 是应用在 list 上的方法，sorted 可以对所有可迭代的对象进行排序操作。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line"><span class="built_in">list</span>.sort()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[1, 2, 3]</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">new_list = <span class="built_in">sorted</span>(<span class="built_in">list</span>)</span><br><span class="line"><span class="built_in">print</span>(new_list)<span class="comment">#[1, 2, 3]</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-sort"><a href="#2-sort" class="headerlink" title="2.sort"></a>2.sort</h2><h3 id="2-1参数"><a href="#2-1参数" class="headerlink" title="2.1参数"></a>2.1参数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span>.sort(cmp=<span class="literal">None</span>, key=<span class="literal">None</span>, reverse=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>cmp – 可选参数, 如果指定了该参数会使用该参数的方法进行排序。</li>
-<li>key – 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。</li>
-<li>reverse – 排序规则，<strong>reverse = True</strong> 降序， <strong>reverse = False</strong> 升序（默认）。</li>
-</ul>
-<h3 id="2-2key参数的应用"><a href="#2-2key参数的应用" class="headerlink" title="2.2key参数的应用"></a>2.2key参数的应用</h3><p>根据列表中指定的元素进行排序</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#定义一个取第二个元素的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">takesecond</span>(<span class="params">item</span>):</span></span><br><span class="line">    <span class="keyword">return</span> item[<span class="number">1</span>]</span><br><span class="line"><span class="comment">#循环列表中的每一个元素，并且根据元素中的第二个元素进行排序。</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=takesecond)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[12, 1], [32, 2], [1, 3]]</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#定义了一个匿名函数，参数x，返回x中的第二个元素</span></span><br><span class="line"><span class="comment">#key 指定了根据x的第二个元素进行排序</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[12, 1], [32, 2], [1, 3]]</span></span><br></pre></td></tr></table></figure>
-
-<p>key会把列表的元素作为参数传入后面的函数，然后把函数的返回值作为排序的依据。</p>
-<h4 id="2-2-1扩展"><a href="#2-2-1扩展" class="headerlink" title="2.2.1扩展"></a>2.2.1扩展</h4><p>如果key接受了两个返回值，那么第一个返回值就会是首要排序依据，如果第一个返回值相等，那么会根据第二个返回值进行排序。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>],[<span class="number">31</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#定义了一个匿名函数，返回第一个元素和第二个元素</span></span><br><span class="line"><span class="comment">#key就会让x[1]成为首要排序依据，另一个成为次要依据</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[12, 1], [31, 2], [32, 2], [1, 3]]</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-3reverse参数的应用"><a href="#2-3reverse参数的应用" class="headerlink" title="2.3reverse参数的应用"></a>2.3reverse参数的应用</h3><p><strong>reverse = True</strong> 降序， <strong>reverse = False</strong> 升序（默认）。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>],[<span class="number">31</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#设置为降序，从大到小。</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]),reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[1, 3], [32, 2], [31, 2], [12, 1]]</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="3-sorted"><a href="#3-sorted" class="headerlink" title="3.sorted"></a>3.sorted</h2><h3 id="3-1参数"><a href="#3-1参数" class="headerlink" title="3.1参数"></a>3.1参数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sorted</span>(iterable, cmp=<span class="literal">None</span>, key=<span class="literal">None</span>, reverse=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>iterable – 可迭代对象。</li>
-<li>cmp – 比较的函数，这个具有两个参数，参数的值都是从可迭代对象中取出，此函数必须遵守的规则为，大于则返回1，小于则返回-1，等于则返回0。</li>
-<li>key – 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。</li>
-<li>reverse – 排序规则，reverse = True 降序 ， reverse = False 升序（默认）。</li>
-</ul>
-<h3 id="3-2对key参数的应用"><a href="#3-2对key参数的应用" class="headerlink" title="3.2对key参数的应用"></a>3.2对key参数的应用</h3><p>按value值对字典排序</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d = &#123;<span class="string">&quot;a&quot;</span>:<span class="number">3</span>,<span class="string">&quot;b&quot;</span>:<span class="number">1</span>,<span class="string">&quot;c&quot;</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="comment">#指定迭代对象是字典中的每一个键值对</span></span><br><span class="line"><span class="comment">#将键值对作为参数传入匿名函数，返回值，将value作为排序的标准</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sorted</span>(d.items(),key=<span class="keyword">lambda</span> item:item[<span class="number">1</span>]))</span><br><span class="line"><span class="comment">#[(&#x27;b&#x27;, 1), (&#x27;c&#x27;, 2), (&#x27;a&#x27;, 3)]</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-3对cmp参数的使用（效率key-gt-cmp）"><a href="#3-3对cmp参数的使用（效率key-gt-cmp）" class="headerlink" title="3.3对cmp参数的使用（效率key&gt;cmp）"></a>3.3对cmp参数的使用（效率key&gt;cmp）</h3><p>发现在py3中取消了cmp参数，那就不写啦！</p>
-<h3 id="3-4reverse"><a href="#3-4reverse" class="headerlink" title="3.4reverse"></a>3.4reverse</h3><p>和上面的一样的</p>
-<h2 id="4-应用扩展"><a href="#4-应用扩展" class="headerlink" title="4.应用扩展"></a>4.应用扩展</h2><p>输入名字（英文），名字在前面形式在后面中间用空格分离，要求根据姓氏排序，姓氏首字母一样就用名字排序，然后输出一个列表，每一个元素装一个名字。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">sName=<span class="built_in">input</span>(<span class="string">&quot;输入名字，名前后姓，quit退出&quot;</span>) <span class="keyword">or</span> <span class="string">&quot;quit&quot;</span></span><br><span class="line">a=[]</span><br><span class="line"><span class="keyword">while</span> sName!=<span class="string">&quot;quit&quot;</span>:</span><br><span class="line">    a.append(sName)</span><br><span class="line">    sName=<span class="built_in">input</span>() <span class="keyword">or</span> <span class="string">&quot;quit&quot;</span></span><br><span class="line"><span class="comment"># 把名字和姓氏组成一个列表嵌套进一个列表中</span></span><br><span class="line">Allname=[x.split() <span class="keyword">for</span> x <span class="keyword">in</span> a]</span><br><span class="line"><span class="comment">#排序</span></span><br><span class="line">Allname.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]))</span><br><span class="line">final=[]</span><br><span class="line"><span class="comment">#把嵌套的列表转换回来</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(Allname)):</span><br><span class="line">    final.append(<span class="string">&quot; &quot;</span>.join(y <span class="keyword">for</span> y <span class="keyword">in</span> Allname[x]))</span><br><span class="line"><span class="built_in">print</span>(final)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>-python</category>
-      </categories>
-  </entry>
-  <entry>
     <title>一，学习py：{} 布尔 del insert input int（）字符串为空的判断 elif</title>
     <url>/2021/12/28/%E4%B8%80%EF%BC%8C%E5%AD%A6%E4%B9%A0py%EF%BC%9A-%E5%B8%83%E5%B0%94-del-insert-input-int%EF%BC%88%EF%BC%89%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%BA%E7%A9%BA%E7%9A%84%E5%88%A4%E6%96%AD-elif/</url>
     <content><![CDATA[<p>一，学习py：{} 布尔 del insert input int（）字符串为空的判断 elif</p>
@@ -1130,6 +1130,22 @@
 <p>9.”if”后面用冒号”:{}”</p>
 <p>10.py中的else if = elif</p>
 <p>参考文章：<a href="https://blog.csdn.net/weixin_39725118/article/details/111822050">https://blog.csdn.net/weixin_39725118/article/details/111822050</a></p>
+]]></content>
+      <categories>
+        <category>-python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>三、py拓展：enumerate() 函数</title>
+    <url>/2022/01/09/%E4%B8%89%E3%80%81py%E6%8B%93%E5%B1%95%EF%BC%9Aenumerate-%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h1 id="三、py拓展：enumerate-函数"><a href="#三、py拓展：enumerate-函数" class="headerlink" title="三、py拓展：enumerate() 函数"></a>三、py拓展：enumerate() 函数</h1><p>enumerate() 函数用于将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列，同时列出数据和数据下标，一般用在 for 循环当中。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>以下是 enumerate() 方法的语法:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">enumerate</span>(sequence, [start=<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,]</span><br><span class="line"><span class="keyword">for</span> i,item <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">list</span>):</span><br><span class="line">    <span class="built_in">print</span>(i,item)</span><br><span class="line">    </span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">0 2</span></span><br><span class="line"><span class="string">1 3</span></span><br><span class="line"><span class="string">2 4</span></span><br><span class="line"><span class="string">3 5</span></span><br><span class="line"><span class="string">4 5</span></span><br><span class="line"><span class="string">5 6</span></span><br><span class="line"><span class="string">6 7</span></span><br><span class="line"><span class="string">7 8</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>-python</category>
@@ -1363,22 +1379,6 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">name = <span class="string">&quot;dhk是一个小丑&quot;</span></span><br><span class="line">data = name.encode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"><span class="comment">#打开一个文件</span></span><br><span class="line">file_object = <span class="built_in">open</span>(<span class="string">&quot;log.txt&quot;</span>,mode = <span class="string">&quot;wb&quot;</span>)</span><br><span class="line"><span class="comment">#在文件中写内容</span></span><br><span class="line">file_object.write(data)</span><br><span class="line"><span class="comment">#关闭文件</span></span><br><span class="line">file_object.close()</span><br></pre></td></tr></table></figure>
 
 <p>file函数的相关操作：<a href="https://www.runoob.com/python/file-methods.html">Python File(文件) 方法 | 菜鸟教程 (runoob.com)</a></p>
-]]></content>
-      <categories>
-        <category>-python</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>三、py拓展：enumerate() 函数</title>
-    <url>/2022/01/09/%E4%B8%89%E3%80%81py%E6%8B%93%E5%B1%95%EF%BC%9Aenumerate-%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h1 id="三、py拓展：enumerate-函数"><a href="#三、py拓展：enumerate-函数" class="headerlink" title="三、py拓展：enumerate() 函数"></a>三、py拓展：enumerate() 函数</h1><p>enumerate() 函数用于将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列，同时列出数据和数据下标，一般用在 for 循环当中。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>以下是 enumerate() 方法的语法:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">enumerate</span>(sequence, [start=<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,]</span><br><span class="line"><span class="keyword">for</span> i,item <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">list</span>):</span><br><span class="line">    <span class="built_in">print</span>(i,item)</span><br><span class="line">    </span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">0 2</span></span><br><span class="line"><span class="string">1 3</span></span><br><span class="line"><span class="string">2 4</span></span><br><span class="line"><span class="string">3 5</span></span><br><span class="line"><span class="string">4 5</span></span><br><span class="line"><span class="string">5 6</span></span><br><span class="line"><span class="string">6 7</span></span><br><span class="line"><span class="string">7 8</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>-python</category>
@@ -1629,19 +1629,6 @@
       </categories>
   </entry>
   <entry>
-    <title>可变变量 {}代替[] eval</title>
-    <url>/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/</url>
-    <content><![CDATA[<h4 id="bugku做题心得-闪电十六鞭"><a href="#bugku做题心得-闪电十六鞭" class="headerlink" title="bugku做题心得  闪电十六鞭"></a>bugku做题心得  闪电十六鞭</h4><h1 id><a href="#" class="headerlink" title></a><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109185349070.png" alt="image-20211109185349070"></h1><p>关于php短标签知识</p>
-<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20211109190406505.png" alt="image-20211109190406505"></p>
-<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109191650731.png" alt="image-20211109191650731"></p>
-<p>关于php中大括号中的知识（这里使用{}代替了[]）</p>
-<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109192111707.png" alt="image-20211109192111707"></p>
-<p>然后就是用可变变量（变量覆盖）绕过了关键词检测。</p>
-<p>还有就是eval函数自带了&lt;?php 不用在继续补充了</p>
-<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109193424609.png" alt="image-20211109193424609"></p>
-]]></content>
-  </entry>
-  <entry>
     <title>六、学习py：文件操作的相关操作</title>
     <url>/2021/12/31/%E5%85%AD%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/</url>
     <content><![CDATA[<h1 id="六、学习py：文件操作的相关操作"><a href="#六、学习py：文件操作的相关操作" class="headerlink" title="六、学习py：文件操作的相关操作"></a>六、学习py：文件操作的相关操作</h1><h2 id="1-文件操作"><a href="#1-文件操作" class="headerlink" title="1.文件操作"></a>1.文件操作</h2><p>在正式学习文件操作之前，大火先来看一下数据类型和编码的一些知识。</p>
@@ -1840,6 +1827,19 @@
       <categories>
         <category>-python</category>
       </categories>
+  </entry>
+  <entry>
+    <title>可变变量 {}代替[] eval</title>
+    <url>/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/</url>
+    <content><![CDATA[<h4 id="bugku做题心得-闪电十六鞭"><a href="#bugku做题心得-闪电十六鞭" class="headerlink" title="bugku做题心得  闪电十六鞭"></a>bugku做题心得  闪电十六鞭</h4><h1 id><a href="#" class="headerlink" title></a><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109185349070.png" alt="image-20211109185349070"></h1><p>关于php短标签知识</p>
+<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20211109190406505.png" alt="image-20211109190406505"></p>
+<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109191650731.png" alt="image-20211109191650731"></p>
+<p>关于php中大括号中的知识（这里使用{}代替了[]）</p>
+<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109192111707.png" alt="image-20211109192111707"></p>
+<p>然后就是用可变变量（变量覆盖）绕过了关键词检测。</p>
+<p>还有就是eval函数自带了&lt;?php 不用在继续补充了</p>
+<p><img src="/2021/12/27/%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F-%E4%BB%A3%E6%9B%BF-eval/image-20211109193424609.png" alt="image-20211109193424609"></p>
+]]></content>
   </entry>
   <entry>
     <title>四、学习py：数据类型</title>
@@ -2432,5 +2432,27 @@
       <tags>
         <tag>-web</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>谷歌语法</title>
+    <url>/2022/01/28/%E8%B0%B7%E6%AD%8C%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="谷歌语法"><a href="#谷歌语法" class="headerlink" title="谷歌语法"></a>谷歌语法</h1><p>记录一些常用的谷歌语法</p>
+<h1 id="1-参数介绍"><a href="#1-参数介绍" class="headerlink" title="1.参数介绍"></a>1.参数介绍</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">一、site，指定搜索的某個網站。例：desire site:bbs.gfan.com</span><br><span class="line">二、filetype，指定搜索的文件類型。例：seo filetype:doc</span><br><span class="line">三、双引号，代表完全匹配，使关键词不分开，顺序都不能变。</span><br><span class="line">四、减号，事搜索结果更准确。减号与前一个关键词之间一定要有一个空格，与后一个关键词之间一定不能有空格。搜索结果为，匹配前一个关键词但不匹配后一个关键词的结果。例如：seo -搜索引擎。</span><br><span class="line">五、AND，逻辑与，这个命令我们其实一直都在用，只是没有意识到。一般用空格代替，还可以用“+”代替。例如：霹雳布袋+败亡之剑，返回的结果同时包含两者。</span><br><span class="line">六、intitle，在结果的标题中包含关键词，一次只能搜索一个关键词。</span><br><span class="line">七、inurl，返回的结果的url中包含关键词。例如：seo inurl:byr，它将返回网址中包含byr，而内容中包含搜索词的结果。一次只能搜索一个关键词。</span><br><span class="line">八、allintitle，在结果的标题中同时包含多个关键词。例如：allintitle:seo 搜索引擎，起作用相当于intitle:seo intitle:搜索引擎。allintitle属于排他性指令，不能与其他指令结合使用。</span><br><span class="line">九、allinurl，结果的url中包含多个关键词。例如：allinurl:byr jobs，等于inurl:byr inurl:jobs。allinurl也是排他性指令</span><br><span class="line">十、define，查询关键词的词义，起的是字典的作用。Google会返回包含查询关键词定义的网页，例如：define:computer ，支持汉字哦！</span><br><span class="line">十一、xx in yy，单位换算，xx和yy代表需要换算的单位，且xx和yy为单位的英文缩写。例如你想知道一盎司等于多少千克，只需输入：1 oz in kg。</span><br><span class="line">十二、weather，查询某一地区或城市的天气。不过我们这一地区或城市必须是Google能识别的，例如：weather:beijing，Google将会给我们返回北京的天气。</span><br><span class="line">十三、intext，在结果的正文内容中包含关键词。例如：intext:剑圣，所有返回的网页正文中都包含“剑圣”。</span><br><span class="line">十四、allintext，在结果的正文内容中同时包含多个关键词。排他性指令。</span><br><span class="line">十五、星号（*），通配符，可以匹配任意字符串。例如：搜索*擎，则返回的结果中不仅有“搜索引擎”，还有“搜索巨擎”之类的。</span><br><span class="line">十六、“..&quot;，表示数值范围。例如：手机 2000..3000 元，注意“3000”与“元”之间必须有空格。另外，也可以是三个点。</span><br><span class="line">十七、OR，逻辑或，可以用“|”代替。例如：霹雳布袋|败亡之剑，则返回的结果中，要么只含有“霹雳布袋”，要么就只含有“败亡之剑”，不可能是同时包含两个关键词的网页。</span><br><span class="line">十八、info，查询网站的一些信息。例如：info:bbs.byr.cn，它只会返回一个结果，是一个选择列表，列表的选项是这个网站的某一方面的信息。info=cache+related+link+site+intext+intitle。</span><br><span class="line">十九、related，查询与所给的网站类似的网站，它会返回Google认为的可能和你提供的网站类似的其他网站。例如：related:bbs.gfan.com，会返回安卓巴士，eoe社区，91等站点，但不会返回机锋网。其实这个命令Google经常在用，比如我们搜一个东西，Google除了返回给我结果，还会在结果下面给我们返回一些相关的词条。</span><br><span class="line">二十、link，查询链接到这个url的页面。例如：link:bbs.gfan.com，会返回机锋网的所有外部链接。从其他页面指向机锋。</span><br><span class="line">二十一、linkdomain，查询这个url链接的页面。例如：linkdomain:bbs.gfan.com -site:bbs.gfan.com，这样的结果比较准确，因为扫除了本身的干扰，它将返回机锋网链接到的页面。从机锋指向其他页面。</span><br><span class="line">二十二、cache，提交cache:url，Google会显示当前网页的快照信息，从而替换网页的当前信息。这个命令现在也被Google集成到了搜索结果里，当你把鼠标悬浮在搜索结果上时，右侧会自动出现此结果的快照信息。</span><br><span class="line">二十三、计算器功能。输入数学表达式，然后Google返回给你一个计算结果。强大的Google不仅支持普通运算，它还支持像三角函数、指数函数甚至是对数函数这样的高级运算。关键是，你会输入这些高级数学符号。</span><br><span class="line">**下面是三个不怎么懂的命令，很少用，而且在有限的实践中也没弄明白是怎么回事，抄一段网上的解释在这里。***</span><br><span class="line">二十四、inanchor，它返回的结果是导入链接锚文字中包含搜索词的页面。比如在Google搜索：inanchor:点击这里，返回的结果页面本身并不一定包含“点击这里”这四个字，而是指向这些页面的链接锚文字中出现了“点击这里”这四个字。需要注意区别与inurl，inurl是网页本身的url地址，而inanchor是在外部用于指向该url地址的文本（&lt;a&gt;..&lt;/a&gt;之间文本）中找。例如：inanchor:download，你可能会发现有“FlashGet最佳的下载管理模式”，而该页面中根本就没有“download”字样。</span><br><span class="line">二十五、allinanchor，inanchor的排他性指令。</span><br><span class="line"></span><br><span class="line">二十六、daterange，当我们使用daterange进行查询的时候，Google会将查询的结果限制在一个特定的时间段内，这个时间相对于网站来说，是按网站被Google收录的时间算的。例如：”Spice Girls“ daterange:2450958-2450968。这里时间日期的格式是按天文学的儒略日。（这个搜索语法Google并不推荐使用，因为它会返回一些莫名其妙的东西）</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">allintext: = 搜索文本,但不包括网页标题和链接allinlinks: = 搜索链接, 不包括文本和标题WordA OR WordB = 搜索包含两关键词之一的页面“Word” OR “Phrase” = 精确的要求搜索单词或者句子WordA -WordB = 包含单词A但是不包含单词BWordA +WordB = 都包含~WORD = 寻找此单词和它的同义词~WORD-WORD = 只搜索同义词,不要原词</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-常用"><a href="#2-常用" class="headerlink" title="2.常用"></a>2.常用</h1><p>查找后台地址：<br> <code>site:域名inurl:login|admin|manage|member|admin_login|login_admin|system|login|user|main|cms</code><br> 查找文本内容：<br> <code>site:域名 intext:管理|后台|登陆|用户名|密码|验证码|系统|admin|login|sys|managetem|password|username</code><br> 查找可注入点：<br> <code>site:域名 inurl:aspx|jsp|php|asp</code><br> 查找上传漏洞：<br> <code>site:域名 inurl:file|load|editor|Files</code><br> 找eweb编辑器：<br> <code>site:域名 inurl:ewebeditor|editor|uploadfile|eweb|edit</code><br> 存在的数据库：<br> <code>site:域名 filetype:mdb|asp|#</code><br> 查看脚本类型：<br> <code>site:域名 filetype:asp/aspx/php/jsp</code><br> 迂回策略入侵：<br> <code>inurl:cms/data/templates/images/index/</code></p>
+<p>查找敏感信息泄露</p>
+<p><code>intitle:“Index of /admin”</code></p>
+<p><code>intitle:“Index of /root”</code></p>
+<p><code>intitle:“Index of /” +password.txt</code></p>
+<p><code>intitle:phpinfo()或者inurl:phpinfo.php</code></p>
+<p>关于ipc段</p>
+<p><a href="http://www.360doc.com/content/20/0607/06/7696210_916944202.shtml">IP C段是什么意思 (360doc.com)</a></p>
+<p>听说很多学校或者机构都喜欢把一些东西放在c段。</p>
+]]></content>
+      <categories>
+        <category>-penetration</category>
+      </categories>
   </entry>
 </search>
