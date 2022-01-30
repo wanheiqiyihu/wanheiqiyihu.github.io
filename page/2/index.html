@@ -195,6 +195,81 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/10/ctfhub-find-it/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="记录学习路上的一些东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/10/ctfhub-find-it/" class="post-title-link" itemprop="url">ctfhub find_it</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">نُشر في</span>
+              
+
+              <time title="أُنشأ: 2022-01-10 15:59:50 / عُدل: 16:00:16" itemprop="dateCreated datePublished" datetime="2022-01-10T15:59:50+08:00">2022-01-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">في</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ctfhub-find-it"><a href="#ctfhub-find-it" class="headerlink" title="ctfhub find_it"></a>ctfhub find_it</h1><p>在robots.php中发现提示</p>
+<p>然后访问.文件.swp的时候发现备份源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Really easy...</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$file</span>=fopen(<span class="string">&quot;flag.php&quot;</span>,<span class="string">&quot;r&quot;</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">&quot;Unable 2 open!&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$I_know_you_wanna_but_i_will_not_give_you_hhh</span> = fread(<span class="variable">$file</span>,filesize(<span class="string">&quot;flag.php&quot;</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable">$hack</span>=fopen(<span class="string">&quot;hack.php&quot;</span>,<span class="string">&quot;w&quot;</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">&quot;Unable 2 open&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;code&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">&#x27;/system|eval|exec|base|compress|chr|ord|str|replace|pack|assert|preg|replace|create|function|call|\~|\^|\`|flag|cat|tac|more|tail|echo|require|include|proc|open|read|shell|file|put|get|contents|dir|link|dl|var|dump/&#x27;</span>,<span class="variable">$a</span>))&#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;you die&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(strlen(<span class="variable">$a</span>)&gt;<span class="number">33</span>)&#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;nonono.&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">fwrite(<span class="variable">$hack</span>,<span class="variable">$a</span>);</span><br><span class="line">fwrite(<span class="variable">$hack</span>,<span class="variable">$I_know_you_wanna_but_i_will_not_give_you_hhh</span>);</span><br><span class="line"></span><br><span class="line">fclose(<span class="variable">$file</span>);</span><br><span class="line">fclose(<span class="variable">$hack</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>发现代码中把falg写入了hack.php中</p>
+<p>利用show_source()函数将文件读出来。</p>
+<p>再或者用大小写绕过这种没有忽略大小写的preg_match System()</p>
+<p><a target="_blank" rel="noopener" href="https://writeup.ctfhub.com/Challenge/2021/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%A4%A7%E8%B5%9B/Web/oKTHZCKnTRgZzifYg5twqZ.html">find_it | CTFHub</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/09/%E4%B8%89%E3%80%81py%E6%8B%93%E5%B1%95%EF%BC%9Aenumerate-%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1300,132 +1375,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/01/Git%E4%B8%8EGit%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/01/Git%E4%B8%8EGit%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2/" class="post-title-link" itemprop="url">Git与Git文件导致源码泄露</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">نُشر في</span>
-              
-
-              <time title="أُنشأ: 2022-01-01 22:26:49 / عُدل: 22:37:25" itemprop="dateCreated datePublished" datetime="2022-01-01T22:26:49+08:00">2022-01-01</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">في</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Git与Git文件导致源码泄露"><a href="#Git与Git文件导致源码泄露" class="headerlink" title="Git与Git文件导致源码泄露"></a>Git与Git文件导致源码泄露</h1><p>Git是目前世界上最先进的<strong>分布式版本控制系统</strong></p>
-<p>git泄露是常见的ctf题型，来看几个例子</p>
-<h2 id="Hello-World-i春秋-第二届春秋欢乐赛-web"><a href="#Hello-World-i春秋-第二届春秋欢乐赛-web" class="headerlink" title="Hello World (i春秋 第二届春秋欢乐赛 web)"></a>Hello World (i春秋 第二届春秋欢乐赛 web)</h2><p>这里只说git利用的点</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-615612ba7e3c7914.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/369/format/webp" alt="img"></p>
-<p>由上可知有git泄露<br>之后尝试使用常用工具GitHack<br><a target="_blank" rel="noopener" href="https://github.com/BugScanTeam/GitHack">https://github.com/BugScanTeam/GitHack</a></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-585b35b487c7a4d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/693/format/webp" alt="img"></p>
-<p>这里应该是通过.git/refs/heads/master中存储的commit的object来提取了master分支</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-c6ea2ef7681a2c38.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/414/format/webp" alt="img"></p>
-<p>但是这并不够，因为本题的考点原意是.git/logs/HEAD文件的利用，而githack并没有对其中的hash提取，因此遗漏了部分的object，即下图中的部分hash</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-17011a2e0aa78d61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1114/format/webp" alt="img"></p>
-<p>这里使用JGitHack是可以获取到这些遗漏的object的</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-5f8dd5ec2fdeb41e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666/format/webp" alt="img"></p>
-<p>之后需要手动提取object<br>这里使用git的底层命令，cat-file和ls-tree<br>看一下logs中的提交记录</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-a2d083652835b1b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/846/format/webp" alt="img"></p>
-<p>可以发现有两个commit，并且hash值是不一样的，说明有文件出现改动<br>于是这里手动查看一下</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-24acb3c8ce970283.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/675/format/webp" alt="img"></p>
-<p>可见他们的tree的hash也是不一样的，说明其中有文件改变，这里继续看两个tree</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-0de1938ca18d91ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/596/format/webp" alt="img"></p>
-<p>由此可见其中的flag.js是变动了，他们的hash值不一样，说明文件不一样，分别是<br> f2b45f1e5af6dc1a8607c11e4ddc5fd077276c45<br> 04bb09bb63fe48e6cab3e1c72a7ef51dda9634b8<br> 所以flag应该就是在这其中<br> 之后可以使用git cat-file命令提取文件</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-ae203287f9ffafec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/586/format/webp" alt="img"></p>
-<p>之后再sublime中diff一下这两个文件</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-c1ace39cda328b1d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/704/format/webp" alt="img"></p>
-<p> 会发现有不同，很明显的区别就是flag了，这前三个差异的字符分别是f,l,a，再往后看便是flag了<br> 到这里，这题做完了，但是过程有些繁琐，而且是可以自动完成的<br> 原先我的想法是使用几个git命令自动完成这个，但发现效率有些低<br> 于是我写了这个工具<br> <a target="_blank" rel="noopener" href="https://github.com/gakki429/Git_Extract">https://github.com/gakki429/Git_Extract</a><br> 我们试试这个工具</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-1c10b475d2b36001.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/576/format/webp" alt="img"></p>
-<p>看下获取到的文件，与之前的对比</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-7d9201cc8bc9ac39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/438/format/webp" alt="img"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-05a3a46139dab261.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/479/format/webp" alt="img"></p>
-<p>之后直接diff其中的flag.js和f2b45f_flag.js就可以了</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-c691aff459782dd7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/723/format/webp" alt="img"></p>
-<h2 id="登录-百度杯CTF比赛-十月场-web"><a href="#登录-百度杯CTF比赛-十月场-web" class="headerlink" title="登录 (百度杯CTF比赛 十月场 web)"></a>登录 (百度杯CTF比赛 十月场 web)</h2><p>前面是注入<br>最后可以得到用户<br>username: bctf3dm1n<br>password: adminqwe123666<br>登录之后如下</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-f0fde8b99202a2bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/503/format/webp" alt="img"></p>
-<p>可见.bctfg1t，应该是git泄露<br>这题的主要考点是.git/refs/stash</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-40844349a4e2b466.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/943/format/webp" alt="img"></p>
-<p>stash是一个用于保存git工作进度的文件<br>之后利用Git_Extract获取<br>这里获取了master分值，之后也解析了stash中的存的hash的object</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-4814b39438ff3f93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/691/format/webp" alt="img"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-75dd391740af9970.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/481/format/webp" alt="img"></p>
-<p>由此可获得提示信息</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-c03796b23bab5313.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/442/format/webp" alt="img"></p>
-<p>之后打开这个71ec9d5ca5580c58d1872962c596ea71.php<br>就可以看到flag了</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-fdbd521dd90d9dc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/754/format/webp" alt="img"></p>
-<p>如果这里使用GitHack也是可以完成的</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-dff9e68d61d64e5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/675/format/webp" alt="img"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-362526efaad7f461.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/447/format/webp" alt="img"></p>
-<p>之后我们手动查看stash中的object就可以了</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-3faed573f040e3d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/645/format/webp" alt="img"></p>
-<p>从这个commit中的tree继续获取</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-12f63e9852ff8012.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/577/format/webp" alt="img"></p>
-<h2 id="Backdoor-百度杯CTF比赛-十月场-web"><a href="#Backdoor-百度杯CTF比赛-十月场-web" class="headerlink" title="Backdoor (百度杯CTF比赛 十月场 web)"></a>Backdoor (百度杯CTF比赛 十月场 web)</h2><p>依旧是git的logs/HEAD，但是这里的commit有些多</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-f3a942027001d519.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/968/format/webp" alt="img"></p>
-<p>使用Git_Extract会帮助你自动解析提取这些commit</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-22fc37de8cba7400.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/670/format/webp" alt="img"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-46d77de7b34ad8a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/579/format/webp" alt="img"></p>
-<p>查看这几个flag文件可以发下如下提示，之后继续做就好了</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5958785-dc18ada5dad0b203.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/448/format/webp" alt="img"></p>
-<p>如果使用GitHack也可以完成，但是这些commit需要你手动提取，相当的难受</p>
-<h4 id="Git常见的利用"><a href="#Git常见的利用" class="headerlink" title="Git常见的利用"></a>Git常见的利用</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.git/index中会缓存git add的文件，这里在没有commit的情况下，也是存在的</span><br><span class="line">https://github.com/lijiejie/GitHack lijiejie的这个就是获取的这个</span><br><span class="line">.git/refs/heads/master 记录了master的commit的hash，由此可以解析出这个commit的所有文件</span><br><span class="line">.git/logs/HEAD其中存储了git的log信息，可以找到历史的commit项</span><br><span class="line">.git/refs/stash 工作进度的临时保存</span><br><span class="line">最后说一个pack的问题，这个好像还没看见有ctf中考到，这里也做了恢复</span><br><span class="line">.git/info/packs packs文件提取恢复</span><br><span class="line"></span><br><span class="line">去除了原本的不存在文件的下载失败的提示</span><br><span class="line">增加对windows字体颜色输出的支持，并同步默认背景色，linux中背景色也修改为与默认同步</span><br><span class="line">更换了帅气的Logo（手动滑稽）</span><br><span class="line">觉得好用的话就给个star吧</span><br></pre></td></tr></table></figure>
-
-<p>下载地址<br><a target="_blank" rel="noopener" href="https://github.com/gakki429/Git_Extract">https://github.com/gakki429/Git_Extract</a></p>
-<p>此文章为转载：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/0ea09975169d">CTF中的几种git泄露 - 简书 (jianshu.com)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1497,7 +1446,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">المقالات</span>
         </a>
       </div>

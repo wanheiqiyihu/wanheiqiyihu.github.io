@@ -195,6 +195,102 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/30/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="记录学习路上的一些东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/30/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" class="post-title-link" itemprop="url">信息收集</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">نُشر في</span>
+              
+
+              <time title="أُنشأ: 2022-01-30 11:50:48 / عُدل: 11:53:02" itemprop="dateCreated datePublished" datetime="2022-01-30T11:50:48+08:00">2022-01-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">في</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="渗透测试之信息收集"><a href="#渗透测试之信息收集" class="headerlink" title="渗透测试之信息收集"></a>渗透测试之信息收集</h1><h2 id="1-1收集域名信息"><a href="#1-1收集域名信息" class="headerlink" title="1.1收集域名信息"></a>1.1收集域名信息</h2><h3 id="1-1-1whois查询"><a href="#1-1-1whois查询" class="headerlink" title="1.1.1whois查询"></a>1.1.1whois查询</h3><p>简单的说whois就是一个用于查询域名是否已被注册一级注册域名的详细信息的数据库（如域名所有人，域名注册商）。</p>
+<h3 id="1-1-2备案信息查询"><a href="#1-1-2备案信息查询" class="headerlink" title="1.1.2备案信息查询"></a>1.1.2备案信息查询</h3><p>icp备案查询网<a target="_blank" rel="noopener" href="https://www.beianx.cn/">ICP备案查询网 (beianx.cn)</a></p>
+<p>天眼查<a target="_blank" rel="noopener" href="https://www.tianyancha.com/">天眼查-商业查询平台_企业信息查询_公司查询_工商查询_企业信用信息系统 (tianyancha.com)</a></p>
+<h2 id="1-2收集敏感信息"><a href="#1-2收集敏感信息" class="headerlink" title="1.2收集敏感信息"></a>1.2收集敏感信息</h2><p>google语法，在我另外一篇博客中有。</p>
+<p>burpsuiite的Repeater功能同样可以获取一些服务器的信息。</p>
+<p>github上也可以找，类似数据库连接信息，邮箱密码，UC-KEY，阿里的osskey</p>
+<h2 id="1-3收集子域名信息"><a href="#1-3收集子域名信息" class="headerlink" title="1.3收集子域名信息"></a>1.3收集子域名信息</h2><p><a target="_blank" rel="noopener" href="https://phpinfo.me/domain">在线子域名查询 (phpinfo.me)</a></p>
+<p><a target="_blank" rel="noopener" href="https://dns.aizhan.com/1/">IP反查域名_同IP站点查询_同ip网站查询_爱站网 (aizhan.com)</a></p>
+<h3 id="1-子域名检测工具"><a href="#1-子域名检测工具" class="headerlink" title="1.子域名检测工具"></a>1.子域名检测工具</h3><p>Layer子域名挖掘机，K8，wydomain等等</p>
+<p>subDomainsBrute，可以用小字典递归发现三级域名或者四级域名。</p>
+<h3 id="2-搜索引擎美剧"><a href="#2-搜索引擎美剧" class="headerlink" title="2.搜索引擎美剧"></a>2.搜索引擎美剧</h3><p>我们可以利用goolgle语法搜索。<code>site:baidu.com</code></p>
+<h3 id="3-第三方聚合应用枚举"><a href="#3-第三方聚合应用枚举" class="headerlink" title="3.第三方聚合应用枚举"></a>3.第三方聚合应用枚举</h3><h4 id="DNSdumpster-com-dns-recon-and-research-find-and-lookup-dns-records（挂代理）"><a href="#DNSdumpster-com-dns-recon-and-research-find-and-lookup-dns-records（挂代理）" class="headerlink" title="DNSdumpster.com - dns recon and research, find and lookup dns records（挂代理）"></a><a target="_blank" rel="noopener" href="https://dnsdumpster.com/">DNSdumpster.com - dns recon and research, find and lookup dns records</a>（挂代理）</h4><h3 id="4-证书透明度公开日志枚举"><a href="#4-证书透明度公开日志枚举" class="headerlink" title="4.证书透明度公开日志枚举"></a>4.证书透明度公开日志枚举</h3><h2 id="1-4收集常用端口信息-服务"><a href="#1-4收集常用端口信息-服务" class="headerlink" title="1.4收集常用端口信息/服务"></a>1.4收集常用端口信息/服务</h2><p>nmap，shodan等</p>
+<p><img src="/2022/01/30/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/D68316B4F2D1CE7976D8A816A32F27CB.png" alt="img"><img src="/2022/01/30/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/28DA39F5B9F767E3C337844003F42EBE.png" alt="img"><img src="/2022/01/30/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/5F961E0C8CCC1DF6FC767A3AC4F1F95F.png" alt="img"></p>
+<h2 id="1-5指纹识别"><a href="#1-5指纹识别" class="headerlink" title="1.5指纹识别"></a>1.5指纹识别</h2><p>找到一个与域名的cms指纹有助于我们后面的渗透工作。</p>
+<p>一般在html,js,css文件中多多少少包含一些特征码。如index.php中有generator=wordpress3.xx</p>
+<p>常见的cms有</p>
+<p>dedecms（织梦），discuz，phpweb等</p>
+<p>代表工具有御剑web指纹之别，WhatWeb，椰树等，可以快速识别一些主流的cms</p>
+<p><a target="_blank" rel="noopener" href="http://whatweb.bugscaner.com/">已支持识别的的cms列表,cms识别,源码识别,在线工具–BugScaner</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.yunsee.cn/">云悉互联网WEB资产在线梳理|在线CMS指纹识别平台 - 云悉安全平台 (yunsee.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.whatweb.net/">WhatWeb - Next generation web scanner.</a></p>
+<h2 id="1-6查找真实ip"><a href="#1-6查找真实ip" class="headerlink" title="1.6查找真实ip"></a>1.6查找真实ip</h2><p>用超极ping</p>
+<p>如果有cdn我们就需要绕过cdn寻找目标的真实ip</p>
+<p>内部邮箱源，扫描网站测试文件，分站域名，国外访问，查询域名的解析记录（查看历史ip），</p>
+<p>如果网站有自己的app，我们可以通过抓包来看真实ip。</p>
+<p>绕过cloudflare，现在很多网站都使用cloudflare，我们可以先尝试通过在线网站cloudflarewatch来查询。</p>
+<h2 id="1-7收集敏感文件目录"><a href="#1-7收集敏感文件目录" class="headerlink" title="1.7收集敏感文件目录"></a>1.7收集敏感文件目录</h2><p>我们可以用DirBuseter，wwwsan轻量级扫描。</p>
+<p>或者用市面上的一些工具来扫。</p>
+<h2 id="1-8社会工程学"><a href="#1-8社会工程学" class="headerlink" title="1.8社会工程学"></a>1.8社会工程学</h2><p>通过管理员的邮箱找到真实ip等用法，建议还是看下社工的书。</p>
+<h1 id><a href="#" class="headerlink" title></a></h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/28/%E8%B0%B7%E6%AD%8C%E8%AF%AD%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1709,81 +1805,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/10/ctfhub-find-it/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/10/ctfhub-find-it/" class="post-title-link" itemprop="url">ctfhub find_it</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">نُشر في</span>
-              
-
-              <time title="أُنشأ: 2022-01-10 15:59:50 / عُدل: 16:00:16" itemprop="dateCreated datePublished" datetime="2022-01-10T15:59:50+08:00">2022-01-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">في</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="ctfhub-find-it"><a href="#ctfhub-find-it" class="headerlink" title="ctfhub find_it"></a>ctfhub find_it</h1><p>在robots.php中发现提示</p>
-<p>然后访问.文件.swp的时候发现备份源码</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Really easy...</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$file</span>=fopen(<span class="string">&quot;flag.php&quot;</span>,<span class="string">&quot;r&quot;</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">&quot;Unable 2 open!&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$I_know_you_wanna_but_i_will_not_give_you_hhh</span> = fread(<span class="variable">$file</span>,filesize(<span class="string">&quot;flag.php&quot;</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable">$hack</span>=fopen(<span class="string">&quot;hack.php&quot;</span>,<span class="string">&quot;w&quot;</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">&quot;Unable 2 open&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;code&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">&#x27;/system|eval|exec|base|compress|chr|ord|str|replace|pack|assert|preg|replace|create|function|call|\~|\^|\`|flag|cat|tac|more|tail|echo|require|include|proc|open|read|shell|file|put|get|contents|dir|link|dl|var|dump/&#x27;</span>,<span class="variable">$a</span>))&#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;you die&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(strlen(<span class="variable">$a</span>)&gt;<span class="number">33</span>)&#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;nonono.&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">fwrite(<span class="variable">$hack</span>,<span class="variable">$a</span>);</span><br><span class="line">fwrite(<span class="variable">$hack</span>,<span class="variable">$I_know_you_wanna_but_i_will_not_give_you_hhh</span>);</span><br><span class="line"></span><br><span class="line">fclose(<span class="variable">$file</span>);</span><br><span class="line">fclose(<span class="variable">$hack</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>发现代码中把falg写入了hack.php中</p>
-<p>利用show_source()函数将文件读出来。</p>
-<p>再或者用大小写绕过这种没有忽略大小写的preg_match System()</p>
-<p><a target="_blank" rel="noopener" href="https://writeup.ctfhub.com/Challenge/2021/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%A4%A7%E8%B5%9B/Web/oKTHZCKnTRgZzifYg5twqZ.html">find_it | CTFHub</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1855,7 +1876,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">المقالات</span>
         </a>
       </div>
