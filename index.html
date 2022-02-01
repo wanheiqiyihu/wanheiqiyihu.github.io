@@ -83,7 +83,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="تشغيل شريط التصفح">
+    <div class="toggle" aria-label="Navigationsleiste an/ausschalten">
       <span class="toggle-line toggle-line-first"></span>
       <span class="toggle-line toggle-line-middle"></span>
       <span class="toggle-line toggle-line-last"></span>
@@ -113,12 +113,12 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Startseite</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>الأرشيفات</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archiv</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
@@ -141,8 +141,13 @@
     <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
+        <li class="menu-item menu-item-基础">
+
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+
+  </li>
       <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>بحث
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Suche
         </a>
       </li>
   </ul>
@@ -158,7 +163,7 @@
   </span>
   <div class="search-input-container">
     <input autocomplete="off" autocapitalize="off"
-           placeholder="بحث..." spellcheck="false"
+           placeholder="Suche..." spellcheck="false"
            type="search" class="search-input">
   </div>
   <span class="popup-btn-close">
@@ -195,6 +200,283 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="记录学习路上的一些东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/" class="post-title-link" itemprop="url">pikachu靶场通关</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              <time title="Erstellt: 2022-02-01 22:38:14 / Geändert am: 22:46:34" itemprop="dateCreated datePublished" datetime="2022-02-01T22:38:14+08:00">2022-02-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">in</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="pikachu靶场通关"><a href="#pikachu靶场通关" class="headerlink" title="pikachu靶场通关"></a>pikachu靶场通关</h1><h1 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h1><h2 id="1-基于表单的暴力破解"><a href="#1-基于表单的暴力破解" class="headerlink" title="1.基于表单的暴力破解"></a>1.基于表单的暴力破解</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220131122217344.png" alt="image-20220131122217344"></p>
+<p>burp跑一下</p>
+<h2 id="2-验证码绕过-on-server"><a href="#2-验证码绕过-on-server" class="headerlink" title="2.验证码绕过(on server)"></a>2.验证码绕过(on server)</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220131122833233.png" alt="image-20220131122833233"></p>
+<p>修改密码发了两次包都发现没有提示验证码错误，那我们可以重复利用这个验证码。</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220131123001877.png" alt="image-20220131123001877"></p>
+<p>跑出来了</p>
+<h2 id="3-验证码绕过-on-client"><a href="#3-验证码绕过-on-client" class="headerlink" title="3.验证码绕过(on client)"></a>3.验证码绕过(on client)</h2><p>根据题目提示是前端验证码</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220131123458283.png" alt="image-20220131123458283"></p>
+<p>那我们发包同样可以绕过</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220131123626609.png" alt="image-20220131123626609"></p>
+<p>成功</p>
+<h2 id="4-token防爆破"><a href="#4-token防爆破" class="headerlink" title="4.token防爆破?"></a>4.token防爆破?</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220131124113085.png" alt="image-20220131124113085"></p>
+<p>通过观察我们可以发现下一次的token是由这一次的返回包来决定的，</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201102136091.png" alt="image-20220201102136091"></p>
+<p>选这个</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201102210221.png" alt="image-20220201102210221"></p>
+<p>线程设置为1</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201102317701.png" alt="image-20220201102317701"></p>
+<p>设置一下获取的token</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201102409707.png" alt="image-20220201102409707"></p>
+<p>选择总是</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201103151781.png" alt="image-20220201103151781"></p>
+<p>选择递归搜索，把上一个token填进去</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201110843373.png" alt="image-20220201110843373"></p>
+<p>发现密码</p>
+<h1 id="xss跨站脚本漏洞"><a href="#xss跨站脚本漏洞" class="headerlink" title="xss跨站脚本漏洞"></a>xss跨站脚本漏洞</h1><h2 id="1-反射型xss-get"><a href="#1-反射型xss-get" class="headerlink" title="1.反射型xss(get)"></a>1.反射型xss(get)</h2><p>因为在输入框有输入限制，我们就直接在url中添加参数</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201112154043.png" alt="image-20220201112154043"></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20220201112158872.png" alt="image-20220201112158872"></p>
+<h2 id="2-反射性xss-post"><a href="#2-反射性xss-post" class="headerlink" title="2.反射性xss(post)"></a>2.反射性xss(post)</h2><p>先用123456的账号密码登录上去</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201113436342.png" alt="image-20220201113436342"></p>
+<p>然后就可以了</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201114104514.png" alt="image-20220201114104514"></p>
+<p>当然我们也有很多的绕过方式</p>
+<p><code>&lt;sCRIPT&gt;alert(&#39;1&#39;)&lt;/script&gt;</code></p>
+<p><code>&lt;sCRIPT&gt;alert(/xss/)&lt;/script&gt;</code>用<code>//</code>代替<code>&quot;&quot;</code></p>
+<p>都可以</p>
+<h2 id="3-存储型xss"><a href="#3-存储型xss" class="headerlink" title="3.存储型xss"></a>3.存储型xss</h2><p>还是用上面的payload<code>&lt;sCRIPT&gt;alert(/xss/)&lt;/script&gt;</code></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201114843672.png" alt="image-20220201114843672"></p>
+<h2 id="4-DOM型xss"><a href="#4-DOM型xss" class="headerlink" title="4.DOM型xss"></a>4.DOM型xss</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201115819085.png" alt="image-20220201115819085"></p>
+<p>通过审查元素我们可以发现我们在点击按钮之后，这个标签里面的属性就会改变我们要做的就是把它弄成超链接，</p>
+<p>onclick 事件会在对象被点击时发生，然后弹出我们的xss，记得闭合我们的标签符号</p>
+<p><code>&#39;onclick=&quot;alert(123)&quot;&gt;</code></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201120149233.png" alt="image-20220201120149233"></p>
+<h2 id="5-DOM型xss"><a href="#5-DOM型xss" class="headerlink" title="5.DOM型xss"></a>5.DOM型xss</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201121609094.png" alt="image-20220201121609094"></p>
+<p>可以看到上面的标签在点击下面的标签之后内容就会变成输入框里面的内容，我们还是用onclick事件。</p>
+<p><code>&#39;onclick=&quot;alert(123)&quot;&gt;</code></p>
+<h2 id="6-xss盲打"><a href="#6-xss盲打" class="headerlink" title="6.xss盲打"></a>6.xss盲打</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201130503164.png" alt="image-20220201130503164"></p>
+<p>先把payload注入进去</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201130521691.png" alt="image-20220201130521691"></p>
+<p>登录进去看看</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201130606293.png" alt="image-20220201130606293"></p>
+<p>存在漏洞</p>
+<h2 id="7-xss之过滤"><a href="#7-xss之过滤" class="headerlink" title="7.xss之过滤"></a>7.xss之过滤</h2><p>看题目就知道有过滤，我们直接使用上面提到的绕过的payload</p>
+<p>拼凑:<code>&lt;scri&lt;script&gt;pt&gt;alert(/xss/)&lt;/scr&lt;/script&gt;pt&gt;</code></p>
+<p><code>&lt;sCRIPT&gt;alert(/xss/)&lt;/scriPt&gt;</code></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201130839329.png" alt="image-20220201130839329"></p>
+<h2 id="8-xss之htmlspecialchars"><a href="#8-xss之htmlspecialchars" class="headerlink" title="8.xss之htmlspecialchars"></a>8.xss之htmlspecialchars</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201131532369.png" alt="image-20220201131532369"></p>
+<p>由于输入的地方出现了特殊字符，所以被记录下来了，但是发现记录的标签也可以进行注入，那我们继续使用onclick事件</p>
+<p><code>&#39;onclick=&#39;alert(/xss/)&#39;</code></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201131717082.png" alt="image-20220201131717082"></p>
+<h2 id="9-xss之href输出"><a href="#9-xss之href输出" class="headerlink" title="9.xss之href输出"></a>9.xss之href输出</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201131817651.png" alt="image-20220201131817651"></p>
+<p>用oncilck事件没有成功</p>
+<p>我们还是按常理输出，然后点击查看查看元素发现，这次的输出是在href中，但是这次代码将双引号进行了过滤，是不是这样不能执行xss代码了呢，当然不是，输出在a标签里的href属性，可以使用js协议来执行js</p>
+<p><code>javascript:alert(/xss/)</code></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201132454361.png" alt="image-20220201132454361"></p>
+<h2 id="10-xss之js输出"><a href="#10-xss之js输出" class="headerlink" title="10.xss之js输出"></a>10.xss之js输出</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201132657030.png" alt="image-20220201132657030"></p>
+<p>可以看到直接被拼接进了代码中，那我们直接对他进行闭合</p>
+<p><code>&#39;&lt;/script&gt;&lt;script&gt;alert(/xss/)&lt;/script&gt;</code></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201132823975.png" alt="image-20220201132823975"></p>
+<h1 id="CSRF-跨站请求伪造"><a href="#CSRF-跨站请求伪造" class="headerlink" title="CSRF(跨站请求伪造)"></a>CSRF(跨站请求伪造)</h1><p>Cross-site request forgery  简称为“CSRF”，在CSRF的攻击场景中攻击者会伪造一个请求（这个请求一般是一个链接），然后欺骗目标用户进行点击，用户一旦点击了这个请求，整个攻击就完成了。所以CSRF攻击也成为”one click”攻击。                         很多人搞不清楚CSRF的概念，甚至有时候会将其和XSS混淆,更有甚者会将其和越权问题混为一谈,这都是对原理没搞清楚导致的。</p>
+<h2 id="1-CSRF-get"><a href="#1-CSRF-get" class="headerlink" title="1.CSRF(get)"></a>1.CSRF(get)</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201154952242.png" alt="image-20220201154952242"></p>
+<p>发现请求是这样的，我们可以伪造这样的请求，登录lili的账号之后让lili点这个链接，然后就会发现lili的个人信息被修改了</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201155130031.png" alt="image-20220201155130031"></p>
+<h2 id="2-CSRF-post"><a href="#2-CSRF-post" class="headerlink" title="2.CSRF(post)"></a>2.CSRF(post)</h2><p>第二关post也一样，我们伪造一个就好了。</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201155542980.png" alt="image-20220201155542980"></p>
+<p>他的信息是在post里面的，那我们伪造一个包。</p>
+<p>但是我不知道怎么发出去，看了下答案，需要伪造一个站点，别人点你站点中的按钮的时候，就可以自动向那个网站发一个修改个人信息的请求。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript"> </span></span><br><span class="line"><span class="javascript"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript"> </span></span><br><span class="line"><span class="javascript"><span class="built_in">document</span>.getElementById(<span class="string">&quot;postsubmit&quot;</span>).click();</span></span><br><span class="line"><span class="javascript"> </span></span><br><span class="line"><span class="javascript">&#125;</span></span><br><span class="line"><span class="javascript"> </span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span> <span class="attr">action</span>=<span class="string">&quot;http://www.tests.com/vul/csrf/csrfpost/csrf_post_edit.php&quot;</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;sex&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;sex&quot;</span> <span class="attr">value</span>=<span class="string">&quot;body&quot;</span> /&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;phonenum&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;phonenum&quot;</span> <span class="attr">value</span>=<span class="string">&quot;123456789&quot;</span> /&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;add&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;add&quot;</span> <span class="attr">value</span>=<span class="string">&quot;usa&quot;</span> /&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;email&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;email&quot;</span> <span class="attr">value</span>=<span class="string">&quot;vince@pikachu.com&quot;</span> /&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;postsubmit&quot;</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">name</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;submit&quot;</span> /&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="token"><a href="#token" class="headerlink" title="token"></a>token</h3><p>如果有token的话看网上说的就无法绕过了。</p>
+<h1 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h1><p>又到了我最喜欢的sql注入时间</p>
+<h2 id="1-数字型注入"><a href="#1-数字型注入" class="headerlink" title="1.数字型注入"></a>1.数字型注入</h2><p>直接在hackbar里面用or 1=1</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201160657534.png" alt="image-20220201160657534"></p>
+<p>成功</p>
+<h2 id="2-字符型注入"><a href="#2-字符型注入" class="headerlink" title="2.字符型注入"></a>2.字符型注入</h2><p><code>kobe&#39; or &quot;1&quot; = &quot;1&quot;#</code></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201161344643.png" alt="image-20220201161344643"></p>
+<p>成功</p>
+<h2 id="3-搜索型注入"><a href="#3-搜索型注入" class="headerlink" title="3.搜索型注入"></a>3.搜索型注入</h2><p><code>kobe&#39; or &quot;1&quot; = &quot;1&quot;#</code></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201161811993.png" alt="image-20220201161811993"></p>
+<h2 id="4-xx型注入"><a href="#4-xx型注入" class="headerlink" title="4.xx型注入"></a>4.xx型注入</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201161919392.png" alt="image-20220201161919392"></p>
+<p>上面的payload被过滤了，但是依然报错，开始尝试绕过。</p>
+<p><code>&#39;)or 1=1 #</code></p>
+<p>成功绕过<img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201163008834.png" alt="image-20220201163008834"></p>
+<h2 id="5-insert-update"><a href="#5-insert-update" class="headerlink" title="5.insert/update"></a>5.insert/update</h2><p>首先了解下updatexml()函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATEXML (XML_document, XPath_string, new_value);</span><br></pre></td></tr></table></figure>
+
+<p>第一个参数：XML_document是String格式，为XML文档对象的名称，文中为Doc</p>
+<p>第二个参数：XPath_string (Xpath格式的字符串) ，如果不了解Xpath语法，可以在网上查找教程。</p>
+<p>第三个参数：new_value，String格式，替换查找到的符合条件的数据</p>
+<p>作用：改变文档中符合条件的节点的值</p>
+<p>改变XML_document中符合XPATH_string的值</p>
+<p>而我们的注入语句为：<code>updatexml(1,concat(0x7e,(SELECT @@version),0x7e),1)</code></p>
+<p>其中的concat()函数是将其连成一个字符串，因此不会符合XPATH_string的格式，从而出现格式错误，爆出。</p>
+<p><code>xxx&#39; or updatexml(1,concat(0x7e,database()),0) or &#39;</code></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201171910421.png" alt="image-20220201171910421"></p>
+<h2 id="6-delete注入"><a href="#6-delete注入" class="headerlink" title="6.delete注入"></a>6.delete注入</h2><p>打开burpsuite然后点击删除，抓到包后发送到重发器然后在56后面加上我们的语句</p>
+<p>+or+updatexml(1,comcat(0x7e,database()),0)因为这里传的是数值型，我们就不用单引号闭合，直接or就行了，这样就完成了我们的注入</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201172931918.png" alt="image-20220201172931918"></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/20200423101230931.png" alt="img"></p>
+<h2 id="7-http头注入"><a href="#7-http头注入" class="headerlink" title="7.http头注入"></a>7.http头注入</h2><p>我们的信息被记录了，那有可能是记录在数据库了</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201174404449.png" alt="image-20220201174404449"></p>
+<p>可能又是insert</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201175400728.png" alt="image-20220201175400728"></p>
+<p>在user-agent完整注入</p>
+<h2 id="8-基于boolian的盲注"><a href="#8-基于boolian的盲注" class="headerlink" title="8.基于boolian的盲注"></a>8.基于boolian的盲注</h2><p>kobe’ and ascii(substr(database(),1,1))=112#</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201180541316.png" alt="image-20220201180541316"></p>
+<h2 id><a href="#" class="headerlink" title></a></h2><h2 id="9-时间盲注"><a href="#9-时间盲注" class="headerlink" title="9.时间盲注"></a>9.时间盲注</h2><p>时间盲注主要使用if语句，通过延迟信息进行判断，不看回显信息</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201181336356.png" alt="image-20220201181336356"></p>
+<p>右击审查元素</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201181340785.png" alt="image-20220201181340785"></p>
+<p>然后点击网络，再从上面提交上去，可以看到时间执行了5.12秒，说明有盲注</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201181344988.png" alt="image-20220201181344988"></p>
+<p>kobe’ and if ((substr(database(),1,1))=’a’,sleep=(5),null)#</p>
+<p>构造了另一条代码</p>
+<p>此时1ms就返回结果,说明数据库名第一位不是a<br>将a改为p,则一直不返回结果<br>说明数据库名第一位不是a</p>
+<h1 id="RCE"><a href="#RCE" class="headerlink" title="RCE"></a>RCE</h1><p>RCE漏洞，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统。                    </p>
+<h2 id="1-ping"><a href="#1-ping" class="headerlink" title="1.ping"></a>1.ping</h2><p>命令执行</p>
+<p>经常遇到，但是由于我们是windows系统，我们要用whoami命令</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201182310878.png" alt="image-20220201182310878"></p>
+<p>最下面可以看到结果</p>
+<h2 id="2-exec-“eval”"><a href="#2-exec-“eval”" class="headerlink" title="2.exec “eval”"></a>2.exec “eval”</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201182644246.png" alt="image-20220201182644246"></p>
+<p>eval把字符串当做代码来执行。</p>
+<h1 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h1><p>文件包含，是一个功能。在各种开发语言中都提供了内置的文件包含函数，其可以使开发人员在一个代码文件中直接包含（引入）另外一个代码文件。</p>
+<h2 id="1-本地包含"><a href="#1-本地包含" class="headerlink" title="1.本地包含"></a>1.本地包含</h2><p>先在本地建立一个敏感文件</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201183902587.png" alt="image-20220201183902587"></p>
+<p>file传参的时候包含这个文件</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201183916344.png" alt="image-20220201183916344"></p>
+<h2 id="2-远程包含"><a href="#2-远程包含" class="headerlink" title="2.远程包含"></a>2.远程包含</h2><p><code>http://192.168.32.104/pikachu/vul/fileinclude/fi_remote.php?filename=http://192.168.32.104/pikachu\vul\fileinclude/test.php&amp;submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2</code></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201184427302.png" alt="image-20220201184427302"></p>
+<h1 id="不安全的文件下载"><a href="#不安全的文件下载" class="headerlink" title="不安全的文件下载"></a>不安全的文件下载</h1><p>文件下载功能在很多web系统上都会出现，一般我们当点击下载链接，便会向后台发送一个下载请求，一般这个请求会包含一个需要下载的文件名称，后台在收到请求后                        会开始执行下载代码，将该文件名对应的文件response给浏览器，从而完成下载。                        如果后台在收到请求的文件名后,将其直接拼进下载文件的路径中而不对其进行安全判断的话，则可能会引发不安全的文件下载漏洞。</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201185131158.png" alt="image-20220201185131158"></p>
+<p>下载抓包发现文件，我们把我们的敏感文件下载下来</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201185216830.png" alt="image-20220201185216830"></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201185219777.png" alt="image-20220201185219777"></p>
+<h1 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h1><p>这个也简单</p>
+<h2 id="1-客户端check"><a href="#1-客户端check" class="headerlink" title="1.客户端check"></a>1.客户端check</h2><p>看标题就知道是js嘛</p>
+<p>先用jpg上传，然后在burp包里修改文件的后缀名，就可以绕过前端检测</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201194924964.png" alt="image-20220201194924964"></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201195341874.png" alt="image-20220201195341874"></p>
+<p>获得shell</p>
+<h2 id="2-服务端check，MIME"><a href="#2-服务端check，MIME" class="headerlink" title="2.服务端check，MIME"></a>2.服务端check，MIME</h2><p>可以用一句话木马图片绕过，当然也可以直接修改mime</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201195459029.png" alt="image-20220201195459029"></p>
+<p>上传成功</p>
+<h2 id="3-getimagesize"><a href="#3-getimagesize" class="headerlink" title="3.getimagesize()"></a>3.getimagesize()</h2><p>getimagesize()简介<br>这个函数功能会对目标文件的16进制去进行一个读取，去读取头几个字符串是不是符合图片的要求的</p>
+<p>直接上传一个图片，然后在里面注入我们的恶意代码</p>
+<p>然后用之前的包含漏洞包含我们的图片就可以了</p>
+<h1 id="越权"><a href="#越权" class="headerlink" title="越权"></a>越权</h1><p>如果使用A用户的权限去操作B用户的数据，A的权限小于B的权限，如果能够成功操作，则称之为越权操作。越权漏洞形成的原因是后台使用了 不合理的权限校验规则导致的。                </p>
+<p>一般越权漏洞容易出现在权限页面（需要登录的页面）增、删、改、查的的地方，当用户对权限页面内的信息进行这些操作时，后台需要对当前用户的权限进行校验，看其是否具备操作的权限，从而给出响应，而如果校验的规则过于简单则容易出现越权漏洞。                </p>
+<h2 id="1-水平越权"><a href="#1-水平越权" class="headerlink" title="1.水平越权"></a>1.水平越权</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201204858787.png" alt="image-20220201204858787"></p>
+<p>得知这些账号</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201212328598.png" alt="image-20220201212328598"></p>
+<p>把lucy的包伪造成lili的</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201212413880.png" alt="image-20220201212413880"></p>
+<p>成功水平越权</p>
+<h2 id="2-垂直越权"><a href="#2-垂直越权" class="headerlink" title="2.垂直越权"></a>2.垂直越权</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201212454749.png" alt="image-20220201212454749"></p>
+<p>我们的目标就是用pikachu使用root的功能</p>
+<p>先登录admin获取一个创建用户的包</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201213354562.png" alt="image-20220201213354562"></p>
+<p>然后需要把我们普通用户的cookie替换上去，这样在登录普通用户的情况下就可以实现垂直越权</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201213501343.png" alt="image-20220201213501343"></p>
+<p>可以看到用户被添加进去了</p>
+<h1 id="目录遍历漏洞"><a href="#目录遍历漏洞" class="headerlink" title="目录遍历漏洞"></a>目录遍历漏洞</h1><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201214157517.png" alt="image-20220201214157517"></p>
+<p>目录遍历，可以读取目录中的任意文件。</p>
+<h1 id="敏感信息泄露"><a href="#敏感信息泄露" class="headerlink" title="敏感信息泄露"></a>敏感信息泄露</h1><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201215102010.png" alt="image-20220201215102010"></p>
+<p>源代码中有测试账号可以看到。</p>
+<p>直接就登录进去了，我还用dirsearch扫了半天。。</p>
+<h1 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h1><p>(๑╹◡╹)ﾉ”ez啦~</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201220501911.png" alt="image-20220201220501911"></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201220448090.png" alt="image-20220201220448090"></p>
+<p>我们先来一个正常的试一下。</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201220533182.png" alt="image-20220201220533182"></p>
+<p>报错了。</p>
+<p>好的不会了，序列化一生之敌！！！！！！！！！！！</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43233085/article/details/104143518">(38条消息) pikachu靶场 ：十二、PHP反序列化_CNwanku的博客-CSDN博客_pikachu 反序列化</a></p>
+<h1 id="xxe"><a href="#xxe" class="headerlink" title="xxe"></a>xxe</h1><p>XXE -“xml external entity injection”<br>                既”xml外部实体注入漏洞”。<br>                概括一下就是”攻击者通过向服务器注入指定的xml实体内容,从而让服务器按照指定的配置进行执行,导致问题”<br>                也就是说服务端接收和解析了来自用户端的xml数据,而又没有做严格的安全控制,从而导致xml外部实体注入。</p>
+<pre><code>            具体的关于xml实体的介绍,网络上有很多,自己动手先查一下。                
+            现在很多语言里面对应的解析xml的函数默认是禁止解析外部实体内容的,从而也就直接避免了这个漏洞。
+            以PHP为例,在PHP里面解析xml用的是libxml,其在≥2.9.0的版本中,默认是禁止解析xml外部实体内容的。
+            
+            本章提供的案例中,为了模拟漏洞,通过手动指定LIBXML_NOENT选项开启了xml外部实体解析。             
+</code></pre>
+<p>xxe我也不是很会，过几天学一学</p>
+<p><code>&lt;?xml version = &quot;1.0&quot;?&gt; &lt;!DOCTYPE note [   &lt;!ENTITY hacker &quot;xxe&quot;&gt; ]&gt; &lt;name&gt;&amp;hacker;&lt;/name&gt;</code></p>
+<p>这个是payload</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223315820.png" alt="image-20220201223315820"></p>
+<h1 id="url重定向"><a href="#url重定向" class="headerlink" title="url重定向"></a>url重定向</h1><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223138435.png" alt="image-20220201223138435"></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223147548.png" alt="image-20220201223147548"></p>
+<p>感觉和远程文件包含差不多</p>
+<h1 id="ssrf"><a href="#ssrf" class="headerlink" title="ssrf"></a>ssrf</h1><h2 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223415905.png" alt="image-20220201223415905"></p>
+<p>发现后面跟了个url参数</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223448116.png" alt="image-20220201223448116"></p>
+<p>伪造一个url</p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223500719.png" alt="image-20220201223500719"></p>
+<h2 id="file-get-content"><a href="#file-get-content" class="headerlink" title="file_get_content"></a>file_get_content</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223540152.png" alt="image-20220201223540152"></p>
+<p>又有参数<img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223600441.png" alt="image-20220201223600441"></p>
+<p>额</p>
+<p>搜了下正确的用法是用伪协议读取文件</p>
+<p><code>192.168.32.104/pikachu/vul/ssrf/ssrf_fgc.php?file=php://filter/read=convert.base64-encode/resource=http://127.0.0.1/phpinfo.php</code></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223723101.png" alt="image-20220201223723101"></p>
+<p>base读取成功</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/30/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -217,16 +499,16 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
-              <time title="أُنشأ: 2022-01-30 11:50:48 / عُدل: 11:53:02" itemprop="dateCreated datePublished" datetime="2022-01-30T11:50:48+08:00">2022-01-30</time>
+              <time title="Erstellt: 2022-01-30 11:50:48 / Geändert am: 11:53:02" itemprop="dateCreated datePublished" datetime="2022-01-30T11:50:48+08:00">2022-01-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">في</span>
+              <span class="post-meta-item-text">in</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
                 </span>
@@ -313,16 +595,16 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
-              <time title="أُنشأ: 2022-01-28 15:33:47 / عُدل: 15:37:03" itemprop="dateCreated datePublished" datetime="2022-01-28T15:33:47+08:00">2022-01-28</time>
+              <time title="Erstellt: 2022-01-28 15:33:47 / Geändert am: 15:37:03" itemprop="dateCreated datePublished" datetime="2022-01-28T15:33:47+08:00">2022-01-28</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">في</span>
+              <span class="post-meta-item-text">in</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
                 </span>
@@ -394,16 +676,16 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
-              <time title="أُنشأ: 2022-01-27 18:04:33 / عُدل: 18:09:35" itemprop="dateCreated datePublished" datetime="2022-01-27T18:04:33+08:00">2022-01-27</time>
+              <time title="Erstellt: 2022-01-27 18:04:33 / Geändert am: 18:09:35" itemprop="dateCreated datePublished" datetime="2022-01-27T18:04:33+08:00">2022-01-27</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">في</span>
+              <span class="post-meta-item-text">in</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">-python</span></a>
                 </span>
@@ -719,16 +1001,16 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
-              <time title="أُنشأ: 2022-01-21 17:23:05 / عُدل: 23:29:35" itemprop="dateCreated datePublished" datetime="2022-01-21T17:23:05+08:00">2022-01-21</time>
+              <time title="Erstellt: 2022-01-21 17:23:05 / Geändert am: 23:29:35" itemprop="dateCreated datePublished" datetime="2022-01-21T17:23:05+08:00">2022-01-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">في</span>
+              <span class="post-meta-item-text">in</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
                 </span>
@@ -876,22 +1158,22 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
 
-              <time title="أُنشأ: 2022-01-20 22:28:01" itemprop="dateCreated datePublished" datetime="2022-01-20T22:28:01+08:00">2022-01-20</time>
+              <time title="Erstellt: 2022-01-20 22:28:01" itemprop="dateCreated datePublished" datetime="2022-01-20T22:28:01+08:00">2022-01-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
-                <span class="post-meta-item-text">عُدل في</span>
-                <time title="عُدل: 2022-01-22 16:42:48" itemprop="dateModified" datetime="2022-01-22T16:42:48+08:00">2022-01-22</time>
+                <span class="post-meta-item-text">Bearbeitet am</span>
+                <time title="Geändert am: 2022-01-22 16:42:48" itemprop="dateModified" datetime="2022-01-22T16:42:48+08:00">2022-01-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">في</span>
+              <span class="post-meta-item-text">in</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
                 </span>
@@ -964,16 +1246,16 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
-              <time title="أُنشأ: 2022-01-19 15:01:42 / عُدل: 15:03:05" itemprop="dateCreated datePublished" datetime="2022-01-19T15:01:42+08:00">2022-01-19</time>
+              <time title="Erstellt: 2022-01-19 15:01:42 / Geändert am: 15:03:05" itemprop="dateCreated datePublished" datetime="2022-01-19T15:01:42+08:00">2022-01-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">في</span>
+              <span class="post-meta-item-text">in</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
                 </span>
@@ -1055,16 +1337,16 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
-              <time title="أُنشأ: 2022-01-17 21:00:19 / عُدل: 21:02:47" itemprop="dateCreated datePublished" datetime="2022-01-17T21:00:19+08:00">2022-01-17</time>
+              <time title="Erstellt: 2022-01-17 21:00:19 / Geändert am: 21:02:47" itemprop="dateCreated datePublished" datetime="2022-01-17T21:00:19+08:00">2022-01-17</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">في</span>
+              <span class="post-meta-item-text">in</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
                 </span>
@@ -1178,16 +1460,16 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
-              <time title="أُنشأ: 2022-01-16 15:35:22 / عُدل: 16:11:50" itemprop="dateCreated datePublished" datetime="2022-01-16T15:35:22+08:00">2022-01-16</time>
+              <time title="Erstellt: 2022-01-16 15:35:22 / Geändert am: 16:11:50" itemprop="dateCreated datePublished" datetime="2022-01-16T15:35:22+08:00">2022-01-16</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">في</span>
+              <span class="post-meta-item-text">in</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/readbook/" itemprop="url" rel="index"><span itemprop="name">-readbook</span></a>
                 </span>
@@ -1317,16 +1599,16 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
-              <time title="أُنشأ: 2022-01-15 16:48:00 / عُدل: 16:53:16" itemprop="dateCreated datePublished" datetime="2022-01-15T16:48:00+08:00">2022-01-15</time>
+              <time title="Erstellt: 2022-01-15 16:48:00 / Geändert am: 16:53:16" itemprop="dateCreated datePublished" datetime="2022-01-15T16:48:00+08:00">2022-01-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">في</span>
+              <span class="post-meta-item-text">in</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
                 </span>
@@ -1477,338 +1759,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/11/sql%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/11/sql%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/" class="post-title-link" itemprop="url">sql必知必会</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">نُشر في</span>
-              
-
-              <time title="أُنشأ: 2022-01-11 22:34:47 / عُدل: 22:36:03" itemprop="dateCreated datePublished" datetime="2022-01-11T22:34:47+08:00">2022-01-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">في</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/readbook/" itemprop="url" rel="index"><span itemprop="name">-readbook</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="sql必知必会"><a href="#sql必知必会" class="headerlink" title="sql必知必会"></a>sql必知必会</h1><h1 id="第一课-了解sql"><a href="#第一课-了解sql" class="headerlink" title="第一课 了解sql"></a>第一课 了解sql</h1><p>数据库（database）</p>
-<p>表（table）储存在表中的数据时同一种类型的数据或清单</p>
-<p>列（column）</p>
-<p>行（row）</p>
-<h2 id="1-1主键-primart-key"><a href="#1-1主键-primart-key" class="headerlink" title="1.1主键 primart key"></a>1.1主键 primart key</h2><p>表中每一行都应该有一列可以唯一标识自己。</p>
-<p>主键值能够唯一标识表中的每一行。</p>
-<p>注：主键列不允许null，不允许修改或更新，不能重用。</p>
-<h1 id="第二课-检索数据"><a href="#第二课-检索数据" class="headerlink" title="第二课 检索数据"></a>第二课 检索数据</h1><h2 id="2-1SELECT语句"><a href="#2-1SELECT语句" class="headerlink" title="2.1SELECT语句"></a>2.1SELECT语句</h2><h3 id="2-1-1检索单列"><a href="#2-1-1检索单列" class="headerlink" title="2.1.1检索单列"></a>2.1.1检索单列</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod <span class="keyword">from</span> products;</span><br><span class="line">#意为从表products中查询prod列</span><br></pre></td></tr></table></figure>
-
-<p>提示：结合sql语句</p>
-<p>多条sql语句必须以分号(;)分隔，并且sql语句不区分大小写。</p>
-<h3 id="2-1-2检索多列"><a href="#2-1-2检索多列" class="headerlink" title="2.1.2检索多列"></a>2.1.2检索多列</h3><p>与单列相同，列名之间必须以逗号分隔，但是在最后一个列名的后面不加，否则会报错。</p>
-<h3 id="2-1-3检索所有列"><a href="#2-1-3检索所有列" class="headerlink" title="2.1.3检索所有列"></a>2.1.3检索所有列</h3><p>在实际列名的位置使用星号通配符可以做到这点。</p>
-<h3 id="2-1-4检索不同值"><a href="#2-1-4检索不同值" class="headerlink" title="2.1.4检索不同值"></a>2.1.4检索不同值</h3><p>想要返回不同的值，在列名前直接用distinct，则不会返回重复的数值。</p>
-<h3 id="2-1-5top关键字"><a href="#2-1-5top关键字" class="headerlink" title="2.1.5top关键字"></a>2.1.5top关键字</h3><p>在SQLserver中使用SELECT时，可以用TOP关键字来限制最多返回多少行。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> top <span class="number">5</span> prod_name FORM prducts;</span><br><span class="line">#检索products表中前五个列</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-1-6LIMIT关键字"><a href="#2-1-6LIMIT关键字" class="headerlink" title="2.1.6LIMIT关键字"></a>2.1.6LIMIT关键字</h3><p>如果使用mysql，mariaDB，postgresql，则用LIMIT关键字来限制</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> top <span class="number">5</span> prod_name FORM prducts LIMIT <span class="number">5</span>;</span><br><span class="line">#只返回五行数据</span><br><span class="line"><span class="keyword">SELECT</span> top <span class="number">5</span> prod_name FORM prducts LIMIT <span class="number">5</span> <span class="keyword">OFFSET</span> <span class="number">4</span>;</span><br><span class="line">#从第四行开始返回五行数据</span><br></pre></td></tr></table></figure>
-
-<h1 id="第三课-排列数据"><a href="#第三课-排列数据" class="headerlink" title="第三课 排列数据"></a>第三课 排列数据</h1><h3 id="3-1-1ORDER-BY关键字"><a href="#3-1-1ORDER-BY关键字" class="headerlink" title="3.1.1ORDER BY关键字"></a>3.1.1ORDER BY关键字</h3><p>在SELECT语句最后使用，ORDER BY，对order by后面的列进行排序（列名之间用逗号分开），其后加数字也可以（相对列位置）。</p>
-<h1 id="第四课-过滤数据"><a href="#第四课-过滤数据" class="headerlink" title="第四课 过滤数据"></a>第四课 过滤数据</h1><h2 id="4-1使用WHERE子句"><a href="#4-1使用WHERE子句" class="headerlink" title="4.1使用WHERE子句"></a>4.1使用WHERE子句</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sex <span class="keyword">FROM</span> <span class="keyword">member</span> <span class="keyword">WHERE</span> username<span class="operator">=</span> <span class="string">&#x27;allen&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>分析 这条语句从menber表中检索了 username为allen那一行的sex列。</p>
-<h2 id="4-2where子句的操作符"><a href="#4-2where子句的操作符" class="headerlink" title="4.2where子句的操作符"></a>4.2where子句的操作符</h2><p>有大于小于以及取非!，还有两个比较特殊的”BETWEEN AND”  “IS NULL”。就像是python里的if一样，输出满足条件的那一行。</p>
-<h1 id="第五课-高级数据过滤"><a href="#第五课-高级数据过滤" class="headerlink" title="第五课 高级数据过滤"></a>第五课 高级数据过滤</h1><h2 id="5-1组合WHERE子句"><a href="#5-1组合WHERE子句" class="headerlink" title="5.1组合WHERE子句"></a>5.1组合WHERE子句</h2><h3 id="5-1-1AND操作符"><a href="#5-1-1AND操作符" class="headerlink" title="5.1.1AND操作符"></a>5.1.1AND操作符</h3><p>要通过不知一个列进行过滤，可以使用AND操作符给WHERE子句附加条件</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sex <span class="keyword">FROM</span> <span class="keyword">member</span> <span class="keyword">WHERE</span> username<span class="operator">=</span> <span class="string">&#x27;allen&#x27;</span> <span class="keyword">AND</span> address <span class="operator">=</span> <span class="string">&#x27;nba 76&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-1-2OR操作符"><a href="#5-1-2OR操作符" class="headerlink" title="5.1.2OR操作符"></a>5.1.2OR操作符</h3><p>就和其他的编程语言一样，or也是或运算。许多dbms在OR WHERE子句的第一个条件得到满足的情况下就不会计算第二个条件了。</p>
-<h3 id="5-1-3运算顺序"><a href="#5-1-3运算顺序" class="headerlink" title="5.1.3运算顺序"></a>5.1.3运算顺序</h3><p>and的优先级是大于or的</p>
-<h2 id="5-2-IN操作符"><a href="#5-2-IN操作符" class="headerlink" title="5.2 IN操作符"></a>5.2 IN操作符</h2><p>IN操作符用来指定条件的范围，范围中的每个条件都可以进行匹配。IN取一组由逗号分隔、括在圆括号中的合法值。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> id <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">3</span>);</span><br><span class="line">#这个语句会找到id为<span class="number">1</span>和<span class="number">3</span>的数据，并不是开区间的意思，比起<span class="keyword">or</span>更加简洁明了，执行起来也更加快捷。</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="5-3NOT操作符"><a href="#5-3NOT操作符" class="headerlink" title="5.3NOT操作符"></a>5.3NOT操作符</h2><p>WHERE子句中的NOT操作符有且仅有一个功能，那就是否定其后所跟的任何条件。 </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> <span class="keyword">NOT</span>  id <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">3</span>);</span><br><span class="line">#检索id不是<span class="number">1</span>和<span class="number">3</span>的数据。</span><br></pre></td></tr></table></figure>
-
-<h1 id="第六课-用通配符进行过滤"><a href="#第六课-用通配符进行过滤" class="headerlink" title="第六课 用通配符进行过滤"></a>第六课 用通配符进行过滤</h1><p>通配符（wildcard）:用来匹配值的一部分的特殊字符</p>
-<p>搜索模式(search pattern):由字面值、通配符或两者组合构成的搜索条件。</p>
-<h2 id="6-1-LIKE操作符"><a href="#6-1-LIKE操作符" class="headerlink" title="6.1 LIKE操作符"></a>6.1 LIKE操作符</h2><h3 id="6-1-1-百分号-通配符"><a href="#6-1-1-百分号-通配符" class="headerlink" title="6.1.1 百分号%通配符"></a>6.1.1 百分号%通配符</h3><p>最常使用的通配符，%表示任何字符出现任意次数。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> username <span class="keyword">LIKE</span> <span class="string">&#x27;L%&#x27;</span>;</span><br><span class="line">#检索username以l开头的的行</span><br></pre></td></tr></table></figure>
-
-<h3 id="6-1-2下划线-通配符"><a href="#6-1-2下划线-通配符" class="headerlink" title="6.1.2下划线_通配符"></a>6.1.2下划线_通配符</h3><p>下划线的作用和百分号一样，但是它只匹配单个字符而不是多个字符。</p>
-<h3 id="6-1-3方括号-通配符"><a href="#6-1-3方括号-通配符" class="headerlink" title="6.1.3方括号[]通配符"></a>6.1.3方括号[]通配符</h3><p>方括号通配符用来指定一个字符集，他必须匹配指定位置(通配符的位置)的一个字符。</p>
-<p>注意:并不是所有都支持集合，sqlserver支持，但是mysql，Oracle，db2，sqlite都不支持</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> username <span class="keyword">like</span> &quot;[jm]%&quot;</span><br><span class="line">#找出所有名字以j或者m开头的成员</span><br></pre></td></tr></table></figure>
-
-<h1 id="第七课-创建计算字段"><a href="#第七课-创建计算字段" class="headerlink" title="第七课 创建计算字段"></a>第七课 创建计算字段</h1><h2 id="7-1计算字段"><a href="#7-1计算字段" class="headerlink" title="7.1计算字段"></a>7.1计算字段</h2><p>储存在数据库表中的数据一般不是应用程序所需要的的格式，这就是计算字段可以派上用场的地方了。与前几课介绍的列不同，计算字段并不实际存在于数据库中。计算字段是运行时在SELECT语句内创建的。</p>
-<h2 id="7-2拼接字段"><a href="#7-2拼接字段" class="headerlink" title="7.2拼接字段"></a>7.2拼接字段</h2><p>在不同的DBMS中会使用不同的拼接符号，大部分是+ 有些是||</p>
-<p>例子：拼接由两列组成的标题。</p>
-<p><img src="/2022/01/11/sql%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/image-20220110211300133.png" alt="image-20220110211300133"></p>
-<p><img src="/2022/01/11/sql%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/image-20220110211308998.png" alt="image-20220110211308998"></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> age <span class="operator">+</span> username <span class="keyword">FROM</span> <span class="keyword">Member</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> uername</span><br></pre></td></tr></table></figure>
-
-<h3 id="7-2-1补充-去除空格的函数"><a href="#7-2-1补充-去除空格的函数" class="headerlink" title="7.2.1补充 去除空格的函数"></a>7.2.1补充 去除空格的函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rtrim(列名)去除右边的空格</span><br><span class="line">ltrim(列名)去除左边的空格</span><br><span class="line"><span class="built_in">trim</span>(列名)去除两边的空格</span><br></pre></td></tr></table></figure>
-
-<h2 id="7-3使用别名"><a href="#7-3使用别名" class="headerlink" title="7.3使用别名"></a>7.3使用别名</h2><p>select语句可以很好的拼接两个地址字段。但是这个新计算列的并没有名字，他只是一个值，我们可以用AS关键字给他赋予别名。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> rtrim(age <span class="operator">+</span> username) <span class="keyword">AS</span> totl <span class="keyword">FROM</span> <span class="keyword">Member</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> uername</span><br></pre></td></tr></table></figure>
-
-<h2 id="7-4执行算数计算"><a href="#7-4执行算数计算" class="headerlink" title="7.4执行算数计算"></a>7.4执行算数计算</h2><p>计算字段的另一常见用途是对检索出的数据进行算术计算。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> quantity,price,quantity<span class="operator">*</span>price <span class="keyword">AS</span> final_price <span class="keyword">FROM</span> <span class="keyword">order</span>;</span><br><span class="line">#计算总的价格之后输出</span><br></pre></td></tr></table></figure>
-
-<h1 id="8-使用函数处理数据"><a href="#8-使用函数处理数据" class="headerlink" title="8.使用函数处理数据"></a>8.使用函数处理数据</h1><h2 id="8-1使用函数"><a href="#8-1使用函数" class="headerlink" title="8.1使用函数"></a>8.1使用函数</h2><p>大多数sql实现支持一下函数：</p>
-<p>用于处理文本字符串的文本函数，用于在数值计算上的算数操作函数，用于处理日期和时间值并从这些值中提取特定数值的日期和时间函数，用于生产美观好动的输出内容的格式化函数，返回dbms特殊信息的函数。</p>
-<h3 id="8-1-1文本处理函数"><a href="#8-1-1文本处理函数" class="headerlink" title="8.1.1文本处理函数"></a>8.1.1文本处理函数</h3><p>UPPER()输出转化为大写</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">upper</span>(username) <span class="keyword">from</span> users;</span><br></pre></td></tr></table></figure>
-
-<p>下面介绍常用的文本处理函数</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rtrim(列名)去除右边的空格</span><br><span class="line">ltrim(列名)去除左边的空格</span><br><span class="line"><span class="built_in">trim</span>(列名)去除两边的空格</span><br><span class="line"><span class="keyword">left</span>()返回字符串左边的字符</span><br><span class="line">length()返回字符串的长度</span><br><span class="line"><span class="built_in">lower</span>()将字符串转换为小写</span><br><span class="line"><span class="keyword">right</span>()返回字符串右边的字符</span><br><span class="line">substr或者<span class="built_in">substring</span>()提取字符串的组成部分</span><br><span class="line">soundex()返回字符串的soundex值</span><br></pre></td></tr></table></figure>
-
-<p>其中，soundex是一个将任何文本串转换为描述其语音表示的字母数字模式的算法</p>
-<h3 id="8-1-2日期和时间处理函数"><a href="#8-1-2日期和时间处理函数" class="headerlink" title="8.1.2日期和时间处理函数"></a>8.1.2日期和时间处理函数</h3><p>每种dbms都有自己的特殊形式的日期和时间。</p>
-<p>例子：在sqlsever中检索2020年所有的订单，可如下进行：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> order_num</span><br><span class="line"><span class="keyword">from</span> Orders</span><br><span class="line"><span class="keyword">where</span> DATAPART(yy,order_date) <span class="operator">=</span> <span class="number">2020</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="8-1-3数值处理函数"><a href="#8-1-3数值处理函数" class="headerlink" title="8.1.3数值处理函数"></a>8.1.3数值处理函数</h3><p>这些函数，一般主要用于，代数，三角或集合运算，因此不想字符串和时间那样使用的平凡。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ABS</span>()返回一个数的绝对值</span><br><span class="line"><span class="built_in">COS</span>()返回一个角度的余弦</span><br><span class="line"><span class="built_in">EXP</span>()返回一个数的指数值</span><br><span class="line">PI()返回圆周率π的值</span><br><span class="line"><span class="built_in">SIN</span>()返回一个角度的正弦</span><br><span class="line"><span class="built_in">SQRT</span>()返回一个数的平方根</span><br><span class="line"><span class="built_in">TAN</span>()返回一个角度的正弦</span><br></pre></td></tr></table></figure>
-
-<h1 id="第九课-汇总数据"><a href="#第九课-汇总数据" class="headerlink" title="第九课 汇总数据"></a>第九课 汇总数据</h1><h2 id="9-1聚集函数"><a href="#9-1聚集函数" class="headerlink" title="9.1聚集函数"></a>9.1聚集函数</h2><p>有时候需要汇总数据但是不用把他们实际检索出来、这种类型的检索例子有：</p>
-<p>确定表中的行数</p>
-<p>获得表中某些行的和</p>
-<p>找出表列的最大值、最小值、平均值。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sql</span>聚集函数</span><br><span class="line"><span class="built_in">AVG</span>()返回某列的平均值</span><br><span class="line"><span class="built_in">COUNT</span>()返回某列的行数</span><br><span class="line"><span class="built_in">MAX</span>()返回某列的最大值</span><br><span class="line"><span class="built_in">MIN</span>()返回某列的最小值</span><br><span class="line"><span class="built_in">SUM</span>()返回某列值之和</span><br></pre></td></tr></table></figure>
-
-<h3 id="9-1-1AVG-函数"><a href="#9-1-1AVG-函数" class="headerlink" title="9.1.1AVG()函数"></a>9.1.1AVG()函数</h3><p>可用来返回所有列的平均值，也可以用来返回特定列或行的平均值。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">avg</span>(id) <span class="keyword">from</span> <span class="keyword">member</span>;</span><br></pre></td></tr></table></figure>
-
-<p>返回id的平均值。注意，avg()函数忽略列值为NULL的行。</p>
-<h3 id="9-1-2COUNT-函数"><a href="#9-1-2COUNT-函数" class="headerlink" title="9.1.2COUNT()函数"></a>9.1.2COUNT()函数</h3><p>可利用count 确定表中行的数目或符合特定条件行的数目。</p>
-<p>count()函数有两种使用方法</p>
-<p>使用count(*)对表中行的数目进行计数，不管表列中包含的是空值还是非空值。</p>
-<p>使用count(colums)对特定列中具有值的进行行计数，忽略null。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">as</span> num_cust <span class="keyword">from</span> <span class="keyword">member</span>;</span><br><span class="line">计算有多少行</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(cust_email) <span class="keyword">as</span> num_cust <span class="keyword">from</span> <span class="keyword">member</span>;</span><br><span class="line">计算有邮箱的用户有多少个</span><br></pre></td></tr></table></figure>
-
-<h3 id="9-1-3max-函数"><a href="#9-1-3max-函数" class="headerlink" title="9.1.3max()函数"></a>9.1.3max()函数</h3><p>返回指定列中的最大值，要求指定列名。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">max</span>(id) <span class="keyword">as</span> max_id <span class="keyword">from</span> <span class="keyword">member</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="9-1-4min-函数"><a href="#9-1-4min-函数" class="headerlink" title="9.1.4min()函数"></a>9.1.4min()函数</h3><p>返回指定列中的最小值，要求指定列名。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">min</span>(id) <span class="keyword">as</span> min_id <span class="keyword">from</span> <span class="keyword">member</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="9-1-5sum-函数"><a href="#9-1-5sum-函数" class="headerlink" title="9.1.5sum()函数"></a>9.1.5sum()函数</h3><p>用返回指定列的和</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">sum</span>(id) <span class="keyword">as</span> sum_id <span class="keyword">from</span> <span class="keyword">member</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="9-2聚集不同值"><a href="#9-2聚集不同值" class="headerlink" title="9.2聚集不同值"></a>9.2聚集不同值</h2><p>以上五个聚集函数都可以如下使用：</p>
-<p>对所有行执行计算，指定all参数或不指定参数（因为all是默认行为）。</p>
-<p>只包含不同的值，指定distinct参数。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">avg</span>(<span class="keyword">distinct</span> id) <span class="keyword">from</span> <span class="keyword">member</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="9-3组合聚集参数"><a href="#9-3组合聚集参数" class="headerlink" title="9.3组合聚集参数"></a>9.3组合聚集参数</h2><p>实际上，selct语句可以根据需要包含多个聚集函数。中间用逗号隔开</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">avg</span>(<span class="keyword">distinct</span> id),<span class="built_in">min</span>(id) <span class="keyword">from</span> <span class="keyword">member</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="10-分组数据"><a href="#10-分组数据" class="headerlink" title="10.分组数据"></a>10.分组数据</h1><h2 id="10-1数据分组"><a href="#10-1数据分组" class="headerlink" title="10.1数据分组"></a>10.1数据分组</h2><p>使用分组可以将数据分为多个逻辑组，对每个组进行聚集计算。</p>
-<h2 id="10-2创建分组"><a href="#10-2创建分组" class="headerlink" title="10.2创建分组"></a>10.2创建分组</h2><p>分组是使用SELECT语句的GROUP BY子句建立的。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username,<span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">as</span> sum <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">group</span> <span class="keyword">by</span> username;</span><br></pre></td></tr></table></figure>
-
-<p>由于使用了group by语句，count函数会对每一个组进行计算。这个语句的意思就是，检索每一个用户有多少条数据。</p>
-<p>注意，group by子句必须出现在where子句之后，order by 子句之前。</p>
-<h2 id="10-3过滤分组"><a href="#10-3过滤分组" class="headerlink" title="10.3过滤分组"></a>10.3过滤分组</h2><p>虽然where可以进行数据的过滤，但是因为where过滤指定的是行而不是分组，实际上，where子句并没有分组的概念。</p>
-<p>这时候我们可以用having子句来代替，他们的差距就是where过滤行，having过滤分组。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username,<span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">as</span> sum <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">group</span> <span class="keyword">by</span> username <span class="keyword">having</span> <span class="built_in">count</span>(<span class="operator">*</span>)<span class="operator">&gt;=</span><span class="number">2</span>;</span><br><span class="line">这个语句的意思就是，检索有两行以上上数据的用户名字。</span><br></pre></td></tr></table></figure>
-
-<p>注意：having要放在group by后面。</p>
-<h2 id="10-4select子句顺序"><a href="#10-4select子句顺序" class="headerlink" title="10.4select子句顺序"></a>10.4select子句顺序</h2><p>下面回顾一下select语句中子句的顺序。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span></span><br><span class="line"><span class="keyword">HAVING</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="第十一课-使用子查询"><a href="#第十一课-使用子查询" class="headerlink" title="第十一课 使用子查询"></a>第十一课 使用子查询</h1><h2 id="11-1子查询"><a href="#11-1子查询" class="headerlink" title="11.1子查询"></a>11.1子查询</h2><p>sql支持创建子查询，即创建在其他查询中的查询。</p>
-<p>下面举几个例子</p>
-<h2 id="11-2利用子查询进行过滤"><a href="#11-2利用子查询进行过滤" class="headerlink" title="11.2利用子查询进行过滤"></a>11.2利用子查询进行过滤</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> cust_id</span><br><span class="line"><span class="keyword">from</span> Orders</span><br><span class="line"><span class="keyword">where</span> order_num <span class="keyword">IN</span> (<span class="keyword">select</span> order_num</span><br><span class="line">                   <span class="keyword">from</span> OrderItems</span><br><span class="line">                   <span class="keyword">where</span> prod<span class="operator">-</span>id <span class="operator">=</span> <span class="string">&#x27;RGAN01&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这里就限制了order_num的范围，在select语句中，子查询总是从内向外处理。而且对于子查询的嵌套没有限制。</p>
-<h1 id="第十二课-联结表"><a href="#第十二课-联结表" class="headerlink" title="第十二课 联结表"></a>第十二课 联结表</h1><h2 id="12-1联结"><a href="#12-1联结" class="headerlink" title="12.1联结"></a>12.1联结</h2><p>sql最强大的功能就是在数据查询的执行中联结(join)表。联结是利用sql的select能执行的最重要的操作。</p>
-<h3 id="12-1-1创建联结"><a href="#12-1-1创建联结" class="headerlink" title="12.1.1创建联结"></a>12.1.1创建联结</h3><p>创建联结非常简单，指定要连接的所有表以及关联他们的方式即可。</p>
-<p>下面看一个例子</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> vend_name,prod_name,prod_price</span><br><span class="line"><span class="keyword">from</span> Vendors,Products</span><br><span class="line"><span class="keyword">WHERE</span> Vendors.vend_id <span class="operator">=</span> Products.ven_id;</span><br><span class="line">#<span class="keyword">where</span>子句指示dbms将Vendors表中的vend_id与Products表中的vend_id匹配起来。</span><br></pre></td></tr></table></figure>
-
-<h3 id="12-1-2内连接"><a href="#12-1-2内连接" class="headerlink" title="12.1.2内连接"></a>12.1.2内连接</h3><p>目前为止使用的联结称为等值联结，他基于两个表之间的相等测试，这种联结也称为内连接。</p>
-<h1 id="第十三课-创建高级联结（未完）"><a href="#第十三课-创建高级联结（未完）" class="headerlink" title="第十三课 创建高级联结（未完）"></a>第十三课 创建高级联结（未完）</h1><h2 id="13-1使用表别名"><a href="#13-1使用表别名" class="headerlink" title="13.1使用表别名"></a>13.1使用表别名</h2><p>同样是在表的后面使用as关键字即可，</p>
-<h1 id="第十四课-组合查询"><a href="#第十四课-组合查询" class="headerlink" title="第十四课 组合查询"></a>第十四课 组合查询</h1><h2 id="14-1组合查询"><a href="#14-1组合查询" class="headerlink" title="14.1组合查询"></a>14.1组合查询</h2><p>sql也允许执行多个查询，(多条sql语句)，并将结果作为一个查询结果集返回，这些组合查询通常称为并(union)或复合查询(xompound query)</p>
-<h2 id="14-2创建组合查询"><a href="#14-2创建组合查询" class="headerlink" title="14.2创建组合查询"></a>14.2创建组合查询</h2><h3 id="14-2-1使用UNION"><a href="#14-2-1使用UNION" class="headerlink" title="14.2.1使用UNION"></a>14.2.1使用UNION</h3><p>给出每条SELECT语句，在每条语句之间放上关键字union。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username <span class="keyword">from</span> users <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">1</span> <span class="keyword">union</span> <span class="keyword">select</span> username <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-
-<p>虽然sql没有对union数量进行限制，但是最好参考一下dbms的文档。</p>
-<h3 id="14-2-2union规则"><a href="#14-2-2union规则" class="headerlink" title="14.2.2union规则"></a>14.2.2union规则</h3><p>1.union必须有两条或两条以上的select语句组成，语句中间用union分隔。</p>
-<p>2.union中的每个查询必须包含相同的列、表达式或聚集函数。</p>
-<p>3.列数据类型必须兼容，类型不必完全相同，但是必须是dbms可以隐含转换的类型。</p>
-<h3 id="14-2-3包含或取消重复的行"><a href="#14-2-3包含或取消重复的行" class="headerlink" title="14.2.3包含或取消重复的行"></a>14.2.3包含或取消重复的行</h3><p>union会自动将重复的行删除，如果想要返回重复的行，使用union all即可</p>
-<h3 id="14-2-4对组合查询结果排序"><a href="#14-2-4对组合查询结果排序" class="headerlink" title="14.2.4对组合查询结果排序"></a>14.2.4对组合查询结果排序</h3><p>在使用union时，只能使用一条ORDER BY语句，必须位于最后一条select语句的后面，不存在用一种方式排列一部分。</p>
-<h1 id="第十五课-插入数据"><a href="#第十五课-插入数据" class="headerlink" title="第十五课 插入数据"></a>第十五课 插入数据</h1><h2 id="15-1数据插入"><a href="#15-1数据插入" class="headerlink" title="15.1数据插入"></a>15.1数据插入</h2><p>除了select语句，sql同样还有其他三个常用的语句。数据插入就是INSERT</p>
-<p>顾名思义，insert用来将行插入到数据库中，插入有几种方式；</p>
-<p>插入完整的行；</p>
-<p>插入行的一部分；</p>
-<p>插入写查询的结果；</p>
-<h3 id="15-1-1插入完整的行"><a href="#15-1-1插入完整的行" class="headerlink" title="15.1.1插入完整的行"></a>15.1.1插入完整的行</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">member</span></span><br><span class="line"><span class="keyword">VALUES</span>(<span class="string">&#x27;8&#x27;</span>,<span class="string">&#x27;test&#x27;</span>,<span class="string">&#x27;asdasdasd&#x27;</span>,<span class="string">&#x27;boy&#x27;</span>,<span class="string">&#x27;1111111111&#x27;</span>,<span class="string">&#x27;chain&#x27;</span>,<span class="string">&#x27;aaa@pikachu.com&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>注意：必须给每一列都提供一个值，如果没有值，那也必须输入null。</p>
-<p>虽然上述方法比较简单，但是并不安全，因为他依赖于列的顺序，很有可能就会打乱我们的数据库，下面介绍一种更加安全的方法。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">member</span>(<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;username&#x27;</span>,<span class="string">&#x27;pw&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>,<span class="string">&#x27;phonenum&#x27;</span>,<span class="string">&#x27;address&#x27;</span>,<span class="string">&#x27;email&#x27;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="string">&#x27;8&#x27;</span>,<span class="string">&#x27;test&#x27;</span>,<span class="string">&#x27;asdasdasd&#x27;</span>,<span class="string">&#x27;boy&#x27;</span>,<span class="string">&#x27;1111111111&#x27;</span>,<span class="string">&#x27;chain&#x27;</span>,<span class="string">&#x27;aaa@pikachu.com&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>虽然这种方法与上面功能一样而且更加繁琐但是不会打乱我们的数据库，因为明确给出了每一列的列名，就像python中的基于索引和基于名字的参数。</p>
-<h3 id="15-1-2插入部分行"><a href="#15-1-2插入部分行" class="headerlink" title="15.1.2插入部分行"></a>15.1.2插入部分行</h3><p>正如所述，使用INSERT的推荐方法是明确给出表的列名。用这种语法还可以省略列，这表示可以只给某些列提供值，给其他列不提供值。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">member</span>(<span class="string">&#x27;pw&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>,<span class="string">&#x27;phonenum&#x27;</span>,<span class="string">&#x27;address&#x27;</span>,<span class="string">&#x27;email&#x27;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="string">&#x27;asdasdasd&#x27;</span>,<span class="string">&#x27;boy&#x27;</span>,<span class="string">&#x27;1111111111&#x27;</span>,<span class="string">&#x27;chain&#x27;</span>,<span class="string">&#x27;aaa@pikachu.com&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>这里就没有输入id 和username这两行，这表示insert语句省略了这两列，如果省略了，有默认值就是默认值没有就是null。</p>
-<h3 id="15-1-3插入检索出的数据"><a href="#15-1-3插入检索出的数据" class="headerlink" title="15.1.3插入检索出的数据"></a>15.1.3插入检索出的数据</h3><p>可以使用INSERT SELECT来实现插入检索出的数据</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">member</span>(<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;username&#x27;</span>,<span class="string">&#x27;pw&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>,<span class="string">&#x27;phonenum&#x27;</span>,<span class="string">&#x27;address&#x27;</span>,<span class="string">&#x27;email&#x27;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> id,username,pw,sex,phonenum,address,xxx</span><br><span class="line"><span class="keyword">FROM</span> xxx;</span><br></pre></td></tr></table></figure>
-
-<h2 id="15-2从一个表复制到另一个表"><a href="#15-2从一个表复制到另一个表" class="headerlink" title="15.2从一个表复制到另一个表"></a>15.2从一个表复制到另一个表</h2><p>有一种数据插入不使用insert语句，要将一个表的内容复制到一个全新表(运行中创建的表)。</p>
-<p>使用CREATE SELECT</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> custcopy <span class="keyword">AS</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> customers;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="第十六课-更新和删除数据"><a href="#第十六课-更新和删除数据" class="headerlink" title="第十六课 更新和删除数据"></a>第十六课 更新和删除数据</h1><p>这一课介绍如何利用UPDATE 和 DELETE语句进一步操作表数据。</p>
-<h2 id="16-1更新数据"><a href="#16-1更新数据" class="headerlink" title="16.1更新数据"></a>16.1更新数据</h2><p>更新(修改)数据，可以使用UPDATE语句，有两种使用的方法：</p>
-<p>更新中的特定行</p>
-<p>更新表中所有行</p>
-<p>基本的UPDATE语句由三部分组成，分别是：要更新的表，列名和他们的新值，确定要更新哪些行的过滤条件。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UPDATE copytable </span><br><span class="line"><span class="keyword">SET</span> username <span class="operator">=</span> <span class="string">&#x27;xiugai&#x27;</span></span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<p>上面语句就是修改id为1的用户的名字。</p>
-<p>在更新多个列时，只需要使用一条set命令，每个“列=值”对之间用逗号分隔。</p>
-<h2 id="16-2删除数据"><a href="#16-2删除数据" class="headerlink" title="16.2删除数据"></a>16.2删除数据</h2><p>从个表中删除数据，使用DELETE语句，有两种使用方式：</p>
-<p>从表中删除特定的行</p>
-<p>从表中删除所有行</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> copytable</span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<p>删除了表copytable中id为1的用户。如果省略WHERE语句，他就会删除整个表。update也一样。</p>
-<h1 id="第十七课-创建和操纵表"><a href="#第十七课-创建和操纵表" class="headerlink" title="第十七课 创建和操纵表"></a>第十七课 创建和操纵表</h1><h2 id="17-1创建表"><a href="#17-1创建表" class="headerlink" title="17.1创建表"></a>17.1创建表</h2><p>一般有两种创建表的方法：</p>
-<p>多数dbms都具有交互式创建和管理数据库表的工具</p>
-<p>表可以直接用sql语句操纵</p>
-<h3 id="17-1-1表创建基础"><a href="#17-1-1表创建基础" class="headerlink" title="17.1.1表创建基础"></a>17.1.1表创建基础</h3><p>利用CREATE TABLE创建表，必须给出下列信息：</p>
-<p>新表的名字，在create table关键字之后给出</p>
-<p>列表的名字和定义，用逗号分隔</p>
-<p>有的dbms还要求指定表的位置</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> new_table</span><br><span class="line">(id <span class="type">CHAR</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line"> passwd <span class="type">CHAR</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p>这里创建了一个名叫new_table 的表，表中有两列，一列是id 一列是passwd，后面跟了数据类型。</p>
-<h3 id="17-1-2使用null值"><a href="#17-1-2使用null值" class="headerlink" title="17.1.2使用null值"></a>17.1.2使用null值</h3><p>每个表列要么是NULL列，要么是NOT NULL列，有null的时候那个列的默认值就是null。</p>
-<h3 id="17-1-3指定默认列"><a href="#17-1-3指定默认列" class="headerlink" title="17.1.3指定默认列"></a>17.1.3指定默认列</h3><p>默认值在CREATE TABLE语句的列定义中用关键字DEFAULT指定</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> new_table</span><br><span class="line">(id <span class="type">CHAR</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line"> passwd <span class="type">CHAR</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">1</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<h2 id="17-2更新表"><a href="#17-2更新表" class="headerlink" title="17.2更新表"></a>17.2更新表</h2><p>更新表定义，可以使用ALTER TABLE语句，虽然所有的dbms都支持这个语句，但是他们的允许更新的内容差别很大。</p>
-<p>所以在这里给出都支持的操作。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> new_table</span><br><span class="line"><span class="keyword">ADD</span> name <span class="type">CHAR</span>(<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
-
-<p>在new_table 表中创建了添加了一个新的列，名为name。</p>
-<h2 id="17-3删除表"><a href="#17-3删除表" class="headerlink" title="17.3删除表"></a>17.3删除表</h2><p>使用DROP TABLE语句即可</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> new_table;</span><br></pre></td></tr></table></figure>
-
-<h2 id="17-4重命名表"><a href="#17-4重命名表" class="headerlink" title="17.4重命名表"></a>17.4重命名表</h2><p>每个dbms对表重命名的支持有所不同，对于这个操作，不存在严格的标准。</p>
-<p>mysql用户使用rename语句，其他的大伙自行查阅即可。</p>
-<h1 id="第十八课-使用视图"><a href="#第十八课-使用视图" class="headerlink" title="第十八课 使用视图"></a>第十八课 使用视图</h1><h2 id="18-1视图"><a href="#18-1视图" class="headerlink" title="18.1视图"></a>18.1视图</h2><p>视图是虚拟的表，与包含数据的表不一样，视图只包含使用时动态检索数据的查询。</p>
-<p>当我们需要查询多个表的数据时，可能会运用表的联结，但是如果把多个表包装成名为xxx的虚拟表，则可以让我们的检索代码更加简洁。</p>
-<h3 id="18-1-1视图的一些规则和限制"><a href="#18-1-1视图的一些规则和限制" class="headerlink" title="18.1.1视图的一些规则和限制"></a>18.1.1视图的一些规则和限制</h3><p>与表一样，视图必须唯一命名。</p>
-<p>对于可以创建的视图数目没有限制。</p>
-<p>视图可以嵌套，即可以利用从其他视图中检索数据的查询来构造视图。</p>
-<p>许多dbms禁止在视图中使用order by</p>
-<h2 id="18-2创建视图"><a href="#18-2创建视图" class="headerlink" title="18.2创建视图"></a>18.2创建视图</h2><p>用CREATE VIEW 语句来创建，并且只能用于创建不存在的视图。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> xxx <span class="keyword">as</span></span><br><span class="line"><span class="keyword">select</span> xxx,xxx</span><br><span class="line"><span class="keyword">from</span> xxx,xx</span><br><span class="line"><span class="keyword">where</span> xxx</span><br></pre></td></tr></table></figure>
-
-<h1 id="第十九课-使用存储过程"><a href="#第十九课-使用存储过程" class="headerlink" title="第十九课 使用存储过程"></a>第十九课 使用存储过程</h1><h2 id="19-1存储过程"><a href="#19-1存储过程" class="headerlink" title="19.1存储过程"></a>19.1存储过程</h2><p>简单的说，存储过程就是为以后使用而保存的一条或多条sql语句，可将其视为批文件，虽然他们的作用不仅限于批处理。#可以理解为python中创建一个函数</p>
-<h2 id="19-2执行储存过程"><a href="#19-2执行储存过程" class="headerlink" title="19.2执行储存过程"></a>19.2执行储存过程</h2><p>存储过程的的执行远比编写繁琐得多，所以我们先介绍存储过程的执行，</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">EXECUTE</span> AddNewProduct(<span class="string">&#x27;JTSO1&#x27;</span>,</span><br><span class="line">                      <span class="string">&#x27;Stuffed Eiffel Tower&#x27;</span>,</span><br><span class="line">                      <span class="number">6</span>,<span class="number">49</span>,</span><br><span class="line">                      <span class="string">&#x27;Plush stuffed toy withxxxx&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>这里执行了一个名为AddNewProduct的存储过程，佳宁一个新产品添加到Product表中，里面有四个参数，供应商，产品名，价格和描述，</p>
-<h2 id="19-3创建存储过程"><a href="#19-3创建存储过程" class="headerlink" title="19.3创建存储过程"></a>19.3创建存储过程</h2><p>下面的例子是SqlServer版本?为什么作者说执行的过程比创建的过程更加繁琐？？？？</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> Malilinglistcount </span><br><span class="line"><span class="keyword">AS</span> </span><br><span class="line"><span class="keyword">DECLARE</span> <span class="variable">@cnt</span> <span class="type">INTEGER</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="variable">@cnt</span> <span class="operator">=</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">FROM</span> Customers</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> cust_email <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line"><span class="keyword">RETURN</span> <span class="variable">@cnt</span>;</span><br></pre></td></tr></table></figure>
-
-<p>分析：申明了一个局部变量@cnt，然后在select语句中使用这个变量 让他包含count()函数返回的的值，最后用return输出。</p>
-<h1 id="第二十课管理事务处理"><a href="#第二十课管理事务处理" class="headerlink" title="第二十课管理事务处理"></a>第二十课管理事务处理</h1><h2 id="20-1事务处理"><a href="#20-1事务处理" class="headerlink" title="20.1事务处理"></a>20.1事务处理</h2><p>使用事务处理，通过确保成批的sql操作要么完全知晓，要么不完全执行，来维护数据库的完整性。</p>
-<p>下面是事务处理的几个关键词</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">事物 transaction 指一组<span class="keyword">sql</span>语句</span><br><span class="line">回退 <span class="keyword">rollback</span> 指撤销指定<span class="keyword">sql</span>的过程</span><br><span class="line">提交 <span class="keyword">commit</span> 指将为存储的<span class="keyword">sql</span>语句结果写入数据库表</span><br><span class="line">保留点 saepoint 值事务处理中设置的临时占位符，可以对他发布退回</span><br></pre></td></tr></table></figure>
-
-<h2 id="20-2控制事务处理"><a href="#20-2控制事务处理" class="headerlink" title="20.2控制事务处理"></a>20.2控制事务处理</h2><p>不同的dbms有不同的语法。</p>
-<p>下面举sql server</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span> TRANSACTION</span><br><span class="line"></span><br><span class="line"><span class="keyword">COMMIT</span> TRANSACTION</span><br></pre></td></tr></table></figure>
-
-<h3 id="20-2-1使用ROLLBACK"><a href="#20-2-1使用ROLLBACK" class="headerlink" title="20.2.1使用ROLLBACK"></a>20.2.1使用ROLLBACK</h3><p>sqk的rollback用来回撤sql语句，</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> Orders</span><br><span class="line"><span class="keyword">ROLLBACK</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="20-2-2使用commit"><a href="#20-2-2使用commit" class="headerlink" title="20.2.2使用commit"></a>20.2.2使用commit</h3><p>一般的sql语句都是针对数据库表直接执行和编写的。这就是所谓的隐式提交(implicit commit)，即提交操作是自动进行的。</p>
-<p>在事物处理块中，他并不会隐式提交，有的dbms又是。</p>
-<p>下面是sql server 的例子</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span> TRANSACTION</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">Order</span></span><br><span class="line"><span class="keyword">COMMIT</span> TRANSACTION</span><br></pre></td></tr></table></figure>
-
-<h1 id="第二十一课-使用游标"><a href="#第二十一课-使用游标" class="headerlink" title="第二十一课 使用游标"></a>第二十一课 使用游标</h1><h2 id="20-1-游标"><a href="#20-1-游标" class="headerlink" title="20.1 游标"></a>20.1 游标</h2><p>在使用游标前，必须声明他。</p>
-<p>一旦声明，就必须打开游标以供使用。</p>
-<p>对于填有数据的游标，根据需要取出(检索)各行。</p>
-<p>在结束游标使用时，必须关闭，</p>
-<h3 id="20-1-1创建游标"><a href="#20-1-1创建游标" class="headerlink" title="20.1.1创建游标"></a>20.1.1创建游标</h3><p>使用DECLARE语句创建游标，这条语句在不同的dbms中有所不同。</p>
-<p>DECLARE命名游标，并定义相应的select语句。</p>
-<p>下面是mysql和sqlserver的例子</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> CustCUrosr <span class="keyword">CURSOR</span></span><br><span class="line"><span class="keyword">FOR</span> </span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> Customers</span><br></pre></td></tr></table></figure>
-
-<h3 id="20-1-2使用游标"><a href="#20-1-2使用游标" class="headerlink" title="20.1.2使用游标"></a>20.1.2使用游标</h3><p>使用OPEN CURSOR 语句打开游标，这条语句很简单，在大多数dbms中的语法相同：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">OPEN</span> SURSOR CustoCurso</span><br></pre></td></tr></table></figure>
-
-<p>现在可以用FETCH语句访问游标数据了，指出要检索哪些行，从何处检索他们以及将他们放于何处。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> TYPE CustCursor <span class="keyword">IS</span> <span class="keyword">REF</span> <span class="keyword">CURSOR</span> </span><br><span class="line">    <span class="keyword">RETURN</span> Customers<span class="operator">%</span>ROWTUPE;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    <span class="keyword">OPEN</span> CustCursor;</span><br><span class="line">    <span class="keyword">FETCH</span> CustCursor <span class="keyword">INTO</span> CustRecord;</span><br><span class="line">    <span class="keyword">CLOSE</span> CustCursor;</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="الصفحة التالية"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Nächste Seite"></i></a>
   </nav>
 
 
@@ -1852,10 +1806,10 @@
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
-          المحتويات
+          Inhaltsverzeichnis
         </li>
         <li class="sidebar-nav-overview">
-          عام
+          Übersicht
         </li>
       </ul>
 
@@ -1876,17 +1830,17 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
-          <span class="site-state-item-name">المقالات</span>
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
         <span class="site-state-item-count">4</span>
-        <span class="site-state-item-name">التصنيفات</span>
+        <span class="site-state-item-name">Kategorien</span>
       </div>
       <div class="site-state-item site-state-tags">
         <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">الوسوم</span>
+        <span class="site-state-item-name">schlagwörter</span>
       </div>
   </nav>
 </div>
@@ -1918,7 +1872,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">十三</span>
 </div>
-  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
         
@@ -1976,7 +1930,7 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/tsumiki.model.json"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
