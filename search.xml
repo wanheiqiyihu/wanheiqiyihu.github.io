@@ -367,6 +367,15 @@
       </categories>
   </entry>
   <entry>
+    <title>file_get_contents绕过</title>
+    <url>/2021/12/27/file-get-contents%E7%BB%95%E8%BF%87/</url>
+    <content><![CDATA[<p>file_get_contents<br>用php伪协议php://input可以直接决定此函数返回的值</p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
     <title>欢迎━(*｀∀´*)ノ亻!</title>
     <url>/2021/12/27/hello-world/</url>
     <content><![CDATA[]]></content>
@@ -470,15 +479,6 @@
       </categories>
   </entry>
   <entry>
-    <title>file_get_contents绕过</title>
-    <url>/2021/12/27/file-get-contents%E7%BB%95%E8%BF%87/</url>
-    <content><![CDATA[<p>file_get_contents<br>用php伪协议php://input可以直接决定此函数返回的值</p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
     <title>pikachu靶场通关</title>
     <url>/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/</url>
     <content><![CDATA[<h1 id="pikachu靶场通关"><a href="#pikachu靶场通关" class="headerlink" title="pikachu靶场通关"></a>pikachu靶场通关</h1><h1 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h1><h2 id="1-基于表单的暴力破解"><a href="#1-基于表单的暴力破解" class="headerlink" title="1.基于表单的暴力破解"></a>1.基于表单的暴力破解</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220131122217344.png" alt="image-20220131122217344"></p>
@@ -508,7 +508,7 @@
 <p>发现密码</p>
 <h1 id="xss跨站脚本漏洞"><a href="#xss跨站脚本漏洞" class="headerlink" title="xss跨站脚本漏洞"></a>xss跨站脚本漏洞</h1><h2 id="1-反射型xss-get"><a href="#1-反射型xss-get" class="headerlink" title="1.反射型xss(get)"></a>1.反射型xss(get)</h2><p>因为在输入框有输入限制，我们就直接在url中添加参数</p>
 <p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201112154043.png" alt="image-20220201112154043"></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20220201112158872.png" alt="image-20220201112158872"></p>
+<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201112158872.png" alt="image-20220201112158872"></p>
 <h2 id="2-反射性xss-post"><a href="#2-反射性xss-post" class="headerlink" title="2.反射性xss(post)"></a>2.反射性xss(post)</h2><p>先用123456的账号密码登录上去</p>
 <p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201113436342.png" alt="image-20220201113436342"></p>
 <p>然后就可以了</p>
@@ -697,19 +697,6 @@
       </categories>
   </entry>
   <entry>
-    <title>preg_replace()函数的e漏洞</title>
-    <url>/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h3 id="preg-replace-函数的-e漏洞"><a href="#preg-replace-函数的-e漏洞" class="headerlink" title="preg_replace()函数的/e漏洞"></a>preg_replace()函数的/e漏洞</h3><p><img src="/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/image-20211124220045332.png" alt="image-20211124220045332">使用案例：</p>
-<p><img src="/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3pod2hv,size_16,color_FFFFFF,t_70" alt="运用实例"></p>
-<p>以及php中的system命令</p>
-<p>cd  &amp;&amp;ls 是进入文件夹然后显示全部文件</p>
-<p>cat用于打开php文件</p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
     <title>preg_match绕过总结</title>
     <url>/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h1 id="preg-match绕过总结"><a href="#preg-match绕过总结" class="headerlink" title="preg_match绕过总结"></a>preg_match绕过总结</h1><h2 id="什么是preg-match"><a href="#什么是preg-match" class="headerlink" title="什么是preg_match"></a>什么是preg_match</h2><p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127190707622.png" alt="image-20211127190707622"></p>
@@ -718,6 +705,19 @@
 <p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127191733611.png" alt="image-20211127191733611"></p>
 <p><img src="/2021/12/27/preg-match%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/image-20211127191742739.png" alt="image-20211127191742739"></p>
 <p><a href="https://www.cnblogs.com/20175211lyz/p/12198258.html">preg_match绕过总结 - MustaphaMond - 博客园 (cnblogs.com)</a></p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>preg_replace()函数的e漏洞</title>
+    <url>/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h3 id="preg-replace-函数的-e漏洞"><a href="#preg-replace-函数的-e漏洞" class="headerlink" title="preg_replace()函数的/e漏洞"></a>preg_replace()函数的/e漏洞</h3><p><img src="/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/image-20211124220045332.png" alt="image-20211124220045332">使用案例：</p>
+<p><img src="/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3pod2hv,size_16,color_FFFFFF,t_70" alt="运用实例"></p>
+<p>以及php中的system命令</p>
+<p>cd  &amp;&amp;ls 是进入文件夹然后显示全部文件</p>
+<p>cat用于打开php文件</p>
 ]]></content>
       <categories>
         <category>-Experience</category>
@@ -2529,6 +2529,18 @@
 ]]></content>
       <categories>
         <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>短信验证码接口限制</title>
+    <url>/2022/02/03/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%8E%A5%E5%8F%A3%E9%99%90%E5%88%B6/</url>
+    <content><![CDATA[<h1 id="短信验证码接口限制"><a href="#短信验证码接口限制" class="headerlink" title="短信验证码接口限制"></a>短信验证码接口限制</h1><p>转载几个博客，方便日后查阅</p>
+<p><a href="https://www.cnblogs.com/lovequitepcs/p/12901987.html">几个绕过短信验证码限制的漏洞挖掘 - QuiteX - 博客园 (cnblogs.com)</a></p>
+<p><a href="https://blog.csdn.net/weixin_44549063/article/details/113361313">(38条消息) 如何防止恶意攻击短信验证码接口_newxtc的博客-CSDN博客_如何防止短信验证码攻击</a></p>
+<p><a href="https://www.lx598.com/hangyedongtai/978.html">短信验证码安全常见逻辑漏洞_动力思维 (lx598.com)</a></p>
+]]></content>
+      <categories>
+        <category>-penetration</category>
       </categories>
   </entry>
   <entry>
