@@ -28,12 +28,12 @@
 <meta property="og:description" content="xray+rad 自动化edusrc最近挖洞效率低下，学习了下扫描器 1.爬取漏洞平台上各大学校的网址 写了个小爬虫，有些会爬到百度百科里面，但是不影响，后面加个判断就好了。 1234567891011121314151617181920212223242526272829303132333435363738import requestsimport osfrom lxml import etre">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/image-20220208144944272.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/73785589/143380522-dc9a5510-1527-4c68-a628-d33460a1ba37.png">
+<meta property="og:image" content="http://example.com/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380522-dc9a5510-1527-4c68-a628-d33460a1ba37.png">
 <meta property="og:image" content="http://example.com/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380572-06ebf313-6064-457f-90be-71b6711db3ae.png">
 <meta property="og:image" content="http://example.com/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380597-5a848ac8-d8d6-4070-8bb0-0879fc7093de.png">
 <meta property="og:image" content="http://example.com/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/image-20220208162054937.png">
 <meta property="article:published_time" content="2022-02-08T08:29:32.000Z">
-<meta property="article:modified_time" content="2022-02-08T08:34:02.147Z">
+<meta property="article:modified_time" content="2022-02-08T08:37:30.320Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/image-20220208144944272.png">
@@ -238,7 +238,7 @@
               <span class="post-meta-item-text">نُشر في</span>
               
 
-              <time title="أُنشأ: 2022-02-08 16:29:32 / عُدل: 16:34:02" itemprop="dateCreated datePublished" datetime="2022-02-08T16:29:32+08:00">2022-02-08</time>
+              <time title="أُنشأ: 2022-02-08 16:29:32 / عُدل: 16:37:30" itemprop="dateCreated datePublished" datetime="2022-02-08T16:29:32+08:00">2022-02-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,7 +269,7 @@
 <h1 id="2-用xray和rad联动扫描url"><a href="#2-用xray和rad联动扫描url" class="headerlink" title="2.用xray和rad联动扫描url"></a>2.用xray和rad联动扫描url</h1><p>工具是别人的</p>
 <p>xray的被动扫描能力很强，但是主动扫描就弱了点，而rad的爬虫功能很强，所以将两种结合起来就能取长补短。但是它们两者不能进行批量检测。所以写了个脚本让两者结合进行批量检测。</p>
 <p>首先将xray与rad所在文件夹加入到环境变量中，环境变量——用户变量——path——编辑</p>
-<p><img src="https://user-images.githubusercontent.com/73785589/143380522-dc9a5510-1527-4c68-a628-d33460a1ba37.png" alt="image"></p>
+<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380522-dc9a5510-1527-4c68-a628-d33460a1ba37.png" alt="image"></p>
 <p>使用的是python3，安装依赖库<br>pip install pypiwin32<br>pip isntall requests</p>
 <p>注意，系统需要装有chrome浏览器<br>之后将要扫描的目标放在url.txt文件中，一个目标一行。接着点击xray批量自动检测.bat</p>
 <p>启动后如下，输入xray扫描后的漏洞文件名，然后rad框中输入任意的数字 </p>
