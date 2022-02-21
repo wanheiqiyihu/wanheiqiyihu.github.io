@@ -205,6 +205,163 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/21/knight-ctf-web-wp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="记录学习路上的一些东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/21/knight-ctf-web-wp/" class="post-title-link" itemprop="url">knight ctf web wp</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">نُشر في</span>
+              
+
+              <time title="أُنشأ: 2022-01-21 17:23:05 / عُدل: 23:29:35" itemprop="dateCreated datePublished" datetime="2022-01-21T17:23:05+08:00">2022-01-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">في</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="knight-ctf-web-Programming-Misc-wp（部分）"><a href="#knight-ctf-web-Programming-Misc-wp（部分）" class="headerlink" title="knight ctf web Programming  Misc wp（部分）"></a>knight ctf web Programming  Misc wp（部分）</h1><p>今天去打了kinghtctf 哇本来以为什么都做不来就去看个热闹的，(p≧w≦q)没想到还是可以嘛</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165146417.png" alt="image-20220121165146417"></p>
+<p>web的现在只做了这么多出来，</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121203443257.png" alt="image-20220121203443257"></p>
+<p>七百多个人能拍这我已经满足了(<em>^▽^</em>)，现在总结一下遇到的题</p>
+<h2 id="Zero-is-not-the-limit"><a href="#Zero-is-not-the-limit" class="headerlink" title="Zero is not the limit"></a>Zero is not the limit</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165345068.png" alt="image-20220121165345068"></p>
+<p>打开这个样子</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165404956.png" alt="image-20220121165404956"></p>
+<p>当时找了又找什么都没找到，后来用dirsearch扫了一下，发现了user下面一大堆的东西，然后根据题目的提示，访问目录/user/-1就出来了</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165503058.png" alt="image-20220121165503058"></p>
+<h2 id="Find-Pass-Code-1"><a href="#Find-Pass-Code-1" class="headerlink" title="Find Pass Code - 1"></a>Find Pass Code - 1</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165521079.png" alt="image-20220121165521079"></p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165531857.png" alt="image-20220121165531857"></p>
+<p>在源码中找到提示</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165549544.png" alt="image-20220121165549544"></p>
+<p>设置source参数得到源码</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165622243.png" alt="image-20220121165622243"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&quot;pass_code&quot;</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> (strcmp(<span class="variable">$_POST</span>[<span class="string">&quot;pass_code&quot;</span>], <span class="variable">$flag</span>) == <span class="number">0</span> ) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;KCTF Flag : <span class="subst">&#123;$flag&#125;</span>&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Oh....My....God. You entered the wrong pass code.&lt;br&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&quot;source&quot;</span>])) &#123;</span><br><span class="line">    <span class="keyword">print</span> show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一个简单的strcmp绕过，他不能处理数组类型，一旦输入数组那么就会return0然后就绕过啦啦啦。</p>
+<h2 id="Most-Secure-Calculator-1"><a href="#Most-Secure-Calculator-1" class="headerlink" title="Most Secure Calculator - 1"></a>Most Secure Calculator - 1</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121170321637.png" alt="image-20220121170321637"></p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121170327886.png" alt="image-20220121170327886"></p>
+<p>这个超简单，任意命令</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121170453019.png" alt="image-20220121170453019"></p>
+<p>但是吧flag给过滤了，加个引号啦啦啦(先用ls知道了flag在这里面的)</p>
+<p><code>system(&quot;cat flag.txt&quot;)</code></p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121170646552.png" alt="image-20220121170646552"></p>
+<h2 id="My-PHP-Site"><a href="#My-PHP-Site" class="headerlink" title="My PHP Site"></a>My PHP Site</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121170702350.png" alt="image-20220121170702350"></p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121170720077.png" alt="image-20220121170720077"></p>
+<p>看到那个file参数了吗，文件包含漏洞哦~</p>
+<p><code>[Tareq&#39;s Home Page](http://137.184.133.81:15002/?file=php://filter/read=convert.base64-encode/resource=index.php)</code>用伪协议直接读取</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121170907391.png" alt="image-20220121170907391"></p>
+<p>base解密</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>] == <span class="string">&quot;index.php&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;&lt;h1&gt;ERROR!!&lt;/h1&gt;&quot;</span>;</span><br><span class="line">        <span class="keyword">die</span>();</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">include</span> <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;h1&gt;You are missing the file parameter&lt;/h1&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#note :- secret location /home/tareq/s3crEt_fl49.txt</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">&quot;X-UA-Compatible&quot;</span> content=<span class="string">&quot;IE=edge&quot;</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">&quot;viewport&quot;</span> content=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br><span class="line">    &lt;title&gt;Tareq<span class="string">&#x27;s Home Page&lt;/title&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<p>看到那个note提示了吗，用伪协议读取他</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121171217272.png" alt="image-20220121171217272"></p>
+<p>出来啦，base解密就好了<code>KCTF&#123;L0C4L_F1L3_1ncLu710n&#125;</code></p>
+<h2 id="Find-Pass-Code-2"><a href="#Find-Pass-Code-2" class="headerlink" title="Find Pass Code - 2"></a>Find Pass Code - 2</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121171307229.png" alt="image-20220121171307229"></p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121171320185.png" alt="image-20220121171320185"></p>
+<p>根据提示还是使用source参数看源码，</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121171401661.png" alt="image-20220121171401661"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"><span class="variable">$old_pass_codes</span> = <span class="keyword">array</span>(<span class="string">&quot;0e215962017&quot;</span>, <span class="string">&quot;0e730083352&quot;</span>, <span class="string">&quot;0e807097110&quot;</span>, <span class="string">&quot;0e840922711&quot;</span>);</span><br><span class="line"><span class="variable">$old_pass_flag</span> = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&quot;pass_code&quot;</span>]) &amp;&amp; !is_array(<span class="variable">$_POST</span>[<span class="string">&quot;pass_code&quot;</span>])) &#123;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$old_pass_codes</span> <span class="keyword">as</span> <span class="variable">$old_pass_code</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$_POST</span>[<span class="string">&quot;pass_code&quot;</span>] === <span class="variable">$old_pass_code</span>) &#123;</span><br><span class="line">            <span class="variable">$old_pass_flag</span> = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$old_pass_flag</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Sorry ! It&#x27;s an old pass code.&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable">$_POST</span>[<span class="string">&quot;pass_code&quot;</span>] == md5(<span class="variable">$_POST</span>[<span class="string">&quot;pass_code&quot;</span>])) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;KCTF Flag : <span class="subst">&#123;$flag&#125;</span>&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Oh....My....God. You entered the wrong pass code.&lt;br&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&quot;source&quot;</span>])) &#123;</span><br><span class="line">    <span class="keyword">print</span> show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一个md5碰撞，但是他把我们常见的都给过滤掉了，加密前加密后都必须是<code>0e纯数字</code>的形式，网上搜半天也没有，我们就写了个脚本自己跑</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121171527103.png" alt="image-20220121171527103"></p>
+<p>最后跑出来了，这里就总结一下常见的这种md5碰撞可用的</p>
+<p>0e1137126905</p>
+<p>0e215962017</p>
+<p>0e730083352</p>
+<p>0e807097110</p>
+<p>0e840922711</p>
+<h2 id="Most-Secure-Calculator-2"><a href="#Most-Secure-Calculator-2" class="headerlink" title="Most Secure Calculator - 2"></a>Most Secure Calculator - 2</h2><p>哇这个是真的难，把这个做出来我是真的有成就感！！！</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121171726495.png" alt="image-20220121171726495"></p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121171737535.png" alt="image-20220121171737535"></p>
+<p>还是命令执行，但是过滤了所有的字母和大部分的符号，这怎么办呢！还好我以前就看过p神的那个无字母webshell，</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45521281/article/details/105656936">命令执行中关于PHP正则表达式的一些绕过方法_WHOAMIAnony的博客-CSDN博客_php正则绕过</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum-advanced.html">无字母数字webshell之提高篇 | 离别歌 (leavesongs.com)</a></p>
+<p>URL编码取反绕过（最简单的）</p>
+<p>注意： 该方法只适用于PHP7</p>
+<p><strong>对想要传入的参数，先进行URL解码再取反</strong></p>
+<p>例如传入构造一个phpinfo();（生成payload的时候先取反再URL编码）</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/asd.png" alt="img"></p>
+<h2 id="Keep-Calculating"><a href="#Keep-Calculating" class="headerlink" title="Keep Calculating"></a>Keep Calculating</h2><p>哈哈随便找了下又弄出来个题，正好最近在学py</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121175705128.png" alt="image-20220121175705128"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">1</span></span><br><span class="line">y = <span class="number">2</span></span><br><span class="line">answer = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> x &lt; <span class="number">667</span>:</span><br><span class="line">    <span class="built_in">print</span>(x)</span><br><span class="line">    answer += ((x * y) + (x * (<span class="number">10</span>**<span class="built_in">len</span>(<span class="string">f&#x27;<span class="subst">&#123;y&#125;</span>&#x27;</span>)))+y)</span><br><span class="line">    x += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(answer)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Reverse-The-Answer"><a href="#Reverse-The-Answer" class="headerlink" title="Reverse The Answer"></a>Reverse The Answer</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121181401026.png" alt="image-20220121181401026"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">1</span></span><br><span class="line">answer = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> x &lt; <span class="number">544</span>:</span><br><span class="line">    calculation = (x * (x + <span class="number">1</span>)) + (<span class="number">2</span> * (x + <span class="number">1</span>))</span><br><span class="line">    reverssed_calc = <span class="built_in">int</span>(<span class="built_in">str</span>(calculation)[::-<span class="number">1</span>])</span><br><span class="line">    <span class="built_in">print</span>(x,reverssed_calc)</span><br><span class="line">    <span class="keyword">if</span> reverssed_calc%<span class="number">4</span> == <span class="number">0</span>:</span><br><span class="line">        answer += reverssed_calc</span><br><span class="line">    x += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(answer)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Square-Sum"><a href="#Square-Sum" class="headerlink" title="Square Sum"></a>Square Sum</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121183643809.png" alt="image-20220121183643809"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data = <span class="number">25000</span></span><br><span class="line">result = []</span><br><span class="line"><span class="keyword">for</span> i1 <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">200</span>):</span><br><span class="line">    <span class="keyword">for</span> i2 <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">200</span>):</span><br><span class="line">        <span class="keyword">if</span> i1**<span class="number">2</span> + i2**<span class="number">2</span> == data:</span><br><span class="line">            buffer = [i1,i2]</span><br><span class="line">            result.append(buffer)</span><br><span class="line">result.sort()</span><br><span class="line"><span class="built_in">print</span>(result)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Something-In-Common"><a href="#Something-In-Common" class="headerlink" title="Something In Common"></a>Something In Common</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121184433577.png" alt="image-20220121184433577"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hcf</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;该函数返回两个数的最大公约数&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 获取最小值</span></span><br><span class="line">    <span class="keyword">if</span> x &gt; y:</span><br><span class="line">        smaller = y</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        smaller = x</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, smaller + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> ((x % i == <span class="number">0</span>) <span class="keyword">and</span> (y % i == <span class="number">0</span>)):</span><br><span class="line">            hcf = i</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> hcf</span><br><span class="line"><span class="comment"># 用户输入两个数字</span></span><br><span class="line">num1 = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;输入第一个数字: &quot;</span>))</span><br><span class="line">num2 = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;输入第二个数字: &quot;</span>))</span><br><span class="line"></span><br><span class="line">data = hcf(num1, num2)</span><br><span class="line">data_list = <span class="built_in">list</span>(<span class="built_in">str</span>(data))</span><br><span class="line">data_list = [<span class="built_in">int</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> data_list]</span><br><span class="line">result = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> data_list:</span><br><span class="line">    result += item</span><br><span class="line"><span class="built_in">print</span>(result*<span class="number">1234</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Find-The-Number"><a href="#Find-The-Number" class="headerlink" title="Find The Number"></a>Find The Number</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121185503423.png" alt="image-20220121185503423"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">g</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n&lt;<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>/<span class="number">2</span>**n+g(n-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">25</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Unzip-Me"><a href="#Unzip-Me" class="headerlink" title="Unzip Me"></a>Unzip Me</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121200432945.png" alt="image-20220121200432945"></p>
+<p>下载下来改下后缀名zip，然后一直解压，最后解压出来的东西用记事本打开</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121200600434.png" alt="image-20220121200600434">下面那两个,是我自己写的，很容易就发现了嘛，两个字符交换下位置，就出来咯~</p>
+<p>今天晚上还要去realwordctf看热闹，不说了继续做题了</p>
+<p>还有好多我不会的东西，什么流量包什么的，以后一定要继续好好学，打算过段时间学学逆向。</p>
+<p>我不能休息我还能学    ⊂(‘ω’⊂ )))Σ≡=─༄༅༄༅༄༅༄༅༄༅</p>
+<p>还有汇编没怎么懂</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fate-/p/12880508.html">如何运行汇编程序 - ice–cream - 博客园 (cnblogs.com)</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/20/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%8F%88%E6%98%AF%E4%B8%80%E4%B8%AAflag%E9%9A%90%E8%97%8F%E5%B0%8F%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1425,184 +1582,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/08/%E5%85%AB%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%A8%A1%E5%9D%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="记录学习路上的一些东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/08/%E5%85%AB%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%A8%A1%E5%9D%97/" class="post-title-link" itemprop="url">八、学习py：模块</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">نُشر في</span>
-              
-
-              <time title="أُنشأ: 2022-01-08 10:30:07 / عُدل: 10:31:14" itemprop="dateCreated datePublished" datetime="2022-01-08T10:30:07+08:00">2022-01-08</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">في</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">-python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="模块-正则表达式"><a href="#模块-正则表达式" class="headerlink" title="模块 正则表达式"></a>模块 正则表达式</h1><h2 id="1-自定义模块"><a href="#1-自定义模块" class="headerlink" title="1.自定义模块"></a>1.自定义模块</h2><h3 id="1-1模块和包"><a href="#1-1模块和包" class="headerlink" title="1.1模块和包"></a>1.1模块和包</h3><p>由于所有函数都定义在一个文件中会大大降低这段代码的可读性，所以可以将函数定义在其他的文件中，再使用from import 关键字来调用。其中相关的功能。</p>
-<p>包，一般指存放模块的文件夹。</p>
-<p>模块，一般指存放功能函数的py文件。</p>
-<h3 id="1-2导入（路径相关）"><a href="#1-2导入（路径相关）" class="headerlink" title="1.2导入（路径相关）"></a>1.2导入（路径相关）</h3><p>当定义好一个模块和包之后，用from 文件路径 import 函数 来导入文件。</p>
-<p>python在找模块时，只会去几个指定的路径寻找。</p>
-<p>也可以自动手动在sys.path中添加指定路径，然后再导入就可以，例如</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.path.append(<span class="string">&quot;路径a&quot;</span>)</span><br><span class="line"></span><br><span class="line">improt xxx</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-第三方模块"><a href="#2-第三方模块" class="headerlink" title="2.第三方模块"></a>2.第三方模块</h2><h3 id="1-pip（最常用）"><a href="#1-pip（最常用）" class="headerlink" title="1.pip（最常用）"></a>1.pip（最常用）</h3><p>这是python中最最最常用的安装第三方模块的方式，pip其实是一个第三方模块包管理工具，默认安装python解释器是自动会安装。</p>
-<p>使用pip全装第三方模块也非常简单，只需要在自己终端执行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install 模块名称</span><br></pre></td></tr></table></figure>
-
-<p>即可。</p>
-<h2 id="3-内置模块"><a href="#3-内置模块" class="headerlink" title="3.内置模块"></a>3.内置模块</h2><p>python内置的模块有很多，我们也接触了不少相关的模块，接下来我们就来做一些汇总和介绍。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ruanxingzi123/article/details/82787852">(29条消息) python 常用的内置模块_一起学习-CSDN博客_python内置模块</a></p>
-<p>常见的就自己查文章拉啦，这里讲一些其他的。</p>
-<h3 id="3-1json"><a href="#3-1json" class="headerlink" title="3.1json"></a>3.1json</h3><p>json模块，可以将python的数据格式转化为json格式的数据，也可以将json格式的数据也可以转换成python格式的数据。</p>
-<p>json格式，是一个数据格式（本质上就是个字符串，常用于网络数据传输。）</p>
-<h4 id="3-1-1核心功能"><a href="#3-1-1核心功能" class="headerlink" title="3.1.1核心功能"></a>3.1.1核心功能</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">跨语言数据的传输，例如</span><br><span class="line">A系统用python开发</span><br><span class="line">B用java开发</span><br><span class="line">语言不通基础数据类型格式都不同，</span><br><span class="line">为了方便数据传输，大家约定一个格式，json格式，每种语言都是将自己的数据类型转换为json格式然后再转换为其他的语言的数据类型。</span><br></pre></td></tr></table></figure>
-
-
-
-<p>Python与json格式的相互转换：</p>
-<p>数据类型-&gt;json，一般称为：序列化</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line">data = [</span><br><span class="line">    &#123;<span class="string">&quot;id&quot;</span>:<span class="number">1</span>,<span class="string">&quot;name&quot;</span>:<span class="string">&quot;dhk&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="number">123</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;id&quot;</span>:<span class="number">2</span>,<span class="string">&quot;name&quot;</span>:<span class="string">&quot;动肝&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="number">312</span>&#125;</span><br><span class="line">]</span><br><span class="line">res = json.dumps(data)</span><br><span class="line"><span class="built_in">print</span>(res)<span class="comment">#[&#123;&quot;id&quot;: 1, &quot;name&quot;: &quot;dhk&quot;, &quot;age&quot;: 123&#125;, &#123;&quot;id&quot;: 2, &quot;name&quot;: &quot;\u52a8\u809d&quot;, &quot;age&quot;: 312&#125;]</span></span><br><span class="line"></span><br><span class="line">res = json.dumps(data,ensure_ascii=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(res)</span><br><span class="line"><span class="comment">#[&#123;&quot;id&quot;: 1, &quot;name&quot;: &quot;dhk&quot;, &quot;age&quot;: 123&#125;, &#123;&quot;id&quot;: 2, &quot;name&quot;: &quot;动肝&quot;, &quot;age&quot;: 312&#125;]</span></span><br></pre></td></tr></table></figure>
-
-<p>json-&gt;python数据类型，一般称为：发序列化</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json </span><br><span class="line">data_string = <span class="string">&#x27;[&#123;&quot;id&quot;: 1, &quot;name&quot;: &quot;dhk&quot;, &quot;age&quot;: 123&#125;, &#123;&quot;id&quot;: 2, &quot;name&quot;: &quot;动肝&quot;, &quot;age&quot;: 312&#125;]&#x27;</span></span><br><span class="line">data_list = json.loads(data_string)</span><br><span class="line"><span class="built_in">print</span>(data_list)<span class="comment">#[&#123;&#x27;id&#x27;: 1, &#x27;name&#x27;: &#x27;dhk&#x27;, &#x27;age&#x27;: 123&#125;, &#123;&#x27;id&#x27;: 2, &#x27;name&#x27;: &#x27;动肝&#x27;, &#x27;age&#x27;: 312&#125;]</span></span><br></pre></td></tr></table></figure>
-
-<p>小例子：</p>
-<p>写一个网站，给用户返回json数据格式</p>
-<p>使用flask写个网站</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;首页&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">user</span>():</span></span><br><span class="line">    data = [</span><br><span class="line">        &#123;<span class="string">&quot;id&quot;</span>: <span class="number">1</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;dhk&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="number">123</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;id&quot;</span>: <span class="number">2</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;动肝&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="number">312</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">    <span class="keyword">return</span> json.dumps(data)</span><br><span class="line"></span><br><span class="line">app.add_url_rule(<span class="string">&#x27;/index/&#x27;</span>,view_func=index,endpoint=<span class="string">&#x27;index&#x27;</span>)</span><br><span class="line">app.add_url_rule(<span class="string">&#x27;/user/&#x27;</span>,view_func=user,endpoint=<span class="string">&#x27;user&#x27;</span>)<span class="comment">#用户在地址栏输入user执行user函数。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
-
-<p>2.写个爬虫把这个数据给爬到</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line">url = <span class="string">&quot;http://127.0.0.1:5000/user/&quot;</span></span><br><span class="line">res = requests.get(url)</span><br><span class="line">reslut = json.dumps(res.text)<span class="comment">#反序列化</span></span><br><span class="line"><span class="built_in">print</span>(reslut)</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-1-2类型要求"><a href="#3-1-2类型要求" class="headerlink" title="3.1.2类型要求"></a>3.1.2类型要求</h4><p>python的数据类型转换为json格式，对数据类型是有要求的：</p>
-<p><img src="/2022/01/08/%E5%85%AB%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%A8%A1%E5%9D%97/image-20220104153252331.png" alt="image-20220104153252331"></p>
-<h3 id="3-2时间处理"><a href="#3-2时间处理" class="headerlink" title="3.2时间处理"></a>3.2时间处理</h3><p>UTC/GMT：世界时间</p>
-<p>本地时间：本地时区的时间</p>
-<p>python中关于时间处理的模块有两个，分别是time和datetime</p>
-<h4 id="3-2-1time"><a href="#3-2-1time" class="headerlink" title="3.2.1time"></a>3.2.1time</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line">v1 = time.time()<span class="comment">#本时区的时间戳</span></span><br><span class="line"><span class="built_in">print</span>(v1)</span><br><span class="line"></span><br><span class="line">v2 = time.timezone</span><br><span class="line"><span class="built_in">print</span>(v2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;start&quot;</span>)</span><br><span class="line">time.sleep(<span class="number">3</span>)<span class="comment">#延时三秒钟再执行</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;end&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-2-2datetime"><a href="#3-2-2datetime" class="headerlink" title="3.2.2datetime"></a>3.2.2datetime</h4><p>平时开发过程的时间一般以如下三种格式存在：</p>
-<p>datetime</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime,timezone,timedelta</span><br><span class="line">v1 = datetime.now()<span class="comment">#当前本地时间</span></span><br><span class="line"><span class="built_in">print</span>(v1)<span class="comment">#2022-01-04 15:51:24.055927</span></span><br><span class="line"></span><br><span class="line">v2 = datetime.utcnow()<span class="comment">#utc当前时间</span></span><br><span class="line"><span class="built_in">print</span>(v2)</span><br><span class="line"></span><br><span class="line">tz = time(timedelte(hours=<span class="number">7</span>))<span class="comment">#当前东七区</span></span><br><span class="line">v2 = datetime.now(tz)</span><br><span class="line"><span class="built_in">print</span>(v2)</span><br></pre></td></tr></table></figure>
-
-<p>字符串</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#字符串格式的时间 转换为datetime格式时间</span></span><br><span class="line">text = <span class="string">&quot;2021-11-11&quot;</span></span><br><span class="line">v1 = datetime.strptime(text,<span class="string">&quot;%Y-%m-%d&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(v1)<span class="comment">#2021-11-11 00:00:00</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#datetime格式 转换为字符串</span></span><br><span class="line">v1 = datetime.now</span><br><span class="line">val = v1.strftime(<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(val)</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-正则表达式相关"><a href="#4-正则表达式相关" class="headerlink" title="4.正则表达式相关"></a>4.正则表达式相关</h2><p>当给你一大堆文本信息，让你提取其中的指定数据时，可以使用正则来实现。例如：提取文本中的邮箱和手机号</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;太厉害了，给我一份资源吧！我的邮箱号是123456789@qq.com和dhk@live.com,这是我的手机号12312312315!&quot;</span></span><br><span class="line">phone_list = re.findall(<span class="string">&quot;1[2|3|5]\d&#123;9&#125;&quot;</span>,text)</span><br><span class="line"><span class="built_in">print</span>(phone_list)<span class="comment">#[&#x27;12312312315&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<p>正则表达式并不是只属于python，在其他语言中同样存在。</p>
-<h3 id="4-1正则表达式"><a href="#4-1正则表达式" class="headerlink" title="4.1正则表达式"></a>4.1正则表达式</h3><h4 id="4-1-1字符相关"><a href="#4-1-1字符相关" class="headerlink" title="4.1.1字符相关"></a>4.1.1字符相关</h4><p>1.dhk 匹配文本中的dhk</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;你好啊dhk，我知道其实你dhk是一个joker，但是身为joker的dhk是不能暴露身份的，&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;dhk&quot;</span>,text)</span><br><span class="line"><span class="built_in">print</span>(data_list)<span class="comment">#[&#x27;dhk&#x27;, &#x27;dhk&#x27;, &#x27;dhk&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<p>2.[dhk]匹配d或h或k</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;你好啊dhk，我知道其实你dhk是一个joker，但是身为joker的dhk是不能暴露身份的，&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;[dhk]&quot;</span>,text)</span><br><span class="line"><span class="built_in">print</span>(data_list)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">[&#x27;d&#x27;, &#x27;h&#x27;, &#x27;k&#x27;, &#x27;d&#x27;, &#x27;h&#x27;, &#x27;k&#x27;, &#x27;k&#x27;, &#x27;k&#x27;, &#x27;d&#x27;, &#x27;h&#x27;, &#x27;k&#x27;]</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;你好啊dhk，我知道其实你dhk是一个joker，但是身为joker的dhk是不能暴露身份的，&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;d[hk]&quot;</span>,text)<span class="comment">#q开头的字符串，后面的内容只能是h或者是k</span></span><br><span class="line"><span class="built_in">print</span>(data_list)<span class="comment">#[&#x27;dh&#x27;, &#x27;dh&#x27;, &#x27;dh&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<p>3.<img src="/2022/01/08/%E5%85%AB%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%A8%A1%E5%9D%97/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20220104175556760.png" alt="image-20220104175556760">匹配除了abc以外的字符串</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;你好啊dhk，我知道其实你dhk是一个joker，但是身为joker的dhk是不能暴露身份的，&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;[^dhkj]&quot;</span>,text)</span><br><span class="line"><span class="built_in">print</span>(data_list)</span><br></pre></td></tr></table></figure>
-
-<p>4.[a-z]匹配a~z的任意字符，（[0-9]也可以）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;你好啊dhk，我知道其实你dhk是一个joker，但是身为joker的dhk是不能暴露身份的，&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;[d-e]&quot;</span>,text)</span><br><span class="line"><span class="built_in">print</span>(data_list)<span class="comment">#[&#x27;d&#x27;, &#x27;d&#x27;, &#x27;e&#x27;, &#x27;e&#x27;, &#x27;d&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<p>5.”.”代指出换行符以外的任意字符</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;你好啊dhk，我知道其实你dhk是一个joker，但是身为joker的dhk是不能暴露身份的，&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;d.k&quot;</span>,text)</span><br><span class="line"><span class="built_in">print</span>(data_list)<span class="comment">#[&#x27;dhk&#x27;, &#x27;dhk&#x27;, &#x27;dhk&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;你好啊dhkk，我知道其实你dhkk是一个joker，但是身为joker的dhk是不能暴露身份的，&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;d.+k&quot;</span>,text)<span class="comment">#贪婪匹配是能匹配长的就匹配长的，可以是任意字符，任意数量。</span></span><br><span class="line"><span class="built_in">print</span>(data_list)<span class="comment">#[&#x27;dhkk，我知道其实你dhkk是一个joker，但是身为joker的dhk&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;你好啊dhk，我知道其实你dhk是一个joker，但是身为joker的dhk是不能暴露身份的，&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;d.+?k&quot;</span>,text)<span class="comment">#非贪婪匹配,能匹配短的就匹配短的。</span></span><br><span class="line"><span class="built_in">print</span>(data_list)<span class="comment">#[&#x27;dhk&#x27;, &#x27;dhk&#x27;, &#x27;dhk&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<p>6.\w指代字母或数字或下划线（汉字）。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;你好啊dhk，我知道其实你dhk是一个joker，但是身为  joker的dhk是不能暴露身份的，&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;jo\w+k&quot;</span>,text)<span class="comment">#不加问号就是贪婪匹配</span></span><br><span class="line"><span class="built_in">print</span>(data_list)</span><br></pre></td></tr></table></figure>
-
-<p>7.\d代指所有的数字</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;123asd123sad2_123minadasd&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;d\d&quot;</span>,text)</span><br><span class="line"><span class="built_in">print</span>(data_list)<span class="comment">#[&#x27;d1&#x27;, &#x27;d2&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<p>8.\s代指一的空白符，包括空格，制表符等。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re </span><br><span class="line">text = <span class="string">&quot;root admin add admin&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;a\w+\s\w+&quot;</span>,text)</span><br><span class="line"><span class="built_in">print</span>(data_list)<span class="comment">#[&#x27;admin add&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="4-1-2数量相关"><a href="#4-1-2数量相关" class="headerlink" title="4.1.2数量相关"></a>4.1.2数量相关</h4><p>1.*重复0次或更多次</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;dhk is a joke,definitely a joker&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;ker*&quot;</span>,text)</span><br><span class="line"><span class="built_in">print</span>(data_list)<span class="comment">#[&#x27;ke&#x27;, &#x27;ker&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<p>2.+重复1次或更多次</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;dhk is a joke,definitely a joker&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;j\w+k&quot;</span>,text)</span><br><span class="line"><span class="built_in">print</span>(data_list)<span class="comment">#[&#x27;jok&#x27;, &#x27;jok&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<p>3.?重复0次或1次</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;dhk is a joke,definitely a joasdasdasdker&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;j\w?k&quot;</span>,text)</span><br><span class="line"><span class="built_in">print</span>(data_list)<span class="comment">#[&#x27;jok&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<p>4.{n}重复n次</p>
-<p>5.{n,}重复n次或多次</p>
-<p>6.{n,m}重复n次到m次</p>
-<h4 id="4-1-3括号（分组）"><a href="#4-1-3括号（分组）" class="headerlink" title="4.1.3括号（分组）"></a>4.1.3括号（分组）</h4><p>1.提取数据区域</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;楼主你这资源好啊，我有个朋友想要。1231231231&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;1231(2\d&#123;5&#125;)&quot;</span>,text)<span class="comment">#意味着匹配还是按照没有括号的时候匹配，但是返回的值是括号里面的。</span></span><br><span class="line"><span class="built_in">print</span>(data_list)<span class="comment">#[&#x27;231231&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;楼主你这资源好啊，我有个朋友想要。1231231231&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;(1231(2\d&#123;5&#125;))&quot;</span>,text)<span class="comment">#由于这里有两层括号，所以会先返回小括号的内容，然后返回大括号的内容。</span></span><br><span class="line"><span class="built_in">print</span>(data_list)<span class="comment">#[(&#x27;1231231231&#x27;, &#x27;231231&#x27;)]</span></span><br></pre></td></tr></table></figure>
-
-<p>2.获取指定区域+或条件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;哇你这dhk真1231admin23123的是一个小丑啊！天ro123123123ot哪！joker，来点资源123123clown123&quot;</span></span><br><span class="line">data_list = re.findall(<span class="string">&quot;1231(\d&#123;4&#125;|\w&#123;5&#125;\d+)3&quot;</span>,text)<span class="comment">#这里面的管道符|就是或条件</span></span><br><span class="line"><span class="built_in">print</span>(data_list)<span class="comment">#[&#x27;admin2312&#x27;, &#x27;2312&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="4-1-4-起始-结束"><a href="#4-1-4-起始-结束" class="headerlink" title="4.1.4 ^起始$结束"></a>4.1.4 ^起始$结束</h4><h4 id="4-1-5特殊字符"><a href="#4-1-5特殊字符" class="headerlink" title="4.1.5特殊字符"></a>4.1.5特殊字符</h4><p>由于正则表达式中各种特殊符号都有特殊的含义，所以如果想要在正则中匹配这种指定的字符，需要转移</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">&quot;dhk is a&#123;9&#125;clown!&quot;</span></span><br><span class="line">data = re.findall(<span class="string">&quot;a\&#123;9\&#125;clown!&quot;</span>,text)</span><br><span class="line"><span class="built_in">print</span>(data)<span class="comment">#[&#x27;a&#123;9&#125;clown!&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<p>要使用\进行转义</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1674,7 +1653,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">المقالات</span>
         </a>
       </div>
