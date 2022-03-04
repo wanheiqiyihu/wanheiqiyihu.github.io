@@ -1,70 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>BUUCTF刷题日志2</title>
-    <url>/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/</url>
-    <content><![CDATA[<h1 id="BUUCTF刷题日志2"><a href="#BUUCTF刷题日志2" class="headerlink" title="BUUCTF刷题日志2"></a>BUUCTF刷题日志2</h1><h2 id="第一题-极客大挑战-2019-Upload"><a href="#第一题-极客大挑战-2019-Upload" class="headerlink" title="第一题 [极客大挑战 2019]Upload"></a>第一题 [极客大挑战 2019]Upload</h2><p>一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image/jpeg</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png" alt="image-20220117150427298"></p>
-<p>但是我们的马里面的&lt;?又被过滤了，所以用<code>&lt;script language=&quot;php&quot;&gt;   &lt;/script&gt; </code>来进行绕过</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png" alt="image-20220117151055301"></p>
-<p>添加一个gif的文件头进去，绕过这个判断</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png" alt="image-20220117151122705"></p>
-<p>上传成功</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png" alt="image-20220117151158231"></p>
-<p>猜测路径为<code>/upload/新建文本文档.phtml</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png" alt="image-20220117152049720"></p>
-<p>成功在根目录找到flag</p>
-<h2 id="第二题-文件上传"><a href="#第二题-文件上传" class="headerlink" title="第二题 文件上传"></a>第二题 文件上传</h2><p>一个前端绕过罢了，还是用phtml文件</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png" alt="image-20220117154044267"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png" alt="image-20220117154204041"></p>
-<p>在根目录找到flag</p>
-<h2 id="第三题-php解析特性-char绕过"><a href="#第三题-php解析特性-char绕过" class="headerlink" title="第三题 php解析特性 char绕过"></a>第三题 php解析特性 char绕过</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png" alt="image-20220117154748431"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png" alt="image-20220117154838651"></p>
-<p>有前端验证</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png" alt="image-20220117155745159"></p>
-<p>在源码中发现了calc.php<img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png" alt="image-20220117161601913"></p>
-<p>写不来了，看了别人的wp，</p>
-<p>然后说waf无法识别加了空格的num参数，” num”和”num”，加了空格就不是num参数了，但是php解析的时候会自动把空格去掉，然后就绕过了waf。</p>
-<p>然后使用scandir()函数，scandir(“/“)但是/被过滤了，所以用char(“47”)来代替</p>
-<p><code>? num=print_r(scandir(chr(47)));</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png" alt="image-20220117162229698"></p>
-<p>发现flag，然后就访问这个flag</p>
-<p>calc.php? <code>num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</code></p>
-<h2 id="第四题-sql注入-极客大挑战-2019-BabySQL"><a href="#第四题-sql注入-极客大挑战-2019-BabySQL" class="headerlink" title="第四题 sql注入[极客大挑战 2019]BabySQL"></a>第四题 sql注入[极客大挑战 2019]BabySQL</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png" alt="image-20220117170804546"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png" alt="image-20220117170814134"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png" alt="image-20220117171730895"></p>
-<p>但是可以双写绕过select和union</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png" alt="image-20220117171950628"></p>
-<p>爆出列数有三个</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png" alt="image-20220117172055414"></p>
-<p>然后又是枯燥的爆表爆字段</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png" alt="image-20220117172428770"></p>
-<p>人嘛了，information里面的or都被过滤了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png" alt="image-20220117172541108"></p>
-<p>反正一步一步爆，然后就出来了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png" alt="image-20220117173343401"></p>
-<h2 id="第五题-备份文件-代码审计-弱类型"><a href="#第五题-备份文件-代码审计-弱类型" class="headerlink" title="第五题 备份文件 代码审计 弱类型"></a>第五题 备份文件 代码审计 弱类型</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png" alt="image-20220117201827743"></p>
-<p>发现备份文件,又是代码审计</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$key</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric(<span class="variable">$key</span>)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&quot;Just num!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$key</span> = intval(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span> == <span class="variable">$str</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Try to find out source file!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>弱比较：如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行，在比较时该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</p>
-<p>所以我们直接传值key=123</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png" alt="image-20220117202715872"></p>
-<p>得到flag</p>
-<h2 id="第六题-模板注入"><a href="#第六题-模板注入" class="headerlink" title="第六题 模板注入"></a>第六题 模板注入</h2><p>经典老题目了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png" alt="image-20220117202952675"></p>
-<p>flag中提示了flag的位置<code>flag in /fllllllllllllag</code></p>
-<p>welcome中提示了<code>render</code>模板渲染用的函数</p>
-<p>hints中提示了filehash的加密方法<code>md5(cookie_secret+md5(filename))</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png" alt="image-20220117203315129"></p>
-<p>然后就开始模板注入，我们的目的就是获取cookie_secret</p>
-<p>[(33条消息) BUUCTF <a href="https://blog.csdn.net/weixin_45642610/article/details/112519061">护网杯 2018]easy_tornado 1_wow小华的博客-CSDN博客</a></p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
     <title>BUUCTF 的一些签到题 内有sql 命令执行(内联)</title>
     <url>/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/</url>
     <content><![CDATA[<h1 id="BUUCTF-的一些签到题-内有sql-命令执行"><a href="#BUUCTF-的一些签到题-内有sql-命令执行" class="headerlink" title="BUUCTF 的一些签到题 内有sql 命令执行"></a>BUUCTF 的一些签到题 内有sql 命令执行</h1><h2 id="第一题-easy-sql"><a href="#第一题-easy-sql" class="headerlink" title="第一题 easy sql"></a>第一题 easy sql</h2><p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115110256458.png" alt="image-20220115110256458"></p>
@@ -192,6 +128,70 @@
       </categories>
   </entry>
   <entry>
+    <title>BUUCTF刷题日志2</title>
+    <url>/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/</url>
+    <content><![CDATA[<h1 id="BUUCTF刷题日志2"><a href="#BUUCTF刷题日志2" class="headerlink" title="BUUCTF刷题日志2"></a>BUUCTF刷题日志2</h1><h2 id="第一题-极客大挑战-2019-Upload"><a href="#第一题-极客大挑战-2019-Upload" class="headerlink" title="第一题 [极客大挑战 2019]Upload"></a>第一题 [极客大挑战 2019]Upload</h2><p>一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image/jpeg</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png" alt="image-20220117150427298"></p>
+<p>但是我们的马里面的&lt;?又被过滤了，所以用<code>&lt;script language=&quot;php&quot;&gt;   &lt;/script&gt; </code>来进行绕过</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png" alt="image-20220117151055301"></p>
+<p>添加一个gif的文件头进去，绕过这个判断</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png" alt="image-20220117151122705"></p>
+<p>上传成功</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png" alt="image-20220117151158231"></p>
+<p>猜测路径为<code>/upload/新建文本文档.phtml</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png" alt="image-20220117152049720"></p>
+<p>成功在根目录找到flag</p>
+<h2 id="第二题-文件上传"><a href="#第二题-文件上传" class="headerlink" title="第二题 文件上传"></a>第二题 文件上传</h2><p>一个前端绕过罢了，还是用phtml文件</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png" alt="image-20220117154044267"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png" alt="image-20220117154204041"></p>
+<p>在根目录找到flag</p>
+<h2 id="第三题-php解析特性-char绕过"><a href="#第三题-php解析特性-char绕过" class="headerlink" title="第三题 php解析特性 char绕过"></a>第三题 php解析特性 char绕过</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png" alt="image-20220117154748431"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png" alt="image-20220117154838651"></p>
+<p>有前端验证</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png" alt="image-20220117155745159"></p>
+<p>在源码中发现了calc.php<img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png" alt="image-20220117161601913"></p>
+<p>写不来了，看了别人的wp，</p>
+<p>然后说waf无法识别加了空格的num参数，” num”和”num”，加了空格就不是num参数了，但是php解析的时候会自动把空格去掉，然后就绕过了waf。</p>
+<p>然后使用scandir()函数，scandir(“/“)但是/被过滤了，所以用char(“47”)来代替</p>
+<p><code>? num=print_r(scandir(chr(47)));</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png" alt="image-20220117162229698"></p>
+<p>发现flag，然后就访问这个flag</p>
+<p>calc.php? <code>num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</code></p>
+<h2 id="第四题-sql注入-极客大挑战-2019-BabySQL"><a href="#第四题-sql注入-极客大挑战-2019-BabySQL" class="headerlink" title="第四题 sql注入[极客大挑战 2019]BabySQL"></a>第四题 sql注入[极客大挑战 2019]BabySQL</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png" alt="image-20220117170804546"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png" alt="image-20220117170814134"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png" alt="image-20220117171730895"></p>
+<p>但是可以双写绕过select和union</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png" alt="image-20220117171950628"></p>
+<p>爆出列数有三个</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png" alt="image-20220117172055414"></p>
+<p>然后又是枯燥的爆表爆字段</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png" alt="image-20220117172428770"></p>
+<p>人嘛了，information里面的or都被过滤了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png" alt="image-20220117172541108"></p>
+<p>反正一步一步爆，然后就出来了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png" alt="image-20220117173343401"></p>
+<h2 id="第五题-备份文件-代码审计-弱类型"><a href="#第五题-备份文件-代码审计-弱类型" class="headerlink" title="第五题 备份文件 代码审计 弱类型"></a>第五题 备份文件 代码审计 弱类型</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png" alt="image-20220117201827743"></p>
+<p>发现备份文件,又是代码审计</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$key</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric(<span class="variable">$key</span>)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&quot;Just num!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$key</span> = intval(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span> == <span class="variable">$str</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Try to find out source file!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>弱比较：如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行，在比较时该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</p>
+<p>所以我们直接传值key=123</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png" alt="image-20220117202715872"></p>
+<p>得到flag</p>
+<h2 id="第六题-模板注入"><a href="#第六题-模板注入" class="headerlink" title="第六题 模板注入"></a>第六题 模板注入</h2><p>经典老题目了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png" alt="image-20220117202952675"></p>
+<p>flag中提示了flag的位置<code>flag in /fllllllllllllag</code></p>
+<p>welcome中提示了<code>render</code>模板渲染用的函数</p>
+<p>hints中提示了filehash的加密方法<code>md5(cookie_secret+md5(filename))</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png" alt="image-20220117203315129"></p>
+<p>然后就开始模板注入，我们的目的就是获取cookie_secret</p>
+<p>[(33条消息) BUUCTF <a href="https://blog.csdn.net/weixin_45642610/article/details/112519061">护网杯 2018]easy_tornado 1_wow小华的博客-CSDN博客</a></p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Git与Git文件导致源码泄露</title>
     <url>/2022/01/01/Git%E4%B8%8EGit%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2/</url>
     <content><![CDATA[<h1 id="Git与Git文件导致源码泄露"><a href="#Git与Git文件导致源码泄露" class="headerlink" title="Git与Git文件导致源码泄露"></a>Git与Git文件导致源码泄露</h1><p>Git是目前世界上最先进的<strong>分布式版本控制系统</strong></p>
@@ -256,6 +256,58 @@
 ]]></content>
       <categories>
         <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>JWT技术——基于token的鉴权机制</title>
+    <url>/2022/03/04/JWT%E6%8A%80%E6%9C%AF%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8Etoken%E7%9A%84%E9%89%B4%E6%9D%83%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<p>今天挖洞 问了jwt技术</p>
+<h1 id="JWT技术——基于token的鉴权机制"><a href="#JWT技术——基于token的鉴权机制" class="headerlink" title="JWT技术——基于token的鉴权机制"></a>JWT技术——基于token的鉴权机制</h1><h1 id="1-基本流程"><a href="#1-基本流程" class="headerlink" title="1.基本流程"></a>1.基本流程</h1><p>JWT技术（基于token的鉴权机制）</p>
+<p>流程上是这样的：</p>
+<p>用户使用用户名密码来请求服务器</p>
+<p>服务器进行验证用户的信息</p>
+<p>服务器通过验证后生成一个token发送给用户</p>
+<p>客户端存储token，并在每次请求时附送上这个token值</p>
+<p>服务端验证token值，并返回数据</p>
+<h1 id="2-与session的区别"><a href="#2-与session的区别" class="headerlink" title="2.与session的区别"></a>2.与session的区别</h1><p> <a href="https://so.csdn.net/so/search?q=JWT&spm=1001.2101.3001.7020">JWT</a>和Session技术的根本区别在于，Session是把访问者信息存储在服务器端的，而JWT是把信息存储在客户端。</p>
+<h1 id="3-弊端"><a href="#3-弊端" class="headerlink" title="3.弊端"></a>3.弊端</h1><p> JWT方式，每次请求都要带上token，服务器每次都要解密出token的信息，这会让服务器有一些计算压力。而且，如果客户端的信息比较多，每次HTTP请求携带的数据就比较多。还有一点，JWT在客户端的存储，不能包含敏感信息，否则很容易被泄露，而且不建议在客户端存储会变动的信息，否则可能出现一致性问题。</p>
+<h1 id="4-JWT长什么样？"><a href="#4-JWT长什么样？" class="headerlink" title="4.JWT长什么样？"></a>4.JWT长什么样？</h1><pre><code>JWT是由三段信息（header.payload.signature）构成的，将这三段信息文本用英文句号链接一起就构成了JWT字符串。例如：
+</code></pre>
+<p>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ</p>
+<pre><code>可以在 https://jwt.io/ 这个网站，把token解析出来。
+</code></pre>
+<h1 id="5-构成"><a href="#5-构成" class="headerlink" title="5.构成"></a>5.构成</h1><p>JWT的构成</p>
+<pre><code>第一部分我们称它为头部（header)，
+
+第二部分我们称其为承载（payload, 类似于飞机上承载的物品)，
+
+第三部分是签证（signature)。
+</code></pre>
+<h2 id="5-1header"><a href="#5-1header" class="headerlink" title="5.1header"></a>5.1header</h2> <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">完整的头部就像下面这样的JSON：</span><br><span class="line"></span><br><span class="line">&#123;undefined</span><br><span class="line"></span><br><span class="line">  &#x27;typ&#x27;: &#x27;JWT&#x27;,</span><br><span class="line"></span><br><span class="line">  &#x27;alg&#x27;: &#x27;HS256&#x27;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">即声明 类型 和 加密的算法。然后将头部进行base64加密，就构成了header部分。</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-2playload"><a href="#5-2playload" class="headerlink" title="5.2playload"></a>5.2playload</h2><p>承载就是存放有效信息的地方。这个名字像是指飞机上承载的货品，这些有效信息包含三个部分声明（Claims）</p>
+<pre><code>标准中注册的声明
+
+公共的声明
+
+私有的声明
+</code></pre>
+<p> 标准中注册的声明 (建议但不强制使用) ：</p>
+<p>iss: jwt签发者</p>
+<p>sub: jwt所面向的用户</p>
+<p>aud: 接收jwt的一方</p>
+<p>exp: jwt的过期时间，这个过期时间必须要大于签发时间</p>
+<p>nbf: 定义在什么时间之前，该jwt都是不可用的.</p>
+<p>iat: jwt的签发时间</p>
+<p>jti: jwt的唯一身份标识，主要用来作为一次性token，从而回避重放攻击。</p>
+<h2 id="5-3signature"><a href="#5-3signature" class="headerlink" title="5.3signature"></a>5.3signature</h2><p>signature是一个签证信息，它会用到前面的header、payload信息，以及一个密匙（secret）。</p>
+<p>即，这个部分需要 base64加密后的header 和 base64加密后的payload，使用 英文句号 连接组成的字符串，然后通过header中声明的加密方式，进行加盐secret组合加密，然后就构成了jwt的第三部分signature。</p>
+<h1 id="6-攻击思路"><a href="#6-攻击思路" class="headerlink" title="6.攻击思路"></a>6.攻击思路</h1><p>1.token的存储一般有两种方式，一种是存在localStorage中，二是存在cookie中，这两种存储方式都有问题，存在localStorage中有很大的安全隐患，容易造成XSS攻击，因为跨站脚本可以读取localStorage里面的信息，如果存在cookie中，又容易造成CSRF攻击，这个是由于Cookie存储的安全性造成的（可以使用XSRF Token来解决这个问题）。</p>
+<p>2.失效和刷新问题，token肯定要有失效时间，而且如果用户一直处于活跃状态，则要考虑能自动刷新token。</p>
+<p>3.重放攻击，由于每次都传输token，如果这个token被窃取，那么可以在任何一个地方使用。特别的，如果这个token过期时间很长的话，那么它就相当于一个在很长时间内有效的钥匙。（可以考虑每次请求都重新生成一个token并存储一段时间防重放，但是这样又会遇到存储问题和并发刷新的问题，参见：<a href="https://zhuanlan.zhihu.com/p/22693223%EF%BC%89">https://zhuanlan.zhihu.com/p/22693223）</a></p>
+]]></content>
+      <categories>
+        <category>-basic</category>
       </categories>
   </entry>
   <entry>
@@ -1086,33 +1138,6 @@
       </categories>
   </entry>
   <entry>
-    <title>xray+rad 自动化edusrc</title>
-    <url>/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/</url>
-    <content><![CDATA[<h1 id="xray-rad-自动化edusrc"><a href="#xray-rad-自动化edusrc" class="headerlink" title="xray+rad 自动化edusrc"></a>xray+rad 自动化edusrc</h1><p>最近挖洞效率低下，学习了下扫描器</p>
-<h1 id="1-爬取漏洞平台上各大学校的网址"><a href="#1-爬取漏洞平台上各大学校的网址" class="headerlink" title="1.爬取漏洞平台上各大学校的网址"></a>1.爬取漏洞平台上各大学校的网址</h1><p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/image-20220208144944272.png" alt="image-20220208144944272"></p>
-<p>写了个小爬虫，有些会爬到百度百科里面，但是不影响，后面加个判断就好了。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line">allpage = <span class="number">199</span></span><br><span class="line">all_school = <span class="built_in">dict</span>()</span><br><span class="line"><span class="comment">#获取学校名字</span></span><br><span class="line">handers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 Edg/97.0.1072.76&#x27;</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开始获取学校名称和网址&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> page <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,allpage):</span><br><span class="line">    <span class="comment">#获取学校名称</span></span><br><span class="line">    url = <span class="string">f&#x27;https://src.sjtu.edu.cn/rank/firm/?page=<span class="subst">&#123;page&#125;</span>&#x27;</span></span><br><span class="line">    page_text = requests.get(url,headers=handers).text</span><br><span class="line">    tree = etree.HTML(page_text)</span><br><span class="line">    content = tree.xpath(<span class="string">f&#x27;//tr[@class=&quot;row&quot;]//a//text()&#x27;</span>)</span><br><span class="line">    <span class="comment">#定义一个进度条用的东西</span></span><br><span class="line">    index = <span class="number">1</span></span><br><span class="line">    <span class="comment">#从bing上获取学校官网</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> content:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response = requests.get(url=<span class="string">f&#x27;https://cn.bing.com/search?q=<span class="subst">&#123;item&#125;</span>&#x27;</span>, headers=handers).text</span><br><span class="line">            tree2 = etree.HTML(response)</span><br><span class="line">            content2 = tree2.xpath(<span class="string">f&#x27;/html/body/div[1]/main/ol/li[1]/div[1]/h2/a/@href&#x27;</span>)</span><br><span class="line">            <span class="comment">#把结果存入字典</span></span><br><span class="line">            all_school[item]=content2[<span class="number">0</span>]</span><br><span class="line">            <span class="built_in">print</span>(item + <span class="string">f&#x27;  <span class="subst">&#123;content2[<span class="number">0</span>]&#125;</span>  &#x27;</span>+<span class="string">f&#x27;第<span class="subst">&#123;page&#125;</span>/<span class="subst">&#123;allpage&#125;</span>页----<span class="subst">&#123;index/<span class="number">15</span>*<span class="number">100</span>&#125;</span>%&#x27;</span>)</span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;item&#125;</span>出错啦！&quot;</span>)</span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line"><span class="comment">#持久化存储</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;./学校网址.txt&#x27;</span>,mode=<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> all_school.keys():</span><br><span class="line">        fp.write(<span class="string">f&#x27;<span class="subst">&#123;key&#125;</span>    <span class="subst">&#123;all_school[key]&#125;</span>\n&#x27;</span>)</span><br><span class="line"><span class="comment">#单独存储url方便扫描</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;url.txt&#x27;</span>,mode=<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> fp2:</span><br><span class="line">    <span class="keyword">for</span> value <span class="keyword">in</span> all_school.values():</span><br><span class="line">        fp2.write(<span class="string">f&#x27;<span class="subst">&#123;value&#125;</span>\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-用xray和rad联动扫描url"><a href="#2-用xray和rad联动扫描url" class="headerlink" title="2.用xray和rad联动扫描url"></a>2.用xray和rad联动扫描url</h1><p>工具是别人的</p>
-<p>xray的被动扫描能力很强，但是主动扫描就弱了点，而rad的爬虫功能很强，所以将两种结合起来就能取长补短。但是它们两者不能进行批量检测。所以写了个脚本让两者结合进行批量检测。</p>
-<p>首先将xray与rad所在文件夹加入到环境变量中，环境变量——用户变量——path——编辑</p>
-<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380522-dc9a5510-1527-4c68-a628-d33460a1ba37.png" alt="image"></p>
-<p>使用的是python3，安装依赖库<br>pip install pypiwin32<br>pip isntall requests</p>
-<p>注意，系统需要装有chrome浏览器<br>之后将要扫描的目标放在url.txt文件中，一个目标一行。接着点击xray批量自动检测.bat</p>
-<p>启动后如下，输入xray扫描后的漏洞文件名，然后rad框中输入任意的数字 </p>
-<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380572-06ebf313-6064-457f-90be-71b6711db3ae.png" alt="image"></p>
-<p>过程如下 </p>
-<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380597-5a848ac8-d8d6-4070-8bb0-0879fc7093de.png" alt="image"></p>
-<p> 如果扫描出漏洞后会自动弹出浏览器漏洞报告</p>
-<h2 id="靶场测试"><a href="#靶场测试" class="headerlink" title="靶场测试"></a>靶场测试</h2><p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/image-20220208162054937.png" alt="image-20220208162054937"></p>
-<p>超！完美！</p>
-<p>链接：<a href="https://pan.baidu.com/s/14pENeqIq-zAIvPgA92n9sw">https://pan.baidu.com/s/14pENeqIq-zAIvPgA92n9sw</a><br>提取码：flag{Favorite anime characters}</p>
-]]></content>
-      <categories>
-        <category>-lunzi</category>
-      </categories>
-  </entry>
-  <entry>
     <title>sql必知必会</title>
     <url>/2022/01/11/sql%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</url>
     <content><![CDATA[<h1 id="sql必知必会"><a href="#sql必知必会" class="headerlink" title="sql必知必会"></a>sql必知必会</h1><h1 id="第一课-了解sql"><a href="#第一课-了解sql" class="headerlink" title="第一课 了解sql"></a>第一课 了解sql</h1><p>数据库（database）</p>
@@ -1379,6 +1404,33 @@
 ]]></content>
       <categories>
         <category>-readbook</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>xray+rad 自动化edusrc</title>
+    <url>/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/</url>
+    <content><![CDATA[<h1 id="xray-rad-自动化edusrc"><a href="#xray-rad-自动化edusrc" class="headerlink" title="xray+rad 自动化edusrc"></a>xray+rad 自动化edusrc</h1><p>最近挖洞效率低下，学习了下扫描器</p>
+<h1 id="1-爬取漏洞平台上各大学校的网址"><a href="#1-爬取漏洞平台上各大学校的网址" class="headerlink" title="1.爬取漏洞平台上各大学校的网址"></a>1.爬取漏洞平台上各大学校的网址</h1><p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/image-20220208144944272.png" alt="image-20220208144944272"></p>
+<p>写了个小爬虫，有些会爬到百度百科里面，但是不影响，后面加个判断就好了。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line">allpage = <span class="number">199</span></span><br><span class="line">all_school = <span class="built_in">dict</span>()</span><br><span class="line"><span class="comment">#获取学校名字</span></span><br><span class="line">handers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 Edg/97.0.1072.76&#x27;</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开始获取学校名称和网址&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> page <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,allpage):</span><br><span class="line">    <span class="comment">#获取学校名称</span></span><br><span class="line">    url = <span class="string">f&#x27;https://src.sjtu.edu.cn/rank/firm/?page=<span class="subst">&#123;page&#125;</span>&#x27;</span></span><br><span class="line">    page_text = requests.get(url,headers=handers).text</span><br><span class="line">    tree = etree.HTML(page_text)</span><br><span class="line">    content = tree.xpath(<span class="string">f&#x27;//tr[@class=&quot;row&quot;]//a//text()&#x27;</span>)</span><br><span class="line">    <span class="comment">#定义一个进度条用的东西</span></span><br><span class="line">    index = <span class="number">1</span></span><br><span class="line">    <span class="comment">#从bing上获取学校官网</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> content:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response = requests.get(url=<span class="string">f&#x27;https://cn.bing.com/search?q=<span class="subst">&#123;item&#125;</span>&#x27;</span>, headers=handers).text</span><br><span class="line">            tree2 = etree.HTML(response)</span><br><span class="line">            content2 = tree2.xpath(<span class="string">f&#x27;/html/body/div[1]/main/ol/li[1]/div[1]/h2/a/@href&#x27;</span>)</span><br><span class="line">            <span class="comment">#把结果存入字典</span></span><br><span class="line">            all_school[item]=content2[<span class="number">0</span>]</span><br><span class="line">            <span class="built_in">print</span>(item + <span class="string">f&#x27;  <span class="subst">&#123;content2[<span class="number">0</span>]&#125;</span>  &#x27;</span>+<span class="string">f&#x27;第<span class="subst">&#123;page&#125;</span>/<span class="subst">&#123;allpage&#125;</span>页----<span class="subst">&#123;index/<span class="number">15</span>*<span class="number">100</span>&#125;</span>%&#x27;</span>)</span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;item&#125;</span>出错啦！&quot;</span>)</span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line"><span class="comment">#持久化存储</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;./学校网址.txt&#x27;</span>,mode=<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> all_school.keys():</span><br><span class="line">        fp.write(<span class="string">f&#x27;<span class="subst">&#123;key&#125;</span>    <span class="subst">&#123;all_school[key]&#125;</span>\n&#x27;</span>)</span><br><span class="line"><span class="comment">#单独存储url方便扫描</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;url.txt&#x27;</span>,mode=<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> fp2:</span><br><span class="line">    <span class="keyword">for</span> value <span class="keyword">in</span> all_school.values():</span><br><span class="line">        fp2.write(<span class="string">f&#x27;<span class="subst">&#123;value&#125;</span>\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-用xray和rad联动扫描url"><a href="#2-用xray和rad联动扫描url" class="headerlink" title="2.用xray和rad联动扫描url"></a>2.用xray和rad联动扫描url</h1><p>工具是别人的</p>
+<p>xray的被动扫描能力很强，但是主动扫描就弱了点，而rad的爬虫功能很强，所以将两种结合起来就能取长补短。但是它们两者不能进行批量检测。所以写了个脚本让两者结合进行批量检测。</p>
+<p>首先将xray与rad所在文件夹加入到环境变量中，环境变量——用户变量——path——编辑</p>
+<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380522-dc9a5510-1527-4c68-a628-d33460a1ba37.png" alt="image"></p>
+<p>使用的是python3，安装依赖库<br>pip install pypiwin32<br>pip isntall requests</p>
+<p>注意，系统需要装有chrome浏览器<br>之后将要扫描的目标放在url.txt文件中，一个目标一行。接着点击xray批量自动检测.bat</p>
+<p>启动后如下，输入xray扫描后的漏洞文件名，然后rad框中输入任意的数字 </p>
+<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380572-06ebf313-6064-457f-90be-71b6711db3ae.png" alt="image"></p>
+<p>过程如下 </p>
+<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380597-5a848ac8-d8d6-4070-8bb0-0879fc7093de.png" alt="image"></p>
+<p> 如果扫描出漏洞后会自动弹出浏览器漏洞报告</p>
+<h2 id="靶场测试"><a href="#靶场测试" class="headerlink" title="靶场测试"></a>靶场测试</h2><p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/image-20220208162054937.png" alt="image-20220208162054937"></p>
+<p>超！完美！</p>
+<p>链接：<a href="https://pan.baidu.com/s/14pENeqIq-zAIvPgA92n9sw">https://pan.baidu.com/s/14pENeqIq-zAIvPgA92n9sw</a><br>提取码：flag{Favorite anime characters}</p>
+]]></content>
+      <categories>
+        <category>-lunzi</category>
       </categories>
   </entry>
   <entry>
@@ -2793,18 +2845,6 @@
       </categories>
   </entry>
   <entry>
-    <title>短信验证码接口限制</title>
-    <url>/2022/02/03/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%8E%A5%E5%8F%A3%E9%99%90%E5%88%B6/</url>
-    <content><![CDATA[<h1 id="短信验证码接口限制"><a href="#短信验证码接口限制" class="headerlink" title="短信验证码接口限制"></a>短信验证码接口限制</h1><p>转载几个博客，方便日后查阅</p>
-<p><a href="https://www.cnblogs.com/lovequitepcs/p/12901987.html">几个绕过短信验证码限制的漏洞挖掘 - QuiteX - 博客园 (cnblogs.com)</a></p>
-<p><a href="https://blog.csdn.net/weixin_44549063/article/details/113361313">(38条消息) 如何防止恶意攻击短信验证码接口_newxtc的博客-CSDN博客_如何防止短信验证码攻击</a></p>
-<p><a href="https://www.lx598.com/hangyedongtai/978.html">短信验证码安全常见逻辑漏洞_动力思维 (lx598.com)</a></p>
-]]></content>
-      <categories>
-        <category>-penetration</category>
-      </categories>
-  </entry>
-  <entry>
     <title>攻防世界 mfw git泄露</title>
     <url>/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/</url>
     <content><![CDATA[<h1 id="攻防世界-mfw-git泄露"><a href="#攻防世界-mfw-git泄露" class="headerlink" title="攻防世界 mfw git泄露"></a>攻防世界 mfw git泄露</h1><p>由于昨天才学了git，找一道题来练练手</p>
@@ -2842,6 +2882,22 @@
 ]]></content>
       <categories>
         <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>短信验证码接口限制</title>
+    <url>/2022/02/03/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%8E%A5%E5%8F%A3%E9%99%90%E5%88%B6/</url>
+    <content><![CDATA[<h1 id="短信验证码接口限制"><a href="#短信验证码接口限制" class="headerlink" title="短信验证码接口限制"></a>短信验证码接口限制</h1><p>转载几个博客，方便日后查阅</p>
+<p><a href="https://www.cnblogs.com/lovequitepcs/p/12901987.html">几个绕过短信验证码限制的漏洞挖掘 - QuiteX - 博客园 (cnblogs.com)</a></p>
+<p><a href="https://blog.csdn.net/weixin_44549063/article/details/113361313">(38条消息) 如何防止恶意攻击短信验证码接口_newxtc的博客-CSDN博客_如何防止短信验证码攻击</a></p>
+<p><a href="https://www.lx598.com/hangyedongtai/978.html">短信验证码安全常见逻辑漏洞_动力思维 (lx598.com)</a></p>
+<p>更新了几个接码平台</p>
+<p><a href="http://www.z-sms.com/sms-receive-free.php?pho_num=15227789961&amp;1">http://www.z-sms.com/sms-receive-free.php?pho_num=15227789961&amp;1</a></p>
+<p><a href="https://smsreceivefree.com/country/usa">https://smsreceivefree.com/country/usa</a></p>
+<p><a href="https://jiemahao.com/sms/?phone=5">https://jiemahao.com/sms/?phone=5</a></p>
+]]></content>
+      <categories>
+        <category>-penetration</category>
       </categories>
   </entry>
   <entry>

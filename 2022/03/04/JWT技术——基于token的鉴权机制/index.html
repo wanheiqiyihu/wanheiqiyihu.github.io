@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="强网杯 随便注（sql堆叠注入以及select绕过） [强网杯 2019]随便注 - chalan630 - 博客园 (cnblogs.com)">
+  <meta name="description" content="今天挖洞 问了jwt技术 JWT技术——基于token的鉴权机制1.基本流程JWT技术（基于token的鉴权机制） 流程上是这样的： 用户使用用户名密码来请求服务器 服务器进行验证用户的信息 服务器通过验证后生成一个token发送给用户 客户端存储token，并在每次请求时附送上这个token值 服务端验证token值，并返回数据 2.与session的区别 JWT和Session技术的根本区别在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="强网杯 随便注（sql堆叠注入以及select绕过）">
-<meta property="og:url" content="http://example.com/2021/12/27/%E5%BC%BA%E7%BD%91%E6%9D%AF-%E9%9A%8F%E4%BE%BF%E6%B3%A8%EF%BC%88sql%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8Aselect%E7%BB%95%E8%BF%87%EF%BC%89/index.html">
+<meta property="og:title" content="JWT技术——基于token的鉴权机制">
+<meta property="og:url" content="http://example.com/2022/03/04/JWT%E6%8A%80%E6%9C%AF%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8Etoken%E7%9A%84%E9%89%B4%E6%9D%83%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="十三の博客">
-<meta property="og:description" content="强网杯 随便注（sql堆叠注入以及select绕过） [强网杯 2019]随便注 - chalan630 - 博客园 (cnblogs.com)">
+<meta property="og:description" content="今天挖洞 问了jwt技术 JWT技术——基于token的鉴权机制1.基本流程JWT技术（基于token的鉴权机制） 流程上是这样的： 用户使用用户名密码来请求服务器 服务器进行验证用户的信息 服务器通过验证后生成一个token发送给用户 客户端存储token，并在每次请求时附送上这个token值 服务端验证token值，并返回数据 2.与session的区别 JWT和Session技术的根本区别在">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-27T12:08:44.000Z">
-<meta property="article:modified_time" content="2021-12-27T12:09:11.728Z">
+<meta property="article:published_time" content="2022-03-04T12:12:39.000Z">
+<meta property="article:modified_time" content="2022-03-04T12:13:16.044Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/12/27/%E5%BC%BA%E7%BD%91%E6%9D%AF-%E9%9A%8F%E4%BE%BF%E6%B3%A8%EF%BC%88sql%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8Aselect%E7%BB%95%E8%BF%87%EF%BC%89/">
+<link rel="canonical" href="http://example.com/2022/03/04/JWT%E6%8A%80%E6%9C%AF%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8Etoken%E7%9A%84%E9%89%B4%E6%9D%83%E6%9C%BA%E5%88%B6/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>强网杯 随便注（sql堆叠注入以及select绕过） | 十三の博客</title>
+  <title>JWT技术——基于token的鉴权机制 | 十三の博客</title>
   
 
 
@@ -208,7 +208,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/27/%E5%BC%BA%E7%BD%91%E6%9D%AF-%E9%9A%8F%E4%BE%BF%E6%B3%A8%EF%BC%88sql%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8Aselect%E7%BB%95%E8%BF%87%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/04/JWT%E6%8A%80%E6%9C%AF%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8Etoken%E7%9A%84%E9%89%B4%E6%9D%83%E6%9C%BA%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -221,7 +221,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          强网杯 随便注（sql堆叠注入以及select绕过）
+          JWT技术——基于token的鉴权机制
         </h1>
 
         <div class="post-meta">
@@ -232,7 +232,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-12-27 20:08:44 / 修改时间：20:09:11" itemprop="dateCreated datePublished" datetime="2021-12-27T20:08:44+08:00">2021-12-27</time>
+              <time title="创建时间：2022-03-04 20:12:39 / 修改时间：20:13:16" itemprop="dateCreated datePublished" datetime="2022-03-04T20:12:39+08:00">2022-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,7 +240,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
+                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
                 </span>
             </span>
 
@@ -255,8 +255,50 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>强网杯 随便注（sql堆叠注入以及select绕过）</p>
-<p>[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/chalan630/p/12583667.html">强网杯 2019]随便注 - chalan630 - 博客园 (cnblogs.com)</a></p>
+        <p>今天挖洞 问了jwt技术</p>
+<h1 id="JWT技术——基于token的鉴权机制"><a href="#JWT技术——基于token的鉴权机制" class="headerlink" title="JWT技术——基于token的鉴权机制"></a>JWT技术——基于token的鉴权机制</h1><h1 id="1-基本流程"><a href="#1-基本流程" class="headerlink" title="1.基本流程"></a>1.基本流程</h1><p>JWT技术（基于token的鉴权机制）</p>
+<p>流程上是这样的：</p>
+<p>用户使用用户名密码来请求服务器</p>
+<p>服务器进行验证用户的信息</p>
+<p>服务器通过验证后生成一个token发送给用户</p>
+<p>客户端存储token，并在每次请求时附送上这个token值</p>
+<p>服务端验证token值，并返回数据</p>
+<h1 id="2-与session的区别"><a href="#2-与session的区别" class="headerlink" title="2.与session的区别"></a>2.与session的区别</h1><p> <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=JWT&spm=1001.2101.3001.7020">JWT</a>和Session技术的根本区别在于，Session是把访问者信息存储在服务器端的，而JWT是把信息存储在客户端。</p>
+<h1 id="3-弊端"><a href="#3-弊端" class="headerlink" title="3.弊端"></a>3.弊端</h1><p> JWT方式，每次请求都要带上token，服务器每次都要解密出token的信息，这会让服务器有一些计算压力。而且，如果客户端的信息比较多，每次HTTP请求携带的数据就比较多。还有一点，JWT在客户端的存储，不能包含敏感信息，否则很容易被泄露，而且不建议在客户端存储会变动的信息，否则可能出现一致性问题。</p>
+<h1 id="4-JWT长什么样？"><a href="#4-JWT长什么样？" class="headerlink" title="4.JWT长什么样？"></a>4.JWT长什么样？</h1><pre><code>JWT是由三段信息（header.payload.signature）构成的，将这三段信息文本用英文句号链接一起就构成了JWT字符串。例如：
+</code></pre>
+<p>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ</p>
+<pre><code>可以在 https://jwt.io/ 这个网站，把token解析出来。
+</code></pre>
+<h1 id="5-构成"><a href="#5-构成" class="headerlink" title="5.构成"></a>5.构成</h1><p>JWT的构成</p>
+<pre><code>第一部分我们称它为头部（header)，
+
+第二部分我们称其为承载（payload, 类似于飞机上承载的物品)，
+
+第三部分是签证（signature)。
+</code></pre>
+<h2 id="5-1header"><a href="#5-1header" class="headerlink" title="5.1header"></a>5.1header</h2> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">完整的头部就像下面这样的JSON：</span><br><span class="line"></span><br><span class="line">&#123;undefined</span><br><span class="line"></span><br><span class="line">  &#x27;typ&#x27;: &#x27;JWT&#x27;,</span><br><span class="line"></span><br><span class="line">  &#x27;alg&#x27;: &#x27;HS256&#x27;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">即声明 类型 和 加密的算法。然后将头部进行base64加密，就构成了header部分。</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-2playload"><a href="#5-2playload" class="headerlink" title="5.2playload"></a>5.2playload</h2><p>承载就是存放有效信息的地方。这个名字像是指飞机上承载的货品，这些有效信息包含三个部分声明（Claims）</p>
+<pre><code>标准中注册的声明
+
+公共的声明
+
+私有的声明
+</code></pre>
+<p> 标准中注册的声明 (建议但不强制使用) ：</p>
+<p>iss: jwt签发者</p>
+<p>sub: jwt所面向的用户</p>
+<p>aud: 接收jwt的一方</p>
+<p>exp: jwt的过期时间，这个过期时间必须要大于签发时间</p>
+<p>nbf: 定义在什么时间之前，该jwt都是不可用的.</p>
+<p>iat: jwt的签发时间</p>
+<p>jti: jwt的唯一身份标识，主要用来作为一次性token，从而回避重放攻击。</p>
+<h2 id="5-3signature"><a href="#5-3signature" class="headerlink" title="5.3signature"></a>5.3signature</h2><p>signature是一个签证信息，它会用到前面的header、payload信息，以及一个密匙（secret）。</p>
+<p>即，这个部分需要 base64加密后的header 和 base64加密后的payload，使用 英文句号 连接组成的字符串，然后通过header中声明的加密方式，进行加盐secret组合加密，然后就构成了jwt的第三部分signature。</p>
+<h1 id="6-攻击思路"><a href="#6-攻击思路" class="headerlink" title="6.攻击思路"></a>6.攻击思路</h1><p>1.token的存储一般有两种方式，一种是存在localStorage中，二是存在cookie中，这两种存储方式都有问题，存在localStorage中有很大的安全隐患，容易造成XSS攻击，因为跨站脚本可以读取localStorage里面的信息，如果存在cookie中，又容易造成CSRF攻击，这个是由于Cookie存储的安全性造成的（可以使用XSRF Token来解决这个问题）。</p>
+<p>2.失效和刷新问题，token肯定要有失效时间，而且如果用户一直处于活跃状态，则要考虑能自动刷新token。</p>
+<p>3.重放攻击，由于每次都传输token，如果这个token被窃取，那么可以在任何一个地方使用。特别的，如果这个token过期时间很长的话，那么它就相当于一个在很长时间内有效的钥匙。（可以考虑每次请求都重新生成一个token并存储一段时间防重放，但是这样又会遇到存储问题和并发刷新的问题，参见：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/22693223%EF%BC%89">https://zhuanlan.zhihu.com/p/22693223）</a></p>
 
     </div>
 
@@ -272,13 +314,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/12/27/%E5%B9%B3%E6%97%B6%E8%A6%81%E6%B3%A8%E6%84%8Furl%E5%9C%B0%E5%9D%80%E9%87%8C%E9%9D%A2%E7%9A%84%E4%B8%9C%E8%A5%BF/" rel="prev" title="平时要注意url地址里面的东西">
-      <i class="fa fa-chevron-left"></i> 平时要注意url地址里面的东西
+    <a href="/2022/03/04/gifxss/" rel="prev" title="gifxss">
+      <i class="fa fa-chevron-left"></i> gifxss
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/12/28/%E4%B8%80%EF%BC%8C%E5%AD%A6%E4%B9%A0py%EF%BC%9A-%E5%B8%83%E5%B0%94-del-insert-input-int%EF%BC%88%EF%BC%89%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%BA%E7%A9%BA%E7%9A%84%E5%88%A4%E6%96%AD-elif/" rel="next" title="一，学习py：{} 布尔 del insert input int（）字符串为空的判断 elif">
-      一，学习py：{} 布尔 del insert input int（）字符串为空的判断 elif <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -337,6 +376,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JWT%E6%8A%80%E6%9C%AF%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8Etoken%E7%9A%84%E9%89%B4%E6%9D%83%E6%9C%BA%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">JWT技术——基于token的鉴权机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">1.基本流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%B8%8Esession%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">2.与session的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%BC%8A%E7%AB%AF"><span class="nav-number">4.</span> <span class="nav-text">3.弊端</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-JWT%E9%95%BF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">4.JWT长什么样？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E6%9E%84%E6%88%90"><span class="nav-number">6.</span> <span class="nav-text">5.构成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1header"><span class="nav-number">6.1.</span> <span class="nav-text">5.1header</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2playload"><span class="nav-number">6.2.</span> <span class="nav-text">5.2playload</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3signature"><span class="nav-number">6.3.</span> <span class="nav-text">5.3signature</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF"><span class="nav-number">7.</span> <span class="nav-text">6.攻击思路</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
