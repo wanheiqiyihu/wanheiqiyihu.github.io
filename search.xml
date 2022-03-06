@@ -305,6 +305,7 @@
 <h1 id="6-攻击思路"><a href="#6-攻击思路" class="headerlink" title="6.攻击思路"></a>6.攻击思路</h1><p>1.token的存储一般有两种方式，一种是存在localStorage中，二是存在cookie中，这两种存储方式都有问题，存在localStorage中有很大的安全隐患，容易造成XSS攻击，因为跨站脚本可以读取localStorage里面的信息，如果存在cookie中，又容易造成CSRF攻击，这个是由于Cookie存储的安全性造成的（可以使用XSRF Token来解决这个问题）。</p>
 <p>2.失效和刷新问题，token肯定要有失效时间，而且如果用户一直处于活跃状态，则要考虑能自动刷新token。</p>
 <p>3.重放攻击，由于每次都传输token，如果这个token被窃取，那么可以在任何一个地方使用。特别的，如果这个token过期时间很长的话，那么它就相当于一个在很长时间内有效的钥匙。（可以考虑每次请求都重新生成一个token并存储一段时间防重放，但是这样又会遇到存储问题和并发刷新的问题，参见：<a href="https://zhuanlan.zhihu.com/p/22693223%EF%BC%89">https://zhuanlan.zhihu.com/p/22693223）</a></p>
+<p><a href="https://www.cnblogs.com/xiaozi/p/12031111.html">JWT攻击手册：如何入侵你的Token - Bypass - 博客园 (cnblogs.com)</a></p>
 ]]></content>
       <categories>
         <category>-basic</category>
@@ -844,19 +845,6 @@
       </categories>
   </entry>
   <entry>
-    <title>preg_replace()函数的e漏洞</title>
-    <url>/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h3 id="preg-replace-函数的-e漏洞"><a href="#preg-replace-函数的-e漏洞" class="headerlink" title="preg_replace()函数的/e漏洞"></a>preg_replace()函数的/e漏洞</h3><p><img src="/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/image-20211124220045332.png" alt="image-20211124220045332">使用案例：</p>
-<p><img src="/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3pod2hv,size_16,color_FFFFFF,t_70" alt="运用实例"></p>
-<p>以及php中的system命令</p>
-<p>cd  &amp;&amp;ls 是进入文件夹然后显示全部文件</p>
-<p>cat用于打开php文件</p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
     <title>py爬虫-入门（b站课程）</title>
     <url>/2022/01/27/py%E7%88%AC%E8%99%AB-%E5%85%A5%E9%97%A8%EF%BC%88b%E7%AB%99%E8%AF%BE%E7%A8%8B%EF%BC%89/</url>
     <content><![CDATA[<h1 id="py爬虫-b站课程（入门的知识和基础的应用）"><a href="#py爬虫-b站课程（入门的知识和基础的应用）" class="headerlink" title="py爬虫-b站课程（入门的知识和基础的应用）"></a>py爬虫-b站课程（入门的知识和基础的应用）</h1><h1 id="1-初识requests模块"><a href="#1-初识requests模块" class="headerlink" title="1.初识requests模块"></a>1.初识requests模块</h1><h2 id="1-1分类"><a href="#1-1分类" class="headerlink" title="1.1分类"></a>1.1分类</h2><p>通用爬虫：抓取的是一整张页面数据</p>
@@ -1120,6 +1108,19 @@
 ]]></content>
       <categories>
         <category>-python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>preg_replace()函数的e漏洞</title>
+    <url>/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h3 id="preg-replace-函数的-e漏洞"><a href="#preg-replace-函数的-e漏洞" class="headerlink" title="preg_replace()函数的/e漏洞"></a>preg_replace()函数的/e漏洞</h3><p><img src="/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/image-20211124220045332.png" alt="image-20211124220045332">使用案例：</p>
+<p><img src="/2021/12/27/preg-replace-%E5%87%BD%E6%95%B0%E7%9A%84e%E6%BC%8F%E6%B4%9E/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3pod2hv,size_16,color_FFFFFF,t_70" alt="运用实例"></p>
+<p>以及php中的system命令</p>
+<p>cd  &amp;&amp;ls 是进入文件夹然后显示全部文件</p>
+<p>cat用于打开php文件</p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
       </categories>
   </entry>
   <entry>
@@ -3056,6 +3057,18 @@
       <tags>
         <tag>-web</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>自动查询icp脚本</title>
+    <url>/2022/03/06/%E8%87%AA%E5%8A%A8%E6%9F%A5%E8%AF%A2icp%E8%84%9A%E6%9C%AC/</url>
+    <content><![CDATA[<h1 id="自动查询icp脚本"><a href="#自动查询icp脚本" class="headerlink" title="自动查询icp脚本"></a>自动查询icp脚本</h1><p>这几天收集icp的资源太累了，索性直接写了个脚本</p>
+<p>记录一下</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"></span><br><span class="line">method = <span class="built_in">input</span>(<span class="string">&quot;不知道公司名字选1输入官网，知道公司名字选2输入名字&quot;</span>)</span><br><span class="line">url = <span class="string">&quot;https://www.beianx.cn/search/&quot;</span></span><br><span class="line">handers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 Edg/97.0.1072.69&#x27;</span>&#125;</span><br><span class="line"><span class="comment">#先获取IPC中的数据</span></span><br><span class="line"><span class="keyword">if</span> method == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">    website = <span class="built_in">input</span>(<span class="string">&quot;请输入公司的官网的域名，不要子域名不要根域名，直接域名即可可&quot;</span>)</span><br><span class="line">    res = requests.get(<span class="string">f&quot;<span class="subst">&#123;url&#125;</span><span class="subst">&#123;website&#125;</span>&quot;</span>)</span><br><span class="line">    tree = etree.HTML(res.text)</span><br><span class="line">    result = tree.xpath(<span class="string">&quot;/html/body/div[1]/div[2]/table/tbody/tr/td[2]/a/text()&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">str</span>(result))</span><br><span class="line"><span class="keyword">elif</span> method == <span class="string">&quot;2&quot;</span>:</span><br><span class="line">    conpany = <span class="built_in">input</span>(<span class="string">&quot;请输入公司的名字&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;加载中...&quot;</span>)</span><br><span class="line">    res = requests.get(<span class="string">f&quot;<span class="subst">&#123;url&#125;</span><span class="subst">&#123;conpany&#125;</span>&quot;</span>)</span><br><span class="line">    tree = etree.HTML(res.text)</span><br><span class="line">    result_list = []</span><br><span class="line">    i = <span class="literal">True</span></span><br><span class="line">    index = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> i:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            result = tree.xpath(<span class="string">f&quot;/html/body/div[1]/div[2]/table/tbody/tr[<span class="subst">&#123;<span class="built_in">str</span>(index)&#125;</span>]/td[6]/div/a/text()&quot;</span>)</span><br><span class="line">            <span class="keyword">if</span> result == []:</span><br><span class="line">                i = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result_list += result</span><br><span class="line">                index += <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            i = <span class="literal">False</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;出错了&quot;</span>)</span><br><span class="line">    final = <span class="string">&#x27;\n&#x27;</span>.join(result_list)</span><br><span class="line">    <span class="comment">#选择数据处理的方式</span></span><br><span class="line">    mod = <span class="built_in">input</span>(<span class="string">&quot;请选择：1.直接获取所有的url  2.获取所有非子域名  3.根据hunter domain语法来输出所有的痱子域名&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> mod == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">        <span class="built_in">print</span>(final)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> mod == <span class="string">&quot;2&quot;</span>:</span><br><span class="line">        final_list2 = []</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> result_list:</span><br><span class="line">            new_item = item.split(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">            <span class="keyword">del</span> new_item[<span class="number">0</span>]</span><br><span class="line">            final_item = <span class="string">&#x27;.&#x27;</span>.join(new_item)</span><br><span class="line">            final_list2.append(final_item)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>.join(final_list2))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> mod == <span class="string">&quot;3&quot;</span>:</span><br><span class="line">        finalset = <span class="built_in">set</span>()</span><br><span class="line">        result_list.append(<span class="string">&#x27;q&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> result_list:</span><br><span class="line">            <span class="keyword">if</span> item == <span class="string">&quot;q&quot;</span>:</span><br><span class="line">                result_list.remove(<span class="string">&quot;q&quot;</span>)</span><br><span class="line">                finallist = <span class="built_in">list</span>(finalset)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;<span class="string">&#x27;||&#x27;</span>.join(finallist)&#125;</span>&quot;</span>)</span><br><span class="line">                a = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                textmid = <span class="string">f&quot;domain=\&quot;<span class="subst">&#123;item&#125;</span>\&quot;&quot;</span></span><br><span class="line">                finalset.add(textmid)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;都说了不要乱输东西了，你看是不是又要重新来了嘛&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;给你说了输什么还要乱输是吧？&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>-lunzi</category>
+      </categories>
   </entry>
   <entry>
     <title>谷歌语法</title>
