@@ -1,70 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>BUUCTF刷题日志2</title>
-    <url>/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/</url>
-    <content><![CDATA[<h1 id="BUUCTF刷题日志2"><a href="#BUUCTF刷题日志2" class="headerlink" title="BUUCTF刷题日志2"></a>BUUCTF刷题日志2</h1><h2 id="第一题-极客大挑战-2019-Upload"><a href="#第一题-极客大挑战-2019-Upload" class="headerlink" title="第一题 [极客大挑战 2019]Upload"></a>第一题 [极客大挑战 2019]Upload</h2><p>一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image/jpeg</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png" alt="image-20220117150427298"></p>
-<p>但是我们的马里面的&lt;?又被过滤了，所以用<code>&lt;script language=&quot;php&quot;&gt;   &lt;/script&gt; </code>来进行绕过</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png" alt="image-20220117151055301"></p>
-<p>添加一个gif的文件头进去，绕过这个判断</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png" alt="image-20220117151122705"></p>
-<p>上传成功</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png" alt="image-20220117151158231"></p>
-<p>猜测路径为<code>/upload/新建文本文档.phtml</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png" alt="image-20220117152049720"></p>
-<p>成功在根目录找到flag</p>
-<h2 id="第二题-文件上传"><a href="#第二题-文件上传" class="headerlink" title="第二题 文件上传"></a>第二题 文件上传</h2><p>一个前端绕过罢了，还是用phtml文件</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png" alt="image-20220117154044267"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png" alt="image-20220117154204041"></p>
-<p>在根目录找到flag</p>
-<h2 id="第三题-php解析特性-char绕过"><a href="#第三题-php解析特性-char绕过" class="headerlink" title="第三题 php解析特性 char绕过"></a>第三题 php解析特性 char绕过</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png" alt="image-20220117154748431"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png" alt="image-20220117154838651"></p>
-<p>有前端验证</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png" alt="image-20220117155745159"></p>
-<p>在源码中发现了calc.php<img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png" alt="image-20220117161601913"></p>
-<p>写不来了，看了别人的wp，</p>
-<p>然后说waf无法识别加了空格的num参数，” num”和”num”，加了空格就不是num参数了，但是php解析的时候会自动把空格去掉，然后就绕过了waf。</p>
-<p>然后使用scandir()函数，scandir(“/“)但是/被过滤了，所以用char(“47”)来代替</p>
-<p><code>? num=print_r(scandir(chr(47)));</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png" alt="image-20220117162229698"></p>
-<p>发现flag，然后就访问这个flag</p>
-<p>calc.php? <code>num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</code></p>
-<h2 id="第四题-sql注入-极客大挑战-2019-BabySQL"><a href="#第四题-sql注入-极客大挑战-2019-BabySQL" class="headerlink" title="第四题 sql注入[极客大挑战 2019]BabySQL"></a>第四题 sql注入[极客大挑战 2019]BabySQL</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png" alt="image-20220117170804546"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png" alt="image-20220117170814134"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png" alt="image-20220117171730895"></p>
-<p>但是可以双写绕过select和union</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png" alt="image-20220117171950628"></p>
-<p>爆出列数有三个</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png" alt="image-20220117172055414"></p>
-<p>然后又是枯燥的爆表爆字段</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png" alt="image-20220117172428770"></p>
-<p>人嘛了，information里面的or都被过滤了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png" alt="image-20220117172541108"></p>
-<p>反正一步一步爆，然后就出来了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png" alt="image-20220117173343401"></p>
-<h2 id="第五题-备份文件-代码审计-弱类型"><a href="#第五题-备份文件-代码审计-弱类型" class="headerlink" title="第五题 备份文件 代码审计 弱类型"></a>第五题 备份文件 代码审计 弱类型</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png" alt="image-20220117201827743"></p>
-<p>发现备份文件,又是代码审计</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$key</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric(<span class="variable">$key</span>)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&quot;Just num!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$key</span> = intval(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span> == <span class="variable">$str</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Try to find out source file!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>弱比较：如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行，在比较时该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</p>
-<p>所以我们直接传值key=123</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png" alt="image-20220117202715872"></p>
-<p>得到flag</p>
-<h2 id="第六题-模板注入"><a href="#第六题-模板注入" class="headerlink" title="第六题 模板注入"></a>第六题 模板注入</h2><p>经典老题目了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png" alt="image-20220117202952675"></p>
-<p>flag中提示了flag的位置<code>flag in /fllllllllllllag</code></p>
-<p>welcome中提示了<code>render</code>模板渲染用的函数</p>
-<p>hints中提示了filehash的加密方法<code>md5(cookie_secret+md5(filename))</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png" alt="image-20220117203315129"></p>
-<p>然后就开始模板注入，我们的目的就是获取cookie_secret</p>
-<p>[(33条消息) BUUCTF <a href="https://blog.csdn.net/weixin_45642610/article/details/112519061">护网杯 2018]easy_tornado 1_wow小华的博客-CSDN博客</a></p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
     <title>BUUCTF 的一些签到题 内有sql 命令执行(内联)</title>
     <url>/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/</url>
     <content><![CDATA[<h1 id="BUUCTF-的一些签到题-内有sql-命令执行"><a href="#BUUCTF-的一些签到题-内有sql-命令执行" class="headerlink" title="BUUCTF 的一些签到题 内有sql 命令执行"></a>BUUCTF 的一些签到题 内有sql 命令执行</h1><h2 id="第一题-easy-sql"><a href="#第一题-easy-sql" class="headerlink" title="第一题 easy sql"></a>第一题 easy sql</h2><p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115110256458.png" alt="image-20220115110256458"></p>
@@ -192,6 +128,123 @@
       </categories>
   </entry>
   <entry>
+    <title>BUUCTF刷题日志2</title>
+    <url>/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/</url>
+    <content><![CDATA[<h1 id="BUUCTF刷题日志2"><a href="#BUUCTF刷题日志2" class="headerlink" title="BUUCTF刷题日志2"></a>BUUCTF刷题日志2</h1><h2 id="第一题-极客大挑战-2019-Upload"><a href="#第一题-极客大挑战-2019-Upload" class="headerlink" title="第一题 [极客大挑战 2019]Upload"></a>第一题 [极客大挑战 2019]Upload</h2><p>一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image/jpeg</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png" alt="image-20220117150427298"></p>
+<p>但是我们的马里面的&lt;?又被过滤了，所以用<code>&lt;script language=&quot;php&quot;&gt;   &lt;/script&gt; </code>来进行绕过</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png" alt="image-20220117151055301"></p>
+<p>添加一个gif的文件头进去，绕过这个判断</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png" alt="image-20220117151122705"></p>
+<p>上传成功</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png" alt="image-20220117151158231"></p>
+<p>猜测路径为<code>/upload/新建文本文档.phtml</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png" alt="image-20220117152049720"></p>
+<p>成功在根目录找到flag</p>
+<h2 id="第二题-文件上传"><a href="#第二题-文件上传" class="headerlink" title="第二题 文件上传"></a>第二题 文件上传</h2><p>一个前端绕过罢了，还是用phtml文件</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png" alt="image-20220117154044267"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png" alt="image-20220117154204041"></p>
+<p>在根目录找到flag</p>
+<h2 id="第三题-php解析特性-char绕过"><a href="#第三题-php解析特性-char绕过" class="headerlink" title="第三题 php解析特性 char绕过"></a>第三题 php解析特性 char绕过</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png" alt="image-20220117154748431"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png" alt="image-20220117154838651"></p>
+<p>有前端验证</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png" alt="image-20220117155745159"></p>
+<p>在源码中发现了calc.php<img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png" alt="image-20220117161601913"></p>
+<p>写不来了，看了别人的wp，</p>
+<p>然后说waf无法识别加了空格的num参数，” num”和”num”，加了空格就不是num参数了，但是php解析的时候会自动把空格去掉，然后就绕过了waf。</p>
+<p>然后使用scandir()函数，scandir(“/“)但是/被过滤了，所以用char(“47”)来代替</p>
+<p><code>? num=print_r(scandir(chr(47)));</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png" alt="image-20220117162229698"></p>
+<p>发现flag，然后就访问这个flag</p>
+<p>calc.php? <code>num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</code></p>
+<h2 id="第四题-sql注入-极客大挑战-2019-BabySQL"><a href="#第四题-sql注入-极客大挑战-2019-BabySQL" class="headerlink" title="第四题 sql注入[极客大挑战 2019]BabySQL"></a>第四题 sql注入[极客大挑战 2019]BabySQL</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png" alt="image-20220117170804546"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png" alt="image-20220117170814134"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png" alt="image-20220117171730895"></p>
+<p>但是可以双写绕过select和union</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png" alt="image-20220117171950628"></p>
+<p>爆出列数有三个</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png" alt="image-20220117172055414"></p>
+<p>然后又是枯燥的爆表爆字段</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png" alt="image-20220117172428770"></p>
+<p>人嘛了，information里面的or都被过滤了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png" alt="image-20220117172541108"></p>
+<p>反正一步一步爆，然后就出来了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png" alt="image-20220117173343401"></p>
+<h2 id="第五题-备份文件-代码审计-弱类型"><a href="#第五题-备份文件-代码审计-弱类型" class="headerlink" title="第五题 备份文件 代码审计 弱类型"></a>第五题 备份文件 代码审计 弱类型</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png" alt="image-20220117201827743"></p>
+<p>发现备份文件,又是代码审计</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$key</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric(<span class="variable">$key</span>)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&quot;Just num!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$key</span> = intval(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span> == <span class="variable">$str</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Try to find out source file!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>弱比较：如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行，在比较时该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</p>
+<p>所以我们直接传值key=123</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png" alt="image-20220117202715872"></p>
+<p>得到flag</p>
+<h2 id="第六题-模板注入"><a href="#第六题-模板注入" class="headerlink" title="第六题 模板注入"></a>第六题 模板注入</h2><p>经典老题目了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png" alt="image-20220117202952675"></p>
+<p>flag中提示了flag的位置<code>flag in /fllllllllllllag</code></p>
+<p>welcome中提示了<code>render</code>模板渲染用的函数</p>
+<p>hints中提示了filehash的加密方法<code>md5(cookie_secret+md5(filename))</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png" alt="image-20220117203315129"></p>
+<p>然后就开始模板注入，我们的目的就是获取cookie_secret</p>
+<p>[(33条消息) BUUCTF <a href="https://blog.csdn.net/weixin_45642610/article/details/112519061">护网杯 2018]easy_tornado 1_wow小华的博客-CSDN博客</a></p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>JWT技术——基于token的鉴权机制</title>
+    <url>/2022/03/04/JWT%E6%8A%80%E6%9C%AF%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8Etoken%E7%9A%84%E9%89%B4%E6%9D%83%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<p>今天挖洞 问了jwt技术</p>
+<h1 id="JWT技术——基于token的鉴权机制"><a href="#JWT技术——基于token的鉴权机制" class="headerlink" title="JWT技术——基于token的鉴权机制"></a>JWT技术——基于token的鉴权机制</h1><h1 id="1-基本流程"><a href="#1-基本流程" class="headerlink" title="1.基本流程"></a>1.基本流程</h1><p>JWT技术（基于token的鉴权机制）</p>
+<p>流程上是这样的：</p>
+<p>用户使用用户名密码来请求服务器</p>
+<p>服务器进行验证用户的信息</p>
+<p>服务器通过验证后生成一个token发送给用户</p>
+<p>客户端存储token，并在每次请求时附送上这个token值</p>
+<p>服务端验证token值，并返回数据</p>
+<h1 id="2-与session的区别"><a href="#2-与session的区别" class="headerlink" title="2.与session的区别"></a>2.与session的区别</h1><p> <a href="https://so.csdn.net/so/search?q=JWT&spm=1001.2101.3001.7020">JWT</a>和Session技术的根本区别在于，Session是把访问者信息存储在服务器端的，而JWT是把信息存储在客户端。</p>
+<h1 id="3-弊端"><a href="#3-弊端" class="headerlink" title="3.弊端"></a>3.弊端</h1><p> JWT方式，每次请求都要带上token，服务器每次都要解密出token的信息，这会让服务器有一些计算压力。而且，如果客户端的信息比较多，每次HTTP请求携带的数据就比较多。还有一点，JWT在客户端的存储，不能包含敏感信息，否则很容易被泄露，而且不建议在客户端存储会变动的信息，否则可能出现一致性问题。</p>
+<h1 id="4-JWT长什么样？"><a href="#4-JWT长什么样？" class="headerlink" title="4.JWT长什么样？"></a>4.JWT长什么样？</h1><pre><code>JWT是由三段信息（header.payload.signature）构成的，将这三段信息文本用英文句号链接一起就构成了JWT字符串。例如：
+</code></pre>
+<p>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ</p>
+<pre><code>可以在 https://jwt.io/ 这个网站，把token解析出来。
+</code></pre>
+<h1 id="5-构成"><a href="#5-构成" class="headerlink" title="5.构成"></a>5.构成</h1><p>JWT的构成</p>
+<pre><code>第一部分我们称它为头部（header)，
+
+第二部分我们称其为承载（payload, 类似于飞机上承载的物品)，
+
+第三部分是签证（signature)。
+</code></pre>
+<h2 id="5-1header"><a href="#5-1header" class="headerlink" title="5.1header"></a>5.1header</h2> <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">完整的头部就像下面这样的JSON：</span><br><span class="line"></span><br><span class="line">&#123;undefined</span><br><span class="line"></span><br><span class="line">  &#x27;typ&#x27;: &#x27;JWT&#x27;,</span><br><span class="line"></span><br><span class="line">  &#x27;alg&#x27;: &#x27;HS256&#x27;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">即声明 类型 和 加密的算法。然后将头部进行base64加密，就构成了header部分。</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-2playload"><a href="#5-2playload" class="headerlink" title="5.2playload"></a>5.2playload</h2><p>承载就是存放有效信息的地方。这个名字像是指飞机上承载的货品，这些有效信息包含三个部分声明（Claims）</p>
+<pre><code>标准中注册的声明
+
+公共的声明
+
+私有的声明
+</code></pre>
+<p> 标准中注册的声明 (建议但不强制使用) ：</p>
+<p>iss: jwt签发者</p>
+<p>sub: jwt所面向的用户</p>
+<p>aud: 接收jwt的一方</p>
+<p>exp: jwt的过期时间，这个过期时间必须要大于签发时间</p>
+<p>nbf: 定义在什么时间之前，该jwt都是不可用的.</p>
+<p>iat: jwt的签发时间</p>
+<p>jti: jwt的唯一身份标识，主要用来作为一次性token，从而回避重放攻击。</p>
+<h2 id="5-3signature"><a href="#5-3signature" class="headerlink" title="5.3signature"></a>5.3signature</h2><p>signature是一个签证信息，它会用到前面的header、payload信息，以及一个密匙（secret）。</p>
+<p>即，这个部分需要 base64加密后的header 和 base64加密后的payload，使用 英文句号 连接组成的字符串，然后通过header中声明的加密方式，进行加盐secret组合加密，然后就构成了jwt的第三部分signature。</p>
+<h1 id="6-攻击思路"><a href="#6-攻击思路" class="headerlink" title="6.攻击思路"></a>6.攻击思路</h1><p>1.token的存储一般有两种方式，一种是存在localStorage中，二是存在cookie中，这两种存储方式都有问题，存在localStorage中有很大的安全隐患，容易造成XSS攻击，因为跨站脚本可以读取localStorage里面的信息，如果存在cookie中，又容易造成CSRF攻击，这个是由于Cookie存储的安全性造成的（可以使用XSRF Token来解决这个问题）。</p>
+<p>2.失效和刷新问题，token肯定要有失效时间，而且如果用户一直处于活跃状态，则要考虑能自动刷新token。</p>
+<p>3.重放攻击，由于每次都传输token，如果这个token被窃取，那么可以在任何一个地方使用。特别的，如果这个token过期时间很长的话，那么它就相当于一个在很长时间内有效的钥匙。（可以考虑每次请求都重新生成一个token并存储一段时间防重放，但是这样又会遇到存储问题和并发刷新的问题，参见：<a href="https://zhuanlan.zhihu.com/p/22693223%EF%BC%89">https://zhuanlan.zhihu.com/p/22693223）</a></p>
+<p><a href="https://www.cnblogs.com/xiaozi/p/12031111.html">JWT攻击手册：如何入侵你的Token - Bypass - 博客园 (cnblogs.com)</a></p>
+]]></content>
+      <categories>
+        <category>-basic</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Git与Git文件导致源码泄露</title>
     <url>/2022/01/01/Git%E4%B8%8EGit%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2/</url>
     <content><![CDATA[<h1 id="Git与Git文件导致源码泄露"><a href="#Git与Git文件导致源码泄露" class="headerlink" title="Git与Git文件导致源码泄露"></a>Git与Git文件导致源码泄露</h1><p>Git是目前世界上最先进的<strong>分布式版本控制系统</strong></p>
@@ -256,59 +309,6 @@
 ]]></content>
       <categories>
         <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>JWT技术——基于token的鉴权机制</title>
-    <url>/2022/03/04/JWT%E6%8A%80%E6%9C%AF%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8Etoken%E7%9A%84%E9%89%B4%E6%9D%83%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<p>今天挖洞 问了jwt技术</p>
-<h1 id="JWT技术——基于token的鉴权机制"><a href="#JWT技术——基于token的鉴权机制" class="headerlink" title="JWT技术——基于token的鉴权机制"></a>JWT技术——基于token的鉴权机制</h1><h1 id="1-基本流程"><a href="#1-基本流程" class="headerlink" title="1.基本流程"></a>1.基本流程</h1><p>JWT技术（基于token的鉴权机制）</p>
-<p>流程上是这样的：</p>
-<p>用户使用用户名密码来请求服务器</p>
-<p>服务器进行验证用户的信息</p>
-<p>服务器通过验证后生成一个token发送给用户</p>
-<p>客户端存储token，并在每次请求时附送上这个token值</p>
-<p>服务端验证token值，并返回数据</p>
-<h1 id="2-与session的区别"><a href="#2-与session的区别" class="headerlink" title="2.与session的区别"></a>2.与session的区别</h1><p> <a href="https://so.csdn.net/so/search?q=JWT&spm=1001.2101.3001.7020">JWT</a>和Session技术的根本区别在于，Session是把访问者信息存储在服务器端的，而JWT是把信息存储在客户端。</p>
-<h1 id="3-弊端"><a href="#3-弊端" class="headerlink" title="3.弊端"></a>3.弊端</h1><p> JWT方式，每次请求都要带上token，服务器每次都要解密出token的信息，这会让服务器有一些计算压力。而且，如果客户端的信息比较多，每次HTTP请求携带的数据就比较多。还有一点，JWT在客户端的存储，不能包含敏感信息，否则很容易被泄露，而且不建议在客户端存储会变动的信息，否则可能出现一致性问题。</p>
-<h1 id="4-JWT长什么样？"><a href="#4-JWT长什么样？" class="headerlink" title="4.JWT长什么样？"></a>4.JWT长什么样？</h1><pre><code>JWT是由三段信息（header.payload.signature）构成的，将这三段信息文本用英文句号链接一起就构成了JWT字符串。例如：
-</code></pre>
-<p>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ</p>
-<pre><code>可以在 https://jwt.io/ 这个网站，把token解析出来。
-</code></pre>
-<h1 id="5-构成"><a href="#5-构成" class="headerlink" title="5.构成"></a>5.构成</h1><p>JWT的构成</p>
-<pre><code>第一部分我们称它为头部（header)，
-
-第二部分我们称其为承载（payload, 类似于飞机上承载的物品)，
-
-第三部分是签证（signature)。
-</code></pre>
-<h2 id="5-1header"><a href="#5-1header" class="headerlink" title="5.1header"></a>5.1header</h2> <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">完整的头部就像下面这样的JSON：</span><br><span class="line"></span><br><span class="line">&#123;undefined</span><br><span class="line"></span><br><span class="line">  &#x27;typ&#x27;: &#x27;JWT&#x27;,</span><br><span class="line"></span><br><span class="line">  &#x27;alg&#x27;: &#x27;HS256&#x27;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">即声明 类型 和 加密的算法。然后将头部进行base64加密，就构成了header部分。</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-2playload"><a href="#5-2playload" class="headerlink" title="5.2playload"></a>5.2playload</h2><p>承载就是存放有效信息的地方。这个名字像是指飞机上承载的货品，这些有效信息包含三个部分声明（Claims）</p>
-<pre><code>标准中注册的声明
-
-公共的声明
-
-私有的声明
-</code></pre>
-<p> 标准中注册的声明 (建议但不强制使用) ：</p>
-<p>iss: jwt签发者</p>
-<p>sub: jwt所面向的用户</p>
-<p>aud: 接收jwt的一方</p>
-<p>exp: jwt的过期时间，这个过期时间必须要大于签发时间</p>
-<p>nbf: 定义在什么时间之前，该jwt都是不可用的.</p>
-<p>iat: jwt的签发时间</p>
-<p>jti: jwt的唯一身份标识，主要用来作为一次性token，从而回避重放攻击。</p>
-<h2 id="5-3signature"><a href="#5-3signature" class="headerlink" title="5.3signature"></a>5.3signature</h2><p>signature是一个签证信息，它会用到前面的header、payload信息，以及一个密匙（secret）。</p>
-<p>即，这个部分需要 base64加密后的header 和 base64加密后的payload，使用 英文句号 连接组成的字符串，然后通过header中声明的加密方式，进行加盐secret组合加密，然后就构成了jwt的第三部分signature。</p>
-<h1 id="6-攻击思路"><a href="#6-攻击思路" class="headerlink" title="6.攻击思路"></a>6.攻击思路</h1><p>1.token的存储一般有两种方式，一种是存在localStorage中，二是存在cookie中，这两种存储方式都有问题，存在localStorage中有很大的安全隐患，容易造成XSS攻击，因为跨站脚本可以读取localStorage里面的信息，如果存在cookie中，又容易造成CSRF攻击，这个是由于Cookie存储的安全性造成的（可以使用XSRF Token来解决这个问题）。</p>
-<p>2.失效和刷新问题，token肯定要有失效时间，而且如果用户一直处于活跃状态，则要考虑能自动刷新token。</p>
-<p>3.重放攻击，由于每次都传输token，如果这个token被窃取，那么可以在任何一个地方使用。特别的，如果这个token过期时间很长的话，那么它就相当于一个在很长时间内有效的钥匙。（可以考虑每次请求都重新生成一个token并存储一段时间防重放，但是这样又会遇到存储问题和并发刷新的问题，参见：<a href="https://zhuanlan.zhihu.com/p/22693223%EF%BC%89">https://zhuanlan.zhihu.com/p/22693223）</a></p>
-<p><a href="https://www.cnblogs.com/xiaozi/p/12031111.html">JWT攻击手册：如何入侵你的Token - Bypass - 博客园 (cnblogs.com)</a></p>
-]]></content>
-      <categories>
-        <category>-basic</category>
       </categories>
   </entry>
   <entry>
@@ -435,6 +435,21 @@
       </categories>
   </entry>
   <entry>
+    <title>bugku遇到的题目心得  xxx二手交易市场   文件上传漏洞</title>
+    <url>/2021/12/27/bugku%E9%81%87%E5%88%B0%E7%9A%84%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-xxx%E4%BA%8C%E6%89%8B%E4%BA%A4%E6%98%93%E5%B8%82%E5%9C%BA-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<p>bugku遇到的题目心得  xxx二手交易市场   文件上传漏洞</p>
+<p>首先上传文件用bp抓包</p>
+<p><img src="/2021/12/27/bugku%E9%81%87%E5%88%B0%E7%9A%84%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-xxx%E4%BA%8C%E6%89%8B%E4%BA%A4%E6%98%93%E5%B8%82%E5%9C%BA-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/image-20211108164017569.png" alt="image-20211108164017569"></p>
+<p>发现文件上传的时候是被转化成base64形式的</p>
+<p><img src="/2021/12/27/bugku%E9%81%87%E5%88%B0%E7%9A%84%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-xxx%E4%BA%8C%E6%89%8B%E4%BA%A4%E6%98%93%E5%B8%82%E5%9C%BA-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/image-20211108164107189.png" alt="image-20211108164107189"></p>
+<p><img src="/2021/12/27/bugku%E9%81%87%E5%88%B0%E7%9A%84%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-xxx%E4%BA%8C%E6%89%8B%E4%BA%A4%E6%98%93%E5%B8%82%E5%9C%BA-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/image-20211108164633630.png" alt="image-20211108164633630"></p>
+<p>没想到的点，直接修改图片数据。</p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
     <title>bugku做题心得 备份是个好习惯</title>
     <url>/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/</url>
     <content><![CDATA[<h4 id="bugku做题心得-备份是个好习惯"><a href="#bugku做题心得-备份是个好习惯" class="headerlink" title="bugku做题心得 备份是个好习惯"></a>bugku做题心得 备份是个好习惯</h4><p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20211108160122664.png" alt="image-20211108160122664"></p>
@@ -451,15 +466,9 @@
       </categories>
   </entry>
   <entry>
-    <title>bugku遇到的题目心得  xxx二手交易市场   文件上传漏洞</title>
-    <url>/2021/12/27/bugku%E9%81%87%E5%88%B0%E7%9A%84%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-xxx%E4%BA%8C%E6%89%8B%E4%BA%A4%E6%98%93%E5%B8%82%E5%9C%BA-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<p>bugku遇到的题目心得  xxx二手交易市场   文件上传漏洞</p>
-<p>首先上传文件用bp抓包</p>
-<p><img src="/2021/12/27/bugku%E9%81%87%E5%88%B0%E7%9A%84%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-xxx%E4%BA%8C%E6%89%8B%E4%BA%A4%E6%98%93%E5%B8%82%E5%9C%BA-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/image-20211108164017569.png" alt="image-20211108164017569"></p>
-<p>发现文件上传的时候是被转化成base64形式的</p>
-<p><img src="/2021/12/27/bugku%E9%81%87%E5%88%B0%E7%9A%84%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-xxx%E4%BA%8C%E6%89%8B%E4%BA%A4%E6%98%93%E5%B8%82%E5%9C%BA-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/image-20211108164107189.png" alt="image-20211108164107189"></p>
-<p><img src="/2021/12/27/bugku%E9%81%87%E5%88%B0%E7%9A%84%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-xxx%E4%BA%8C%E6%89%8B%E4%BA%A4%E6%98%93%E5%B8%82%E5%9C%BA-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/image-20211108164633630.png" alt="image-20211108164633630"></p>
-<p>没想到的点，直接修改图片数据。</p>
+    <title>file_get_contents绕过</title>
+    <url>/2021/12/27/file-get-contents%E7%BB%95%E8%BF%87/</url>
+    <content><![CDATA[<p>file_get_contents<br>用php伪协议php://input可以直接决定此函数返回的值</p>
 ]]></content>
       <categories>
         <category>-Experience</category>
@@ -498,15 +507,6 @@
 ]]></content>
       <categories>
         <category>-penetration</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>file_get_contents绕过</title>
-    <url>/2021/12/27/file-get-contents%E7%BB%95%E8%BF%87/</url>
-    <content><![CDATA[<p>file_get_contents<br>用php伪协议php://input可以直接决定此函数返回的值</p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
       </categories>
   </entry>
   <entry>
@@ -2870,44 +2870,6 @@
       </categories>
   </entry>
   <entry>
-    <title>火线沙龙云存储浅析 观看笔记</title>
-    <url>/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="火线沙龙云存储浅析-观看笔记"><a href="#火线沙龙云存储浅析-观看笔记" class="headerlink" title="火线沙龙云存储浅析 观看笔记"></a>火线沙龙云存储浅析 观看笔记</h1><h1 id="1-何为对象存储"><a href="#1-何为对象存储" class="headerlink" title="1.何为对象存储"></a>1.何为对象存储</h1><p>对线存储(object-based storage)。也可以叫做面向对象的存储，现在也有不少厂商直接把他叫做云存储<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319194028830.png" alt="image-20220319194028830"></p>
-<h1 id="2-对象存储的利用方式"><a href="#2-对象存储的利用方式" class="headerlink" title="2.对象存储的利用方式"></a>2.对象存储的利用方式</h1><h2 id="2-1bucket公开访问"><a href="#2-1bucket公开访问" class="headerlink" title="2.1bucket公开访问"></a>2.1bucket公开访问</h2><p>在此时如果选择公有读的话，会出现两种情况</p>
-<p>1.在只配置读写权限设置为公有读或公共读写的情况下，无法列出对象，但是可以直接访问对应的key路径。</p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212000584.png" alt="image-20220319212000584"></p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212010434.png" alt="image-20220319212010434"></p>
-<p>也就是俗话说的，访问其下面的路径，类似未授权访问。</p>
-<p>2.如果想列出object对象，只需要在bucket授权策略中设置listobject即可。<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212131809.png" alt="image-20220319212131809"></p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212142347.png" alt="image-20220319212142347"></p>
-<h2 id="2-2bucket桶爆破"><a href="#2-2bucket桶爆破" class="headerlink" title="2.2bucket桶爆破"></a>2.2bucket桶爆破</h2><p>当知道bucket名称的时候，可以通过爆破获得bucket名称，这有些类似于目录爆破，只不过目录爆破一般通过状态码判断，而这个通过页面的内容判断</p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212403531.png" alt="image-20220319212403531"></p>
-<p>下面是名称对了，第一个是设置了objectlist，后面是没有权限访问</p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212457984.png" alt="image-20220319212457984"></p>
-<h2 id="2-3特定的bucket策略配置"><a href="#2-3特定的bucket策略配置" class="headerlink" title="2.3特定的bucket策略配置"></a>2.3特定的bucket策略配置</h2><p>特定的策略配置是指，如果管理员设置了某些ip，ua才可以请求改存储桶的话，此时如果错误的配置了getbucketpolicy，可导致攻击者获取策略配置。</p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212724053.png" alt="image-20220319212724053"></p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212753558.png" alt="image-20220319212753558"></p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212821561.png" alt="image-20220319212821561"></p>
-<h2 id="2-4bucket-object遍历"><a href="#2-4bucket-object遍历" class="headerlink" title="2.4bucket object遍历"></a>2.4bucket object遍历</h2><p>类似于目录遍历</p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212903537.png" alt="image-20220319212903537"></p>
-<h2 id="2-5任意文件上传与覆盖"><a href="#2-5任意文件上传与覆盖" class="headerlink" title="2.5任意文件上传与覆盖"></a>2.5任意文件上传与覆盖</h2><p>如果在配置存储桶，管理员错误的将存储桶权限，配置为可写，这将会导致攻击者可上传任意文件去覆盖。</p>
-<h2 id="2-6accesskeyld，secretaccessket泄露"><a href="#2-6accesskeyld，secretaccessket泄露" class="headerlink" title="2.6accesskeyld，secretaccessket泄露"></a>2.6accesskeyld，secretaccessket泄露</h2><p>1.通过github等开源平台中的源代码中可发现存在泄露的key。</p>
-<p>2.通过反编译apk，小程序找到敏感信息。</p>
-<p>3.在目标网站源代码中找到一些敏感的信息，js等。<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319213139689.png" alt="image-20220319213139689">有个工具推荐，是burp的插件，就是我们把正则表达式配置好，他会自动检测流量，然后看是否复合正则表达式。 </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://github.com/gh0stkey/HaE</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-7bucket与子域接管"><a href="#2-7bucket与子域接管" class="headerlink" title="2.7bucket与子域接管"></a>2.7bucket与子域接管</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319213519789.png" alt="image-20220319213519789"></p>
-<p>大概意思就是，管理员删除了存储桶但是没有删除地址解析，然后我们自己创建一个bucket，和那个受害删除桶的名称一样，上传一个文件可以看到上传上去了，这就是成功接管了这个桶了</p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319213547151.png" alt="image-20220319213547151"></p>
-<h2 id="2-8bucket策略配置可写"><a href="#2-8bucket策略配置可写" class="headerlink" title="2.8bucket策略配置可写"></a>2.8bucket策略配置可写</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215031791.png" alt="image-20220319215031791"></p>
-<h2 id="2-9修改bucket策略为deny使业务瘫痪"><a href="#2-9修改bucket策略为deny使业务瘫痪" class="headerlink" title="2.9修改bucket策略为deny使业务瘫痪"></a>2.9修改bucket策略为deny使业务瘫痪</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215152619.png" alt="image-20220319215152619"></p>
-<h2 id="2-10修改网站引用s3资源进行钓鱼"><a href="#2-10修改网站引用s3资源进行钓鱼" class="headerlink" title="2.10修改网站引用s3资源进行钓鱼"></a>2.10修改网站引用s3资源进行钓鱼</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215311222.png" alt="image-20220319215311222"></p>
-]]></content>
-      <categories>
-        <category>-penetration</category>
-      </categories>
-  </entry>
-  <entry>
     <title>攻防世界 mfw git泄露</title>
     <url>/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/</url>
     <content><![CDATA[<h1 id="攻防世界-mfw-git泄露"><a href="#攻防世界-mfw-git泄露" class="headerlink" title="攻防世界 mfw git泄露"></a>攻防世界 mfw git泄露</h1><p>由于昨天才学了git，找一道题来练练手</p>
@@ -2945,6 +2907,44 @@
 ]]></content>
       <categories>
         <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>火线沙龙云存储浅析 观看笔记</title>
+    <url>/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="火线沙龙云存储浅析-观看笔记"><a href="#火线沙龙云存储浅析-观看笔记" class="headerlink" title="火线沙龙云存储浅析 观看笔记"></a>火线沙龙云存储浅析 观看笔记</h1><h1 id="1-何为对象存储"><a href="#1-何为对象存储" class="headerlink" title="1.何为对象存储"></a>1.何为对象存储</h1><p>对线存储(object-based storage)。也可以叫做面向对象的存储，现在也有不少厂商直接把他叫做云存储<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319194028830.png" alt="image-20220319194028830"></p>
+<h1 id="2-对象存储的利用方式"><a href="#2-对象存储的利用方式" class="headerlink" title="2.对象存储的利用方式"></a>2.对象存储的利用方式</h1><h2 id="2-1bucket公开访问"><a href="#2-1bucket公开访问" class="headerlink" title="2.1bucket公开访问"></a>2.1bucket公开访问</h2><p>在此时如果选择公有读的话，会出现两种情况</p>
+<p>1.在只配置读写权限设置为公有读或公共读写的情况下，无法列出对象，但是可以直接访问对应的key路径。</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212000584.png" alt="image-20220319212000584"></p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212010434.png" alt="image-20220319212010434"></p>
+<p>也就是俗话说的，访问其下面的路径，类似未授权访问。</p>
+<p>2.如果想列出object对象，只需要在bucket授权策略中设置listobject即可。<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212131809.png" alt="image-20220319212131809"></p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212142347.png" alt="image-20220319212142347"></p>
+<h2 id="2-2bucket桶爆破"><a href="#2-2bucket桶爆破" class="headerlink" title="2.2bucket桶爆破"></a>2.2bucket桶爆破</h2><p>当知道bucket名称的时候，可以通过爆破获得bucket名称，这有些类似于目录爆破，只不过目录爆破一般通过状态码判断，而这个通过页面的内容判断</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212403531.png" alt="image-20220319212403531"></p>
+<p>下面是名称对了，第一个是设置了objectlist，后面是没有权限访问</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212457984.png" alt="image-20220319212457984"></p>
+<h2 id="2-3特定的bucket策略配置"><a href="#2-3特定的bucket策略配置" class="headerlink" title="2.3特定的bucket策略配置"></a>2.3特定的bucket策略配置</h2><p>特定的策略配置是指，如果管理员设置了某些ip，ua才可以请求改存储桶的话，此时如果错误的配置了getbucketpolicy，可导致攻击者获取策略配置。</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212724053.png" alt="image-20220319212724053"></p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212753558.png" alt="image-20220319212753558"></p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212821561.png" alt="image-20220319212821561"></p>
+<h2 id="2-4bucket-object遍历"><a href="#2-4bucket-object遍历" class="headerlink" title="2.4bucket object遍历"></a>2.4bucket object遍历</h2><p>类似于目录遍历</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212903537.png" alt="image-20220319212903537"></p>
+<h2 id="2-5任意文件上传与覆盖"><a href="#2-5任意文件上传与覆盖" class="headerlink" title="2.5任意文件上传与覆盖"></a>2.5任意文件上传与覆盖</h2><p>如果在配置存储桶，管理员错误的将存储桶权限，配置为可写，这将会导致攻击者可上传任意文件去覆盖。</p>
+<h2 id="2-6accesskeyld，secretaccessket泄露"><a href="#2-6accesskeyld，secretaccessket泄露" class="headerlink" title="2.6accesskeyld，secretaccessket泄露"></a>2.6accesskeyld，secretaccessket泄露</h2><p>1.通过github等开源平台中的源代码中可发现存在泄露的key。</p>
+<p>2.通过反编译apk，小程序找到敏感信息。</p>
+<p>3.在目标网站源代码中找到一些敏感的信息，js等。<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319213139689.png" alt="image-20220319213139689">有个工具推荐，是burp的插件，就是我们把正则表达式配置好，他会自动检测流量，然后看是否复合正则表达式。 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://github.com/gh0stkey/HaE</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-7bucket与子域接管"><a href="#2-7bucket与子域接管" class="headerlink" title="2.7bucket与子域接管"></a>2.7bucket与子域接管</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319213519789.png" alt="image-20220319213519789"></p>
+<p>大概意思就是，管理员删除了存储桶但是没有删除地址解析，然后我们自己创建一个bucket，和那个受害删除桶的名称一样，上传一个文件可以看到上传上去了，这就是成功接管了这个桶了</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319213547151.png" alt="image-20220319213547151"></p>
+<h2 id="2-8bucket策略配置可写"><a href="#2-8bucket策略配置可写" class="headerlink" title="2.8bucket策略配置可写"></a>2.8bucket策略配置可写</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215031791.png" alt="image-20220319215031791"></p>
+<h2 id="2-9修改bucket策略为deny使业务瘫痪"><a href="#2-9修改bucket策略为deny使业务瘫痪" class="headerlink" title="2.9修改bucket策略为deny使业务瘫痪"></a>2.9修改bucket策略为deny使业务瘫痪</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215152619.png" alt="image-20220319215152619"></p>
+<h2 id="2-10修改网站引用s3资源进行钓鱼"><a href="#2-10修改网站引用s3资源进行钓鱼" class="headerlink" title="2.10修改网站引用s3资源进行钓鱼"></a>2.10修改网站引用s3资源进行钓鱼</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215311222.png" alt="image-20220319215311222"></p>
+]]></content>
+      <categories>
+        <category>-penetration</category>
       </categories>
   </entry>
   <entry>
@@ -3095,18 +3095,6 @@
       </categories>
   </entry>
   <entry>
-    <title>自动查询icp脚本</title>
-    <url>/2022/03/06/%E8%87%AA%E5%8A%A8%E6%9F%A5%E8%AF%A2icp%E8%84%9A%E6%9C%AC/</url>
-    <content><![CDATA[<h1 id="自动查询icp脚本"><a href="#自动查询icp脚本" class="headerlink" title="自动查询icp脚本"></a>自动查询icp脚本</h1><p>这几天收集icp的资源太累了，索性直接写了个脚本</p>
-<p>记录一下</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"></span><br><span class="line">method = <span class="built_in">input</span>(<span class="string">&quot;不知道公司名字选1输入官网，知道公司名字选2输入名字&quot;</span>)</span><br><span class="line">url = <span class="string">&quot;https://www.beianx.cn/search/&quot;</span></span><br><span class="line">handers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 Edg/97.0.1072.69&#x27;</span>&#125;</span><br><span class="line"><span class="comment">#先获取IPC中的数据</span></span><br><span class="line"><span class="keyword">if</span> method == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">    website = <span class="built_in">input</span>(<span class="string">&quot;请输入公司的官网的域名，不要子域名不要根域名，直接域名即可可&quot;</span>)</span><br><span class="line">    res = requests.get(<span class="string">f&quot;<span class="subst">&#123;url&#125;</span><span class="subst">&#123;website&#125;</span>&quot;</span>)</span><br><span class="line">    tree = etree.HTML(res.text)</span><br><span class="line">    result = tree.xpath(<span class="string">&quot;/html/body/div[1]/div[2]/table/tbody/tr/td[2]/a/text()&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">str</span>(result))</span><br><span class="line"><span class="keyword">elif</span> method == <span class="string">&quot;2&quot;</span>:</span><br><span class="line">    conpany = <span class="built_in">input</span>(<span class="string">&quot;请输入公司的名字&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;加载中...&quot;</span>)</span><br><span class="line">    res = requests.get(<span class="string">f&quot;<span class="subst">&#123;url&#125;</span><span class="subst">&#123;conpany&#125;</span>&quot;</span>)</span><br><span class="line">    tree = etree.HTML(res.text)</span><br><span class="line">    result_list = []</span><br><span class="line">    i = <span class="literal">True</span></span><br><span class="line">    index = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> i:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            result = tree.xpath(<span class="string">f&quot;/html/body/div[1]/div[2]/table/tbody/tr[<span class="subst">&#123;<span class="built_in">str</span>(index)&#125;</span>]/td[6]/div/a/text()&quot;</span>)</span><br><span class="line">            <span class="keyword">if</span> result == []:</span><br><span class="line">                i = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result_list += result</span><br><span class="line">                index += <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            i = <span class="literal">False</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;出错了&quot;</span>)</span><br><span class="line">    final = <span class="string">&#x27;\n&#x27;</span>.join(result_list)</span><br><span class="line">    <span class="comment">#选择数据处理的方式</span></span><br><span class="line">    mod = <span class="built_in">input</span>(<span class="string">&quot;请选择：1.直接获取所有的url  2.获取所有非子域名  3.根据hunter domain语法来输出所有的痱子域名&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> mod == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">        <span class="built_in">print</span>(final)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> mod == <span class="string">&quot;2&quot;</span>:</span><br><span class="line">        final_list2 = []</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> result_list:</span><br><span class="line">            new_item = item.split(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">            <span class="keyword">del</span> new_item[<span class="number">0</span>]</span><br><span class="line">            final_item = <span class="string">&#x27;.&#x27;</span>.join(new_item)</span><br><span class="line">            final_list2.append(final_item)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>.join(final_list2))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> mod == <span class="string">&quot;3&quot;</span>:</span><br><span class="line">        final_list2 = []</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> result_list:</span><br><span class="line">            new_item = item.split(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">            <span class="keyword">del</span> new_item[<span class="number">0</span>]</span><br><span class="line">            final_item = <span class="string">&#x27;.&#x27;</span>.join(new_item)</span><br><span class="line">            final_list2.append(final_item)</span><br><span class="line"></span><br><span class="line">        resultlist = <span class="built_in">list</span>()</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> final_list2:</span><br><span class="line">            newitem = <span class="string">f&quot;domain=\&quot;<span class="subst">&#123;item&#125;</span>\&quot;&quot;</span></span><br><span class="line">            resultlist.append(newitem)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;||&#x27;</span>.join(resultlist))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;都说了不要乱输东西了，你看是不是又要重新来了嘛&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;给你说了输什么还要乱输是吧？&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>-lunzi</category>
-      </categories>
-  </entry>
-  <entry>
     <title>群友发的签到题 又是一个flag隐藏小技巧</title>
     <url>/2022/01/20/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%8F%88%E6%98%AF%E4%B8%80%E4%B8%AAflag%E9%9A%90%E8%97%8F%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
     <content><![CDATA[<h1 id="群友发的签到题-又是一个flag隐藏小技巧"><a href="#群友发的签到题-又是一个flag隐藏小技巧" class="headerlink" title="群友发的签到题 又是一个flag隐藏小技巧"></a>群友发的签到题 又是一个flag隐藏小技巧</h1><p><img src="/2022/01/20/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%8F%88%E6%98%AF%E4%B8%80%E4%B8%AAflag%E9%9A%90%E8%97%8F%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20220120221631901.png" alt="image-20220120221631901"></p>
@@ -3131,6 +3119,18 @@
       <tags>
         <tag>-web</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>自动查询icp脚本</title>
+    <url>/2022/03/06/%E8%87%AA%E5%8A%A8%E6%9F%A5%E8%AF%A2icp%E8%84%9A%E6%9C%AC/</url>
+    <content><![CDATA[<h1 id="自动查询icp脚本"><a href="#自动查询icp脚本" class="headerlink" title="自动查询icp脚本"></a>自动查询icp脚本</h1><p>这几天收集icp的资源太累了，索性直接写了个脚本</p>
+<p>记录一下</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"></span><br><span class="line">method = <span class="built_in">input</span>(<span class="string">&quot;不知道公司名字选1输入官网，知道公司名字选2输入名字&quot;</span>)</span><br><span class="line">url = <span class="string">&quot;https://www.beianx.cn/search/&quot;</span></span><br><span class="line">handers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 Edg/97.0.1072.69&#x27;</span>&#125;</span><br><span class="line"><span class="comment">#先获取IPC中的数据</span></span><br><span class="line"><span class="keyword">if</span> method == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">    website = <span class="built_in">input</span>(<span class="string">&quot;请输入公司的官网的域名，不要子域名不要根域名，直接域名即可可&quot;</span>)</span><br><span class="line">    res = requests.get(<span class="string">f&quot;<span class="subst">&#123;url&#125;</span><span class="subst">&#123;website&#125;</span>&quot;</span>)</span><br><span class="line">    tree = etree.HTML(res.text)</span><br><span class="line">    result = tree.xpath(<span class="string">&quot;/html/body/div[2]/table/tbody/tr/td[2]/a/text()&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">str</span>(result))</span><br><span class="line"><span class="keyword">elif</span> method == <span class="string">&quot;2&quot;</span>:</span><br><span class="line">    conpany = <span class="built_in">input</span>(<span class="string">&quot;请输入公司的名字&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;加载中...&quot;</span>)</span><br><span class="line">    res = requests.get(<span class="string">f&quot;<span class="subst">&#123;url&#125;</span><span class="subst">&#123;conpany&#125;</span>&quot;</span>)</span><br><span class="line">    tree = etree.HTML(res.text)</span><br><span class="line">    result_list = []</span><br><span class="line">    i = <span class="literal">True</span></span><br><span class="line">    index = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> i:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            result = tree.xpath(<span class="string">f&quot;/html/body/div[2]/table/tbody/tr[<span class="subst">&#123;<span class="built_in">str</span>(index)&#125;</span>]/td[6]/div/a/text()&quot;</span>)</span><br><span class="line">            <span class="keyword">if</span> result == []:</span><br><span class="line">                i = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result_list += result</span><br><span class="line">                index += <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            i = <span class="literal">False</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;出错了&quot;</span>)</span><br><span class="line">    final = <span class="string">&#x27;\n&#x27;</span>.join(result_list)</span><br><span class="line">    <span class="comment">#选择数据处理的方式</span></span><br><span class="line">    mod = <span class="built_in">input</span>(<span class="string">&quot;请选择：1.直接获取所有的url  2.获取所有非子域名  3.根据hunter domain语法来输出所有的痱子域名&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> mod == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">        <span class="built_in">print</span>(final)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> mod == <span class="string">&quot;2&quot;</span>:</span><br><span class="line">        final_list2 = []</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> result_list:</span><br><span class="line">            new_item = item.split(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">            <span class="keyword">del</span> new_item[<span class="number">0</span>]</span><br><span class="line">            final_item = <span class="string">&#x27;.&#x27;</span>.join(new_item)</span><br><span class="line">            final_list2.append(final_item)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>.join(final_list2))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> mod == <span class="string">&quot;3&quot;</span>:</span><br><span class="line">        final_list2 = []</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> result_list:</span><br><span class="line">            new_item = item.split(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">            <span class="keyword">del</span> new_item[<span class="number">0</span>]</span><br><span class="line">            final_item = <span class="string">&#x27;.&#x27;</span>.join(new_item)</span><br><span class="line">            final_list2.append(final_item)</span><br><span class="line"></span><br><span class="line">        resultlist = <span class="built_in">list</span>()</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> final_list2:</span><br><span class="line">            newitem = <span class="string">f&quot;domain=\&quot;<span class="subst">&#123;item&#125;</span>\&quot;&quot;</span></span><br><span class="line">            resultlist.append(newitem)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;||&#x27;</span>.join(resultlist))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;都说了不要乱输东西了，你看是不是又要重新来了嘛&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;给你说了输什么还要乱输是吧？&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>-lunzi</category>
+      </categories>
   </entry>
   <entry>
     <title>谷歌语法</title>
