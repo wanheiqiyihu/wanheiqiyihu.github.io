@@ -1418,9 +1418,9 @@
 <p><a href="https://blog.csdn.net/qq_52243589/article/details/121128848">(82条消息) 搭建vulhub以及物理机访问虚拟机docker环境_财鸟的博客-CSDN博客_vulhub虚拟机</a></p>
 <p><a href="http://dljz.nicethemes.cn/news/show-391495.html">虚拟机与物理机能相互ping通但为什么访问不了vulhub搭建的靶场 (nicethemes.cn)</a></p>
 ]]></content>
-      <tags>
-        <tag>-fuxian</tag>
-      </tags>
+      <categories>
+        <category>-fuxian</category>
+      </categories>
   </entry>
   <entry>
     <title>xray+rad 自动化edusrc</title>
@@ -2490,15 +2490,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>平时要注意url地址里面的东西</title>
-    <url>/2021/12/27/%E5%B9%B3%E6%97%B6%E8%A6%81%E6%B3%A8%E6%84%8Furl%E5%9C%B0%E5%9D%80%E9%87%8C%E9%9D%A2%E7%9A%84%E4%B8%9C%E8%A5%BF/</url>
-    <content><![CDATA[<p>有可能会有重要的参数<br>然后base64之类的</p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
     <title>四、学习py：数据类型</title>
     <url>/2021/12/29/%E5%9B%9B%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<h1 id="四、学习py：数据类型"><a href="#四、学习py：数据类型" class="headerlink" title="四、学习py：数据类型"></a>四、学习py：数据类型</h1><h2 id="1-整型"><a href="#1-整型" class="headerlink" title="1.整型"></a>1.整型</h2><h3 id="1-1定义"><a href="#1-1定义" class="headerlink" title="1.1定义"></a>1.1定义</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">number = <span class="number">10</span></span><br><span class="line">age = <span class="number">123</span></span><br></pre></td></tr></table></figure>
@@ -2752,6 +2743,15 @@
 ]]></content>
       <categories>
         <category>-python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>平时要注意url地址里面的东西</title>
+    <url>/2021/12/27/%E5%B9%B3%E6%97%B6%E8%A6%81%E6%B3%A8%E6%84%8Furl%E5%9C%B0%E5%9D%80%E9%87%8C%E9%9D%A2%E7%9A%84%E4%B8%9C%E8%A5%BF/</url>
+    <content><![CDATA[<p>有可能会有重要的参数<br>然后base64之类的</p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
       </categories>
   </entry>
   <entry>
