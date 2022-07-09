@@ -2955,6 +2955,22 @@
       </categories>
   </entry>
   <entry>
+    <title>短信验证码接口限制</title>
+    <url>/2022/02/03/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%8E%A5%E5%8F%A3%E9%99%90%E5%88%B6/</url>
+    <content><![CDATA[<h1 id="短信验证码接口限制"><a href="#短信验证码接口限制" class="headerlink" title="短信验证码接口限制"></a>短信验证码接口限制</h1><p>转载几个博客，方便日后查阅</p>
+<p><a href="https://www.cnblogs.com/lovequitepcs/p/12901987.html">几个绕过短信验证码限制的漏洞挖掘 - QuiteX - 博客园 (cnblogs.com)</a></p>
+<p><a href="https://blog.csdn.net/weixin_44549063/article/details/113361313">(38条消息) 如何防止恶意攻击短信验证码接口_newxtc的博客-CSDN博客_如何防止短信验证码攻击</a></p>
+<p><a href="https://www.lx598.com/hangyedongtai/978.html">短信验证码安全常见逻辑漏洞_动力思维 (lx598.com)</a></p>
+<p>更新了几个接码平台</p>
+<p><a href="http://www.z-sms.com/sms-receive-free.php?pho_num=15227789961&amp;1">http://www.z-sms.com/sms-receive-free.php?pho_num=15227789961&amp;1</a></p>
+<p><a href="https://smsreceivefree.com/country/usa">https://smsreceivefree.com/country/usa</a></p>
+<p><a href="https://jiemahao.com/sms/?phone=5">https://jiemahao.com/sms/?phone=5</a></p>
+]]></content>
+      <categories>
+        <category>-penetration</category>
+      </categories>
+  </entry>
+  <entry>
     <title>火线沙龙云存储浅析 观看笔记</title>
     <url>/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="火线沙龙云存储浅析-观看笔记"><a href="#火线沙龙云存储浅析-观看笔记" class="headerlink" title="火线沙龙云存储浅析 观看笔记"></a>火线沙龙云存储浅析 观看笔记</h1><h1 id="1-何为对象存储"><a href="#1-何为对象存储" class="headerlink" title="1.何为对象存储"></a>1.何为对象存储</h1><p>对线存储(object-based storage)。也可以叫做面向对象的存储，现在也有不少厂商直接把他叫做云存储<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319194028830.png" alt="image-20220319194028830"></p>
@@ -2987,22 +3003,6 @@
 <h2 id="2-8bucket策略配置可写"><a href="#2-8bucket策略配置可写" class="headerlink" title="2.8bucket策略配置可写"></a>2.8bucket策略配置可写</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215031791.png" alt="image-20220319215031791"></p>
 <h2 id="2-9修改bucket策略为deny使业务瘫痪"><a href="#2-9修改bucket策略为deny使业务瘫痪" class="headerlink" title="2.9修改bucket策略为deny使业务瘫痪"></a>2.9修改bucket策略为deny使业务瘫痪</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215152619.png" alt="image-20220319215152619"></p>
 <h2 id="2-10修改网站引用s3资源进行钓鱼"><a href="#2-10修改网站引用s3资源进行钓鱼" class="headerlink" title="2.10修改网站引用s3资源进行钓鱼"></a>2.10修改网站引用s3资源进行钓鱼</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215311222.png" alt="image-20220319215311222"></p>
-]]></content>
-      <categories>
-        <category>-penetration</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>短信验证码接口限制</title>
-    <url>/2022/02/03/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%8E%A5%E5%8F%A3%E9%99%90%E5%88%B6/</url>
-    <content><![CDATA[<h1 id="短信验证码接口限制"><a href="#短信验证码接口限制" class="headerlink" title="短信验证码接口限制"></a>短信验证码接口限制</h1><p>转载几个博客，方便日后查阅</p>
-<p><a href="https://www.cnblogs.com/lovequitepcs/p/12901987.html">几个绕过短信验证码限制的漏洞挖掘 - QuiteX - 博客园 (cnblogs.com)</a></p>
-<p><a href="https://blog.csdn.net/weixin_44549063/article/details/113361313">(38条消息) 如何防止恶意攻击短信验证码接口_newxtc的博客-CSDN博客_如何防止短信验证码攻击</a></p>
-<p><a href="https://www.lx598.com/hangyedongtai/978.html">短信验证码安全常见逻辑漏洞_动力思维 (lx598.com)</a></p>
-<p>更新了几个接码平台</p>
-<p><a href="http://www.z-sms.com/sms-receive-free.php?pho_num=15227789961&amp;1">http://www.z-sms.com/sms-receive-free.php?pho_num=15227789961&amp;1</a></p>
-<p><a href="https://smsreceivefree.com/country/usa">https://smsreceivefree.com/country/usa</a></p>
-<p><a href="https://jiemahao.com/sms/?phone=5">https://jiemahao.com/sms/?phone=5</a></p>
 ]]></content>
       <categories>
         <category>-penetration</category>
