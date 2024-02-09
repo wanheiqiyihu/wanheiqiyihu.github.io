@@ -5,39 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="20年三道编程大题题库有些简单，换新的题来写一下，自从20年之后，专业课难度感觉直线飙升啊。 第一题-字符串中找出英文数组 12345678910111213141516171819202122232425262728293031323334#include&lt;stdio.h&gt;#include&lt;string.h&gt;void fun(char str[], char *p) &amp;#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="20年三道编程大题">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="20年三道编程大题题库有些简单，换新的题来写一下，自从20年之后，专业课难度感觉直线飙升啊。 第一题-字符串中找出英文数组 12345678910111213141516171819202122232425262728293031323334#include&lt;stdio.h&gt;#include&lt;string.h&gt;void fun(char str[], char *p) &amp;#">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011225540518.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011231316782.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011232331406.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231021194501769.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011225540518.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011231316782.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011232331406.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231021194501769.png">
 <meta property="article:published_time" content="2023-10-21T12:59:49.000Z">
 <meta property="article:modified_time" content="2023-10-21T13:01:15.516Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011225540518.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011225540518.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/">
 
 
 <script id="page-configurations">
@@ -99,7 +99,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -120,92 +120,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -263,10 +263,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -295,7 +295,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/c/" itemprop="url" rel="index"><span itemprop="name">-c</span></a>
+                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">-c</span></a>
                 </span>
             </span>
 
@@ -311,14 +311,14 @@
 
       
         <h1 id="20年三道编程大题"><a href="#20年三道编程大题" class="headerlink" title="20年三道编程大题"></a>20年三道编程大题</h1><p>题库有些简单，换新的题来写一下，自从20年之后，专业课难度感觉直线飙升啊。</p>
-<h1 id="第一题-字符串中找出英文数组"><a href="#第一题-字符串中找出英文数组" class="headerlink" title="第一题-字符串中找出英文数组"></a>第一题-字符串中找出英文数组</h1><p><img src="/wan1/wan1/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011225540518.png" alt="image-20231011225540518"></p>
+<h1 id="第一题-字符串中找出英文数组"><a href="#第一题-字符串中找出英文数组" class="headerlink" title="第一题-字符串中找出英文数组"></a>第一题-字符串中找出英文数组</h1><p><img src="/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011225540518.png" alt="image-20231011225540518"></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(<span class="keyword">char</span> str[], <span class="keyword">char</span> *p)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> len;</span><br><span class="line">	len = <span class="built_in">strlen</span>(str);</span><br><span class="line">	<span class="keyword">char</span> item;</span><br><span class="line">	<span class="keyword">int</span> cishu = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (((<span class="string">&#x27;a&#x27;</span> &lt;= str[i]) &amp;&amp; (<span class="string">&#x27;z&#x27;</span> &gt;= str[i])) || ((<span class="string">&#x27;A&#x27;</span> &lt;= str[i]) &amp;&amp; (<span class="string">&#x27;Z&#x27;</span> &gt;= str[i]))) &#123;</span><br><span class="line">			item = str[i];</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; len<span class="number">-1</span>; j++) &#123;</span><br><span class="line">				str[j] = str[j + <span class="number">1</span>];</span><br><span class="line">			&#125;</span><br><span class="line">			str[len - <span class="number">1</span>] = item;</span><br><span class="line">			i--;<span class="comment">//避免有连续的字母，这样就可以不断检测这一位是否是字母</span></span><br><span class="line">		&#125;</span><br><span class="line">		cishu++;</span><br><span class="line">		<span class="keyword">if</span> (cishu &gt;= len) &#123;<span class="comment">//避免无限循环</span></span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入一串字符串：&quot;</span>);</span><br><span class="line">	<span class="keyword">char</span> ch[<span class="number">128</span>] = <span class="string">&quot;&quot;</span>;</span><br><span class="line">	<span class="keyword">char</span>* p;</span><br><span class="line">	p = ch;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, ch);</span><br><span class="line">	fun(ch, p);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n处理如下：%s&quot;</span>, ch);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011231316782.png" alt="image-20231011231316782"></p>
-<h1 id="第二题-求数组列和"><a href="#第二题-求数组列和" class="headerlink" title="第二题-求数组列和"></a>第二题-求数组列和</h1><p><img src="/wan1/wan1/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011232331406.png" alt="image-20231011232331406"></p>
+<p><img src="/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011231316782.png" alt="image-20231011231316782"></p>
+<h1 id="第二题-求数组列和"><a href="#第二题-求数组列和" class="headerlink" title="第二题-求数组列和"></a>第二题-求数组列和</h1><p><img src="/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011232331406.png" alt="image-20231011232331406"></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> arr[][<span class="number">3</span>], <span class="keyword">int</span> n)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//我们这里就求一个3行3列数组的第一列和最后一列之和。</span></span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">3</span>][<span class="number">3</span>] = &#123; &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">7</span>,<span class="number">8</span>,<span class="number">2</span>&#125;,&#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125; &#125;;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, fun(arr, <span class="number">3</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> arr[][<span class="number">3</span>], <span class="keyword">int</span> n)</span> </span>&#123;<span class="comment">//n为n行数组的意思</span></span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		<span class="comment">//循环第一列</span></span><br><span class="line">		sum += arr[i][<span class="number">0</span>];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		<span class="comment">//循环最后一列</span></span><br><span class="line">		sum += arr[i][<span class="number">2</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="第三题-结构体指针"><a href="#第三题-结构体指针" class="headerlink" title="第三题-结构体指针"></a>第三题-结构体指针</h1><p><img src="/wan1/wan1/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231021194501769.png" alt="image-20231021194501769"></p>
+<h1 id="第三题-结构体指针"><a href="#第三题-结构体指针" class="headerlink" title="第三题-结构体指针"></a>第三题-结构体指针</h1><p><img src="/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231021194501769.png" alt="image-20231021194501769"></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> &#123;</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line">	<span class="keyword">int</span> english;</span><br><span class="line">	<span class="keyword">int</span> math;</span><br><span class="line">	<span class="keyword">int</span> politics;</span><br><span class="line">	<span class="keyword">int</span> specialised;</span><br><span class="line">	<span class="keyword">int</span> SUM = english + math + politics + specialised;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(struct Student aa[], <span class="keyword">int</span> (*p)(struct Student aa[]))</span> </span>&#123;</span><br><span class="line">	<span class="comment">//p指向fun2</span></span><br><span class="line">	<span class="keyword">return</span> 	p(aa);;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun2</span><span class="params">(struct Student aa[])</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Student</span> <span class="title">aa</span>[4] =</span> &#123;</span><br><span class="line">	&#123;<span class="string">&quot;越江&quot;</span>, <span class="number">65</span>, <span class="number">85</span>, <span class="number">60</span>, <span class="number">110</span>&#125;,</span><br><span class="line">	&#123;<span class="string">&quot;张三&quot;</span>, <span class="number">77</span>, <span class="number">100</span>, <span class="number">60</span>, <span class="number">60</span>&#125;,</span><br><span class="line">	&#123;<span class="string">&quot;李四&quot;</span>, <span class="number">60</span>, <span class="number">60</span>, <span class="number">60</span>, <span class="number">60</span>&#125;,</span><br><span class="line">	&#123;<span class="string">&quot;王五&quot;</span>, <span class="number">75</span>, <span class="number">75</span>, <span class="number">75</span>, <span class="number">75</span>&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">int</span> max_index = fun(aa,fun2);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;获得最高分的是国服%s，分数为：%d&quot;</span>, aa[max_index].name, aa[max_index].SUM);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun2</span><span class="params">(struct Student aa[])</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> av_english, av_math, av_politcs, av_specialised;</span><br><span class="line">	<span class="keyword">char</span> av_name[<span class="number">20</span>];</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> sum2 = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> sum3 = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> sum4 = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">		sum += aa[i].english;</span><br><span class="line">		sum2 += aa[i].math;</span><br><span class="line">		sum3 += aa[i].politics;</span><br><span class="line">		sum4 += aa[i].specialised;</span><br><span class="line">	&#125;</span><br><span class="line">	av_english = sum / <span class="number">4</span>;</span><br><span class="line">	av_math = sum2 / <span class="number">4</span>;</span><br><span class="line">	av_politcs = sum3 / <span class="number">4</span>;</span><br><span class="line">	av_specialised = sum4 / <span class="number">4</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;平均成绩\n英语：%d\n数学：%d\n政治：%d\n专业课：%d\n&quot;</span>, av_english, av_math, av_politcs, av_specialised);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> max_index = <span class="number">0</span>;<span class="comment">//只记录一个最大分就可</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (aa[i].SUM &gt; aa[max_index].SUM) &#123;</span><br><span class="line">			max_index = i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> max_index;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -336,11 +336,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/" rel="prev" title="PKI（数字证书系统）">
+    <a href="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/" rel="prev" title="PKI（数字证书系统）">
       <i class="fa fa-chevron-left"></i> PKI（数字证书系统）
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2023/11/03/2017%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/" rel="next" title="2017年真题解析">
+    <a href="/2023/11/03/2017%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/" rel="next" title="2017年真题解析">
       2017年真题解析 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -408,14 +408,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -476,48 +476,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

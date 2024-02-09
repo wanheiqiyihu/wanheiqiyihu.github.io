@@ -5,25 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="关于zip上传点的攻击思路1.目录走访漏洞（Zip Slip）记一次Zip Slip漏洞 - 知乎 (zhihu.com) 1234567import zipfile# the name of the zip file to generatezf &#x3D; zipfile.ZipFile(&amp;#x27;out.zip&amp;#x27;, &amp;#x27;w&amp;#x27;)# the name of the malic">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于zip上传点的攻击思路.md">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/03/13/%E5%85%B3%E4%BA%8Ezip%E4%B8%8A%E4%BC%A0%E7%82%B9%E7%9A%84%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF-md/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2022/03/13/%E5%85%B3%E4%BA%8Ezip%E4%B8%8A%E4%BC%A0%E7%82%B9%E7%9A%84%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF-md/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="关于zip上传点的攻击思路1.目录走访漏洞（Zip Slip）记一次Zip Slip漏洞 - 知乎 (zhihu.com) 1234567import zipfile# the name of the zip file to generatezf &#x3D; zipfile.ZipFile(&amp;#x27;out.zip&amp;#x27;, &amp;#x27;w&amp;#x27;)# the name of the malic">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/03/13/%E5%85%B3%E4%BA%8Ezip%E4%B8%8A%E4%BC%A0%E7%82%B9%E7%9A%84%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF-md/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2022/03/13/%E5%85%B3%E4%BA%8Ezip%E4%B8%8A%E4%BC%A0%E7%82%B9%E7%9A%84%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF-md/">
 
 
 <script id="page-configurations">
@@ -94,7 +94,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -115,92 +115,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -258,10 +258,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/03/13/%E5%85%B3%E4%BA%8Ezip%E4%B8%8A%E4%BC%A0%E7%82%B9%E7%9A%84%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF-md/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/03/13/%E5%85%B3%E4%BA%8Ezip%E4%B8%8A%E4%BC%A0%E7%82%B9%E7%9A%84%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -290,7 +290,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
+                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
                 </span>
             </span>
 
@@ -336,11 +336,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2022/03/06/%E8%87%AA%E5%8A%A8%E6%9F%A5%E8%AF%A2icp%E8%84%9A%E6%9C%AC/" rel="prev" title="自动查询icp脚本">
+    <a href="/2022/03/06/%E8%87%AA%E5%8A%A8%E6%9F%A5%E8%AF%A2icp%E8%84%9A%E6%9C%AC/" rel="prev" title="自动查询icp脚本">
       <i class="fa fa-chevron-left"></i> 自动查询icp脚本
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2022/03/17/%E8%B7%A8%E5%9F%9F%E6%BC%8F%E6%B4%9E-md/" rel="next" title="跨域漏洞.md">
+    <a href="/2022/03/17/%E8%B7%A8%E5%9F%9F%E6%BC%8F%E6%B4%9E-md/" rel="next" title="跨域漏洞.md">
       跨域漏洞.md <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -408,14 +408,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -476,48 +476,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

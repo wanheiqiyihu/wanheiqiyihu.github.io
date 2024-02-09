@@ -5,44 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="标准输入和输出、控制字符格式与运算符优先级前言2024的考研大纲中同样也增加了这样的三个内容标准输入和输出、控制字符格式与运算符优先级。于是在这里详细学习一下。不学不行啊，md数学太难了，难得我头都要炸了，必须把专业课好好学，缓解一下数学的压力才行。专业课考到120的话，其他的，科目压力就不是很大了。 标准输入和输出首先了解标准输入和输出标准输出：C语言标准输出是一个接口库函数，已经写好了实现，我">
 <meta property="og:type" content="article">
 <meta property="og:title" content="标准输入和输出、控制字符格式与运算符优先级">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="标准输入和输出、控制字符格式与运算符优先级前言2024的考研大纲中同样也增加了这样的三个内容标准输入和输出、控制字符格式与运算符优先级。于是在这里详细学习一下。不学不行啊，md数学太难了，难得我头都要炸了，必须把专业课好好学，缓解一下数学的压力才行。专业课考到120的话，其他的，科目压力就不是很大了。 标准输入和输出首先了解标准输入和输出标准输出：C语言标准输出是一个接口库函数，已经写好了实现，我">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002134154568.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002131951357.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002132140868.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002133015231.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/aa84edfc4d854375b1a5a68ee4318d49.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/2641bbfe00f249c784f28ed86cf25544.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/89b84965da5f4c21800f711d113f35c7.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/a931a90546764d92a623d5490fb0308d.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/6418658c4f954cb7b81866765efef0a4.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002134154568.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002131951357.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002132140868.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002133015231.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/aa84edfc4d854375b1a5a68ee4318d49.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/2641bbfe00f249c784f28ed86cf25544.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/89b84965da5f4c21800f711d113f35c7.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/a931a90546764d92a623d5490fb0308d.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/6418658c4f954cb7b81866765efef0a4.png">
 <meta property="article:published_time" content="2023-10-02T05:59:53.000Z">
 <meta property="article:modified_time" content="2023-10-02T06:00:30.075Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002134154568.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002134154568.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/">
 
 
 <script id="page-configurations">
@@ -104,7 +104,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -125,92 +125,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -268,10 +268,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -300,7 +300,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/c/" itemprop="url" rel="index"><span itemprop="name">-c</span></a>
+                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">-c</span></a>
                 </span>
             </span>
 
@@ -321,7 +321,7 @@
 <p>我们这篇文章只讲6个函数，<code>printf，scanf，getchar，putchar，gets，puts</code></p>
 <h2 id="printf和scanf"><a href="#printf和scanf" class="headerlink" title="printf和scanf"></a><code>printf</code>和<code>scanf</code></h2><p><code>printf()</code> 是一个C语言标准库中的函数，用于格式化输出数据到标准输出（通常指屏幕）。它可以将不同类型的值转换为字符串，并根据指定的格式字符串打印输出。</p>
 <p>关于printf函数的<strong>运算顺序</strong></p>
-<p><img src="/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002134154568.png" alt="image-20231002134154568"></p>
+<p><img src="/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002134154568.png" alt="image-20231002134154568"></p>
 <p>这是我在之前的C语言碎碎念博客中提到的。这点需要注意一下。</p>
 <p><code>scanf()</code> 是 C 语言标准库中的一个函数，用于从标准输入（通常指键盘输入）读取数据，并按照指定的格式进行解析。</p>
 <p>这两个函数本身其实不是很重要，但是重要的是，他们的控制字符格式，以及各种控制字符格式对应的特性。这些我会在下面的控制字符格式中详细说明。</p>
@@ -329,23 +329,23 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">getchar：能在屏幕上输入一个字符。</span><br><span class="line">putchar：它可以输出一个字符到屏幕上。</span><br></pre></td></tr></table></figure>
 
 <p><strong><code>getchar</code>的例子</strong></p>
-<p><img src="/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002131951357.png" alt="image-20231002131951357"></p>
+<p><img src="/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002131951357.png" alt="image-20231002131951357"></p>
 <p><strong><code>putchar</code>的例子</strong></p>
-<p><img src="/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002132140868.png" alt="image-20231002132140868"></p>
+<p><img src="/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002132140868.png" alt="image-20231002132140868"></p>
 <h2 id="gets-和puts"><a href="#gets-和puts" class="headerlink" title="gets()和puts()"></a>gets()和puts()</h2><p>puts()最大的特点是自动在末尾添加换行符，虽然不能忠实反应输出内容，但是极大方便了行输出，对应的gets()会读取并自动丢弃缓存中换行符并且忽略字符串中间的空格符，极大方便了行输入。</p>
 <p><strong>puts的例子</strong></p>
-<p><img src="/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002133015231.png" alt="image-20231002133015231"></p>
+<p><img src="/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/image-20231002133015231.png" alt="image-20231002133015231"></p>
 <p><strong>gets的例子</strong>（我的编译器版本太高了，已经没gets了，就写个程序得了）</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">50</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Enter a string: &quot;</span>);</span><br><span class="line">    gets(str);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;You entered: %s\n&quot;</span>, str);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="控制字符格式"><a href="#控制字符格式" class="headerlink" title="控制字符格式"></a>控制字符格式</h1><p>这里面的讲究还是有很多的</p>
-<h2 id="type类型"><a href="#type类型" class="headerlink" title="type类型"></a>type类型</h2><p><img src="/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/aa84edfc4d854375b1a5a68ee4318d49.png" alt="在这里插入图片描述"></p>
+<h2 id="type类型"><a href="#type类型" class="headerlink" title="type类型"></a>type类型</h2><p><img src="/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/aa84edfc4d854375b1a5a68ee4318d49.png" alt="在这里插入图片描述"></p>
 <h2 id="flags"><a href="#flags" class="headerlink" title="flags"></a>flags</h2><p>flags 规定输出样式，%后面可以跟 0 个或多个以下标志：</p>
-<p><img src="/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/2641bbfe00f249c784f28ed86cf25544.png" alt="在这里插入图片描述"></p>
+<p><img src="/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/2641bbfe00f249c784f28ed86cf25544.png" alt="在这里插入图片描述"></p>
 <h2 id="width"><a href="#width" class="headerlink" title="width"></a>width</h2><p>最小的输出宽度，用十进制数来表示输出的最小位数</p>
-<p><img src="/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/89b84965da5f4c21800f711d113f35c7.png" alt="在这里插入图片描述"></p>
-<h2 id="precision-精度"><a href="#precision-精度" class="headerlink" title="precision 精度"></a>precision 精度</h2><p><img src="/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/a931a90546764d92a623d5490fb0308d.png" alt="在这里插入图片描述"></p>
-<h2 id="length-长度修饰符"><a href="#length-长度修饰符" class="headerlink" title="length 长度修饰符"></a>length 长度修饰符</h2><p><img src="/wan1/wan1/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/6418658c4f954cb7b81866765efef0a4.png" alt="在这里插入图片描述"></p>
+<p><img src="/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/89b84965da5f4c21800f711d113f35c7.png" alt="在这里插入图片描述"></p>
+<h2 id="precision-精度"><a href="#precision-精度" class="headerlink" title="precision 精度"></a>precision 精度</h2><p><img src="/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/a931a90546764d92a623d5490fb0308d.png" alt="在这里插入图片描述"></p>
+<h2 id="length-长度修饰符"><a href="#length-长度修饰符" class="headerlink" title="length 长度修饰符"></a>length 长度修饰符</h2><p><img src="/2023/10/02/%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E3%80%81%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/6418658c4f954cb7b81866765efef0a4.png" alt="在这里插入图片描述"></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%hd\n&quot;</span>, <span class="number">12345</span>); <span class="comment">//将数据以 short int 类型进行转换</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%ld\n&quot;</span>, <span class="number">12345</span>); <span class="comment">//将数据以 long int 类型进行转换</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, <span class="number">12345</span>); <span class="comment">//将数据以 long long int 类型进行转换</span></span><br></pre></td></tr></table></figure>
 
 
@@ -367,11 +367,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2023/10/01/%E8%B7%B3%E5%87%BA%E5%87%BD%E6%95%B0-%E8%AF%AD%E5%8F%A5-%E8%AF%A6%E8%A7%A3/" rel="prev" title="跳出函数(语句)详解">
+    <a href="/2023/10/01/%E8%B7%B3%E5%87%BA%E5%87%BD%E6%95%B0-%E8%AF%AD%E5%8F%A5-%E8%AF%A6%E8%A7%A3/" rel="prev" title="跳出函数(语句)详解">
       <i class="fa fa-chevron-left"></i> 跳出函数(语句)详解
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/" rel="next" title="2018年真题解析">
+    <a href="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/" rel="next" title="2018年真题解析">
       2018年真题解析 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -439,14 +439,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -507,48 +507,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

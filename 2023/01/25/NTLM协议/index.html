@@ -5,41 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="NTLM协议相当于读书笔记吧，这下面都是我手打的，图也是我画的，手好痛。也确实有段时间没有更新博客了，主要是方向的转变，不过网安依旧是我的主要攻略目标好吧。 NTLM协议是微软用于Windows身份验证的主要协议之一。从早期的SMB到因为安全问题改成的LM再最后变成NTLM协议.NTML即可用于域环境身份验证，还可为SMB、HTTP、LDAP、SMTP等上层微软应用提供身份验证。 SSPI和SSP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NTLM协议">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="NTLM协议相当于读书笔记吧，这下面都是我手打的，图也是我画的，手好痛。也确实有段时间没有更新博客了，主要是方向的转变，不过网安依旧是我的主要攻略目标好吧。 NTLM协议是微软用于Windows身份验证的主要协议之一。从早期的SMB到因为安全问题改成的LM再最后变成NTLM协议.NTML即可用于域环境身份验证，还可为SMB、HTTP、LDAP、SMTP等上层微软应用提供身份验证。 SSPI和SSP">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230113124624449.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125131209709.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140656764.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140710636.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140718486.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140727018.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230113124624449.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125131209709.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140656764.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140710636.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140718486.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140727018.png">
 <meta property="article:published_time" content="2023-01-25T06:04:56.000Z">
 <meta property="article:modified_time" content="2023-01-25T06:09:50.450Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230113124624449.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230113124624449.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/">
 
 
 <script id="page-configurations">
@@ -101,7 +101,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -122,92 +122,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -265,10 +265,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -297,7 +297,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
+                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
                 </span>
             </span>
 
@@ -320,7 +320,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">NTLP SSP：windows NT 3.51中引入的，为windows2000以前的客户端服务器域和非域身份验证提供NTLM查询\响应身份验证。</span><br><span class="line"></span><br><span class="line">Kerberos SSP:windows 2000中间引入，windows vista中更新为支持AES，为windows2000及更高版本中首选的客户端-服务器域提供相互身份验证。</span><br><span class="line"></span><br><span class="line">Digest SSP:winows xp中引入，在windows系统与非windows系统间提供基于HTTP和SASL身份验证的质询/响应。</span><br><span class="line"></span><br><span class="line">Negotiate SSP:windows2000中引入，默认选择Kerberos，如果不可用，则选择NTLM。</span><br><span class="line"></span><br><span class="line">Cred SSP：windows vista中引入，为远程桌面连接提供单点登录和网络级身份验证。</span><br><span class="line"></span><br><span class="line">Schannel SSP：windows 2000中引入，，后续更新为支持AES加密。</span><br><span class="line"></span><br><span class="line">PKU2U SSP:windows 7中引入，在不隶属于域的系统之间提供数字证书的对等身份验证。</span><br></pre></td></tr></table></figure>
 
 <p>因为SSPI中定义了域Session security有关的API，所以上层应用题用任何SSP与远程的服务进行身份验证后，此SSP都会为本次连接生成一个随机的key,这个随机key被成为session key.在系统层面,SSP就是一个dll,用来实现身份验证.不同的SSP，实现的身份验证机制是不一样的，比如NTLM SSP，实现的是一种基于质询/响应的身份验证机制，而Kerberos SSP实现的是基于Ticket的身份验证机制。我们可以编写自己的SSP,然后注册到操作系统中,</p>
-<p><img src="/wan1/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230113124624449.png" alt="image-20230113124624449"></p>
+<p><img src="/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230113124624449.png" alt="image-20230113124624449"></p>
 <h2 id="LM-Hash算法"><a href="#LM-Hash算法" class="headerlink" title="LM Hash算法"></a>LM Hash算法</h2><p>LM是微软退出的一个身份认证协议,使用的加密算法是LM HASH。虽然比较容易被破解，但是为了保证系统的兼容性，windows就知识将LM HASH禁用，(从Windows vista 和windows 2008开始就禁用了)，LM HASH的明文密码被限定在14位以内，也就是说，如果要停止使用LM HASH，将用户的密码设置为14位以上就可以了。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">LM HASH的加密流程如下</span><br><span class="line"></span><br><span class="line">明文密码-全部改成大写-转为16进制-如果转换后的16进制字符串的长度不足14B（长度28），剩下的用0来补全。</span><br><span class="line"></span><br><span class="line">随后，将14B分为两组，每组7B，然后转换为2进制数据，每组二进制数据的长度为56bit。</span><br><span class="line"></span><br><span class="line">将每组二进制数据安7bit为一组，分为8组，每组末尾家0，在转换成十六进制。这样每组也就成了8B长度的十六进制数据了。</span><br><span class="line"></span><br><span class="line">将上面生成的两组8B的十六进制数据，分别作为DES加密密钥，队字符串“KGS!@#$%”进行加密，然后将DES 加密后的两组密文进行拼接，得到最终的LM HASH。</span><br></pre></td></tr></table></figure>
 
@@ -349,7 +349,7 @@
 <p>NTML和NTLM v2的区别：</p>
 <p>v1和v2是NTLM身份认证协议，但是是不同版本，只是其中的chalenge值与加密算法不同而已。</p>
 <p>下面介绍lmcompatibilityLevel</p>
-<p><img src="/wan1/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125131209709.png" alt="image-20230125131209709"></p>
+<p><img src="/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125131209709.png" alt="image-20230125131209709"></p>
 <p>我们可以手动修改本地安全策略进行lmcompatibilityLevel值的修改。在本地安全策略中的安全选项中的网络安全中进行设置。或者也可以通过修改注册表进行修改。</p>
 <h2 id="NTLM协议的安全问题"><a href="#NTLM协议的安全问题" class="headerlink" title="NTLM协议的安全问题"></a>NTLM协议的安全问题</h2><p>从上面的NTLM认证的流程中可以看到，在type3消息中是使用用户密码Hash进计算的。因此，当没有拿到用户的明文密码而只拿到Hash的情况下，可以进行Pass The Hash(PTH)攻击，也就是常说的哈希传递攻击。同样，还是在type3消息中，存在Net-NTLM hash，当获得了Net-NTLM hash之后，可以进行中年人攻击，重放Net-NTLM hash，这种手法也就是常说的NTLM Relay(NTLM中继)攻击。由于NTLM v1协议加密过程存在天然缺陷，因此可以队Net-NTLM v1 Hash进行破解，得到NTLM Hash之后即可横向移动。下面介绍一下三中基于NTLM的攻击手法</p>
 <h3 id="1-Pass-The-Hash"><a href="#1-Pass-The-Hash" class="headerlink" title="1.Pass The Hash"></a>1.Pass The Hash</h3><p>Pass The Hash攻击是内网横向移动的一种方式。由于NTLM认证过程中使用的是用户密码的NTLM hash来进行加密，因此当或渠道了用户密码的NTLMhash而没有解出明文密码的时候，就可以利用此NTLMhash来进行哈希传递攻击。对内网其他机器进行hash碰撞，碰撞到使用相同密码的机器。然后通过135或者445端口横向移动。这本书后面也会写详细的过程，我们后面再继续进行相关的介绍。</p>
@@ -372,24 +372,24 @@
 <p>Net-NTLMv1的格式为：<code>username::hostname:LM response:NTLM response:challenge</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Administrator::adexx-PC:bf3d8d0c689b18f7fce20f605af5b689dadc3623865acfad:bf3d8d0c689b18f7fce20f605af5b689dadc3623865acfad:1122334455667788</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140656764.png" alt="image-20230125140656764"></p>
+<p><img src="/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140656764.png" alt="image-20230125140656764"></p>
 <p>使用hashcat进行字典破解，参数如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -m 5500 hash.txt password.txt</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140710636.png" alt="image-20230125140710636"></p>
+<p><img src="/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140710636.png" alt="image-20230125140710636"></p>
 <p>优点：</p>
 <p>1、这种方式不会对lsass.exe进程进行操作<br>2、同本地NTLM SSP进行交互，不会产生流量<br>3、没有进行NTLM认证，不会产生日志</p>
 <p>补充：</p>
 <p>Net-NTLMv2的格式<code>username::domain:challenge:HMAC-MD5:blob</code></p>
 <p>如果以<strong>普通用户</strong>权限执行InternalMonologue，同样能够获得当前用户的<strong>Net-NTLMv2</strong>数据包（注意是的Net-NTLMv2的数据包，不是Net-NTLMv1，因为没有权限去进行降级到Net-NTLMv1），通过hashcat进行破解，也能获得当前用户的明文口令</p>
-<p><img src="/wan1/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140718486.png" alt="image-20230125140718486"></p>
+<p><img src="/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140718486.png" alt="image-20230125140718486"></p>
 <p>如上图，获得Net-NTLMv2的数据包如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yuyonghu01::PENTEST:1122334455667788:bf3d8d0c689b18f7fce20f605af5b689dadc3623865acfad:bf3d8d0c689b18f7fce20f605af5b689dadc3623865acfad</span><br></pre></td></tr></table></figure>
 
 <p>使用hashcat进行字典破解，参数如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -m 5600 hash.txt password.txt</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140727018.png" alt="image-20230125140727018"></p>
+<p><img src="/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140727018.png" alt="image-20230125140727018"></p>
 <p>同时找资料的时候也发现了很多优秀的文章，大家复习的时候可以进行相关的借鉴。</p>
 <p><a target="_blank" rel="noopener" href="https://www.likecs.com/show-305718374.html#sc=749.2799682617188">Net-NTLMv1的利用-爱码网 (likecs.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/8562">NTLM认证相关攻击技巧（较全） - 先知社区 (aliyun.com)</a></p>
@@ -408,11 +408,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2023/01/13/%E5%90%8E%E5%8F%B0%E7%82%B9%E5%87%BB%E7%BB%95%E8%BF%87%E7%81%AB%E7%BB%92%E8%81%94%E7%BD%91%E6%A3%80%E6%B5%8B/" rel="prev" title="后台点击绕过火绒联网检测">
+    <a href="/2023/01/13/%E5%90%8E%E5%8F%B0%E7%82%B9%E5%87%BB%E7%BB%95%E8%BF%87%E7%81%AB%E7%BB%92%E8%81%94%E7%BD%91%E6%A3%80%E6%B5%8B/" rel="prev" title="后台点击绕过火绒联网检测">
       <i class="fa fa-chevron-left"></i> 后台点击绕过火绒联网检测
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2023/02/04/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91-%E7%BA%A2%E5%B8%86OA-ioFileExport-aspx-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" rel="next" title="【漏洞复现】 红帆OA ioFileExport.aspx 任意文件读取漏洞">
+    <a href="/2023/02/04/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91-%E7%BA%A2%E5%B8%86OA-ioFileExport-aspx-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" rel="next" title="【漏洞复现】 红帆OA ioFileExport.aspx 任意文件读取漏洞">
       【漏洞复现】 红帆OA ioFileExport.aspx 任意文件读取漏洞 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -480,14 +480,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -548,48 +548,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

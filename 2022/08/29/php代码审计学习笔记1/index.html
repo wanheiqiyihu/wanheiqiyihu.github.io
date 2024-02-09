@@ -5,72 +5,72 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="php代码审计学习笔记1课程是某牛的，笔记只供个人学习 感觉就是从代码层面复习了一遍漏洞原理 环境配置及审计工具介绍环境就用phpstudy 看代码的话我用的是notepad++ 审计工具可以用seay源代码审计系统（基于正则 Fortify SCA也是一款不错的商业化代码审计工具（靠内置的规则空间匹配 rips审计工具也不错，可以看到用户输的一些点 以及一款数据库监控工具 vMysqlMonit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="php代码审计学习笔记1">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="php代码审计学习笔记1课程是某牛的，笔记只供个人学习 感觉就是从代码层面复习了一遍漏洞原理 环境配置及审计工具介绍环境就用phpstudy 看代码的话我用的是notepad++ 审计工具可以用seay源代码审计系统（基于正则 Fortify SCA也是一款不错的商业化代码审计工具（靠内置的规则空间匹配 rips审计工具也不错，可以看到用户输的一些点 以及一款数据库监控工具 vMysqlMonit">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824105406833.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824105546784.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824105649145.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824183645573.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824185643247.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824194314976.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220826202223548.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220826205026879.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220826205517820.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827131024547.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827133732973.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827135455087.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827151005452.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827151016017.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827151921288.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827165236507.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827183314670.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827183326474.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827170249923.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827171538419.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827180110497.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827190243561.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827201453222.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827203219636.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827210315089.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827210740514.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828162149341.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828162321840.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828170533205.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828172043564.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829141621485.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829144838482.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829150623976.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155633444.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155648037.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155656537.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155706905.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824105406833.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824105546784.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824105649145.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824183645573.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824185643247.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824194314976.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220826202223548.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220826205026879.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220826205517820.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827131024547.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827133732973.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827135455087.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827151005452.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827151016017.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827151921288.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827165236507.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827183314670.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827183326474.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827170249923.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827171538419.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827180110497.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827190243561.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827201453222.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827203219636.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827210315089.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827210740514.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828162149341.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828162321840.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828170533205.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828172043564.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829141621485.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829144838482.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829150623976.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155633444.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155648037.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155656537.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155706905.png">
 <meta property="article:published_time" content="2022-08-29T12:44:06.000Z">
 <meta property="article:modified_time" content="2022-12-07T17:03:24.000Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824105406833.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824105406833.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/">
 
 
 <script id="page-configurations">
@@ -132,7 +132,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -153,92 +153,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -296,10 +296,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -334,7 +334,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/daima/" itemprop="url" rel="index"><span itemprop="name">-daima</span></a>
+                  <a href="/categories/daima/" itemprop="url" rel="index"><span itemprop="name">-daima</span></a>
                 </span>
             </span>
 
@@ -359,10 +359,10 @@
 <p>以及一款数据库监控工具 vMysqlMonitoring.exe</p>
 <p>审计靶场:VAuditDemo   ZVulDrill</p>
 <h1 id="代码审计的思路及流程"><a href="#代码审计的思路及流程" class="headerlink" title="代码审计的思路及流程"></a>代码审计的思路及流程</h1><h2 id="MVC架构"><a href="#MVC架构" class="headerlink" title="MVC架构"></a>MVC架构</h2><p>MVC是一种设计创建Web程序的一种模式，其同时提供了HTML,CSS和JAVASCRIPT的完全控制。</p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824105406833.png" alt="image-20220824105406833"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824105406833.png" alt="image-20220824105406833"></p>
 <p>MVC关系</p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824105546784.png" alt="image-20220824105546784"></p>
-<h2 id="常见的php框架"><a href="#常见的php框架" class="headerlink" title="常见的php框架"></a>常见的php框架</h2><p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824105649145.png" alt="image-20220824105649145"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824105546784.png" alt="image-20220824105546784"></p>
+<h2 id="常见的php框架"><a href="#常见的php框架" class="headerlink" title="常见的php框架"></a>常见的php框架</h2><p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824105649145.png" alt="image-20220824105649145"></p>
 <h2 id="审计思路"><a href="#审计思路" class="headerlink" title="审计思路"></a>审计思路</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MVC框架常见的一个处理流程</span><br><span class="line">获取请求 全剧过滤 模块文件 c函数内容 m函数内容 v显示</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">常见网站目录架构</span><br><span class="line">主目录</span><br><span class="line"></span><br><span class="line">模块目录</span><br><span class="line">插件目录</span><br><span class="line">上传目录</span><br><span class="line">模板目录</span><br><span class="line">数据目录</span><br><span class="line">配置目录</span><br><span class="line"></span><br><span class="line">配置文件</span><br><span class="line"></span><br><span class="line">公共函数的文件</span><br><span class="line">安全过滤的文件</span><br><span class="line"></span><br><span class="line">数据库结构</span><br><span class="line"></span><br><span class="line">入口文件</span><br></pre></td></tr></table></figure>
@@ -377,12 +377,12 @@
 
 <h1 id="PHP核心配置详解"><a href="#PHP核心配置详解" class="headerlink" title="PHP核心配置详解"></a>PHP核心配置详解</h1><p>   PHP.INI配置文件也就是所谓的核心配置</p>
 <p>下面是一些常亮</p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824183645573.png" alt="image-20220824183645573"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824183645573.png" alt="image-20220824183645573"></p>
 <h2 id="基本配置-语法"><a href="#基本配置-语法" class="headerlink" title="基本配置-语法"></a>基本配置-语法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">大小写敏感</span><br><span class="line">directive = value（指令 = 值）</span><br><span class="line">foo=bar ≠ FOO=bar</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">运算符</span><br><span class="line">|、&amp;、~、!</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824185643247.png" alt="image-20220824185643247"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824185643247.png" alt="image-20220824185643247"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">空值的表达方式</span><br><span class="line">foo =     ;</span><br><span class="line">foo = none;</span><br><span class="line">foo = &quot;none&quot;;这个就表示这么一个字符串了，而不是空值</span><br></pre></td></tr></table></figure>
 
 <h2 id="基本配置-安全模式"><a href="#基本配置-安全模式" class="headerlink" title="基本配置-安全模式"></a>基本配置-安全模式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">安全模式</span><br><span class="line">safe_mode = off</span><br><span class="line">安全模式，用来限制文档的存取、限制环境变量的存取，限制外部程序的执行。</span><br><span class="line">本特性已在PHP5.4.0被移除</span><br></pre></td></tr></table></figure>
@@ -397,7 +397,7 @@
 
 <h2 id="基本配置-控制变量"><a href="#基本配置-控制变量" class="headerlink" title="基本配置-控制变量"></a>基本配置-控制变量</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">全局变量注册开关</span><br><span class="line">register_globals = off</span><br><span class="line">php.ini的register_globals选项的默认值预设为off，在4.2版本之前是默认开启的，当register_globals的设定为On时，程序可以接受来自服务器的各种环境变量，包括表单提交的变量，这是对服务器来讲是不安全的，所以我们不能让它注册为全局变量。</span><br><span class="line">register_globals = off时，服务器端获取数据的时候用$_GET[&#x27;name&#x27;]来获取数据</span><br><span class="line">register_globals = On时，服务器使用POST或者GET提交的变量，都将自动使用全局变量的值来接受值。</span><br><span class="line">如下：</span><br><span class="line">开启这个开关之后，我们只要传入一个_SESSION[username]=aa，就可以doeverthing</span><br><span class="line">关掉之后，我们就不能获取权限了</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824194314976.png" alt="image-20220824194314976"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220824194314976.png" alt="image-20220824194314976"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">魔术引号过滤</span><br><span class="line">magic_quotes_gpc = on  本特性已在PHP5.4.0已经移除</span><br><span class="line">magic_quotes_gpc = Off 在php.ini里面是默认关闭的，如果他打开后将自动把用户提交对sql的查询语句进行转换，如果设置成ON的话，php会吧所有的单引号，双引号，反斜杠和空字符加上反斜杠进行转义，他会影响HTTP请求的数据有(GET,POST,Cookies)，开启他会提高网站的安全性，当然，您也可以使用addslashes来转义提交的HTTP请求数据，或者用stripsashes来删除转义</span><br></pre></td></tr></table></figure>
 
 <h2 id="基本配置-远程文件"><a href="#基本配置-远程文件" class="headerlink" title="基本配置-远程文件"></a>基本配置-远程文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">是否允许远程包含文件</span><br><span class="line">allow_url_include = off</span><br><span class="line">该配置为on的情况下，可以直接包含远程文件，若包含的变量为可控的情况下，可以直接控制变量来执行PHP代码</span><br></pre></td></tr></table></figure>
@@ -445,15 +445,15 @@
 <p>$_ENV只是被动的接收服务器端的环境碧昂量转换为数组元素。</p>
 <h1 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h1><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>数字型的注入，当输入的参数是整型时，则可认为是数字型注入。如年龄，id，页码，都可以是，而且不需要单引号进行闭合。</p>
 <p>首先我们自己新建一个数据库来进行一个测试</p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220826202223548.png" alt="image-20220826202223548"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220826202223548.png" alt="image-20220826202223548"></p>
 <p>这是一个名为test的数据库,以及一个user表</p>
 <p>随后自己写一个查询页面</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$id</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$conn</span> = mysql_connect(<span class="string">&#x27;127.0.0.1&#x27;</span>,<span class="string">&#x27;root&#x27;</span>,<span class="string">&#x27;root&#x27;</span>);<span class="comment">#建立一个连接，返回一个连接标识</span></span><br><span class="line">mysql_select_db(<span class="string">&#x27;test&#x27;</span>,<span class="variable">$conn</span>);<span class="comment">#选择数据库</span></span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM USER WHERE id =<span class="subst">$id</span>&quot;</span>;</span><br><span class="line"><span class="variable">$result</span> = mysql_query(<span class="variable">$sql</span>) <span class="keyword">or</span> <span class="keyword">die</span>(mysql_error());<span class="comment">#执行一次sql查询</span></span><br><span class="line"><span class="keyword">while</span>(<span class="variable">$row</span> = mysql_fetch_array(<span class="variable">$result</span>)<span class="comment">#返回一个关联数组)&#123;</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;ID&#x27;</span>.<span class="variable">$row</span>[<span class="string">&#x27;id&#x27;</span>].<span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;USERNAME&#x27;</span>.<span class="variable">$row</span>[<span class="string">&#x27;username&#x27;</span>].<span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;PASSWORD&#x27;</span>.<span class="variable">$row</span>[<span class="string">&#x27;password&#x27;</span>].<span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;PHONE&#x27;</span>.<span class="variable">$row</span>[<span class="string">&#x27;phone&#x27;</span>].<span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">mysql_close(<span class="variable">$conn</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$sql</span>;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220826205026879.png" alt="image-20220826205026879"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220826205026879.png" alt="image-20220826205026879"></p>
 <p>可以看到就像是一个基础的sql注入靶场</p>
 <p>or1=1就可以看到注入成功</p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220826205517820.png" alt="image-20220826205517820"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220826205517820.png" alt="image-20220826205517820"></p>
 <h2 id="注入利用的方式"><a href="#注入利用的方式" class="headerlink" title="注入利用的方式"></a>注入利用的方式</h2><p>查询数据，读写文件，执行命令</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">写入webshell</span><br><span class="line">union select 1,2,3,十六进制编码的一句话 into outfile &#x27;C:/Localhost/WWW/3.php&#x27;</span><br></pre></td></tr></table></figure>
 
@@ -464,17 +464,17 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;login&#x27;</span>]))&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;fail&#x27;</span>;<span class="comment">#首先看是否有数据从那边传过来</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="variable">$username</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line">    <span class="variable">$password</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;password&#x27;</span>];</span><br><span class="line">    <span class="variable">$conn</span> = mysql_connect(<span class="string">&quot;127.0.0.1&quot;</span>,<span class="string">&quot;root&quot;</span>,<span class="string">&quot;root&quot;</span>);<span class="comment">#连接数据库</span></span><br><span class="line">    mysql_select_db(<span class="string">&quot;test&quot;</span>,<span class="variable">$conn</span>);<span class="comment">#选择数据库</span></span><br><span class="line">    <span class="variable">$sql</span> = <span class="string">&quot;SELECT *FROM USER WHERE USERNAME=&#x27;&quot;</span>.<span class="variable">$username</span>.<span class="string">&quot;&#x27;&quot;</span>;<span class="comment">#拼接sql语句</span></span><br><span class="line">    <span class="variable">$result</span> = mysql_query(<span class="variable">$sql</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">&#x27;执行失败&#x27;</span>.mysql_errno());<span class="comment">#执行sql语句</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="variable">$row</span> = mysql_fetch_array(<span class="variable">$result</span>))&#123;</span><br><span class="line">        <span class="variable">$db_username</span> = <span class="variable">$row</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line">        <span class="variable">$db_password</span> = <span class="variable">$row</span>[<span class="string">&#x27;password&#x27;</span>];</span><br><span class="line">    &#125;<span class="comment">#拿到数据库的结果整理</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$db_password</span> == <span class="variable">$password</span> &amp;&amp; <span class="variable">$db_username</span> = <span class="variable">$username</span>)&#123;<span class="comment">#对比数据</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;成功&quot;</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;失败&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>这里的用户名就存在万能密码注入，<code>or 1=1</code></p>
-<h2 id="HTTP头注入"><a href="#HTTP头注入" class="headerlink" title="HTTP头注入"></a>HTTP头注入</h2><p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827131024547.png" alt="image-20220827131024547"></p>
+<h2 id="HTTP头注入"><a href="#HTTP头注入" class="headerlink" title="HTTP头注入"></a>HTTP头注入</h2><p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827131024547.png" alt="image-20220827131024547"></p>
 <h1 id="宽字节注入和二次注入"><a href="#宽字节注入和二次注入" class="headerlink" title="宽字节注入和二次注入"></a>宽字节注入和二次注入</h1><h2 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h2><p>intval()#是强制转换类型，强制将其中的内容转换成整型。常用于数字型</p>
 <p>add#函数在指定的预定义<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AD%97%E7%AC%A6/4768913">字符</a>前添加<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8F%8D%E6%96%9C%E6%9D%A0/10132050">反斜杠</a>。这些字符是单引号（’）、双引号（”）、反斜线（\）与NUL（NULL字符）。</p>
 <p>而宽字节注入的思路就是，单引号逃逸</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">因为%df的关系，\的编码%5c被吃掉了，也就失去了转义的效果，直接被带入到mysql中，然后mysql在解读时无视了%a0%5c形成的新字节，那么单引号便重新发挥了效果</span><br><span class="line"></span><br><span class="line">常见的宽字节编码：GB2312,GBK,GB18030,BIG5,Shift_JIS</span><br><span class="line"></span><br><span class="line">如果数据库使用的的是GBK编码而PHP编码为UTF8就可能出现注入问题，原因是程序员为了防止SQL注入，就会调用我们上面所介绍的几种函数，将单引号或双引号进行转义操作，转义无非便是在单或双引号前加上斜杠（\）进行转义 ，但这样并非安全，因为数据库使用的是宽字节编码，两个连在一起的字符会被当做是一个汉字，而在PHP使用的UTF8编码则认为是两个独立的字符，如果我们在单或双引号前添加一个字符，使其和斜杠（\）组合被当作一个汉字，从而保留单或双引号，使其发挥应用的作用。但添加的字符的Ascii要大于128，两个字符才能组合成汉字 ，因为前一个ascii码要大于128，才到汉字的范围 ，这一点需要注意。</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827133732973.png" alt="image-20220827133732973"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827133732973.png" alt="image-20220827133732973"></p>
 <h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><p>test.php</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$id</span> = addslashes(<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>]);</span><br><span class="line"><span class="variable">$conn</span> = mysql_connect(<span class="string">&#x27;127.0.0.1:3306&#x27;</span>,<span class="string">&#x27;root&#x27;</span>,<span class="string">&#x27;root&#x27;</span>);</span><br><span class="line">mysql_select_db(<span class="string">&#x27;test&#x27;</span>,<span class="variable">$conn</span>);</span><br><span class="line">mysql_query(<span class="string">&quot;SET NAMES &#x27;GBK&#x27;&quot;</span>);</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM user WHERE id = &#x27;<span class="subst">$id</span>&#x27;&quot;</span>;</span><br><span class="line"><span class="variable">$result</span> = mysql_query(<span class="variable">$sql</span>) <span class="keyword">or</span> <span class="keyword">die</span>(mysql_error());</span><br><span class="line"><span class="keyword">while</span>(<span class="variable">$row</span> = mysql_fetch_array(<span class="variable">$result</span>))&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;ID&#x27;</span>.<span class="variable">$row</span>[<span class="string">&#x27;id&#x27;</span>].<span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;USERNAME&#x27;</span>.<span class="variable">$row</span>[<span class="string">&#x27;username&#x27;</span>].<span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;PASSWORD&#x27;</span>.<span class="variable">$row</span>[<span class="string">&#x27;password&#x27;</span>].<span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;PHONE&#x27;</span>.<span class="variable">$row</span>[<span class="string">&#x27;phone&#x27;</span>].<span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">mysql_close(<span class="variable">$conn</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$sql</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827135455087.png" alt="image-20220827135455087"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827135455087.png" alt="image-20220827135455087"></p>
 <p>成功宽字节注入（payload <code>1%20%df%27%20union%20select%201,database(),3,4%20--+</code></p>
 <p>修复建议：</p>
 <p>使用<code>mysql_ser_charset(GBK)</code>指定字符集</p>
@@ -488,22 +488,22 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;submit&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$id</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line">    <span class="variable">$conn</span> = mysql_connect(<span class="string">&#x27;127.0.0.1&#x27;</span>,<span class="string">&#x27;root&#x27;</span>,<span class="string">&#x27;root&#x27;</span>);</span><br><span class="line">    mysql_select_db(<span class="string">&#x27;test&#x27;</span>);</span><br><span class="line">    <span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM user WHERE id=&quot;</span>.<span class="variable">$id</span>.<span class="string">&quot;;&quot;</span>;</span><br><span class="line">    <span class="variable">$result</span> = mysql_query(<span class="variable">$sql</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">&quot;失败1&quot;</span>.mysql_error());</span><br><span class="line">    <span class="keyword">while</span>(<span class="variable">$row</span> = mysql_fetch_array(<span class="variable">$result</span>))&#123;</span><br><span class="line">        <span class="variable">$username</span> = <span class="variable">$row</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line">        <span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM USER WHERE username=&#x27;&quot;</span>.<span class="variable">$username</span>.<span class="string">&quot;&#x27;;&quot;</span>;</span><br><span class="line">        <span class="variable">$result</span> = mysql_query(<span class="variable">$sql</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">&quot;失败2&quot;</span>.mysql_error());</span><br><span class="line">        <span class="keyword">while</span>(<span class="variable">$row</span> = mysql_fetch_array(<span class="variable">$result</span>))&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;ID:&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;id&#x27;</span>].<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;USERNAME:&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;username&#x27;</span>].<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;PASSWORD:&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;password&#x27;</span>].<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;PHONE:&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;phone&#x27;</span>].<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;form action=<span class="string">&quot;search.php&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">    search ID:&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;id&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span> name=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;点击搜索&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>我们的payload就可以在username那里加上<code>&#39;union select 1,2,database(),4;#</code></p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827151005452.png" alt="image-20220827151005452"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827151005452.png" alt="image-20220827151005452"></p>
 <p>再查询0</p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827151016017.png" alt="image-20220827151016017"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827151016017.png" alt="image-20220827151016017"></p>
 <p>但是为什么感觉就是再讲漏洞原理啊喂(#`O′)</p>
 <p>思路：先将注入语句插入到数据库，注册、留言板等功能都具有insert数据库的操作，然后再使用update的地方触发插入到数据库的注入语句</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值&#x27;union select ......#</span><br></pre></td></tr></table></figure>
 
 <h1 id="代码执行漏洞"><a href="#代码执行漏洞" class="headerlink" title="代码执行漏洞"></a>代码执行漏洞</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">思路：</span><br><span class="line">用户能够控制函数输入</span><br><span class="line">存在可执行代码的危险函数</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827151921288.png" alt="image-20220827151921288"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827151921288.png" alt="image-20220827151921288"></p>
 <h2 id="常见的一些函数"><a href="#常见的一些函数" class="headerlink" title="常见的一些函数"></a>常见的一些函数</h2><p>eval()和assert()函数就不说了，直接把中间的参数当做php代码执行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">回调函数：</span><br><span class="line">mixed call_user_func(callble $callback[,mixed $parameter[,mixed $...]])</span><br><span class="line">$callback是要调用自定义的函数名称</span><br><span class="line">$parameter是自定义函数的参数</span><br><span class="line">call_user_func — 把第一个参数作为回调函数调用 第二个参数当做回调函数的参数</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$b</span> = <span class="string">&quot;phpinfo()&quot;</span>;</span><br><span class="line">call_user_func(<span class="variable">$_GET</span>[<span class="string">&#x27;a&#x27;</span>],<span class="variable">$b</span>);</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827165236507.png" alt="image-20220827165236507"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827165236507.png" alt="image-20220827165236507"></p>
 <p>常见的回调函数：</p>
 <p>call_user_func(),call_user_func_array(),array_map()等</p>
 <p>这里不全，后面我自己会补充。</p>
@@ -541,8 +541,8 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?data=&lt;data&gt;$&#123;phpinfo()&#125;&lt;/data&gt;</span><br></pre></td></tr></table></figure>
 
 <p>分析原因，此时括号内的内容是${phpinfo()}，传到了缓冲区，执行后面语句时会调用，那么后面语句此时就相当于$ret=${phpinfo()}，肯定会先执行phpinfo()，然后呢返回了1，此时语句是$ret=1，加上我们的/e是执行语句的，所以这里执行的就等同于eval($ret=1)；我们本地测试一下输出结果</p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827183314670.png" alt="image-20220827183314670">所以，这就是执行报错的原因所在，有没有解决办法呢，当然有，再加个<code>&#123;&#125;</code>，此时执行结果如下</p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827183326474.png" alt="image-20220827183326474"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827183314670.png" alt="image-20220827183314670">所以，这就是执行报错的原因所在，有没有解决办法呢，当然有，再加个<code>&#123;&#125;</code>，此时执行结果如下</p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827183326474.png" alt="image-20220827183326474"></p>
 <p>这是为啥呢，我们不妨再来分析一下，此时存入缓冲区的是{${phpinfo()}}，此时由于\1是反向引用，再加上/e，实际的执行语句就是eval($ret={${phpinfo()}})执行过里面之后，得到的就是eval($ret={1}),而里面会当做变量来执行，也就是eval($ret=${1})，此时就执行出来了。</p>
 <p>第三个案例</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span></span><br><span class="line"><span class="meta">&lt;?</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"><span class="variable">$str</span></span>)</span>&#123;</span><br><span class="line">&#125;</span><br><span class="line">preg_replace(<span class="string">&quot;/s*(.*)s*/ies&quot;</span>, <span class="string">&quot;test(\\1)&quot;</span>, <span class="variable">$_GET</span>[<span class="string">&quot;h&quot;</span>]);</span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment">*eval(&quot;\$&#123;phpinfo()&#125;&quot;);</span></span><br><span class="line"><span class="comment">*eval(&quot;test(\&quot;&#123;\$&#123;phpinfo()&#125;&#125;\&quot;);&quot;);</span></span><br><span class="line"><span class="comment">*$&#123;phpinfo()&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
@@ -550,14 +550,14 @@
 <p>payload如下</p>
 <p>?h=${phpinfo()}</p>
 <p>此时执行的就是<code>eval(test($&#123;phpinfo()&#125;)</code>，，而后为<code>eval(test(1))</code>，里面那个是空的，所以执行结果为空，没有错误，可以正常执行</p>
-<h2 id="一些正则"><a href="#一些正则" class="headerlink" title="一些正则"></a>一些正则</h2><p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827170249923.png" alt="image-20220827170249923"></p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827171538419.png" alt="image-20220827171538419"></p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827180110497.png" alt="image-20220827180110497"></p>
+<h2 id="一些正则"><a href="#一些正则" class="headerlink" title="一些正则"></a>一些正则</h2><p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827170249923.png" alt="image-20220827170249923"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827171538419.png" alt="image-20220827171538419"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827180110497.png" alt="image-20220827180110497"></p>
 <h1 id="命令执行漏洞"><a href="#命令执行漏洞" class="headerlink" title="命令执行漏洞"></a>命令执行漏洞</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">挖掘思路</span><br><span class="line">用户能够控制函数输入</span><br><span class="line">存在可执行代码的危险函数</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">类型</span><br><span class="line">代码层过滤不严</span><br><span class="line">系统的漏洞造成命令注入</span><br><span class="line">调用的第三方组件存在代码执行漏洞</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827190243561.png" alt="image-20220827190243561"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827190243561.png" alt="image-20220827190243561"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">system函数 自带回显的，不用输出也可</span><br><span class="line">system(string $command, int &amp;$return_var = ?): string</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">passthru函数 也是自带回显</span><br><span class="line">passthru ( string $command [, int &amp;$return_var ] ) : void</span><br></pre></td></tr></table></figure>
@@ -576,16 +576,16 @@
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$content = $_GET[&#x27;content&#x27;];</span><br><span class="line">?&gt;</span><br><span class="line">&lt;input type=&quot;text&quot; value=&quot;&lt;?php echo $content;?&gt;&quot;&gt;</span><br><span class="line">//payload是 123?&gt;&quot;&gt;&lt;script&gt;alert(`xss`)&lt;/script&gt;#</span><br><span class="line">//闭合了标签</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827201453222.png" alt="image-20220827201453222"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827201453222.png" alt="image-20220827201453222"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$content = $_GET[&#x27;content&#x27;];</span><br><span class="line">?&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var xss = &#x27;&lt;?php echo $content?&gt;&#x27;;</span><br><span class="line">    document.write(xss);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">//payload是123%27;&lt;/script&gt;&lt;script&gt;alert(`xss`)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 <p>存储其实和反射差不多，只不过大多是存在数据库的，需要别人点击去触发。</p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827203219636.png" alt="image-20220827203219636"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827203219636.png" alt="image-20220827203219636"></p>
 <p>dom既可能是存储型，也可能是反射型</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$content = $_GET[&#x27;content&#x27;];</span><br><span class="line">?&gt;</span><br><span class="line">&lt;input type=&quot;text&quot; id=&quot;text&quot; value=&quot;&lt;?php echo $content;?&gt;&quot;&gt;</span><br><span class="line">&lt;dic id=&quot;print&quot;&gt;&lt;/dic&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    var text = document.getElementById(&quot;text&quot;);</span><br><span class="line">    var print = document.getElementById(&quot;print&quot;);</span><br><span class="line">    print.innerHTML = text.value;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827210315089.png" alt="image-20220827210315089"></p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827210740514.png" alt="image-20220827210740514"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827210315089.png" alt="image-20220827210315089"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220827210740514.png" alt="image-20220827210740514"></p>
 <h1 id="csrf漏洞"><a href="#csrf漏洞" class="headerlink" title="csrf漏洞"></a>csrf漏洞</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">挖掘思路</span><br><span class="line">后台功能模块：管理后台，会员中心，添加用户等</span><br><span class="line">被引用的核心文件里面没有验证token和referer相关的代码</span><br><span class="line"></span><br><span class="line">没带token:可以直接请求这个页面</span><br><span class="line">没带referer:返回相同的数据</span><br></pre></td></tr></table></figure>
 
 <p>这个简单，我就不写代码了，就是后端只验证了session，但是没有验证origin或者referer等参数，或者没有加上csrftoken，导致这么一个漏洞。</p>
@@ -608,10 +608,10 @@
 
 <h1 id="目录穿越以及文件包含"><a href="#目录穿越以及文件包含" class="headerlink" title="目录穿越以及文件包含"></a>目录穿越以及文件包含</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    readfile(<span class="string">&#x27;&#x27;</span>.<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828162149341.png" alt="image-20220828162149341"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828162149341.png" alt="image-20220828162149341"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">目录穿越绕过方式</span><br><span class="line">进行url编码</span><br><span class="line">进行16位unicode编码</span><br><span class="line">进行双倍url编码</span><br><span class="line">进行超常utf-8 unicode编码</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828162321840.png" alt="image-20220828162321840"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828162321840.png" alt="image-20220828162321840"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">目录穿越修复方案</span><br><span class="line">在url中不要使用文件名称作为参数</span><br><span class="line">检查使用者输入的文件名是否有目录阶层字符</span><br><span class="line">在php.ini文件中设置open_basedir来指定文件的目录</span><br><span class="line">使用realpath函数来展开文件路径中的&quot;./&quot;、&quot;../&quot;等字符，然后返回绝对路径名称</span><br><span class="line">使用basename函数来返回不包含路径的文件名称</span><br></pre></td></tr></table></figure>
 
 
@@ -627,21 +627,21 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">本地包含-利用方式</span><br><span class="line">%00截断</span><br><span class="line"></span><br><span class="line">记录错误日志文件</span><br></pre></td></tr></table></figure>
 
 <p>远程包含-利用方式</p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828170533205.png" alt="image-20220828170533205"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828170533205.png" alt="image-20220828170533205"></p>
 <h1 id="任意文件读取及删除漏洞"><a href="#任意文件读取及删除漏洞" class="headerlink" title="任意文件读取及删除漏洞"></a>任意文件读取及删除漏洞</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">文件读取-挖掘经验</span><br><span class="line">allow_url_fopen选项激活了URL形式的fopen封装协议是的可以访问URL对象例如文件，默认的封装协议提供ftp和http协议来访问远程文件，一些扩展库例如zlib可以能会注册更多的封装协议</span><br><span class="line"></span><br><span class="line">fopen()</span><br><span class="line">file_get_contents()</span><br><span class="line">fread</span><br><span class="line">fgets</span><br><span class="line">fgetss</span><br><span class="line">file</span><br><span class="line">fpassthru</span><br><span class="line">parse_ini_file</span><br><span class="line">readfile</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">文件删除-挖掘经验</span><br><span class="line">unlink($file,$cont)</span><br></pre></td></tr></table></figure>
 
 <h1 id="变量覆盖漏洞"><a href="#变量覆盖漏洞" class="headerlink" title="变量覆盖漏洞"></a>变量覆盖漏洞</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">漏洞危害</span><br><span class="line">比如说文件上传页面的白名单，我们可以覆盖白名单导致文件上传</span><br><span class="line">用户注册页面控制没覆盖的未初始化变量导致sql</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828172043564.png" alt="image-20220828172043564"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220828172043564.png" alt="image-20220828172043564"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">常见的遍历方式释放代码，可能导致变量覆盖漏洞</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">foreach</span>(<span class="keyword">array</span>(<span class="string">&#x27;_COOKIE&#x27;</span>,<span class="string">&#x27;_POST&#x27;</span>,<span class="string">&#x27;_GET&#x27;</span>) <span class="keyword">as</span> <span class="variable">$_request</span>)&#123;</span><br><span class="line">    <span class="keyword">foreach</span>(<span class="variable">$$_request</span> <span class="keyword">as</span> <span class="variable">$_key</span> =&gt; <span class="variable">$_value</span>)&#123;</span><br><span class="line">        <span class="variable">$$_key</span> = addslashes(<span class="variable">$_value</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$a</span>;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">extract()变量覆盖</span><br><span class="line">int extract( $array , extract_rules,prefix )</span><br><span class="line">$array 关联的数组，受第二个和第三个参数的影响</span><br><span class="line">extract_rules  对待非法/数字和冲突的键名的方法将根据去除标记</span><br><span class="line">prefix  尽在第二个参数特殊时需要，添加前缀</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829141621485.png" alt="image-20220829141621485"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829141621485.png" alt="image-20220829141621485"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">parse_str()变量覆盖</span><br><span class="line">void parse_str(string $encoded_string [,array &amp;$result])</span><br><span class="line">incoded_string输入的字符串</span><br><span class="line">result 变量将会以数组元素的形式存入到这个数组，作为替代</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import_request_variables()</span><br><span class="line">（PHP 4&gt;= 4.1.0 , php5 &lt; 5.4.0）</span><br><span class="line">bool import_request_variables(string $types[,string $prefix])</span><br><span class="line">$type 指定需要导入的变量。可以用字母&#x27;G&#x27;,&#x27;P&#x27;,&#x27;C&#x27;来表示get，post，cookie</span><br><span class="line">$prefix 变量名前缀</span><br></pre></td></tr></table></figure>
@@ -656,16 +656,16 @@
 
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$test1</span> = <span class="string">&quot;dhk 2002&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$test2</span> = <span class="string">&quot;dhk 2002&quot;</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$test3</span> = <span class="string">&quot;dhk 2002&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$test</span> = <span class="keyword">new</span> test();</span><br><span class="line"><span class="keyword">echo</span> serialize(<span class="variable">$test</span>);</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829144838482.png" alt="image-20220829144838482"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829144838482.png" alt="image-20220829144838482"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">漏洞本质</span><br><span class="line">unserialize函数的变量可控</span><br><span class="line">php文件中存在可利用的类，类中有魔术方法</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829150623976.png" alt="image-20220829150623976"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829150623976.png" alt="image-20220829150623976"></p>
 <h1 id="PHP弱类型"><a href="#PHP弱类型" class="headerlink" title="PHP弱类型"></a>PHP弱类型</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">变量类型</span><br><span class="line">标准类型：布尔boolen、整型integer、浮点floadt、字符string</span><br><span class="line">复杂类型：数组array、对象object</span><br><span class="line">特殊类型：资源resource</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155633444.png" alt="image-20220829155633444"></p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155648037.png" alt="image-20220829155648037"></p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155656537.png" alt="image-20220829155656537"></p>
-<p><img src="/wan1/wan1/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155706905.png" alt="image-20220829155706905"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155633444.png" alt="image-20220829155633444"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155648037.png" alt="image-20220829155648037"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155656537.png" alt="image-20220829155656537"></p>
+<p><img src="/2022/08/29/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/image-20220829155706905.png" alt="image-20220829155706905"></p>
 <h1 id="PHP伪协议"><a href="#PHP伪协议" class="headerlink" title="PHP伪协议"></a>PHP伪协议</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file://协议</span><br><span class="line">用于访问本地系统文件</span><br><span class="line">allow_url_fopen:off/on</span><br><span class="line">allow_url_include:off/on</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">php://filter</span><br><span class="line">读取源代码并进行base64编码输出</span><br><span class="line">allow_url_fopen:off/on</span><br><span class="line">allow_url_include:off/on</span><br></pre></td></tr></table></figure>
@@ -689,11 +689,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2022/08/23/vulnstack-%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA-%E4%BA%8C/" rel="prev" title="vulnstack 红日靶场 二">
+    <a href="/2022/08/23/vulnstack-%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA-%E4%BA%8C/" rel="prev" title="vulnstack 红日靶场 二">
       <i class="fa fa-chevron-left"></i> vulnstack 红日靶场 二
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2022/09/05/%E9%80%86%E5%90%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E6%9F%90%E7%88%B1%E6%8A%80%E6%9C%AF%E5%90%A7%E7%9A%84vip%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" rel="next" title="逆向学习笔记1（某爱技术吧的vip基础教程">
+    <a href="/2022/09/05/%E9%80%86%E5%90%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E6%9F%90%E7%88%B1%E6%8A%80%E6%9C%AF%E5%90%A7%E7%9A%84vip%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" rel="next" title="逆向学习笔记1（某爱技术吧的vip基础教程">
       逆向学习笔记1（某爱技术吧的vip基础教程 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -761,14 +761,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -829,48 +829,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

@@ -5,56 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="FristiLeaks_1.3部署记得改nat模式。 nmap查看对方ip地址 改了nat之后，vm用户需要手动更改mac地址为 08:00:27:A5:A6:76  信息收集nmap 192.168.100.0&#x2F;24 -n -sP -sn 扫到目标地址为，192.168.100.168 然后还是扫端口 1nmap -A 192.168.100.168  只有一个80端口？  是这么个东西  刚刚">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FristiLeaks_1.3">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/11/02/FristiLeaks-1-3/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="FristiLeaks_1.3部署记得改nat模式。 nmap查看对方ip地址 改了nat之后，vm用户需要手动更改mac地址为 08:00:27:A5:A6:76  信息收集nmap 192.168.100.0&#x2F;24 -n -sP -sn 扫到目标地址为，192.168.100.168 然后还是扫端口 1nmap -A 192.168.100.168  只有一个80端口？  是这么个东西  刚刚">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102140304341.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102140812413.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102141214460.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102141315482.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102141938396.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102143115854.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102143103409.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102143335952.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102143558311.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102144626370.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102144843878.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102145147078.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150027246.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150144080.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150222722.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150330655.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150349992.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150546777.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150634958.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150733991.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102153136131.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102140304341.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102140812413.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102141214460.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102141315482.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102141938396.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102143115854.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102143103409.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102143335952.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102143558311.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102144626370.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102144843878.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102145147078.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102150027246.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102150144080.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102150222722.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102150330655.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102150349992.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102150546777.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102150634958.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102150733991.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102153136131.png">
 <meta property="article:published_time" content="2022-11-02T07:34:54.000Z">
 <meta property="article:modified_time" content="2022-11-02T07:36:34.000Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102140304341.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/image-20221102140304341.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/11/02/FristiLeaks-1-3/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/">
 
 
 <script id="page-configurations">
@@ -116,7 +116,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -137,92 +137,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -280,10 +280,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/11/02/FristiLeaks-1-3/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -312,7 +312,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
+                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
                 </span>
             </span>
 
@@ -331,60 +331,60 @@
 <p>nmap查看对方ip地址</p>
 <p>改了nat之后，vm用户需要手动更改mac地址为</p>
 <p>08:00:27:A5:A6:76</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102140304341.png" alt="image-20221102140304341"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102140304341.png" alt="image-20221102140304341"></p>
 <h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p><code>nmap 192.168.100.0/24 -n -sP -sn</code></p>
 <p>扫到目标地址为，192.168.100.168</p>
 <p>然后还是扫端口</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A 192.168.100.168</span><br></pre></td></tr></table></figure>
 
 <p>只有一个80端口？</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102140812413.png" alt="image-20221102140812413"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102140812413.png" alt="image-20221102140812413"></p>
 <p>是这么个东西</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102141214460.png" alt="image-20221102141214460"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102141214460.png" alt="image-20221102141214460"></p>
 <p>刚刚扫到个robots先看看。</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102141315482.png" alt="image-20221102141315482"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102141315482.png" alt="image-20221102141315482"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Disallow: /cola</span><br><span class="line">Disallow: /sisi</span><br><span class="line">Disallow: /beer</span><br></pre></td></tr></table></figure>
 
-<h1 id="漏洞探测"><a href="#漏洞探测" class="headerlink" title="漏洞探测"></a>漏洞探测</h1><p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102141938396.png" alt="image-20221102141938396"></p>
+<h1 id="漏洞探测"><a href="#漏洞探测" class="headerlink" title="漏洞探测"></a>漏洞探测</h1><p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102141938396.png" alt="image-20221102141938396"></p>
 <p>还是扫一下目录把，目录也没扫到，看了攻略，是index中的</p>
 <p>fristi有提示。</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102143115854.png" alt="image-20221102143115854"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102143115854.png" alt="image-20221102143115854"></p>
 <p>拼接url进入如下页面。所以要注意各种微小的东西，这些都是靶场中的提示，和实战中并不一样。</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102143103409.png" alt="image-20221102143103409"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102143103409.png" alt="image-20221102143103409"></p>
 <p>下面有个登录框，弱口令sql测试过了，没用。</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102143335952.png" alt="image-20221102143335952"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102143335952.png" alt="image-20221102143335952"></p>
 <p>扫目录扫出来个no！</p>
 <p>暂时还不知道干什么用的。</p>
 <p>查看登录框界面的前端代码会发现注释，有一大串base64</p>
 <p>解码之后发现是一个png</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102143558311.png" alt="image-20221102143558311"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102143558311.png" alt="image-20221102143558311"></p>
 <p>将他在kali中解码为png文件</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base64 -d base64.txt &gt; base64.png</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102144626370.png" alt="image-20221102144626370"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102144626370.png" alt="image-20221102144626370"></p>
 <p>得到密码为，keKkeKKeKKeKkEkkEk</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102144843878.png" alt="image-20221102144843878"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102144843878.png" alt="image-20221102144843878"></p>
 <p>同时在html的注释中还有发信人的名字，</p>
 <p>eezeepz</p>
 <h1 id="漏洞利用-upload"><a href="#漏洞利用-upload" class="headerlink" title="漏洞利用-upload"></a>漏洞利用-upload</h1><p>成功登录！随后就是一个上传文件的目录，然后尝试上传冰蝎的木马</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102145147078.png" alt="image-20221102145147078"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102145147078.png" alt="image-20221102145147078"></p>
 <p>害得来一个绕过，那我们就进行一个绕过。%00和00截断都用过了，应该是白名单，而且正常无法绕。但是这是一个Apache服务器，尝试寻找他的解析漏洞进行getshell。</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150027246.png" alt="image-20221102150027246"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150027246.png" alt="image-20221102150027246"></p>
 <p>apache 2.2.15</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150144080.png" alt="image-20221102150144080"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150144080.png" alt="image-20221102150144080"></p>
 <p>多文件名后缀的解析漏洞。</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150222722.png" alt="image-20221102150222722"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150222722.png" alt="image-20221102150222722"></p>
 <p>解析成功，使用冰蝎连接。</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150330655.png" alt="image-20221102150330655"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150330655.png" alt="image-20221102150330655"></p>
 <p>这是一个</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150349992.png" alt="image-20221102150349992"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150349992.png" alt="image-20221102150349992"></p>
 <p>apache权限的用户，所以还需要进行一个提权。</p>
 <h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p>先弹一个nc来我们的kali上面</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150546777.png" alt="image-20221102150546777"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150546777.png" alt="image-20221102150546777"></p>
 <p>弹是弹回来了，但是输入一个字母就要出现两个字母，就很麻烦诶。</p>
 <p>发现其中有个文件<code>checklogin.php</code></p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150634958.png" alt="image-20221102150634958"></p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102150733991.png" alt="image-20221102150733991"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150634958.png" alt="image-20221102150634958"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150733991.png" alt="image-20221102150733991"></p>
 <p>拿到mysql的账号密码，一下子就想到了udf提权。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eezeepz</span><br><span class="line">4ll3maal12#</span><br></pre></td></tr></table></figure>
 
@@ -393,7 +393,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -pthread dirty.c -o dirty -lcrypt</span><br><span class="line">./dirty 123456</span><br></pre></td></tr></table></figure>
 
 <p>随后登录我们的firefart账户就可以了</p>
-<p><img src="/wan1/wan1/2022/11/02/FristiLeaks-1-3/image-20221102153136131.png" alt="image-20221102153136131"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102153136131.png" alt="image-20221102153136131"></p>
 <p>拿下权限</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这个靶场相比前面的靶场难度有所提升，有些地方没想到却是还是借助了攻略。但是我记得某个大佬说过，这些靶场既然是靶场那就是存在漏洞的，那么作者最有可能的是在漏洞的隐藏上面下功夫，而不是在利用上面。所以以后我们必须要注重的是靶场中的一些细节，一定要做好，看好。</p>
 
@@ -411,11 +411,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2022/11/02/KIOPTRIX-LEVEL-1-3-4/" rel="prev" title="KIOPTRIX: LEVEL 1.3 (#4)">
+    <a href="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/" rel="prev" title="KIOPTRIX: LEVEL 1.3 (#4)">
       <i class="fa fa-chevron-left"></i> KIOPTRIX: LEVEL 1.3 (#4)
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2022/11/02/PwnLab/" rel="next" title="PwnLab">
+    <a href="/2022/11/02/PwnLab/" rel="next" title="PwnLab">
       PwnLab <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -483,14 +483,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -551,48 +551,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

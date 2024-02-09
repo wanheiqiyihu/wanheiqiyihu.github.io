@@ -5,41 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="JAVA基础-1终于是又开坑学java了，简单记录一下自己的java学习笔记。毕竟是网安跨不过的坎，本文可能有些长，供作者自己学习。 开发步骤1.编写代码 123456789注意：（1）代码的结构类&amp;#123;	方法&amp;#123;		语句;		&amp;#125;&amp;#125;（2）必须把代码文件保存为xx.java文件名建议和类名一样  2.编译 编译工具：javac.exe 使用格式：javac xx.j">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JAVA基础-1">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="JAVA基础-1终于是又开坑学java了，简单记录一下自己的java学习笔记。毕竟是网安跨不过的坎，本文可能有些长，供作者自己学习。 开发步骤1.编写代码 123456789注意：（1）代码的结构类&amp;#123;	方法&amp;#123;		语句;		&amp;#125;&amp;#125;（2）必须把代码文件保存为xx.java文件名建议和类名一样  2.编译 编译工具：javac.exe 使用格式：javac xx.j">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221204173931603.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221204182333118.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221205122144879.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221206134233669.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221213115914522.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221213153644342.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221204173931603.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221204182333118.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221205122144879.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221206134233669.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221213115914522.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221213153644342.png">
 <meta property="article:published_time" content="2022-12-20T02:47:30.000Z">
 <meta property="article:modified_time" content="2022-12-20T02:50:28.383Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221204173931603.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221204173931603.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/">
 
 
 <script id="page-configurations">
@@ -101,7 +101,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -122,92 +122,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -265,10 +265,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -297,7 +297,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/java/" itemprop="url" rel="index"><span itemprop="name">-java</span></a>
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">-java</span></a>
                 </span>
             </span>
 
@@ -325,7 +325,7 @@
 <h2 id="helloworld"><a href="#helloworld" class="headerlink" title="helloworld"></a>helloworld</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">helloworld</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>其中有一个方法<code>public static void mian(String[] args)</code>这是最特殊的一个方法，叫做主方法，main方法。他是java程序的入口。他的格式是固定的。</p>
-<p><img src="/wan1/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221204173931603.png" alt="image-20221204173931603"></p>
+<p><img src="/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221204173931603.png" alt="image-20221204173931603"></p>
 <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="中文编码问题"><a href="#中文编码问题" class="headerlink" title="中文编码问题"></a>中文编码问题</h3><p>如果xx.java文件的编码是UTF-8的，又不想改文件的编码，所以在编译的时候，可以加一个参数<code>-encoding UTF-8</code></p>
 <p>除了在编译的时候使用指定编码进行编译，也可以通过编辑器上面的选项来进行修改文件本身的编码。</p>
 <h3 id="大小写问题"><a href="#大小写问题" class="headerlink" title="大小写问题"></a>大小写问题</h3><p>java代码中是严格区分大小写的。</p>
@@ -338,7 +338,7 @@
 <p>其中还有两个保留字，相当于还未正式启用的关键字。（const,goto）他俩是c语言的关键字，但是java没有用它。</p>
 <p>还有三个特殊值，他们不是关键字，但是又特殊意义。他们不在关键字表中：true,false,null</p>
 <p>值得注意的是，50个关键字全部都是小写的。</p>
-<p><img src="/wan1/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221204182333118.png" alt="image-20221204182333118"></p>
+<p><img src="/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221204182333118.png" alt="image-20221204182333118"></p>
 <h3 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h3><p>凡是代码中需要自己“命名”的地方都是标识符。给变量、类、方法等命名的字符序列就是标识符。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">标识符的命名规则：</span><br><span class="line">1.只能使用26个英文字母大小写，数字0-9，下划线_，美元符号$</span><br><span class="line">按理说，所有unicode编码中的字符都能用，但是对于中文来说，还要解决编码问题，所以不要用</span><br><span class="line">2.数字不能开头</span><br><span class="line">3.不能直接使用关键字，保留字，特殊字，但是可以包含。</span><br><span class="line">4.严格区分大小写</span><br><span class="line">5.不能包含空格</span><br><span class="line"></span><br><span class="line">命名规范（人为规定）：</span><br><span class="line">1.见名知意</span><br><span class="line">2.类名，每个单词的首字母大写</span><br><span class="line">3.变量名，方法名：从第二个单词开始首字母大写</span><br><span class="line">4.包名，所有单词都小写，单词与单词之间使用.分隔。</span><br><span class="line">5.常亮所有单词都大写</span><br></pre></td></tr></table></figure>
 
@@ -363,7 +363,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">int</span> max = <span class="number">150</span>;</span><br></pre></td></tr></table></figure>
 
 <h3 id="进制的表示"><a href="#进制的表示" class="headerlink" title="进制的表示"></a>进制的表示</h3><p>值得注意的是，输出的时候都是以十进制的形式来输出的。</p>
-<p><img src="/wan1/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221205122144879.png" alt="image-20221205122144879"></p>
+<p><img src="/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221205122144879.png" alt="image-20221205122144879"></p>
 <h3 id="程序中表示字符的方法"><a href="#程序中表示字符的方法" class="headerlink" title="程序中表示字符的方法"></a>程序中表示字符的方法</h3><p>在java中除了直接用双引号表示的字符之外，也可以用数字的形式来定义一个字符。</p>
 <p>如下</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestChar</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">char</span> c1 = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">        <span class="keyword">char</span> c2 = <span class="number">97</span>;</span><br><span class="line">        System.out.println(c1);</span><br><span class="line">        System.out.println(c2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -397,7 +397,7 @@
 
 
 <h3 id="java反编译"><a href="#java反编译" class="headerlink" title="java反编译"></a>java反编译</h3><p>可以通过在命令行中是用javap命令来进行反编译任意一个java类，-c参数代表打印类中每个方法的反汇编代码，例如包含java字节码的指令。</p>
-<h3 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h3><p><img src="/wan1/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221206134233669.png" alt="image-20221206134233669"></p>
+<h3 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h3><p><img src="/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221206134233669.png" alt="image-20221206134233669"></p>
 <h1 id="IDEA开发工具"><a href="#IDEA开发工具" class="headerlink" title="IDEA开发工具"></a>IDEA开发工具</h1><p>安装卸载我这里就不写啦，之前安装过了，而且网上有很多教程</p>
 <h2 id="创建空工程和模块"><a href="#创建空工程和模块" class="headerlink" title="创建空工程和模块"></a>创建空工程和模块</h2><p>在创建工程的时候，可以先创建一个空工程，没有必要马上创建一个java工程。</p>
 <p>在空工程中创建一个新的模块，在选模块的时候就可以选择java模块。方便。</p>
@@ -485,7 +485,7 @@
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JVM java虚拟机</span><br><span class="line">其在运行时，分为几个部分：</span><br><span class="line">1.方法区：存储已经被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据</span><br><span class="line">2.堆内存：存储对象（包括数组对象），new来创建的，都存储在堆内存</span><br><span class="line">3.java虚拟机栈：用于存储正在执行的每个java方法的局部变量表等。局部变量表存放了编译器可知长度的各种基本数据类型、对象引用，方法执行完，自动释放</span><br><span class="line">4.本地方法栈：当程序中调用了native的本地方法时，本地方法执行期间的内存区域</span><br><span class="line">5.程序计数器：CPU中的寄存器，他包含每一个线程下一条要执行的指令的地址</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221213115914522.png" alt="image-20221213115914522"></p>
+<p><img src="/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221213115914522.png" alt="image-20221213115914522"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">hello</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] num = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">        System.out.println(num);<span class="comment">//[I@4554617c</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//num是数组名，同时也是变量，是一个应用数据类型的变量。他里面存储的是地址值。</span></span><br><span class="line"><span class="comment">//new了一个数组之后，jvm就会存储他的首地址和占用内存，这样就可以通过这两个值找到所有的元素。</span></span><br><span class="line"><span class="comment">//虽然num里面存储的是首地址，但是和真实的首地址还是不能划等号，因为java不会对外暴露内存地址。本质上：I代表的是int內型，@后面的数字是数组对象的hashCode值的十六进制值。</span></span><br><span class="line"><span class="comment">//hashCode：就是一个数字，有点像身份证号码。只有当对象存储到哈希表等哈希结构的容器中才有用。</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">扩展：</span><br><span class="line">java中自动打印一个对象，会自动调用它的toString方法。</span><br><span class="line">而在默认库的定义中，toString方法return的就是一个，內型名称@&quot;Integer.toHexString(hashCode())&quot;</span><br><span class="line"></span><br><span class="line">所以直接println(num)和println(num.toString())返回值是一样的</span><br></pre></td></tr></table></figure>
@@ -504,7 +504,7 @@
 
 <h1 id="IDEA的单步调试Debug"><a href="#IDEA的单步调试Debug" class="headerlink" title="IDEA的单步调试Debug"></a>IDEA的单步调试Debug</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Debug的步骤：</span><br><span class="line">1.打断点，在代码的左边（行号）的位置单击出现小红圈，就是断点</span><br><span class="line">2.以Debug模式运行</span><br><span class="line">3.单步调试</span><br><span class="line">Step Over（f8）</span><br><span class="line">往下走一行。</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221213153644342.png" alt="image-20221213153644342"></p>
+<p><img src="/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/image-20221213153644342.png" alt="image-20221213153644342"></p>
 <h1 id="面向对象基础"><a href="#面向对象基础" class="headerlink" title="面向对象基础"></a>面向对象基础</h1><h2 id="面向对象编程思想"><a href="#面向对象编程思想" class="headerlink" title="面向对象编程思想"></a>面向对象编程思想</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">面向过程：</span><br><span class="line">1.以步骤为核心</span><br><span class="line">2.代码的结构以函数为单位，程序是由一个一个函数组成</span><br><span class="line">3.数据是在函数内核函数歪，内部是局部数据，外部是全局数据。</span><br><span class="line">面向对象：</span><br><span class="line">1.以类和对象为核心的</span><br><span class="line">2.代码的结构是以类为单位。程序是由一个一个类组成的。</span><br><span class="line">3.数据是在类里面的。数据分为类中方法外和类中方法内。</span><br></pre></td></tr></table></figure>
 
 <h2 id="类和对象的定义"><a href="#类和对象的定义" class="headerlink" title="类和对象的定义"></a>类和对象的定义</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">一类事物的一个具体实实在在的个体。</span><br><span class="line">类是很多对象共同特征的描述的提取</span><br><span class="line">写代码的角度：先有类，再有对象，没有类就无法new一个对象。</span><br></pre></td></tr></table></figure>
@@ -590,11 +590,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2022/12/06/flash%E9%92%93%E9%B1%BC-inno-%E6%89%93%E5%8C%85flash%E5%AE%89%E8%A3%85%E5%8C%85/" rel="prev" title="flash钓鱼+inno 打包flash安装包">
+    <a href="/2022/12/06/flash%E9%92%93%E9%B1%BC-inno-%E6%89%93%E5%8C%85flash%E5%AE%89%E8%A3%85%E5%8C%85/" rel="prev" title="flash钓鱼+inno 打包flash安装包">
       <i class="fa fa-chevron-left"></i> flash钓鱼+inno 打包flash安装包
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2022/12/25/%E5%88%9D%E6%8E%A2%E5%86%85%E5%AD%98%E9%A9%AC/" rel="next" title="初探内存马">
+    <a href="/2022/12/25/%E5%88%9D%E6%8E%A2%E5%86%85%E5%AD%98%E9%A9%AC/" rel="next" title="初探内存马">
       初探内存马 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -662,14 +662,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -730,48 +730,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

@@ -5,54 +5,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="java反序列化基础闲下来研究一下反序列化(虽然目前也不算是闲下来哩)，但是总不能一直当脚本小子哩。下面的内容不是完全原创的，借鉴的别人的，毕竟是学习笔记。 序列化与反序列化其实在之前学习php的时候就学过了 12序列化：对象 -&gt; 字符串反序列化：字符串 -&gt; 对象  1234567序列化的好处(1) 能够实现数据的持久化，通过序列化可以把数据永久的保存在硬盘上，也可以理解为通过序列">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java反序列化基础">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="java反序列化基础闲下来研究一下反序列化(虽然目前也不算是闲下来哩)，但是总不能一直当脚本小子哩。下面的内容不是完全原创的，借鉴的别人的，毕竟是学习笔记。 序列化与反序列化其实在之前学习php的时候就学过了 12序列化：对象 -&gt; 字符串反序列化：字符串 -&gt; 对象  1234567序列化的好处(1) 能够实现数据的持久化，通过序列化可以把数据永久的保存在硬盘上，也可以理解为通过序列">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422174102802.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422174116591.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422174727670.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422175104583.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422175158916.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422175211749.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422183019221.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422183821562.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191011519.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191134968.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191156410.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191919523.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192109083.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192225041.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192304530.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192620209.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192914961.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423193046221.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423194403069.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422174102802.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422174116591.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422174727670.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422175104583.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422175158916.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422175211749.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422183019221.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422183821562.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191011519.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191134968.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191156410.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191919523.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192109083.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192225041.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192304530.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192620209.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192914961.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423193046221.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423194403069.png">
 <meta property="article:published_time" content="2023-04-23T11:46:03.000Z">
 <meta property="article:modified_time" content="2023-04-23T11:46:41.031Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422174102802.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422174102802.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/">
 
 
 <script id="page-configurations">
@@ -114,7 +114,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -135,92 +135,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -278,10 +278,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -310,7 +310,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/java/" itemprop="url" rel="index"><span itemprop="name">-java</span></a>
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">-java</span></a>
                 </span>
             </span>
 
@@ -343,8 +343,8 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> src;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnserializeTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">unserialize</span><span class="params">(String Filename)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException</span>&#123;</span><br><span class="line">        ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(Filename));</span><br><span class="line">        Object obj = ois.readObject();</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        Person person = (Person)unserialize(<span class="string">&quot;ser.bin&quot;</span>);</span><br><span class="line">        System.out.println(person);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>运行结果</p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422174102802.png" alt="image-20230422174102802"></p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422174116591.png" alt="image-20230422174116591"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422174102802.png" alt="image-20230422174102802"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422174116591.png" alt="image-20230422174116591"></p>
 <p>解析</p>
 <ul>
 <li><strong>SerializationTest.java</strong></li>
@@ -364,16 +364,16 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Serializable 用来标识当前类可以被 ObjectOutputStream 序列化，以及被 ObjectInputStream 反序列化。如果我们此处将 Serializable 接口删除掉的话，会导致如下结果。</p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422174727670.png" alt="image-20230422174727670"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422174727670.png" alt="image-20230422174727670"></p>
 <p>(2) 在反序列化过程中，它的父类如果没有实现序列化接口，那么将需要提供无参构造函数来重新创建对象。</p>
 <p>(3)一个实现 <strong>Serializable</strong>接口的子类也是可以被序列化的。</p>
 <p>(4) 静态成员变量是不能被序列化</p>
 <p>序列化是针对对象属性的，而静态成员变量是属于类的。</p>
 <p>(5) transient 标识的对象成员变量不参与序列化</p>
 <p>这里我们可以动手实操一下，将 <strong>Person.java</strong>中的<code>name</code>加上<code>transient</code>的类型标识。加完之后再跑我们的序列化与反序列化的两个程序，修改过程与运行结果如图所示。</p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422175104583.png" alt="image-20230422175104583"></p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422175158916.png" alt="image-20230422175158916"></p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422175211749.png" alt="image-20230422175211749"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422175104583.png" alt="image-20230422175104583"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422175158916.png" alt="image-20230422175158916"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422175211749.png" alt="image-20230422175211749"></p>
 <h1 id="引例"><a href="#引例" class="headerlink" title="引例"></a>引例</h1><p>网上找了个引例，加深我对代码的理解哩。</p>
 <p>(1) 入口类的<code>readObject</code>直接调用危险方法</p>
 <p>先创建一个恶意类Person</p>
@@ -384,7 +384,7 @@
 <p>这段代码就是弹计算器的。</p>
 <p>先运行序列化程序 ———— “SerializationTest.java”，再运行反序列化程序 ———— “UnserializeTest.java”</p>
 <p>这时候就会弹出计算器，也就是<code>calc.exe</code>，是不是帅的飞起哈哈。</p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422183019221.png" alt="image-20230422183019221"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422183019221.png" alt="image-20230422183019221"></p>
 <p>这是黑客最理想的情况，但是这种情况几乎不会出现。</p>
 <p>(2) 入口参数中包含可控类，该类有危险方法，<code>readObject</code>时调用</p>
 <p>(3) 入口类参数中包含可控类，该类又调用其他有危险方法的类，<code>readObject</code>时调用</p>
@@ -398,15 +398,15 @@
 <p>我们先去到 ysoserial 的项目当中，去看看它是如何构造 URLDNS 链的。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/frohoff/ysoserial/blob/master/src/main/java/ysoserial/payloads/URLDNS.java</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422183821562.png" alt="image-20230422183821562"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230422183821562.png" alt="image-20230422183821562"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*   Gadget Chain:</span><br><span class="line">*     HashMap.readObject()</span><br><span class="line">*       HashMap.putVal()</span><br><span class="line">*         HashMap.hash()</span><br><span class="line">*           URL.hashCode()</span><br></pre></td></tr></table></figure>
 
 <p>URL 是由 HashMap 的<code>put</code>方法产生的，所以我们先跟进<code>put</code>方法当中。<code>put</code>方法之后又是调用了<code>hash</code>方法；<code>hash</code>方法则是调用了<code>hashcode</code>这一函数。</p>
 <p>现在我们来实战分析一下，现在双击shift，输入hashmap.java来看看源码。</p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191011519.png" alt="image-20230423191011519"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191011519.png" alt="image-20230423191011519"></p>
 <p>URL 是由 HashMap 的<code>put</code>方法产生的，所以我们先跟进<code>put</code>方法当中。<code>put</code>方法之后又是调用了<code>hash</code>方法；<code>hash</code>方法则是调用了<code>hashcode</code>这一函数。</p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191134968.png" alt="image-20230423191134968"></p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191156410.png" alt="image-20230423191156410"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191134968.png" alt="image-20230423191134968"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191156410.png" alt="image-20230423191156410"></p>
 <p>我们看到这个<code>hashCode</code>函数的变量名是 key；那这个 key 是啥啊？<br>噢 ~ 原来 key 是<code>hash</code>这一方法传进的参数！那我们前面写的 key 不就是这个东东吗 ~！</p>
 <p>也就是put方法传入了一个key，最后hash方法中又调用了key的hashcode方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hashmap.put(<span class="keyword">new</span> URL(<span class="string">&quot;DNS生成的 URL，用dnslog就可以&quot;</span>),<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 传进去两个参数，key = 前面那串网址，value = 1</span></span><br></pre></td></tr></table></figure>
@@ -414,11 +414,11 @@
 <p>现在跟进URL，去看看 URL 跟进一堆之后的<code>hashCode</code>方法是如何实现的。</p>
 <p>跟进 URL，我们肯定是要去寻找 URL 调用的函数的函数（的函数，应该还有好几个的函数，就不写出来了，不然大家就晕了）的<code>hashCode</code>方法。</p>
 <p>在左边 Structure 直接寻找<code>hashCode</code>方法，URL 中的<code>hashCode</code>被<code>handler</code>这一对象所调用，<code>handler</code>又是<code>URLStreamHandler</code>的抽象类。我们再去找<code>URLStreamHandler</code>的<code>hashCode</code>方法。</p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191919523.png" alt="image-20230423191919523"></p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192109083.png" alt="image-20230423192109083"></p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192225041.png" alt="image-20230423192225041"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423191919523.png" alt="image-20230423191919523"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192109083.png" alt="image-20230423192109083"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192225041.png" alt="image-20230423192225041"></p>
 <p>终于找到了，这个用于 URLDNS 的方法 ————<code>getHostAddress</code></p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192304530.png" alt="image-20230423192304530"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192304530.png" alt="image-20230423192304530"></p>
 <p>这⾥<code>InetAddress.getByName(host)</code>的作⽤是根据主机名，获取其 IP 地址，在⽹络上其实就是⼀次 DNS 查询。到这⾥就不必要再跟了。</p>
 <p>所以，⾄此，整个 URLDNS 的Gadget其实清晰⼜简单：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HashMap-&gt;readObject()</span><br><span class="line">HashMap-&gt;hash()</span><br><span class="line">URL-&gt;hashCode()</span><br><span class="line">URLStreamHandler-&gt;hashCode()</span><br><span class="line">URLStreamHandler-&gt;getHostAddress()</span><br><span class="line">InetAddress-&gt;getByName()</span><br></pre></td></tr></table></figure>
@@ -426,12 +426,12 @@
 <h2 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h2><p><strong>SerializationTest.java</strong>文件下添加如下代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;URL,Integer&gt; hashmap= <span class="keyword">new</span> HashMap&lt;URL,Integer&gt;();</span><br><span class="line">hashmap.put(<span class="keyword">new</span> URL(<span class="string">&quot;DNS生成的 URL，用dnslog就可以&quot;</span>),<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">serialize(hashmap);</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192620209.png" alt="image-20230423192620209"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192620209.png" alt="image-20230423192620209"></p>
 <p>我们先把它序列化，按照道理来说，这个过程应该什么都不会发生对吧。</p>
 <p>但是确实收到了dnslog信息</p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192914961.png" alt="image-20230423192914961"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423192914961.png" alt="image-20230423192914961"></p>
 <p>还是从原理角度分析，我们回到 URL 这个对象，回到<code>hashCode</code>这里。</p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423193046221.png" alt="image-20230423193046221"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423193046221.png" alt="image-20230423193046221"></p>
 <p>我们发现，当<code>hashCode</code>的值不等于 -1 的时候，函数就会直接<code>return hashCode</code>而不执行<code>hashCode = handler.hashCode(this);</code>。而一开始定义 HashMap 类的时候<code>hashCode</code>的值为 -1，便是发起了请求。</p>
 <p>所以我们在没有反序列化的情况下面，就收到了 DNS 请求，这是不正确的。</p>
 <p>但是这里就涉及到关于反射的一个庞大知识体系，那个博主在这里也没有讲，直接放出poc</p>
@@ -440,7 +440,7 @@
 
 <p>反序列化的文件无需更改</p>
 <p>接着我们运行序列化文件，是收不到 DNS 请求的，而当我们运行反序列化的文件时候，可以收到请求，这就代表着我们的 URLDNS 链构造成功了。</p>
-<p><img src="/wan1/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423194403069.png" alt="image-20230423194403069"></p>
+<p><img src="/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/image-20230423194403069.png" alt="image-20230423194403069"></p>
 
     </div>
 
@@ -456,11 +456,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/" rel="prev" title="【实战】UEditor.net rce的一次渗透">
+    <a href="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/" rel="prev" title="【实战】UEditor.net rce的一次渗透">
       <i class="fa fa-chevron-left"></i> 【实战】UEditor.net rce的一次渗透
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2023/04/27/%E7%9B%91%E6%8E%A7hackone%E6%8A%A5%E5%91%8A%E6%9C%BA%E5%99%A8%E4%BA%BA/" rel="next" title="监控hackone报告机器人">
+    <a href="/2023/04/27/%E7%9B%91%E6%8E%A7hackone%E6%8A%A5%E5%91%8A%E6%9C%BA%E5%99%A8%E4%BA%BA/" rel="next" title="监控hackone报告机器人">
       监控hackone报告机器人 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -528,14 +528,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -596,48 +596,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

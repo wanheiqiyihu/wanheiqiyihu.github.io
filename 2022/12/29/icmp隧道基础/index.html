@@ -5,42 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="icmp隧道基础ICMP协议既不是基于TCP，也不是基于UDP，而是直接基于网络层的IP协议，在整个网络协议栈中属于相当底层的协议了。用于实现链路连通性测试和链路追踪（我们常用的ping命令就是基于icmp协议实现的）。它是TCP&#x2F;IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息。控制消息是指网络通不通、主机是否可达、路由是否可用等网络本身的消息。这些控制消息虽然并不传输用户数据，但">
 <meta property="og:type" content="article">
 <meta property="og:title" content="icmp隧道基础">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="icmp隧道基础ICMP协议既不是基于TCP，也不是基于UDP，而是直接基于网络层的IP协议，在整个网络协议栈中属于相当底层的协议了。用于实现链路连通性测试和链路追踪（我们常用的ping命令就是基于icmp协议实现的）。它是TCP&#x2F;IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息。控制消息是指网络通不通、主机是否可达、路由是否可用等网络本身的消息。这些控制消息虽然并不传输用户数据，但">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229120816554-1672317331094.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229172143069-1672317331094.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229173404402-1672317331094.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203234279-1672317331094.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203242870-1672317331094.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203317920-1672317331094.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203412222-1672317331094.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229120816554-1672317331094.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229172143069-1672317331094.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229173404402-1672317331094.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203234279-1672317331094.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203242870-1672317331094.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203317920-1672317331094.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203412222-1672317331094.png">
 <meta property="article:published_time" content="2022-12-29T12:35:22.000Z">
 <meta property="article:modified_time" content="2022-12-29T12:35:57.653Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229120816554-1672317331094.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229120816554-1672317331094.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/">
 
 
 <script id="page-configurations">
@@ -102,7 +102,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -123,92 +123,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -266,10 +266,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -298,7 +298,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
+                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
                 </span>
             </span>
 
@@ -317,7 +317,7 @@
 <h2 id="ICMP报文结构"><a href="#ICMP报文结构" class="headerlink" title="ICMP报文结构"></a>ICMP报文结构</h2><p>下面介绍一下ICMP报文的结构</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ICMP头部分为三个字段:</span><br><span class="line">type 类型 （0回应，8请求）</span><br><span class="line">code 代码</span><br><span class="line">checksum 校验和</span><br><span class="line"></span><br><span class="line">其余部分三个部分为为:</span><br><span class="line">标识符 ( identifier )，一般填写进程 PID 以区分其他 ping 进程；</span><br><span class="line">报文序号 ( sequence number )，用于编号报文序列；</span><br><span class="line">数据 ( data )，可以是任意数据；</span><br><span class="line"></span><br><span class="line">ICMP协议在实际传输中数据包：20字节IP首部 + 8字节ICMP首部+ 1472字节&lt;数据大小&gt;38字节</span><br><span class="line">ICMP首部细分为8位类型+8位代码+16位校验和+16位标识符+16位序列号</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229120816554-1672317331094.png" alt="image-20221229120816554"></p>
+<p><img src="/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229120816554-1672317331094.png" alt="image-20221229120816554"></p>
 <h2 id="ICMP隧道原理"><a href="#ICMP隧道原理" class="headerlink" title="ICMP隧道原理"></a>ICMP隧道原理</h2><p>即是把原本其他协议内容通讯，放在<strong>选项数据</strong>位置，从而伪装成一个ICMP进行通信</p>
 <p>值得一提的是，ICMP是控制协议，不需要端口号。</p>
 <h2 id="实践搭建隧道"><a href="#实践搭建隧道" class="headerlink" title="实践搭建隧道"></a>实践搭建隧道</h2><h3 id="icmpsh"><a href="#icmpsh" class="headerlink" title="icmpsh"></a><strong>icmpsh</strong></h3><p>icmpsh是一款使用简单，而且不需要管理员权限即可运行的程序，可以较为简答的搭建隧道并同时获得目标shell</p>
@@ -334,10 +334,10 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/CoreSecurity/impacket.git</span><br><span class="line"></span><br><span class="line">cd impacket/</span><br><span class="line"></span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
 
 <p>出现下面这种情况说明搭建好了</p>
-<p><img src="/wan1/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229172143069-1672317331094.png" alt="image-20221229172143069"></p>
+<p><img src="/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229172143069-1672317331094.png" alt="image-20221229172143069"></p>
 <p>但是这里搞忘关掉kali本身的icmp服务了，所以导致流量巨大</p>
 <p>先关了，然后就可以获得一个交互式shell</p>
-<p><img src="/wan1/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229173404402-1672317331094.png" alt="image-20221229173404402"></p>
+<p><img src="/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229173404402-1672317331094.png" alt="image-20221229173404402"></p>
 <h3 id="ptunnel"><a href="#ptunnel" class="headerlink" title="ptunnel"></a>ptunnel</h3><p>这个工具在kali中也是内置的。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">安装</span><br><span class="line">#安装libpcap的依赖环境</span><br><span class="line">yum -y install byacc</span><br><span class="line">yum -y install flex bison</span><br><span class="line"></span><br><span class="line">#安装libpcap依赖库</span><br><span class="line">wget http://www.tcpdump.org/release/libpcap-1.9.0.tar.gz</span><br><span class="line">tar -xzvf libpcap-1.9.0.tar.gz</span><br><span class="line">cd libpcap-1.9.0</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">#安装PingTunnel</span><br><span class="line">wget http://www.cs.uit.no/~daniels/PingTunnel/PingTunnel-0.72.tar.gz</span><br><span class="line">tar -xzvf PingTunnel-0.72.tar.gz</span><br><span class="line">cd PingTunnel</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
 
@@ -361,13 +361,13 @@
 <p>你拿下的公网服务器执行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ptunnel -x cookie</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203234279-1672317331094.png" alt="image-20221229203234279"></p>
+<p><img src="/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203234279-1672317331094.png" alt="image-20221229203234279"></p>
 <p>(上面是攻击机的界面)</p>
-<p><img src="/wan1/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203242870-1672317331094.png" alt="image-20221229203242870"></p>
+<p><img src="/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203242870-1672317331094.png" alt="image-20221229203242870"></p>
 <p>（上面是跳板机的界面）</p>
 <p>然后我们访问攻击机的3389端口，即可远程登陆对应目标</p>
-<p><img src="/wan1/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203317920-1672317331094.png" alt="image-20221229203317920"></p>
-<p><img src="/wan1/wan1/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203412222-1672317331094.png" alt="image-20221229203412222"></p>
+<p><img src="/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203317920-1672317331094.png" alt="image-20221229203317920"></p>
+<p><img src="/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203412222-1672317331094.png" alt="image-20221229203412222"></p>
 
     </div>
 
@@ -383,11 +383,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2022/12/28/DNS%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/" rel="prev" title="DNS隧道基础">
+    <a href="/2022/12/28/DNS%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/" rel="prev" title="DNS隧道基础">
       <i class="fa fa-chevron-left"></i> DNS隧道基础
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2022/12/31/%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93%E4%B9%8BNeo-reGeorg/" rel="next" title="内网隧道之Neo-reGeorg">
+    <a href="/2022/12/31/%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93%E4%B9%8BNeo-reGeorg/" rel="next" title="内网隧道之Neo-reGeorg">
       内网隧道之Neo-reGeorg <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -455,14 +455,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -523,48 +523,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

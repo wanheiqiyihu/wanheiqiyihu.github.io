@@ -5,59 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="BUUCTF刷题日志2第一题 [极客大挑战 2019]Upload一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image&#x2F;jpeg  但是我们的马里面的&lt;?又被过滤了，所以用&lt;script language&#x3D;&quot;php&quot;&gt;   &lt;&#x2F;script&gt; 来进行绕过  添加一个gif的文件头进去，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BUUCTF刷题日志2">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="BUUCTF刷题日志2第一题 [极客大挑战 2019]Upload一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image&#x2F;jpeg  但是我们的马里面的&lt;?又被过滤了，所以用&lt;script language&#x3D;&quot;php&quot;&gt;   &lt;&#x2F;script&gt; 来进行绕过  添加一个gif的文件头进去，">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png">
 <meta property="article:published_time" content="2022-01-17T13:00:19.000Z">
 <meta property="article:modified_time" content="2022-01-17T13:02:48.000Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/">
 
 
 <script id="page-configurations">
@@ -119,7 +119,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -140,92 +140,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -283,10 +283,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -315,7 +315,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
+                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
                 </span>
             </span>
 
@@ -331,59 +331,59 @@
 
       
         <h1 id="BUUCTF刷题日志2"><a href="#BUUCTF刷题日志2" class="headerlink" title="BUUCTF刷题日志2"></a>BUUCTF刷题日志2</h1><h2 id="第一题-极客大挑战-2019-Upload"><a href="#第一题-极客大挑战-2019-Upload" class="headerlink" title="第一题 [极客大挑战 2019]Upload"></a>第一题 [极客大挑战 2019]Upload</h2><p>一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image/jpeg</p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png" alt="image-20220117150427298"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png" alt="image-20220117150427298"></p>
 <p>但是我们的马里面的&lt;?又被过滤了，所以用<code>&lt;script language=&quot;php&quot;&gt;   &lt;/script&gt; </code>来进行绕过</p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png" alt="image-20220117151055301"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png" alt="image-20220117151055301"></p>
 <p>添加一个gif的文件头进去，绕过这个判断</p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png" alt="image-20220117151122705"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png" alt="image-20220117151122705"></p>
 <p>上传成功</p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png" alt="image-20220117151158231"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png" alt="image-20220117151158231"></p>
 <p>猜测路径为<code>/upload/新建文本文档.phtml</code></p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png" alt="image-20220117152049720"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png" alt="image-20220117152049720"></p>
 <p>成功在根目录找到flag</p>
 <h2 id="第二题-文件上传"><a href="#第二题-文件上传" class="headerlink" title="第二题 文件上传"></a>第二题 文件上传</h2><p>一个前端绕过罢了，还是用phtml文件</p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png" alt="image-20220117154044267"></p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png" alt="image-20220117154204041"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png" alt="image-20220117154044267"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png" alt="image-20220117154204041"></p>
 <p>在根目录找到flag</p>
-<h2 id="第三题-php解析特性-char绕过"><a href="#第三题-php解析特性-char绕过" class="headerlink" title="第三题 php解析特性 char绕过"></a>第三题 php解析特性 char绕过</h2><p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png" alt="image-20220117154748431"></p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png" alt="image-20220117154838651"></p>
+<h2 id="第三题-php解析特性-char绕过"><a href="#第三题-php解析特性-char绕过" class="headerlink" title="第三题 php解析特性 char绕过"></a>第三题 php解析特性 char绕过</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png" alt="image-20220117154748431"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png" alt="image-20220117154838651"></p>
 <p>有前端验证</p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png" alt="image-20220117155745159"></p>
-<p>在源码中发现了calc.php<img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png" alt="image-20220117161601913"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png" alt="image-20220117155745159"></p>
+<p>在源码中发现了calc.php<img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png" alt="image-20220117161601913"></p>
 <p>写不来了，看了别人的wp，</p>
 <p>然后说waf无法识别加了空格的num参数，” num”和”num”，加了空格就不是num参数了，但是php解析的时候会自动把空格去掉，然后就绕过了waf。</p>
 <p>然后使用scandir()函数，scandir(“/“)但是/被过滤了，所以用char(“47”)来代替</p>
 <p><code>? num=print_r(scandir(chr(47)));</code></p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png" alt="image-20220117162229698"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png" alt="image-20220117162229698"></p>
 <p>发现flag，然后就访问这个flag</p>
 <p>calc.php? <code>num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</code></p>
-<h2 id="第四题-sql注入-极客大挑战-2019-BabySQL"><a href="#第四题-sql注入-极客大挑战-2019-BabySQL" class="headerlink" title="第四题 sql注入[极客大挑战 2019]BabySQL"></a>第四题 sql注入[极客大挑战 2019]BabySQL</h2><p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png" alt="image-20220117170804546"></p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png" alt="image-20220117170814134"></p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png" alt="image-20220117171730895"></p>
+<h2 id="第四题-sql注入-极客大挑战-2019-BabySQL"><a href="#第四题-sql注入-极客大挑战-2019-BabySQL" class="headerlink" title="第四题 sql注入[极客大挑战 2019]BabySQL"></a>第四题 sql注入[极客大挑战 2019]BabySQL</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png" alt="image-20220117170804546"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png" alt="image-20220117170814134"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png" alt="image-20220117171730895"></p>
 <p>但是可以双写绕过select和union</p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png" alt="image-20220117171950628"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png" alt="image-20220117171950628"></p>
 <p>爆出列数有三个</p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png" alt="image-20220117172055414"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png" alt="image-20220117172055414"></p>
 <p>然后又是枯燥的爆表爆字段</p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png" alt="image-20220117172428770"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png" alt="image-20220117172428770"></p>
 <p>人嘛了，information里面的or都被过滤了</p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png" alt="image-20220117172541108"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png" alt="image-20220117172541108"></p>
 <p>反正一步一步爆，然后就出来了</p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png" alt="image-20220117173343401"></p>
-<h2 id="第五题-备份文件-代码审计-弱类型"><a href="#第五题-备份文件-代码审计-弱类型" class="headerlink" title="第五题 备份文件 代码审计 弱类型"></a>第五题 备份文件 代码审计 弱类型</h2><p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png" alt="image-20220117201827743"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png" alt="image-20220117173343401"></p>
+<h2 id="第五题-备份文件-代码审计-弱类型"><a href="#第五题-备份文件-代码审计-弱类型" class="headerlink" title="第五题 备份文件 代码审计 弱类型"></a>第五题 备份文件 代码审计 弱类型</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png" alt="image-20220117201827743"></p>
 <p>发现备份文件,又是代码审计</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$key</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric(<span class="variable">$key</span>)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&quot;Just num!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$key</span> = intval(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span> == <span class="variable">$str</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Try to find out source file!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>弱比较：如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行，在比较时该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</p>
 <p>所以我们直接传值key=123</p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png" alt="image-20220117202715872"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png" alt="image-20220117202715872"></p>
 <p>得到flag</p>
 <h2 id="第六题-模板注入"><a href="#第六题-模板注入" class="headerlink" title="第六题 模板注入"></a>第六题 模板注入</h2><p>经典老题目了</p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png" alt="image-20220117202952675"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png" alt="image-20220117202952675"></p>
 <p>flag中提示了flag的位置<code>flag in /fllllllllllllag</code></p>
 <p>welcome中提示了<code>render</code>模板渲染用的函数</p>
 <p>hints中提示了filehash的加密方法<code>md5(cookie_secret+md5(filename))</code></p>
-<p><img src="/wan1/wan1/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png" alt="image-20220117203315129"></p>
+<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png" alt="image-20220117203315129"></p>
 <p>然后就开始模板注入，我们的目的就是获取cookie_secret</p>
 <p>[(33条消息) BUUCTF <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45642610/article/details/112519061">护网杯 2018]easy_tornado 1_wow小华的博客-CSDN博客</a></p>
 
@@ -401,11 +401,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/" rel="prev" title="算法图解">
+    <a href="/2022/01/16/%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3/" rel="prev" title="算法图解">
       <i class="fa fa-chevron-left"></i> 算法图解
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2022/01/19/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%91%E5%BA%8F%E5%88%97%E5%8C%96-%E7%BB%95%E8%BF%87-weakup/" rel="next" title="序列化与发序列化 绕过__weakup()">
+    <a href="/2022/01/19/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%91%E5%BA%8F%E5%88%97%E5%8C%96-%E7%BB%95%E8%BF%87-weakup/" rel="next" title="序列化与发序列化 绕过__weakup()">
       序列化与发序列化 绕过__weakup() <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -473,14 +473,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -541,48 +541,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

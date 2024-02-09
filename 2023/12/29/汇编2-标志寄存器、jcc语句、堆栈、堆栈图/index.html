@@ -5,42 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="汇编2-标志寄存器、jcc语句、堆栈、堆栈图杂项EIP寄存器是记录程序运行到哪个寄存器就指向哪个寄存器。 cmp语句是用来看前后两个参数的值是否相等的，当然可以指定某个内存中的数据进行比较。比较结果会放到Zf里面去，也就是下图所示的寄存器中。  0XCCCCCCCC 在汇编中是int 3 odF2  在OD的反汇编视图中使用F2进行下断 F4  程序执行到当前光标位置 F5  缩小、还原当前窗口">
 <meta property="og:type" content="article">
 <meta property="og:title" content="汇编2-标志寄存器、jcc语句、堆栈、堆栈图">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="汇编2-标志寄存器、jcc语句、堆栈、堆栈图杂项EIP寄存器是记录程序运行到哪个寄存器就指向哪个寄存器。 cmp语句是用来看前后两个参数的值是否相等的，当然可以指定某个内存中的数据进行比较。比较结果会放到Zf里面去，也就是下图所示的寄存器中。  0XCCCCCCCC 在汇编中是int 3 odF2  在OD的反汇编视图中使用F2进行下断 F4  程序执行到当前光标位置 F5  缩小、还原当前窗口">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225203726.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225350448.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225609644.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225849576.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228230924204.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228231149048.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231229151423853.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225203726.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225350448.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225609644.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225849576.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228230924204.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228231149048.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231229151423853.png">
 <meta property="article:published_time" content="2023-12-29T08:26:40.000Z">
 <meta property="article:modified_time" content="2023-12-29T08:27:19.142Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225203726.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225203726.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/">
 
 
 <script id="page-configurations">
@@ -102,7 +102,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -123,92 +123,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -266,10 +266,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -298,7 +298,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/miansha/" itemprop="url" rel="index"><span itemprop="name">-miansha</span></a>
+                  <a href="/categories/miansha/" itemprop="url" rel="index"><span itemprop="name">-miansha</span></a>
                 </span>
             </span>
 
@@ -315,15 +315,15 @@
       
         <h1 id="汇编2-标志寄存器、jcc语句、堆栈、堆栈图"><a href="#汇编2-标志寄存器、jcc语句、堆栈、堆栈图" class="headerlink" title="汇编2-标志寄存器、jcc语句、堆栈、堆栈图"></a>汇编2-标志寄存器、jcc语句、堆栈、堆栈图</h1><h1 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h1><p>EIP寄存器是记录程序运行到哪个寄存器就指向哪个寄存器。</p>
 <p>cmp语句是用来看前后两个参数的值是否相等的，当然可以指定某个内存中的数据进行比较。比较结果会放到Zf里面去，也就是下图所示的寄存器中。</p>
-<p><img src="/wan1/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225203726.png" alt="image-20231228225203726"></p>
+<p><img src="/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225203726.png" alt="image-20231228225203726"></p>
 <p>0XCCCCCCCC 在汇编中是int 3</p>
 <h2 id="od"><a href="#od" class="headerlink" title="od"></a>od</h2><p>F2  在OD的反汇编视图中使用F2进行下断<br> F4  程序执行到当前光标位置<br> F5  缩小、还原当前窗口<br> F7  单步步入，进入函数内,跟进到CALL地址处<br> F8  单步步过，越过函数实现，不会进入CALL地址处<br> F9  直接运行程序，遇到断点程序暂停</p>
-<h1 id="标志寄存器"><a href="#标志寄存器" class="headerlink" title="标志寄存器"></a>标志寄存器</h1><p><img src="/wan1/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225350448.png" alt="image-20231228225350448"></p>
-<p><img src="/wan1/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225609644.png" alt="image-20231228225609644"></p>
+<h1 id="标志寄存器"><a href="#标志寄存器" class="headerlink" title="标志寄存器"></a>标志寄存器</h1><p><img src="/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225350448.png" alt="image-20231228225350448"></p>
+<p><img src="/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225609644.png" alt="image-20231228225609644"></p>
 <p>下面这张图是eflag寄存器需要我们掌握的位数，一般都有八个，下面是一些介绍。</p>
-<p><img src="/wan1/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225849576.png" alt="image-20231228225849576"></p>
-<p><img src="/wan1/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228230924204.png" alt="image-20231228230924204"></p>
-<h1 id="堆栈"><a href="#堆栈" class="headerlink" title="堆栈"></a>堆栈</h1><p><img src="/wan1/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228231149048.png" alt="image-20231228231149048">哈</p>
+<p><img src="/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225849576.png" alt="image-20231228225849576"></p>
+<p><img src="/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228230924204.png" alt="image-20231228230924204"></p>
+<h1 id="堆栈"><a href="#堆栈" class="headerlink" title="堆栈"></a>堆栈</h1><p><img src="/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228231149048.png" alt="image-20231228231149048">哈</p>
 <p>上图，一个exe程序可以分为这几个区域，<br>其中代码区就是存储一些代码，他是可读可可执行（rx）权限<br>堆，这个里面就是c语言里面的malloc函数申请的内存空间就是申请在这里面的。</p>
 <h2 id="ESP-EBP"><a href="#ESP-EBP" class="headerlink" title="ESP EBP"></a>ESP EBP</h2><p>esp和ebp分别是栈顶和栈底，值得注意的是，这个堆栈是从高字节往第四节存储的。</p>
 <p>在进入程序和退出程序的时候，esp和ebp的值是不能变的，也就是堆栈平衡。</p>
@@ -333,7 +333,7 @@
 <p>cmp指令，比较两 个操作数是否相等，如果相等则ZF为1（但是不能比较两个立即数）</p>
 <p>test指令，对两个操作数进行相与操作，通常都是用于判断一个寄存器是否为0，test eax eax</p>
 <p>而jcc语句大多都是通过不同的情况，进行跳转</p>
-<p><img src="/wan1/wan1/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231229151423853.png" alt="image-20231229151423853"></p>
+<p><img src="/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231229151423853.png" alt="image-20231229151423853"></p>
 <h1 id="堆栈-1"><a href="#堆栈-1" class="headerlink" title="堆栈"></a>堆栈</h1><h2 id="压入数据"><a href="#压入数据" class="headerlink" title="压入数据"></a>压入数据</h2><p>压入数据一般就可以大致分为下面两个</p>
 <p>1.先把数据存到堆栈-4的那个地址，随后将堆栈提升4字节，从而存入</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">代码实现如下：</span><br><span class="line">mov dword ptr ds:[0x19FF70],0x123456</span><br><span class="line">sub esp,0x4</span><br></pre></td></tr></table></figure>
@@ -363,11 +363,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/" rel="prev" title="汇编1-进制、数据宽度、通用寄存器、汇编指令、内存寻址">
+    <a href="/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/" rel="prev" title="汇编1-进制、数据宽度、通用寄存器、汇编指令、内存寻址">
       <i class="fa fa-chevron-left"></i> 汇编1-进制、数据宽度、通用寄存器、汇编指令、内存寻址
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2024/01/02/%E7%BB%95cdn%E4%B9%8B%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="next" title="绕cdn之邮件服务器">
+    <a href="/2024/01/02/%E7%BB%95cdn%E4%B9%8B%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="next" title="绕cdn之邮件服务器">
       绕cdn之邮件服务器 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -435,14 +435,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -503,48 +503,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

