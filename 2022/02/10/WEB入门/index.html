@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/wan1/css/main.css">
+
+
+<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="WEB入门最近感觉基础薄弱，遂重新温习一下各类基础 1. WEB技术架构 1.1 协议1.1.1 http协议1.1.1.1 http简介超文本传输协议（英文：HyperText Transfer Protocol，缩写：HTTP）是一种用于分布式、协作式和超媒体信息系统的应用层协议。HTTP是万维网的数据通信的基础。 1.1.1.2 http概述HTTP是一个客户端终端（用户）和服务器端（网站）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WEB入门">
+<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/02/10/WEB%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="十三の博客">
+<meta property="og:description" content="WEB入门最近感觉基础薄弱，遂重新温习一下各类基础 1. WEB技术架构 1.1 协议1.1.1 http协议1.1.1.1 http简介超文本传输协议（英文：HyperText Transfer Protocol，缩写：HTTP）是一种用于分布式、协作式和超媒体信息系统的应用层协议。HTTP是万维网的数据通信的基础。 1.1.1.2 http概述HTTP是一个客户端终端（用户）和服务器端（网站）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/10/WEB%E5%85%A5%E9%97%A8/image-20220210105848463.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/10/WEB%E5%85%A5%E9%97%A8/877318-20180418161321986-304902913.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/10/WEB%E5%85%A5%E9%97%A8/867021-20180322001744323-654009411.jpg">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/10/WEB%E5%85%A5%E9%97%A8/1.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/10/WEB%E5%85%A5%E9%97%A8/v2-bd43cb8bd3dc72bb0df8de108d4de2e0_r.jpg">
+<meta property="article:published_time" content="2022-02-10T03:42:17.000Z">
+<meta property="article:modified_time" content="2022-12-07T16:22:24.000Z">
+<meta property="article:author" content="十三">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/10/WEB%E5%85%A5%E9%97%A8/image-20220210105848463.png">
+
+<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/02/10/WEB%E5%85%A5%E9%97%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>WEB入门 | 十三の博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/wan1/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">十三の博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-ctf做题笔记">
+
+    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-python">
+
+    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+
+  </li>
+        <li class="menu-item menu-item-读书笔记">
+
+    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-渗透测试">
+
+    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+
+  </li>
+        <li class="menu-item menu-item-基础">
+
+    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+
+  </li>
+        <li class="menu-item menu-item-轮子">
+
+    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+
+  </li>
+        <li class="menu-item menu-item-漏洞库">
+
+    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+
+  </li>
+        <li class="menu-item menu-item-代码审计">
+
+    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+
+  </li>
+        <li class="menu-item menu-item-逆向">
+
+    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+
+  </li>
+        <li class="menu-item menu-item-应急响应">
+
+    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+
+  </li>
+        <li class="menu-item menu-item-免杀">
+
+    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+
+  </li>
+        <li class="menu-item menu-item-靶场">
+
+    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+
+  </li>
+        <li class="menu-item menu-item-cve申请">
+
+    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+
+  </li>
+        <li class="menu-item menu-item-c语言">
+
+    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/02/10/WEB%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WEB入门
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-10 11:42:17" itemprop="dateCreated datePublished" datetime="2022-02-10T11:42:17+08:00">2022-02-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-08 00:22:24" itemprop="dateModified" datetime="2022-12-08T00:22:24+08:00">2022-12-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/wan1/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="WEB入门"><a href="#WEB入门" class="headerlink" title="WEB入门"></a>WEB入门</h1><p>最近感觉基础薄弱，遂重新温习一下各类基础</p>
+<h1 id="1-WEB技术架构"><a href="#1-WEB技术架构" class="headerlink" title="1. WEB技术架构"></a>1. WEB技术架构</h1><p><img src="/wan1/wan1/2022/02/10/WEB%E5%85%A5%E9%97%A8/image-20220210105848463.png" alt="image-20220210105848463"></p>
+<h2 id="1-1-协议"><a href="#1-1-协议" class="headerlink" title="1.1 协议"></a>1.1 协议</h2><h3 id="1-1-1-http协议"><a href="#1-1-1-http协议" class="headerlink" title="1.1.1 http协议"></a>1.1.1 http协议</h3><h4 id="1-1-1-1-http简介"><a href="#1-1-1-1-http简介" class="headerlink" title="1.1.1.1 http简介"></a>1.1.1.1 http简介</h4><p>超文本传输协议（英文：<strong>H</strong>yper<strong>T</strong>ext <strong>T</strong>ransfer <strong>P</strong>rotocol，缩写：HTTP）是一种用于分布式、协作式和超媒体信息系统的应用层协议。HTTP是万维网的数据通信的基础。</p>
+<h4 id="1-1-1-2-http概述"><a href="#1-1-1-2-http概述" class="headerlink" title="1.1.1.2 http概述"></a>1.1.1.2 http概述</h4><p>HTTP是一个客户端终端（用户）和服务器端（网站）请求和应答的标准（TCP）。通过使用网页浏览器、网络爬虫或者其它的工具，客户端发起一个HTTP请求到服务器上指定端口（默认端口为80）。我们称这个客户端为用户代理程序（user agent）。应答的服务器上存储着一些资源，比如HTML文件和图像。我们称这个应答服务器为源服务器（origin server）。在用户代理和源服务器中间可能存在多个“中间层”，比如代理服务器、网关或者隧道（tunnel）。</p>
+<p>尽管TCP/IP协议是互联网上最流行的应用，HTTP协议中，并没有规定必须使用它或它支持的层。事实上，HTTP可以在任何互联网协议上，或其他网络上实现。HTTP假定其下层协议提供可靠的传输。因此，任何能够提供这种保证的协议都可以被其使用。因此也就是其在TCP/IP协议族使用TCP作为其传输层。</p>
+<p>通常，由HTTP客户端发起一个请求，创建一个到服务器指定端口（默认是80端口）的TCP连接。HTTP服务器则在那个端口监听客户端的请求。一旦收到请求，服务器会向客户端返回一个状态，比如”HTTP/1.1 200 OK”，以及返回的内容，如请求的文件、错误消息、或者其它信息。</p>
+<h4 id="1-1-1-3-http工作原理"><a href="#1-1-1-3-http工作原理" class="headerlink" title="1.1.1.3 http工作原理"></a>1.1.1.3 http工作原理</h4><p>HTTP协议定义Web客户端如何从Web服务器请求Web页面，以及服务器如何把Web页面传送给客户端。HTTP协议采用了请求/响应模型。客户端向服务器发送一个请求报文，请求报文包含请求的方法、URL、协议版本、请求头部和请求数据。服务器以一个状态行作为响应，响应的内容包括协议的版本、成功或者错误代码、服务器信息、响应头部和响应数据。</p>
+<p>以下是 HTTP 请求/响应的步骤：</p>
+<p>\1. 客户端连接到Web服务器<br>一个HTTP客户端，通常是浏览器，与Web服务器的HTTP端口（默认为80）建立一个TCP套接字连接。例如，<a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a>。</p>
+<p>\2. 发送HTTP请求<br>通过TCP套接字，客户端向Web服务器发送一个文本的请求报文，一个请求报文由请求行、请求头部、空行和请求数据4部分组成。</p>
+<p>\3. 服务器接受请求并返回HTTP响应<br>Web服务器解析请求，定位请求资源。服务器将资源复本写到TCP套接字，由客户端读取。一个响应由状态行、响应头部、空行和响应数据4部分组成。</p>
+<p>\4. 释放连接TCP连接<br>若connection 模式为close，则服务器主动关闭TCP连接，客户端被动关闭连接，释放TCP连接;若connection 模式为keepalive，则该连接会保持一段时间，在该时间内可以继续接收请求;</p>
+<p>\5. 客户端浏览器解析HTML内容<br>客户端浏览器首先解析状态行，查看表明请求是否成功的状态代码。然后解析每一个响应头，响应头告知以下为若干字节的HTML文档和文档的字符集。客户端浏览器读取响应数据HTML，根据HTML的语法对其进行格式化，并在浏览器窗口中显示。</p>
+<h4 id="1-1-1-4-HTTP状态码"><a href="#1-1-1-4-HTTP状态码" class="headerlink" title="1.1.1.4 HTTP状态码"></a>1.1.1.4 HTTP状态码</h4><p><img src="/wan1/wan1/2022/02/10/WEB%E5%85%A5%E9%97%A8/877318-20180418161321986-304902913.png" alt="img"></p>
+<h4 id="1-1-1-5-url"><a href="#1-1-1-5-url" class="headerlink" title="1.1.1.5 url"></a>1.1.1.5 url</h4><p>超文本传输协议（HTTP）的统一资源定位符将从因特网获取信息的五个基本元素包括在一个简单的地址中：</p>
+<ul>
+<li>传送协议。</li>
+<li>层级URL标记符号(为[//],固定不变)</li>
+<li>访问资源需要的凭证信息（可省略）</li>
+<li>服务器。（通常为域名，有时为IP地址）</li>
+<li>端口号。（以数字方式表示，若为HTTP的默认值“:80”可省略）</li>
+<li>路径。（以“/”字符区别路径中的每一个目录名称）</li>
+<li>查询。（GET模式的窗体参数，以“?”字符为起点，每个参数以“&amp;”隔开，再以“=”分开参数名称与数据，通常以UTF8的URL编码，避开字符冲突的问题）</li>
+<li>片段。以“#”字符为起点</li>
+</ul>
+<p>以<a target="_blank" rel="noopener" href="http://www.luffycity.com/news/index.html?id=250&amp;page=1">http://www.luffycity.com:80/news/index.html?id=250&amp;page=1</a> 为例</p>
+<h4 id="1-1-1-6-http响应格式"><a href="#1-1-1-6-http响应格式" class="headerlink" title="1.1.1.6 http响应格式"></a>1.1.1.6 http响应格式</h4><p><img src="/wan1/wan1/2022/02/10/WEB%E5%85%A5%E9%97%A8/867021-20180322001744323-654009411.jpg" alt="img"></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/an-wen/p/11180076.html">HTTP协议超级详解 - 爱文飞翔 - 博客园 (cnblogs.com)</a></p>
+<h3 id="1-1-2-https协议"><a href="#1-1-2-https协议" class="headerlink" title="1.1.2 https协议"></a>1.1.2 https协议</h3><p>基于HTTP协议，通过SSL或TLS提供加密处理数据、验证对方身份以及数据完整性保护</p>
+<p>通过抓包可以看到数据不是明文传输，而且HTTPS有如下特点：</p>
+<ol>
+<li>内容加密：采用混合加密技术，中间者无法直接查看明文内容</li>
+<li>验证身份：通过证书认证客户端访问的是自己的服务器</li>
+<li>保护数据完整性：防止传输的内容被中间人冒充或者篡改</li>
+</ol>
+<h4 id="1-1-2-1-ssl建立连接过程"><a href="#1-1-2-1-ssl建立连接过程" class="headerlink" title="1.1.2.1 ssl建立连接过程"></a>1.1.2.1 ssl建立连接过程</h4><p><img src="/wan1/wan1/2022/02/10/WEB%E5%85%A5%E9%97%A8/1.png" alt="在这里插入图片描述"></p>
+<p>client向server发送请求<a target="_blank" rel="noopener" href="https://baidu.com,然后连接到server的443端口,发送的信息主要是随机值1和客户端支持的加密算法./">https://baidu.com，然后连接到server的443端口，发送的信息主要是随机值1和客户端支持的加密算法。</a><br>server接收到信息之后给予client响应握手信息，包括随机值2和匹配好的协商加密算法，这个加密算法一定是client发送给server加密算法的子集。<br>随即server给client发送第二个响应报文是数字证书。服务端必须要有一套数字证书，可以自己制作，也可以向组织申请。区别就是自己颁发的证书需要客户端验证通过，才可以继续访问，而使用受信任的公司申请的证书则不会弹出提示页面，这套证书其实就是一对公钥和私钥。传送证书，这个证书其实就是公钥，只是包含了很多信息，如证书的颁发机构，过期时间、服务端的公钥，第三方证书认证机构(CA)的签名，服务端的域名信息等内容。<br>客户端解析证书，这部分工作是由客户端的TLS来完成的，首先会验证公钥是否有效，比如颁发机构，过期时间等等，如果发现异常，则会弹出一个警告框，提示证书存在问题。如果证书没有问题，那么就生成一个随即值（预主秘钥）。<br>客户端认证证书通过之后，接下来是通过随机值1、随机值2和预主秘钥组装会话秘钥。然后通过证书的公钥加密会话秘钥。<br>传送加密信息，这部分传送的是用证书加密后的会话秘钥，目的就是让服务端使用秘钥解密得到随机值1、随机值2和预主秘钥。<br>服务端解密得到随机值1、随机值2和预主秘钥，然后组装会话秘钥，跟客户端会话秘钥相同。<br>客户端通过会话秘钥加密一条消息发送给服务端，主要验证服务端是否正常接受客户端加密的消息。<br>同样服务端也会通过会话秘钥加密一条消息回传给客户端，如果客户端能够正常接受的话表明SSL层连接建立完成了。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoming100001/article/details/81109617">(39条消息) HTTP和HTTPS协议，看一篇就够了_不一样的博客-CSDN博客_https</a></p>
+<h2 id="1-2-系统"><a href="#1-2-系统" class="headerlink" title="1.2 系统"></a>1.2 系统</h2><p>在这只是先了解基础，后面会继续深入学习操作系统方面的东西</p>
+<h3 id="1-2-1-Linux系统"><a href="#1-2-1-Linux系统" class="headerlink" title="1.2.1 Linux系统"></a>1.2.1 Linux系统</h3><p>Linux，全称GNU/Linux，是一种免费使用和自由传播的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%B1%BBUNIX/9032872">类UNIX</a>操作系统，其内核由<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9E%97%E7%BA%B3%E6%96%AF%C2%B7%E6%9C%AC%E7%BA%B3%E7%AC%AC%E5%85%8B%E7%89%B9%C2%B7%E6%89%98%E7%93%A6%E5%85%B9/1034429">林纳斯·本纳第克特·托瓦兹</a>于1991年10月5日首次发布，它主要受到<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Minix/7106045">Minix</a>和Unix思想的启发，是一个基于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/POSIX">POSIX</a>的多用户、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%A4%9A%E4%BB%BB%E5%8A%A1/1011764">多任务</a>、支持<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%A4%9A%E7%BA%BF%E7%A8%8B/1190404">多线程</a>和多<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/CPU">CPU</a>的操作系统。它能运行主要的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Unix/219943">Unix</a>工具软件、应用程序和网络协议。它支持<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/32%E4%BD%8D/5812218">32位</a>和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/64%E4%BD%8D">64位</a>硬件。Linux继承了Unix以网络为核心的设计思想，是一个性能稳定的多用户网络操作系统。Linux有上百种不同的发行版，如基于社区开发的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/debian/748667">debian</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/archlinux/10857530">archlinux</a>，和基于商业开发的[Red Hat Enterprise Linux](<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Red">https://baike.baidu.com/item/Red</a> Hat Enterprise Linux/10770503)、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/SUSE/60409">SUSE</a>、[Oracle Linux](<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Oracle">https://baike.baidu.com/item/Oracle</a> Linux/6876458)等。</p>
+<h3 id="1-2-2-Unix系统"><a href="#1-2-2-Unix系统" class="headerlink" title="1.2.2 Unix系统"></a>1.2.2 Unix系统</h3><p>Unix是20世纪70年代初出现的一个操作系统，除了作为网络操作系统之外，还可以作为单机操作系统使用。Unix作为一种开发平台和台式操作系统获得了广泛使用，主要用于工程应用和科学计算等领域。</p>
+<h2 id="1-3-前端"><a href="#1-3-前端" class="headerlink" title="1.3 前端"></a>1.3 前端</h2><p><img src="/wan1/wan1/2022/02/10/WEB%E5%85%A5%E9%97%A8/v2-bd43cb8bd3dc72bb0df8de108d4de2e0_r.jpg" alt="preview"></p>
+<p>了解 web的大概框架，具体某个地方的东西会更深入的学习。</p>
+<h2 id="1-4-后端"><a href="#1-4-后端" class="headerlink" title="1.4 后端"></a>1.4 后端</h2><h2 id="1-5-中间件"><a href="#1-5-中间件" class="headerlink" title="1.5 中间件"></a>1.5 中间件</h2><h2 id="1-6-数据库"><a href="#1-6-数据库" class="headerlink" title="1.6 数据库"></a>1.6 数据库</h2><h1 id="2-web网站平台"><a href="#2-web网站平台" class="headerlink" title="2. web网站平台"></a>2. web网站平台</h1><p>内容管理系统（content management system，CMS），是一种位于WEB前端（Web 服务器）和后端办公系统或流程（内容创作、编辑）之间的软件系统。内容的创作人员、编辑人员、发布人员使用内容管理系统来提交、修改、审批、发布内容。这里指的“内容”可能包括文件、表格、图片、数据库中的数据甚至视频等一切你想要发布到Internet、Intranet以及Extranet网站的信息。<br>内容管理还可选地提供内容抓取工具，将第三方信息来源，比如将文本文件、HTML网页、Web服务、关系数据库等的内容自动抓取，并经分析处理后放到自身的内容库中。<br>随着个性化的发展，内容管理还辅助WEB前端将内容以个性化的方式提供给内容使用者，即提供个性化的门户框架，以基于WEB技术将内容更好地推送到用户的浏览器端.<br>内容管理系统是企业信息化建设和电子政务的新宠，也是一个相对较新的市场。对于内容管理，业界还没有一个统一的定义，不同的机构有不同的理解。</p>
+<h2 id="2-1-wordpress"><a href="#2-1-wordpress" class="headerlink" title="2.1 wordpress"></a>2.1 wordpress</h2><p><strong>WordPress是使用PHP语言开发的<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:1793643716%7D">内容管理系统</a>：</strong></p>
+<ul>
+<li>内容管理系统，英文叫做 Content Management System（CMS）。</li>
+<li>WordPress是全球最多人使用的，免费开源的<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%BB%BA%E7%AB%99%E7%A8%8B%E5%BA%8F&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:1793643716%7D">建站程序</a>。</li>
+</ul>
+<h2 id="2-2-joomla"><a href="#2-2-joomla" class="headerlink" title="2.2 joomla"></a>2.2 joomla</h2><p>Joomla!是一套全球知名的内容管理系统。Joomla!是使用PHP语言加上MySQL数据库所开发的软件系统，最新版本是3.9.27 。可以在Linux、 Windows、MacOSX等各种不同的平台上执行。</p>
+<h2 id="2-3-discuz"><a href="#2-3-discuz" class="headerlink" title="2.3 discuz!"></a>2.3 discuz!</h2><p>Crossday Discuz! Board（简称 Discuz!）是北京康盛新创科技有限责任公司推出的一套通用的社区论坛软件系统。自2001年6月面世以来，Discuz!已拥有15年以上的应用历史和200多万网站用户案例，是全球成熟度最高、覆盖率最大的论坛软件系统之一。</p>
+<h2 id="2-4-dedecms（织梦）"><a href="#2-4-dedecms（织梦）" class="headerlink" title="2.4 dedecms（织梦）"></a>2.4 dedecms（织梦）</h2><p>织梦内容管理系统(DedeCms) 以简单、实用、开源而闻名，是国内最知名的PHP开源网站管理系统，也是使用用户最多的PHP类CMS系统，在经历多年的发展，版本无论在功能，还是在易用性方面，都有了长足的发展和进步，DedeCms免费版的主要目标用户锁定在个人站长，功能更专注于个人网站或中小型门户的构建，当然也不乏有企业用户和学校等在使用该系统。</p>
+<h2 id="2-5-wamp"><a href="#2-5-wamp" class="headerlink" title="2.5 wamp"></a>2.5 wamp</h2><p>Windows下的Apache+Mysql/MariaDB+Perl/PHP/Python，一组常用来搭建动态网站或者服务器的开源软件，本身都是各自独立的程序，但是因为常被放在一起使用，拥有了越来越高的兼容度，共同组成了一个强大的Web应用程序平台。随着开源潮流的蓬勃发展，开放源代码的LAMP已经与J2EE和.Net商业软件形成三足鼎立之势，并且该软件开发的项目在软件方面的投资成本较低，因此受到整个IT界的关注。LAMP是基于Linux，Apache，MySQL/MariaDB和PHP的开放资源网络开发平台，PHP是一种有时候用Perl或Python可代替的编程语言。这个术语来自欧洲，在那里这些程序常用来作为一种标准开发环境。名字来源于每个程序的第一个字母。每个程序在所有权里都符合开放源代码标准：Linux是开放系统；Apache是最通用的网络服务器；mySQL是带有基于网络管理附加工具的关系数据库；PHP是流行的对象脚本语言，它包含了多数其它语言的优秀特征来使得它的网络开发更加有效。开发者在Windows操作系统下使用这些Linux环境里的工具称为使用WAMP。</p>
+<p>s</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/wan1/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/" rel="prev" title="xray+rad 自动化edusrc">
+      <i class="fa fa-chevron-left"></i> xray+rad 自动化edusrc
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/wan1/2022/02/17/%E4%BB%8A%E6%97%A5%E6%B8%97%E9%80%8F%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%88%E5%BF%83%E8%B7%B3%E5%8C%85-%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E7%9A%84%E5%9F%9F%E5%90%8D%EF%BC%89/" rel="next" title="今日渗透的知识（心跳包 访问不了的域名）">
+      今日渗透的知识（心跳包 访问不了的域名） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WEB%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">WEB入门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-WEB%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">1. WEB技术架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-http%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1.1 http协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-1-http%E7%AE%80%E4%BB%8B"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">1.1.1.1 http简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-2-http%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">1.1.1.2 http概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-3-http%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">1.1.1.3 http工作原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-4-HTTP%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">2.1.1.4.</span> <span class="nav-text">1.1.1.4 HTTP状态码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-5-url"><span class="nav-number">2.1.1.5.</span> <span class="nav-text">1.1.1.5 url</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-6-http%E5%93%8D%E5%BA%94%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.1.1.6.</span> <span class="nav-text">1.1.1.6 http响应格式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-https%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.1.2 https协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-2-1-ssl%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">1.1.2.1 ssl建立连接过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-Linux%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.2.1 Linux系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-Unix%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.2.2.</span> <span class="nav-text">1.2.2 Unix系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E5%89%8D%E7%AB%AF"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 前端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E5%90%8E%E7%AB%AF"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 后端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">2.5.</span> <span class="nav-text">1.5 中间件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.6.</span> <span class="nav-text">1.6 数据库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-web%E7%BD%91%E7%AB%99%E5%B9%B3%E5%8F%B0"><span class="nav-number">3.</span> <span class="nav-text">2. web网站平台</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-wordpress"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 wordpress</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-joomla"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 joomla</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-discuz"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 discuz!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-dedecms%EF%BC%88%E7%BB%87%E6%A2%A6%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 dedecms（织梦）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-wamp"><span class="nav-number">3.5.</span> <span class="nav-text">2.5 wamp</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="十三"
+      src="/wan1/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">十三</p>
+  <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/wan1/archives/">
+        
+          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">十三</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/wan1/lib/anime.min.js"></script>
+  <script src="/wan1/lib/velocity/velocity.min.js"></script>
+  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/wan1/js/utils.js"></script>
+
+<script src="/wan1/js/motion.js"></script>
+
+
+<script src="/wan1/js/schemes/pisces.js"></script>
+
+
+<script src="/wan1/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/wan1/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

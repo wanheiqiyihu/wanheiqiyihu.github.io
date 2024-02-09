@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/wan1/css/main.css">
+
+
+<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、进阶py：通关一个某校的题库第一关，除去列表中的重复元素已知两个列表，可能包含有相同元素，请找出两个列表的相同元素，并放入新的列表。打印新列表。输出结果中没有重复元素,如果两个列表中没有相同元素则输出[]。  第二关 递归求嵌套层数 123456789101112131415list_max &#x3D; []def level(mylist,a&#x3D;-1):    if  isinstance(mylis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一、进阶py：通关一个某校的题库">
+<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/index.html">
+<meta property="og:site_name" content="十三の博客">
+<meta property="og:description" content="一、进阶py：通关一个某校的题库第一关，除去列表中的重复元素已知两个列表，可能包含有相同元素，请找出两个列表的相同元素，并放入新的列表。打印新列表。输出结果中没有重复元素,如果两个列表中没有相同元素则输出[]。  第二关 递归求嵌套层数 123456789101112131415list_max &#x3D; []def level(mylist,a&#x3D;-1):    if  isinstance(mylis">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220105182957787.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220105195353498.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220105204458620.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220105231142866.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220106000047657.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220107132040203.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220109181909010.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220109181954023.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220109182026041.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220109182135667.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220109182214040.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220119205038551.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220125174147666.png">
+<meta property="article:published_time" content="2022-02-19T03:01:51.000Z">
+<meta property="article:modified_time" content="2022-02-19T03:04:20.000Z">
+<meta property="article:author" content="十三">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220105182957787.png">
+
+<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>一、进阶py：通关一个某校的题库 | 十三の博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/wan1/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">十三の博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-ctf做题笔记">
+
+    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-python">
+
+    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+
+  </li>
+        <li class="menu-item menu-item-读书笔记">
+
+    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-渗透测试">
+
+    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+
+  </li>
+        <li class="menu-item menu-item-基础">
+
+    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+
+  </li>
+        <li class="menu-item menu-item-轮子">
+
+    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+
+  </li>
+        <li class="menu-item menu-item-漏洞库">
+
+    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+
+  </li>
+        <li class="menu-item menu-item-代码审计">
+
+    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+
+  </li>
+        <li class="menu-item menu-item-逆向">
+
+    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+
+  </li>
+        <li class="menu-item menu-item-应急响应">
+
+    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+
+  </li>
+        <li class="menu-item menu-item-免杀">
+
+    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+
+  </li>
+        <li class="menu-item menu-item-靶场">
+
+    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+
+  </li>
+        <li class="menu-item menu-item-cve申请">
+
+    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+
+  </li>
+        <li class="menu-item menu-item-c语言">
+
+    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一、进阶py：通关一个某校的题库
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-02-19 11:01:51 / 修改时间：11:04:20" itemprop="dateCreated datePublished" datetime="2022-02-19T11:01:51+08:00">2022-02-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/wan1/categories/python/" itemprop="url" rel="index"><span itemprop="name">-python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="一、进阶py：通关一个某校的题库"><a href="#一、进阶py：通关一个某校的题库" class="headerlink" title="一、进阶py：通关一个某校的题库"></a>一、进阶py：通关一个某校的题库</h1><h2 id="第一关，除去列表中的重复元素"><a href="#第一关，除去列表中的重复元素" class="headerlink" title="第一关，除去列表中的重复元素"></a>第一关，除去列表中的重复元素</h2><p>已知两个列表，可能包含有相同元素，请找出两个列表的相同元素，并放入新的列表。打印新列表。输出结果中没有重复元素,如果两个列表中没有相同元素则输出[]。</p>
+<p><img src="/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220105182957787.png" alt="image-20220105182957787"></p>
+<h2 id="第二关-递归求嵌套层数"><a href="#第二关-递归求嵌套层数" class="headerlink" title="第二关 递归求嵌套层数"></a>第二关 递归求嵌套层数</h2><p><img src="/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220105195353498.png" alt="image-20220105195353498"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">list_max = []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">level</span>(<span class="params">mylist,a=-<span class="number">1</span></span>):</span></span><br><span class="line">    <span class="keyword">if</span>  <span class="built_in">isinstance</span>(mylist,<span class="built_in">list</span>):  <span class="comment">#判断mylist变量是否是一个列表</span></span><br><span class="line">        a += <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> mylist:</span><br><span class="line">            level(item,a)</span><br><span class="line">        list_max.append(a)</span><br><span class="line">        list_max.sort(reverse=<span class="literal">True</span>)</span><br><span class="line">        max_level = list_max[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">return</span> max_level + <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:  <span class="comment"># 不是列表，递归结束条件</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">origin=<span class="built_in">eval</span>(<span class="built_in">input</span>())</span><br><span class="line"><span class="built_in">print</span>(level(origin))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="中途插一关-递归输出索引"><a href="#中途插一关-递归输出索引" class="headerlink" title="中途插一关 递归输出索引"></a>中途插一关 递归输出索引</h2><p><img src="/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220105204458620.png" alt="image-20220105204458620"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    somestr, substr, startstr, endstr = <span class="built_in">input</span>().split()</span><br><span class="line">    startnum = <span class="built_in">int</span>(startstr)</span><br><span class="line">    endnum = <span class="built_in">int</span>(endstr)</span><br><span class="line">    fun(somestr, substr, startnum, endnum)</span><br><span class="line">num_list = []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span>(<span class="params">a,b,c,d</span>):</span></span><br><span class="line">    a_list = <span class="built_in">list</span>(a)</span><br><span class="line">    b_list = <span class="built_in">list</span>(b)</span><br><span class="line">    <span class="keyword">if</span> c+<span class="number">2</span>&lt;d:</span><br><span class="line">        <span class="keyword">if</span> a_list[c] == b_list[<span class="number">0</span>] <span class="keyword">and</span> a_list[c+<span class="number">1</span>] == b_list[<span class="number">1</span>] <span class="keyword">and</span> a_list[c+<span class="number">2</span>] == b_list[<span class="number">2</span>]:</span><br><span class="line">            index = c</span><br><span class="line">            num_list.append(index)</span><br><span class="line">            fun(a,b,c+<span class="number">3</span>,d)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            fun(a,b,c+<span class="number">1</span>,d)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> num_list == []:</span><br><span class="line">            <span class="built_in">print</span>(<span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(num_list)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+
+<h2 id="第三关-递归求加权和"><a href="#第三关-递归求加权和" class="headerlink" title="第三关 递归求加权和"></a>第三关 递归求加权和</h2><p><img src="/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220105231142866.png" alt="image-20220105231142866"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">num_list = []</span><br><span class="line"><span class="comment">#定义了一个吧列表里面所有元素加起来的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">jia</span>(<span class="params">a,b=<span class="number">0</span></span>):</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> a:</span><br><span class="line">        b = b + item</span><br><span class="line">    <span class="keyword">return</span> b</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sumlist</span>(<span class="params">lists,w</span>):</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> lists:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">isinstance</span>(item,<span class="built_in">list</span>):</span><br><span class="line">            sumlist(item,w+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">             num_list.append(item*w)</span><br><span class="line">    <span class="keyword">return</span> jia(num_list)</span><br><span class="line">nums  =  <span class="built_in">eval</span>(<span class="built_in">input</span>())</span><br><span class="line">addv  =  sumlist(nums,<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(addv)</span><br></pre></td></tr></table></figure>
+
+<h2 id="第四关"><a href="#第四关" class="headerlink" title="第四关"></a>第四关</h2><p><img src="/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220106000047657.png" alt="image-20220106000047657"></p>
+<p>第一个correct.in文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rhe+[35(fjej)w-wr3f[efe&#123;feofds&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>__main__文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建两个符号表</span></span><br><span class="line">symbols = &#123;<span class="string">&#x27;&#125;&#x27;</span>: <span class="string">&#x27;&#123;&#x27;</span>, <span class="string">&#x27;]&#x27;</span>: <span class="string">&#x27;[&#x27;</span>, <span class="string">&#x27;)&#x27;</span>: <span class="string">&#x27;(&#x27;</span>, <span class="string">&#x27;&gt;&#x27;</span>: <span class="string">&#x27;&lt;&#x27;</span>&#125;</span><br><span class="line">symbols_l, symbols_r = symbols.values(), symbols.keys()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check</span>(<span class="params">s</span>):</span></span><br><span class="line">    arr = []</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> symbols_l:</span><br><span class="line">            <span class="comment"># 左符号存入列表</span></span><br><span class="line">            arr.append(c)</span><br><span class="line">        <span class="keyword">elif</span> c <span class="keyword">in</span> symbols_r:</span><br><span class="line">            <span class="comment"># 右符号要不在列表中不存在，要么匹配失败</span></span><br><span class="line">            <span class="keyword">if</span> arr <span class="keyword">and</span> arr[-<span class="number">1</span>] == symbols[c]:</span><br><span class="line">                arr.pop()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"><span class="comment">#上面用栈的思想</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;correct.in&#x27;</span>,mode=<span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = f.read()</span><br><span class="line">    res = check(data)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;correct.out&#x27;</span>,mode=<span class="string">&#x27;wt&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> g:</span><br><span class="line">    g.write(<span class="built_in">str</span>(res))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="第五关-输出特定节日（类似母亲节）"><a href="#第五关-输出特定节日（类似母亲节）" class="headerlink" title="第五关 输出特定节日（类似母亲节）"></a>第五关 输出特定节日（类似母亲节）</h2><p><img src="/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220107132040203.png" alt="image-20220107132040203"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> calendar</span><br><span class="line"></span><br><span class="line">data = <span class="built_in">input</span>()</span><br><span class="line">data_list = data.split(<span class="string">&quot;,&quot;</span>)</span><br><span class="line">a,b,c,y1,y2 = data_list</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_valid_date</span>(<span class="params">a,b,c</span>):</span></span><br><span class="line">  <span class="comment">#判断是否是一个有效的日期字符串</span></span><br><span class="line">  <span class="keyword">try</span>:</span><br><span class="line">    datetime.date(a,b,c)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">  <span class="keyword">except</span>:</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">festival</span>(<span class="params">a=a,b=b,c=c,y1=y1,y2=y2</span>):</span></span><br><span class="line">    year = []</span><br><span class="line">    a = <span class="built_in">int</span>(a)</span><br><span class="line">    b = <span class="built_in">int</span>(b)</span><br><span class="line">    c = <span class="built_in">int</span>(c)</span><br><span class="line">    y1 = <span class="built_in">int</span>(y1)</span><br><span class="line">    y2 = <span class="built_in">int</span>(y2)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(y1,y2+<span class="number">1</span>):</span><br><span class="line">        year.append(i)</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> year:</span><br><span class="line">        daterange = calendar.monthrange(item, a)</span><br><span class="line">        date = (b - <span class="number">1</span>) * <span class="number">7</span> + c - daterange[<span class="number">0</span>]  <span class="comment"># 计算日期</span></span><br><span class="line">        <span class="keyword">if</span> is_valid_date(item, a, date):  <span class="comment"># 判断是否有效</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;item&#125;</span> <span class="subst">&#123;a&#125;</span> <span class="subst">&#123;date&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="literal">None</span>)</span><br><span class="line">festival()</span><br></pre></td></tr></table></figure>
+
+<h2 id="第六题-定义类计算票价"><a href="#第六题-定义类计算票价" class="headerlink" title="第六题 定义类计算票价"></a>第六题 定义类计算票价</h2><p><img src="/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220109181909010.png" alt="image-20220109181909010"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> date</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">calculator</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,adult,child,date</span>):</span></span><br><span class="line">        self.adult = adult</span><br><span class="line">        self.child = child</span><br><span class="line">        self.date_list = date.split(<span class="string">&quot;-&quot;</span>)</span><br><span class="line">        self.year = self.date_list[<span class="number">0</span>]</span><br><span class="line">        self.month = self.date_list[<span class="number">1</span>]</span><br><span class="line">        self.day = self.date_list[<span class="number">2</span>]</span><br><span class="line">        self.workday = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">adult_cost</span>(<span class="params">self</span>):</span></span><br><span class="line">        x = date(<span class="built_in">int</span>(self.year), <span class="built_in">int</span>(self.month), <span class="built_in">int</span>(self.day))</span><br><span class="line">        <span class="keyword">if</span> x.weekday() <span class="keyword">in</span> self.workday:</span><br><span class="line">            <span class="keyword">return</span> self.adult*<span class="number">100</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> self.adult*<span class="number">120</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">child_cost</span>(<span class="params">self</span>):</span></span><br><span class="line">        x = date(<span class="built_in">int</span>(self.year), <span class="built_in">int</span>(self.month), <span class="built_in">int</span>(self.day))</span><br><span class="line">        <span class="keyword">if</span> x.weekday() <span class="keyword">in</span> self.workday:</span><br><span class="line">            <span class="keyword">return</span> self.child*<span class="number">50</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> self.child*<span class="number">60</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isweekend</span>(<span class="params">self</span>):</span></span><br><span class="line">        x = date(<span class="built_in">int</span>(self.year), <span class="built_in">int</span>(self.month), <span class="built_in">int</span>(self.day))</span><br><span class="line">        <span class="keyword">if</span> x.weekday() <span class="keyword">in</span> self.workday:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">result</span>(<span class="params">self</span>):</span></span><br><span class="line">        a = <span class="string">f&quot;adult:<span class="subst">&#123;self.adult&#125;</span>,child:<span class="subst">&#123;self.child&#125;</span>,isWeekend:<span class="subst">&#123;self.isweekend()&#125;</span>,total cost:<span class="subst">&#123;<span class="built_in">int</span>(self.child_cost()+self.adult_cost())&#125;</span>.0&quot;</span></span><br><span class="line">        <span class="keyword">return</span> a</span><br><span class="line">data = <span class="built_in">input</span>()</span><br><span class="line">a,b,c = data.split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">ex = calculator(adult=<span class="built_in">int</span>(a),child=<span class="built_in">int</span>(b),date=c)</span><br><span class="line"><span class="built_in">print</span>(ex.result())</span><br></pre></td></tr></table></figure>
+
+<h2 id="人民币大写"><a href="#人民币大写" class="headerlink" title="人民币大写"></a>人民币大写</h2><p><img src="/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220109181954023.png" alt="image-20220109181954023"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">sys.stdin = io.TextIOWrapper(sys.stdin.buffer,encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> Decimal</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cncurrency</span>(<span class="params">value, capital=<span class="literal">True</span>, prefix=<span class="literal">False</span>, classical=<span class="literal">None</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> classical <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        classical = <span class="literal">True</span> <span class="keyword">if</span> capital <span class="keyword">else</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> prefix <span class="keyword">is</span> <span class="literal">True</span>:</span><br><span class="line">        prefix = <span class="string">&#x27;人民币&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        prefix = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> capital:</span><br><span class="line">        num = (<span class="string">&#x27;零&#x27;</span>, <span class="string">&#x27;壹&#x27;</span>, <span class="string">&#x27;贰&#x27;</span>, <span class="string">&#x27;叁&#x27;</span>, <span class="string">&#x27;肆&#x27;</span>, <span class="string">&#x27;伍&#x27;</span>, <span class="string">&#x27;陆&#x27;</span>, <span class="string">&#x27;柒&#x27;</span>, <span class="string">&#x27;捌&#x27;</span>, <span class="string">&#x27;玖&#x27;</span>)</span><br><span class="line">        iunit = [<span class="literal">None</span>, <span class="string">&#x27;拾&#x27;</span>, <span class="string">&#x27;佰&#x27;</span>, <span class="string">&#x27;仟&#x27;</span>, <span class="string">&#x27;万&#x27;</span>, <span class="string">&#x27;拾&#x27;</span>, <span class="string">&#x27;佰&#x27;</span>, <span class="string">&#x27;仟&#x27;</span>,<span class="string">&#x27;亿&#x27;</span>, <span class="string">&#x27;拾&#x27;</span>, <span class="string">&#x27;佰&#x27;</span>, <span class="string">&#x27;仟&#x27;</span>, <span class="string">&#x27;万&#x27;</span>, <span class="string">&#x27;拾&#x27;</span>, <span class="string">&#x27;佰&#x27;</span>, <span class="string">&#x27;仟&#x27;</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        num = (<span class="string">&#x27;〇&#x27;</span>, <span class="string">&#x27;一&#x27;</span>, <span class="string">&#x27;二&#x27;</span>, <span class="string">&#x27;三&#x27;</span>, <span class="string">&#x27;四&#x27;</span>, <span class="string">&#x27;五&#x27;</span>, <span class="string">&#x27;六&#x27;</span>, <span class="string">&#x27;七&#x27;</span>, <span class="string">&#x27;八&#x27;</span>, <span class="string">&#x27;九&#x27;</span>)</span><br><span class="line">        iunit = [<span class="literal">None</span>, <span class="string">&#x27;十&#x27;</span>, <span class="string">&#x27;百&#x27;</span>, <span class="string">&#x27;千&#x27;</span>, <span class="string">&#x27;万&#x27;</span>, <span class="string">&#x27;十&#x27;</span>, <span class="string">&#x27;百&#x27;</span>, <span class="string">&#x27;千&#x27;</span>,<span class="string">&#x27;亿&#x27;</span>, <span class="string">&#x27;十&#x27;</span>, <span class="string">&#x27;百&#x27;</span>, <span class="string">&#x27;千&#x27;</span>, <span class="string">&#x27;万&#x27;</span>, <span class="string">&#x27;十&#x27;</span>, <span class="string">&#x27;百&#x27;</span>, <span class="string">&#x27;千&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> classical:</span><br><span class="line">        iunit[<span class="number">0</span>] = <span class="string">&#x27;元&#x27;</span> <span class="keyword">if</span> classical <span class="keyword">else</span> <span class="string">&#x27;圆&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, Decimal):</span><br><span class="line">        value = Decimal(value).quantize(Decimal(<span class="string">&#x27;0.01&#x27;</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 转化为字符串</span></span><br><span class="line">    s = <span class="built_in">str</span>(value)</span><br><span class="line">    istr, dstr = s.split(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">    istr = istr[::-<span class="number">1</span>]</span><br><span class="line">    so = []     <span class="comment"># 用于记录转换结果</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 零</span></span><br><span class="line">    <span class="keyword">if</span> value == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> prefix + num[<span class="number">0</span>] + iunit[<span class="number">0</span>]</span><br><span class="line">    haszero = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> dstr == <span class="string">&#x27;00&#x27;</span>:</span><br><span class="line">        haszero = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 处理整数部分</span></span><br><span class="line">    <span class="keyword">for</span> i, n <span class="keyword">in</span> <span class="built_in">enumerate</span>(istr):</span><br><span class="line">        n = <span class="built_in">int</span>(n)</span><br><span class="line">        <span class="keyword">if</span> i % <span class="number">4</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">8</span> <span class="keyword">and</span> so[-<span class="number">1</span>] == iunit[<span class="number">4</span>]:</span><br><span class="line">                so.pop()</span><br><span class="line">            so.append(iunit[i])</span><br><span class="line">            <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> haszero:</span><br><span class="line">                    so.insert(-<span class="number">1</span>, num[<span class="number">0</span>])</span><br><span class="line">                    haszero = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                so.append(num[n])</span><br><span class="line">                haszero = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> n != <span class="number">0</span>:</span><br><span class="line">                so.append(iunit[i])</span><br><span class="line">                so.append(num[n])</span><br><span class="line">                haszero = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> haszero:</span><br><span class="line">                    so.append(num[<span class="number">0</span>])</span><br><span class="line">                    haszero = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    so.append(prefix)</span><br><span class="line">    so.reverse()</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(so)</span><br><span class="line"></span><br><span class="line">i=<span class="built_in">input</span>()</span><br><span class="line"><span class="built_in">print</span> (cncurrency(i)+<span class="string">&quot;整&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="计算教学周"><a href="#计算教学周" class="headerlink" title="计算教学周"></a>计算教学周</h2><p><img src="/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220109182026041.png" alt="image-20220109182026041"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">frist_date = <span class="built_in">input</span>().split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">date = <span class="built_in">input</span>().split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">year1,month1,day1 = frist_date</span><br><span class="line">year2,month2,day2 = date</span><br><span class="line">d1 = datetime.date(<span class="built_in">int</span>(year1),<span class="built_in">int</span>(month1),<span class="built_in">int</span>(day1))</span><br><span class="line">d2 = datetime.date(<span class="built_in">int</span>(year2),<span class="built_in">int</span>(month2),<span class="built_in">int</span>(day2))</span><br><span class="line"></span><br><span class="line">gap = (d2-d1).days</span><br><span class="line">week = (gap-(gap%<span class="number">7</span>))/<span class="number">7</span>+<span class="number">1</span></span><br><span class="line">xingqiji = gap%<span class="number">7</span>+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;<span class="built_in">round</span>(week)&#125;</span> <span class="subst">&#123;xingqiji&#125;</span>&quot;</span>)<span class="comment">#用四舍五入来取整</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="找出同一周上课的周次"><a href="#找出同一周上课的周次" class="headerlink" title="找出同一周上课的周次"></a>找出同一周上课的周次</h2><p><img src="/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220109182135667.png" alt="image-20220109182135667"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">data1 = <span class="built_in">input</span>().split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">data2 = <span class="built_in">input</span>().split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line"></span><br><span class="line">date1 = <span class="built_in">set</span>()<span class="comment">#第一节课的数据</span></span><br><span class="line">date2 = <span class="built_in">set</span>()<span class="comment">#第二节课的数据</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> data1:</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;-&#x27;</span> <span class="keyword">in</span> item:</span><br><span class="line">        gap = item.split(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(gap[<span class="number">0</span>]),<span class="built_in">int</span>(gap[<span class="number">1</span>])+<span class="number">1</span>):</span><br><span class="line">            date1.add(<span class="built_in">int</span>(num))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        date1.add(<span class="built_in">int</span>(item))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> data2:</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;-&#x27;</span> <span class="keyword">in</span> item:</span><br><span class="line">        gap = item.split(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(gap[<span class="number">0</span>]),<span class="built_in">int</span>(gap[<span class="number">1</span>])+<span class="number">1</span>):</span><br><span class="line">            date2.add(<span class="built_in">int</span>(num))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        date2.add(<span class="built_in">int</span>(item))</span><br><span class="line"></span><br><span class="line">res = date1&amp;date2</span><br><span class="line">res2 = <span class="built_in">list</span>(res)</span><br><span class="line"><span class="keyword">if</span> res == <span class="built_in">set</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;none&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    final = <span class="string">&quot; &quot;</span>.join(<span class="string">&#x27;%s&#x27;</span> %item <span class="keyword">for</span> item <span class="keyword">in</span> res2)</span><br><span class="line">    <span class="built_in">print</span>(final)</span><br></pre></td></tr></table></figure>
+
+<h2 id="课程表调表"><a href="#课程表调表" class="headerlink" title="课程表调表"></a>课程表调表</h2><p><img src="/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220109182214040.png" alt="image-20220109182214040"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> groupby</span><br><span class="line">data1 = <span class="built_in">input</span>().split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">data2 = <span class="built_in">input</span>()</span><br><span class="line">data3 = <span class="built_in">input</span>()</span><br><span class="line">date1 = []<span class="comment">#第一节课的数据</span></span><br><span class="line">new_date = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">list_str</span>(<span class="params"><span class="built_in">list</span></span>):</span></span><br><span class="line">    final_list = []</span><br><span class="line">    fun = <span class="keyword">lambda</span> x: x[<span class="number">1</span>]-x[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> k, g <span class="keyword">in</span> groupby(<span class="built_in">enumerate</span>(<span class="built_in">list</span>), fun):</span><br><span class="line">      l1 = [j <span class="keyword">for</span> i, j <span class="keyword">in</span> g]  <span class="comment"># 连续数字的列表</span></span><br><span class="line">      <span class="keyword">if</span> <span class="built_in">len</span>(l1) &gt; <span class="number">1</span>:</span><br><span class="line">        scop = <span class="built_in">str</span>(<span class="built_in">min</span>(l1)) + <span class="string">&#x27;-&#x27;</span> + <span class="built_in">str</span>(<span class="built_in">max</span>(l1))  <span class="comment"># 将连续数字范围用&quot;-&quot;连接</span></span><br><span class="line">        final_list.append(scop)</span><br><span class="line">      <span class="keyword">else</span>:</span><br><span class="line">        scop = l1[<span class="number">0</span>]</span><br><span class="line">        final_list.append(scop)</span><br><span class="line">    <span class="keyword">return</span> final_list</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> data1:</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;-&#x27;</span> <span class="keyword">in</span> item:</span><br><span class="line">        gap = item.split(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(gap[<span class="number">0</span>]),<span class="built_in">int</span>(gap[<span class="number">1</span>])+<span class="number">1</span>):</span><br><span class="line">            date1.append(<span class="built_in">int</span>(num))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        date1.append(<span class="built_in">int</span>(item))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">int</span>(data2) <span class="keyword">not</span> <span class="keyword">in</span> date1 <span class="keyword">or</span> <span class="built_in">int</span>(data3) <span class="keyword">in</span> date1:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;not available&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    date1.remove(<span class="built_in">int</span>(data2))</span><br><span class="line">    date1.append(<span class="built_in">int</span>(data3))</span><br><span class="line">    date1.sort()</span><br><span class="line">    xinde = list_str(date1)</span><br><span class="line">    result = <span class="string">&#x27;,&#x27;</span>.join(<span class="string">f&#x27;<span class="subst">&#123;<span class="built_in">id</span>&#125;</span>&#x27;</span> <span class="keyword">for</span> <span class="built_in">id</span> <span class="keyword">in</span> xinde)</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="在列表中找出有相同度的最小连续子列表，输出其长度"><a href="#在列表中找出有相同度的最小连续子列表，输出其长度" class="headerlink" title="在列表中找出有相同度的最小连续子列表，输出其长度"></a>在列表中找出有相同度的最小连续子列表，输出其长度</h2><p><img src="/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220119205038551.png" alt="image-20220119205038551"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">da = <span class="built_in">input</span>()</span><br><span class="line">data = da.replace(<span class="string">&quot;[&quot;</span>,<span class="string">&quot;&quot;</span>).replace(<span class="string">&quot;]&quot;</span>,<span class="string">&quot;&quot;</span>).replace(<span class="string">&#x27; &#x27;</span>,<span class="string">&quot;&quot;</span>).split(<span class="string">&quot;,&quot;</span>)</span><br><span class="line">oc_list = <span class="built_in">dict</span>()</span><br><span class="line"><span class="comment">#z把元素出现的次数输入到字典中</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> data:</span><br><span class="line">    oc_list.update(&#123;<span class="string">f&quot;<span class="subst">&#123;item&#125;</span>&quot;</span>:<span class="number">0</span>&#125;)</span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> data:</span><br><span class="line">    oc_list[<span class="string">f&quot;<span class="subst">&#123;item&#125;</span>&quot;</span>] += <span class="number">1</span></span><br><span class="line"><span class="comment">#j找到所有的出现次数最大的值</span></span><br><span class="line">maxitem_buffer = <span class="built_in">max</span>(oc_list,key=oc_list.get)</span><br><span class="line">maxitem = []</span><br><span class="line"><span class="keyword">for</span> key,value <span class="keyword">in</span> oc_list.items():</span><br><span class="line">    <span class="keyword">if</span> value == oc_list.get(maxitem_buffer):</span><br><span class="line">        maxitem.append(key)</span><br><span class="line"><span class="comment">#找到出现次数最大的元素的起始位置和最终位置</span></span><br><span class="line">index_buffer = []</span><br><span class="line">list_buffer = []</span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> maxitem:</span><br><span class="line">    list_buffer.clear()</span><br><span class="line">    <span class="keyword">for</span> index,it <span class="keyword">in</span> <span class="built_in">enumerate</span>(data):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">int</span>(it) == <span class="built_in">int</span>(item):</span><br><span class="line">            list_buffer.append(index)</span><br><span class="line">    index_buffer.append(list_buffer)</span><br><span class="line"><span class="comment">#计算最短的长度</span></span><br><span class="line">len_buffer = []</span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> index_buffer:</span><br><span class="line">    len_buffer.append(<span class="built_in">max</span>(item)-<span class="built_in">min</span>(item)+<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">min</span>(len_buffer))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="判断麻将是否胡牌"><a href="#判断麻将是否胡牌" class="headerlink" title="判断麻将是否胡牌"></a>判断麻将是否胡牌</h1><p><img src="/wan1/wan1/2022/02/19/%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93/image-20220125174147666.png" alt="image-20220125174147666"></p>
+<p>笑死我了，我写了他妈一百多行代码，以后老板看到不把我骂死</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    data = <span class="built_in">input</span>()</span><br><span class="line">    data_list = data.split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">nitian</span>(<span class="params">data_list</span>):</span></span><br><span class="line">        <span class="comment">#把他们全部放到c d s列表中</span></span><br><span class="line">        c_list = []</span><br><span class="line">        d_list = []</span><br><span class="line">        s_list = []</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> data_list:</span><br><span class="line">            <span class="keyword">if</span> item.endswith(<span class="string">&#x27;D&#x27;</span>):</span><br><span class="line">                d_list.append(item)</span><br><span class="line">            <span class="keyword">elif</span> item.endswith(<span class="string">&#x27;S&#x27;</span>):</span><br><span class="line">                s_list.append(item)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                c_list.append(item)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#要先找到连续的排再找到相同的排最后找做将的牌</span></span><br><span class="line">        <span class="comment">#定义一个找连续牌的函数,返回的是元组，第一个是n第二个是减去重复元素之后的列表</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">find_rconsecutive_data</span>(<span class="params">listx</span>):</span></span><br><span class="line">            item_buffer = []</span><br><span class="line">            result = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> indexs,itemx <span class="keyword">in</span> <span class="built_in">enumerate</span>(listx):</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(item_buffer) == <span class="number">3</span>:</span><br><span class="line">                    result += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">for</span> i <span class="keyword">in</span> item_buffer:</span><br><span class="line">                        listx.remove(i)</span><br><span class="line">                item_buffer.clear()</span><br><span class="line">                item_buffer.clear()</span><br><span class="line">                listx.sort()</span><br><span class="line">                item_buffer.append(itemx)</span><br><span class="line">                <span class="keyword">for</span> index,item <span class="keyword">in</span> <span class="built_in">enumerate</span>(listx):</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">len</span>(item_buffer) &gt;= <span class="number">3</span>:</span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                    <span class="keyword">elif</span> <span class="built_in">int</span>(<span class="built_in">list</span>(item)[<span class="number">0</span>]) - <span class="built_in">int</span>(<span class="built_in">list</span>(item_buffer[-<span class="number">1</span>])[<span class="number">0</span>]) == <span class="number">1</span>:</span><br><span class="line">                        item_buffer.append(item)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> indexs,itemx <span class="keyword">in</span> <span class="built_in">enumerate</span>(listx):</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(item_buffer) == <span class="number">3</span>:</span><br><span class="line">                    result += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">for</span> i <span class="keyword">in</span> item_buffer:</span><br><span class="line">                        listx.remove(<span class="built_in">str</span>(i))</span><br><span class="line">                item_buffer.clear()</span><br><span class="line">                item_buffer.clear()</span><br><span class="line">                listx.sort()</span><br><span class="line">                item_buffer.append(itemx)</span><br><span class="line">                <span class="keyword">for</span> index,item <span class="keyword">in</span> <span class="built_in">enumerate</span>(listx):</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">len</span>(item_buffer) &gt;= <span class="number">3</span>:</span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                    <span class="keyword">elif</span> <span class="built_in">int</span>(<span class="built_in">list</span>(item)[<span class="number">0</span>]) - <span class="built_in">int</span>(<span class="built_in">list</span>(item_buffer[-<span class="number">1</span>])[<span class="number">0</span>]) == <span class="number">1</span>:</span><br><span class="line">                        item_buffer.append(item)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> result,listx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        c = find_rconsecutive_data(c_list)</span><br><span class="line">        s = find_rconsecutive_data(s_list)</span><br><span class="line">        d = find_rconsecutive_data(d_list)</span><br><span class="line">        <span class="comment">##重置所有东西，开始检测三个相同类型的牌</span></span><br><span class="line">        new_data = c[<span class="number">1</span>]+s[<span class="number">1</span>]+d[<span class="number">1</span>]</span><br><span class="line">        n = <span class="built_in">int</span>(c[<span class="number">0</span>]) + <span class="built_in">int</span>(s[<span class="number">0</span>]) + <span class="built_in">int</span>(d[<span class="number">0</span>])</span><br><span class="line">        c_list = []</span><br><span class="line">        d_list = []</span><br><span class="line">        s_list = []</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> new_data:</span><br><span class="line">            <span class="keyword">if</span> item.endswith(<span class="string">&#x27;D&#x27;</span>):</span><br><span class="line">                d_list.append(item)</span><br><span class="line">            <span class="keyword">elif</span> item.endswith(<span class="string">&#x27;S&#x27;</span>):</span><br><span class="line">                s_list.append(item)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                c_list.append(item)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#定义一个函数检测列表中是不是有相同的牌,返回数字和删除相同元素之后的列表</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">find_repeat_data</span>(<span class="params">listx</span>):</span></span><br><span class="line">            buffer = []</span><br><span class="line">            result = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> indexs,items <span class="keyword">in</span> <span class="built_in">enumerate</span>(listx):</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(buffer) &gt;= <span class="number">3</span>:</span><br><span class="line">                    result += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">for</span> itemxxx <span class="keyword">in</span> buffer:</span><br><span class="line">                        listx.remove(itemxxx)</span><br><span class="line">                    buffer.clear()</span><br><span class="line">                buffer.clear()</span><br><span class="line">                buffer.append(items)</span><br><span class="line">                <span class="keyword">for</span> index,item <span class="keyword">in</span> <span class="built_in">enumerate</span>(listx):</span><br><span class="line">                    <span class="keyword">if</span> index == indexs:</span><br><span class="line">                        <span class="keyword">pass</span></span><br><span class="line">                    <span class="keyword">elif</span> <span class="built_in">len</span>(buffer) &gt;= <span class="number">3</span>:</span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                    <span class="keyword">elif</span> item == buffer[-<span class="number">1</span>]:</span><br><span class="line">                        buffer.append(item)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> indexs,items <span class="keyword">in</span> <span class="built_in">enumerate</span>(listx):</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(buffer) &gt;= <span class="number">3</span>:</span><br><span class="line">                    result += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">for</span> itemxxx <span class="keyword">in</span> buffer:</span><br><span class="line">                        listx.remove(itemxxx)</span><br><span class="line">                    buffer.clear()</span><br><span class="line">                buffer.clear()</span><br><span class="line">                buffer.append(items)</span><br><span class="line">                <span class="keyword">for</span> index,item <span class="keyword">in</span> <span class="built_in">enumerate</span>(listx):</span><br><span class="line">                    <span class="keyword">if</span> index == indexs:</span><br><span class="line">                        <span class="keyword">pass</span></span><br><span class="line">                    <span class="keyword">elif</span> <span class="built_in">len</span>(buffer) &gt;= <span class="number">3</span>:</span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                    <span class="keyword">elif</span> item == buffer[-<span class="number">1</span>]:</span><br><span class="line">                        buffer.append(item)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> result,listx</span><br><span class="line"></span><br><span class="line">        <span class="comment">#再次重置东西，进行最后的做将判断</span></span><br><span class="line">        s = find_repeat_data(s_list)</span><br><span class="line">        c = find_repeat_data(c_list)</span><br><span class="line">        d = find_repeat_data(d_list)</span><br><span class="line">        DATA = s[<span class="number">1</span>]+c[<span class="number">1</span>]+d[<span class="number">1</span>]</span><br><span class="line">        n += s[<span class="number">0</span>]+c[<span class="number">0</span>]+d[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> n &gt;= <span class="number">4</span> <span class="keyword">and</span> <span class="built_in">len</span>(DATA) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;yes&quot;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;no&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">zuojiang</span>(<span class="params">data_list</span>):</span></span><br><span class="line">        repeat = []</span><br><span class="line">        <span class="keyword">for</span> indexx,itemx <span class="keyword">in</span> <span class="built_in">enumerate</span>(data_list):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(repeat) == <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">for</span> re <span class="keyword">in</span> repeat:</span><br><span class="line">                    data_list.remove(re)</span><br><span class="line">                repeat.clear()</span><br><span class="line">                <span class="keyword">return</span> data_list</span><br><span class="line">            repeat.clear()</span><br><span class="line">            repeat.append(itemx)</span><br><span class="line">            <span class="keyword">for</span> index,item <span class="keyword">in</span> <span class="built_in">enumerate</span>(data_list):</span><br><span class="line">                <span class="keyword">if</span> index == indexx:</span><br><span class="line">                    <span class="keyword">pass</span></span><br><span class="line">                <span class="keyword">elif</span> item == repeat[-<span class="number">1</span>]:</span><br><span class="line">                    repeat.append(item)</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">return</span> data_list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">#做不同的将，但凡有一个yes，那么我们就成功了</span></span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data_list)):</span><br><span class="line">        data_listx = [item <span class="keyword">for</span> item <span class="keyword">in</span> data_list]</span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            result.append(nitian(zuojiang(data_listx)))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                buffer_item = data_listx[<span class="number">0</span>:i]</span><br><span class="line">                <span class="keyword">del</span> data_listx[<span class="number">0</span>:i]</span><br><span class="line">                buffer_zuojiang = zuojiang(data_listx)</span><br><span class="line">                buffer_zuojiang += buffer_item</span><br><span class="line">                result.append(nitian( buffer_zuojiang))</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                result.append(<span class="string">&quot;no&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;yes&quot;</span> <span class="keyword">in</span> result:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;yes&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;no&quot;</span>)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;no&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/wan1/2022/02/17/%E4%BB%8A%E6%97%A5%E6%B8%97%E9%80%8F%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%88%E5%BF%83%E8%B7%B3%E5%8C%85-%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E7%9A%84%E5%9F%9F%E5%90%8D%EF%BC%89/" rel="prev" title="今日渗透的知识（心跳包 访问不了的域名）">
+      <i class="fa fa-chevron-left"></i> 今日渗透的知识（心跳包 访问不了的域名）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/wan1/2022/02/21/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%EF%BC%88html-css)/" rel="next" title="前端基础（html css ）">
+      前端基础（html css ） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%BF%9B%E9%98%B6py%EF%BC%9A%E9%80%9A%E5%85%B3%E4%B8%80%E4%B8%AA%E6%9F%90%E6%A0%A1%E7%9A%84%E9%A2%98%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">一、进阶py：通关一个某校的题库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E5%85%B3%EF%BC%8C%E9%99%A4%E5%8E%BB%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0"><span class="nav-number">1.1.</span> <span class="nav-text">第一关，除去列表中的重复元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%85%B3-%E9%80%92%E5%BD%92%E6%B1%82%E5%B5%8C%E5%A5%97%E5%B1%82%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">第二关 递归求嵌套层数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E9%80%94%E6%8F%92%E4%B8%80%E5%85%B3-%E9%80%92%E5%BD%92%E8%BE%93%E5%87%BA%E7%B4%A2%E5%BC%95"><span class="nav-number">1.3.</span> <span class="nav-text">中途插一关 递归输出索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E5%85%B3-%E9%80%92%E5%BD%92%E6%B1%82%E5%8A%A0%E6%9D%83%E5%92%8C"><span class="nav-number">1.4.</span> <span class="nav-text">第三关 递归求加权和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%85%B3"><span class="nav-number">1.5.</span> <span class="nav-text">第四关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E5%85%B3-%E8%BE%93%E5%87%BA%E7%89%B9%E5%AE%9A%E8%8A%82%E6%97%A5%EF%BC%88%E7%B1%BB%E4%BC%BC%E6%AF%8D%E4%BA%B2%E8%8A%82%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">第五关 输出特定节日（类似母亲节）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E9%A2%98-%E5%AE%9A%E4%B9%89%E7%B1%BB%E8%AE%A1%E7%AE%97%E7%A5%A8%E4%BB%B7"><span class="nav-number">1.7.</span> <span class="nav-text">第六题 定义类计算票价</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%BA%E6%B0%91%E5%B8%81%E5%A4%A7%E5%86%99"><span class="nav-number">1.8.</span> <span class="nav-text">人民币大写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%95%99%E5%AD%A6%E5%91%A8"><span class="nav-number">1.9.</span> <span class="nav-text">计算教学周</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%BE%E5%87%BA%E5%90%8C%E4%B8%80%E5%91%A8%E4%B8%8A%E8%AF%BE%E7%9A%84%E5%91%A8%E6%AC%A1"><span class="nav-number">1.10.</span> <span class="nav-text">找出同一周上课的周次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BE%E7%A8%8B%E8%A1%A8%E8%B0%83%E8%A1%A8"><span class="nav-number">1.11.</span> <span class="nav-text">课程表调表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E5%88%97%E8%A1%A8%E4%B8%AD%E6%89%BE%E5%87%BA%E6%9C%89%E7%9B%B8%E5%90%8C%E5%BA%A6%E7%9A%84%E6%9C%80%E5%B0%8F%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%88%97%E8%A1%A8%EF%BC%8C%E8%BE%93%E5%87%BA%E5%85%B6%E9%95%BF%E5%BA%A6"><span class="nav-number">1.12.</span> <span class="nav-text">在列表中找出有相同度的最小连续子列表，输出其长度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E9%BA%BB%E5%B0%86%E6%98%AF%E5%90%A6%E8%83%A1%E7%89%8C"><span class="nav-number">2.</span> <span class="nav-text">判断麻将是否胡牌</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="十三"
+      src="/wan1/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">十三</p>
+  <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/wan1/archives/">
+        
+          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">十三</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/wan1/lib/anime.min.js"></script>
+  <script src="/wan1/lib/velocity/velocity.min.js"></script>
+  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/wan1/js/utils.js"></script>
+
+<script src="/wan1/js/motion.js"></script>
+
+
+<script src="/wan1/js/schemes/pisces.js"></script>
+
+
+<script src="/wan1/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/wan1/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

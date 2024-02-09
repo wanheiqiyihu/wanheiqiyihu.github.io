@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/wan1/css/main.css">
+
+
+<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="C语言单选题题库总结开始考研的刷题库了，有很多单选题，我会总结上每一道题的知识点，进行记录。纯概念博客，师傅们图一乐即可。 一 c语言概述11231、C程序中main函数的位置（C）A、必须在最开始 B、必须在系统库函数后面C、可以在自定义函数后面 D、必须在最后  c语言中main函数的位置可以任意位置．在执行一个c语言编写的程序时，main函数就相当于是执行程序的入口．只要是没有语法和逻辑上的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言单选题题库总结">
+<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="十三の博客">
+<meta property="og:description" content="C语言单选题题库总结开始考研的刷题库了，有很多单选题，我会总结上每一道题的知识点，进行记录。纯概念博客，师傅们图一乐即可。 一 c语言概述11231、C程序中main函数的位置（C）A、必须在最开始 B、必须在系统库函数后面C、可以在自定义函数后面 D、必须在最后  c语言中main函数的位置可以任意位置．在执行一个c语言编写的程序时，main函数就相当于是执行程序的入口．只要是没有语法和逻辑上的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/image-20230902214050568.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/image-20230903080250291.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/image-20230903090942744.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/image-20230903091125126.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/image-20230911085818138.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/image-20230911090531013.png">
+<meta property="og:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/image-20230911090641993.png">
+<meta property="article:published_time" content="2023-09-11T01:14:15.000Z">
+<meta property="article:modified_time" content="2023-09-20T02:38:39.421Z">
+<meta property="article:author" content="十三">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wanheiqiyihu.gitee.io/wan1/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/image-20230902214050568.png">
+
+<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>C语言单选题题库总结 | 十三の博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/wan1/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">十三の博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-ctf做题笔记">
+
+    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-python">
+
+    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+
+  </li>
+        <li class="menu-item menu-item-读书笔记">
+
+    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-渗透测试">
+
+    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+
+  </li>
+        <li class="menu-item menu-item-基础">
+
+    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+
+  </li>
+        <li class="menu-item menu-item-轮子">
+
+    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+
+  </li>
+        <li class="menu-item menu-item-漏洞库">
+
+    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+
+  </li>
+        <li class="menu-item menu-item-代码审计">
+
+    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+
+  </li>
+        <li class="menu-item menu-item-逆向">
+
+    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+
+  </li>
+        <li class="menu-item menu-item-应急响应">
+
+    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+
+  </li>
+        <li class="menu-item menu-item-免杀">
+
+    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+
+  </li>
+        <li class="menu-item menu-item-靶场">
+
+    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+
+  </li>
+        <li class="menu-item menu-item-cve申请">
+
+    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+
+  </li>
+        <li class="menu-item menu-item-c语言">
+
+    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C语言单选题题库总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-11 09:14:15" itemprop="dateCreated datePublished" datetime="2023-09-11T09:14:15+08:00">2023-09-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-20 10:38:39" itemprop="dateModified" datetime="2023-09-20T10:38:39+08:00">2023-09-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/wan1/categories/c/" itemprop="url" rel="index"><span itemprop="name">-c</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="C语言单选题题库总结"><a href="#C语言单选题题库总结" class="headerlink" title="C语言单选题题库总结"></a>C语言单选题题库总结</h1><p>开始考研的刷题库了，有很多单选题，我会总结上每一道题的知识点，进行记录。纯概念博客，师傅们图一乐即可。</p>
+<h1 id="一-c语言概述"><a href="#一-c语言概述" class="headerlink" title="一 c语言概述"></a>一 c语言概述</h1><h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、C程序中main函数的位置（C）</span><br><span class="line">A、必须在最开始 B、必须在系统库函数后面</span><br><span class="line">C、可以在自定义函数后面 D、必须在最后</span><br></pre></td></tr></table></figure>
+
+<p>c语言中main函数的位置可以任意位置．在执行一个c语言编写的程序时，main函数就相当于是执行程序的入口．只要是没有语法和逻辑上的错误，main函数可以放在任意位置．</p>
+<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2、下面关于C语言用户标识符的描述，正确的是（D）</span><br><span class="line">A、不能区分大小写            B、用户标识符不能描述常量</span><br><span class="line">C、类型名也是用户标识        D、用户标识符可以作为变量名</span><br></pre></td></tr></table></figure>
+
+<p>标识符由<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AD%97%E6%AF%8D/1710184?fromModule=lemma_inlink">字母</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%8B%E5%88%92%E7%BA%BF/9768709?fromModule=lemma_inlink">下划线</a>、数字这三个方面组成，但开头必须是字母或下划线</p>
+<p>标识符不能使用系统法保留的关键字</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/C%E8%AF%AD%E8%A8%80?fromModule=lemma_inlink">C语言</a>中标识符区分大小写</p>
+<p>用户标识符可以作为变量名</p>
+<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">3.关于C语言的叙述中，不正确的是（D）</span><br><span class="line">A. C程序可由一个或多个函数组成</span><br><span class="line">B. C程序必须包含一个main（）函数</span><br><span class="line">C. C程序的基本组成单位是函数</span><br><span class="line">D. 注释说明只能位于一条语句的后面</span><br></pre></td></tr></table></figure>
+
+<p> C语言程序是由函数构成的，函数是C程序的基本组成单位.</p>
+<p>注释可以随处</p>
+<h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4.若有说明语句：char C=‘\95’;则变量C包含(A)个字符</span><br><span class="line">A.1         B.2       C.3       D.语法错误</span><br></pre></td></tr></table></figure>
+
+<p>字符常量 <code>&#39;\95&#39;</code> 使用八进制表示</p>
+<p>字符常量在存储时只占用一个字节的内存空间，因此变量 <code>C</code> 仅包含一个字符。所以，变量 C 包含 1 个字符。</p>
+<p>很多答案都说是语法错误，我也搞不懂几把哪里错了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> C = <span class="string">&#x27;\95&#x27;</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="keyword">sizeof</span>(C));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//无语，这些题库能不能好一点啊</span></span><br><span class="line">&#125;<span class="comment">//运行输出是1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5"><a href="#5" class="headerlink" title="5"></a>5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">5.结构化程序设计不包括（A）</span><br><span class="line">A.最优化</span><br><span class="line">B自顶而下，逐步细化</span><br><span class="line">C模拟化设计</span><br><span class="line">D结构化编码  </span><br></pre></td></tr></table></figure>
+
+<p>结构化程序设计的设计方法包括下面四个，<strong>自顶向下，逐步细化，模块化，结构化编码</strong></p>
+<h2 id="6"><a href="#6" class="headerlink" title="6"></a>6</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">6.结构化程序设计的三种基本语句是(C)</span><br><span class="line">A.函数结购   分支结构   判断结构</span><br><span class="line">B.函数结构   嵌套结构   平行结构</span><br><span class="line">C.顺序结构   分支结构   循环结构</span><br><span class="line">D.分支结构   循环结构   嵌套结构</span><br></pre></td></tr></table></figure>
+
+<p>结构化程序设计的三中基本语句：<strong>顺序结构，选择结构（分支结构），循环结构</strong></p>
+<h2 id="7"><a href="#7" class="headerlink" title="7"></a>7</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">7.关于C语言数据类型的叙述,正确的是(C)</span><br><span class="line">A.枚举类型不是基本类型</span><br><span class="line">B.数组不是构造类型</span><br><span class="line">C.变量必须先定义后使用</span><br><span class="line">D.不允许使用空类型</span><br></pre></td></tr></table></figure>
+
+<p>枚举类型是一种基本数据类型而不是构造数据类型.</p>
+<p>C语言数据类型中构造类型包括三种：<strong>数组类型 结构类型 联合类型</strong></p>
+<p>C语言有四种基本数据类型：<strong>整型，浮点型，指针，聚合类型</strong>。</p>
+<p>c语言没有空类型。也就是void a; 是不行的,但允许有void指针,void* p;可行,</p>
+<p>变量必须先定义后使用</p>
+<h2 id="8"><a href="#8" class="headerlink" title="8"></a>8</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">关于C语言的源程序的叙述中,错误的是(C)</span><br><span class="line">A.C语言的源程序由函数构成</span><br><span class="line">B.main函数可以书写在自定义函数之后</span><br><span class="line">C.必须包含有输入语句</span><br><span class="line">D.一行可以书写多个语句</span><br></pre></td></tr></table></figure>
+
+<p> C语言的源程序并不一定要包含输入语句。不同的程序可能具有不同的输入方式，如从命令行参数读取、从文件中读取等。</p>
+<h2 id="9"><a href="#9" class="headerlink" title="9"></a>9</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">9.下面叙述中，（A）不是结构化程序设计中的三种基本结构之一</span><br><span class="line">A.数据结构  B.选择结构   C.循环结构    D.顺序结构</span><br></pre></td></tr></table></figure>
+
+<p>结构化程序设计的三中基本语句：<strong>顺序结构，选择结构（分支结构），循环结构</strong></p>
+<h2 id="10"><a href="#10" class="headerlink" title="10"></a>10</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">10.char 型变量存放的是（A）</span><br><span class="line">A.ASCⅡ码值</span><br><span class="line">B.字符本身</span><br><span class="line">C十进制代码值</span><br><span class="line">D十六进制代码值</span><br></pre></td></tr></table></figure>
+
+<p>c语言中,<em>char型数据是“ASCII码”形式存储的</em></p>
+<h2 id="11"><a href="#11" class="headerlink" title="11"></a>11</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">11.已有如下定义和输入语句</span><br><span class="line">int a; char c1,c2;</span><br><span class="line">scanf(“%d，%c，%c”, ＆a, ＆c1, ＆c2);</span><br><span class="line">若要求a、c1、c2的值分别为10、A和B，正确的数据输入是（ B ）</span><br><span class="line">A．10AB</span><br><span class="line">B．10,A,B</span><br><span class="line">C．10A  B</span><br><span class="line">D．10  AB</span><br></pre></td></tr></table></figure>
+
+<p>注意哈，由于scanf里面存在逗号，所以这道题才选B。</p>
+<p><img src="/wan1/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/image-20230902214050568.png" alt="image-20230902214050568"></p>
+<p>如果scanf没有逗号的话就选A</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//实例程序</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a; <span class="keyword">char</span> c1, c2;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot; %d,%c,%c&quot;</span>, &amp;a, &amp;c1, &amp;c2);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n%c\n%c&quot;</span>, a, c1, c2);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="12"><a href="#12" class="headerlink" title="12"></a>12</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">12.以下叙述不正确的是（ D ）</span><br><span class="line">A、C程序的执行总是从main函数开始</span><br><span class="line">B、一个C源程序必须包含一个main函数</span><br><span class="line">C、C语言程序的基本组成单位是函数</span><br><span class="line">D、在编译C程序源程序时，可发现注释中的拼写</span><br></pre></td></tr></table></figure>
+
+<p>A. C程序的执行总是从 <code>main</code> 函数开始，<code>main</code> 函数是程序的入口。 </p>
+<p>B. 一个C源程序必须包含一个 <code>main</code> 函数，因为程序的执行从 <code>main</code> 函数开始。 </p>
+<p>C. C语言程序的基本组成单位是函数，C程序是由多个函数组成的。</p>
+<p>D. 编译C程序时不会检查注释中的拼写。注释是用来提供对代码的说明和解释，编译器在编译阶段会忽略注释，不对其进行处理。</p>
+<h2 id="13"><a href="#13" class="headerlink" title="13"></a>13</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">13.已知如下定义和输入语句：</span><br><span class="line">int a, b;</span><br><span class="line">scanf (“%d, %d”，＆a, ＆b);</span><br><span class="line">若要求a、b的值分别为10和20，正确的数据输入是（B）</span><br><span class="line">A、10  20</span><br><span class="line">B、10，20</span><br><span class="line">C、a=10, b=20</span><br><span class="line">D、10；20</span><br></pre></td></tr></table></figure>
+
+<p>还是一样的，<code>scanf</code>里面存在逗号。</p>
+<h2 id="14"><a href="#14" class="headerlink" title="14"></a>14</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">14、在C语言源程序中，以下叙述正确的是（C）</span><br><span class="line">A、main函数必须位于文件的开头</span><br><span class="line">B、每行只能写一条语句</span><br><span class="line">C、程序中的每一语句可以写成几行</span><br><span class="line">D、每个语句的最后必须有点号</span><br></pre></td></tr></table></figure>
+
+<p>A.<code>main</code>不一定非要在开头</p>
+<p>B.每行可以写多条语句</p>
+<p>C. 正确，C语言中的语句可以跨越多行书写。使用反斜线（\）来表示下一行是当前语句的延续。这种写法可以提高代码的可读性。</p>
+<p>D. 每个语句的最后必须有分号（;）而不是点号。分号用来表示语句的结束。</p>
+<h2 id="15"><a href="#15" class="headerlink" title="15"></a>15</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">15.对于C语言源程序,以下叙述错误的是( C )</span><br><span class="line">A.可以有空语句</span><br><span class="line">B.函数之间是平等的,在一个函数内部不能定义其它函数</span><br><span class="line">C.程序调试时如果没有提示错误,就能得到正确结果</span><br><span class="line">D.注释可以出现在在语句的前面</span><br></pre></td></tr></table></figure>
+
+<p>1.可以有空语句，即只包含一个分号的语句。它们在某些情况下可能是有用的，例如在某个条件下不需要执行任何操作。</p>
+<p>2.在C语言中，函数是独立的代码块，不能在函数内部定义其他函数。函数的定义必须是独立于其他函数之外的。 </p>
+<p>3.c语言的函数不可以嵌套定义</p>
+<p>4.注释可以出现在语句的前面。C语言中，注释是用来给代码添加说明、解释和注解的，编译器在编译时会忽略注释。</p>
+<h2 id="16"><a href="#16" class="headerlink" title="16"></a>16</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">16．下面叙述中，（A）不是结构化程序设计三种基本结构的共同特点</span><br><span class="line">Ａ．先判断后执行</span><br><span class="line">Ｂ．单入口，单出口，</span><br><span class="line">Ｃ．程序中没有执行不到的语句</span><br><span class="line">Ｄ．无死循环</span><br></pre></td></tr></table></figure>
+
+<p>A. 先判断后执行并不是结构化程序设计三种基本结构（顺序结构、选择结构、循环结构）的共同特点。先判断后执行是指在执行某一代码块之前进行条件判断，根据判断结果决定是否执行。这是选择结构（if语句）的特点，不适用于其他两种结构。</p>
+<p>B. 单入口，单出口是结构化程序设计三种基本结构的共同特点。这表示程序的执行都从一个确定的入口（如main函数）开始，并且从该入口输出结果，只有一个出口。</p>
+<p>C. 程序中没有执行不到的语句是结构化程序设计的特点，保证所有的代码都能被执行到。这也是为了避免程序中出现悬挂语句或无效代码。</p>
+<p>D. 无死循环也是结构化程序设计的特点，避免程序陷入无限循环而无法退出。</p>
+<h2 id="17"><a href="#17" class="headerlink" title="17"></a>17</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">17.若有定义:int x=1234,y=123,z=12;则语句printf(“%4d+%3d+%2d”,x,y,z);运行后的输出结果为(D)</span><br><span class="line"></span><br><span class="line">A.123412312</span><br><span class="line">B. 12341234123412341231231231212  </span><br><span class="line">C.1234+1234+1234</span><br><span class="line">D.1234+123+12</span><br></pre></td></tr></table></figure>
+
+<p>根据printf函数的格式化字符串”%4d+%3d+%2d”，它指定了输出3个整数，并且左对齐输出，总宽度分别为4、3和2个字符。</p>
+<h1 id="数据类型，运算符和表达式"><a href="#数据类型，运算符和表达式" class="headerlink" title="数据类型，运算符和表达式"></a>数据类型，运算符和表达式</h1><h2 id="1-1"><a href="#1-1" class="headerlink" title="1"></a>1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1、若定义：int x=2; y=3; float i； 则以下符合C语言语法的表达式是（B）</span><br><span class="line">A、x=x*3=2</span><br><span class="line">B、x=(y==1)</span><br><span class="line">C、i=float(x)</span><br><span class="line">D、i%(-3)</span><br></pre></td></tr></table></figure>
+
+<p>D.在C语言中,取余操作符(%)的操作数只能是整型</p>
+<p>B. 表达式 “x = (y == 1)” 中括号内的表达式 “y == 1” 是一个条件表达式，返回一个布尔值（真或假），然后将布尔值赋给整数变量 x，这是符合C语言的语法。</p>
+<p>？这道题我不知道C错哪了，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">2</span>, y = <span class="number">3</span>; <span class="keyword">float</span> i;</span><br><span class="line">    i = <span class="keyword">float</span>(x);</span><br><span class="line">    x = (y == <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;<span class="comment">//这jb也没报错啊我草，这些c语言老师不会出题就别出可以吗。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-1"><a href="#2-1" class="headerlink" title="2"></a>2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2、若有定义：int a=5, b=2, c=1；则表达式a-b&lt;c||b==c的值是（A）</span><br><span class="line">A、0   B、1   C、2   D、-1</span><br></pre></td></tr></table></figure>
+
+<p>很简单的一道题，左右条件都为假，中间那个是逻辑或。</p>
+<p>逻辑或运算符的短路特性是，只要在整个表达式中发现了一个为真的条件，就不再继续计算剩下的表达式。<strong>也就是一个为真结果就为真</strong></p>
+<h2 id="3-1"><a href="#3-1" class="headerlink" title="3"></a>3</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3、若有68定义：float x=3.5; int z=8; 则表达式x+z%3/4的值是（B）</span><br><span class="line">A、3.75   B、3.5   C、3   D、4</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">根据给定的定义：float x=3.5; int z=8; 我们计算表达式x+z%3/4的值。</span><br><span class="line">首先，根据运算符的优先级，我们先计算取余运算 z%3：</span><br><span class="line">z%3 = 8%3 = 2 （8除以3的余数）</span><br><span class="line">然后，我们计算3除以4的结果：</span><br><span class="line">3/4 = 0 （这里由于除法运算涉及到整数，因此结果会取整数部分）</span><br><span class="line">最后，我们将结果2加上浮点数 x 的值：</span><br><span class="line">2+3.5=5.5</span><br><span class="line">因此，表达式x+z%3/4的值是5.5。</span><br><span class="line">所以，正确答案是选项 B. 5.5。</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-1"><a href="#4-1" class="headerlink" title="4"></a>4</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4.若有定义：int a=1，b=2，c=3；语句++a||++b＆＆++a运行后b	的值为（C）</span><br><span class="line">A．1       B.0      C.2       D.3</span><br></pre></td></tr></table></figure>
+
+<p><img src="/wan1/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/image-20230903080250291.png" alt="image-20230903080250291"></p>
+<p>可以看到这个逻辑与和逻辑或都是从左到右的，然后看逻辑或的短路特性，一个为真就不会执行接下来的东西了。</p>
+<p>由于第一个操作数的结果为真（非零），整个表达式的结果也为真（非零），此时不会再执行后续的操作。</p>
+<p>所以最后b的值依然是2.</p>
+<h2 id="5-1"><a href="#5-1" class="headerlink" title="5"></a>5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">9.对于整型变量x，下述计语句（B）与赋值句：x=x%2==0?1:0;不等价</span><br><span class="line">A.if（x%2！=0）x=0；else x=1；</span><br><span class="line">B.if（x%2）x=1；else x=0；</span><br><span class="line">C.if（x%2= =0）x=1；else x=0；</span><br><span class="line">D.if（x%2==1） x=0；else x=1；</span><br></pre></td></tr></table></figure>
+
+<p>这个很简单啊，我加上括号就好了<code>x=(x%2==0?1:0);</code></p>
+<p>这样理解，然后如果x对2取余，结果为0，x的值就是1.</p>
+<h2 id="6-1"><a href="#6-1" class="headerlink" title="6"></a>6</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">12.下面语句正确的是（ B  C ）</span><br><span class="line">A.int *P；*P=20;</span><br><span class="line">B.char *s=“abcdef”；printf（“%s\n”,s）;</span><br><span class="line">C.char str[]=“abcdf”；</span><br><span class="line">printf（“%s”,str）；</span><br><span class="line">D.char str[]=&#123;‘a’,’b’,’c’&#125;;printf(“%s”,str);</span><br></pre></td></tr></table></figure>
+
+<p>A.在代码中，定义了一个整型指针变量 P，但是没有为其分配内存空间。</p>
+<p>然后，执行了 <code>*P = 20;</code> 这个语句，它会尝试将一个值赋给未初始化的指针 P 所指向的内存地址。</p>
+<p>由于指针 P 没有被正确初始化，它的值是不确定的，可能指向的是未分配的内存地址，因此这段代码是有严重错误的。</p>
+<p>这样的操作可能导致程序出现未定义的行为，比如崩溃或错误的结果。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* P;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">20</span>;</span><br><span class="line">    P = &amp;num;</span><br><span class="line">    *P = <span class="number">20</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, *P);  <span class="comment">// 输出 20</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;<span class="comment">//这才是A的正确答案</span></span><br></pre></td></tr></table></figure>
+
+<p>D。在 <code>%s</code> 的格式控制符中，需要传入指向字符串的指针。而不是传入一个数组的指针。</p>
+<p>反正答案都输选B,那就bbbbbb。</p>
+<p>不是，我就搞不懂了，这些b题为啥我有些就是编译报错呢。</p>
+<h2 id="7-1"><a href="#7-1" class="headerlink" title="7"></a>7</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">13.若有定义:intａ＝２；则正确的赋值表达式是（Ａ）</span><br><span class="line">Ａ.ａ- =(a*3)      B.double(-a)     C.a*    D.a*4=3</span><br></pre></td></tr></table></figure>
+
+<p>这个不多解释，其他都不是正常的赋值语句好吧。</p>
+<p>A最后结果是，-4</p>
+<h2 id="8-1"><a href="#8-1" class="headerlink" title="8"></a>8</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">15.对于基类型相同的两个指针变量之间，不能进行的运算是（C）</span><br><span class="line">A.＜      B.＝      C.﹢      D.﹣</span><br></pre></td></tr></table></figure>
+
+<p>选项 A 的 “&lt;” 运算符表示比较两个指针的值的大小关系，选项 B 的 “=” 运算符用于指针的赋值，选项 D 的 “－” 运算符用于计算两个指针之间的距离。</p>
+<p> “+ “ 运算符在指针之间进行运算是非法的。指针的相加操作是未定义的行为</p>
+<h2 id="9-1"><a href="#9-1" class="headerlink" title="9"></a>9</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">16.若有定义:int a;则语句a=(3*4)+2%3;运行后a的值为(B)</span><br><span class="line">A. 12        B.14     C.11        D.17</span><br></pre></td></tr></table></figure>
+
+<p>这个不多说，前面是12，后面是2，加起来14</p>
+<h2 id="10-1"><a href="#10-1" class="headerlink" title="10"></a>10</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">17.下面叙述中,错误的是(A)</span><br><span class="line">A.其算术运算对象不包含函数</span><br><span class="line">B.%(模拟运算符)的运算对象只能为整型量</span><br><span class="line">C.算术运算的结合方向是“自左向右”</span><br><span class="line">D.自加和自减运算符的结合方向是“自右向左”</span><br></pre></td></tr></table></figure>
+
+<p>A.是错误的。算术运算可以应用于包含函数的算术运算对象，只要在运算之前将函数计算为相应的值。在确保函数的返回值具有适当的类型后，可以将其用作算术运算的操作数。例如，可以将函数的返回值与其他操作数进行加法或乘法运算。</p>
+<p>D.自加 (++) 和自减 (–) 运算符的结合方向是从右到左。这意味着如果同时存在多个自加或自减运算符，则从最右边的运算符开始逐个执行。</p>
+<h2 id="11-1"><a href="#11-1" class="headerlink" title="11"></a>11</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">18.已知int a=‘R’；则正确的表达式是（A）</span><br><span class="line">A.a%10</span><br><span class="line">B.a=int（3e2）</span><br><span class="line">C .2＊a=a++</span><br><span class="line">D.a=a+a=a+3</span><br></pre></td></tr></table></figure>
+
+<p>B选项中，使用C++风格的强制类型转换语法 <code>(int)</code>，的确在一些编译器中是可以编译通过的，但这并不符合C语言的标准。在C语言中，应该使用C风格的强制类型转换语法 <code>(int)</code>。</p>
+<h2 id="12-1"><a href="#12-1" class="headerlink" title="12"></a>12</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">20.以下的计语句中,x的值一定被重新赋值的是(B)</span><br><span class="line">A.if(x==y) x+=y;</span><br><span class="line">B if(x＞y＆＆x!=y);x+=y;  </span><br><span class="line">C.if(x!=y) scanf(“%d”,＆x) else scanf(“%d”,＆y);</span><br><span class="line">D.if（x＜y） &#123;x++；y++&#125;</span><br></pre></td></tr></table></figure>
+
+<p>B if(x＞y＆＆x!=y);x+=y; 关键是中间有个;号, 导致if语句对后面的那个语句不起作用.这样考眼力的题目没什么意思（笑死我了）</p>
+<h2 id="13-1"><a href="#13-1" class="headerlink" title="13"></a>13</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">21.设有double型变量a，b，c，e均有值，对代数式（3ae）/（bc），不正确的语言表达式是（C）</span><br><span class="line">A.a/b/c*e*3         B.3*a*e/b/c        C.3*a*e/b*c       D.a*e/c/b*3</span><br></pre></td></tr></table></figure>
+
+<p><img src="/wan1/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/image-20230903090942744.png" alt="image-20230903090942744"></p>
+<p>加减乘除都是从左到右，先计算乘除取余。</p>
+<p>所以c其实指的是（3aec）/（b）</p>
+<h2 id="14-1"><a href="#14-1" class="headerlink" title="14"></a>14</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">22.以下运算符中优先级最高的是(D)</span><br><span class="line">A.＞           B.||          C.＆＆          D.+</span><br></pre></td></tr></table></figure>
+
+<p><img src="/wan1/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/image-20230903091125126.png" alt="image-20230903091125126"></p>
+<p>记住，大于在加后面，剩下两个优先级其实很低。</p>
+<h2 id="15-1"><a href="#15-1" class="headerlink" title="15"></a>15</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">23.若有自定义:int a,b;double x.,则以下不符合C语言的表达是(A)</span><br><span class="line">A.x%(-3)       B.a+=-2</span><br><span class="line">C.a=b=2         D.x=a+b</span><br></pre></td></tr></table></figure>
+
+<p>取余的操作只能作用于整数</p>
+<h2 id="16-1"><a href="#16-1" class="headerlink" title="16"></a>16</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">24.若有定义:int a[3] [3];则表达式＆a[2][1]-a的值为(A)</span><br><span class="line">A.7      B.8        C.6        D.9</span><br></pre></td></tr></table></figure>
+
+<p>二维数组其实也是线性存储，题目中的减号之前也提到过，计算的是两个内存地址相差的数量。a指的是首字母的地址。 </p>
+<p>这里每一行是三个元素，<code>a[2][1]</code>在第三行第一个，中间就是查了1+3+3个元素，所以选7.</p>
+<p>（什么狗题，明明int是四个字节，应该是7*4=28才对。。）</p>
+<h2 id="17-1"><a href="#17-1" class="headerlink" title="17"></a>17</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">25.以下（D）是正确的变量名</span><br><span class="line">A.a.bee      B.-P11</span><br><span class="line">C.int      D.P＿11</span><br></pre></td></tr></table></figure>
+
+<p>变量名只能由字母和下划线和数组组成，然后只能由字母和下划线开头。不能和关键字重复。</p>
+<h2 id="18"><a href="#18" class="headerlink" title="18"></a>18</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">26.若有定义：int a=1，b=2 ，c=3，d=4，x=5，y=6 则表达式（x=a＞b）＆＆（y=c＞b）的值为（A）</span><br><span class="line">A.0      B.1     C.  5    D.6</span><br></pre></td></tr></table></figure>
+
+<p>这个更简单，判断一下即可，x是假，y是真。一个真一个假的逻辑或，一假即为假。</p>
+<h2 id="19"><a href="#19" class="headerlink" title="19"></a>19</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">27.以下（D）是正确变量名</span><br><span class="line">A.5f     B.if    C.f.5    D._f5</span><br></pre></td></tr></table></figure>
+
+<p>变量名必须以字母或下划线 <code>_</code> 开头，后面可以跟着字母、数字或下划线。它也不能是C语言的关键字。</p>
+<h2 id="20"><a href="#20" class="headerlink" title="20"></a>20</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">28.若有定义：int x=3，y=4，z=5 则值为0的表达式是（D）</span><br><span class="line">A.‘x’＆＆‘y’</span><br><span class="line">B. x＜=y</span><br><span class="line">C. x||y=z＆＆y-z</span><br><span class="line">D. ！（（x＜y）＆＆！z||1）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">3</span>, y = <span class="number">4</span>, z = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> test = !((x &lt; y) &amp;&amp; !z || <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, test);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;<span class="comment">//返回值为0</span></span><br></pre></td></tr></table></figure>
+
+<p>取非<code>!</code>在逻辑与或的前面，</p>
+<p>所以先计算最右边的！，<code>!z || 1</code>这个表达式就是1，因为逻辑或有一真即为真，然后左边<code>(x &lt; y)</code>是真的，括在一起，两个真的逻辑与，真。最后对这个<code>!(ture)</code>最后就是假，所以输出为0</p>
+<h2 id="21"><a href="#21" class="headerlink" title="21"></a>21</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">29.若有定义：int x,a；则语句x=(a=3,a+1)；运行后x、a的值依次为（ C ）</span><br><span class="line">A．3，3		B．4，4</span><br><span class="line">C．4，3		D．3，4</span><br></pre></td></tr></table></figure>
+
+<p>在这个语句中，我们使用了逗号操作符 <code>,</code>。逗号操作符可以用来在一个表达式中使用多个子表达式，并且每个子表达式都会被依次计算，但最终的结果是最后一个子表达式的值。</p>
+<p>首先，<code>a = 3</code> 将 <code>a</code> 的值设置为 3。然后，<code>a + 1</code> 计算出 4，这个值被赋给了 <code>x</code>。所以最终的结果是 <code>x = 4</code> 和 <code>a = 3</code>。</p>
+<h2 id="22"><a href="#22" class="headerlink" title="22"></a>22</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">30.若有定义：int a,b；则表达式(a=2,b=5,a*2,b++,a+b)的值是（ B ）</span><br><span class="line">A．7		B．8		C．9		D．10</span><br></pre></td></tr></table></figure>
+
+<p>从左往右执行哈，a=2,b=5，然后b加了一个，b=6，最后a+b=8</p>
+<h2 id="23"><a href="#23" class="headerlink" title="23"></a>23</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">31.若有定义：int a=2,b=3;float x=3.5,y=2.5;则表达式(float)(a+b)/2+(int)x%(int)y的值是（A）</span><br><span class="line">A．3.5		B．3.0</span><br><span class="line">C．2.5		D．2.0</span><br></pre></td></tr></table></figure>
+
+<p>计算顺序应该是<code>(float)(a+b)/2</code>然后再加上<code>(int)x%(int)y</code></p>
+<p>(5/2)+(3%2)=3.5</p>
+<h2 id="24"><a href="#24" class="headerlink" title="24"></a>24</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">32. 以下（B）是错误的整型常量</span><br><span class="line">A、-0xcdf    B、018    C、0xe    D、011</span><br></pre></td></tr></table></figure>
+
+<p>当数字以0开头时，C语言将其解释为八进制数。在八进制表示中，有效数字的范围是0到7。因此，八进制常量的每个数字都必须在0到7之间。</p>
+<p>在选项B中，常量是018。这个常量的第一个数字是0，表示八进制。接下来的数字1是有效的，但是后面的8超出了八进制的范围。因此，018是错误的整型常量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在C语言中，整型常量遵循特定的规则。它们可以是十进制、八进制或十六进制的表示形式。</span><br><span class="line">以0为前缀表示八进制数，以0x或0X为前缀表示十六进制数。</span><br><span class="line"></span><br><span class="line">选项 A. -0xcdf 是正确的十六进制负数常量；</span><br><span class="line">选项 B. 018 是错误的，因为0后面不能紧跟非零数字的八进制常量表示；</span><br><span class="line">选项 C. 0xe 是正确的十六进制常量；</span><br><span class="line">选项 D. 011 是正确的八进制常量。</span><br></pre></td></tr></table></figure>
+
+<h2 id="25"><a href="#25" class="headerlink" title="25"></a>25</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">33.语句a=(3/4)+3%2; 运行后，a的值为（B）</span><br><span class="line">A、0     B、1    C、2     D、3</span><br></pre></td></tr></table></figure>
+
+<p>首先，我们计算表达式 <code>(3 / 4)</code>。在整数除法中，如果除法的结果不能整除，则舍去小数部分。因此，<code>3 / 4</code> 的结果为 0。</p>
+<p>然后，我们计算表达式 <code>3 % 2</code>，它代表取余运算。3 除以 2 的余数为 1。</p>
+<h2 id="26"><a href="#26" class="headerlink" title="26"></a>26</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">34.设整形变量a为5， 使b不为2的表达式是（C）</span><br><span class="line">A、b=(++a)/3     B、b=6-(--a)</span><br><span class="line">C、b=a%2      D、b=a/2</span><br></pre></td></tr></table></figure>
+
+<p>C选项明显b是1</p>
+<h2 id="27"><a href="#27" class="headerlink" title="27"></a>27</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">35、已知char a=’R’；则正确的赋值表达式是（A）；</span><br><span class="line">A、a=(a++)% 4    B、a+2=3</span><br><span class="line">C、c a+=256--  D、a=‘\078’</span><br></pre></td></tr></table></figure>
+
+<p>a是char类型的数据，但是在c语言中，char也被当做是int类型存储，所以可以进行取余操作。</p>
+<p>D:当数字以0开头时，C语言将其解释为八进制数。在八进制表示中，有效数字的范围是0到7。</p>
+<h2 id="28"><a href="#28" class="headerlink" title="28"></a>28</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">36.下面叙述正确的是（B）</span><br><span class="line">A、2/3与2.0/3.0等价    B、（int）2.0/3与2/3等价</span><br><span class="line">C、++5与6等价        D、‘A’与“A”等价</span><br></pre></td></tr></table></figure>
+
+<p>C. ++5与6等价：这个叙述是不正确的。<code>++5</code>是错误的语法，<code>++</code>是一个递增运算符，应该与变量一起使用。而6是一个字面常量，不是一个变量，不能与<code>++</code>运算符一起使用。</p>
+<p>D. ‘A’与“A”等价：这个叙述是不正确的。‘A’是一个字符常量，表示一个字符A；而“A”是一个字符串常量，表示一个包含一个字符A的字符串。</p>
+<h2 id="29"><a href="#29" class="headerlink" title="29"></a>29</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">37、getchar(  )函数的功能是从终端输入（D）</span><br><span class="line">A、一个整型量值   B、一个实型变量值</span><br><span class="line">C、多个字符   D、一个字符</span><br></pre></td></tr></table></figure>
+
+<p><code>getchar()</code>函数是C语言中的标准库函数，它用于从标准输入（终端）获取单个字符，并返回该字符的ASCII值（整数)</p>
+<h2 id="30"><a href="#30" class="headerlink" title="30"></a>30</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">38、若有定义：int i=7, j=8; 则表达式 i &gt;j||i&lt;j的值为（A）</span><br><span class="line">A、1      B、变量i的值</span><br><span class="line">C、0     D、变量j的值</span><br></pre></td></tr></table></figure>
+
+<p>逻辑或运算符 || 的运算顺序是从左向右。</p>
+<p>而且这个逻辑或，只要有一个真就是真的，所以选a啦</p>
+<h2 id="31"><a href="#31" class="headerlink" title="31"></a>31</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">39、若有定义：int i ，j；则表达式（i=2, j=5, i++, i+j++）的值是（B）</span><br><span class="line">A、7     B、8</span><br><span class="line">C、9       D、10</span><br></pre></td></tr></table></figure>
+
+<p>3+5,括号的顺序是从左往右的</p>
+<h2 id="32"><a href="#32" class="headerlink" title="32"></a>32</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">40.若希望当a的值为奇数时,表达式的值为”真”,a的值为偶数时,表达式的值为”假”.则不能满足要求的表达式是( C ) </span><br><span class="line">A.a%2==1    B.!(a%2==0)</span><br><span class="line">C.!(a%2)     D.a%2</span><br></pre></td></tr></table></figure>
+
+<p>c括号里面本来是满足的，加了个！就相反了。</p>
+<h2 id="33"><a href="#33" class="headerlink" title="33"></a>33</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">41．下面叙述正确的是（　A　）</span><br><span class="line">　Ａ．强制类型转换运算的优先级高于算术运算</span><br><span class="line">　Ｂ．若a和b是整型变量，(a+b)++是合法的</span><br><span class="line">　Ｃ．”A”*＇B＇是合法的</span><br><span class="line">　Ｄ．＂A＂+＂B＂是合法的</span><br></pre></td></tr></table></figure>
+
+<p>在C语言中，强制类型转换运算符<code>(type)</code>具有较高的优先级.</p>
+<p>若a和b是整型变量，<code>(a+b)++</code> 是非法的。在C语言中，后缀自增运算符<code>++</code>只能用于变量，而不能用于表达式。</p>
+<p><code>&quot;A&quot; * &#39;B&#39;</code> 是非法的。C语言中，乘法运算符<code>*</code>只可以用于数值类型的操作数，而不可以用于字符类型的操作数。</p>
+<p>在C语言中，字符串类型是用字符数组表示的，而不是简单的字符。字符串常量可以被表示为<code>&quot;A&quot;</code>这样的字符数组，但是不能直接进行加法运算。</p>
+<h2 id="34"><a href="#34" class="headerlink" title="34"></a>34</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">42．以下程序段运行后变量a的值为（D）</span><br><span class="line">int x=6,y=5;</span><br><span class="line">int a;</span><br><span class="line">a=(--x==y++)?x:y+1;</span><br><span class="line">Ａ．０　　Ｂ．１　　Ｃ．６　　Ｄ．５</span><br></pre></td></tr></table></figure>
+
+<p>括号中的表达是真的，所以会选择x，而x进行过自减操作，所以为5</p>
+<h2 id="35"><a href="#35" class="headerlink" title="35"></a>35</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">43.下面程序段的运行结果是( D )</span><br><span class="line">int a =5 b=6;printf (“%d”,a/b);</span><br><span class="line">A. 5     B.   6       C. 7      D. 0</span><br></pre></td></tr></table></figure>
+
+<p>整数相除会忽略掉小数部分，所以是0</p>
+<h2 id="36"><a href="#36" class="headerlink" title="36"></a>36</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">44.以下程序的运行结果是( D  )</span><br><span class="line">void main()</span><br><span class="line">&#123;</span><br><span class="line">int a=65;</span><br><span class="line">char c=’A’;</span><br><span class="line">printf(“%x,%d”,a,c);</span><br><span class="line">&#125;</span><br><span class="line">A.65,       B.41,       C.65,65       D.41,65</span><br></pre></td></tr></table></figure>
+
+<p><code>%x</code> 的格式说明符用于打印变量 a 的十六进制表示，<code>%d</code> 的格式说明符用于打印变量 c 的十进制表示。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">%d：用于打印有符号十进制整数。</span><br><span class="line">%u：用于打印无符号十进制整数。</span><br><span class="line">%f：用于打印浮点数。</span><br><span class="line">%c：用于打印单个字符。</span><br><span class="line">%s：用于打印字符串。</span><br><span class="line">%x 或 %X：用于打印无符号十六进制整数，字母可以是小写或大写。</span><br><span class="line">%o：用于打印八进制整数。</span><br><span class="line">%p：用于打印指针地址。</span><br><span class="line">%e 或 %E：用于打印科学计数法表示的浮点数。</span><br><span class="line">%g 或 %G：根据实际情况自动选择 %f 或 %e 表示浮点数。</span><br><span class="line">%%：用于打印一个百分号。</span><br></pre></td></tr></table></figure>
+
+<p>因此，<code>%x,%d</code> 会将变量 a 的值 65 打印为 41（十六进制表示），变量 c 的值 ‘A’ 打印为 65（十进制表示）。</p>
+<p>排除法都选D吧</p>
+<h1 id="选择结构程序设计"><a href="#选择结构程序设计" class="headerlink" title="选择结构程序设计"></a>选择结构程序设计</h1><h2 id="1-2"><a href="#1-2" class="headerlink" title="1"></a>1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.C语言对于计嵌套语句的规定：else总是与（B）配对</span><br><span class="line">A.第一个if</span><br><span class="line">B.之前最近且尚未配对</span><br><span class="line">C.缩进位置相同的if</span><br><span class="line">D.之前最近的if</span><br></pre></td></tr></table></figure>
+
+<p>这个是规定哈</p>
+<h2 id="2-2"><a href="#2-2" class="headerlink" title="2"></a>2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">3、以下程序运行结果是（D）</span><br><span class="line">void  main(   )</span><br><span class="line">&#123; int n=5;</span><br><span class="line"> if ( n++=6 )</span><br><span class="line"> printf( “% d\n” , n);</span><br><span class="line"> else</span><br><span class="line"> printf ( “%d\n” ,  ++n );</span><br><span class="line">&#125;</span><br><span class="line">A、4      B、5     C、6      D、7</span><br></pre></td></tr></table></figure>
+
+<p>这个也不用多说，加了两次，第一次判断的时候是先调用再增加。</p>
+<h2 id="3-2"><a href="#3-2" class="headerlink" title="3"></a>3</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">4.以下程序段运行后的值为（　B　）</span><br><span class="line">int a[]=&#123;1,2,3&#125;,b[]=&#123;4,2,5&#125;;</span><br><span class="line">int *p,*q;</span><br><span class="line">int i,x;</span><br><span class="line">p=a;q=b;</span><br><span class="line">for(i=0;i&lt;3;i++)</span><br><span class="line">    if(*(p+i)==*(q+i))</span><br><span class="line">         x=*(p+i)*2;</span><br><span class="line">Ａ．２　　Ｂ．４　　Ｃ．６　　Ｄ．不确定</span><br></pre></td></tr></table></figure>
+
+<p>这个也不多说，是个人就看的出来好吧，大概说说就是p和q都是指向那两个数组头地址的指针，加i就是表示第几个元素。</p>
+<h2 id="4-2"><a href="#4-2" class="headerlink" title="4"></a>4</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5.若有定义:int a=1,b=2,c=3;则执行以下程序后a,b,c的值分别为( D )</span><br><span class="line">if(a＜b) &#123;c=a,a=b,b=c;&#125;</span><br><span class="line">A.a=1 b=2, c=3       B.a=2 b=3 c=1      C.a=2 b=3 c=3     D.a=2 b=1,c=1</span><br></pre></td></tr></table></figure>
+
+<p>条件打成执行大括号里面的语句，然后就是c=1，a=2,b=1.</p>
+<p>直接就选d了</p>
+<h2 id="5-2"><a href="#5-2" class="headerlink" title="5"></a>5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">6.以下程序的运行结果是（C）</span><br><span class="line">void main (  )</span><br><span class="line">&#123; int n=‘e’；</span><br><span class="line">switch (n--)</span><br><span class="line">&#123;default: printf (“error”);</span><br><span class="line">case‘a’：</span><br><span class="line">case‘b’: printf(“good”); break;</span><br><span class="line">case‘c’: printf(“pass”);</span><br><span class="line">case‘d’: printf(“warn”);</span><br><span class="line">&#125;</span><br><span class="line">A、error      B、good</span><br><span class="line">C、error good      D、warn</span><br></pre></td></tr></table></figure>
+
+<p>这个很简单啊，switch会依次执行嘛，遇到break停止。e没有匹配到，就执行默认，然后依次执行。</p>
+<h1 id="循环控制"><a href="#循环控制" class="headerlink" title="循环控制"></a><strong>循环控制</strong></h1><h2 id="1-3"><a href="#1-3" class="headerlink" title="1"></a>1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.对于整型变量x，与while（！x）等价的是（B）</span><br><span class="line">A.while（x！=0）    B.while（x==0）   C.while（x！=1）    D.while（～x）</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3"><a href="#2-3" class="headerlink" title="2"></a>2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">2.以下程序运行后，循环体运行的次数为（ B ）</span><br><span class="line">int i=10,x;</span><br><span class="line">for( ;i&lt;10;i++)</span><br><span class="line">       x=x+i;</span><br><span class="line">A．10		B．0</span><br><span class="line">C．1		D．无限</span><br></pre></td></tr></table></figure>
+
+<p>你这个i都不小于10，执行个jb</p>
+<h2 id="3-3"><a href="#3-3" class="headerlink" title="3"></a>3</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">3.设有整型变量x，下述语句（ B ）不会出现死循环</span><br><span class="line">A、for( ; ; x+=1);</span><br><span class="line">B、for(; (x=getchar( ))!=‘\n’; );</span><br><span class="line">C、while (1) &#123;x++;&#125;</span><br><span class="line">D、for(x=10; ; x--);</span><br></pre></td></tr></table></figure>
+
+<p>b嘛，一看知道了，当x不等于换行符的时候就执行，是换行符的时候就停止执行。</p>
+<h2 id="4-3"><a href="#4-3" class="headerlink" title="4"></a>4</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4、在C语言中while循环和do—while循环的主要区别是（ B ）</span><br><span class="line">A、do—while 循环体内可以使用break语句， while循环体内不能使用break语句</span><br><span class="line">B、do—while的循环至少无条件执行一次，while的循环体不是</span><br><span class="line">C、do—while 循环体内可以使用continue语句，while循环体内不能使用continue语句</span><br><span class="line">D、while的循环体至少无条件执行一次，do—while的循环体不是</span><br></pre></td></tr></table></figure>
+
+<p>这个不多说，不知道的立即推好了</p>
+<h2 id="5-3"><a href="#5-3" class="headerlink" title="5"></a>5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5、对于整型变量x和y，语句for (x=0, y=0 ; (y!=123) ＆＆(x&lt;4); x++) y++;中的“y++;”被执行（ A ）</span><br><span class="line">A、4次     B、0次</span><br><span class="line">C、123次     D、3次</span><br></pre></td></tr></table></figure>
+
+<p>这个也不多说了好吧，中间是与，但是也没影响，毕竟y加不到123次，只用看x执行了多少次即可。</p>
+<h2 id="6-2"><a href="#6-2" class="headerlink" title="6"></a>6</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">6．以下程序段运行后变量n的值为（ D ）</span><br><span class="line">int i=1,n=1;</span><br><span class="line">for( ; i&lt;3;i++)</span><br><span class="line">    &#123;</span><br><span class="line">     continue;</span><br><span class="line">     n=n+i;</span><br><span class="line">     &#125;</span><br><span class="line">Ａ．４　　Ｂ．３　Ｃ．２　　Ｄ．１</span><br></pre></td></tr></table></figure>
+
+<p>因为continue语句体检结束了循环，所以n的值不变哈，就是还是1.</p>
+<p>在程序段中的 <code>for</code> 循环中，使用了 <code>continue</code> 语句，当 <code>continue</code> 被执行时，它会跳过当前循环中剩余的代码，并进入下一次循环迭代。</p>
+<h2 id="7-2"><a href="#7-2" class="headerlink" title="7"></a>7</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">7．设有如下程序段：</span><br><span class="line">int a[3][3]=&#123;1,0,2,1,0,2,1,0,1&#125;,i,j,s=0; </span><br><span class="line">for(i=0;i&lt;3;i++)</span><br><span class="line">    for(j=0;j&lt;i;j++)</span><br><span class="line">        s=s+a[i][j];</span><br><span class="line">则执行该程序段后，s的值是（ C ）</span><br><span class="line">Ａ．０　  　Ｂ．１　　  Ｃ．２　　 Ｄ．３</span><br></pre></td></tr></table></figure>
+
+<p>这个双重循环倒是可以一步步的慢慢分析了，第一步的时候i就是0，注意在最外面一层循环结束之前，都不会执行i++所以第一次循环i和j的值都是0不会执行语句。</p>
+<p>第二步的时候，i增加了，i为1，j循环就执行1次，执行的时候，i为1，j为0，s=1</p>
+<p>第三部的时候，i为2，j就循环执行2此，执行的时候，i为2，j为0，1，s=1+1+0</p>
+<p>第四步，i为3，不执行语句。</p>
+<h2 id="8-2"><a href="#8-2" class="headerlink" title="8"></a>8</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">8.以下程序运行结果（C）</span><br><span class="line">void main() </span><br><span class="line">&#123;</span><br><span class="line">int sum=0,item=0;</span><br><span class="line"> while(item＜5)    </span><br><span class="line">&#123;                 </span><br><span class="line">item++; </span><br><span class="line">sum+=item;</span><br><span class="line">if(sum＞=6) break;</span><br><span class="line">&#125;</span><br><span class="line">printf(“%d\n”,sum) ;</span><br><span class="line">&#125;</span><br><span class="line">A.10          B.15</span><br><span class="line">C.6         D.7</span><br></pre></td></tr></table></figure>
+
+<p>就是这种题才有意思啊喂，比之前那些文字游戏好玩多了好吧😎</p>
+<p>首先就是item为0，开始执行，首先自增为1，然后sun加为1，如果sum大于6就结束，但是不是捏。</p>
+<p>然后第2次循环，item为1，进入，然后自增为2.sum增加为3，结束。</p>
+<p>第3次循环，item为2，进入，然后自增为3，sum加为6，结束此循环。</p>
+<p>输出sum为6</p>
+<h2 id="9-2"><a href="#9-2" class="headerlink" title="9"></a>9</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">9.下面程序运行结果是( A )</span><br><span class="line">int  i=0,a[] =&#123;1,2,3,4,5&#125;;</span><br><span class="line">do&#123;</span><br><span class="line">a[i]+=10;</span><br><span class="line">&#125;while(a[++i]＞2);</span><br><span class="line">for(i=0;i&lt;5;i++)</span><br><span class="line">printf(“%d”,a[i]);</span><br><span class="line">A.11 2 3 4 5</span><br><span class="line">B.1 2 3 4 5</span><br><span class="line">C.11 12 13 14 15</span><br><span class="line">D.11 12 3 4 5</span><br></pre></td></tr></table></figure>
+
+<p>dowhile形式，会先执行do里面的内容然后再判断哈。</p>
+<p>首先给a数组里面第一个元素加了个10.</p>
+<p>然后while，++i=1，a[1]=2不执行，然后就跳出循环（者循环里面也没东西啊，注意while后面的分号）</p>
+<p>然后执行for循环，循环输出数组中的内容，就是那里面的内容。</p>
+<h2 id="10-2"><a href="#10-2" class="headerlink" title="10"></a>10</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">10.若有定义:int i=0,x=0; int a[3][3]=&#123;1,2,3,4,5,6,7,8,9&#125;则以下程序段运行后x的值为( C )</span><br><span class="line">  for( ;i＜3;i++) x+=a[i][2-i]；</span><br><span class="line">A.0      B.12</span><br><span class="line">C.15      D.18</span><br></pre></td></tr></table></figure>
+
+<p>for循环，i是0，执行三次。</p>
+<p>第一次，i是0，x是3</p>
+<p>第二次，i=1，x=3+5</p>
+<p>第三次，i=2，x=8+7=15</p>
+<h2 id="11-2"><a href="#11-2" class="headerlink" title="11"></a>11</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">11.以下程序的运行结果是( B )</span><br><span class="line">void main()</span><br><span class="line">&#123;</span><br><span class="line">int sum=0,item=0;</span><br><span class="line">while (item＜5)</span><br><span class="line">&#123;</span><br><span class="line">item++;</span><br><span class="line">sum+=item;</span><br><span class="line">if(sum==5) </span><br><span class="line">break;</span><br><span class="line">&#125;</span><br><span class="line">printf(“%d\n”,sum);</span><br><span class="line">&#125;</span><br><span class="line">A. 10        B.15       C.5      D.6</span><br></pre></td></tr></table></figure>
+
+<p>当sum到5的时候，退出循环。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">第一次，item=0，1，sum=1</span><br><span class="line">第二次，item=1，2.sum=1+2</span><br><span class="line">第三次，item=2，3，sum=3+3=6</span><br><span class="line">第四次，item=3，4，sum=6+4</span><br><span class="line">第五次，item=4，5，sum=10+5</span><br><span class="line">第六次，item=5，不循环。输出15</span><br></pre></td></tr></table></figure>
+
+<h2 id="12-2"><a href="#12-2" class="headerlink" title="12"></a>12</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">12.下面程序段的运行结果是( D )</span><br><span class="line">int i=O, a[]=&#123;3,4,5,4,3&#125;;</span><br><span class="line">do&#123;</span><br><span class="line">a[i]++;</span><br><span class="line">&#125;while(a[++i]＜5);</span><br><span class="line">for(i=0;i＜5;i++)</span><br><span class="line">printf(“%d”,a[i]) ;</span><br><span class="line">A.  45654      B.34543    C.45554      D.45543</span><br></pre></td></tr></table></figure>
+
+<p>开始分析：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">第一次，先把第一个元素变成4，这个时候第二个元素为4，小于5，执行循环</span><br><span class="line">第二次，第二个元素变成5，第三个元素为5，不循环。输出45543</span><br></pre></td></tr></table></figure>
+
+<h2 id="13-2"><a href="#13-2" class="headerlink" title="13"></a>13</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">13.下面程序段的运行结果是( C )</span><br><span class="line">int i=0,a[]=&#123;7,5,7,3,8,3&#125;;</span><br><span class="line">do&#123;</span><br><span class="line">a[i]+=2;</span><br><span class="line">&#125;while(a[++i]＞5);</span><br><span class="line">for(i=0;i＜6;i++)</span><br><span class="line">printf(“%d ”,a[i]);</span><br><span class="line">A. 9 7 9 5 10 5    B.9 5 9 3 10 3   C.  9 5 7 3 8 3     D.7 5 7 3 8 3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">第一次，先把第一个元素变成9，然后第二个元素5不大于5，不执行循环。</span><br><span class="line">直接进入下面的for循环，循环输出数组中的内容</span><br><span class="line">数组中的内容只修改了第一个元素，所以就是</span><br><span class="line">957383</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>我是无情的码字机器，我是腱鞘炎单推人😎</p>
+<h2 id="1-4"><a href="#1-4" class="headerlink" title="1"></a>1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、有如下定义  int a[ ][3]=&#123;1，2，3，4，5，6，7，8，&#125;；则数组a的行数（ B ）</span><br><span class="line">A、 2     B、 3</span><br><span class="line">C、 4  D、无法确定</span><br></pre></td></tr></table></figure>
+
+<p>每行三个元素，一个一个数不就好，没定义的用0补齐。所以是3行</p>
+<h2 id="2-4"><a href="#2-4" class="headerlink" title="2"></a>2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">2.以下数组定义中，正确的是（ D ）</span><br><span class="line">A.int a[2] [3]=&#123;1，2，3，4，5，6，7&#125;； </span><br><span class="line">B.int a[] []=&#123;&#123;1，2，3&#125;，&#123;4，5，6&#125;，&#123;7，8，9&#125;&#125;；</span><br><span class="line">C.int a[2] []=&#123;1，2，3，4，5，6&#125;；    </span><br><span class="line">D.int a[] [4]=&#123;6&#125;；</span><br></pre></td></tr></table></figure>
+
+<p>在 C/C++ 中，如果要声明多维数组并对其进行初始化，每个维度（除了第一维）都需要指定大小。这是因为编译器需要知道每个维度的大小来正确分配内存和处理索引。</p>
+<p>反正最后一个必须要有定义，然后A选项中，定义的时候多了个元素。</p>
+<h2 id="3-4"><a href="#3-4" class="headerlink" title="3"></a>3</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3.若有定义:int a=6,b=2;ch1ar C1=‘a’，C2=‘b’；则表达式a+b%5+C2-C1的值是（ C ）</span><br><span class="line">A .7       B.8</span><br><span class="line">C.9      D表达式错误</span><br></pre></td></tr></table></figure>
+
+<p>‘a’的值97，’A‘的是97.</p>
+<p>然后b是98，现在开始算，b%5就是2，所以答案就是，6+2+98-97最后算出来就是9</p>
+<h2 id="4-4"><a href="#4-4" class="headerlink" title="4"></a>4</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4.若有定义：char str[6]=“abcdm”，*ps，*str2=“abcdef”；正确的是（ B ）</span><br><span class="line">A.stycpy（str1，str2）；</span><br><span class="line">B.表达式strcmp（str1，str2）的值＞0</span><br><span class="line">C.str1=str2；</span><br><span class="line">D.表达式strlen（str1）的值为6</span><br></pre></td></tr></table></figure>
+
+<p><strong>函数解释</strong></p>
+<p><code>strcpy</code>函数是C语言中的字符串函数之一，用于将一个字符串复制到另一个字符串中.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">strcmp函数的作用是比较两个字符串，返回一个整数值。具体的返回值有以下几种情况：</span><br><span class="line"></span><br><span class="line">如果 str1 和 str2 相等，则返回 0。</span><br><span class="line">如果 str1 大于 str2，则返回一个正整数（大于 0）。</span><br><span class="line">如果 str1 小于 str2，则返回一个负整数（小于 0）。</span><br></pre></td></tr></table></figure>
+
+<p>strlen函数接受一个参数，即需要计算长度的字符串（str），并返回一个 size_t 类型的值，表示字符串的长度。</p>
+<p><strong>题目解析</strong></p>
+<p>这道题都没说明str1和2到底是谁我们只能猜测前面那个是str1后面那个是str2.然后看我之前解析的函数就可以知道答案了，第一个字符串是比第二个字符串的长度大的所以b返回正值。</p>
+<h2 id="5-4"><a href="#5-4" class="headerlink" title="5"></a>5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5.以下能对一维数组a进行正确初始化的语句是（ D ）</span><br><span class="line">A.int a[5]=（0，0，0，0，0，）        B.int a[5]=[0] </span><br><span class="line">C.int a[5]=&#123;1，2，3，4，5，6，7&#125;     D.int a[]=&#123;0&#125;</span><br></pre></td></tr></table></figure>
+
+<p>数组只能用花括号定义啊，然后c选项又多定义了2个元素</p>
+<h2 id="6-3"><a href="#6-3" class="headerlink" title="6"></a>6</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6.以下( A )是不正确的字符串常量</span><br><span class="line">A.‘abc’      B.“12′12”     C.“O”     D“ ”</span><br></pre></td></tr></table></figure>
+
+<p>A. ‘abc’ 是不正确的字符串常量。在 C 语言中，字符串常量应该使用双引号 “ 来表示，而不是单引号 ‘。单引号用于表示字符常量。</p>
+<p>B. “12’12” 是正确的字符串常量。虽然其中包含了单引号字符，但是它是一个有效的字符串，因为它是由双引号包围的。</p>
+<p>C. “O” 是正确的字符串常量。它只包含一个字符，由双引号包围。</p>
+<p>D. “ “ 是正确的字符串常量，表示一个空字符串。它由双引号包围，但不包含任何字符。</p>
+<h2 id="7-3"><a href="#7-3" class="headerlink" title="7"></a>7</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">7.设有如下定义：char str[8]=&#123;“Fujian”&#125;；则分配给数组str的存储空间是（C）字节</span><br><span class="line">A.6         B.7</span><br><span class="line">C.8         D.9</span><br></pre></td></tr></table></figure>
+
+<p>一个字符占一个字节，8个元素就是8个字节</p>
+<h2 id="8-3"><a href="#8-3" class="headerlink" title="8"></a>8</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">8.下列数组定义中,正确的是( A )</span><br><span class="line">A.int a[10]</span><br><span class="line">B.int n=10  a[n];</span><br><span class="line">C.int N=10;int a[N]; </span><br><span class="line">D.int n; scant(“%d”,＆n);int a[n]</span><br></pre></td></tr></table></figure>
+
+<p>额第一个怎么看都是正确的吧，第二个的n是什么鬼啊喂！而且如果第二个是对的了那第一个肯定是对的吧喂，出题人是什么脑回路？</p>
+<p>最后一个也不说了好吧，第二个是错的你第三个就能对了？</p>
+<p>最后一个，C语言中，数组的大小必须是在编译时就确定的，而不能在运行时根据用户的输入来决定。</p>
+<p>在 C 语言中，数组的大小必须是一个整型常量表达式。数组的大小应该在编译时就确定。</p>
+<h2 id="9-3"><a href="#9-3" class="headerlink" title="9"></a>9</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">9.若有定义int a[2][3];则对数组元素的非法引用是( D )</span><br><span class="line">A.a[0][1/2]      B.a[1][1]</span><br><span class="line">C.a[4-4][0]      D.a[0][3]</span><br></pre></td></tr></table></figure>
+
+<p>首先值得注意的是，上面那一题我们也说过了，数组的大小必须是整数常量的表达式，注意是表达式哈。</p>
+<p>最后一个，是超出范围引用了。</p>
+<h2 id="10-3"><a href="#10-3" class="headerlink" title="10"></a>10</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">10.若有int a=2 则a=strcmp(“miss”,“miss”)运行后a的值为（B）</span><br><span class="line">A.1        B.0 </span><br><span class="line">C.-1.      D.2</span><br></pre></td></tr></table></figure>
+
+<p>cmp是比较两个字符串，一样的话就返回0</p>
+<h2 id="11-3"><a href="#11-3" class="headerlink" title="11"></a>11</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">11.以下程序结束后屏幕输出（B）</span><br><span class="line">char str[]=“ab\\cd”;printf(“%d”,strlen(str));</span><br><span class="line">A.4.       B.5 </span><br><span class="line">C.6          D.7</span><br></pre></td></tr></table></figure>
+
+<p>我草，我要是在考研这道题就错了！！</p>
+<p>中间那两个斜杠是转义！！所以其实只有五个字符在里面！</p>
+<h2 id="12-3"><a href="#12-3" class="headerlink" title="12"></a>12</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">12.已知int a[10]；则对a数组元素引用不正确的是（ A ）</span><br><span class="line">A．a[10]		B．a[3+5]</span><br><span class="line">C．a[10-10]		D．a[5] </span><br></pre></td></tr></table></figure>
+
+<p>第一个明显超出范围了好吧</p>
+<h2 id="13-3"><a href="#13-3" class="headerlink" title="13"></a>13</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">13.设有以下变量定义：</span><br><span class="line">char str1[]=”string”,str2[8],*str3,*str4=”string”;</span><br><span class="line">则（ A ）是正确的</span><br><span class="line">A．strcpy(str1,”china”)；		    B．str2=”china”；</span><br><span class="line">C．strcpy(*str3,”china”)；		D．strcpy(str4[0],”china”)；</span><br></pre></td></tr></table></figure>
+
+<p>B. <code>str2 = &quot;china&quot;;</code> 是错误的语句。在 C 语言中，字符串不能直接用赋值操作符 <code>=</code> 赋值给数组。如果想要将一个字符串的内容赋值给数组，应该使用 <code>strcpy()</code> 函数。</p>
+<p>C. <code>strcpy(*str3, &quot;china&quot;);</code> 是错误的语句。由于 <code>str3</code> 是一个指针变量，它指向某个地址。在使用指针指向的地址之前，必须先为其分配内存。否则，将无法使用 <code>strcpy()</code> 函数来复制字符串。</p>
+<p>D. <code>strcpy(str4[0], &quot;china&quot;);</code> 是错误的语句。在给定的变量定义中，<code>str4</code> 是一个指向字符串常量的指针，它的内容是只读的，不能对其进行修改。</p>
+<h2 id="14-2"><a href="#14-2" class="headerlink" title="14"></a>14</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">14、以下能对一维数组a进行正确初始化的语句是（ D ）</span><br><span class="line">A、int a[5]=(0, 0, 0, 0, 0);           B、int a [s]=[0];</span><br><span class="line">C、int a[5]=&#123;1, 2, 3, 4, 5, 6, 7 &#125;;    D、int a [ ] = &#123;0&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>花括号，c选项超出范围</p>
+<h2 id="15-2"><a href="#15-2" class="headerlink" title="15"></a>15</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">15. 若有定义int a [ ] [ 3 ]=&#123;1,2,3,4,5,6,7,8,9&#125;;则表达式sizeof(a)/sizeof(a[0])的值为( A )</span><br><span class="line">A、3      B、4      C、5      D、9</span><br></pre></td></tr></table></figure>
+
+<p>9除以3，所以是3</p>
+<h2 id="16-2"><a href="#16-2" class="headerlink" title="16"></a>16</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">16、下列数组定义中，正确的是（ A ）</span><br><span class="line">A. int a[5]=&#123;0&#125;;</span><br><span class="line">B、int a[ ]=&#123;0 1 2&#125;;</span><br><span class="line">C、int a[5]=0</span><br><span class="line">D、int a [ ]</span><br></pre></td></tr></table></figure>
+
+<p>第二个看着是对的，但是没有逗号。</p>
+<h2 id="17-2"><a href="#17-2" class="headerlink" title="17"></a>17</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">17、以下数组定义中，正确的是（ D ）</span><br><span class="line">A、int a[2][3]=&#123;1,2,3,4,5,6,7&#125;;</span><br><span class="line">B、int a[ ][ ]=&#123;&#123;1,2,3&#125;,&#123;4,5,6&#125;, &#123;7,8,9&#125;&#125;;</span><br><span class="line">C、int a[2][ ]=&#123;1,2,3,4,5,6&#125;;</span><br><span class="line">D、int a[ ][4]=&#123;6&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个学长的答案又错了，答案是D。必须要给最小的那个数组赋值！</p>
+<h2 id="18-1"><a href="#18-1" class="headerlink" title="18"></a>18</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">18.若有定义:int a[3][4]=&#123;&#123;1,2&#125;,&#123;0&#125;,&#123;1,2,3&#125;&#125;;则a[1][1]的值为( A )</span><br><span class="line">A.0.    B.&#123;1,2&#125;    C.1    D.3</span><br></pre></td></tr></table></figure>
+
+<p>这个就是0.别想其他的了哈（你是1？🤗）</p>
+<h2 id="19-1"><a href="#19-1" class="headerlink" title="19"></a>19</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">19.若有定义:int a[3]=&#123;0,1,2&#125;;则a[1]的值为( B )</span><br><span class="line"> A.0    B. 1</span><br><span class="line"> C.2      D.3</span><br></pre></td></tr></table></figure>
+
+<p>写错了的自己立即推</p>
+<h2 id="20-1"><a href="#20-1" class="headerlink" title="20"></a>20</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">20．若有定义：int a[5]=&#123;1,2,3,4,5&#125;;则语句a[1]=a[3]+a[2+2]-a[3-1];运行后a[1]的值为（ A ）</span><br><span class="line">Ａ．６  　Ｂ．５    Ｃ．１  　Ｄ．２</span><br></pre></td></tr></table></figure>
+
+<p>大概就是4+5-3所以是6</p>
+<h2 id="21-1"><a href="#21-1" class="headerlink" title="21"></a>21</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">21.有如下定义:char str[6]=&#123;‘a’,‘b’,‘\0’，‘d’，‘e’，‘f’&#125;；则语句printf(“%s”,str);的输出结果是( D )</span><br><span class="line">A.ab\         B.abdef</span><br><span class="line">C.ab\0         D.ab</span><br></pre></td></tr></table></figure>
+
+<p>\0是结束符号。别忘了哈</p>
+<h2 id="22-1"><a href="#22-1" class="headerlink" title="22"></a>22</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">22.定义char a[]=“abcdef”；char b[]=“xyz”;以下程序运行后输出（ B ）</span><br><span class="line">strcpy（a，b）；</span><br><span class="line">printf（“%c”，a[2]）；</span><br><span class="line">A. c     B.  z      C.\0     D.d</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">char</span> a[] = <span class="string">&quot;abcdef&quot;</span>;</span><br><span class="line">	<span class="keyword">char</span> b[] = <span class="string">&quot;xyz&quot;</span>;</span><br><span class="line">	<span class="built_in">strcpy</span>(a, b);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>,a);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;<span class="comment">//输出xyz</span></span><br></pre></td></tr></table></figure>
+
+<p>这个是直接把那个b里面的内容弄进去了，直接覆盖了。所以答案选B</p>
+<h2 id="23-1"><a href="#23-1" class="headerlink" title="23"></a>23</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">23、以下程序段运行后屏幕输出为（ A ）</span><br><span class="line">char str[80]; </span><br><span class="line">strcpy(str, “hello”); </span><br><span class="line">printf( “%d” , strlen (str));</span><br><span class="line">A、5    B、6     C、7     D、80</span><br></pre></td></tr></table></figure>
+
+<p>在给定的程序段中，字符数组 <code>str</code> 的长度为 80。而使用 <code>strcpy()</code> 函数将字符串 “hello” 复制到字符数组 <code>str</code> 中后，实际上只是将 “hello” 的内容复制到了 <code>str</code> 中，并且在最后添加了字符串的终止符 <code>\0</code>。所以，<code>strlen()</code> 函数在计算 <code>str</code> 的长度时，会在遇到终止符 <code>\0</code> 时停止计数。</p>
+<p>因此，尽管 <code>str</code> 的长度为 80，但是实际上存储的字符串 “hello” 的长度为 5。所以，程序运行后调用 <code>strlen(str)</code> 函数将返回 5，而不是 80。</p>
+<h2 id="24-1"><a href="#24-1" class="headerlink" title="24"></a>24</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">24．以下程序段运行后屏幕输出为（ C ）</span><br><span class="line">char a[]=”abc\0mis”;</span><br><span class="line">printf(“%d”,srelen(a));</span><br><span class="line">Ａ．５　　   Ｂ．８　    Ｃ．３　　Ｄ．４</span><br></pre></td></tr></table></figure>
+
+<p>这个题目都写错了把，str，这个选3，上面解释过了</p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="1-5"><a href="#1-5" class="headerlink" title="1"></a>1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.关于C语言函数的描述中，正确的是（ B ）</span><br><span class="line">A.函数的定义可以嵌套，但函数的调用不可以嵌套     </span><br><span class="line">B.函数的定义不可以嵌套，但函数的调用可以嵌套   </span><br><span class="line">C.函数的定义和函数的调用都可以嵌套    </span><br><span class="line">D. 函数的定义和函数的调用都不可以嵌套</span><br></pre></td></tr></table></figure>
+
+<p>定义不可以嵌套，但是调用可以</p>
+<h2 id="2-5"><a href="#2-5" class="headerlink" title="2"></a>2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2.已知char a；使用scanf（）函数输入一个字符给变量a，不正确的函数调用是（ B ）</span><br><span class="line">A.scanf（“%d”，＆a）;     B.scanf（“%lf”，＆a）;   </span><br><span class="line">C.scanf（“%c，＆a）;      D.scanf（”%u”，＆a）;</span><br></pre></td></tr></table></figure>
+
+<p>%u：用于打印无符号十进制整数。</p>
+<p>b是float类型的，不可以。char在c语言中是按照整数类型存储</p>
+<h2 id="3-5"><a href="#3-5" class="headerlink" title="3"></a>3</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3.putchar（）函数的功能是向终端输出（ B ）</span><br><span class="line">A.多个字符     B.一个字符</span><br><span class="line">C.一个实型变量值   D.一个整型变量表达式</span><br></pre></td></tr></table></figure>
+
+<p>这个记住就好了</p>
+<p>扩展一个<code>getchar()</code> 函数的功能是从标准输入（通常是终端）获取一个字符。</p>
+<h2 id="4-5"><a href="#4-5" class="headerlink" title="4"></a>4</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4、已知int a；使用scanf（）函数输入一个整数给变量a, 正确的函数调用是( B )</span><br><span class="line">A、scanf（“%d”, a）;     B、scanf（“%d”,＆a）; </span><br><span class="line">C、scanf(“A”, ＆a );    D、scanf(“%df”, ＆a );</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-5"><a href="#5-5" class="headerlink" title="5"></a>5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5.C语言的函数体由( B )括起来</span><br><span class="line">  A.( )      B.&#123;&#125;　　  Ｃ．［］   　Ｄ．／* *／</span><br></pre></td></tr></table></figure>
+
+<p>这个就不多说了</p>
+<h2 id="6-4"><a href="#6-4" class="headerlink" title="6"></a>6</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">6.如下fun函数的类型是（ C ）</span><br><span class="line">fun(float x)</span><br><span class="line">&#123;</span><br><span class="line">  double y;</span><br><span class="line">  int z;</span><br><span class="line">  y=x*x;</span><br><span class="line">  z=(int)y;</span><br><span class="line">  return(z);</span><br><span class="line">&#125;</span><br><span class="line">Ａ．void     B.double     C.int     D.float</span><br></pre></td></tr></table></figure>
+
+<p>最后返回的数据是int。所以就是int类型啦</p>
+<h2 id="7-4"><a href="#7-4" class="headerlink" title="7"></a>7</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">7.设有如下函数定义:</span><br><span class="line">int fun(char *str) </span><br><span class="line">&#123;</span><br><span class="line">char *p;p=str;</span><br><span class="line">if(p!=‘\0’) </span><br><span class="line">p++;</span><br><span class="line">return (p-str);</span><br><span class="line">&#125;</span><br><span class="line">则以下语句执行后的输出结果是( A )</span><br><span class="line">printf(“%d\n”,fun(“student”));</span><br><span class="line">A. 7         B. 8            C. 9      D. 10</span><br></pre></td></tr></table></figure>
+
+<p>你妈妈的，编译都编译不了额额额额。</p>
+<p>自己算算吧，大致就是定义了一坨指针，和一个变量。如果这个变量不是\0,那就给指针往后移一位，就是算了下这个字符串的长度。哪有这样算的啊？不是，真可以这样算吗？</p>
+<h2 id="8-4"><a href="#8-4" class="headerlink" title="8"></a>8</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">8.以下程序的屏幕输出为(B)</span><br><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">void f（int i）</span><br><span class="line">&#123;</span><br><span class="line">int a=2；</span><br><span class="line">a=i++；</span><br><span class="line">printf（“%d”，a）；</span><br><span class="line">&#125;</span><br><span class="line">main（）</span><br><span class="line">&#123;</span><br><span class="line">int a=1 ，c=3；</span><br><span class="line">f（c）；</span><br><span class="line">a=c++;</span><br><span class="line">printf（“%d”，a）；</span><br><span class="line">&#125;</span><br><span class="line">A. 4，3       B. 3，3      C.4，5      D. 3，5</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>f(c)</code> 调用中，传递给 <code>f()</code> 函数的参数是变量 <code>c</code> 的值，即 3。在函数内部，变量 <code>a</code> 被赋值为 2，并且 <code>i++</code> 表达式的值被赋给 <code>a</code>。这意味着 <code>a</code> 的值将是 <code>i</code> 在自增之前的值，即 3。所以 <code>printf</code> 语句会输出 <code>3</code>。</p>
+<p>然后在 <code>a = c++</code> 语句中，变量 <code>c</code> 的值被赋值给变量 <code>a</code>，即 <code>a</code> 的值变为 3。在赋值完成之后，<code>c</code> 的值自增，变为 4。所以 <code>printf</code> 语句会输出 <code>3</code>。</p>
+<h2 id="9-4"><a href="#9-4" class="headerlink" title="9"></a>9</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">9.若有以下函数定义:</span><br><span class="line">int fun ()</span><br><span class="line">&#123;</span><br><span class="line">static int k=0;</span><br><span class="line">return ++k;</span><br><span class="line">&#125;</span><br><span class="line">以下程序段运行后屏幕输出为( D )</span><br><span class="line">int i; </span><br><span class="line">for (i=1;i＜=5 i++)</span><br><span class="line">    fun();</span><br><span class="line">printf(“%d”,fun());</span><br><span class="line">A.  0      B.   1      C.  5      D.  6</span><br></pre></td></tr></table></figure>
+
+<p>分析一下这个函数的作用，定义了一个静态变量k</p>
+<p>这里就需要注意静态变量的特性了，静态局部变量是在编译的时候赋初值。即只赋初值一次，不会随函数调用结束后其存储单元消失</p>
+<p>然后执行了5+1次的fun函数，最后输出fun函数的返回值，函数里面是先加再输出的，所以选D</p>
+<h2 id="10-4"><a href="#10-4" class="headerlink" title="10"></a>10</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">10.以下程序运行的结果是（ Ａ ）</span><br><span class="line">int fun (int array[4][4])</span><br><span class="line">&#123;</span><br><span class="line">int j;</span><br><span class="line">for(j=0;j＜4;j++)//神说这样会更占用资源，不入++j</span><br><span class="line">printf(“%2d”,array[2][j]);</span><br><span class="line">printf(“\n”);</span><br><span class="line">&#125;</span><br><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">int a[4][4]=&#123;0,1,2,0,1,0,0,4,2,0,0,5,0,4,5,0&#125;;</span><br><span class="line">fun(a);</span><br><span class="line">&#125;</span><br><span class="line">A.2005       B.1004       C.0120        D.0450</span><br></pre></td></tr></table></figure>
+
+<p>fun的函数效果就是，将输入的二维数组，的第3行一次输出，所以就是A</p>
+<h2 id="11-4"><a href="#11-4" class="headerlink" title="11"></a>11</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">11.以下程序运行后屏幕输出为（ D ）</span><br><span class="line">#include〈stdio.h〉</span><br><span class="line">int a=2 ，b=3；</span><br><span class="line">int max（int a，int b）</span><br><span class="line">&#123; </span><br><span class="line">int c；</span><br><span class="line">c=a＞b？a:b；</span><br><span class="line">return（c）；</span><br><span class="line">&#125;</span><br><span class="line">main（）</span><br><span class="line">&#123;</span><br><span class="line">int a=4；</span><br><span class="line">printf（“%d”，max（a，b））；</span><br><span class="line">&#125;</span><br><span class="line">A. 2，3      B.  2     C. 3    D.  4</span><br></pre></td></tr></table></figure>
+
+<p>max函数的作用就是寻找两个数中的最大值，这个考的就是作用域把，肯定是选择4啊，不用说，因为前面的ab是在编译的时候定义的，然后你main函数又重新定义了一次a，肯定使用重新定义的。</p>
+<h2 id="12-4"><a href="#12-4" class="headerlink" title="12"></a>12</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">12.以下程序运行后屏幕输出为( B )</span><br><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">int f(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">  return(x+y);</span><br><span class="line">&#125;</span><br><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">  int a=2,b=3,c;</span><br><span class="line">  c=f(a,b);</span><br><span class="line">  printf(“%d+%d=%d\n”,a,b,c);</span><br><span class="line">&#125;</span><br><span class="line">A.0     B.2+3=5     C.2+3=0     D.3+2=5</span><br></pre></td></tr></table></figure>
+
+<p>输出的是一个表达式，abc的值，a的值就是2，b是3，c是两个相加，就是5.所以选B</p>
+<h2 id="13-4"><a href="#13-4" class="headerlink" title="13"></a>13</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">13、下面程序的输出结果是（ D ）</span><br><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">int global=100;</span><br><span class="line">fun (  )</span><br><span class="line">&#123;</span><br><span class="line">int global=5;</span><br><span class="line">return ++global;</span><br><span class="line">&#125;</span><br><span class="line">void main(  )</span><br><span class="line">&#123;</span><br><span class="line">printf (“% d\n”, fun( ) )</span><br><span class="line">&#125;</span><br><span class="line">A、100    B、101   C、5   D、6</span><br></pre></td></tr></table></figure>
+
+<p>然后这里又是考作用域的问题啊，定义了一个全局的global变量和一个fun内部的局部变量。我觉得函数内部肯定使用的就是函数内部的局部变量咯</p>
+<p>我的博客也写了<code>在文件的某处引用重名变量时，所引用的变量就是作用域较小的那一个变量。</code></p>
+<h1 id="预处理命令"><a href="#预处理命令" class="headerlink" title="预处理命令"></a>预处理命令</h1><h2 id="1-6"><a href="#1-6" class="headerlink" title="1"></a>1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.若有定义：#define PI 3，则表达式PI*2*2的值为（ A ）</span><br><span class="line">A.12      B.4</span><br><span class="line">C.3     D.不确定</span><br></pre></td></tr></table></figure>
+
+<p>3*4就是十二</p>
+<h2 id="2-6"><a href="#2-6" class="headerlink" title="2"></a>2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2.设有如下定义typedef  int *INTEGER；INTEGER  P，*q；则（ C ）是正确的表述</span><br><span class="line">A.P是int型变量                 B .q是基类型为int的指针变量</span><br><span class="line">C.P是基类型为int的指针变量     D.程序中可用INTEGER代替int类型名。</span><br></pre></td></tr></table></figure>
+
+<p>在这里，<code>INTEGER</code> 被定义为 <code>int *</code>，即指向整型的指针类型。</p>
+<p>根据定义，<code>P</code> 是 <code>INTEGER</code> 类型的变量，即 <code>int *</code> 类型的变量。因此，P 是基类型为 int 的指针变量。</p>
+<p>同样，<code>q</code> 也是 <code>INTEGER</code> 类型的变量，即 <code>int *</code> 类型的指针变量。因此，q 也是基类型为 int 的指针变量。</p>
+<p>这道题有意思哈，我第一次看也选错了。<strong>需要着重复习！！</strong></p>
+<h2 id="3-6"><a href="#3-6" class="headerlink" title="3"></a>3</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">3、以下叙述中，正确的是（ A ）</span><br><span class="line">A、宏展开不占用运行时间，只占用编译时间</span><br><span class="line">B、预编译处理命令行必须以分号结束</span><br><span class="line">C、一个源程序只能有一个预编译处理命令行</span><br><span class="line">D、使用带参数的宏定义时，应该说明每个参数的数据类型</span><br></pre></td></tr></table></figure>
+
+<p>A. 宏展开是在编译时期进行的，它会将宏定义的部分替换为相应的代码。因此，宏展开不会在运行时产生额外的开销，它只在编译期起作用，所以只会占用编译时间。</p>
+<p>B. 预编译处理命令行以 <code>#</code> 字符开头，而不是以分号结束。</p>
+<p>C. 一个源程序可以有多个预编译处理命令行，以插入包含文件、定义宏等。</p>
+<p>D. 在使用带参数的宏定义时，不需要明确指定每个参数的数据类型。宏展开只是进行简单的文本替换，不像函数有参数的类型检查。</p>
+<h2 id="4-6"><a href="#4-6" class="headerlink" title="4"></a>4</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4、以下的叙述中不正确的是（ C ）</span><br><span class="line">A、宏展开不占用运行时间，只占用编译时间</span><br><span class="line">B、宏名无类型</span><br><span class="line">C、宏名必须用大写字母表示</span><br><span class="line">D、预处理命令行都必须以#号开始</span><br></pre></td></tr></table></figure>
+
+<p>和上面那道题差不多</p>
+<p>A. 宏展开是在编译时期进行的，它会将宏定义的部分替换为相应的代码。因此，宏展开不会在运行时产生额外的开销，它只在编译期起作用，所以只会占用编译时间。</p>
+<p>B. 宏名没有类型，它只是一个标识符，用于标识宏定义的部分。</p>
+<p>C. 宏名没有强制要求使用大写字母表示。宏名的命名规范与其他标识符一样，通常建议使用大写字母加下划线的形式，以提高可读性和与其他标识符的区分度。但并非必须使用大写字母。</p>
+<p>D. 预处理命令行都必须以 <code>#</code> 号开始，以标识预处理命令，对于大多数预处理命令，确实需要以 <code>#</code> 号开始。例如，宏定义、包含文件等。</p>
+<h2 id="5-6"><a href="#5-6" class="headerlink" title="5"></a>5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">5．以下叙述中，正确的是（ B ）</span><br><span class="line">Ａ．＂#define　PRICE＝３０＂定义了３０等价的符号常量PRICE</span><br><span class="line">Ｂ．预编译处理命令行都必须以＂#＂开头</span><br><span class="line">Ｃ．宏名只能是含大写字母和数字字符</span><br><span class="line">Ｄ．在程序的一行上可以书写几个有效的宏定义</span><br></pre></td></tr></table></figure>
+
+<p>A. <code>#define PRICE=30</code> 定义的是 <code>PRICE=30</code> 这个宏，而不是 <code>30</code> 这个符号常量。在宏展开时，会将 <code>PRICE</code> 替换为 <code>30</code>，而不是直接将 <code>30</code> 视为符号常量。</p>
+<p>B. 预处理处理命令行都必须以 <code>#</code> 开头，以标识预处理命令。预处理命令包括宏定义 <code>#define</code>、条件编译 <code>#if</code>、<code>#ifdef</code>、包含文件 <code>#include</code> 等。</p>
+<p>C. 宏名可以包含大写字母、小写字母、数字和下划线。并无限制只能使用大写字母和数字字符。</p>
+<p>D. 在一行上可以书写多个有效的宏定义，每个宏定义之间用分号或者换行符分隔。</p>
+<p>这道题，我们只能当做D是错误的了，实际上D选项我写过程序，正常运行了的。</p>
+<h2 id="6-5"><a href="#6-5" class="headerlink" title="6"></a>6</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">6.下面程序的输出结果是（C）</span><br><span class="line">#include〈stdio.h〉</span><br><span class="line">#define ONE 1 </span><br><span class="line">#define  TWO ONE+1  </span><br><span class="line">#define THREE TWO+1</span><br><span class="line">void main （）</span><br><span class="line">&#123;</span><br><span class="line">printf（“%d\n”,THREE-ONE）;</span><br><span class="line">&#125;</span><br><span class="line">A.产生错误,     B.  1        C.   2      D.   3</span><br></pre></td></tr></table></figure>
+
+<p>3-1等于2嘛</p>
+<p>根据宏定义展开的原理，宏的展开是简单的文本替换。在给定的代码中：</p>
+<p>首先，宏 ONE 被定义为 1，所以 TWO 直接进行宏展开就是 <code>ONE+1</code>，即 <code>1+1</code>。</p>
+<p>然后，宏 THREE 直接进行宏展开就是 <code>TWO+1</code>，即 <code>(ONE+1)+1</code>，这里 ONE 视为字面值常量。</p>
+<p>最后，在 <code>printf()</code> 函数中，<code>THREE-ONE</code> 进行宏展开就是 <code>((ONE+1)+1)-ONE</code>，即 <code>(1+1+1)-1</code>，结果为 2。</p>
+<h2 id="7-5"><a href="#7-5" class="headerlink" title="7"></a>7</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">7.以下程序执行时,输入1 2 3 4 5&lt;回车&gt;输出为( A )</span><br><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#define N 5</span><br><span class="line">void main()</span><br><span class="line">&#123;</span><br><span class="line">  int a[N];</span><br><span class="line">  int *p=a;</span><br><span class="line">  while(p&lt;a+N)</span><br><span class="line">     scanf(“%d”,p++);</span><br><span class="line">  while(p&gt;a)</span><br><span class="line">     prinf(“%s”,*(--p));</span><br><span class="line">&#125;</span><br><span class="line">A.5 4 3 2 1      B.1 2 3 4 5     C.2 3 4 5 1      D.4 3 2 1 5</span><br></pre></td></tr></table></figure>
+
+<p>第一个while就是比较两个是指针的大小，因为指针p是指向的a数组的首地址，一直加到a+N停止，也就是说比a数组最大的还多了个地址，正好让p停留在a数组的最后一个元素的位置。</p>
+<p>所以第一个while就是给a数组依次赋值，后面的while就是让while从最后开始输出，（这些b题放在编译器都要报错的，也不知道是谁写的。）</p>
+<p>所以就是倒着输出54321</p>
+<h2 id="8-5"><a href="#8-5" class="headerlink" title="8"></a>8</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">8.若有以下定义</span><br><span class="line">#define MOD(x,y) x%y</span><br><span class="line">则执行以下程序段后,z的值是( D )</span><br><span class="line">int z,a=15,b=100;</span><br><span class="line">z=MOD(b,a);</span><br><span class="line">A.100,     B.15       C.11     D.10</span><br></pre></td></tr></table></figure>
+
+<p>根据给定的宏定义 <code>#define MOD(x,y) x%y</code>，宏展开后 <code>z=MOD(b,a)</code> 变成 <code>z=b%a</code>。</p>
+<p>所以，<code>z</code> 的值是 100 % 15，结果为 10。因此，选项 D 正确。</p>
+<h2 id="9-5"><a href="#9-5" class="headerlink" title="9"></a>9</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">9、下面程序的输出结果是（ A ）</span><br><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#define SQR(x) (x*x)</span><br><span class="line">void main()</span><br><span class="line">&#123;</span><br><span class="line">  int a,b=3;</span><br><span class="line">  a=SQR(b+2);</span><br><span class="line">  printf(“\n%d”,a);</span><br><span class="line">&#125;</span><br><span class="line">A．11		B．25		C．不定值		D．产生错误</span><br></pre></td></tr></table></figure>
+
+<p><strong>这道题需要注意了！！！！！！</strong>，这个define只是最基础的文本替换，</p>
+<p>所以我们这个替换之后是这样的</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> a,b=<span class="number">3</span>;</span><br><span class="line">  a=(b+<span class="number">2</span>*b+<span class="number">2</span>);</span><br><span class="line">  <span class="built_in">printf</span>(“\n%d”,a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自然输出的就是11了！！！！</p>
+<h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><h2 id="1-7"><a href="#1-7" class="headerlink" title="1"></a>1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.若函数fun的函数头为：int  fun（int i，int j）且函数指针变量P定义如下：int （*P）（int i，int j）；则要使指针P指向函数fun的赋值语句是（ B ）</span><br><span class="line">A. P=*fun      B. P=fun；</span><br><span class="line">C. P=fun（i，j）     D. P=＆fun</span><br></pre></td></tr></table></figure>
+
+<p><code>int (*P)(int i, int j)</code> 表示 <code>P</code> 是一个指向具有两个 <code>int</code> 类型参数和一个 <code>int</code> 类型返回值的函数的指针。</p>
+<p>这个确实比较难理解哈，但是答案就是选B，这句解析好好看一下。</p>
+<h2 id="2-7"><a href="#2-7" class="headerlink" title="2"></a>2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2.设有以下语句，则（ D ）是对数组元素的不正确引用，其中.int a[10]=&#123;0,1,2,3,4,5,6,7,8,9&#125;,*p=a</span><br><span class="line">A．a[p-a]		B．*(&amp;a[i])</span><br><span class="line">C．p[i]		D．*(*(a+i)) </span><br></pre></td></tr></table></figure>
+
+<p>a啊啊啊啊啊啊我要疯掉了，首先C肯定是对的</p>
+<p><code>a</code> 是一个数组名，代表数组的首地址，因此 <code>a</code> 的值为 <code>&amp;a[0]</code>。</p>
+<p><code>p</code> 是一个指针变量，指向数组 <code>a</code> 的首地址，即 <code>&amp;a[0]</code>。</p>
+<p>然后第一个是p-a是地址差值，而p就是指向的a的第一个元素， 所以相减是0，然后就相当于是a[0]</p>
+<p>第二个呢，<code>&amp;a[i]</code>指的是a的i的元素的地址，而*又是指向这个地址，所以是正确的</p>
+<p>最后一个，a+i，指向他一个就够了。</p>
+<p><code>*(*(a+i))</code>：这是一个不正确的引用。在这种语法中，我们尝试将数组 <code>a</code> 视为一个二维数组，并通过 <code>*(*(a+i))</code> 来访问其中的元素。但是，事实上，数组 <code>a</code> 是一个一维数组，这样的引用是不正确的。</p>
+<h2 id="3-7"><a href="#3-7" class="headerlink" title="3"></a>3</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">3、在16位编译系统上，若有定义int a [ ]=&#123;10，20，30&#125;，*p=＆a；当执行p++；后下列叙述错误的是（ A ）</span><br><span class="line">A、p向高地址移了一个字节</span><br><span class="line">B、p与a+1等价</span><br><span class="line">C、语句printf(“%d”, p)；输出20</span><br><span class="line">D、p指向数组元素a[1]</span><br></pre></td></tr></table></figure>
+
+<p>后面三个我都能理解，这个a是什么意思？</p>
+<p>A. <code>p</code> 向高地址移了一个字节：这个叙述是错误的。在16位编译系统中，指针的大小是2个字节（16位），而不是1个字节。因此，执行 <code>p++</code> 操作后，<code>p</code> 移动的是2个字节的大小，而不是1个字节。所以，叙述 A 是错误的。</p>
+<p>酱紫啊。。</p>
+<p>在C语言中，指针的大小是由编译系统的位数决定的。一般而言，32位编译系统中指针的大小是4个字节（32位），64位编译系统中指针的大小是8个字节（64位）。</p>
+<h2 id="4-7"><a href="#4-7" class="headerlink" title="4"></a>4</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4、以下程序段运行后*（++p）的值为（C）</span><br><span class="line">   char a[6]=“work”;</span><br><span class="line">   char *p;</span><br><span class="line">   p=a;</span><br><span class="line">A、‘w’   B、存放‘w’的地址    C、‘O’   D、存放的‘O’地址</span><br></pre></td></tr></table></figure>
+
+<p>这个就不说了把，++p是指向那个地方的地址，*就引用了他。</p>
+<h2 id="5-7"><a href="#5-7" class="headerlink" title="5"></a>5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5.在16位编译系统上,若有定义int a[]=&#123;10,20,30&#125;,*p=&amp;a;当执行p++;后下列叙述错误的是( A )</span><br><span class="line">A.p向高地址移了一个字节         B.p与a+1等价</span><br><span class="line">C.语句printf(“%d”,*p);输出20;    D.p指向数组元素a[1] </span><br></pre></td></tr></table></figure>
+
+<p>这个不收了好吧不就是上面那个题吗</p>
+<h2 id="6-6"><a href="#6-6" class="headerlink" title="6"></a>6</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">6.以下程序运行后*（P+3）的值为（ A ）</span><br><span class="line">char a[]=“good”； char *P；P=a；</span><br><span class="line">A.‘d’       B.‘\0’</span><br><span class="line">C.存放‘d’的地址      D.‘0’</span><br></pre></td></tr></table></figure>
+
+<p>一样的啊*引用了d的地址，所以输出d</p>
+<h2 id="7-6"><a href="#7-6" class="headerlink" title="7"></a>7</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">7.以下程序运行后x的值为(D)</span><br><span class="line">int a[9]=&#123;1,2,3,4,5,6,7,8,9&#125;;</span><br><span class="line">int *p,*q;</span><br><span class="line">int i,x;</span><br><span class="line">p=＆a[0];</span><br><span class="line">q=＆a[8];</span><br><span class="line">for (i=O;i＜3;i++)</span><br><span class="line">if(*(p+i)==*(q-i) )</span><br><span class="line">x=*(p+i)*2;</span><br><span class="line">A. 2       B.  4</span><br><span class="line">C. 6      D.不确定</span><br></pre></td></tr></table></figure>
+
+<p>for循环三次，然后并没有找到一样的数，所以x没有被赋值。</p>
+<ul>
+<li>当 <code>i = 0</code> 时，<code>*(p+i) = *(p+0) = *p = 1</code>，<code>*(q-i) = *(q-0) = *q = 9</code>。因此，条件不满足，进入下一次迭代。</li>
+<li>当 <code>i = 1</code> 时，<code>*(p+i) = *(p+1) = *(p+1) = 2</code>，<code>*(q-i) = *(q-1) = *(q-1) = 8</code>。因此，条件不满足，进入下一次迭代。</li>
+<li>当 <code>i = 2</code> 时，<code>*(p+i) = *(p+2) = *(p+2) = 3</code>，<code>*(q-i) = *(q-2) = *(q-2) = 7</code>。因此，条件不满足，循环结束。</li>
+</ul>
+<h2 id="8-6"><a href="#8-6" class="headerlink" title="8"></a>8</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">8.以下程序运行段运行后x的值为( D )</span><br><span class="line">int a[]=&#123;1,2,3,4,5,6,7,8&#125;;</span><br><span class="line">int i,x *p; </span><br><span class="line">x=1;</span><br><span class="line">p=＆a[2];</span><br><span class="line">for(i=0,i＜3,i++)</span><br><span class="line">x*=(p+i);</span><br><span class="line">A. 不确定       B.  24       C.  120     D.  60</span><br></pre></td></tr></table></figure>
+
+<p>x为1，p指向a的第三个元素，for循环三次。</p>
+<p>x乘以p+0的元素，第一次是3，第二次是，12，第三次是，60</p>
+<p>值得注意的是，代码是错的哈，应该是<code>x *= *(p + i);</code></p>
+<h2 id="9-6"><a href="#9-6" class="headerlink" title="9"></a>9</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">10．执行以下程序段的输出结果是（ B ）</span><br><span class="line">int a=10,*p=&amp;a;</span><br><span class="line">printf(“%d”,++*p);</span><br><span class="line">A．１０　　 Ｂ．１１</span><br><span class="line">Ｃ．变量a的地址　  Ｄ．变量a的地址加１</span><br></pre></td></tr></table></figure>
+
+<p>*p的值是10哈，加一个就是11</p>
+<p>根据运算符优先级，前缀递增运算符 <code>++</code> 具有比间接解引用运算符 <code>*</code> 更高的优先级，因此 <code>++*p</code> 将先递增 <code>*p</code> 所指向的值，然后取得递增后的值。</p>
+<h1 id="结构体与共用体"><a href="#结构体与共用体" class="headerlink" title="结构体与共用体"></a><strong>结构体与共用体</strong></h1><h2 id="1-8"><a href="#1-8" class="headerlink" title="1"></a>1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.设有以下定义语句：</span><br><span class="line">struct student&#123;</span><br><span class="line">int num；</span><br><span class="line">char name[10]；</span><br><span class="line">float score;</span><br><span class="line">&#125;wang，zhang；的变量wang所占的内存字节是（ B ）</span><br><span class="line">A.14        B.16.         C.18        D.9</span><br></pre></td></tr></table></figure>
+
+<p>关于结构体：</p>
+<p>1.结构体变量的首地址能够被其最宽基本类型成员的大小所整除。</p>
+<p>2.结构体成员相对于结构体变量的首地址的偏移量（结构体变量的首地址编号和结构体成员的地址编号他们之间所差的字节数）都是其成员大小的整数倍</p>
+<p>3.结构体的总大小为结构最宽基本类型成员的整数倍</p>
+<p>这里最宽的基本类型是float，4个字节，所以一定会被4整除</p>
+<h2 id="2-8"><a href="#2-8" class="headerlink" title="2"></a>2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2.设有以下定义语句:</span><br><span class="line">struct student&#123;</span><br><span class="line">int num ;</span><br><span class="line">char name[10];</span><br><span class="line">float score;&#125;wang,zhang;</span><br><span class="line">则不正确的叙述是( C )</span><br><span class="line">A.struct 是结构体类型的关键字   B.zhang是结构体变量名</span><br><span class="line">C.wang是结构体类型名           D.num,name,score都是结构体类型student的成员名</span><br></pre></td></tr></table></figure>
+
+<p>结构体类型名为 <code>student</code>，而 <code>wang</code> 和 <code>zhang</code> 是具体的结构体变量名。</p>
+<h2 id="3-8"><a href="#3-8" class="headerlink" title="3"></a>3</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">3.若struct teacher&#123;</span><br><span class="line">int num；</span><br><span class="line">char name[10]；</span><br><span class="line">char sex；</span><br><span class="line">int age； </span><br><span class="line">float score；&#125;teacher1；</span><br><span class="line">则变量teacher1所占用的内存字节是（ C ）</span><br><span class="line">A.5        B.14       C.19.      D.20</span><br></pre></td></tr></table></figure>
+
+<p>1、找到结构体中最大的成员变量所占的字节数</p>
+<p>2、结构体中成员变量的起始地址为该成员变量大小的整数倍（一般情况下我们认为第一个成员变量的起始地址为0）</p>
+<p>3、<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%BB%93%E6%9E%84%E4%BD%93%E5%8F%98%E9%87%8F&spm=1001.2101.3001.7020">结构体变量</a>的总大小必须要是结构体中最大变量字节的整数倍（不足补齐）</p>
+<p>答案是24个字节，我运行了程序的，分析一下。int，就是四个字节，0+4，1可以从4开始存，所以4+11=15，int是4，需要从16开始存，所以16+4，float是4，可以从20开始，所以是24.</p>
+<h2 id="4-8"><a href="#4-8" class="headerlink" title="4"></a>4</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">4.、假定已有如下变量说明和枚举定义：</span><br><span class="line">char ch;</span><br><span class="line">int j,k;</span><br><span class="line">enum day&#123;sum,mon,tue,wed,thu,fri,sat&#125;;</span><br><span class="line">int a[sat];</span><br><span class="line">判定下列语句是否符合语法规则，结果是（ C ）</span><br><span class="line">char a;                  /*语句1*/</span><br><span class="line">j+k=j;                   /*语句2*/</span><br><span class="line">if（a[mon]&gt;0） j++;      /*语句3*/</span><br><span class="line">A．语句2错误，其它正确		B．语句1正确，其它错误</span><br><span class="line">C．语句3正确，其它错误		D．语句错误，其它正确</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">enum A &#123;a1,a2,a3,a4&#125;;//c语言在定义的时候会根据这些元素的顺序定义一个默认值，分别为0.1.。。。。</span><br><span class="line">enum B &#123; b1=3, b2, b3, b4=5 &#125;;//定义枚举类型的时候可以为枚举元素指定一个值，为指定值的元素将是前一个元素+1</span><br><span class="line">int main(void) &#123;</span><br><span class="line">    enum A w = a2;</span><br><span class="line">    enum B w2 = b2;</span><br><span class="line">    printf(&quot;%d,%d,%d\n&quot;, a2, a3, b2);//输出124</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个是博客中的一些总结。看了就会明白了。</p>
+<h2 id="5-8"><a href="#5-8" class="headerlink" title="5"></a>5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">5、以下C语言共用体类型数据的描述中，不正确的是（ D ）</span><br><span class="line">A、共用体变量占的内存大小等于所需内在最大的成员所占的内存</span><br><span class="line">B、共用体类型可以出现在结构体类型定义中</span><br><span class="line">C、在定义共用体变量的同时允许对另一个成员的值进行初始化</span><br><span class="line">D、同一共用体中各成员的首地址不相同</span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是，共用体的所有成员所使用的内存的开头地址的值都是一样的，所以当我们对其中一个成员赋值时，会把这个变量中原油数据诶给覆盖掉</p>
+<p>在共用体中，所有成员共享同一块内存空间。共用体变量的内存大小取决于最大的成员所需的内存大小。共用体类型可以出现在结构体类型定义中，可以在定义共用体变量的同时对另一个成员进行初始化。</p>
+<p>然而，共用体的不同成员可能具有不同的类型和长度，但它们共享相同的起始地址，因此同一共用体中各成员的首地址是相同的。</p>
+<h2 id="6-7"><a href="#6-7" class="headerlink" title="6"></a>6</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">6、若有以下类型说明，叙述正确的是（ C ）</span><br><span class="line">typedef sturct&#123; </span><br><span class="line">int num;</span><br><span class="line">char  *name;</span><br><span class="line">int score;</span><br><span class="line">&#125; STU, *PSTU</span><br><span class="line">A、STU 是变量名       B、PSTU是变量名</span><br><span class="line">C、PSTU是指向结构体类型STU的指针类型名</span><br><span class="line">D、类型说明语句有错误</span><br></pre></td></tr></table></figure>
+
+<p>这个简单啊</p>
+<p><code>typedef int count</code>这个时候count就代表的是int类型的数据。<code>count a = 3;</code>这个a就是个整型数据。</p>
+<ul>
+<li><code>STU</code> 是一个结构体类型名，包含了 <code>int num</code>、<code>char *name</code> 和 <code>int score</code> 这三个成员。使用 <code>STU</code> 可以声明结构体类型的变量，比如 <code>STU stu1;</code>。</li>
+<li><code>PSTU</code> 是一个指针类型名，它是指向 <code>STU</code> 类型的指针。也就是说，<code>PSTU</code> 可以用来声明指向结构体的指针变量，比如 <code>PSTU pStu;</code>。</li>
+</ul>
+<h2 id="7-7"><a href="#7-7" class="headerlink" title="7"></a>7</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">7、设有如下定义语句：</span><br><span class="line">union u-type&#123;</span><br><span class="line">int i;            </span><br><span class="line">  double x;         </span><br><span class="line">  float f;           </span><br><span class="line">&#125;;  </span><br><span class="line">struct  str-type&#123;</span><br><span class="line">char str[100];</span><br><span class="line">union u_type u[2];</span><br><span class="line">&#125;;</span><br><span class="line">则语句“printf(“%d”, sizeof(struct str-type) );”的输出结果是（ B ）</span><br><span class="line">A、100      B、116</span><br><span class="line">C、120      D、200</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-7"><a href="#8-7" class="headerlink" title="8"></a>8</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">下列对结构体类型变量定义不正确的是（ C ）。</span><br><span class="line"></span><br><span class="line">A.struct teacher&#123;int num; int age;&#125;teach1;B.struct &#123;int num; int age;&#125;teach1,teach2;C.struct &#123;int num; int age;&#125;teacher; struct teacher teach1;D.struct teacher &#123;int num; int age;&#125;; struct teacher teach1;</span><br></pre></td></tr></table></figure>
+
+<p>c不用看都晓得错了</p>
+<h2 id="9-7"><a href="#9-7" class="headerlink" title="9"></a>9</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">9．若有定义</span><br><span class="line">struct node&#123;</span><br><span class="line">int date;</span><br><span class="line">struct node *next;</span><br><span class="line">&#125;</span><br><span class="line">函数：</span><br><span class="line">void fun(struct node *head)</span><br><span class="line">&#123;</span><br><span class="line">struct node *p=head;</span><br><span class="line">while(p)</span><br><span class="line">&#123;</span><br><span class="line">       struct node *q=p-&gt;next;</span><br><span class="line">       free(p);</span><br><span class="line">p=q;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">则该函数的功能是（ A ）</span><br><span class="line">A. 删除整个单向链表               B. 删除单向链表中的一个结点</span><br><span class="line">C．显示单向链表中的所有数据       D. 创建单向链表</span><br></pre></td></tr></table></figure>
+
+<p>挨个free元素，所以是删除整个单向链表。</p>
+<h2 id="10-5"><a href="#10-5" class="headerlink" title="10"></a>10</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> 对枚举类型进行定义，不正确的是（  ）。</span><br><span class="line"></span><br><span class="line">A. enum b&#123;1, 2, 3&#125;;</span><br><span class="line"></span><br><span class="line">B. enum a&#123;A, B, C&#125;;</span><br><span class="line"></span><br><span class="line">C. enum c&#123;D=3, E, F&#125;;</span><br><span class="line"></span><br><span class="line">D. enum d&#123;X=0, Y=5, Z=9&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>A 错</p>
+<p>枚举类型列表中的都是标识符。</p>
+<p>还记得标识符的命名要求吗？ 不能以数字开头</p>
+<p>几把这些题好多都是错的，还要我一个一个搜索，真该死啊这个学长，题给我都不检查一下，纯骗子，等我入学了😋再来慢慢说他好吧，别被逮着内网有漏洞哈</p>
+<h2 id="11-5"><a href="#11-5" class="headerlink" title="11"></a>11</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">11.下面程序的输出结果为(C)</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">	enum Weekday &#123; sum = 7, mon = 1, tue, thu, fri, sat &#125;;</span><br><span class="line">	enum Weekday day = sat;</span><br><span class="line">	printf(&quot;%d\n&quot;, day);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line">A.7         B.6          C.5         D.4 </span><br></pre></td></tr></table></figure>
+
+<p>这个是依次定义的，所以输出5，12345.</p>
+<h2 id="12-5"><a href="#12-5" class="headerlink" title="12"></a>12</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">12.以下程序的运行结果（D）</span><br><span class="line">#include&lt;stdio.h&gt; </span><br><span class="line">union utype&#123;</span><br><span class="line">int i;</span><br><span class="line">float f</span><br><span class="line">&#125;U[2];</span><br><span class="line">void main()</span><br><span class="line">&#123;</span><br><span class="line">printf(“sizeof(u):%d\n”,sizeof(u)) ;</span><br><span class="line">&#125;</span><br><span class="line">A. 2          B.  4         C.6          D. 8</span><br></pre></td></tr></table></figure>
+
+<p><code>union</code> 是一种特殊的数据类型，在内存中它所有的成员共用同一块内存空间。根据内存对齐的规则，一个 <code>union</code> 的大小等于其包含的成员中占用内存最大的那个成员的大小。在这个程序中，<code>union u</code> 包含有两个成员，一个是 <code>int</code> 类型的 <code>i</code>，一个是 <code>float</code> 类型的 <code>f</code>。<code>sizeof(U)</code> 的结果就是 <code>union u</code> 的大小，根据最大成员的大小为 <code>4</code>，因此程序输出的结果是 8。</p>
+<h2 id="13-5"><a href="#13-5" class="headerlink" title="13"></a>13</h2><p><img src="/wan1/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/image-20230911085818138.png" alt="image-20230911085818138"></p>
+<p>题目要求是保留其他节点，所以我们要先把p之后的节点位置传输给p之前的pnext，也就是p的next赋值给head的next，然后就可以直接删除p了。所以选a</p>
+<h2 id="14-3"><a href="#14-3" class="headerlink" title="14"></a>14</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">14.若有定义</span><br><span class="line">struct node&#123;</span><br><span class="line">int data;</span><br><span class="line">struct node *next;</span><br><span class="line">&#125;;</span><br><span class="line">及函数： void fun(struct node *head)</span><br><span class="line">&#123;</span><br><span class="line">struct node *p=head;</span><br><span class="line">while(p)</span><br><span class="line">&#123;</span><br><span class="line">   printf(“%d”,p-&gt;data);</span><br><span class="line">   p=p-&gt;next;</span><br><span class="line">   break;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">则函数　fun（　）的功能是（ C  ）</span><br><span class="line">A. 删除单向链表                 B. 显示单向链表中的所有数据</span><br><span class="line">C. 显示单向链表中的第一个数据   D. 创建单向链表</span><br></pre></td></tr></table></figure>
+
+<p>由于while最后有个break，所以本来是显示所有数据的函数，变成了只展示第一个数据的函数，</p>
+<h2 id="15-3"><a href="#15-3" class="headerlink" title="15"></a>15</h2><p><img src="/wan1/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/image-20230911090531013.png" alt="image-20230911090531013"></p>
+<p>这个也不多说了，就是计算节点个数</p>
+<h2 id="16-3"><a href="#16-3" class="headerlink" title="16"></a>16</h2><p><img src="/wan1/wan1/2023/09/11/C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93/image-20230911090641993.png" alt="image-20230911090641993"></p>
+<p>链表的第二个节点就是，head.next指向的节点。插入进去，需要修改head.next和p.next。p.next改成原来的第二个节点，head.next改成现在的节点。</p>
+<p>所以选c。</p>
+<p>后面还有个题库我就不总结了，也是单选题的，判断题和其他大题或许会总结一下？另外一个单选题的我自己过一遍就好了。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/wan1/2023/08/31/c%E8%AF%AD%E8%A8%80%E7%A2%8E%E7%A2%8E%E5%BF%B5/" rel="prev" title="c语言碎碎念">
+      <i class="fa fa-chevron-left"></i> c语言碎碎念
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/wan1/2023/09/21/2019%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/" rel="next" title="2019年真题解析">
+      2019年真题解析 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C%E8%AF%AD%E8%A8%80%E5%8D%95%E9%80%89%E9%A2%98%E9%A2%98%E5%BA%93%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">C语言单选题题库总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-c%E8%AF%AD%E8%A8%80%E6%A6%82%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">一 c语言概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">2.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2"><span class="nav-number">2.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3"><span class="nav-number">2.3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4"><span class="nav-number">2.4.</span> <span class="nav-text">4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5"><span class="nav-number">2.5.</span> <span class="nav-text">5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6"><span class="nav-number">2.6.</span> <span class="nav-text">6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7"><span class="nav-number">2.7.</span> <span class="nav-text">7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8"><span class="nav-number">2.8.</span> <span class="nav-text">8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9"><span class="nav-number">2.9.</span> <span class="nav-text">9</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10"><span class="nav-number">2.10.</span> <span class="nav-text">10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11"><span class="nav-number">2.11.</span> <span class="nav-text">11</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12"><span class="nav-number">2.12.</span> <span class="nav-text">12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13"><span class="nav-number">2.13.</span> <span class="nav-text">13</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14"><span class="nav-number">2.14.</span> <span class="nav-text">14</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15"><span class="nav-number">2.15.</span> <span class="nav-text">15</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16"><span class="nav-number">2.16.</span> <span class="nav-text">16</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17"><span class="nav-number">2.17.</span> <span class="nav-text">17</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%8C%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">数据类型，运算符和表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1"><span class="nav-number">3.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1"><span class="nav-number">3.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1"><span class="nav-number">3.3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1"><span class="nav-number">3.4.</span> <span class="nav-text">4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1"><span class="nav-number">3.5.</span> <span class="nav-text">5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1"><span class="nav-number">3.6.</span> <span class="nav-text">6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1"><span class="nav-number">3.7.</span> <span class="nav-text">7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1"><span class="nav-number">3.8.</span> <span class="nav-text">8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1"><span class="nav-number">3.9.</span> <span class="nav-text">9</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1"><span class="nav-number">3.10.</span> <span class="nav-text">10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-1"><span class="nav-number">3.11.</span> <span class="nav-text">11</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-1"><span class="nav-number">3.12.</span> <span class="nav-text">12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-1"><span class="nav-number">3.13.</span> <span class="nav-text">13</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-1"><span class="nav-number">3.14.</span> <span class="nav-text">14</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-1"><span class="nav-number">3.15.</span> <span class="nav-text">15</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-1"><span class="nav-number">3.16.</span> <span class="nav-text">16</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-1"><span class="nav-number">3.17.</span> <span class="nav-text">17</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18"><span class="nav-number">3.18.</span> <span class="nav-text">18</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19"><span class="nav-number">3.19.</span> <span class="nav-text">19</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20"><span class="nav-number">3.20.</span> <span class="nav-text">20</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21"><span class="nav-number">3.21.</span> <span class="nav-text">21</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22"><span class="nav-number">3.22.</span> <span class="nav-text">22</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23"><span class="nav-number">3.23.</span> <span class="nav-text">23</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24"><span class="nav-number">3.24.</span> <span class="nav-text">24</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25"><span class="nav-number">3.25.</span> <span class="nav-text">25</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#26"><span class="nav-number">3.26.</span> <span class="nav-text">26</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#27"><span class="nav-number">3.27.</span> <span class="nav-text">27</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#28"><span class="nav-number">3.28.</span> <span class="nav-text">28</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#29"><span class="nav-number">3.29.</span> <span class="nav-text">29</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#30"><span class="nav-number">3.30.</span> <span class="nav-text">30</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#31"><span class="nav-number">3.31.</span> <span class="nav-text">31</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32"><span class="nav-number">3.32.</span> <span class="nav-text">32</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#33"><span class="nav-number">3.33.</span> <span class="nav-text">33</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#34"><span class="nav-number">3.34.</span> <span class="nav-text">34</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#35"><span class="nav-number">3.35.</span> <span class="nav-text">35</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#36"><span class="nav-number">3.36.</span> <span class="nav-text">36</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1"><span class="nav-number">4.</span> <span class="nav-text">选择结构程序设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2"><span class="nav-number">4.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2"><span class="nav-number">4.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2"><span class="nav-number">4.3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2"><span class="nav-number">4.4.</span> <span class="nav-text">4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2"><span class="nav-number">4.5.</span> <span class="nav-text">5</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6"><span class="nav-number">5.</span> <span class="nav-text">循环控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3"><span class="nav-number">5.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3"><span class="nav-number">5.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3"><span class="nav-number">5.3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3"><span class="nav-number">5.4.</span> <span class="nav-text">4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3"><span class="nav-number">5.5.</span> <span class="nav-text">5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2"><span class="nav-number">5.6.</span> <span class="nav-text">6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2"><span class="nav-number">5.7.</span> <span class="nav-text">7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2"><span class="nav-number">5.8.</span> <span class="nav-text">8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2"><span class="nav-number">5.9.</span> <span class="nav-text">9</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-2"><span class="nav-number">5.10.</span> <span class="nav-text">10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-2"><span class="nav-number">5.11.</span> <span class="nav-text">11</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-2"><span class="nav-number">5.12.</span> <span class="nav-text">12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-2"><span class="nav-number">5.13.</span> <span class="nav-text">13</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">6.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4"><span class="nav-number">6.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4"><span class="nav-number">6.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4"><span class="nav-number">6.3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4"><span class="nav-number">6.4.</span> <span class="nav-text">4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4"><span class="nav-number">6.5.</span> <span class="nav-text">5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3"><span class="nav-number">6.6.</span> <span class="nav-text">6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3"><span class="nav-number">6.7.</span> <span class="nav-text">7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3"><span class="nav-number">6.8.</span> <span class="nav-text">8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-3"><span class="nav-number">6.9.</span> <span class="nav-text">9</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-3"><span class="nav-number">6.10.</span> <span class="nav-text">10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-3"><span class="nav-number">6.11.</span> <span class="nav-text">11</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-3"><span class="nav-number">6.12.</span> <span class="nav-text">12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-3"><span class="nav-number">6.13.</span> <span class="nav-text">13</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-2"><span class="nav-number">6.14.</span> <span class="nav-text">14</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-2"><span class="nav-number">6.15.</span> <span class="nav-text">15</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-2"><span class="nav-number">6.16.</span> <span class="nav-text">16</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-2"><span class="nav-number">6.17.</span> <span class="nav-text">17</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-1"><span class="nav-number">6.18.</span> <span class="nav-text">18</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-1"><span class="nav-number">6.19.</span> <span class="nav-text">19</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-1"><span class="nav-number">6.20.</span> <span class="nav-text">20</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-1"><span class="nav-number">6.21.</span> <span class="nav-text">21</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-1"><span class="nav-number">6.22.</span> <span class="nav-text">22</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-1"><span class="nav-number">6.23.</span> <span class="nav-text">23</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-1"><span class="nav-number">6.24.</span> <span class="nav-text">24</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5"><span class="nav-number">7.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5"><span class="nav-number">7.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5"><span class="nav-number">7.3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5"><span class="nav-number">7.4.</span> <span class="nav-text">4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5"><span class="nav-number">7.5.</span> <span class="nav-text">5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4"><span class="nav-number">7.6.</span> <span class="nav-text">6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-4"><span class="nav-number">7.7.</span> <span class="nav-text">7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-4"><span class="nav-number">7.8.</span> <span class="nav-text">8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-4"><span class="nav-number">7.9.</span> <span class="nav-text">9</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-4"><span class="nav-number">7.10.</span> <span class="nav-text">10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-4"><span class="nav-number">7.11.</span> <span class="nav-text">11</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-4"><span class="nav-number">7.12.</span> <span class="nav-text">12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-4"><span class="nav-number">7.13.</span> <span class="nav-text">13</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%84%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4"><span class="nav-number">8.</span> <span class="nav-text">预处理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6"><span class="nav-number">8.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6"><span class="nav-number">8.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6"><span class="nav-number">8.3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6"><span class="nav-number">8.4.</span> <span class="nav-text">4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-6"><span class="nav-number">8.5.</span> <span class="nav-text">5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5"><span class="nav-number">8.6.</span> <span class="nav-text">6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-5"><span class="nav-number">8.7.</span> <span class="nav-text">7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-5"><span class="nav-number">8.8.</span> <span class="nav-text">8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-5"><span class="nav-number">8.9.</span> <span class="nav-text">9</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%87%E9%92%88"><span class="nav-number">9.</span> <span class="nav-text">指针</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7"><span class="nav-number">9.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7"><span class="nav-number">9.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7"><span class="nav-number">9.3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-7"><span class="nav-number">9.4.</span> <span class="nav-text">4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-7"><span class="nav-number">9.5.</span> <span class="nav-text">5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-6"><span class="nav-number">9.6.</span> <span class="nav-text">6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-6"><span class="nav-number">9.7.</span> <span class="nav-text">7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-6"><span class="nav-number">9.8.</span> <span class="nav-text">8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-6"><span class="nav-number">9.9.</span> <span class="nav-text">9</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E5%85%B1%E7%94%A8%E4%BD%93"><span class="nav-number">10.</span> <span class="nav-text">结构体与共用体</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8"><span class="nav-number">10.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8"><span class="nav-number">10.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-8"><span class="nav-number">10.3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-8"><span class="nav-number">10.4.</span> <span class="nav-text">4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-8"><span class="nav-number">10.5.</span> <span class="nav-text">5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-7"><span class="nav-number">10.6.</span> <span class="nav-text">6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-7"><span class="nav-number">10.7.</span> <span class="nav-text">7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-7"><span class="nav-number">10.8.</span> <span class="nav-text">8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-7"><span class="nav-number">10.9.</span> <span class="nav-text">9</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-5"><span class="nav-number">10.10.</span> <span class="nav-text">10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-5"><span class="nav-number">10.11.</span> <span class="nav-text">11</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-5"><span class="nav-number">10.12.</span> <span class="nav-text">12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-5"><span class="nav-number">10.13.</span> <span class="nav-text">13</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-3"><span class="nav-number">10.14.</span> <span class="nav-text">14</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-3"><span class="nav-number">10.15.</span> <span class="nav-text">15</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-3"><span class="nav-number">10.16.</span> <span class="nav-text">16</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="十三"
+      src="/wan1/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">十三</p>
+  <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/wan1/archives/">
+        
+          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">十三</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/wan1/lib/anime.min.js"></script>
+  <script src="/wan1/lib/velocity/velocity.min.js"></script>
+  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/wan1/js/utils.js"></script>
+
+<script src="/wan1/js/motion.js"></script>
+
+
+<script src="/wan1/js/schemes/pisces.js"></script>
+
+
+<script src="/wan1/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/wan1/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/wan1/css/main.css">
+
+
+<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="通过linux服务器进入内网后如何快速达到域控的思路总结此文章为转发，方便日后查阅。 通过linux服务器进入内网后如何快速达到域控的思路总结 - 哔哩哔哩 (bilibili.com) 1linux服务器的resolve.conf 中dns可能会设置为域控  123查&#x2F;etc&#x2F;krb5.conf  Azure 中的vm可以通过配置kerberos将vm加入托管域，使Azure AD域账户通过ss">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过linux服务器进入内网后如何快速达到域控的思路总结">
+<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2023/02/19/%E9%80%9A%E8%BF%87linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9B%E5%85%A5%E5%86%85%E7%BD%91%E5%90%8E%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E8%BE%BE%E5%88%B0%E5%9F%9F%E6%8E%A7%E7%9A%84%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="十三の博客">
+<meta property="og:description" content="通过linux服务器进入内网后如何快速达到域控的思路总结此文章为转发，方便日后查阅。 通过linux服务器进入内网后如何快速达到域控的思路总结 - 哔哩哔哩 (bilibili.com) 1linux服务器的resolve.conf 中dns可能会设置为域控  123查&#x2F;etc&#x2F;krb5.conf  Azure 中的vm可以通过配置kerberos将vm加入托管域，使Azure AD域账户通过ss">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-19T05:12:01.000Z">
+<meta property="article:modified_time" content="2023-02-19T05:12:24.041Z">
+<meta property="article:author" content="十三">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2023/02/19/%E9%80%9A%E8%BF%87linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9B%E5%85%A5%E5%86%85%E7%BD%91%E5%90%8E%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E8%BE%BE%E5%88%B0%E5%9F%9F%E6%8E%A7%E7%9A%84%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>通过linux服务器进入内网后如何快速达到域控的思路总结 | 十三の博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/wan1/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">十三の博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-ctf做题笔记">
+
+    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-python">
+
+    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+
+  </li>
+        <li class="menu-item menu-item-读书笔记">
+
+    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-渗透测试">
+
+    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+
+  </li>
+        <li class="menu-item menu-item-基础">
+
+    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+
+  </li>
+        <li class="menu-item menu-item-轮子">
+
+    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+
+  </li>
+        <li class="menu-item menu-item-漏洞库">
+
+    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+
+  </li>
+        <li class="menu-item menu-item-代码审计">
+
+    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+
+  </li>
+        <li class="menu-item menu-item-逆向">
+
+    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+
+  </li>
+        <li class="menu-item menu-item-应急响应">
+
+    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+
+  </li>
+        <li class="menu-item menu-item-免杀">
+
+    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+
+  </li>
+        <li class="menu-item menu-item-靶场">
+
+    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+
+  </li>
+        <li class="menu-item menu-item-cve申请">
+
+    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+
+  </li>
+        <li class="menu-item menu-item-c语言">
+
+    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2023/02/19/%E9%80%9A%E8%BF%87linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9B%E5%85%A5%E5%86%85%E7%BD%91%E5%90%8E%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E8%BE%BE%E5%88%B0%E5%9F%9F%E6%8E%A7%E7%9A%84%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          通过linux服务器进入内网后如何快速达到域控的思路总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-02-19 13:12:01 / 修改时间：13:12:24" itemprop="dateCreated datePublished" datetime="2023-02-19T13:12:01+08:00">2023-02-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/wan1/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="通过linux服务器进入内网后如何快速达到域控的思路总结"><a href="#通过linux服务器进入内网后如何快速达到域控的思路总结" class="headerlink" title="通过linux服务器进入内网后如何快速达到域控的思路总结"></a><strong>通过linux服务器进入内网后如何快速达到域控的思路总结</strong></h1><p>此文章为转发，方便日后查阅。</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv20125695">通过linux服务器进入内网后如何快速达到域控的思路总结 - 哔哩哔哩 (bilibili.com)</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linux服务器的resolve.conf 中dns可能会设置为域控</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查/etc/krb5.conf  </span><br><span class="line"></span><br><span class="line">Azure 中的vm可以通过配置kerberos将vm加入托管域，使Azure AD域账户通过ssh登录linux服务器</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查smb.conf / 查mnt cifs挂载</span><br><span class="line"></span><br><span class="line">linux 主机连接windows 445 smb共享文件夹有两种方式，一种是通过samba-client客户端，一种是通过mount cifs去挂载共享文件夹的cifs文件系统，可以查看samba-client 的配置文件，或者查看.bash_history查看连接历史，这里连接的大概率不是域控主机，但可能是域内的nas或域内的服务器，小概率会是开发的测试机，不管怎么样，都离我们的目标更近了一步，而且nas里面有敏感信息正常吗，很正常啊</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">找ad登录验证的web服务器</span><br><span class="line"></span><br><span class="line">在大型组织的内网，很可能存在通过域进行身份验证的服务器，包括但不限于通过ad账号验证的erp、crm系统、邮箱系统或域账号管控系统，通过web端口扫描找到对应的服务器并尝试对web系统、数据库弱口令等各种姿势去getshell，在进入内网后的众多web系统中可以提高对他的渗透优先级</span><br><span class="line"></span><br><span class="line">拿到后可以在web源码或配置文件中找到ad服务器的ip端口等信息，如果数据库保存了账号密码明文很好，但大概率是加密后的账号密码，可以改源码加个后门把域账号密码明文保存下来</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">找ad账号验证的vdi管控或登录系统（Crtrix ADC、Vcenter、国内某些厂商的VDI管控平台等等）</span><br><span class="line"></span><br><span class="line">这里的vdi系统其实也是套web系统，但因为这些网络设备如果是登录系统拿到shell权限后大概率会跨网段进入域控和vdi主机所在的网段，如果是管控系统的话，如果都是vdi主机组的域，那基本就结束了，所以单独拿出来说一下。拿到对应的服务器权限后一般都会有一个本地与域控服务器通信的域控账号将设备注册到域控中，密码不出意外都是加密的，这里吹一波msf，在cs烂大街的情况下，还是有一堆痴心不改的老外愿意把这些关键设备的配置文件解密脚本更新到msf的插件中</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">找WSUS服务器/EDR终端管控服务器/SCCM服务器</span><br><span class="line"></span><br><span class="line">WSUS就是windows推送更新补丁包的服务器，拿到之后可以给域控分发补丁（exe或恶意命令）然后打域控，当然不是扫135看到WSUS就一定有域，这玩意也能放到工作组里用</span><br><span class="line"></span><br><span class="line">SCCM是 Microsoft 的一种解决方案，可在整个组织中以可扩展的方式增强管理。SCCM 允许大量功能，包括将 PowerShell 脚本推送到其客户端、将命令推送到其客户端、在客户端上打开远程终端会话、在其客户端上安装软件、更改其客户端上的策略等等。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano/cat /var/log/secure</span><br><span class="line"></span><br><span class="line">emm...如果拿到内网web系统，查下端口访问，可能能看到办公机访问的ip或办公网网关ip，对所在网段389或636,3268,3269（GC服务）端口扫描可能会有收获</span><br><span class="line"></span><br><span class="line">查看ssh连接历史的ip也是一个意思，快速定位可达windows主机的IP段，尽量少在内网大的网段扫描探测</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">135端口扫描</span><br><span class="line"></span><br><span class="line">OXID find是yyds啦</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openvpn配置文件</span><br><span class="line"></span><br><span class="line">适用的环境比较奇怪，现在的云主机比较多嘛，有时候源码在内网的gitlab上，或者有些其他需要与内网资源交互的奇特场景，会给服务器上配个vpn，拿到账号密码ip端口就去连内网去搞内网渗透去了，像vpn账号嘛、邮箱账号嘛、sso账号嘛和域控账号密码一毛一样很正常嘛，如果能在主机上能翻到ADFS sso账号简直中奖好嘛，这一块主要看操作的人在主机上留了什么东西了</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gitlab信息收集</span><br><span class="line"></span><br><span class="line">就像前面说的内网存在一些需要ad验证的web系统，如果拿到gitlab之类的源码平台搜索关键字ldap在源码中、注释中可能会找到测试的ad账号和服务器地址，如果最新的版本中找不到，记得在老的commit中翻一下，git系统的位置可以在拿到权限的服务器源码的.git的config之类的配置文件中找</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/wan1/2023/02/17/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E9%87%87%E7%94%A8%E7%BA%AFpy3%E5%B7%A5%E5%85%B7%E5%A4%8D%E7%8E%B0ms17010/" rel="prev" title="【漏洞复现】采用纯py3工具复现ms17010">
+      <i class="fa fa-chevron-left"></i> 【漏洞复现】采用纯py3工具复现ms17010
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/wan1/2023/03/03/c2%E6%9C%8D%E5%8A%A1%E5%99%A8CDN%E9%9A%90%E8%97%8F/" rel="next" title="c2服务器CDN隐藏">
+      c2服务器CDN隐藏 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%9A%E8%BF%87linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9B%E5%85%A5%E5%86%85%E7%BD%91%E5%90%8E%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E8%BE%BE%E5%88%B0%E5%9F%9F%E6%8E%A7%E7%9A%84%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">通过linux服务器进入内网后如何快速达到域控的思路总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="十三"
+      src="/wan1/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">十三</p>
+  <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/wan1/archives/">
+        
+          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">十三</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/wan1/lib/anime.min.js"></script>
+  <script src="/wan1/lib/velocity/velocity.min.js"></script>
+  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/wan1/js/utils.js"></script>
+
+<script src="/wan1/js/motion.js"></script>
+
+
+<script src="/wan1/js/schemes/pisces.js"></script>
+
+
+<script src="/wan1/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/wan1/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

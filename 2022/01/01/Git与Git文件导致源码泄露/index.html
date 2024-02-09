@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/wan1/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/wan1/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/wan1/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/wan1/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/wan1/css/main.css">
+
+
+<link rel="stylesheet" href="/wan1/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wanheiqiyihu.gitee.io","root":"/wan1/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Git与Git文件导致源码泄露Git是目前世界上最先进的分布式版本控制系统 git泄露是常见的ctf题型，来看几个例子 Hello World (i春秋 第二届春秋欢乐赛 web)这里只说git利用的点  由上可知有git泄露之后尝试使用常用工具GitHackhttps:&#x2F;&#x2F;github.com&#x2F;BugScanTeam&#x2F;GitHack  这里应该是通过.git&#x2F;refs&#x2F;heads&#x2F;master中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git与Git文件导致源码泄露">
+<meta property="og:url" content="https://wanheiqiyihu.gitee.io/wan1/2022/01/01/Git%E4%B8%8EGit%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2/index.html">
+<meta property="og:site_name" content="十三の博客">
+<meta property="og:description" content="Git与Git文件导致源码泄露Git是目前世界上最先进的分布式版本控制系统 git泄露是常见的ctf题型，来看几个例子 Hello World (i春秋 第二届春秋欢乐赛 web)这里只说git利用的点  由上可知有git泄露之后尝试使用常用工具GitHackhttps:&#x2F;&#x2F;github.com&#x2F;BugScanTeam&#x2F;GitHack  这里应该是通过.git&#x2F;refs&#x2F;heads&#x2F;master中">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-615612ba7e3c7914.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/369/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-585b35b487c7a4d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/693/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-c6ea2ef7681a2c38.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/414/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-17011a2e0aa78d61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1114/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-5f8dd5ec2fdeb41e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-a2d083652835b1b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/846/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-24acb3c8ce970283.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/675/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-0de1938ca18d91ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/596/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-ae203287f9ffafec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/586/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-c1ace39cda328b1d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/704/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-1c10b475d2b36001.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/576/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-7d9201cc8bc9ac39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/438/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-05a3a46139dab261.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/479/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-c691aff459782dd7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/723/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-f0fde8b99202a2bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/503/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-40844349a4e2b466.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/943/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-4814b39438ff3f93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/691/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-75dd391740af9970.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/481/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-c03796b23bab5313.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/442/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-fdbd521dd90d9dc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/754/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-dff9e68d61d64e5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/675/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-362526efaad7f461.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/447/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-3faed573f040e3d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/645/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-12f63e9852ff8012.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/577/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-f3a942027001d519.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/968/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-22fc37de8cba7400.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/670/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-46d77de7b34ad8a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/579/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5958785-dc18ada5dad0b203.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/448/format/webp">
+<meta property="article:published_time" content="2022-01-01T14:26:49.000Z">
+<meta property="article:modified_time" content="2022-01-01T14:37:26.000Z">
+<meta property="article:author" content="十三">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5958785-615612ba7e3c7914.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/369/format/webp">
+
+<link rel="canonical" href="https://wanheiqiyihu.gitee.io/wan1/2022/01/01/Git%E4%B8%8EGit%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>Git与Git文件导致源码泄露 | 十三の博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/wan1/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">十三の博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/wan1/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/wan1/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-ctf做题笔记">
+
+    <a href="/wan1/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-python">
+
+    <a href="/wan1/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/wan1/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+
+  </li>
+        <li class="menu-item menu-item-读书笔记">
+
+    <a href="/wan1/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-渗透测试">
+
+    <a href="/wan1/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+
+  </li>
+        <li class="menu-item menu-item-基础">
+
+    <a href="/wan1/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+
+  </li>
+        <li class="menu-item menu-item-轮子">
+
+    <a href="/wan1/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+
+  </li>
+        <li class="menu-item menu-item-漏洞库">
+
+    <a href="/wan1/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/wan1/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+
+  </li>
+        <li class="menu-item menu-item-代码审计">
+
+    <a href="/wan1/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+
+  </li>
+        <li class="menu-item menu-item-逆向">
+
+    <a href="/wan1/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+
+  </li>
+        <li class="menu-item menu-item-应急响应">
+
+    <a href="/wan1/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+
+  </li>
+        <li class="menu-item menu-item-免杀">
+
+    <a href="/wan1/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+
+  </li>
+        <li class="menu-item menu-item-靶场">
+
+    <a href="/wan1/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+
+  </li>
+        <li class="menu-item menu-item-cve申请">
+
+    <a href="/wan1/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+
+  </li>
+        <li class="menu-item menu-item-c语言">
+
+    <a href="/wan1/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.gitee.io/wan1/2022/01/01/Git%E4%B8%8EGit%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/wan1/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git与Git文件导致源码泄露
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-01-01 22:26:49 / 修改时间：22:37:26" itemprop="dateCreated datePublished" datetime="2022-01-01T22:26:49+08:00">2022-01-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/wan1/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Git与Git文件导致源码泄露"><a href="#Git与Git文件导致源码泄露" class="headerlink" title="Git与Git文件导致源码泄露"></a>Git与Git文件导致源码泄露</h1><p>Git是目前世界上最先进的<strong>分布式版本控制系统</strong></p>
+<p>git泄露是常见的ctf题型，来看几个例子</p>
+<h2 id="Hello-World-i春秋-第二届春秋欢乐赛-web"><a href="#Hello-World-i春秋-第二届春秋欢乐赛-web" class="headerlink" title="Hello World (i春秋 第二届春秋欢乐赛 web)"></a>Hello World (i春秋 第二届春秋欢乐赛 web)</h2><p>这里只说git利用的点</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-615612ba7e3c7914.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/369/format/webp" alt="img"></p>
+<p>由上可知有git泄露<br>之后尝试使用常用工具GitHack<br><a target="_blank" rel="noopener" href="https://github.com/BugScanTeam/GitHack">https://github.com/BugScanTeam/GitHack</a></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-585b35b487c7a4d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/693/format/webp" alt="img"></p>
+<p>这里应该是通过.git/refs/heads/master中存储的commit的object来提取了master分支</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-c6ea2ef7681a2c38.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/414/format/webp" alt="img"></p>
+<p>但是这并不够，因为本题的考点原意是.git/logs/HEAD文件的利用，而githack并没有对其中的hash提取，因此遗漏了部分的object，即下图中的部分hash</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-17011a2e0aa78d61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1114/format/webp" alt="img"></p>
+<p>这里使用JGitHack是可以获取到这些遗漏的object的</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-5f8dd5ec2fdeb41e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666/format/webp" alt="img"></p>
+<p>之后需要手动提取object<br>这里使用git的底层命令，cat-file和ls-tree<br>看一下logs中的提交记录</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-a2d083652835b1b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/846/format/webp" alt="img"></p>
+<p>可以发现有两个commit，并且hash值是不一样的，说明有文件出现改动<br>于是这里手动查看一下</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-24acb3c8ce970283.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/675/format/webp" alt="img"></p>
+<p>可见他们的tree的hash也是不一样的，说明其中有文件改变，这里继续看两个tree</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-0de1938ca18d91ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/596/format/webp" alt="img"></p>
+<p>由此可见其中的flag.js是变动了，他们的hash值不一样，说明文件不一样，分别是<br> f2b45f1e5af6dc1a8607c11e4ddc5fd077276c45<br> 04bb09bb63fe48e6cab3e1c72a7ef51dda9634b8<br> 所以flag应该就是在这其中<br> 之后可以使用git cat-file命令提取文件</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-ae203287f9ffafec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/586/format/webp" alt="img"></p>
+<p>之后再sublime中diff一下这两个文件</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-c1ace39cda328b1d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/704/format/webp" alt="img"></p>
+<p> 会发现有不同，很明显的区别就是flag了，这前三个差异的字符分别是f,l,a，再往后看便是flag了<br> 到这里，这题做完了，但是过程有些繁琐，而且是可以自动完成的<br> 原先我的想法是使用几个git命令自动完成这个，但发现效率有些低<br> 于是我写了这个工具<br> <a target="_blank" rel="noopener" href="https://github.com/gakki429/Git_Extract">https://github.com/gakki429/Git_Extract</a><br> 我们试试这个工具</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-1c10b475d2b36001.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/576/format/webp" alt="img"></p>
+<p>看下获取到的文件，与之前的对比</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-7d9201cc8bc9ac39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/438/format/webp" alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-05a3a46139dab261.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/479/format/webp" alt="img"></p>
+<p>之后直接diff其中的flag.js和f2b45f_flag.js就可以了</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-c691aff459782dd7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/723/format/webp" alt="img"></p>
+<h2 id="登录-百度杯CTF比赛-十月场-web"><a href="#登录-百度杯CTF比赛-十月场-web" class="headerlink" title="登录 (百度杯CTF比赛 十月场 web)"></a>登录 (百度杯CTF比赛 十月场 web)</h2><p>前面是注入<br>最后可以得到用户<br>username: bctf3dm1n<br>password: adminqwe123666<br>登录之后如下</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-f0fde8b99202a2bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/503/format/webp" alt="img"></p>
+<p>可见.bctfg1t，应该是git泄露<br>这题的主要考点是.git/refs/stash</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-40844349a4e2b466.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/943/format/webp" alt="img"></p>
+<p>stash是一个用于保存git工作进度的文件<br>之后利用Git_Extract获取<br>这里获取了master分值，之后也解析了stash中的存的hash的object</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-4814b39438ff3f93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/691/format/webp" alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-75dd391740af9970.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/481/format/webp" alt="img"></p>
+<p>由此可获得提示信息</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-c03796b23bab5313.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/442/format/webp" alt="img"></p>
+<p>之后打开这个71ec9d5ca5580c58d1872962c596ea71.php<br>就可以看到flag了</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-fdbd521dd90d9dc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/754/format/webp" alt="img"></p>
+<p>如果这里使用GitHack也是可以完成的</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-dff9e68d61d64e5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/675/format/webp" alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-362526efaad7f461.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/447/format/webp" alt="img"></p>
+<p>之后我们手动查看stash中的object就可以了</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-3faed573f040e3d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/645/format/webp" alt="img"></p>
+<p>从这个commit中的tree继续获取</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-12f63e9852ff8012.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/577/format/webp" alt="img"></p>
+<h2 id="Backdoor-百度杯CTF比赛-十月场-web"><a href="#Backdoor-百度杯CTF比赛-十月场-web" class="headerlink" title="Backdoor (百度杯CTF比赛 十月场 web)"></a>Backdoor (百度杯CTF比赛 十月场 web)</h2><p>依旧是git的logs/HEAD，但是这里的commit有些多</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-f3a942027001d519.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/968/format/webp" alt="img"></p>
+<p>使用Git_Extract会帮助你自动解析提取这些commit</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-22fc37de8cba7400.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/670/format/webp" alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-46d77de7b34ad8a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/579/format/webp" alt="img"></p>
+<p>查看这几个flag文件可以发下如下提示，之后继续做就好了</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5958785-dc18ada5dad0b203.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/448/format/webp" alt="img"></p>
+<p>如果使用GitHack也可以完成，但是这些commit需要你手动提取，相当的难受</p>
+<h4 id="Git常见的利用"><a href="#Git常见的利用" class="headerlink" title="Git常见的利用"></a>Git常见的利用</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.git/index中会缓存git add的文件，这里在没有commit的情况下，也是存在的</span><br><span class="line">https://github.com/lijiejie/GitHack lijiejie的这个就是获取的这个</span><br><span class="line">.git/refs/heads/master 记录了master的commit的hash，由此可以解析出这个commit的所有文件</span><br><span class="line">.git/logs/HEAD其中存储了git的log信息，可以找到历史的commit项</span><br><span class="line">.git/refs/stash 工作进度的临时保存</span><br><span class="line">最后说一个pack的问题，这个好像还没看见有ctf中考到，这里也做了恢复</span><br><span class="line">.git/info/packs packs文件提取恢复</span><br><span class="line"></span><br><span class="line">去除了原本的不存在文件的下载失败的提示</span><br><span class="line">增加对windows字体颜色输出的支持，并同步默认背景色，linux中背景色也修改为与默认同步</span><br><span class="line">更换了帅气的Logo（手动滑稽）</span><br><span class="line">觉得好用的话就给个star吧</span><br></pre></td></tr></table></figure>
+
+<p>下载地址<br><a target="_blank" rel="noopener" href="https://github.com/gakki429/Git_Extract">https://github.com/gakki429/Git_Extract</a></p>
+<p>此文章为转载：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/0ea09975169d">CTF中的几种git泄露 - 简书 (jianshu.com)</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/wan1/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/" rel="prev" title="群友发的一个题目心得 敏感文件 git泄露 flag的隐藏">
+      <i class="fa fa-chevron-left"></i> 群友发的一个题目心得 敏感文件 git泄露 flag的隐藏
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/wan1/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/" rel="next" title="攻防世界 mfw git泄露">
+      攻防世界 mfw git泄露 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git%E4%B8%8EGit%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2"><span class="nav-number">1.</span> <span class="nav-text">Git与Git文件导致源码泄露</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World-i%E6%98%A5%E7%A7%8B-%E7%AC%AC%E4%BA%8C%E5%B1%8A%E6%98%A5%E7%A7%8B%E6%AC%A2%E4%B9%90%E8%B5%9B-web"><span class="nav-number">1.1.</span> <span class="nav-text">Hello World (i春秋 第二届春秋欢乐赛 web)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E5%BD%95-%E7%99%BE%E5%BA%A6%E6%9D%AFCTF%E6%AF%94%E8%B5%9B-%E5%8D%81%E6%9C%88%E5%9C%BA-web"><span class="nav-number">1.2.</span> <span class="nav-text">登录 (百度杯CTF比赛 十月场 web)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Backdoor-%E7%99%BE%E5%BA%A6%E6%9D%AFCTF%E6%AF%94%E8%B5%9B-%E5%8D%81%E6%9C%88%E5%9C%BA-web"><span class="nav-number">1.3.</span> <span class="nav-text">Backdoor (百度杯CTF比赛 十月场 web)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Git%E5%B8%B8%E8%A7%81%E7%9A%84%E5%88%A9%E7%94%A8"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">Git常见的利用</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="十三"
+      src="/wan1/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">十三</p>
+  <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/wan1/archives/">
+        
+          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">十三</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/wan1/lib/anime.min.js"></script>
+  <script src="/wan1/lib/velocity/velocity.min.js"></script>
+  <script src="/wan1/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/wan1/js/utils.js"></script>
+
+<script src="/wan1/js/motion.js"></script>
+
+
+<script src="/wan1/js/schemes/pisces.js"></script>
+
+
+<script src="/wan1/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/wan1/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/wan1/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
