@@ -255,6 +255,111 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/01/02/C%E8%AF%AD%E8%A8%801-%E7%A9%BA%E5%87%BD%E6%95%B0%E3%80%81%E8%A3%B8%E5%87%BD%E6%95%B0%E3%80%81%E8%B0%83%E7%94%A8%E9%A2%84%E5%AE%9A%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F-%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/02/C%E8%AF%AD%E8%A8%801-%E7%A9%BA%E5%87%BD%E6%95%B0%E3%80%81%E8%A3%B8%E5%87%BD%E6%95%B0%E3%80%81%E8%B0%83%E7%94%A8%E9%A2%84%E5%AE%9A%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F-%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/" class="post-title-link" itemprop="url">C语言1-空函数、裸函数、调用预定、数据宽度、全局变量&局部变量</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-02 23:14:09 / 修改时间：23:14:53" itemprop="dateCreated datePublished" datetime="2024-01-02T23:14:09+08:00">2024-01-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/miansha/" itemprop="url" rel="index"><span itemprop="name">-miansha</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="C语言1-空函数、裸函数、调用预定、数据宽度、全局变量-amp-局部变量"><a href="#C语言1-空函数、裸函数、调用预定、数据宽度、全局变量-amp-局部变量" class="headerlink" title="C语言1-空函数、裸函数、调用预定、数据宽度、全局变量&amp;局部变量"></a>C语言1-空函数、裸函数、调用预定、数据宽度、全局变量&amp;局部变量</h1><p>杂项放到最后了</p>
+<h1 id="空函数"><a href="#空函数" class="headerlink" title="空函数"></a>空函数</h1><p>空函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注：hook，跳过原函数的东西，运行我们自己的函数。比如说把call指令前面的东西换成jmp，跳转到我们自己写的函数。</p>
+<p>空函数是有初始化的，有call有ret</p>
+<h1 id="裸函数"><a href="#裸函数" class="headerlink" title="裸函数"></a>裸函数</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> _declspec(naked) function()&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>加上了裸函数关键字之后，就相当于告诉编译器，不用管我们的堆栈，不用初始化，全部都由我们自己弄。这个就没有初始化了，没有call没有ret</p>
+<p>所以我们需要自己编写汇编语句，需要用到一个关键字，_asm</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> _declspec(naked) function()&#123;</span><br><span class="line">    _asm&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="调用约定"><a href="#调用约定" class="headerlink" title="调用约定"></a>调用约定</h1><p>_cdecl 从右往左入栈 调用者清理堆栈 外平线（默认）他会自己去平衡堆栈，他是在函数外面平衡堆栈，所以函数内部就不用平衡堆栈了，也就是降低栈。</p>
+<p><img src="/2024/01/02/C%E8%AF%AD%E8%A8%801-%E7%A9%BA%E5%87%BD%E6%95%B0%E3%80%81%E8%A3%B8%E5%87%BD%E6%95%B0%E3%80%81%E8%B0%83%E7%94%A8%E9%A2%84%E5%AE%9A%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F-%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/image-20231231222606782-1704208457630.png" alt="image-20231231222606782"></p>
+<p>_stdcall 从右往左入栈 自身清理堆栈  内平线</p>
+<p>而这个是在函数内部进行堆栈平衡，</p>
+<p><img src="/2024/01/02/C%E8%AF%AD%E8%A8%801-%E7%A9%BA%E5%87%BD%E6%95%B0%E3%80%81%E8%A3%B8%E5%87%BD%E6%95%B0%E3%80%81%E8%B0%83%E7%94%A8%E9%A2%84%E5%AE%9A%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F-%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/image-20231231224037381-1704208457630.png" alt="image-20231231224037381"></p>
+<p>_fastcall将前两个参数用ecx edx传入，剩下的参数从右往左入栈  自身清理堆栈 内平线 </p>
+<p>这个只有前两个参数是存在寄存器（从左往右数），后面的参数是存在内存的。</p>
+<h1 id="数据宽度"><a href="#数据宽度" class="headerlink" title="数据宽度"></a>数据宽度</h1><p>主要分为整数类型和浮点数类型</p>
+<p>整数类型：</p>
+<p>char 8bit 1字节 对应byte<br>short 16bit 2字节 对应word<br>int 32bit 4字节 对应dword  </p>
+<p>有符号数和无符号数</p>
+<p>有符号数：会把第一位当作符号，所以范围是-128<del>127<br>无符号数：8个位全可以用，所以范围是0</del>255</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c =<span class="number">128</span>; <span class="comment">//这个就是越界了</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> u = <span class="number">128</span>; <span class="comment">//这就就是不越界</span></span><br><span class="line"><span class="comment">//但是在汇编语句中，有符号数和无符号数的表现形式是一样的</span></span><br><span class="line"><span class="comment">//只有在运算的时候是不一样的</span></span><br><span class="line"><span class="comment">//运算的时候有什么不一样呢？</span></span><br><span class="line"><span class="comment">//他们运算的时候都jcc语句的比较是不一样的</span></span><br><span class="line"><span class="comment">//有符号数的jcc语句是jle，无符号数是jbe</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>而在c语言中如何分别有符号数和无符号数呢？<br>unsigned关键字就是无符号数（之前我的blog有写）</p>
+<h1 id="全局变量-局部变量"><a href="#全局变量-局部变量" class="headerlink" title="全局变量/局部变量"></a>全局变量/局部变量</h1><p>全局变量是整个程序可访问的变量，生存期从程序开始到程序结束；局部变量存在于模块中（比如某个函数），只有在模块中可以访问，生存期从模块开始到结束。</p>
+<p>全局变量分配在全局数据段，在程序开始运行的时候被加载，局部变量则分配在程序的堆栈中。因此，操作系统和编译器可以通过内存的分配位置来知道区分全局变和局部变量。</p>
+<p>全局变量和局部变量的区别是在存储器中的位置不同，具体说，全局变量存储在数据段中，局部变量一般存在堆栈段 。</p>
+<p><strong>全局变量</strong><br>1.全局变量的地址在程序编译时就已经确定，如果没有赋初始值则为0<br>2.全局变量可以被所有函数修改，存储的是最后一个函数所赋的值。<br>3.全局变量占用的内存会一直存在，知道进程结束。<br>4.反汇编：mov 寄存器,dword ptr ds:[0x1234567]<br>5.初始化可以不赋初值</p>
+<p><strong>局部变量</strong><br>1.局部变量没有固定地址，需要在调用的时候才会在堆栈里面分配内存<br>2.局部变量执行完毕之后数据仍然保存在堆栈，但已经没有作用<br>3.只在函数内部使用，不能跨函数调用<br>4.反汇编:mov eax,[esp-4]<br>5.初始化必须赋初值</p>
+<h1 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h1><p>1.如果写东西出现0xc0005出来，那么很有可能是地址不正确</p>
+<p>2.一般函数的过程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.提栈</span><br><span class="line">2.保存现场</span><br><span class="line">3.填充缓冲区</span><br><span class="line">4.函数的核心功能</span><br><span class="line">5.恢复现场</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/01/02/%E7%BB%95cdn%E4%B9%8B%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -429,115 +534,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/" class="post-title-link" itemprop="url">汇编1-进制、数据宽度、通用寄存器、汇编指令、内存寻址</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-12-28 00:32:27 / 修改时间：00:33:19" itemprop="dateCreated datePublished" datetime="2023-12-28T00:32:27+08:00">2023-12-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/miansha/" itemprop="url" rel="index"><span itemprop="name">-miansha</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="汇编1-进制、数据宽度、通用寄存器、汇编指令、内存寻址"><a href="#汇编1-进制、数据宽度、通用寄存器、汇编指令、内存寻址" class="headerlink" title="汇编1-进制、数据宽度、通用寄存器、汇编指令、内存寻址"></a>汇编1-进制、数据宽度、通用寄存器、汇编指令、内存寻址</h1><p>系统学习一下免杀，纯属个人笔记。禁止搬运。课是别人的，要删联系我即可。刚考完就火急火燎的来学免杀了，感觉还是网安好啊，正反馈十足，考研这b东西，真恼火。唉，也不知道考得上不这次。</p>
-<p>首先记录一些杂七杂八的东西</p>
-<h1 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h1><h2 id="位数的知识扩展"><a href="#位数的知识扩展" class="headerlink" title="位数的知识扩展"></a>位数的知识扩展</h2><p>比如一个计算机的位数是4，那他的数据宽度就只能存0000-1111（二进制）这么多。也就是0-15</p>
-<p>那么以此类推，32位的系统的数据宽度也能算出来。</p>
-<h2 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h2><p><img src="/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/image-20231227223714089.png" alt="image-20231227223714089"></p>
-<p>哎哟有水印，我这个知识个人笔记哈，这一篇的内容反正百度也能拿到的。</p>
-<h2 id="vs的一些基础小用"><a href="#vs的一些基础小用" class="headerlink" title="vs的一些基础小用"></a>vs的一些基础小用</h2><p>比如说你要看c语言的代码的反汇编，先下个断点，然后直接运行，右键进入反汇编即可</p>
-<p><img src="/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/image-20230915201659763.png" alt="image-20230915201659763"></p>
-<p><img src="/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/image-20230915201843667.png" alt="image-20230915201843667"></p>
-<h2 id="od"><a href="#od" class="headerlink" title="od"></a>od</h2><p>单步走是按f8</p>
-<p>od中，改变的寄存器或者说是数据，会变成红色</p>
-<h1 id="汇编指令"><a href="#汇编指令" class="headerlink" title="汇编指令"></a>汇编指令</h1><h2 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h2><p>mov  把后面的参数覆盖掉前面指定的寄存器中去（前后的寄存器的数据宽度必须是一样的，而如果后面的参数是数据的话，那么只会取后8位的数据放到前面的寄存器中去）</p>
-<p><img src="/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/image-20230915203822481.png" alt="image-20230915203822481"></p>
-<p><img src="/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/image-20231227224752974.png" alt="image-20231227224752974"></p>
-<h2 id="add"><a href="#add" class="headerlink" title="add"></a>add</h2><p>两个参数，参数相加之后，放到第一个参数的寄存器里面去，这里的寄存器记得也要保持位数相同。</p>
-<p><img src="/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/image-20231227230452727.png" alt="image-20231227230452727"></p>
-<h2 id="sub"><a href="#sub" class="headerlink" title="sub"></a>sub</h2><p>这就是相减了</p>
-<p><img src="/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/image-20231227230512866.png" alt="image-20231227230512866"></p>
-<h2 id="and"><a href="#and" class="headerlink" title="and"></a>and</h2><p>这个就是位运算了，会对每一位都进行运算，</p>
-<p><img src="/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/image-20231227231146757.png" alt="image-20231227231146757"></p>
-<p>就像这样，有0则全为0，全是1则是1.</p>
-<p><img src="/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/image-20231227231228499.png" alt="image-20231227231228499"></p>
-<p>这里值得注意的是，od里面的数都是十六进制的哈，而位运算都是基于二进制算的。举个栗子，0x6和0x9进行运算，那就是0110和1001进行运算，那结果就是0.</p>
-<h2 id="or"><a href="#or" class="headerlink" title="or"></a>or</h2><p>同and，只不过是或的关系。</p>
-<h2 id="xor"><a href="#xor" class="headerlink" title="xor"></a>xor</h2><p>那异或呢</p>
-<p>如果a、b两个值不相同，则异或结果为1。如果a、b两个值相同，异或结果为0。</p>
-<h2 id="not"><a href="#not" class="headerlink" title="not"></a>not</h2><p>就是取非，1变成0，0变成1。</p>
-<h1 id="内存寻址"><a href="#内存寻址" class="headerlink" title="内存寻址"></a>内存寻址</h1><h2 id="基础指令-取（改）内存里面的值"><a href="#基础指令-取（改）内存里面的值" class="headerlink" title="基础指令-取（改）内存里面的值"></a>基础指令-取（改）内存里面的值</h2><p>嘿嘿我的网安，我爱网安。</p>
-<p>寄存器是存在于cpu里面的，所以运算速度相比内存来说，就很快。但是cpu的空间不够，</p>
-<p><img src="/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/image-20231227233542844.png" alt="image-20231227233542844"></p>
-<p>这里值得注意点的是，ESP EBP这两个是存储内存地址的(和堆栈有关)，而EAX ECX EDX EBX这四个基本上使用来存储十六进制数据的。acdb，数据的存储数据基本是按照这个顺序存入的。</p>
-<p>byte是1字节，8bit。<br>word是1字，16bit<br>dword 双字，32bit<br>qword 64bit</p>
-<p>在计算机里面每个字节都有一个编号，这里可以认为内存的编号就是字节，在32位下范围为00000000-FFFFFFFF，最大的殉职范围就是FFFFFFFF+1字节，转换过来就是4G</p>
-<p><img src="/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/image-20231227234612416.png" alt="image-20231227234612416"></p>
-<p>这时候咱们就举个栗子比如说，我们要将一个8位的通用寄存器里面的内容放到一个8位的内存中去<code>mov m8 r8</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov byte ptr ds:[0x19FF74],al</span><br><span class="line">mov dword ptr ds:[0x19FF74],eax</span><br></pre></td></tr></table></figure>
-
-<p>其中，byte和dword是单位嘛，就是指几位。<br>而ptr是一个关键字，表示指针，表示后面这个ds:[0x19FF74]是个指针<br>而ds:[0x19FF74]则是一个内存地址ds    是data segment register，即数据段寄存器。<br>这里值得注意的是，中括号括起来的东西是一个内存地址，而不是立即数。</p>
-<h2 id="lea"><a href="#lea" class="headerlink" title="lea"></a>lea</h2><p>这个指令是寻找内存地址的意思，<code>lea eax,dword ptr ds:[ecx]</code>是取ecx的地址（和c语言的指针差不多）</p>
-<h2 id="栗子"><a href="#栗子" class="headerlink" title="栗子"></a>栗子</h2><p><img src="/2023/12/28/%E6%B1%87%E7%BC%961-%E8%BF%9B%E5%88%B6%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E3%80%81%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/image-20231228002134442.png" alt="image-20231228002134442"></p>
-<p>第一行，把后面的立即数存到ecx寄存器中<br>第二行，把ecx存的立即数作为地址，将这个地址中的内容存到eax里面去。<br>第三行，把立即数存到edx寄存器中<br>第四行，把后面的立即数存到edx存的地址所指向的内存中去<br>第五行，表示取edx存的地址，存到eax寄存器中去<br>第六行，表示讲edx寄存器所指向的内存中存的东西，存到eax中区</p>
-<p>（课里面有个好厉害的师傅，感觉什么都能想到，举一反三，我感觉啥也不懂一样像个呆瓜捏。）慢慢学把，加油捏。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -609,7 +605,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-count">173</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

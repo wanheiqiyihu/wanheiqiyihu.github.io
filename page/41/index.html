@@ -255,6 +255,103 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">火线沙龙云存储浅析 观看笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-03-21 11:18:46 / 修改时间：11:21:50" itemprop="dateCreated datePublished" datetime="2022-03-21T11:18:46+08:00">2022-03-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="火线沙龙云存储浅析-观看笔记"><a href="#火线沙龙云存储浅析-观看笔记" class="headerlink" title="火线沙龙云存储浅析 观看笔记"></a>火线沙龙云存储浅析 观看笔记</h1><h1 id="1-何为对象存储"><a href="#1-何为对象存储" class="headerlink" title="1.何为对象存储"></a>1.何为对象存储</h1><p>对线存储(object-based storage)。也可以叫做面向对象的存储，现在也有不少厂商直接把他叫做云存储<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319194028830.png" alt="image-20220319194028830"></p>
+<h1 id="2-对象存储的利用方式"><a href="#2-对象存储的利用方式" class="headerlink" title="2.对象存储的利用方式"></a>2.对象存储的利用方式</h1><h2 id="2-1bucket公开访问"><a href="#2-1bucket公开访问" class="headerlink" title="2.1bucket公开访问"></a>2.1bucket公开访问</h2><p>在此时如果选择公有读的话，会出现两种情况</p>
+<p>1.在只配置读写权限设置为公有读或公共读写的情况下，无法列出对象，但是可以直接访问对应的key路径。</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212000584.png" alt="image-20220319212000584"></p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212010434.png" alt="image-20220319212010434"></p>
+<p>也就是俗话说的，访问其下面的路径，类似未授权访问。</p>
+<p>2.如果想列出object对象，只需要在bucket授权策略中设置listobject即可。<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212131809.png" alt="image-20220319212131809"></p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212142347.png" alt="image-20220319212142347"></p>
+<h2 id="2-2bucket桶爆破"><a href="#2-2bucket桶爆破" class="headerlink" title="2.2bucket桶爆破"></a>2.2bucket桶爆破</h2><p>当知道bucket名称的时候，可以通过爆破获得bucket名称，这有些类似于目录爆破，只不过目录爆破一般通过状态码判断，而这个通过页面的内容判断</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212403531.png" alt="image-20220319212403531"></p>
+<p>下面是名称对了，第一个是设置了objectlist，后面是没有权限访问</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212457984.png" alt="image-20220319212457984"></p>
+<h2 id="2-3特定的bucket策略配置"><a href="#2-3特定的bucket策略配置" class="headerlink" title="2.3特定的bucket策略配置"></a>2.3特定的bucket策略配置</h2><p>特定的策略配置是指，如果管理员设置了某些ip，ua才可以请求改存储桶的话，此时如果错误的配置了getbucketpolicy，可导致攻击者获取策略配置。</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212724053.png" alt="image-20220319212724053"></p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212753558.png" alt="image-20220319212753558"></p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212821561.png" alt="image-20220319212821561"></p>
+<h2 id="2-4bucket-object遍历"><a href="#2-4bucket-object遍历" class="headerlink" title="2.4bucket object遍历"></a>2.4bucket object遍历</h2><p>类似于目录遍历</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319212903537.png" alt="image-20220319212903537"></p>
+<h2 id="2-5任意文件上传与覆盖"><a href="#2-5任意文件上传与覆盖" class="headerlink" title="2.5任意文件上传与覆盖"></a>2.5任意文件上传与覆盖</h2><p>如果在配置存储桶，管理员错误的将存储桶权限，配置为可写，这将会导致攻击者可上传任意文件去覆盖。</p>
+<h2 id="2-6accesskeyld，secretaccessket泄露"><a href="#2-6accesskeyld，secretaccessket泄露" class="headerlink" title="2.6accesskeyld，secretaccessket泄露"></a>2.6accesskeyld，secretaccessket泄露</h2><p>1.通过github等开源平台中的源代码中可发现存在泄露的key。</p>
+<p>2.通过反编译apk，小程序找到敏感信息。</p>
+<p>3.在目标网站源代码中找到一些敏感的信息，js等。<img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319213139689.png" alt="image-20220319213139689">有个工具推荐，是burp的插件，就是我们把正则表达式配置好，他会自动检测流量，然后看是否复合正则表达式。 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/gh0stkey/HaE</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-7bucket与子域接管"><a href="#2-7bucket与子域接管" class="headerlink" title="2.7bucket与子域接管"></a>2.7bucket与子域接管</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319213519789.png" alt="image-20220319213519789"></p>
+<p>大概意思就是，管理员删除了存储桶但是没有删除地址解析，然后我们自己创建一个bucket，和那个受害删除桶的名称一样，上传一个文件可以看到上传上去了，这就是成功接管了这个桶了</p>
+<p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319213547151.png" alt="image-20220319213547151"></p>
+<h2 id="2-8bucket策略配置可写"><a href="#2-8bucket策略配置可写" class="headerlink" title="2.8bucket策略配置可写"></a>2.8bucket策略配置可写</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215031791.png" alt="image-20220319215031791"></p>
+<h2 id="2-9修改bucket策略为deny使业务瘫痪"><a href="#2-9修改bucket策略为deny使业务瘫痪" class="headerlink" title="2.9修改bucket策略为deny使业务瘫痪"></a>2.9修改bucket策略为deny使业务瘫痪</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215152619.png" alt="image-20220319215152619"></p>
+<h2 id="2-10修改网站引用s3资源进行钓鱼"><a href="#2-10修改网站引用s3资源进行钓鱼" class="headerlink" title="2.10修改网站引用s3资源进行钓鱼"></a>2.10修改网站引用s3资源进行钓鱼</h2><p><img src="/2022/03/21/%E7%81%AB%E7%BA%BF%E6%B2%99%E9%BE%99%E4%BA%91%E5%AD%98%E5%82%A8%E6%B5%85%E6%9E%90-%E8%A7%82%E7%9C%8B%E7%AC%94%E8%AE%B0/image-20220319215311222.png" alt="image-20220319215311222"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/03/17/%E8%B7%A8%E5%9F%9F%E6%BC%8F%E6%B4%9E-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -414,83 +511,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/03/06/%E8%87%AA%E5%8A%A8%E6%9F%A5%E8%AF%A2icp%E8%84%9A%E6%9C%AC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/06/%E8%87%AA%E5%8A%A8%E6%9F%A5%E8%AF%A2icp%E8%84%9A%E6%9C%AC/" class="post-title-link" itemprop="url">自动查询icp脚本</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-03-06 19:17:38" itemprop="dateCreated datePublished" datetime="2022-03-06T19:17:38+08:00">2022-03-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-28 23:11:22" itemprop="dateModified" datetime="2022-03-28T23:11:22+08:00">2022-03-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/lunzi/" itemprop="url" rel="index"><span itemprop="name">-lunzi</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="自动查询icp脚本"><a href="#自动查询icp脚本" class="headerlink" title="自动查询icp脚本"></a>自动查询icp脚本</h1><p>这几天收集icp的资源太累了，索性直接写了个脚本</p>
-<p>记录一下</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"></span><br><span class="line">method = <span class="built_in">input</span>(<span class="string">&quot;不知道公司名字选1输入官网，知道公司名字选2输入名字&quot;</span>)</span><br><span class="line">url = <span class="string">&quot;https://www.beianx.cn/search/&quot;</span></span><br><span class="line">handers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 Edg/97.0.1072.69&#x27;</span>&#125;</span><br><span class="line"><span class="comment">#先获取IPC中的数据</span></span><br><span class="line"><span class="keyword">if</span> method == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">    website = <span class="built_in">input</span>(<span class="string">&quot;请输入公司的官网的域名，不要子域名不要根域名，直接域名即可可&quot;</span>)</span><br><span class="line">    res = requests.get(<span class="string">f&quot;<span class="subst">&#123;url&#125;</span><span class="subst">&#123;website&#125;</span>&quot;</span>)</span><br><span class="line">    tree = etree.HTML(res.text)</span><br><span class="line">    result = tree.xpath(<span class="string">&quot;/html/body/div[2]/table/tbody/tr/td[2]/a/text()&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">str</span>(result))</span><br><span class="line"><span class="keyword">elif</span> method == <span class="string">&quot;2&quot;</span>:</span><br><span class="line">    conpany = <span class="built_in">input</span>(<span class="string">&quot;请输入公司的名字&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;加载中...&quot;</span>)</span><br><span class="line">    res = requests.get(<span class="string">f&quot;<span class="subst">&#123;url&#125;</span><span class="subst">&#123;conpany&#125;</span>&quot;</span>)</span><br><span class="line">    tree = etree.HTML(res.text)</span><br><span class="line">    result_list = []</span><br><span class="line">    i = <span class="literal">True</span></span><br><span class="line">    index = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> i:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            result = tree.xpath(<span class="string">f&quot;/html/body/div[2]/table/tbody/tr[<span class="subst">&#123;<span class="built_in">str</span>(index)&#125;</span>]/td[6]/div/a/text()&quot;</span>)</span><br><span class="line">            <span class="keyword">if</span> result == []:</span><br><span class="line">                i = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result_list += result</span><br><span class="line">                index += <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            i = <span class="literal">False</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;出错了&quot;</span>)</span><br><span class="line">    final = <span class="string">&#x27;\n&#x27;</span>.join(result_list)</span><br><span class="line">    <span class="comment">#选择数据处理的方式</span></span><br><span class="line">    mod = <span class="built_in">input</span>(<span class="string">&quot;请选择：1.直接获取所有的url  2.获取所有非子域名  3.根据hunter domain语法来输出所有的痱子域名&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> mod == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">        <span class="built_in">print</span>(final)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> mod == <span class="string">&quot;2&quot;</span>:</span><br><span class="line">        final_list2 = []</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> result_list:</span><br><span class="line">            new_item = item.split(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">            <span class="keyword">del</span> new_item[<span class="number">0</span>]</span><br><span class="line">            final_item = <span class="string">&#x27;.&#x27;</span>.join(new_item)</span><br><span class="line">            final_list2.append(final_item)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>.join(final_list2))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> mod == <span class="string">&quot;3&quot;</span>:</span><br><span class="line">        final_list2 = []</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> result_list:</span><br><span class="line">            new_item = item.split(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">            <span class="keyword">del</span> new_item[<span class="number">0</span>]</span><br><span class="line">            final_item = <span class="string">&#x27;.&#x27;</span>.join(new_item)</span><br><span class="line">            final_list2.append(final_item)</span><br><span class="line"></span><br><span class="line">        resultlist = <span class="built_in">list</span>()</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> final_list2:</span><br><span class="line">            newitem = <span class="string">f&quot;domain=\&quot;<span class="subst">&#123;item&#125;</span>\&quot;&quot;</span></span><br><span class="line">            resultlist.append(newitem)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;||&#x27;</span>.join(resultlist))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;都说了不要乱输东西了，你看是不是又要重新来了嘛&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;给你说了输什么还要乱输是吧？&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -562,7 +582,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-count">173</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

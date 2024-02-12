@@ -255,6 +255,85 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2021/12/27/bugku-never-give-up%E8%A7%A3%E9%A2%98%E5%BF%83%E5%BE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/27/bugku-never-give-up%E8%A7%A3%E9%A2%98%E5%BF%83%E5%BE%97/" class="post-title-link" itemprop="url">bugku   never_give_up解题心得</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-27 19:01:12 / 修改时间：19:53:10" itemprop="dateCreated datePublished" datetime="2021-12-27T19:01:12+08:00">2021-12-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>bugku   never_give_up解题心得</p>
+<p>首先看源码看到备注。</p>
+<p>根据备注访问了文件，但是直接跳转到首页，这时可以考虑使用bp抓包查看返回数据包。</p>
+<p>在返回数据包中发现了加密数据，是url base64 url加密。</p>
+<p>然后得到部分关键php代码</p>
+<p><img src="https://img-blog.csdnimg.cn/2019061800582911.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzMzNTc4,size_16,color_FFFFFF,t_70" alt="img">接下来就是代码审计，下面补充一些代码函数的拓展。</p>
+<p>eregi()函数</p>
+<p>也可以使用？通配符</p>
+<p><img src="/2021/12/27/bugku-never-give-up%E8%A7%A3%E9%A2%98%E5%BF%83%E5%BE%97/image-20211108150506907.png" alt="image-20211108150506907"></p>
+<p><img src="/2021/12/27/bugku-never-give-up%E8%A7%A3%E9%A2%98%E5%BF%83%E5%BE%97/image-20211108152538728.png" alt="image-20211108152538728"></p>
+<p>substr函数</p>
+<p><img src="/2021/12/27/bugku-never-give-up%E8%A7%A3%E9%A2%98%E5%BF%83%E5%BE%97/image-20211108150626916.png" alt="image-20211108150626916"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2021/12/27/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -379,7 +458,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-count">173</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
