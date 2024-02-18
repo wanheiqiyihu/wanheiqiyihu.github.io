@@ -255,6 +255,113 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/" class="post-title-link" itemprop="url">PKI（数字证书系统）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-16 18:41:40" itemprop="dateCreated datePublished" datetime="2023-10-16T18:41:40+08:00">2023-10-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-29 20:32:31" itemprop="dateModified" datetime="2023-11-29T20:32:31+08:00">2023-11-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="PKI（数字证书系统）"><a href="#PKI（数字证书系统）" class="headerlink" title="PKI（数字证书系统）"></a>PKI（数字证书系统）</h1><p>bilibili找了个课程，记录一下学习过程</p>
+<h1 id="散列函数"><a href="#散列函数" class="headerlink" title="散列函数"></a>散列函数</h1><p><img src="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/image-20231013201415718.png" alt="image-20231013201415718"></p>
+<p><strong>散列函数的特点</strong>：固定大小，雪崩效应，单向，冲突避免</p>
+<h1 id="密钥算法"><a href="#密钥算法" class="headerlink" title="密钥算法"></a>密钥算法</h1><p>简单记录一下，</p>
+<h2 id="对称密钥算法"><a href="#对称密钥算法" class="headerlink" title="对称密钥算法"></a>对称密钥算法</h2><p>使用相同的密钥的算法进行加密和解密，优点:非常快，安全，紧凑。</p>
+<h2 id="非对称密钥算法"><a href="#非对称密钥算法" class="headerlink" title="非对称密钥算法"></a>非对称密钥算法</h2><p><img src="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/image-20231015184112596.png" alt="image-20231015184112596"></p>
+<p>缺点：加密速度非常慢，密文会非常长。</p>
+<p>一般来说，都是对称加密和非对称机密同时使用，</p>
+<p><img src="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/image-20231015190332650.png" alt="image-20231015190332650"></p>
+<p><img src="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/image-20231015190338867.png" alt="image-20231015190338867"></p>
+<h1 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h1><p><img src="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/image-20231015190853472.png" alt="image-20231015190853472"></p>
+<p>证书加密是私钥，解密（校验）是公钥。<br>因为只有发送方存在私钥，所以证书具有不可否认性。<br>任何人都有公钥，来校验这个文件是否完整和是否源自发送方。</p>
+<h1 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h1><p><img src="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/image-20231015191809857.png" alt="image-20231015191809857"></p>
+<p>证书系统的目的就是给两端提供一次安全的公钥加密</p>
+<p><img src="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/image-20231015193250043.png" alt="image-20231015193250043"></p>
+<p><strong>受信任的介绍</strong>，通过中间人b，使a和c建立受信任的联系。</p>
+<h1 id="证书授权颁发机构CA"><a href="#证书授权颁发机构CA" class="headerlink" title="证书授权颁发机构CA"></a>证书授权颁发机构CA</h1><p><img src="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/image-20231015193426511.png" alt="image-20231015193426511"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.PKI  最高级的（类似zf，为了颁布证书所弄出来的所有东西）</span><br><span class="line">2.CA  中间的（类似发证的机构，公安局之类的）</span><br><span class="line">3.证书  （类似身份证）</span><br></pre></td></tr></table></figure>
+
+<p><strong>步骤：</strong></p>
+<p><img src="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/image-20231015193656625.png" alt="image-20231015193656625"></p>
+<p>1.首先客户需要得到ca的根证书，然后将客户自己的公钥提供给ca。</p>
+<p><img src="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/image-20231015193747827.png" alt="image-20231015193747827"></p>
+<p>2.证书服务器会把客户的个人信息和公钥，哈希加密之后得到的东西就叫签名。随后，将明文的个人信息，明文的公钥，明文的hash（通过CA的私钥做的），<strong>这个东西的集合就叫数字证书（下图）</strong>。</p>
+<p><img src="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/image-20231015194232854.png" alt="image-20231015194232854"></p>
+<p>3.客户收到CA发送的消息之后，就可以通过CA的公钥对hash值进行校验，确定是CA发布的。这个时候就可以通过消息中的公钥得到对面客户的公钥。</p>
+<h1 id="证书申请的步骤"><a href="#证书申请的步骤" class="headerlink" title="证书申请的步骤"></a>证书申请的步骤</h1><h2 id="同步时间"><a href="#同步时间" class="headerlink" title="同步时间"></a>同步时间</h2><p>时间是整个PKI系统的重中之重，必须要先确保参加PKI系统的设备和主机的时间同步，才能开始PKI的部署。</p>
+<h2 id="部署证书服务器"><a href="#部署证书服务器" class="headerlink" title="部署证书服务器"></a>部署证书服务器</h2><p><img src="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/image-20231016182824907.png" alt="image-20231016182824907"></p>
+<h2 id="客户端产生密钥"><a href="#客户端产生密钥" class="headerlink" title="客户端产生密钥"></a>客户端产生密钥</h2><p>每一个实体在申请证书之前，需要预先产生RSA密钥对。</p>
+<h2 id="验证证书服务器"><a href="#验证证书服务器" class="headerlink" title="验证证书服务器"></a>验证证书服务器</h2><p>每一个实体需要获取证书服务器的根证书，里面包含证书服务器的公钥。获取了根证书后，乐意通过fingerprint离线验证证书服务器。</p>
+<h2 id="申请个人证书"><a href="#申请个人证书" class="headerlink" title="申请个人证书"></a>申请个人证书</h2><h2 id="审核并签名证书"><a href="#审核并签名证书" class="headerlink" title="审核并签名证书"></a>审核并签名证书</h2><h2 id="颁发数字证书"><a href="#颁发数字证书" class="headerlink" title="颁发数字证书"></a>颁发数字证书</h2><h2 id="交换公钥"><a href="#交换公钥" class="headerlink" title="交换公钥"></a>交换公钥</h2><h1 id="证书的申请与吊销"><a href="#证书的申请与吊销" class="headerlink" title="证书的申请与吊销"></a>证书的申请与吊销</h1><p><img src="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/image-20231016183313907.png" alt="image-20231016183313907"></p>
+<p>三个经典的申请方式。</p>
+<h2 id="申请"><a href="#申请" class="headerlink" title="申请"></a>申请</h2><p><img src="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/image-20231016183335825.png" alt="image-20231016183335825"></p>
+<h2 id="吊销"><a href="#吊销" class="headerlink" title="吊销"></a>吊销</h2><p><img src="/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/image-20231016184107006.png" alt="image-20231016184107006"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/10/10/c%E8%AF%AD%E8%A8%80%E4%B9%8B%E8%9E%BA%E6%97%8B%E6%95%B0%E7%BB%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -494,152 +601,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">2018年真题解析</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-05 14:50:18 / 修改时间：14:50:52" itemprop="dateCreated datePublished" datetime="2023-10-05T14:50:18+08:00">2023-10-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">-c</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="2018年真题解析"><a href="#2018年真题解析" class="headerlink" title="2018年真题解析"></a>2018年真题解析</h1><p>网安的概念还有几十页要背，好好背一下好了。唉，考研是真的好痛苦啊。</p>
-<h1 id="临时存答案"><a href="#临时存答案" class="headerlink" title="临时存答案"></a>临时存答案</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">一、单选题</span><br><span class="line">1.A 2.C 3.A 4.D 5.A</span><br><span class="line">6.C 7.B 8.C 9.C 10.B</span><br><span class="line">//正确答案BCADA DBCCB  错两个，得16分</span><br><span class="line">二、判断题</span><br><span class="line">对对对错对</span><br><span class="line">错错错对错</span><br><span class="line">//我的就是正确答案！得20分</span><br><span class="line">三、程序分析题</span><br><span class="line">21.</span><br><span class="line">程序功能：判断每个字母分别出现了几次，不区分大小写</span><br><span class="line">程序运行结果：</span><br><span class="line">A-2</span><br><span class="line">E-1</span><br><span class="line">G-1</span><br><span class="line">H-1</span><br><span class="line">I-2</span><br><span class="line">K-1</span><br><span class="line">M-1</span><br><span class="line">O-2</span><br><span class="line">P-1</span><br><span class="line">R-2</span><br><span class="line">S-3</span><br><span class="line">T-3</span><br><span class="line">//全对10分！</span><br><span class="line">22.</span><br><span class="line">程序功能：判断数组中成绩最高的学生和成绩最低的学生，并分别输出分数最大的学生和分数最小的学生的姓名和成绩。</span><br><span class="line">程序运行结果：</span><br><span class="line">Max is:Wanghai,93</span><br><span class="line">Min is:Liuhong,62</span><br><span class="line">//全对10分！</span><br><span class="line">23.</span><br><span class="line">程序功能：将一个正整数倒置</span><br><span class="line">程序运行结果：result:54321</span><br><span class="line">//全对10分！</span><br></pre></td></tr></table></figure>
-
-<p>四、程序设计题</p>
-<p>24.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="keyword">int</span> re;</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=<span class="number">9</span>;j++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=j;i++)&#123;</span><br><span class="line">			re=j*i;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d*%d=%d   &quot;</span>,j,i,re);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>//能完成功能，我就算25分吧</p>
-<p>25.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">person</span> &#123;</span></span><br><span class="line">		<span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line">		<span class="keyword">int</span> sex;<span class="comment">//男人为0，女人为1</span></span><br><span class="line">		<span class="keyword">int</span> age;</span><br><span class="line">	&#125;arr[<span class="number">100</span>];</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (i &lt; <span class="number">100</span>) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;请输入第%d位人的姓名，性别（其中男人为0，女人为1）和年龄:\n&quot;</span>, i+<span class="number">1</span>);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%s%d%d&quot;</span>, &amp;arr[i].name, &amp;arr[i].sex, &amp;arr[i].age);</span><br><span class="line">		i++;</span><br><span class="line">	&#125;<span class="comment">//接收</span></span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">person</span> <span class="title">tee</span>[100], <span class="title">adult</span>[100], <span class="title">old</span>[100];</span></span><br><span class="line">	<span class="keyword">int</span> t = <span class="number">0</span>; <span class="keyword">int</span> a = <span class="number">0</span>; <span class="keyword">int</span> o = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (( - <span class="number">1</span> &lt; arr[i].age) &amp;&amp; (arr[i].age&lt; <span class="number">30</span>)) &#123;</span><br><span class="line">			tee[t] = arr[i];</span><br><span class="line">			t++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> ((<span class="number">29</span> &lt; arr[i].age) &amp;&amp; (arr[i].age &lt; <span class="number">60</span>)) &#123;</span><br><span class="line">			adult[a] = arr[i];</span><br><span class="line">			a++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (arr[i].age &gt;= <span class="number">60</span>) &#123;</span><br><span class="line">			old[o] = arr[i];</span><br><span class="line">			o++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;年轻人有%d，中年人有%d，老年人有%d&quot;</span>, t, a, o);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>//能完成功能，我就算25分吧</p>
-<p>26.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">char</span> arr1[<span class="number">50</span>];</span><br><span class="line">	<span class="keyword">char</span> arr2[<span class="number">50</span>];</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入字符串1\n&quot;</span>);</span><br><span class="line">	gets_s(arr1);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> a = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">	<span class="keyword">char</span> b = <span class="string">&#x27;9&#x27;</span>;</span><br><span class="line">	<span class="keyword">while</span> (arr1[i] != <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> ((arr1[i] &gt;= a) &amp;&amp; (arr1[i] &lt;= b)) &#123;</span><br><span class="line">			arr1[i] == a;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (arr1[i] != a) &#123;</span><br><span class="line">			arr2[j] = arr1[i];</span><br><span class="line">			j++;</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> lenth = <span class="number">0</span>;</span><br><span class="line">	lenth = <span class="built_in">strlen</span>(arr2);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;字符串2为：&quot;</span>);</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; lenth; i++) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, arr2[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>未完成，我直接算0分好吧</p>
-<p>这次总分116分！重点其实就是编程题，我要是最后一个编程题对了，基本上就是130分左右，但是好难啊，我两次编程题都没写对，所以要对编程题进行针对性的训练。</p>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><h1 id="填空题"><a href="#填空题" class="headerlink" title="填空题"></a>填空题</h1><h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231004182136763.png" alt="image-20231004182136763"></p>
-<p>这道题我都能选错是我没想到的，脑子抽了。。</p>
-<p>逻辑或是有一个是真的就是真的，所以选B</p>
-<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231004182611730.png" alt="image-20231004182611730"></p>
-<p>选C</p>
-<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231004182625830.png" alt="image-20231004182625830"></p>
-<p>选A</p>
-<p>C语言源文件后缀名是“.c”，编译（就是将源代码转换为机器语言。编译器的输出结果成为目标代码，存放它们的文件称为目标文件）生成的文件后缀名是“.obj”，连接后可执行文件的后缀名是“.exe”。<br>而最后的cpp后缀，是c++的源文件。</p>
-<h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231004182933228.png" alt="image-20231004182933228"></p>
-<p>最后一个只是单纯的表达式，并不具备赋值的功能。<br>选D</p>
-<h2 id="5"><a href="#5" class="headerlink" title="5"></a>5</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231004183005784.png" alt="image-20231004183005784"></p>
-<p>这个是老生常谈了，选A</p>
-<h2 id="6"><a href="#6" class="headerlink" title="6"></a>6</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231004183026483.png" alt="image-20231004183026483"></p>
-<p>这个我还是真是触及到知识盲区了，我一直以为是3能省略，结果是全部都可以省略,但表达式之间的间隔符 ( 分号 )不能缺省。<code>for(;;)</code>的功能就和while(1)一样了<br>选D</p>
-<h2 id="7"><a href="#7" class="headerlink" title="7"></a>7</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231004183740621.png" alt="image-20231004183740621"></p>
-<p>判断长度当然使用strlen函数啦<br>选B</p>
-<h2 id="8"><a href="#8" class="headerlink" title="8"></a>8</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231004183848474.png" alt="image-20231004183848474"></p>
-<p>老生常谈的问题了，不说了，选C</p>
-<h2 id="9"><a href="#9" class="headerlink" title="9"></a>9</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005133809796.png" alt="image-20231005133809796"></p>
-<p>定义结构体，太基础啦！首先必不可少的就是struct，后面的结构体名称和变量名都是可以省略的，然后前面的结构体名称是不能使用数组的，所以最后答案就选C</p>
-<h2 id="10"><a href="#10" class="headerlink" title="10"></a>10</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005134540301.png" alt="image-20231005134540301"></p>
-<p>首先是输入，所以排除A，如果要直接接收数组的话，scanf直接用数组名即可，gets也是直接用数组名即可，但是gets里面是不能打引号的，所以这道题选B</p>
-<h1 id="判断题"><a href="#判断题" class="headerlink" title="判断题"></a>判断题</h1><h2 id="11"><a href="#11" class="headerlink" title="11"></a>11</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005135432175.png" alt="image-20231005135432175"></p>
-<p>对的</p>
-<h2 id="12"><a href="#12" class="headerlink" title="12"></a>12</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005135448133.png" alt="image-20231005135448133"></p>
-<p>对的</p>
-<h2 id="13"><a href="#13" class="headerlink" title="13"></a>13</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005135455889.png" alt="image-20231005135455889"></p>
-<p>对的</p>
-<h2 id="14"><a href="#14" class="headerlink" title="14"></a>14</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005135511505.png" alt="image-20231005135511505"></p>
-<p>错的，定义数组要使用方括号，定义函数的时候才使用圆括号，且圆括号中的形参也不能以数字开头。</p>
-<h2 id="15"><a href="#15" class="headerlink" title="15"></a>15</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005135554642.png" alt="image-20231005135554642"></p>
-<p>对的</p>
-<h2 id="16"><a href="#16" class="headerlink" title="16"></a>16</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005135608260.png" alt="image-20231005135608260"></p>
-<p>错的，应该如下，p=a</p>
-<p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005135705681.png" alt="image-20231005135705681"></p>
-<h2 id="17"><a href="#17" class="headerlink" title="17"></a>17</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005135725130.png" alt="image-20231005135725130"></p>
-<p>错误的，viod函数不需要return的返回值</p>
-<h2 id="18"><a href="#18" class="headerlink" title="18"></a>18</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005135745158.png" alt="image-20231005135745158"></p>
-<p>错误的，是按照从上到下执行的</p>
-<h2 id="19"><a href="#19" class="headerlink" title="19"></a>19</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005135815722.png" alt="image-20231005135815722"></p>
-<p>正确的</p>
-<p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005140832833.png" alt="image-20231005140832833"></p>
-<p>viod指针就能做到这一点，但是后面却无法正确间接寻址，原因是void指针必须要进行转换之后，才能进行正确的引用</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">char</span> arr[<span class="number">5</span>] = <span class="string">&quot;arrs&quot;</span>;</span><br><span class="line">	<span class="keyword">int</span> arr2[<span class="number">5</span>] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;</span><br><span class="line">	<span class="keyword">void</span>* p;</span><br><span class="line">	p = &amp;arr[<span class="number">1</span>];  <span class="comment">// 指向字符数组的第二个元素</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>, *(<span class="keyword">char</span>*)p);  <span class="comment">// 打印字符数组的第二个元素</span></span><br><span class="line">	p = &amp;arr2[<span class="number">1</span>];  <span class="comment">// 指向整数数组的第二个元素</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, *(<span class="keyword">int</span>*)p);  <span class="comment">// 打印整数数组的第二个元素</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005141250833.png" alt="image-20231005141250833"></p>
-<h2 id="20"><a href="#20" class="headerlink" title="20"></a>20</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005141318466.png" alt="image-20231005141318466"></p>
-<p>肯定是错误的啦，变量E等于1的时候才执行，而后面是变量E等于0的时候才执行.</p>
-<h1 id="程序分析题"><a href="#程序分析题" class="headerlink" title="程序分析题"></a>程序分析题</h1><h2 id="21"><a href="#21" class="headerlink" title="21"></a>21</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005141535365.png" alt="image-20231005141535365"></p>
-<p>这些分析题我就不解释了，毕竟我都全对，直接看我之前写的答案就好了<br>值得注意的一点就是，程序中的printf必须要好好的看，避免漏过一些重要的输出内容。</p>
-<h2 id="22"><a href="#22" class="headerlink" title="22"></a>22</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005142350476.png" alt="image-20231005142350476"></p>
-<h2 id="23"><a href="#23" class="headerlink" title="23"></a>23</h2><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/一些笔记\c语言\2018年真题解析\image-20231005142402355.png" alt="image-20231005142402355" style="zoom:150%;">
-
-<h1 id="编程题"><a href="#编程题" class="headerlink" title="编程题"></a>编程题</h1><p>不多解释了，前面两个看我的答案就可以了，现在说说第三个</p>
-<h2 id="24-25"><a href="#24-25" class="headerlink" title="24-25"></a>24-25</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005143304921.png" alt="image-20231005143304921"></p>
-<h2 id><a href="#" class="headerlink" title></a></h2><h2 id="26"><a href="#26" class="headerlink" title="26"></a>26</h2><p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005143317971.png" alt="image-20231005143317971"></p>
-<p>我的思路是，首先接收字符串1和2，然后遍历字符串1，遇到0~9之间的元素就跳过，其他时候直接存入字符串2</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 定义两个字符数组，arr1用于接收输入，arr2用于存储非数字字符</span></span><br><span class="line">	<span class="keyword">char</span> arr1[<span class="number">50</span>];</span><br><span class="line">	<span class="keyword">char</span> arr2[<span class="number">50</span>] = &#123;<span class="string">&quot;&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 从用户那里获取字符串，并存入arr1</span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, arr1);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 计算输入字符串的长度</span></span><br><span class="line">	<span class="keyword">int</span> len = <span class="built_in">strlen</span>(arr1);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 初始化索引变量j</span></span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 遍历输入字符串中的每个字符</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">		<span class="comment">// 如果当前字符是数字，则打印提示信息并跳过</span></span><br><span class="line">		<span class="keyword">if</span> (arr1[i] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; arr1[i] &lt;= <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;排除%c!\n&quot;</span>, arr1[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">// 如果当前字符不是数字，则将其添加到arr2，并增加索引j</span></span><br><span class="line">			arr2[j] = arr1[i];</span><br><span class="line">			j++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 计算arr2的长度</span></span><br><span class="line">	<span class="keyword">int</span> len2;</span><br><span class="line">	len2 = <span class="built_in">strlen</span>(arr2);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 打印出arr2中的所有字符</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, arr2[i]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="/2023/10/05/2018%E5%B9%B4%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90/image-20231005144842718.png" alt="image-20231005144842718"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -711,7 +672,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

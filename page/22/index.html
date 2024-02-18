@@ -255,6 +255,154 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">NTLM协议</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-01-25 14:04:56 / 修改时间：14:09:50" itemprop="dateCreated datePublished" datetime="2023-01-25T14:04:56+08:00">2023-01-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="NTLM协议"><a href="#NTLM协议" class="headerlink" title="NTLM协议"></a>NTLM协议</h1><p>相当于读书笔记吧，这下面都是我手打的，图也是我画的，手好痛。也确实有段时间没有更新博客了，主要是方向的转变，不过网安依旧是我的主要攻略目标好吧。</p>
+<p>NTLM协议是微软用于Windows身份验证的主要协议之一。从早期的SMB到因为安全问题改成的LM再最后变成NTLM协议.NTML即可用于域环境身份验证，还可为SMB、HTTP、LDAP、SMTP等上层微软应用提供身份验证。</p>
+<h2 id="SSPI和SSP的概念"><a href="#SSPI和SSP的概念" class="headerlink" title="SSPI和SSP的概念"></a>SSPI和SSP的概念</h2><p>SSPI是Windows定义的一套接口，该接口定义了与安全有关的功能函数，包含但不限于，身份验证机制，为其他协议提供的Session Security机制。</p>
+<p>但是SSPI只是定义了一套接口函数，并没有实现具体内容。</p>
+<p>SSP是SSPI的实现者，微软自己实现了很多SSP,用于提供安全功能,下面介绍几个比较经典的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">NTLP SSP：windows NT 3.51中引入的，为windows2000以前的客户端服务器域和非域身份验证提供NTLM查询\响应身份验证。</span><br><span class="line"></span><br><span class="line">Kerberos SSP:windows 2000中间引入，windows vista中更新为支持AES，为windows2000及更高版本中首选的客户端-服务器域提供相互身份验证。</span><br><span class="line"></span><br><span class="line">Digest SSP:winows xp中引入，在windows系统与非windows系统间提供基于HTTP和SASL身份验证的质询/响应。</span><br><span class="line"></span><br><span class="line">Negotiate SSP:windows2000中引入，默认选择Kerberos，如果不可用，则选择NTLM。</span><br><span class="line"></span><br><span class="line">Cred SSP：windows vista中引入，为远程桌面连接提供单点登录和网络级身份验证。</span><br><span class="line"></span><br><span class="line">Schannel SSP：windows 2000中引入，，后续更新为支持AES加密。</span><br><span class="line"></span><br><span class="line">PKU2U SSP:windows 7中引入，在不隶属于域的系统之间提供数字证书的对等身份验证。</span><br></pre></td></tr></table></figure>
+
+<p>因为SSPI中定义了域Session security有关的API，所以上层应用题用任何SSP与远程的服务进行身份验证后，此SSP都会为本次连接生成一个随机的key,这个随机key被成为session key.在系统层面,SSP就是一个dll,用来实现身份验证.不同的SSP，实现的身份验证机制是不一样的，比如NTLM SSP，实现的是一种基于质询/响应的身份验证机制，而Kerberos SSP实现的是基于Ticket的身份验证机制。我们可以编写自己的SSP,然后注册到操作系统中,</p>
+<p><img src="/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230113124624449.png" alt="image-20230113124624449"></p>
+<h2 id="LM-Hash算法"><a href="#LM-Hash算法" class="headerlink" title="LM Hash算法"></a>LM Hash算法</h2><p>LM是微软退出的一个身份认证协议,使用的加密算法是LM HASH。虽然比较容易被破解，但是为了保证系统的兼容性，windows就知识将LM HASH禁用，(从Windows vista 和windows 2008开始就禁用了)，LM HASH的明文密码被限定在14位以内，也就是说，如果要停止使用LM HASH，将用户的密码设置为14位以上就可以了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">LM HASH的加密流程如下</span><br><span class="line"></span><br><span class="line">明文密码-全部改成大写-转为16进制-如果转换后的16进制字符串的长度不足14B（长度28），剩下的用0来补全。</span><br><span class="line"></span><br><span class="line">随后，将14B分为两组，每组7B，然后转换为2进制数据，每组二进制数据的长度为56bit。</span><br><span class="line"></span><br><span class="line">将每组二进制数据安7bit为一组，分为8组，每组末尾家0，在转换成十六进制。这样每组也就成了8B长度的十六进制数据了。</span><br><span class="line"></span><br><span class="line">将上面生成的两组8B的十六进制数据，分别作为DES加密密钥，队字符串“KGS!@#$%”进行加密，然后将DES 加密后的两组密文进行拼接，得到最终的LM HASH。</span><br></pre></td></tr></table></figure>
+
+<h2 id="NTLM-Hash算法"><a href="#NTLM-Hash算法" class="headerlink" title="NTLM Hash算法"></a>NTLM Hash算法</h2><p>从Windows vista和windows servers 2008开始，默认禁用了LM Hash的支持。也就是说，默认只存储了NTLM Hash的值。（用LM的基本只有三个  2000 XP  server2002）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">加密流程如下：</span><br><span class="line">1.将用户密码转换为十六进制格式</span><br><span class="line">2.将ASCII编码的十六进制格式的字符串转换为Unicode编码，</span><br><span class="line">3.队Unicode编码的十六进制字符串进行标准MD4单向Hash加密。</span><br></pre></td></tr></table></figure>
+
+<p>用户的密码经过NTLM Hash加密后存储在<code>C:\Windows\System32\config\SAM</code>中</p>
+<p>在用户输入密码进行本地认证的过程中，所有操作都是本定进行的，系统将用户输入的密码转换成NTLM Hash在SAM文件中进行比较,如果相同就是密码正确.当用户注销,重启,锁屏后,操作系统会让winlogon.exe显示登录界面，也就是输入框。当winlogn.exe接收输入后，将密码交给lsass.exe进程，开始进行比较。lsass.exe进程中会存一份明文密码，我们使用的mimikatz就是从lsass.exe进程中抓去明文密码或者Hash密码。</p>
+<h2 id="NTLM协议认证"><a href="#NTLM协议认证" class="headerlink" title="NTLM协议认证"></a>NTLM协议认证</h2><p>NTLM（NT LAN MANAGER）是一种网络认证协议，它是基于质询（Challenge）/响应（Response）认证机制的一种认证模式。</p>
+<p>NTLM使用在Windows NT和Windows 2000 Server（or later）工作组环境中（kerberos用在域模式下）。在AD域环境中，如果需要认证Windows NT系统，也必须采用NTLM。</p>
+<p>NTLM协议的认证过程分为三步：</p>
+<p>1、协商：主要用于确认双方协议版本（NTLM v1/NTLM v2）</p>
+<p>2、质询：就是挑战/响应认证机制起作用的范畴</p>
+<p>3、验证：验证主要是在质询完成后，验证结果，是认证的最后一步</p>
+<p>质询的完整过程：</p>
+<p>1、客户端向服务端发送用户信息（用户名）请求</p>
+<p>2、服务器接受到请求，判断本地账户列表是否有用户名，如果有，生成一个16位的随机数，被称之为“Challenge”，使用登陆用户名对应NTLM Hash加密Challenge（16位随机字符），生成Challenge1，生成一个Net-NTLM Hash存在内存中，同时，生成Challenge1后，将Challenge（16位随机字符）发送给客户端。</p>
+<p>3、客户端接收到Challenge后，使用将要登陆的账户对应的NTLM Hash加密Challenge生成Response，然后将Response发送至服务器端。</p>
+<p>4、验证，服务器接收到客户端的Response后，对比Challenge1与Response是否相等，若相等，则认证通过。</p>
+<p>NTLM是底层的认证协议，必须嵌入上层应用协议中，消息都传输依赖于使用NTLM的上层协议，比如SMB,HTTP等。</p>
+<p>这里本来是有一个抓包实验的，但是我这边才装的电脑就不弄了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">当应用SMB协议传输NTLM协议的时候，NTLM认证的数据包都是放在GSS-API中的。</span><br><span class="line">什么是GSS-API呢？</span><br><span class="line">通用安全服务应用程序接口(GSSAPI) 是为了让程序能够访问安全服务的一个应用程序接口。</span><br><span class="line">使用 GSS-API，程序员在编写应用程序时，可以应用通用的安全机制。</span><br><span class="line">开发者不必针对任何特定的平台、安全机制、保护类型或传输协议来定制安全实现。</span><br><span class="line">使用 GSS-API，程序员可忽略保护网络数据方面的细节。</span><br><span class="line">使用 GSS-API 编写的程序在网络安全方面具有更高的可移植性。</span><br><span class="line">这种可移植性是通用安全服务 API 的一个特点。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">一些小知识：</span><br><span class="line">工作组环境下默认均不签名</span><br><span class="line">域环境下的NTLM认证，服务端会把协议认证发送给域控，域控会把认证结果成功与否返回给服务端。</span><br></pre></td></tr></table></figure>
+
+<p>NTML和NTLM v2的区别：</p>
+<p>v1和v2是NTLM身份认证协议，但是是不同版本，只是其中的chalenge值与加密算法不同而已。</p>
+<p>下面介绍lmcompatibilityLevel</p>
+<p><img src="/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125131209709.png" alt="image-20230125131209709"></p>
+<p>我们可以手动修改本地安全策略进行lmcompatibilityLevel值的修改。在本地安全策略中的安全选项中的网络安全中进行设置。或者也可以通过修改注册表进行修改。</p>
+<h2 id="NTLM协议的安全问题"><a href="#NTLM协议的安全问题" class="headerlink" title="NTLM协议的安全问题"></a>NTLM协议的安全问题</h2><p>从上面的NTLM认证的流程中可以看到，在type3消息中是使用用户密码Hash进计算的。因此，当没有拿到用户的明文密码而只拿到Hash的情况下，可以进行Pass The Hash(PTH)攻击，也就是常说的哈希传递攻击。同样，还是在type3消息中，存在Net-NTLM hash，当获得了Net-NTLM hash之后，可以进行中年人攻击，重放Net-NTLM hash，这种手法也就是常说的NTLM Relay(NTLM中继)攻击。由于NTLM v1协议加密过程存在天然缺陷，因此可以队Net-NTLM v1 Hash进行破解，得到NTLM Hash之后即可横向移动。下面介绍一下三中基于NTLM的攻击手法</p>
+<h3 id="1-Pass-The-Hash"><a href="#1-Pass-The-Hash" class="headerlink" title="1.Pass The Hash"></a>1.Pass The Hash</h3><p>Pass The Hash攻击是内网横向移动的一种方式。由于NTLM认证过程中使用的是用户密码的NTLM hash来进行加密，因此当或渠道了用户密码的NTLMhash而没有解出明文密码的时候，就可以利用此NTLMhash来进行哈希传递攻击。对内网其他机器进行hash碰撞，碰撞到使用相同密码的机器。然后通过135或者445端口横向移动。这本书后面也会写详细的过程，我们后面再继续进行相关的介绍。</p>
+<h3 id="2-NTLM-Relay"><a href="#2-NTLM-Relay" class="headerlink" title="2.NTLM Relay"></a>2.NTLM Relay</h3><p>严格意义上这个名字并不正确，应该叫Net-NTLM Relay。他发生在NTLM认证的第三步,在response消息中存在Net-NTLM hash,或则Net-NTLM hash后,可以进行中间人攻击,重放Net-NTLM,同样,我们后续会进行介绍.</p>
+<h3 id="3-Net-NTLM-v1-Hash破解"><a href="#3-Net-NTLM-v1-Hash破解" class="headerlink" title="3.Net-NTLM v1 Hash破解"></a>3.Net-NTLM v1 Hash破解</h3><p>由于NTLM v1存在天然缺陷，只要获取到Net-NTLM v1 hash，就能破解为NTLM Hash，这与密码强度无关。在域环境中，这一点更为明显，因为在域环境中可以直接使用hash连接目标机器。如果域控允许发送NTLM v1响应，我们就可以通过与域控机器进行NTLM认证，然后抓去域控的Net-NTLMv1 hash，然后破解为NTLM hash，使用域控的机器账户和Hash即可到处域内所有用户Hash。</p>
+<p>但是有一个缺点，自从windows vista开始，微软就默认使用NTLM v2身份认证，想要降级到v1，需要手动修改，并且需要目标主机的管理员权限。<code>本地安全策略，安全设置，本地策略，安全选项，网络安全:LAN管理器身份验证级别</code>将其修改成进发送NTLM响应。</p>
+<p>或者也可以通过执行命令修改注册表来达到这个效果。</p>
+<h3 id="Net-NTLMv1的利用思路"><a href="#Net-NTLMv1的利用思路" class="headerlink" title="Net-NTLMv1的利用思路"></a>Net-NTLMv1的利用思路</h3><p>由于Net-NTLMv1的脆弱性，在控制Challenge后可以在短时间内通过彩虹表还原出用户的ntlm hash，所以在利用上首选的是将Win7环境下的默认Net-NTLMv2降级到Net-NTLMv1，获取本机的通信数据，还原出ntlm hash。</p>
+<p>实现工具: InternalMonologue</p>
+<p>下载地址： <a target="_blank" rel="noopener" href="https://github.com/eladshamir/Internal-Monologue">https://github.com/eladshamir/Internal-Monologue</a></p>
+<p>注意点：</p>
+<p>1、自Windows Vista/Server2008开始起，微软默认使用Net-NTLMv2协议，想要降级到Net-NTLMv1，首先需要获得当前系统的管理员权限。</p>
+<p>2、修改注册表需要管理员权限</p>
+<p>修改注册表开启Net-NTLMv1：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa\ /v lmcompatibilitylevel /t REG_DWORD /d 2 /f</span><br></pre></td></tr></table></figure>
+
+<p>为确保Net-NTLMv1开启成功，还需要修改两处注册表键值：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0\ /v NtlmMinClientSec /t REG_DWORD /d 536870912 /f</span><br><span class="line">reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0\ /v RestrictSendingNTLMTraffic /t REG_DWORD /d 0 /f</span><br></pre></td></tr></table></figure>
+
+<p>Net-NTLMv1的格式为：<code>username::hostname:LM response:NTLM response:challenge</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Administrator::adexx-PC:bf3d8d0c689b18f7fce20f605af5b689dadc3623865acfad:bf3d8d0c689b18f7fce20f605af5b689dadc3623865acfad:1122334455667788</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140656764.png" alt="image-20230125140656764"></p>
+<p>使用hashcat进行字典破解，参数如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -m 5500 hash.txt password.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140710636.png" alt="image-20230125140710636"></p>
+<p>优点：</p>
+<p>1、这种方式不会对lsass.exe进程进行操作<br>2、同本地NTLM SSP进行交互，不会产生流量<br>3、没有进行NTLM认证，不会产生日志</p>
+<p>补充：</p>
+<p>Net-NTLMv2的格式<code>username::domain:challenge:HMAC-MD5:blob</code></p>
+<p>如果以<strong>普通用户</strong>权限执行InternalMonologue，同样能够获得当前用户的<strong>Net-NTLMv2</strong>数据包（注意是的Net-NTLMv2的数据包，不是Net-NTLMv1，因为没有权限去进行降级到Net-NTLMv1），通过hashcat进行破解，也能获得当前用户的明文口令</p>
+<p><img src="/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140718486.png" alt="image-20230125140718486"></p>
+<p>如上图，获得Net-NTLMv2的数据包如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yuyonghu01::PENTEST:1122334455667788:bf3d8d0c689b18f7fce20f605af5b689dadc3623865acfad:bf3d8d0c689b18f7fce20f605af5b689dadc3623865acfad</span><br></pre></td></tr></table></figure>
+
+<p>使用hashcat进行字典破解，参数如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -m 5600 hash.txt password.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/image-20230125140727018.png" alt="image-20230125140727018"></p>
+<p>同时找资料的时候也发现了很多优秀的文章，大家复习的时候可以进行相关的借鉴。</p>
+<p><a target="_blank" rel="noopener" href="https://www.likecs.com/show-305718374.html#sc=749.2799682617188">Net-NTLMv1的利用-爱码网 (likecs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/8562">NTLM认证相关攻击技巧（较全） - 先知社区 (aliyun.com)</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/01/13/%E5%90%8E%E5%8F%B0%E7%82%B9%E5%87%BB%E7%BB%95%E8%BF%87%E7%81%AB%E7%BB%92%E8%81%94%E7%BD%91%E6%A3%80%E6%B5%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -417,127 +565,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">注册表自启动基础</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-01-06 23:31:46 / 修改时间：23:32:25" itemprop="dateCreated datePublished" datetime="2023-01-06T23:31:46+08:00">2023-01-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="注册表自启动基础"><a href="#注册表自启动基础" class="headerlink" title="注册表自启动基础"></a>注册表自启动基础</h1><p>修改注册表实现开机子启动的方法的好处在于，全版本的windows系统都适用。</p>
-<p>而修改注册表的方法有两种，gui界面和命令行。</p>
-<h1 id="修改注册表的两种方法"><a href="#修改注册表的两种方法" class="headerlink" title="修改注册表的两种方法"></a>修改注册表的两种方法</h1><h2 id="手动修改注册表"><a href="#手动修改注册表" class="headerlink" title="手动修改注册表"></a>手动修改注册表</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">首先regedit调用注册表。</span><br><span class="line"></span><br><span class="line">打开注册表之后，找到如下位置HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</span><br><span class="line"></span><br><span class="line">以桌面上的1.exe文件为例，在run右侧新建一个字符串值，名字任取，我这里设置为aaa。首先查看1.exe文件的路径：</span><br><span class="line">C:\Users\ASUS\Desktop\1.exe</span><br><span class="line"></span><br><span class="line">然后双击aaa并修改它的值为：</span><br><span class="line">&quot;C:\Users\ASUS\Desktop\1.exe&quot; /start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106160655173.png" alt="image-20230106160655173"></p>
-<p>(图片虽然是txt，但是是一样的效果)</p>
-<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106160722409.png" alt="image-20230106160722409"></p>
-<h2 id="命令行修改注册表"><a href="#命令行修改注册表" class="headerlink" title="命令行修改注册表"></a>命令行修改注册表</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">通过命令行修改注册表的主要方法为用reg命令来改。</span><br><span class="line">可以在命令行输入以下命令查看帮助：</span><br><span class="line">reg /?</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106161009102.png" alt="image-20230106161009102"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我们需要用到的一个参数是：</span><br><span class="line">reg add</span><br><span class="line">这表示增加或修改。没有的就增加，已有的就覆盖（名称及类型）。该命令的语法及参数的含义可以在命令行中输入：</span><br></pre></td></tr></table></figure>
-
-<p><code>reg add /?</code></p>
-<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106161228642.png" alt="image-20230106161228642"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">这里我们需要注意的地方有两个，首先，路径是要被双引号包起来的，其次，双引号后面有一个空格，空格后面才是/`start`参数。</span><br><span class="line">构造语句如下：</span><br><span class="line"></span><br><span class="line">reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v bbb /t REG_SZ /d &quot;\&quot;C:\Users\ASUS\Desktop\1.exe\&quot; /start&quot; /f</span><br><span class="line"></span><br><span class="line">注意，/d参数后面的双引号内的全部内容是表示要写入bbb键的内容，而由于该参数会识别双引号，因此这里用了转义。同时，空格也是被包含在双引号内的，因此不必再单独处理。</span><br><span class="line">注意修改注册表最好以管理员身份运行命令提示符，以免出现权限不够的情况。</span><br></pre></td></tr></table></figure>
-
-<h2 id="查询注册表键值"><a href="#查询注册表键值" class="headerlink" title="查询注册表键值"></a>查询注册表键值</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">reg query</span><br><span class="line">用以上命令即可实现。当然如果不知道语法可以通过以下命令进行查询</span><br><span class="line">reg query /?</span><br></pre></td></tr></table></figure>
-
-<p>举个例子，查询刚刚写入的注册表中的键值</p>
-<p><code>reg query HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v bbb</code></p>
-<h1 id="隐藏注册表的创建"><a href="#隐藏注册表的创建" class="headerlink" title="隐藏注册表的创建"></a>隐藏注册表的创建</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>首先讲讲，隐藏注册表的原理吧。</p>
-<p>注册表键值名称经过特殊构造： 以”\0”作为开头，后面加上任意字符(不能为数字)</p>
-<p>对于Windows系统，”\0”(即0x0000)会被识别为字符串的结束符，所以在对该字符串读取的过程中，遇到开头的”\0”，会被解析成结束符，提前截断，导致读取错误</p>
-<p>而使用Native API设定注册表，需要使用结构体OBJECT_ATTRIBUTES作为参数， 指定读取的字符串长度</p>
-<p>只要长度设定正常，就能够读取正确的字符串，避免这个bug</p>
-<p>所以，我们可以通过Native API来创建这个特殊的注册表名</p>
-<p>更为重要的是，像regedit.exe和其他对注册表的操作，通常会调用Win32 API，这就导致该注册表无法被读取，也就实现了所谓的”隐藏”</p>
-<p>综上，创建方法为： 通过Native API创建一个以”\0”开头的键值</p>
-<p>[Native API_百度百科 (baidu.com)](<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Native">https://baike.baidu.com/item/Native</a> API/5877113?fr=aladdin)</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>实现部分我在网上看都是一些工具的使用，感觉不太行，其中有个工具已经找不到了。然后我问了一下新朋友（chatgpt</p>
-<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106171650419.png" alt="image-20230106171650419"></p>
-<p>算是加深了一些印象。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当然可以！首先，您可以使用本机API——RegCreateKeyEx来创建一个注册表键。该函数需要提供根键的句柄、以“\\0”开头的字符串作为键的名称以及相应的保护属性，例如访问权限等属性，以及用于指定所创建键的方式的标志。然后，您可以调用函数RegSetValueEx来设置键值，此函数需要您提供要设置的键的句柄，其值的名称以及具体的值，以在Windows注册表中隐藏键值。</span><br></pre></td></tr></table></figure>
-
-<p>随后又问了下手工创建</p>
-<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106192024145.png" alt="image-20230106192024145"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">完整步骤如下：</span><br><span class="line"></span><br><span class="line">1. 首先在你想要创建键值的注册表项下，创建一个新的字符串键值；</span><br><span class="line"></span><br><span class="line">2. 使用本机API函数RegSetValueExA()来创建以”\\0”开头的新键值，它的完整代码如下：</span><br><span class="line"></span><br><span class="line">// 函数声明</span><br><span class="line">LONG RegSetValueExA(</span><br><span class="line">HKEY hKey,</span><br><span class="line">LPCSTR lpValueName,</span><br><span class="line">DWORD Reserved,</span><br><span class="line">DWORD dwType,</span><br><span class="line">CONST BYTE *lpData,</span><br><span class="line">DWORD cbData</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">// 调用例子</span><br><span class="line">LONG res = RegSetValueExA(hKey, &quot;\\0MyStringKey&quot;, 0, REG_SZ, (const BYTE*)&quot;MyStringValue&quot;, strlen(&quot;MyStringValue&quot;));</span><br></pre></td></tr></table></figure>
-
-<p>(感觉不对呢，仅供参考吧)</p>
-<p>随后我还是找了一个工具，工具的实现原理和上面的一样。但是这个工具需要我们下载下来之后自行编译，链接如下</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/outflanknl/SharpHide">outflanknl/SharpHide: Tool to create hidden registry keys. (github.com)</a></p>
-<p>那么简单介绍一下工具的使用方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">若要创建隐藏的注册表（运行）项，请执行以下操作：</span><br><span class="line">SharpHide.exe action=create keyvalue=&quot;C:\Windows\Temp\Bla.exe&quot; </span><br><span class="line"></span><br><span class="line">若要创建带有参数的隐藏注册表（运行）项，请执行以下操作：</span><br><span class="line">SharpHide.exe action=create keyvalue=&quot;C:\Windows\Temp\Bla.exe&quot; arguments=&quot;arg1 arg2&quot;</span><br><span class="line"></span><br><span class="line">删除隐藏的注册表（运行）项：</span><br><span class="line">SharpHide.exe action=delete</span><br></pre></td></tr></table></figure>
-
-<p>开始实践，用命令添加了一个没参数的，</p>
-<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106231937737.png" alt="image-20230106231937737"></p>
-<p>现在来看注册表的里面是没有键值的</p>
-<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106232344606.png" alt="image-20230106232344606"></p>
-<p>现在重新启动一下，看看是不是成功写入启动项了</p>
-<p><img src="/2023/01/06/%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%87%AA%E5%90%AF%E5%8A%A8%E5%9F%BA%E7%A1%80/image-20230106232447518.png" alt="image-20230106232447518"></p>
-<p>成功了！</p>
-<p>最后值得一提的是，该工具也适用于Cobalt Strike的execute-assembly。</p>
-<p><a target="_blank" rel="noopener" href="https://www.freeaihub.com/post/59039.html">execute-assembly实现原理(非托管C++代码调用C#) 狐狸教程 (freeaihub.com)</a></p>
-<p>后续来进行进一步的研究</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -609,7 +636,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

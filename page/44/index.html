@@ -255,6 +255,80 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/02/17/%E4%BB%8A%E6%97%A5%E6%B8%97%E9%80%8F%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%88%E5%BF%83%E8%B7%B3%E5%8C%85-%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E7%9A%84%E5%9F%9F%E5%90%8D%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/17/%E4%BB%8A%E6%97%A5%E6%B8%97%E9%80%8F%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%88%E5%BF%83%E8%B7%B3%E5%8C%85-%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E7%9A%84%E5%9F%9F%E5%90%8D%EF%BC%89/" class="post-title-link" itemprop="url">今日渗透的知识（心跳包 访问不了的域名）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-02-17 17:14:36 / 修改时间：17:26:54" itemprop="dateCreated datePublished" datetime="2022-02-17T17:14:36+08:00">2022-02-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="今日渗透的知识（心跳包-访问不了的域名）"><a href="#今日渗透的知识（心跳包-访问不了的域名）" class="headerlink" title="今日渗透的知识（心跳包 访问不了的域名）"></a>今日渗透的知识（心跳包 访问不了的域名）</h1><h1 id="1-心跳包"><a href="#1-心跳包" class="headerlink" title="1.心跳包"></a>1.心跳包</h1><p>今天在挖洞的时候遇到的问题，有些时候什么都没点就莫名其妙抓了个包，</p>
+<p><img src="/2022/02/17/%E4%BB%8A%E6%97%A5%E6%B8%97%E9%80%8F%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%88%E5%BF%83%E8%B7%B3%E5%8C%85-%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E7%9A%84%E5%9F%9F%E5%90%8D%EF%BC%89/WPS%E5%9B%BE%E7%89%87%E7%BC%96%E8%BE%91.png" alt="WPS图片编辑"></p>
+<p>老师告诉我这是心跳包，然后就去学习了一下</p>
+<p><img src="/2022/02/17/%E4%BB%8A%E6%97%A5%E6%B8%97%E9%80%8F%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%88%E5%BF%83%E8%B7%B3%E5%8C%85-%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E7%9A%84%E5%9F%9F%E5%90%8D%EF%BC%89/image-20220217170949748.png" alt="image-20220217170949748"></p>
+<p><strong>心跳包</strong>就是在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AE%A2%E6%88%B7%E7%AB%AF/101081">客户端</a>和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E5%99%A8/100571">服务器</a>间定时通知对方自己状态的一个自己定义的命令字，按照一定的时间间隔发送，类似于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%BF%83%E8%B7%B3/2640820">心跳</a>，所以叫做心跳包。</p>
+<h2 id="1-1-作用"><a href="#1-1-作用" class="headerlink" title="1.1 作用"></a>1.1 作用</h2><p>网络中的接收和发送数据都是使用<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/SOCKET/281150">SOCKET</a>进行实现，但是如果此<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%A5%97%E6%8E%A5%E5%AD%97">套接字</a>已经断开，那发送数据和接收数据的时候就一定会有问题。可是如何判断这个套接字是否还可以使用呢？这个就需要在系统中创建心跳机制。其实TCP中已经为我们实现了一个叫做心跳的机制。如果你设置了心跳，那<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/TCP/33012">TCP</a>就会在一定的时间（比如你设置的是3秒钟）内发送你设置的次数的心跳（比如说2次），并且此信息不会影响你自己定义的协议。所谓“心跳”就是定时发送一个自定义的结构体（心跳包或心跳帧），让对方知道自己“在线”。 以确保链接的有效性。</p>
+<h1 id="2-访问不了的域名"><a href="#2-访问不了的域名" class="headerlink" title="2. 访问不了的域名"></a>2. 访问不了的域名</h1><p><img src="/2022/02/17/%E4%BB%8A%E6%97%A5%E6%B8%97%E9%80%8F%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%88%E5%BF%83%E8%B7%B3%E5%8C%85-%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E7%9A%84%E5%9F%9F%E5%90%8D%EF%BC%89/image-20220217171103673.png" alt="image-20220217171103673"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/02/10/WEB%E5%85%A5%E9%97%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -464,87 +538,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/02/03/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%8E%A5%E5%8F%A3%E9%99%90%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/03/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%8E%A5%E5%8F%A3%E9%99%90%E5%88%B6/" class="post-title-link" itemprop="url">短信验证码接口限制</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-03 23:57:42" itemprop="dateCreated datePublished" datetime="2022-02-03T23:57:42+08:00">2022-02-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-04 20:00:06" itemprop="dateModified" datetime="2022-03-04T20:00:06+08:00">2022-03-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="短信验证码接口限制"><a href="#短信验证码接口限制" class="headerlink" title="短信验证码接口限制"></a>短信验证码接口限制</h1><p>转载几个博客，方便日后查阅</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lovequitepcs/p/12901987.html">几个绕过短信验证码限制的漏洞挖掘 - QuiteX - 博客园 (cnblogs.com)</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44549063/article/details/113361313">(38条消息) 如何防止恶意攻击短信验证码接口_newxtc的博客-CSDN博客_如何防止短信验证码攻击</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.lx598.com/hangyedongtai/978.html">短信验证码安全常见逻辑漏洞_动力思维 (lx598.com)</a></p>
-<p>更新了几个接码平台</p>
-<p><a target="_blank" rel="noopener" href="http://www.z-sms.com/sms-receive-free.php?pho_num=15227789961&amp;1">http://www.z-sms.com/sms-receive-free.php?pho_num=15227789961&amp;1</a></p>
-<p><a target="_blank" rel="noopener" href="https://smsreceivefree.com/country/usa">https://smsreceivefree.com/country/usa</a></p>
-<p><a target="_blank" rel="noopener" href="https://jiemahao.com/sms/?phone=5">https://jiemahao.com/sms/?phone=5</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -616,7 +609,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

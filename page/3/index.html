@@ -255,6 +255,116 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/01/07/C%E8%AF%AD%E8%A8%802-%E6%95%B0%E7%BB%84%E3%80%81%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%E3%80%81%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E3%80%81%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81dll%E7%BC%96%E5%86%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/07/C%E8%AF%AD%E8%A8%802-%E6%95%B0%E7%BB%84%E3%80%81%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%E3%80%81%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E3%80%81%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81dll%E7%BC%96%E5%86%99/" class="post-title-link" itemprop="url">C语言2-数组、条件语句、参数传递、结构体、dll编写</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-07 23:56:23 / 修改时间：23:56:59" itemprop="dateCreated datePublished" datetime="2024-01-07T23:56:23+08:00">2024-01-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/miansha/" itemprop="url" rel="index"><span itemprop="name">-miansha</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="C语言2-数组、条件语句、参数传递、结构体、dll编写"><a href="#C语言2-数组、条件语句、参数传递、结构体、dll编写" class="headerlink" title="C语言2-数组、条件语句、参数传递、结构体、dll编写"></a>C语言2-数组、条件语句、参数传递、结构体、dll编写</h1><p>这些除了dll编写宝宝之前都学过捏，先看看把。看看他是怎么从面杀角度讲解的。</p>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>值得注意的是，cs里面的shellcode也是存在数组里面的。</p>
+<p>这里讲数组的定义啊，基础类的我就不记笔记了。之前的《c语言碎碎念》博客都有些。</p>
+<p>下面是一个数组，在内存中的形式，值得注意的是，数组最后会跟一个00，也就是如下图所示，数组中02是最后一个元素，然后跟了个0。用0结尾。</p>
+<p><img src="/2024/01/07/C%E8%AF%AD%E8%A8%802-%E6%95%B0%E7%BB%84%E3%80%81%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%E3%80%81%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E3%80%81%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81dll%E7%BC%96%E5%86%99/image-20240103000532874.png" alt="image-20240103000532874"></p>
+<h1 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h1><p>这个也不多说好吧，如果他讲了免杀相关的我就写，没得话有需要可以看看我不久之前的博客。</p>
+<h2 id="if"><a href="#if" class="headerlink" title="if"></a>if</h2><p>1.底层反汇编与正向代码逻辑相反。比如说一个是i&gt;j，那底层的汇编就是jle，小于等于则跳转，大于则不跳转，</p>
+<h2 id="elseif和if的区别"><a href="#elseif和if的区别" class="headerlink" title="elseif和if的区别"></a>elseif和if的区别</h2><p>就是看jle跳转之后，跳转之后的地址的上一行是否有jmp语句，如果有，则是ifelse语句。</p>
+<p>如果要看有几个elseif，那么就直接看有几个jmp就行。<br>if…else  if..else</p>
+<h2 id="while"><a href="#while" class="headerlink" title="while"></a>while</h2><p>这个的底层代码是是je，如果相等则跳转。他的底层逻辑和代码的逻辑也是相反的。</p>
+<h2 id="do-while"><a href="#do-while" class="headerlink" title="do-while"></a>do-while</h2><p>至少会执行循环体一次</p>
+<h1 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h1><p>参数传递的本质：将上层函数的变量，或者表达式的值复制一份，传递给下层函数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> i = function();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">function</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    x = x +<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">2</span>;</span><br><span class="line">    function(x);</span><br><span class="line">    <span class="comment">//看过我之前的博客就知道，这个x还是2.</span></span><br><span class="line">    <span class="comment">//在vc中看堆栈，可以看到两个根本不是一个地址</span></span><br><span class="line">    <span class="comment">//以后免杀还要专门弄个虚拟机</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h1><p>结构体有个好处就是可以反复利用。</p>
+<p>q1</p>
+<p><img src="/2024/01/07/C%E8%AF%AD%E8%A8%802-%E6%95%B0%E7%BB%84%E3%80%81%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%E3%80%81%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E3%80%81%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81dll%E7%BC%96%E5%86%99/image-20240107221844568.png" alt="image-20240107221844568"></p>
+<p>为什么这两个结构体都是同样的内部变量，但是第一个大小是8第二个大小是12呢？<br>结构体对齐，n为字节对齐，默认为8，可填1、2、4、8，如果n的值比sizeof()得出值小，则已n的值对齐，否则以sizeof()的值对齐，结构体的总大小必须是其最大内部成员的整数倍<br>那怎么改对齐呢，需要使用以下关键字<code>#pragma pack(n)</code>，其中的n就是以n字节对齐，将这个关键字加在定义结构体的struct关键字前面（然后所有的结构体都已这个n对齐）</p>
+<p><img src="/2024/01/07/C%E8%AF%AD%E8%A8%802-%E6%95%B0%E7%BB%84%E3%80%81%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%E3%80%81%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E3%80%81%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81dll%E7%BC%96%E5%86%99/image-20240107223101109.png" alt="image-20240107223101109"></p>
+<h1 id="dll编写"><a href="#dll编写" class="headerlink" title="dll编写"></a>dll编写</h1><h2 id="多线程调试dll方式编译和默认编译的区别"><a href="#多线程调试dll方式编译和默认编译的区别" class="headerlink" title="多线程调试dll方式编译和默认编译的区别"></a>多线程调试dll方式编译和默认编译的区别</h2><p>怎么改这个呢，ctest属性页-c/c++-代码生成-运行库</p>
+<p>1.默认的小，多线程的大<br>2.默认的编译，不会将当前程序的dll打包进去，而多线程dll也不会把你的dll打包进去。<br><img src="/2024/01/07/C%E8%AF%AD%E8%A8%802-%E6%95%B0%E7%BB%84%E3%80%81%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%E3%80%81%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E3%80%81%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81dll%E7%BC%96%E5%86%99/image-20240107225929798.png" alt="image-20240107225929798"><br>所以使用上图中多线程这种方式，将所有的dll打宝进去，就不会出现各种错误了。</p>
+<p>所以基本上都用多线程就行。</p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p><img src="/2024/01/07/C%E8%AF%AD%E8%A8%802-%E6%95%B0%E7%BB%84%E3%80%81%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%E3%80%81%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E3%80%81%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81dll%E7%BC%96%E5%86%99/image-20240107230403739.png" alt="image-20240107230403739"></p>
+<p>而dll里面那些api，都是3环东东西，然后一层一层调用，进入到0环也就是内核去实现功能</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0环：内核层  .sys</span><br><span class="line">3环：用户层  .exe</span><br></pre></td></tr></table></figure>
+
+<h2 id="编写"><a href="#编写" class="headerlink" title="编写"></a>编写</h2><p><img src="/2024/01/07/C%E8%AF%AD%E8%A8%802-%E6%95%B0%E7%BB%84%E3%80%81%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%E3%80%81%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E3%80%81%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81dll%E7%BC%96%E5%86%99/image-20240107232804445.png" alt="image-20240107232804445"></p>
+<p>1.一开始的程序是不会调用所有dll的，如果需要调用的话，需要用LoadLibrary这个函数来调用</p>
+<h2 id="加载的地一种方式"><a href="#加载的地一种方式" class="headerlink" title="加载的地一种方式"></a>加载的地一种方式</h2><p><img src="/2024/01/07/C%E8%AF%AD%E8%A8%802-%E6%95%B0%E7%BB%84%E3%80%81%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%E3%80%81%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E3%80%81%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81dll%E7%BC%96%E5%86%99/image-20240107234543458.png" alt="image-20240107234543458"></p>
+<p><img src="/2024/01/07/C%E8%AF%AD%E8%A8%802-%E6%95%B0%E7%BB%84%E3%80%81%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%E3%80%81%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E3%80%81%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81dll%E7%BC%96%E5%86%99/image-20240107234205370.png" alt="image-20240107234205370"></p>
+<p><img src="/2024/01/07/C%E8%AF%AD%E8%A8%802-%E6%95%B0%E7%BB%84%E3%80%81%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%E3%80%81%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E3%80%81%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81dll%E7%BC%96%E5%86%99/image-20240107234215510.png" alt="image-20240107234215510"></p>
+<p>上面这个东西，也就是dll被加载的时候就会弹窗</p>
+<h2 id="加载的第二种方式"><a href="#加载的第二种方式" class="headerlink" title="加载的第二种方式"></a>加载的第二种方式</h2><p>用rundll32来调用，</p>
+<p><img src="/2024/01/07/C%E8%AF%AD%E8%A8%802-%E6%95%B0%E7%BB%84%E3%80%81%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%E3%80%81%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E3%80%81%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81dll%E7%BC%96%E5%86%99/image-20240107234342834.png" alt="image-20240107234342834"></p>
+<p>但是呢，这个东西被杀软查的非常严格，除非你写的dll是面纱的，要不然不行。</p>
+<h2 id="procexp-exe"><a href="#procexp-exe" class="headerlink" title="procexp.exe"></a>procexp.exe</h2><p>这个东西可以看所有进程加载的dll，而且也是微软官方的</p>
+<h2 id="remotedll"><a href="#remotedll" class="headerlink" title="remotedll"></a>remotedll</h2><p>这个是个可以注入dll的东西，32位的就只能用32位的dll。</p>
+<h1 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h1><p>汇编指令扩展：<br>shl  右移指令</p>
+<p>当一个dll被加载的时候，是不能对这个dll进行读写的</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/01/02/C%E8%AF%AD%E8%A8%801-%E7%A9%BA%E5%87%BD%E6%95%B0%E3%80%81%E8%A3%B8%E5%87%BD%E6%95%B0%E3%80%81%E8%B0%83%E7%94%A8%E9%A2%84%E5%AE%9A%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6%E3%80%81%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F-%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -432,108 +542,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/" class="post-title-link" itemprop="url">汇编2-标志寄存器、jcc语句、堆栈、堆栈图</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-12-29 16:26:40 / 修改时间：16:27:19" itemprop="dateCreated datePublished" datetime="2023-12-29T16:26:40+08:00">2023-12-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/miansha/" itemprop="url" rel="index"><span itemprop="name">-miansha</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="汇编2-标志寄存器、jcc语句、堆栈、堆栈图"><a href="#汇编2-标志寄存器、jcc语句、堆栈、堆栈图" class="headerlink" title="汇编2-标志寄存器、jcc语句、堆栈、堆栈图"></a>汇编2-标志寄存器、jcc语句、堆栈、堆栈图</h1><h1 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h1><p>EIP寄存器是记录程序运行到哪个寄存器就指向哪个寄存器。</p>
-<p>cmp语句是用来看前后两个参数的值是否相等的，当然可以指定某个内存中的数据进行比较。比较结果会放到Zf里面去，也就是下图所示的寄存器中。</p>
-<p><img src="/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225203726.png" alt="image-20231228225203726"></p>
-<p>0XCCCCCCCC 在汇编中是int 3</p>
-<h2 id="od"><a href="#od" class="headerlink" title="od"></a>od</h2><p>F2  在OD的反汇编视图中使用F2进行下断<br> F4  程序执行到当前光标位置<br> F5  缩小、还原当前窗口<br> F7  单步步入，进入函数内,跟进到CALL地址处<br> F8  单步步过，越过函数实现，不会进入CALL地址处<br> F9  直接运行程序，遇到断点程序暂停</p>
-<h1 id="标志寄存器"><a href="#标志寄存器" class="headerlink" title="标志寄存器"></a>标志寄存器</h1><p><img src="/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225350448.png" alt="image-20231228225350448"></p>
-<p><img src="/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225609644.png" alt="image-20231228225609644"></p>
-<p>下面这张图是eflag寄存器需要我们掌握的位数，一般都有八个，下面是一些介绍。</p>
-<p><img src="/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228225849576.png" alt="image-20231228225849576"></p>
-<p><img src="/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228230924204.png" alt="image-20231228230924204"></p>
-<h1 id="堆栈"><a href="#堆栈" class="headerlink" title="堆栈"></a>堆栈</h1><p><img src="/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231228231149048.png" alt="image-20231228231149048">哈</p>
-<p>上图，一个exe程序可以分为这几个区域，<br>其中代码区就是存储一些代码，他是可读可可执行（rx）权限<br>堆，这个里面就是c语言里面的malloc函数申请的内存空间就是申请在这里面的。</p>
-<h2 id="ESP-EBP"><a href="#ESP-EBP" class="headerlink" title="ESP EBP"></a>ESP EBP</h2><p>esp和ebp分别是栈顶和栈底，值得注意的是，这个堆栈是从高字节往第四节存储的。</p>
-<p>在进入程序和退出程序的时候，esp和ebp的值是不能变的，也就是堆栈平衡。</p>
-<h1 id="jcc语句"><a href="#jcc语句" class="headerlink" title="jcc语句"></a>jcc语句</h1><p>jmp，跳转到指定地址 硬编码：e9<br>jmp是不会引起esp和ebp的变化的。（其本质就是修改EIP，但是你自己直接mov eip是不行的）</p>
-<p>call，跳转到指定地址并返回到当前指令的下一行（调用函数之后回来），硬编码 e8<br>call是会涉及到堆栈的变化的，esp提升4字节，将返回地址压入堆栈。<br>值得注意的是，由于esp和ebp是从高字节往低字节存储的，所以提升4也就是减4.</p>
-<p>ret，返回到指定地址（和retn是一个东西）<br>ret会esp会降低4字节，并且会从堆栈中提出返回地址传给eip</p>
-<p>cmp指令，比较两 个操作数是否相等，如果相等则ZF为1（但是不能比较两个立即数）</p>
-<p>test指令，对两个操作数进行相与操作，通常都是用于判断一个寄存器是否为0，test eax eax</p>
-<p>而jcc语句大多都是通过不同的情况，进行跳转</p>
-<p><img src="/2023/12/29/%E6%B1%87%E7%BC%962-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E3%80%81jcc%E8%AF%AD%E5%8F%A5%E3%80%81%E5%A0%86%E6%A0%88%E3%80%81%E5%A0%86%E6%A0%88%E5%9B%BE/image-20231229151423853.png" alt="image-20231229151423853"></p>
-<h1 id="堆栈-1"><a href="#堆栈-1" class="headerlink" title="堆栈"></a>堆栈</h1><h2 id="压入数据"><a href="#压入数据" class="headerlink" title="压入数据"></a>压入数据</h2><p>压入数据一般就可以大致分为下面两个</p>
-<p>1.先把数据存到堆栈-4的那个地址，随后将堆栈提升4字节，从而存入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">代码实现如下：</span><br><span class="line">mov dword ptr ds:[0x19FF70],0x123456</span><br><span class="line">sub esp,0x4</span><br></pre></td></tr></table></figure>
-
-
-
-<p>2.也可以先提栈再存入。</p>
-<h2 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h2><p>可以直接从栈顶和栈底来读取数据，esp和ebp</p>
-<h2 id="移除数据"><a href="#移除数据" class="headerlink" title="移除数据"></a>移除数据</h2><p>和压入数据差不多，可以先压栈再去除数据，或者先取出数据之后在压栈。</p>
-<p>当然上述指令都不常用，我们一般用push和pop，只不过讲解上面的内容是方便理解原理。</p>
-<h2 id="push"><a href="#push" class="headerlink" title="push"></a>push</h2><p>向堆栈中存入数据，只有一个参数，那个参数就是数据。</p>
-<h2 id="pop"><a href="#pop" class="headerlink" title="pop"></a>pop</h2><p>压栈之后将数据存入寄存器中，只有一个参数，那个参数就是寄存器。</p>
-<h1 id="堆栈图"><a href="#堆栈图" class="headerlink" title="堆栈图"></a>堆栈图</h1><p>stos指令，循环执行将eax的值存储到[edi]指定的内存，执行ecx中存储的次数，每执行一次ecx的值减1。</p>
-<p>保留环境：esp ebp在进入函数的时候是什么样，出来的时候就是什么样子。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -605,7 +613,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
