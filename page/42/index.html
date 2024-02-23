@@ -255,6 +255,86 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/03/17/%E8%B7%A8%E5%9F%9F%E6%BC%8F%E6%B4%9E-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/17/%E8%B7%A8%E5%9F%9F%E6%BC%8F%E6%B4%9E-md/" class="post-title-link" itemprop="url">跨域漏洞.md</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-03-17 16:58:29 / 修改时间：16:59:06" itemprop="dateCreated datePublished" datetime="2022-03-17T16:58:29+08:00">2022-03-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="跨域漏洞"><a href="#跨域漏洞" class="headerlink" title="跨域漏洞"></a>跨域漏洞</h1><h1 id="cors跨域漏洞"><a href="#cors跨域漏洞" class="headerlink" title="cors跨域漏洞"></a>cors跨域漏洞</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>●1.假设用户登陆一个含有CORS配置网站<a target="_blank" rel="noopener" href="http://vuln.com,同时又访问了攻击者提供的一个链接http//evil.com%E3%80%82">http://vuln.com，同时又访问了攻击者提供的一个链接http://evil.com。</a></p>
+<p>●<a target="_blank" rel="noopener" href="http://2.evil.com的网站向http//vuln.com%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99%E5%8F%91%E8%B5%B7%E8%AF%B7%E6%B1%82%E8%8E%B7%E5%8F%96%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%83%BD%E5%90%A6%E6%8E%A5%E6%94%B6%E4%BF%A1%E6%81%AF%E5%8F%96%E5%86%B3%E4%BA%8Ehttp://vuln.com%E7%9A%84%E9%85%8D%E7%BD%AE%E3%80%82">http://2.evil.com的网站向http://vuln.com这个网站发起请求获取敏感数据，浏览器能否接收信息取决于http://vuln.com的配置。</a></p>
+<p>●3.如果<a target="_blank" rel="noopener" href="http://vuln.com配置了access-control-allow-origin头且为预期,那么允许接收,否则浏览器会因为同源策略而不接收/">http://vuln.com配置了Access-Control-Allow-Origin头且为预期，那么允许接收，否则浏览器会因为同源策略而不接收</a></p>
+<h2 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- cors.html --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">title</span>&gt;</span>cors exp<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">cors</span>(<span class="params"></span>) </span>&#123;  </span></span><br><span class="line"><span class="javascript"><span class="keyword">var</span> xhttp = <span class="keyword">new</span> XMLHttpRequest();  </span></span><br><span class="line"><span class="javascript">xhttp.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;    </span></span><br><span class="line"><span class="javascript">    <span class="keyword">if</span> (<span class="built_in">this</span>.status == <span class="number">200</span>) &#123;    </span></span><br><span class="line"><span class="javascript">    alert(<span class="built_in">this</span>.responseText);  </span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.getElementById(<span class="string">&quot;demo&quot;</span>).innerHTML = <span class="built_in">this</span>.responseText;    </span></span><br><span class="line"><span class="javascript">    &#125;  </span></span><br><span class="line"><span class="javascript">&#125;;  </span></span><br><span class="line"><span class="javascript">xhttp.open(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;http://www.baidu.com&quot;</span>);  </span></span><br><span class="line"><span class="javascript">xhttp.withCredentials = <span class="literal">true</span>;  </span></span><br><span class="line"><span class="javascript">xhttp.send();</span></span><br><span class="line"><span class="javascript">&#125;</span></span><br><span class="line"><span class="javascript">cors();</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45605352/article/details/119245952">(54条消息) CORS和JSONP跨域漏洞_DDao_blog的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41598660/article/details/106050957">(54条消息) Jsonp跨域漏洞浅析_努力的学渣’#的博客-CSDN博客_jsonp跨域漏洞</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sevck/p/9035422.html">CORS跨域资源共享漏洞 - sevck - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/204023.html">CORS（跨域资源共享）错误配置漏洞的高级利用 - FreeBuf网络安全行业门户</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41679427/article/details/97536860">(54条消息) CORS跨域漏洞的学习_CanMeng’Blog的博客-CSDN博客_跨域漏洞</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/152339">JSONP和CORS跨站跨域读取资源的漏洞利用（附带EXP） - 安全客，安全资讯平台 (anquanke.com)</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/03/13/%E5%85%B3%E4%BA%8Ezip%E4%B8%8A%E4%BC%A0%E7%82%B9%E7%9A%84%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -411,122 +491,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/03/04/JWT%E6%8A%80%E6%9C%AF%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8Etoken%E7%9A%84%E9%89%B4%E6%9D%83%E6%9C%BA%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/04/JWT%E6%8A%80%E6%9C%AF%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8Etoken%E7%9A%84%E9%89%B4%E6%9D%83%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">JWT技术——基于token的鉴权机制</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-03-04 20:12:39 / 修改时间：20:28:40" itemprop="dateCreated datePublished" datetime="2022-03-04T20:12:39+08:00">2022-03-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>今天挖洞 问了jwt技术</p>
-<h1 id="JWT技术——基于token的鉴权机制"><a href="#JWT技术——基于token的鉴权机制" class="headerlink" title="JWT技术——基于token的鉴权机制"></a>JWT技术——基于token的鉴权机制</h1><h1 id="1-基本流程"><a href="#1-基本流程" class="headerlink" title="1.基本流程"></a>1.基本流程</h1><p>JWT技术（基于token的鉴权机制）</p>
-<p>流程上是这样的：</p>
-<p>用户使用用户名密码来请求服务器</p>
-<p>服务器进行验证用户的信息</p>
-<p>服务器通过验证后生成一个token发送给用户</p>
-<p>客户端存储token，并在每次请求时附送上这个token值</p>
-<p>服务端验证token值，并返回数据</p>
-<h1 id="2-与session的区别"><a href="#2-与session的区别" class="headerlink" title="2.与session的区别"></a>2.与session的区别</h1><p> <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=JWT&spm=1001.2101.3001.7020">JWT</a>和Session技术的根本区别在于，Session是把访问者信息存储在服务器端的，而JWT是把信息存储在客户端。</p>
-<h1 id="3-弊端"><a href="#3-弊端" class="headerlink" title="3.弊端"></a>3.弊端</h1><p> JWT方式，每次请求都要带上token，服务器每次都要解密出token的信息，这会让服务器有一些计算压力。而且，如果客户端的信息比较多，每次HTTP请求携带的数据就比较多。还有一点，JWT在客户端的存储，不能包含敏感信息，否则很容易被泄露，而且不建议在客户端存储会变动的信息，否则可能出现一致性问题。</p>
-<h1 id="4-JWT长什么样？"><a href="#4-JWT长什么样？" class="headerlink" title="4.JWT长什么样？"></a>4.JWT长什么样？</h1><pre><code>JWT是由三段信息（header.payload.signature）构成的，将这三段信息文本用英文句号链接一起就构成了JWT字符串。例如：
-</code></pre>
-<p>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ</p>
-<pre><code>可以在 https://jwt.io/ 这个网站，把token解析出来。
-</code></pre>
-<h1 id="5-构成"><a href="#5-构成" class="headerlink" title="5.构成"></a>5.构成</h1><p>JWT的构成</p>
-<pre><code>第一部分我们称它为头部（header)，
-
-第二部分我们称其为承载（payload, 类似于飞机上承载的物品)，
-
-第三部分是签证（signature)。
-</code></pre>
-<h2 id="5-1header"><a href="#5-1header" class="headerlink" title="5.1header"></a>5.1header</h2> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">完整的头部就像下面这样的JSON：</span><br><span class="line"></span><br><span class="line">&#123;undefined</span><br><span class="line"></span><br><span class="line">  &#x27;typ&#x27;: &#x27;JWT&#x27;,</span><br><span class="line"></span><br><span class="line">  &#x27;alg&#x27;: &#x27;HS256&#x27;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">即声明 类型 和 加密的算法。然后将头部进行base64加密，就构成了header部分。</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-2playload"><a href="#5-2playload" class="headerlink" title="5.2playload"></a>5.2playload</h2><p>承载就是存放有效信息的地方。这个名字像是指飞机上承载的货品，这些有效信息包含三个部分声明（Claims）</p>
-<pre><code>标准中注册的声明
-
-公共的声明
-
-私有的声明
-</code></pre>
-<p> 标准中注册的声明 (建议但不强制使用) ：</p>
-<p>iss: jwt签发者</p>
-<p>sub: jwt所面向的用户</p>
-<p>aud: 接收jwt的一方</p>
-<p>exp: jwt的过期时间，这个过期时间必须要大于签发时间</p>
-<p>nbf: 定义在什么时间之前，该jwt都是不可用的.</p>
-<p>iat: jwt的签发时间</p>
-<p>jti: jwt的唯一身份标识，主要用来作为一次性token，从而回避重放攻击。</p>
-<h2 id="5-3signature"><a href="#5-3signature" class="headerlink" title="5.3signature"></a>5.3signature</h2><p>signature是一个签证信息，它会用到前面的header、payload信息，以及一个密匙（secret）。</p>
-<p>即，这个部分需要 base64加密后的header 和 base64加密后的payload，使用 英文句号 连接组成的字符串，然后通过header中声明的加密方式，进行加盐secret组合加密，然后就构成了jwt的第三部分signature。</p>
-<h1 id="6-攻击思路"><a href="#6-攻击思路" class="headerlink" title="6.攻击思路"></a>6.攻击思路</h1><p>1.token的存储一般有两种方式，一种是存在localStorage中，二是存在cookie中，这两种存储方式都有问题，存在localStorage中有很大的安全隐患，容易造成XSS攻击，因为跨站脚本可以读取localStorage里面的信息，如果存在cookie中，又容易造成CSRF攻击，这个是由于Cookie存储的安全性造成的（可以使用XSRF Token来解决这个问题）。</p>
-<p>2.失效和刷新问题，token肯定要有失效时间，而且如果用户一直处于活跃状态，则要考虑能自动刷新token。</p>
-<p>3.重放攻击，由于每次都传输token，如果这个token被窃取，那么可以在任何一个地方使用。特别的，如果这个token过期时间很长的话，那么它就相当于一个在很长时间内有效的钥匙。（可以考虑每次请求都重新生成一个token并存储一段时间防重放，但是这样又会遇到存储问题和并发刷新的问题，参见：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/22693223%EF%BC%89">https://zhuanlan.zhihu.com/p/22693223）</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaozi/p/12031111.html">JWT攻击手册：如何入侵你的Token - Bypass - 博客园 (cnblogs.com)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/41/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><span class="page-number current">42</span><a class="page-number" href="/page/43/">43</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/43/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/41/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><span class="page-number current">42</span><a class="page-number" href="/page/43/">43</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/43/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -594,7 +562,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

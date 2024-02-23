@@ -255,6 +255,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/02/24/ProxyPoolxSocks%E4%B8%8EFofa-hack%E9%85%8D%E5%90%88%E8%87%AA%E5%BB%BA%E4%BB%A3%E7%90%86%E6%B1%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/02/24/ProxyPoolxSocks%E4%B8%8EFofa-hack%E9%85%8D%E5%90%88%E8%87%AA%E5%BB%BA%E4%BB%A3%E7%90%86%E6%B1%A0/" class="post-title-link" itemprop="url">ProxyPoolxSocks与Fofa-hack配合自建代理池</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-02-24 01:11:07 / 修改时间：01:11:52" itemprop="dateCreated datePublished" datetime="2024-02-24T01:11:07+08:00">2024-02-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">-tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ProxyPoolxSocks与Fofa-hack配合自建代理池"><a href="#ProxyPoolxSocks与Fofa-hack配合自建代理池" class="headerlink" title="ProxyPoolxSocks与Fofa-hack配合自建代理池"></a><a target="_blank" rel="noopener" href="https://github.com/Anyyy111/ProxyPoolxSocks">ProxyPoolxSocks</a>与<a target="_blank" rel="noopener" href="https://github.com/Cl0udG0d/Fofa-hack">Fofa-hack</a>配合自建代理池</h1><p>两个工具</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Anyyy111/ProxyPoolxSocks">Anyyy111/ProxyPoolxSocks: ☁️Socks代理池服务端自动化搭建工具☁️ (github.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Cl0udG0d/Fofa-hack">Cl0udG0d/Fofa-hack: 非付费会员，fofa数据采集工具 (github.com)</a></p>
+<p>这两天项目天天封我ip，草，他还是一堆域名一起封禁的，我整个公司的站都进不去了。电脑上的全局代理工具也代理不了burp，Proxifier虽然可以代理burp但是我没有那么多代理啊，所以决定研究一下代理池。</p>
+<h1 id="先抓代理"><a href="#先抓代理" class="headerlink" title="先抓代理"></a>先抓代理</h1><p>抓代理，很简单，给一个fofa语法先</p>
+<p><code>protocol==&quot;socks5&quot; &amp;&amp; &quot;Version:5 Method:No Authentication(0x00)&quot; &amp;&amp; after=&quot;2023-11-23&quot; &amp;&amp; country=&quot;CN&quot;</code></p>
+<p>然后用fofahack来抓代理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fofa-hack.exe --keyword &quot;protocol==&#x27;socks5&#x27; &amp;&amp; &#x27;Version:5 Method:No Authentication(0x00)&#x27; &amp;&amp; after=&#x27;2023-11-23&#x27; &amp;&amp; country=&#x27;CN&#x27;&quot; --authorization &quot;fofatoken&quot;</span><br><span class="line"> --endcount 5000 --output OUTPUT --timesleep 2</span><br></pre></td></tr></table></figure>
+
+<p>这里贴一下参数吧</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">-h, --help            show this help message and exit</span><br><span class="line">--keyword KEYWORD, -k KEYWORD</span><br><span class="line">                      fofa搜索关键字</span><br><span class="line">--inputfile INPUTFILE, -i INPUTFILE</span><br><span class="line">                      指定文件,从文件中批量读取fofa语法</span><br><span class="line">--base BASE, -b BASE  以base64的形式输入关键字 -b InRoaW5rcGhwIg==</span><br><span class="line">--timesleep TIMESLEEP, -t TIMESLEEP</span><br><span class="line">                      爬取每一页等待秒数,防止IP被Ban,默认为3</span><br><span class="line">--timeout TIMEOUT, -to TIMEOUT</span><br><span class="line">                      爬取每一页的超时时间,默认为180秒</span><br><span class="line">--endcount ENDCOUNT, -e ENDCOUNT</span><br><span class="line">                      爬取结束数量</span><br><span class="line">--level LEVEL, -l LEVEL</span><br><span class="line">                      爬取等级: 1-3 ,数字越大内容越详细,默认为 1</span><br><span class="line">--output OUTPUT, -o OUTPUT</span><br><span class="line">                      输出格式:txt、json,默认为txt</span><br><span class="line">--outputname OUTPUT, -on OUTPUTNAME</span><br><span class="line">                      指定输出文件名，默认为fofaHack</span><br><span class="line">--fuzz, -f            关键字fuzz参数,增加内容获取粒度</span><br><span class="line">--proxy PROXY         指定代理，代理格式 --proxy &#x27;127.0.0.1:7890&#x27;</span><br><span class="line">--authorization AUTHORIZATION</span><br><span class="line">                      指定Authorization值</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/02/24/ProxyPoolxSocks%E4%B8%8EFofa-hack%E9%85%8D%E5%90%88%E8%87%AA%E5%BB%BA%E4%BB%A3%E7%90%86%E6%B1%A0/image-20240223235634246.png" alt="image-20240223235634246"></p>
+<p>好，反正现在已经抓下来了。准备搭建代理池</p>
+<h1 id="搭建代理池"><a href="#搭建代理池" class="headerlink" title="搭建代理池"></a>搭建代理池</h1><h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><p>先去下一下吧<a target="_blank" rel="noopener" href="https://github.com/Anyyy111/ProxyPoolxSocks">Anyyy111/ProxyPoolxSocks: ☁️Socks代理池服务端自动化搭建工具☁️ (github.com)</a></p>
+<p>然后这个分为服务端和客户端，我们这里把服务端搭建在vps上面，</p>
+<p>这里的代理前面需要加一个<code>socks://</code>，我这里写了个py脚本，来批量让抓取的代理地址前面加上这个文本，脚本如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 读取原始txt文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;fofaHack.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    lines = file.readlines()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理每一行，添加&quot;socks://&quot;</span></span><br><span class="line">new_lines = [<span class="string">&#x27;socks://&#x27;</span> + line.strip() <span class="keyword">for</span> line <span class="keyword">in</span> lines]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将处理后的内容写入新的txt文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;output_file.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    file.write(<span class="string">&#x27;\n&#x27;</span>.join(new_lines))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;处理完成，请查看output_file.txt文件。&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/02/24/ProxyPoolxSocks%E4%B8%8EFofa-hack%E9%85%8D%E5%90%88%E8%87%AA%E5%BB%BA%E4%BB%A3%E7%90%86%E6%B1%A0/image-20240224000441767.png" alt="image-20240224000441767"></p>
+<p>代理池从github下载下来之后，直接传到vps上面，然后里面的node.txt文件里面填写我们刚刚弄的代理地址。</p>
+<p>我草我服了，这也能报错啊，<br><img src="/2024/02/24/ProxyPoolxSocks%E4%B8%8EFofa-hack%E9%85%8D%E5%90%88%E8%87%AA%E5%BB%BA%E4%BB%A3%E7%90%86%E6%B1%A0/image-20240224001016240.png" alt="image-20240224001016240"><br>这里我弄了三千多个节点进去，然后报错了，待我把代码放本地来调试一下。。。。</p>
+<p>好，改好了，把当前文件夹下面的都getaddress.py的第51行代码改成如下内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    parts = node.split(<span class="string">&#x27;socks://&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;:&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(parts) &gt;= <span class="number">2</span>:</span><br><span class="line">        addr, port = parts[:<span class="number">2</span>]</span><br><span class="line">        <span class="comment"># 执行接下来的操作</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;无法正确解析地址和端口&quot;</span>)</span><br><span class="line"><span class="keyword">except</span> IndexError:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;无法正确解析地址和端口&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/02/24/ProxyPoolxSocks%E4%B8%8EFofa-hack%E9%85%8D%E5%90%88%E8%87%AA%E5%BB%BA%E4%BB%A3%E7%90%86%E6%B1%A0/image-20240224002514322.png" alt="image-20240224002514322"><br>改成这样<br><img src="/2024/02/24/ProxyPoolxSocks%E4%B8%8EFofa-hack%E9%85%8D%E5%90%88%E8%87%AA%E5%BB%BA%E4%BB%A3%E7%90%86%E6%B1%A0/image-20240224002524734.png" alt="image-20240224002524734"></p>
+<p>这样就好了，现在我们把vps上面的服务端搭建起来</p>
+<p>直接<code>python run.py</code>，注意必须要python3.7版本已上。。这centos yum下载的是2的版本，要改版本可以参考此博客<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yunwangjun-python-520/p/11288406.html">centos7安装python3.7 - Mr_Yun - 博客园 (cnblogs.com)</a><br>又改了一万年</p>
+<p>然后直接运行run.py就行<br><img src="/2024/02/24/ProxyPoolxSocks%E4%B8%8EFofa-hack%E9%85%8D%E5%90%88%E8%87%AA%E5%BB%BA%E4%BB%A3%E7%90%86%E6%B1%A0/image-20240224010141686.png" alt="image-20240224010141686"></p>
+<p>好力！</p>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>可以在文件夹Client-check里面的client.py来检测一下可用性</p>
+<p>或者直接用proxifier即可。但是很多抓取到的ip其实是不能用的，不过夜无所谓，这样就好了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/02/19/%E9%92%93%E9%B1%BC%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -640,98 +739,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">shiro550漏洞分析</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-02-07 00:10:28 / 修改时间：00:11:03" itemprop="dateCreated datePublished" datetime="2024-02-07T00:10:28+08:00">2024-02-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="shiro550漏洞分析"><a href="#shiro550漏洞分析" class="headerlink" title="shiro550漏洞分析"></a>shiro550漏洞分析</h1><p>今天来仔细研究一下这个漏洞</p>
-<p>环境搭建暂时就不说了，这个可以在网上找教程，直接开始漏洞分析，祝福。</p>
-<h1 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h1><h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><p>漏洞产生点在<code>CookieRememberMeManager</code>该位置，来看到<code>rememberSerializedIdentity</code>方法。</p>
-<p><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206134650560.png" alt="image-20240206134650560"><br>在此处，对序列化的字节数组进行base64编码，并将编码结果设置为cookie值。那我们看看是什么地方调用了这个方法.</p>
-<p><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206140748579.png" alt="image-20240206140748579"><br>点这个2个用法,这样就可以看到是在哪里用了这个方法.<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206140835289.png" alt="image-20240206140835289"><br>可以看到是AbstractRememberMeManager类里面调用了这个方法</p>
-<p><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206141831432.png" alt="image-20240206141831432"><br>还可以用ctrl+alt+h来看是哪些东西调用了这个方法<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206144038527.png" alt="image-20240206144038527">在这里会发现<code>rememberIdentity</code>方法会被<code>onSuccessfulLogin</code>方法给调用，跟踪到这一步，就看到了<code>onSuccessfulLogin</code>登录成功的方法。</p>
-<p><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206144121521.png" alt="image-20240206144121521"></p>
-<p>当登录成功后会调用<code>AbstractRememberMeManager.onSuccessfulLogin</code>方法，该方法主要实现了生成加密的<code>RememberMe Cookie</code>,然后将<code>RememberMe Cookie</code>设置为用户的Cookie值。在前面我们分析的<code>rememberSerializedIdentity</code>方法里面去实现了。</p>
-<p>接下来，我们在这个登陆函数这里打个断点，进行分析，正向的。<br>开始环境，然后输入账号密码，root,secret<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206144748667.png" alt="image-20240206144748667"><br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206144807380.png" alt="image-20240206144807380"><br>idea里面都可以看到穿进去了<br>这里看到调用了<code>isRememberMe</code>很显而易见得发现这个就是一个判断用户是否选择了<code>Remember Me</code>选项。<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206144910533.png" alt="image-20240206144910533"><br>这里进入这个rememberIdentity方法</p>
-<p>前面说过该方法会去生成一个<code>PrincipalCollection</code>对象，里面包含登录信息。F7进行跟进<code>rememberIdentity</code>方法。<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206144958818.png" alt="image-20240206144958818"></p>
-<p><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206145025830.png" alt="image-20240206145025830"><br>查看convertPrincipalsToBytes的使用，根据英文名字，我们都可以猜测，这个点作用就是将凭证转化为字节流，不过我们还是跟进去看看<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206150300541.png" alt="image-20240206150300541"><br>跟进来看之后，发现是将凭证序列化之后，再进行转字节流数组。</p>
-<p>这里我们接下来看另外一个地方，cipherService<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206150612234.png" alt="image-20240206150612234"><br>再来看到下一段代码，这里如果<code>getCipherService</code>方法不为空的话，就会去执行下一段代码。<code>getCipherService</code>方法是获取加密模式。</p>
-<p>后面就是进行加密了<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206150707538.png" alt="image-20240206150707538"><br>我们跟入这个加密参数来看看<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206150750007.png" alt="image-20240206150750007"><br>可以看到，如果值不为空就进入加密。</p>
-<p><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206150842156.png" alt="image-20240206150842156"><br>这里，有个<code>getEncryptionCipherKey()</code>从名字看，就是获取加密密钥的，我们这里就跟进去看看，是怎么获取密钥的。<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206150929704.png" alt="image-20240206150929704"><br>然后看下面哈<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206152218420.png" alt="image-20240206152218420"><br>看，下面那个<code>setEncryptionCipherKey</code>在AbstractRememberMeManager.java的AbstractRememberMeManager方法中被调用了。<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206152349191.png" alt="image-20240206152349191"><br>然后去查看这个<code>DEFAULT_CIPHER_KEY_BYTES</code>的值<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206152424668.png" alt="image-20240206152424668"><br>可以看到，密钥是被定义死的，那么加密过程基本就很清晰了</p>
-<p>凭证等值-&gt;tobytes-&gt;aes-&gt;base64</p>
-<h2 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h2><p>现在看看解密的过程</p>
-<p><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206235351390.png" alt="image-20240206235351390"><br>还是在AbstractRememberMeManager.decrypt中，一层一层网上追溯。<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206235516557.png" alt="image-20240206235516557"><br>在convertBytesToPrincipals方法中使用了解密方法,继续网上追溯<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206235707082.png" alt="image-20240206235707082"><br>在这个getRememberedPrincipals方法中调用了convertBytesToPrincipals方法，从名字我们就可以看出，这个getRememberedPrincipals是获取登陆凭证的一个函数</p>
-<p>好，那我们就在这个方法中下一个断点，一步一步跟踪。</p>
-<p><img src="file://C:/Users/24205/Desktop/day1%E7%BA%A2%E9%98%9F%E8%AF%BE/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/%E8%B5%84%E6%96%99/1-Shiro/assets/image-20220902000758049.png?lastModify=1707235646" alt="image-20220902000758049"></p>
-<p>首先rememberme传进来之后，就会进行base解密，之后和加密差不多，最后就是传入readObject()导致的反序列化漏洞。</p>
-<h1 id="漏洞攻击"><a href="#漏洞攻击" class="headerlink" title="漏洞攻击"></a>漏洞攻击</h1><p>就用工具即可<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240207001003892.png" alt="image-20240207001003892"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -799,7 +810,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

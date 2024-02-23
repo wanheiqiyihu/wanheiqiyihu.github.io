@@ -255,6 +255,92 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/" class="post-title-link" itemprop="url">xray+rad 自动化edusrc</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-02-08 16:29:32 / 修改时间：16:37:32" itemprop="dateCreated datePublished" datetime="2022-02-08T16:29:32+08:00">2022-02-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/lunzi/" itemprop="url" rel="index"><span itemprop="name">-lunzi</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="xray-rad-自动化edusrc"><a href="#xray-rad-自动化edusrc" class="headerlink" title="xray+rad 自动化edusrc"></a>xray+rad 自动化edusrc</h1><p>最近挖洞效率低下，学习了下扫描器</p>
+<h1 id="1-爬取漏洞平台上各大学校的网址"><a href="#1-爬取漏洞平台上各大学校的网址" class="headerlink" title="1.爬取漏洞平台上各大学校的网址"></a>1.爬取漏洞平台上各大学校的网址</h1><p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/image-20220208144944272.png" alt="image-20220208144944272"></p>
+<p>写了个小爬虫，有些会爬到百度百科里面，但是不影响，后面加个判断就好了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line">allpage = <span class="number">199</span></span><br><span class="line">all_school = <span class="built_in">dict</span>()</span><br><span class="line"><span class="comment">#获取学校名字</span></span><br><span class="line">handers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 Edg/97.0.1072.76&#x27;</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开始获取学校名称和网址&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> page <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,allpage):</span><br><span class="line">    <span class="comment">#获取学校名称</span></span><br><span class="line">    url = <span class="string">f&#x27;https://src.sjtu.edu.cn/rank/firm/?page=<span class="subst">&#123;page&#125;</span>&#x27;</span></span><br><span class="line">    page_text = requests.get(url,headers=handers).text</span><br><span class="line">    tree = etree.HTML(page_text)</span><br><span class="line">    content = tree.xpath(<span class="string">f&#x27;//tr[@class=&quot;row&quot;]//a//text()&#x27;</span>)</span><br><span class="line">    <span class="comment">#定义一个进度条用的东西</span></span><br><span class="line">    index = <span class="number">1</span></span><br><span class="line">    <span class="comment">#从bing上获取学校官网</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> content:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response = requests.get(url=<span class="string">f&#x27;https://cn.bing.com/search?q=<span class="subst">&#123;item&#125;</span>&#x27;</span>, headers=handers).text</span><br><span class="line">            tree2 = etree.HTML(response)</span><br><span class="line">            content2 = tree2.xpath(<span class="string">f&#x27;/html/body/div[1]/main/ol/li[1]/div[1]/h2/a/@href&#x27;</span>)</span><br><span class="line">            <span class="comment">#把结果存入字典</span></span><br><span class="line">            all_school[item]=content2[<span class="number">0</span>]</span><br><span class="line">            <span class="built_in">print</span>(item + <span class="string">f&#x27;  <span class="subst">&#123;content2[<span class="number">0</span>]&#125;</span>  &#x27;</span>+<span class="string">f&#x27;第<span class="subst">&#123;page&#125;</span>/<span class="subst">&#123;allpage&#125;</span>页----<span class="subst">&#123;index/<span class="number">15</span>*<span class="number">100</span>&#125;</span>%&#x27;</span>)</span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;item&#125;</span>出错啦！&quot;</span>)</span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line"><span class="comment">#持久化存储</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;./学校网址.txt&#x27;</span>,mode=<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> all_school.keys():</span><br><span class="line">        fp.write(<span class="string">f&#x27;<span class="subst">&#123;key&#125;</span>    <span class="subst">&#123;all_school[key]&#125;</span>\n&#x27;</span>)</span><br><span class="line"><span class="comment">#单独存储url方便扫描</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;url.txt&#x27;</span>,mode=<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> fp2:</span><br><span class="line">    <span class="keyword">for</span> value <span class="keyword">in</span> all_school.values():</span><br><span class="line">        fp2.write(<span class="string">f&#x27;<span class="subst">&#123;value&#125;</span>\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-用xray和rad联动扫描url"><a href="#2-用xray和rad联动扫描url" class="headerlink" title="2.用xray和rad联动扫描url"></a>2.用xray和rad联动扫描url</h1><p>工具是别人的</p>
+<p>xray的被动扫描能力很强，但是主动扫描就弱了点，而rad的爬虫功能很强，所以将两种结合起来就能取长补短。但是它们两者不能进行批量检测。所以写了个脚本让两者结合进行批量检测。</p>
+<p>首先将xray与rad所在文件夹加入到环境变量中，环境变量——用户变量——path——编辑</p>
+<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380522-dc9a5510-1527-4c68-a628-d33460a1ba37.png" alt="image"></p>
+<p>使用的是python3，安装依赖库<br>pip install pypiwin32<br>pip isntall requests</p>
+<p>注意，系统需要装有chrome浏览器<br>之后将要扫描的目标放在url.txt文件中，一个目标一行。接着点击xray批量自动检测.bat</p>
+<p>启动后如下，输入xray扫描后的漏洞文件名，然后rad框中输入任意的数字 </p>
+<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380572-06ebf313-6064-457f-90be-71b6711db3ae.png" alt="image"></p>
+<p>过程如下 </p>
+<p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/143380597-5a848ac8-d8d6-4070-8bb0-0879fc7093de.png" alt="image"></p>
+<p> 如果扫描出漏洞后会自动弹出浏览器漏洞报告</p>
+<h2 id="靶场测试"><a href="#靶场测试" class="headerlink" title="靶场测试"></a>靶场测试</h2><p><img src="/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/image-20220208162054937.png" alt="image-20220208162054937"></p>
+<p>超！完美！</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/14pENeqIq-zAIvPgA92n9sw">https://pan.baidu.com/s/14pENeqIq-zAIvPgA92n9sw</a><br>提取码：flag{Favorite anime characters}</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/02/03/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%8E%A5%E5%8F%A3%E9%99%90%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -615,106 +701,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/01/30/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/30/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" class="post-title-link" itemprop="url">信息收集</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-01-30 11:50:48 / 修改时间：11:53:04" itemprop="dateCreated datePublished" datetime="2022-01-30T11:50:48+08:00">2022-01-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="渗透测试之信息收集"><a href="#渗透测试之信息收集" class="headerlink" title="渗透测试之信息收集"></a>渗透测试之信息收集</h1><h2 id="1-1收集域名信息"><a href="#1-1收集域名信息" class="headerlink" title="1.1收集域名信息"></a>1.1收集域名信息</h2><h3 id="1-1-1whois查询"><a href="#1-1-1whois查询" class="headerlink" title="1.1.1whois查询"></a>1.1.1whois查询</h3><p>简单的说whois就是一个用于查询域名是否已被注册一级注册域名的详细信息的数据库（如域名所有人，域名注册商）。</p>
-<h3 id="1-1-2备案信息查询"><a href="#1-1-2备案信息查询" class="headerlink" title="1.1.2备案信息查询"></a>1.1.2备案信息查询</h3><p>icp备案查询网<a target="_blank" rel="noopener" href="https://www.beianx.cn/">ICP备案查询网 (beianx.cn)</a></p>
-<p>天眼查<a target="_blank" rel="noopener" href="https://www.tianyancha.com/">天眼查-商业查询平台_企业信息查询_公司查询_工商查询_企业信用信息系统 (tianyancha.com)</a></p>
-<h2 id="1-2收集敏感信息"><a href="#1-2收集敏感信息" class="headerlink" title="1.2收集敏感信息"></a>1.2收集敏感信息</h2><p>google语法，在我另外一篇博客中有。</p>
-<p>burpsuiite的Repeater功能同样可以获取一些服务器的信息。</p>
-<p>github上也可以找，类似数据库连接信息，邮箱密码，UC-KEY，阿里的osskey</p>
-<h2 id="1-3收集子域名信息"><a href="#1-3收集子域名信息" class="headerlink" title="1.3收集子域名信息"></a>1.3收集子域名信息</h2><p><a target="_blank" rel="noopener" href="https://phpinfo.me/domain">在线子域名查询 (phpinfo.me)</a></p>
-<p><a target="_blank" rel="noopener" href="https://dns.aizhan.com/1/">IP反查域名_同IP站点查询_同ip网站查询_爱站网 (aizhan.com)</a></p>
-<h3 id="1-子域名检测工具"><a href="#1-子域名检测工具" class="headerlink" title="1.子域名检测工具"></a>1.子域名检测工具</h3><p>Layer子域名挖掘机，K8，wydomain等等</p>
-<p>subDomainsBrute，可以用小字典递归发现三级域名或者四级域名。</p>
-<h3 id="2-搜索引擎美剧"><a href="#2-搜索引擎美剧" class="headerlink" title="2.搜索引擎美剧"></a>2.搜索引擎美剧</h3><p>我们可以利用goolgle语法搜索。<code>site:baidu.com</code></p>
-<h3 id="3-第三方聚合应用枚举"><a href="#3-第三方聚合应用枚举" class="headerlink" title="3.第三方聚合应用枚举"></a>3.第三方聚合应用枚举</h3><h4 id="DNSdumpster-com-dns-recon-and-research-find-and-lookup-dns-records（挂代理）"><a href="#DNSdumpster-com-dns-recon-and-research-find-and-lookup-dns-records（挂代理）" class="headerlink" title="DNSdumpster.com - dns recon and research, find and lookup dns records（挂代理）"></a><a target="_blank" rel="noopener" href="https://dnsdumpster.com/">DNSdumpster.com - dns recon and research, find and lookup dns records</a>（挂代理）</h4><h3 id="4-证书透明度公开日志枚举"><a href="#4-证书透明度公开日志枚举" class="headerlink" title="4.证书透明度公开日志枚举"></a>4.证书透明度公开日志枚举</h3><h2 id="1-4收集常用端口信息-服务"><a href="#1-4收集常用端口信息-服务" class="headerlink" title="1.4收集常用端口信息/服务"></a>1.4收集常用端口信息/服务</h2><p>nmap，shodan等</p>
-<p><img src="/2022/01/30/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/D68316B4F2D1CE7976D8A816A32F27CB.png" alt="img"><img src="/2022/01/30/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/28DA39F5B9F767E3C337844003F42EBE.png" alt="img"><img src="/2022/01/30/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/5F961E0C8CCC1DF6FC767A3AC4F1F95F.png" alt="img"></p>
-<h2 id="1-5指纹识别"><a href="#1-5指纹识别" class="headerlink" title="1.5指纹识别"></a>1.5指纹识别</h2><p>找到一个与域名的cms指纹有助于我们后面的渗透工作。</p>
-<p>一般在html,js,css文件中多多少少包含一些特征码。如index.php中有generator=wordpress3.xx</p>
-<p>常见的cms有</p>
-<p>dedecms（织梦），discuz，phpweb等</p>
-<p>代表工具有御剑web指纹之别，WhatWeb，椰树等，可以快速识别一些主流的cms</p>
-<p><a target="_blank" rel="noopener" href="http://whatweb.bugscaner.com/">已支持识别的的cms列表,cms识别,源码识别,在线工具–BugScaner</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.yunsee.cn/">云悉互联网WEB资产在线梳理|在线CMS指纹识别平台 - 云悉安全平台 (yunsee.cn)</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.whatweb.net/">WhatWeb - Next generation web scanner.</a></p>
-<h2 id="1-6查找真实ip"><a href="#1-6查找真实ip" class="headerlink" title="1.6查找真实ip"></a>1.6查找真实ip</h2><p>用超极ping</p>
-<p>如果有cdn我们就需要绕过cdn寻找目标的真实ip</p>
-<p>内部邮箱源，扫描网站测试文件，分站域名，国外访问，查询域名的解析记录（查看历史ip），</p>
-<p>如果网站有自己的app，我们可以通过抓包来看真实ip。</p>
-<p>绕过cloudflare，现在很多网站都使用cloudflare，我们可以先尝试通过在线网站cloudflarewatch来查询。</p>
-<h2 id="1-7收集敏感文件目录"><a href="#1-7收集敏感文件目录" class="headerlink" title="1.7收集敏感文件目录"></a>1.7收集敏感文件目录</h2><p>我们可以用DirBuseter，wwwsan轻量级扫描。</p>
-<p>或者用市面上的一些工具来扫。</p>
-<h2 id="1-8社会工程学"><a href="#1-8社会工程学" class="headerlink" title="1.8社会工程学"></a>1.8社会工程学</h2><p>通过管理员的邮箱找到真实ip等用法，建议还是看下社工的书。</p>
-<h1 id><a href="#" class="headerlink" title></a></h1>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/44/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/44/">44</a><span class="page-number current">45</span><a class="page-number" href="/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/46/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/44/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/44/">44</a><span class="page-number current">45</span><a class="page-number" href="/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/46/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -782,7 +772,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

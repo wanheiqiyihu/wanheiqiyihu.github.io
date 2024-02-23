@@ -255,6 +255,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/" class="post-title-link" itemprop="url">20年三道编程大题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-21 20:59:49 / 修改时间：21:01:15" itemprop="dateCreated datePublished" datetime="2023-10-21T20:59:49+08:00">2023-10-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">-c</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="20年三道编程大题"><a href="#20年三道编程大题" class="headerlink" title="20年三道编程大题"></a>20年三道编程大题</h1><p>题库有些简单，换新的题来写一下，自从20年之后，专业课难度感觉直线飙升啊。</p>
+<h1 id="第一题-字符串中找出英文数组"><a href="#第一题-字符串中找出英文数组" class="headerlink" title="第一题-字符串中找出英文数组"></a>第一题-字符串中找出英文数组</h1><p><img src="/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011225540518.png" alt="image-20231011225540518"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(<span class="keyword">char</span> str[], <span class="keyword">char</span> *p)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> len;</span><br><span class="line">	len = <span class="built_in">strlen</span>(str);</span><br><span class="line">	<span class="keyword">char</span> item;</span><br><span class="line">	<span class="keyword">int</span> cishu = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (((<span class="string">&#x27;a&#x27;</span> &lt;= str[i]) &amp;&amp; (<span class="string">&#x27;z&#x27;</span> &gt;= str[i])) || ((<span class="string">&#x27;A&#x27;</span> &lt;= str[i]) &amp;&amp; (<span class="string">&#x27;Z&#x27;</span> &gt;= str[i]))) &#123;</span><br><span class="line">			item = str[i];</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; len<span class="number">-1</span>; j++) &#123;</span><br><span class="line">				str[j] = str[j + <span class="number">1</span>];</span><br><span class="line">			&#125;</span><br><span class="line">			str[len - <span class="number">1</span>] = item;</span><br><span class="line">			i--;<span class="comment">//避免有连续的字母，这样就可以不断检测这一位是否是字母</span></span><br><span class="line">		&#125;</span><br><span class="line">		cishu++;</span><br><span class="line">		<span class="keyword">if</span> (cishu &gt;= len) &#123;<span class="comment">//避免无限循环</span></span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入一串字符串：&quot;</span>);</span><br><span class="line">	<span class="keyword">char</span> ch[<span class="number">128</span>] = <span class="string">&quot;&quot;</span>;</span><br><span class="line">	<span class="keyword">char</span>* p;</span><br><span class="line">	p = ch;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, ch);</span><br><span class="line">	fun(ch, p);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n处理如下：%s&quot;</span>, ch);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011231316782.png" alt="image-20231011231316782"></p>
+<h1 id="第二题-求数组列和"><a href="#第二题-求数组列和" class="headerlink" title="第二题-求数组列和"></a>第二题-求数组列和</h1><p><img src="/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231011232331406.png" alt="image-20231011232331406"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> arr[][<span class="number">3</span>], <span class="keyword">int</span> n)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//我们这里就求一个3行3列数组的第一列和最后一列之和。</span></span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">3</span>][<span class="number">3</span>] = &#123; &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">7</span>,<span class="number">8</span>,<span class="number">2</span>&#125;,&#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125; &#125;;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, fun(arr, <span class="number">3</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> arr[][<span class="number">3</span>], <span class="keyword">int</span> n)</span> </span>&#123;<span class="comment">//n为n行数组的意思</span></span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		<span class="comment">//循环第一列</span></span><br><span class="line">		sum += arr[i][<span class="number">0</span>];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		<span class="comment">//循环最后一列</span></span><br><span class="line">		sum += arr[i][<span class="number">2</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="第三题-结构体指针"><a href="#第三题-结构体指针" class="headerlink" title="第三题-结构体指针"></a>第三题-结构体指针</h1><p><img src="/2023/10/21/20%E5%B9%B4%E4%B8%89%E9%81%93%E7%BC%96%E7%A8%8B%E5%A4%A7%E9%A2%98/image-20231021194501769.png" alt="image-20231021194501769"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> &#123;</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line">	<span class="keyword">int</span> english;</span><br><span class="line">	<span class="keyword">int</span> math;</span><br><span class="line">	<span class="keyword">int</span> politics;</span><br><span class="line">	<span class="keyword">int</span> specialised;</span><br><span class="line">	<span class="keyword">int</span> SUM = english + math + politics + specialised;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(struct Student aa[], <span class="keyword">int</span> (*p)(struct Student aa[]))</span> </span>&#123;</span><br><span class="line">	<span class="comment">//p指向fun2</span></span><br><span class="line">	<span class="keyword">return</span> 	p(aa);;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun2</span><span class="params">(struct Student aa[])</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Student</span> <span class="title">aa</span>[4] =</span> &#123;</span><br><span class="line">	&#123;<span class="string">&quot;越江&quot;</span>, <span class="number">65</span>, <span class="number">85</span>, <span class="number">60</span>, <span class="number">110</span>&#125;,</span><br><span class="line">	&#123;<span class="string">&quot;张三&quot;</span>, <span class="number">77</span>, <span class="number">100</span>, <span class="number">60</span>, <span class="number">60</span>&#125;,</span><br><span class="line">	&#123;<span class="string">&quot;李四&quot;</span>, <span class="number">60</span>, <span class="number">60</span>, <span class="number">60</span>, <span class="number">60</span>&#125;,</span><br><span class="line">	&#123;<span class="string">&quot;王五&quot;</span>, <span class="number">75</span>, <span class="number">75</span>, <span class="number">75</span>, <span class="number">75</span>&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">int</span> max_index = fun(aa,fun2);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;获得最高分的是国服%s，分数为：%d&quot;</span>, aa[max_index].name, aa[max_index].SUM);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun2</span><span class="params">(struct Student aa[])</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> av_english, av_math, av_politcs, av_specialised;</span><br><span class="line">	<span class="keyword">char</span> av_name[<span class="number">20</span>];</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> sum2 = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> sum3 = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> sum4 = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">		sum += aa[i].english;</span><br><span class="line">		sum2 += aa[i].math;</span><br><span class="line">		sum3 += aa[i].politics;</span><br><span class="line">		sum4 += aa[i].specialised;</span><br><span class="line">	&#125;</span><br><span class="line">	av_english = sum / <span class="number">4</span>;</span><br><span class="line">	av_math = sum2 / <span class="number">4</span>;</span><br><span class="line">	av_politcs = sum3 / <span class="number">4</span>;</span><br><span class="line">	av_specialised = sum4 / <span class="number">4</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;平均成绩\n英语：%d\n数学：%d\n政治：%d\n专业课：%d\n&quot;</span>, av_english, av_math, av_politcs, av_specialised);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> max_index = <span class="number">0</span>;<span class="comment">//只记录一个最大分就可</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (aa[i].SUM &gt; aa[max_index].SUM) &#123;</span><br><span class="line">			max_index = i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> max_index;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/10/16/PKI%EF%BC%88%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%B3%BB%E7%BB%9F%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -441,170 +519,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">信息安全考研基础</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-10-08 15:10:25" itemprop="dateCreated datePublished" datetime="2023-10-08T15:10:25+08:00">2023-10-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-10 20:43:58" itemprop="dateModified" datetime="2023-10-10T20:43:58+08:00">2023-10-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="信息安全考研基础"><a href="#信息安全考研基础" class="headerlink" title="信息安全考研基础"></a>信息安全考研基础</h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本篇博客不是技术流的，是针对本人的院校发布的考研大纲提供的信息安全方面的知识大纲所写的基础知识总结。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1、信息安全基础</span><br><span class="line">(1)	信息安全基本特征</span><br><span class="line">(2)	信息安全体系结构</span><br><span class="line">(3)	信息安全等级与标准</span><br><span class="line">2、密钥管理</span><br><span class="line">(1) 密钥管理原理</span><br><span class="line">(2) 密钥分配方案</span><br><span class="line">3、PKI</span><br><span class="line">(1)	PKI基本概念和原理</span><br><span class="line">(2)	数字证书概念和原理</span><br><span class="line">4、常见安全设备的基本概念及原理、类型</span><br><span class="line">(1)	防火墙</span><br><span class="line">(2)	入侵检测</span><br><span class="line">(3)	VPN</span><br><span class="line">5、密码学基础</span><br><span class="line">(1)	对称密码算法原理及应用</span><br><span class="line">(2)	非对称密码算法原理及应用</span><br></pre></td></tr></table></figure>
-
-<p>可以看到一共有五个部分啊，我们每个部分的各种知识都放进来，方便看看。同时也是对大纲的一种理解加深。</p>
-<h1 id="信息安全基础"><a href="#信息安全基础" class="headerlink" title="信息安全基础"></a>信息安全基础</h1><h2 id="信息安全的基本特征"><a href="#信息安全的基本特征" class="headerlink" title="信息安全的基本特征"></a>信息安全的基本特征</h2><p>保密性(<strong>confidentiality</strong>)：信息加密、解密；信息划分密级，对用户分配不同权限，对不同权限的用户访问的对象进行访问控制；防止硬件辐射泄露、网络截获、窃听等</p>
-<p>完整性(<strong>integrity</strong>)：严格控制对系统中数据的写访问。只允许许可的当事人进行更改</p>
-<p>可用性(<strong>availability</strong>)：可以保证合法用户在需要时可以访问信息及相关资产。在坚持严格的访问控制机制的条件下，为用户提供方便和快速的访问接口。提供安全性的访问工具。即使在突发事件下，依然能够保障数据和服务的正常使用，例如可防范病毒及各种恶意代码攻击包括<code>DDos</code>攻击，可进行灾难备份</p>
-<p><strong>口诀：保完用</strong></p>
-<h2 id="网络安全的四层含义"><a href="#网络安全的四层含义" class="headerlink" title="网络安全的四层含义"></a>网络安全的四层含义</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">• 运行系统安全：系统本身</span><br><span class="line">• 网络上系统信息的安全：系统权限</span><br><span class="line">• 网络上信息传播的安全：防止有害信息传播</span><br><span class="line">• 网络上信息内容的安全：防止利用安全漏洞进行窃听，冒充和诈骗</span><br></pre></td></tr></table></figure>
-
-<h2 id="网络安全结构层次"><a href="#网络安全结构层次" class="headerlink" title="网络安全结构层次"></a>网络安全结构层次</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">物理安全</span><br><span class="line">安全控制</span><br><span class="line">安全服务</span><br></pre></td></tr></table></figure>
-
-<h2 id="网络信息安全策略"><a href="#网络信息安全策略" class="headerlink" title="网络信息安全策略"></a>网络信息安全策略</h2><p>• 物理安全策略：保护计算机系统等硬件设备面手攻击，验证身份和使用权限</p>
-<p>• 访问控制策略：网络安全防范和保护的主要策略。保证网络资源不被非法使用和访问<br>入网访问控制<br>网络权限控制<br>目录级安全控制<br>属性安全控制<br>网络服务器安全控制<br>网络检测和锁定控制<br>网络端口和节点的安全控制</p>
-<p>• 防火墙控制</p>
-<p>• 信息加密策略：保护网上传输的数据</p>
-<p>• 网络安全管理策略</p>
-<p><strong>口诀：物访防信安</strong></p>
-<h2 id="ISO-OSI安全体系3个组成"><a href="#ISO-OSI安全体系3个组成" class="headerlink" title="ISO/OSI安全体系3个组成"></a>ISO/OSI安全体系3个组成</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ISO：国际标准化组织</span><br></pre></td></tr></table></figure>
-
-<p>OSI：开放系统互连通信参考模型<br>安全服务：5类，认证，访问控制，数据保密性，数据完整性，不可否认性<br>安全机制：8类，加密，数字签名，访问控制，数据完整性，鉴别交换，业务填充，路由控制，公证<br>安全管理：3类，系统安全管理，安全服务管理，安全机制管理</p>
-<h2 id="网络安全体系2个模型"><a href="#网络安全体系2个模型" class="headerlink" title="网络安全体系2个模型"></a>网络安全体系2个模型</h2><p><code>PDRR：Protection, Detection, Response, Recovery</code><br>保护，检测，响应，恢复</p>
-<p><code>PPDR: Policy， Protection, Detection, Response</code><br>安全策略，防护，检测，响应</p>
-<h2 id="信息系统安全5个等级"><a href="#信息系统安全5个等级" class="headerlink" title="信息系统安全5个等级"></a>信息系统安全5个等级</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">• 自主保护级</span><br><span class="line">• 系统审计保护级</span><br><span class="line">• 安全标记保护级</span><br><span class="line">• 结构化保护级</span><br><span class="line">• 访问验证保护级</span><br></pre></td></tr></table></figure>
-
-<p><strong>口诀：自系安结访</strong></p>
-<h2 id="安全评测认证体系"><a href="#安全评测认证体系" class="headerlink" title="安全评测认证体系"></a>安全评测认证体系</h2><p><code>TCSEC</code>(可信任计算机标准评估准则)：现行的网络安全准则，分为3个部分</p>
-<p>• 简介和一般模型<br>• 安全功能要求<br>• 安全保证要求</p>
-<p>7种评估保证级：(功结功系半半形)<br>◦ 1:评估保证级别1(<code>EAL1</code>)：功能测试<br>◦ 2:<code>EAL2</code>：结构测试<br>◦ 3：功能测试和校验<br>◦ 4：系统地设计，测试和评审<br>◦ 5：半形式化设计和测试<br>◦ 6：半形式化验证的设计和测试<br>◦ 7：形式化验证的设计和测试</p>
-<h1 id="密钥管理"><a href="#密钥管理" class="headerlink" title="密钥管理"></a>密钥管理</h1><h2 id="密码学基础"><a href="#密码学基础" class="headerlink" title="密码学基础"></a>密码学基础</h2><p><img src="/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/image-20231008141959237.png" alt="image-20231008141959237"></p>
-<p><img src="/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/image-20231008142004143.png" alt="image-20231008142004143"></p>
-<p><img src="/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/image-20231008142009253.png" alt="image-20231008142009253"></p>
-<h2 id="密钥类型"><a href="#密钥类型" class="headerlink" title="密钥类型"></a>密钥类型</h2><p><img src="/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/image-20231008142036789.png" alt="image-20231008142036789"></p>
-<p>会话密钥：保护传输数据（数据加密密钥），保护文件（文件密钥），供通信双方使用（称为专用密钥），使用对称密码算法生成。</p>
-<p>密钥加密密钥：对会话密钥或下层密钥进行保护，也称为次主密钥，二级密钥。</p>
-<p>主密钥</p>
-<p>基本密钥（初始密钥\用户密钥）：用户选定或系统分配，可在较长时间一对用户所专用。</p>
-<h2 id="密钥分配"><a href="#密钥分配" class="headerlink" title="密钥分配"></a>密钥分配</h2><p>以下仅考虑在对称密码技术中的密钥分配</p>
-<h3 id="集中式密钥分配体质"><a href="#集中式密钥分配体质" class="headerlink" title="集中式密钥分配体质"></a>集中式密钥分配体质</h3><p>需要密钥分配中心(KDC)或密钥转递中心(KTC)<br>典型代表是Kerboros协议</p>
-<img src="/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/image-20231008142841165.png" alt="image-20231008142841165" style="zoom:150%;">
-
-<img src="/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/image-20231008142852127.png" alt="image-20231008142852127" style="zoom:150%;">
-
-<h3 id="分布式密钥分配体制"><a href="#分布式密钥分配体制" class="headerlink" title="分布式密钥分配体制"></a>分布式密钥分配体制</h3><p><img src="/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/image-20231008143246713.png" alt="image-20231008143246713"></p>
-<h1 id="PKI技术"><a href="#PKI技术" class="headerlink" title="PKI技术"></a>PKI技术</h1><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>概念：PKI(Public Key Infrastructure)：公钥基础设施，支持<strong>公开密钥管理</strong>并提供<strong>真实性</strong>，<strong>保密性</strong>，<strong>完整性</strong>和<strong>可追究性服务</strong>的基础设施</p>
-<p>PKI提供的几种安全服务及对应的技术：向一个实体确认另一个实体是自己。使用<strong>数字签名</strong>实现</p>
-<p>• 完整性：向一个实体确保数据没有被修改。使用数字签名和消息认证码(MAC)，MAC使用对称分组密码或密码杂凑函数<br>• 机密性：向一个实体确保除了接收者，无人可读懂数据的关键部分。采用对称密码加密，需要建立密钥交换和密钥传输协议<br>• 不可否认性：使用数字签名实现</p>
-<p>应用PKI的几种协议：<br>• IPSec：处在网络层，架设VPN<br>• S/MIME：处在应用层，安全的电子邮件协议<br>• SSL：处在传输层，保证浏览器和服务器之间的加密通信</p>
-<h2 id="PKI的基本组成"><a href="#PKI的基本组成" class="headerlink" title="PKI的基本组成"></a>PKI的基本组成</h2><p>完整的PKI系统必须具有权威认证机构(CA)、数字证书库、密钥备份及恢复系统、证书作废系统、应用接口（API）等基本构成部分，构建PKI也将围绕着这五大系统来着手构建。</p>
-<p><strong>认证机构</strong>（CA）：即数字证书的申请及签发机关，CA必须具备权威性的特征；</p>
-<p><strong>数字证书库</strong>：用于存储已签发的数字证书及公钥，用户可由此获得所需的其他用户的证书及公钥；</p>
-<p><strong>密钥备份及恢复系统</strong>：如果用户丢失了用于解密数据的密钥，则数据将无法被解密，这将造成合法数据丢失。为避免这种情况，PKI提供备份与恢复密钥的机制。但须注意，密钥的备份与恢复必须由可信的机构来完成。并且，密钥备份与恢复只能针对解密密钥，签名私钥为确保其唯一性而不能够作备份。</p>
-<p><strong>证书作废系统</strong>：证书作废处理系统是PKI的一个必备的组件。与日常生活中的各种身份证件一样,证书有效期以内也可能需要作废，原因可能是密钥介质丢失或用户身份变更等。为实现这一点,PKI必须提供作废证书的一系列机制。</p>
-<p><strong>应用接口（API）</strong>：PKI的价值在于使用户能够方便地使用加密、数字签名等安全服务，因此一个完整的PKI必须提供良好的应用接口系统，使得各种各样的应用能够以安全、一致、可信的方式与PKI交互，确保安全网络环境的完整性和易用性。</p>
-<p>通常来说，CA是证书的签发机构,它是PKI的核心。众所周知，构建密码服务系统的核心内容是如何实现密钥管理。公钥体制涉及到一对密钥（即私钥和公钥），私钥只由用户独立掌握，无须在网上传输，而公钥则是公开的，需要在网上传送，故公钥体制的密钥管理主要是针对公钥的管理问题，目前较好的解决方案是数字证书机制。</p>
-<h2 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h2><p>数字证书是公开密钥体系的一种<strong>密钥管理媒介</strong>。<strong>它是一种权威性的电子文档</strong>，形同网络计算环境中的一种身份证，用于证明某一主体（如人、服务器等）的身份以及其公开密钥的合法性，又称为数字ID。数字证书简称证书，它是一个<strong>经证书授权中心CA数字签名的文件</strong>，包含拥有者的公钥及相关身份信息。数字证书技术解决了数字签名技术中无法确定公钥是指定拥有者的问题。</p>
-<h3 id="证书结构"><a href="#证书结构" class="headerlink" title="证书结构"></a>证书结构</h3><p><img src="/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/image-20231008150155370.png" alt="image-20231008150155370"></p>
-<h3 id="证书类型"><a href="#证书类型" class="headerlink" title="证书类型"></a>证书类型</h3><p><strong>自签名证书</strong>：自签名证书又称为根证书，是自己颁发给自己的证书，即证书中的颁发者和主体名相同。<br><strong>CA证书</strong>：CA自身的证书。如果PKI系统中没有多层级CA，CA证书就是自签名证书；如果有多层级CA，则会形成一个CA层次结构，最上层的CA是根CA，它拥有一个CA“自签名”的证书。<br><strong>本地证书</strong>：CA颁发给申请者的证书。<br><strong>设备本地证书</strong>：设备根据CA证书给自己颁发的证书，证书中的颁发者名称是CA服务器的名称。</p>
-<h3 id="证书认证过程"><a href="#证书认证过程" class="headerlink" title="证书认证过程"></a>证书认证过程</h3><ol>
-<li>证书拆封：使用CA的公钥验证证书的数字签名，验证证书是否为CA所颁发</li>
-<li>序列号验证：验证证书的真伪</li>
-<li>有效期验证</li>
-<li>撤销列表查询</li>
-</ol>
-<h1 id="常见安全设备的基本概念及原理、类型"><a href="#常见安全设备的基本概念及原理、类型" class="headerlink" title="常见安全设备的基本概念及原理、类型"></a>常见安全设备的基本概念及原理、类型</h1><h2 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h2><p>内网：防火墙内的网络<br>外网：防火墙外的网络<br>受信主机和非受信主机分别指内网和外网的主机<br>内网中需要向外提供服务的服务器放在的网段即为非军事化区</p>
-<p><strong>NAT</strong><br>工作在传输层<br>作用：解决IP地址不足的问题，而且还能够有效地避免来自网络外部的攻击，隐藏并保护网络内部的计算机</p>
-<h2 id="防火墙的结构"><a href="#防火墙的结构" class="headerlink" title="防火墙的结构"></a>防火墙的结构</h2><h3 id="屏蔽路由器"><a href="#屏蔽路由器" class="headerlink" title="屏蔽路由器"></a>屏蔽路由器</h3><p><img src="/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/image-20231008143955460.png" alt="image-20231008143955460"></p>
-<h3 id="双宿主防火墙"><a href="#双宿主防火墙" class="headerlink" title="双宿主防火墙"></a>双宿主防火墙</h3><p><img src="/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/image-20231008144140749.png" alt="image-20231008144140749"></p>
-<h3 id="屏蔽主机防火墙"><a href="#屏蔽主机防火墙" class="headerlink" title="屏蔽主机防火墙"></a>屏蔽主机防火墙</h3><p><img src="/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/image-20231008144202131.png" alt="image-20231008144202131"></p>
-<h3 id="屏蔽子网防火墙"><a href="#屏蔽子网防火墙" class="headerlink" title="屏蔽子网防火墙"></a>屏蔽子网防火墙</h3><p><img src="/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/image-20231008144233974.png" alt="image-20231008144233974"></p>
-<h2 id="防火墙类型"><a href="#防火墙类型" class="headerlink" title="防火墙类型"></a>防火墙类型</h2><p>数据包过滤路由器，代理网关(应用层网关)，状态检测<br>包过滤是在网络层拦截所有信息流，代理在应用层实现防火墙的功能<br>代理服务安全性&gt;包过滤，应用层的防火墙性能会有明显下降，故代理服务性能&lt;包过滤</p>
-<p><img src="/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/image-20231008144622628.png" alt="image-20231008144622628"></p>
-<h2 id="入侵检测系统-IDS"><a href="#入侵检测系统-IDS" class="headerlink" title="入侵检测系统(IDS)"></a>入侵检测系统(IDS)</h2><p>基于<strong>误用</strong>(特征)的入侵检测<br>将入侵行为按照某种方式进行特征编码，与模式数据库中的内容进行模式匹配，从而发现入侵行为<br>优点：只需要收集相关的数据集合，减小系统负担<br>缺点：需要不断升级网络入侵和系统误用模式数据库，不能检测未知的入侵方式</p>
-<p>基于<strong>异常</strong>的入侵检测<br>对计算机或网络资源进行统计分析，定义一组系统正常情况的阈值，将系统运行时的数值与阈值相比较，判断是否被入侵<br>优点：可检测到未知或更复杂的入侵<br>缺点：误报，漏报率高，不适应用户行为的突然改变</p>
-<h2 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a>VPN</h2><p>这个曾经考过了，em。。只能说再考的概率稍微小点，但是还是得背下来。</p>
-<p><strong>VPN的概念和特点</strong>：</p>
-<p>VPN：虚拟专用网。通过一个公用网络建立一个临时的、安全的连接，是一条穿过混乱的公用网络的安全、稳定的隧道</p>
-<p><strong>特点</strong>：<br>• 安全保障：在公用网络上建立一个逻辑的，点对点的连接(建立一个隧道)，并使用加密技术对隧道加密<br>• 服务质量保证：流量预测和流量控制策略，防止阻塞发生<br>• 可扩充性和灵活性：支持通过<code>Intranet</code>和<code>Extranet</code>的任何类型的数据流<br>• 可管理性</p>
-<h3 id="隧道技术"><a href="#隧道技术" class="headerlink" title="隧道技术"></a>隧道技术</h3><p>隧道技术是指通过使<strong>用互联网络的基础设施</strong>在网络之间<strong>传递数据</strong>的一种方式<br>被封装的数据包在公共互联网络上传递时所经过的<strong>逻辑路径称为隧道</strong><br>隧道技术包括 <strong>数据封装-传输-解包</strong> 的全过程</p>
-<h3 id="不同层的隧道协议"><a href="#不同层的隧道协议" class="headerlink" title="不同层的隧道协议"></a>不同层的隧道协议</h3><p>• 数据链路层：PPTP，L2TP，L2F<br>• 网络层：IPSec<br>• 运输层：SSL<br>• 应用层：set</p>
-<h3 id="VPN的4种建立方式"><a href="#VPN的4种建立方式" class="headerlink" title="VPN的4种建立方式"></a>VPN的4种建立方式</h3><p>• Host 对 Host：主机要支持IPSec，VPN网关不需支持<br>• Host 对 VPN网关：均需支持IPSec<br>• VPN 对 VPN网关：主机不需支持IPSec，VPN网关需支持<br>• Remote User 对 VPN网关：均需支持IPSec</p>
-<h1 id="密码学基础-1"><a href="#密码学基础-1" class="headerlink" title="密码学基础"></a>密码学基础</h1><h2 id="对称加密算法"><a href="#对称加密算法" class="headerlink" title="对称加密算法"></a>对称加密算法</h2><p>对称加密算法是一种使用同一个密钥进行加密和解密的算法。加密和解密过程使用相同的密钥，因此也被称为“共享密钥加密算法”或“单密钥加密算法”。</p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>对称加密算法的原理是通过对数据进行按位异或、替换、置换等运算，将明文转换为密文。在解密时，使用相同的密钥对密文进行逆向运算，将密文恢复为明文。</p>
-<p>对称加密算法的工作方式包括<strong>分组密码和流密码两种</strong>。分组密码将明文分成固定长度的数据块进行加密，而流密码将明文和密钥作为输入，逐位产生密文。</p>
-<p><img src="/2023/10/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%80%83%E7%A0%94%E5%9F%BA%E7%A1%80/image-20231008150727026.png" alt="image-20231008150727026"></p>
-<h2 id="非对称加密算法"><a href="#非对称加密算法" class="headerlink" title="非对称加密算法"></a>非对称加密算法</h2><p>加密和解密所用的密钥是不一样的，所以叫“非对称”。<br>非对称加密算法的这两个密钥，一个称为公钥，一个称为私钥。</p>
-<p>常见的有：RSA、ECC</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -672,7 +590,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

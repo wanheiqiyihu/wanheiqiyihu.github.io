@@ -255,6 +255,90 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/" class="post-title-link" itemprop="url">前端加密爆破</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-06 13:06:50 / 修改时间：13:08:08" itemprop="dateCreated datePublished" datetime="2022-11-06T13:06:50+08:00">2022-11-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="前端加密爆破"><a href="#前端加密爆破" class="headerlink" title="前端加密爆破"></a>前端加密爆破</h1><p>有些网站对数据包中的参数进行了前端加密，对我们进行爆破造成了很大困难。</p>
+<p>现在我们来解决这个问题</p>
+<p>首先我找了一个前端加密的网站来进行试验，</p>
+<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106125305611.png" alt="image-20221106125305611"></p>
+<p>他会对我们的参数进行一个整体的加密。</p>
+<p>这时候就需要使用一款burp插件来解决这个烦恼，jsEncrypter，但是由于这款 插件是基于phantomjs运行的，所以我们还需要安装一个phantomjs。</p>
+<h1 id="插件的使用"><a href="#插件的使用" class="headerlink" title="插件的使用"></a>插件的使用</h1><h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>下载好，解压好，将phantomjs放到一个新的文件夹下，这个新建文件夹包括下列文件。</p>
+<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106125535087.png" alt="image-20221106125535087"></p>
+<p>其中encode是我们在网站按f12发现的加密js定义的加密函数。</p>
+<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106125649529.png" alt="image-20221106125649529"></p>
+<p>jar包是生成的burp插件，phantomjs_server.js是其中的配置文件。</p>
+<p>注意，我这里的js函数中使用的第三方库，所以我们需要提前在cmd中安装好第三方库<code>npm install crypto-js</code></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>首先点开phantomjs_server.js，我们需要修改的地方只有两处</p>
+<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106125859275.png" alt="image-20221106125859275"></p>
+<p>然后，在cmd中执行<code>phantomjs.exe phantomjs_server.js</code>启动工具。</p>
+<p>在burp中引入刚才生成的jar包插件</p>
+<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106130019468.png" alt="image-20221106130019468"></p>
+<p>然后在上方可以看到插件已经加入进来了。</p>
+<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106130046463.png" alt="image-20221106130046463"></p>
+<p>将密文加入进去，就可以看到解密成功了</p>
+<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106130220931.png" alt="image-20221106130220931"></p>
+<p>如果要是爆破的话。</p>
+<p>引入脚本就可以开始爆破了</p>
+<p><img src="/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/image-20221106130450827.png" alt="image-20221106130450827"></p>
+<h1 id="py脚本（生成密文字典）"><a href="#py脚本（生成密文字典）" class="headerlink" title="py脚本（生成密文字典）"></a>py脚本（生成密文字典）</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span> = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10000</span>):</span><br><span class="line">  <span class="built_in">list</span>.append(<span class="string">f&#x27;<span class="subst">&#123;i:04&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line">data1=<span class="string">&#x27;&#x27;&#x27;xxx&#x27;</span></span><br><span class="line"><span class="string">data2 = &#x27;&#x27;&#x27;</span><span class="string">&quot;xxx&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">for s in list:</span></span><br><span class="line"><span class="string">  data3 = data1+str(s)+data2</span></span><br><span class="line"><span class="string">  print(data3)</span></span><br><span class="line"><span class="string">#用于生成四位验证码的数据格式，data1和data2是验证码部分前后的数据。</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/03/%C2%96Kioptrix-2014-5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -551,146 +635,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/02/FristiLeaks-1-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/02/FristiLeaks-1-3/" class="post-title-link" itemprop="url">FristiLeaks_1.3</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-11-02 15:34:54 / 修改时间：15:36:34" itemprop="dateCreated datePublished" datetime="2022-11-02T15:34:54+08:00">2022-11-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="FristiLeaks-1-3"><a href="#FristiLeaks-1-3" class="headerlink" title="FristiLeaks_1.3"></a>FristiLeaks_1.3</h1><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>记得改nat模式。</p>
-<p>nmap查看对方ip地址</p>
-<p>改了nat之后，vm用户需要手动更改mac地址为</p>
-<p>08:00:27:A5:A6:76</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102140304341.png" alt="image-20221102140304341"></p>
-<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p><code>nmap 192.168.100.0/24 -n -sP -sn</code></p>
-<p>扫到目标地址为，192.168.100.168</p>
-<p>然后还是扫端口</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A 192.168.100.168</span><br></pre></td></tr></table></figure>
-
-<p>只有一个80端口？</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102140812413.png" alt="image-20221102140812413"></p>
-<p>是这么个东西</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102141214460.png" alt="image-20221102141214460"></p>
-<p>刚刚扫到个robots先看看。</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102141315482.png" alt="image-20221102141315482"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Disallow: /cola</span><br><span class="line">Disallow: /sisi</span><br><span class="line">Disallow: /beer</span><br></pre></td></tr></table></figure>
-
-<h1 id="漏洞探测"><a href="#漏洞探测" class="headerlink" title="漏洞探测"></a>漏洞探测</h1><p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102141938396.png" alt="image-20221102141938396"></p>
-<p>还是扫一下目录把，目录也没扫到，看了攻略，是index中的</p>
-<p>fristi有提示。</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102143115854.png" alt="image-20221102143115854"></p>
-<p>拼接url进入如下页面。所以要注意各种微小的东西，这些都是靶场中的提示，和实战中并不一样。</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102143103409.png" alt="image-20221102143103409"></p>
-<p>下面有个登录框，弱口令sql测试过了，没用。</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102143335952.png" alt="image-20221102143335952"></p>
-<p>扫目录扫出来个no！</p>
-<p>暂时还不知道干什么用的。</p>
-<p>查看登录框界面的前端代码会发现注释，有一大串base64</p>
-<p>解码之后发现是一个png</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102143558311.png" alt="image-20221102143558311"></p>
-<p>将他在kali中解码为png文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base64 -d base64.txt &gt; base64.png</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102144626370.png" alt="image-20221102144626370"></p>
-<p>得到密码为，keKkeKKeKKeKkEkkEk</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102144843878.png" alt="image-20221102144843878"></p>
-<p>同时在html的注释中还有发信人的名字，</p>
-<p>eezeepz</p>
-<h1 id="漏洞利用-upload"><a href="#漏洞利用-upload" class="headerlink" title="漏洞利用-upload"></a>漏洞利用-upload</h1><p>成功登录！随后就是一个上传文件的目录，然后尝试上传冰蝎的木马</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102145147078.png" alt="image-20221102145147078"></p>
-<p>害得来一个绕过，那我们就进行一个绕过。%00和00截断都用过了，应该是白名单，而且正常无法绕。但是这是一个Apache服务器，尝试寻找他的解析漏洞进行getshell。</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150027246.png" alt="image-20221102150027246"></p>
-<p>apache 2.2.15</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150144080.png" alt="image-20221102150144080"></p>
-<p>多文件名后缀的解析漏洞。</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150222722.png" alt="image-20221102150222722"></p>
-<p>解析成功，使用冰蝎连接。</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150330655.png" alt="image-20221102150330655"></p>
-<p>这是一个</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150349992.png" alt="image-20221102150349992"></p>
-<p>apache权限的用户，所以还需要进行一个提权。</p>
-<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p>先弹一个nc来我们的kali上面</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150546777.png" alt="image-20221102150546777"></p>
-<p>弹是弹回来了，但是输入一个字母就要出现两个字母，就很麻烦诶。</p>
-<p>发现其中有个文件<code>checklogin.php</code></p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150634958.png" alt="image-20221102150634958"></p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102150733991.png" alt="image-20221102150733991"></p>
-<p>拿到mysql的账号密码，一下子就想到了udf提权。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eezeepz</span><br><span class="line">4ll3maal12#</span><br></pre></td></tr></table></figure>
-
-<p>但是我记得udf提权是需要root的mysql用户，这就十分尴尬了。</p>
-<p>随后想到了脏牛提权,上传我祖传的脏牛脚本</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -pthread dirty.c -o dirty -lcrypt</span><br><span class="line">./dirty 123456</span><br></pre></td></tr></table></figure>
-
-<p>随后登录我们的firefart账户就可以了</p>
-<p><img src="/2022/11/02/FristiLeaks-1-3/image-20221102153136131.png" alt="image-20221102153136131"></p>
-<p>拿下权限</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这个靶场相比前面的靶场难度有所提升，有些地方没想到却是还是借助了攻略。但是我记得某个大佬说过，这些靶场既然是靶场那就是存在漏洞的，那么作者最有可能的是在漏洞的隐藏上面下功夫，而不是在利用上面。所以以后我们必须要注重的是靶场中的一些细节，一定要做好，看好。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/27/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/29/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/27/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/29/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -758,7 +706,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

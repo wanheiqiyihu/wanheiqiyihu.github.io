@@ -255,6 +255,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/" class="post-title-link" itemprop="url">攻防世界 Cat url编码超过 @参数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-03 10:59:26" itemprop="dateCreated datePublished" datetime="2022-01-03T10:59:26+08:00">2022-01-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-07 22:25:46" itemprop="dateModified" datetime="2022-12-07T22:25:46+08:00">2022-12-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="攻防世界-Cat-url编码超过-参数"><a href="#攻防世界-Cat-url编码超过-参数" class="headerlink" title="攻防世界 Cat url编码超过 @参数"></a>攻防世界 Cat url编码超过 @参数</h1><p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103085511643.png" alt="image-20220103085511643"></p>
+<p>打开题目，是这样一个界面</p>
+<p>先随便输入一个域名</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103085846359.png" alt="image-20220103085846359"></p>
+<p>发现url中有了参数，</p>
+<p>再尝试输入127.0.0.1</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103090800111.png" alt="image-20220103090800111"></p>
+<p>是一个ping命令功能框，经过尝试，127.0.0.1&amp;&amp;dir、127.0.0.1&amp;&amp;ls、127.0.0.1|ls均被屏蔽。</p>
+<p>在url处 发现当传入url编码的值后，可以解析。当传入%80等之后的值发现报错。</p>
+<p>由于url编码是16进制 ascii范围是0-127 所以%80大于127 导致了报错。</p>
+<p>附上一张ASCII编码的表<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/ASCII/309296?fr=aladdin">ASCII_百度百科 (baidu.com)</a></p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103100316436.png" alt="image-20220103100316436"></p>
+<p>发现使用的框架</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103100617946.png" alt="image-20220103100617946"></p>
+<p>发现了数据库信息</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103100659567.png" alt="image-20220103100659567"></p>
+<p>记录关键地址opt/api/database.sqlite</p>
+<p>百度了一下发现了@参数没有被禁止</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/1.png" alt="img"></p>
+<p>输入@opt/api/database.sqlite</p>
+<p>出现一个新的页面，通过关键词搜索ctf发现了flag</p>
+<p><img src="/2022/01/03/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-Cat-url%E7%BC%96%E7%A0%81%E8%B6%85%E8%BF%87@%E5%8F%82%E6%95%B0/image-20220103103926563.png" alt="image-20220103103926563"></p>
+<p>总结：</p>
+<p>1.url编码超过%80报错</p>
+<p>2.datebase里面的关键信息</p>
+<p>3.@参数的使用</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -476,120 +575,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/" class="post-title-link" itemprop="url">群友发的一个题目心得 敏感文件 git泄露 flag的隐藏</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-01-01 22:26:07 / 修改时间：22:37:38" itemprop="dateCreated datePublished" datetime="2022-01-01T22:26:07+08:00">2022-01-01</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="群友发的一个题目心得"><a href="#群友发的一个题目心得" class="headerlink" title="群友发的一个题目心得"></a>群友发的一个题目心得</h1><p><a target="_blank" rel="noopener" href="http://182.254.215.168:8090/">http://182.254.215.168:8090/</a></p>
-<p>打开题目一共有五道题</p>
-<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101160426265.png" alt="image-20220101160426265"></p>
-<h2 id="1-第一题"><a href="#1-第一题" class="headerlink" title="1.第一题"></a>1.第一题</h2><p>直接查看源代码，flag就在注释里面</p>
-<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101160729201.png" alt="image-20220101160729201"></p>
-<h2 id="2-第二题"><a href="#2-第二题" class="headerlink" title="2.第二题"></a>2.第二题</h2><p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101160832507.png" alt="image-20220101160832507"></p>
-<p>打开之后，bp抓包就是这样，才开始我以为是找敏感文件。找了半天没有找到，后来才发现。</p>
-<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101161005749.png" alt="image-20220101161005749"></p>
-<p>要从这里开始拦截</p>
-<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101161049259.png" alt="image-20220101161049259"></p>
-<p>在返回注释中拿到flag</p>
-<h2 id="3-第三题"><a href="#3-第三题" class="headerlink" title="3.第三题"></a>3.第三题</h2><p>第三题点进去是这样<img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101161621911.png" alt="image-20220101161621911"></p>
-<p>多半就是xff伪造</p>
-<p>在参数中加入X-Forwarded-For: 127.0.0.1</p>
-<p>提示<img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101161819908.png" alt="image-20220101161819908"></p>
-<p>又在参数中发现</p>
-<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101161833771.png" alt="image-20220101161833771"></p>
-<p>将0改为1，试试</p>
-<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101161852223.png" alt="image-20220101161852223"></p>
-<p>成功获取flag</p>
-<h2 id="4-第四题"><a href="#4-第四题" class="headerlink" title="4.第四题"></a>4.第四题</h2><p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101162229249.png" alt="image-20220101162229249"></p>
-<p>都提示是敏感文件了</p>
-<p>第一个肯定想到的是robot.txt</p>
-<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101163642673.png" alt="image-20220101163642673"></p>
-<p>发现flag的文件，并访问得到flag1？</p>
-<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101163717926.png" alt="image-20220101163717926"></p>
-<p>那第二个敏感文件就是gedit备份文件，在index.php地址后面添加~符号，发现要让我们下载，然后txt打开,得到flag2</p>
-<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101164432699.png" alt="image-20220101164432699"></p>
-<p>注：  默认情况下使用Vim编程，在修改文件后系统会自动生成一个带~的备份文件，某些情况下可以对其下载进行查看；</p>
-<p>第三个是vim的临时文件 swp文件</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38133867/article/details/78671626">(27条消息) SWP文件详细介绍与利用_James_zjm的博客-CSDN博客_swp文件</a></p>
-<p>访问.index.php.swp下载</p>
-<p>在虚拟机中用vim打开它</p>
-<p>用vim -r  filename复原文件</p>
-<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101183736286.png" alt="image-20220101183736286"></p>
-<p>发现第三个flag</p>
-<h2 id="5-第五题"><a href="#5-第五题" class="headerlink" title="5.第五题"></a>5.第五题</h2><p>点进去之后发现是</p>
-<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101183857645.png" alt="image-20220101183857645"></p>
-<p>这样一个界面，慢慢看。</p>
-<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101184514591.png" alt="image-20220101184514591"></p>
-<p>提示我们是git泄露</p>
-<p>用githack一弄就弄出来了，没想到这东西只能在py2中运行。</p>
-<p><img src="/2022/01/01/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E7%9B%AE%E5%BF%83%E5%BE%97-%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6-git%E6%B3%84%E9%9C%B2-flag%E7%9A%84%E9%9A%90%E8%97%8F/image-20220101222431174.png" alt="image-20220101222431174"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/51/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/">51</a><span class="page-number current">52</span><a class="page-number" href="/page/53/">53</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/53/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/51/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/">51</a><span class="page-number current">52</span><a class="page-number" href="/page/53/">53</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/53/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -657,7 +646,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

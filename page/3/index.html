@@ -255,6 +255,106 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">linux下php-rce下的小技巧</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-11 03:13:40 / 修改时间：03:14:12" itemprop="dateCreated datePublished" datetime="2024-01-11T03:13:40+08:00">2024-01-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="linux下php-rce下的小技巧"><a href="#linux下php-rce下的小技巧" class="headerlink" title="linux下php-rce下的小技巧"></a>linux下php-rce下的小技巧</h1><p>最近遇到一个机器，有命令执行漏洞</p>
+<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111021705807.png" alt="image-20240111021705807"></p>
+<p>我在bp里面一直试了两个多小时，终于解决了。没想到居然是用这么朴素的方法。。。</p>
+<p>由于只是一个rce</p>
+<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111022200983.png" alt="image-20240111022200983"></p>
+<p>我期间尝试过如下的方法</p>
+<h2 id="1-反弹shell"><a href="#1-反弹shell" class="headerlink" title="1.反弹shell"></a>1.反弹shell</h2><p>用各种反弹shell的命令尝试反弹shell，失败，原因大概有两个，不是命令太长就是命令中包含了&lt;字符，没错，就是这个字符，</p>
+<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111022439195.png" alt="image-20240111022439195"></p>
+<p>只要有这个东西还有些我没试出来的其他的字符，那就会直接报错，可能是这套系统的问题或者是对面有防火墙的问题。</p>
+<p>总之能想到的linux反弹shell，能搜到的，能找到的，我都试过了。无果</p>
+<h2 id="2-echo写文件"><a href="#2-echo写文件" class="headerlink" title="2.echo写文件"></a>2.echo写文件</h2><p>既然反弹shell没法，那我直接写文件不就对了吗，问题还是在&lt;上面，一旦echo创建的文件中含有&lt;这个字符，依然会直接报错，那就断绝了我们写php文件的想法</p>
+<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111023344212.png" alt="image-20240111023344212"></p>
+<h2 id="3-echo-gt-gt-写到文件末尾"><a href="#3-echo-gt-gt-写到文件末尾" class="headerlink" title="3.echo&gt;&gt;写到文件末尾"></a>3.echo&gt;&gt;写到文件末尾</h2><p>通过cat我读取到对面的php源码（图是我自己复制到txt方便看的）</p>
+<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111023745249.png" alt="image-20240111023745249"></p>
+<p>他的末尾都没有?&gt;结尾符号，那我们可以尝试通过echo&gt;&gt;，直接写到原有文件的末尾。这样我们就不用使用前面那个字符了。</p>
+<p>但是问题又出现了一旦检测到<code>$</code>符号后面跟了东西，那就会把$和跟的东西全部删掉然后写入</p>
+<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111024651789.png" alt="image-20240111024651789"></p>
+<p>访问目标文件，</p>
+<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111024705013.png" alt="image-20240111024705013"></p>
+<p>可以看到$后面跟了东西的，$和跟的东西都被删掉了。又没办法写文件进去了</p>
+<h2 id="4-wget下文件"><a href="#4-wget下文件" class="headerlink" title="4.wget下文件"></a>4.wget下文件</h2><p>没办法，不让写，那我们直接下进去呗</p>
+<p>然而，wget确实可以使用，下载也能下，但是！！下的东西里面他也会检测$和跟的东西都会被删掉。啊？</p>
+<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111025030683.png" alt="image-20240111025030683"></p>
+<p>可以看到，我的马什么都没。只有一个文本（我是cat看过的）</p>
+<p>然后我还试了脏数据绕过，加了很多文本在前面，结果如下</p>
+<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111025203676.png" alt="image-20240111025203676"></p>
+<p>翻到最后，马还是被它删了。</p>
+<h1 id="最后的解决办法"><a href="#最后的解决办法" class="headerlink" title="最后的解决办法"></a>最后的解决办法</h1><p>没想到是图片马，中间还尝试过一些其他的方法，上传过大马，翻配置文件链接数据库（对面只支持本地连接），都没用。</p>
+<p>然后我后面还想在机器上下载一个上传小马（半夜了脑子糊了），突然旁边搜到一个《php上传图片马绕过》，好好好，直接上传图片马。</p>
+<p>然后用mv命令将上传的图片马的后缀名改成php，<code>mv file.txt new_name.txt</code></p>
+<p>终于成了！</p>
+<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111025616390.png" alt="image-20240111025616390"></p>
+<p>最后师傅们要是还有什么其他的方法欢迎评论区赐教</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/01/07/C%E8%AF%AD%E8%A8%802-%E6%95%B0%E7%BB%84%E3%80%81%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%E3%80%81%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E3%80%81%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81dll%E7%BC%96%E5%86%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -466,86 +566,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/01/02/%E7%BB%95cdn%E4%B9%8B%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/01/02/%E7%BB%95cdn%E4%B9%8B%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-title-link" itemprop="url">绕cdn之邮件服务器</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-01-02 22:02:44 / 修改时间：22:03:19" itemprop="dateCreated datePublished" datetime="2024-01-02T22:02:44+08:00">2024-01-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="绕cdn之邮件服务器"><a href="#绕cdn之邮件服务器" class="headerlink" title="绕cdn之邮件服务器"></a>绕cdn之邮件服务器</h1><p>平时很少碰到绕cdn的，偶然看到大佬聊天说这个邮件绕cdn的方法很准，所以来学习一下，其实网上也搜得到很多其他的，不过基本上都知道，就只是单独说说邮件服务器的方法。</p>
-<p> 考了一年啥也不是咯~</p>
-<h1 id="原理介绍"><a href="#原理介绍" class="headerlink" title="原理介绍"></a>原理介绍</h1><p>很多站点都有发送邮件的功能，比如忘记密码，订阅，等等。而且一般的邮件系统很多都是在内部，没有经过CDN的解析。在邮件源码里面就会包含服务器的真实 IP。</p>
-<p>现在就以墨者学院为例。<a target="_blank" rel="noopener" href="http://www.mozhe.cn/">www.mozhe.cn</a></p>
-<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><p>可以用一些匿名邮箱来，避免被溯源。</p>
-<p>现在看看</p>
-<p><img src="/2024/01/02/%E7%BB%95cdn%E4%B9%8B%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240102220050864.png" alt="image-20240102220050864"></p>
-<p>一般来说第一个是转发服务器的ip，第二个就是真实服务器的ip。可以结合一些其他的东西进行判断，比如说，对面公司的地址是不是就是在那个ip的地址，</p>
-<p>（这么简单个东西还要专门写blog是吧，嘛，主要是记录一下。反正没人看）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -613,7 +637,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

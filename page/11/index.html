@@ -255,6 +255,114 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/" class="post-title-link" itemprop="url">红队隐蔽 whonix+vmware</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-27 00:32:49 / 修改时间：00:33:22" itemprop="dateCreated datePublished" datetime="2023-07-27T00:32:49+08:00">2023-07-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="红队隐蔽-whonix-vmware"><a href="#红队隐蔽-whonix-vmware" class="headerlink" title="红队隐蔽 whonix+vmware"></a>红队隐蔽 whonix+vmware</h1><h1 id="whonix"><a href="#whonix" class="headerlink" title="whonix"></a>whonix</h1><p>下载地址 <a target="_blank" rel="noopener" href="https://www.t00ls.com/link.html?url=https://www.whonix.org/">https://www.whonix.org/</a></p>
+<p><img src="/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/image-20230725185037301.png" alt="image-20230725185037301"></p>
+<p>下载后为 Whonix-XFCE-15.0.1.7.3.ova ova 是vbox使用文件，但是本人不使用vbox，所以我们要把他转为vmware得vmdk文件，操作如下： 首先使用压缩软件强行解压，解压后文件如下：</p>
+<p><img src="/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/image-20230725185055110.png" alt="image-20230725185055110"></p>
+<h1 id="制作vmdk"><a href="#制作vmdk" class="headerlink" title="制作vmdk"></a>制作vmdk</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmware-vdiskmanager.exe -r Whonix-Xfce-17.0.3.0-disk001.vmdk -t 0 Whonix-GW.vmdk</span><br></pre></td></tr></table></figure>
+
+<p>需要在vm的安装目录里面找到vmware-vdiskmanager.exe工具</p>
+<p><img src="/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/image-20230725185206447.png" alt="image-20230725185206447"></p>
+<h1 id="vmware新建虚拟机"><a href="#vmware新建虚拟机" class="headerlink" title="vmware新建虚拟机"></a>vmware新建虚拟机</h1><p>选新虚拟机的时候先不安装操作系统，到时候直接用磁盘</p>
+<p>自定义配置如下： 选择：linux - debian10 x64 - 起名 whonix-GW - 1个处理器 2个内核 - 2g内存 - NAT - 使用现有虚拟磁盘 Whonix-GW.vmdk - 选择转换格式 - 自定义硬件：关闭cd 启动时链接 ；usb、打印机移除 - 添加网卡 - 增加 Lan 区段，起名：whonix</p>
+<h1 id="开机-whonix-WG-内配网卡信息，开终端"><a href="#开机-whonix-WG-内配网卡信息，开终端" class="headerlink" title="开机 whonix-WG 内配网卡信息，开终端"></a>开机 whonix-WG 内配网卡信息，开终端</h1><p><img src="/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/image-20230725210701461.png" alt="image-20230725210701461"></p>
+<p>在这个里面修改我们的代理设置</p>
+<p>打开需要默认密码，默认密码是changeme</p>
+<p>在打开的torrc文件的最后面，另起一行，填写如下并保存(加入前置代理哈)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTTPSProxy IP:PORT</span><br></pre></td></tr></table></figure>
+
+<img src="/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/一些笔记\渗透测试\红队隐蔽 whonix+vmware\image-20230725211813559.png" alt="image-20230725211813559" style="zoom: 67%;">
+
+
+
+<p>然后就是给whonix网关弄两个网卡，一个lan网段，一个nat连外网。</p>
+<p>重启之后ifconfig</p>
+<p><img src="/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/image-20230725212211170.png" alt="image-20230725212211170"></p>
+<h1 id><a href="#" class="headerlink" title></a></h1><p>弄之前需要把nat网卡的地址改成你自的vm工具上面的</p>
+<p>/etc/network/interfaces.d/ nano 30_non-qubes-whonix</p>
+<p><img src="/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/image-20230725213720726.png" alt="image-20230725213720726"></p>
+<p><img src="/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/image-20230726235816120.png" alt="image-20230726235816120"></p>
+<p><img src="/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/image-20230725213736504.png" alt="image-20230725213736504"></p>
+<p>这里配置一定要注意自己的VMnet网卡配置，包括网关地址以及ip dhcp取值范围（注意这个系统的编辑器用的是nano而不是平时用的vim）</p>
+<p><img src="/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/image-20230726235853448.png" alt="image-20230726235853448"></p>
+<h1 id="Anon-Connection-Wizard-这里和Tor-浏览器配置一样"><a href="#Anon-Connection-Wizard-这里和Tor-浏览器配置一样" class="headerlink" title="Anon Connection Wizard 这里和Tor 浏览器配置一样"></a>Anon Connection Wizard 这里和Tor 浏览器配置一样</h1><p><img src="/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/image-20230725212544633.png" alt="image-20230725212544633"></p>
+<p>你可以用brige也可以用前置代理，当然我们这就用前置代理了，也可以一起用。</p>
+<p><img src="/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/image-20230727001359789.png" alt="image-20230727001359789"></p>
+<p>等待连上tor网络</p>
+<h1 id="配置一下你的攻击机"><a href="#配置一下你的攻击机" class="headerlink" title="配置一下你的攻击机"></a>配置一下你的攻击机</h1><p>攻击机把dns服务器设置成我们的lan网段ip即可</p>
+<p>这里我们就是用kali</p>
+<p><img src="/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/image-20230727001534028.png" alt="image-20230727001534028"></p>
+<p>右键编辑kali 网卡配置</p>
+<p><img src="/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/image-20230727001841720.png" alt="image-20230727001841720"></p>
+<p>设置成手动（忘截图了）</p>
+<p>然后就可以实现匿名了</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/07/18/Linux%E8%BF%9B%E7%A8%8B%E9%9A%90%E8%97%8F-%E5%8A%AB%E6%8C%81%E9%A2%84%E5%8A%A0%E8%BD%BD%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93LD-PRELOAD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -428,102 +536,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">php审计之phar://协议</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-10 17:44:57 / 修改时间：17:45:59" itemprop="dateCreated datePublished" datetime="2023-07-10T17:44:57+08:00">2023-07-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/daima/" itemprop="url" rel="index"><span itemprop="name">-daima</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="php审计之phar-协议"><a href="#php审计之phar-协议" class="headerlink" title="php审计之phar://协议"></a>php审计之phar://协议</h1><p>之前在网上看到这么个协议，感觉记忆有点模糊，故复现一下。</p>
-<ul>
-<li>php.ini中的phar.readonly设置为Off（默认为On）</li>
-</ul>
-<p>一般来说此协议可适用于文件包含</p>
-<p>这个协议就是用来读取压缩包中的文件内容的。</p>
-<p>我们这里用最最经典的pikachu靶场来做实验。</p>
-<p><img src="/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/image-20230709210835154.png" alt="image-20230709210835154"></p>
-<p>看代码，直接包含了get方法接收到的filename参数，我们这里去给include里面加一个压缩包，压缩包里面弄一个shell。</p>
-<p><img src="/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/image-20230709211004093.png" alt="image-20230709211004093"></p>
-<p><img src="/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/image-20230709211049372.png" alt="image-20230709211049372"></p>
-<p>现在我们去包含这个1.zip</p>
-<p>可以看到直接包含也只能看到里面的文件名字</p>
-<p><img src="/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/image-20230709211136275.png" alt="image-20230709211136275"></p>
-<p>但是我们使用，<code>phar://</code>协议去包含的话（中途改了下代码）</p>
-<p><img src="/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/image-20230710174430954.png" alt="image-20230710174430954"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phar://C:\code\phpstudy_pro\WWW\vul\fileinclude\include\12.zip\12.php</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/image-20230710174201307.png" alt="image-20230710174201307"></p>
-<p>而且后缀也不是非要zip，换成png也可以，这样就可以绕过了。</p>
-<h2 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h2><p>同时也可以用php脚本打包一个phar文件，下面是脚本</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$pharFilename</span> = <span class="string">&#x27;myapp.phar&#x27;</span>;</span><br><span class="line"><span class="variable">$entrypoint</span> = <span class="string">&#x27;1.php&#x27;</span>;</span><br><span class="line"><span class="variable">$stub</span> = <span class="string">&lt;&lt;&lt;STUB</span></span><br><span class="line"><span class="string">&lt;?php</span></span><br><span class="line"><span class="string">Phar::mapPhar(&#x27;<span class="subst">$pharFilename</span>&#x27;);</span></span><br><span class="line"><span class="string">include &#x27;phar://<span class="subst">$pharFilename</span>/<span class="subst">$entrypoint</span>&#x27;;</span></span><br><span class="line"><span class="string">__HALT_COMPILER();</span></span><br><span class="line"><span class="string">STUB</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$phar</span> = <span class="keyword">new</span> Phar(<span class="variable">$pharFilename</span>);</span><br><span class="line"><span class="variable">$phar</span>-&gt;startBuffering();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加入口文件</span></span><br><span class="line"><span class="variable">$phpCode</span> = <span class="string">&#x27;&lt;?php echo &quot;Hello, World!&quot;;&#x27;</span>;</span><br><span class="line"><span class="variable">$phar</span>-&gt;addFromString(<span class="variable">$entrypoint</span>, <span class="variable">$phpCode</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置 stub（入口文件）</span></span><br><span class="line"><span class="variable">$phar</span>-&gt;setStub(<span class="variable">$stub</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$phar</span>-&gt;stopBuffering();</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;成功生成 <span class="subst">$pharFilename</span>\n&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>phpcode就是包含的文件内容。</p>
-<p>ps:我用php7.3.4版本复现了一晚上都没成功，真要自杀了。换成5.6.9就可以了。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -591,7 +607,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

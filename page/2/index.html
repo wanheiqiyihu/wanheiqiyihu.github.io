@@ -255,6 +255,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">shiro550漏洞分析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-02-07 00:10:28 / 修改时间：00:11:03" itemprop="dateCreated datePublished" datetime="2024-02-07T00:10:28+08:00">2024-02-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="shiro550漏洞分析"><a href="#shiro550漏洞分析" class="headerlink" title="shiro550漏洞分析"></a>shiro550漏洞分析</h1><p>今天来仔细研究一下这个漏洞</p>
+<p>环境搭建暂时就不说了，这个可以在网上找教程，直接开始漏洞分析，祝福。</p>
+<h1 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h1><h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><p>漏洞产生点在<code>CookieRememberMeManager</code>该位置，来看到<code>rememberSerializedIdentity</code>方法。</p>
+<p><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206134650560.png" alt="image-20240206134650560"><br>在此处，对序列化的字节数组进行base64编码，并将编码结果设置为cookie值。那我们看看是什么地方调用了这个方法.</p>
+<p><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206140748579.png" alt="image-20240206140748579"><br>点这个2个用法,这样就可以看到是在哪里用了这个方法.<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206140835289.png" alt="image-20240206140835289"><br>可以看到是AbstractRememberMeManager类里面调用了这个方法</p>
+<p><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206141831432.png" alt="image-20240206141831432"><br>还可以用ctrl+alt+h来看是哪些东西调用了这个方法<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206144038527.png" alt="image-20240206144038527">在这里会发现<code>rememberIdentity</code>方法会被<code>onSuccessfulLogin</code>方法给调用，跟踪到这一步，就看到了<code>onSuccessfulLogin</code>登录成功的方法。</p>
+<p><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206144121521.png" alt="image-20240206144121521"></p>
+<p>当登录成功后会调用<code>AbstractRememberMeManager.onSuccessfulLogin</code>方法，该方法主要实现了生成加密的<code>RememberMe Cookie</code>,然后将<code>RememberMe Cookie</code>设置为用户的Cookie值。在前面我们分析的<code>rememberSerializedIdentity</code>方法里面去实现了。</p>
+<p>接下来，我们在这个登陆函数这里打个断点，进行分析，正向的。<br>开始环境，然后输入账号密码，root,secret<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206144748667.png" alt="image-20240206144748667"><br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206144807380.png" alt="image-20240206144807380"><br>idea里面都可以看到穿进去了<br>这里看到调用了<code>isRememberMe</code>很显而易见得发现这个就是一个判断用户是否选择了<code>Remember Me</code>选项。<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206144910533.png" alt="image-20240206144910533"><br>这里进入这个rememberIdentity方法</p>
+<p>前面说过该方法会去生成一个<code>PrincipalCollection</code>对象，里面包含登录信息。F7进行跟进<code>rememberIdentity</code>方法。<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206144958818.png" alt="image-20240206144958818"></p>
+<p><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206145025830.png" alt="image-20240206145025830"><br>查看convertPrincipalsToBytes的使用，根据英文名字，我们都可以猜测，这个点作用就是将凭证转化为字节流，不过我们还是跟进去看看<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206150300541.png" alt="image-20240206150300541"><br>跟进来看之后，发现是将凭证序列化之后，再进行转字节流数组。</p>
+<p>这里我们接下来看另外一个地方，cipherService<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206150612234.png" alt="image-20240206150612234"><br>再来看到下一段代码，这里如果<code>getCipherService</code>方法不为空的话，就会去执行下一段代码。<code>getCipherService</code>方法是获取加密模式。</p>
+<p>后面就是进行加密了<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206150707538.png" alt="image-20240206150707538"><br>我们跟入这个加密参数来看看<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206150750007.png" alt="image-20240206150750007"><br>可以看到，如果值不为空就进入加密。</p>
+<p><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206150842156.png" alt="image-20240206150842156"><br>这里，有个<code>getEncryptionCipherKey()</code>从名字看，就是获取加密密钥的，我们这里就跟进去看看，是怎么获取密钥的。<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206150929704.png" alt="image-20240206150929704"><br>然后看下面哈<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206152218420.png" alt="image-20240206152218420"><br>看，下面那个<code>setEncryptionCipherKey</code>在AbstractRememberMeManager.java的AbstractRememberMeManager方法中被调用了。<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206152349191.png" alt="image-20240206152349191"><br>然后去查看这个<code>DEFAULT_CIPHER_KEY_BYTES</code>的值<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206152424668.png" alt="image-20240206152424668"><br>可以看到，密钥是被定义死的，那么加密过程基本就很清晰了</p>
+<p>凭证等值-&gt;tobytes-&gt;aes-&gt;base64</p>
+<h2 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h2><p>现在看看解密的过程</p>
+<p><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206235351390.png" alt="image-20240206235351390"><br>还是在AbstractRememberMeManager.decrypt中，一层一层网上追溯。<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206235516557.png" alt="image-20240206235516557"><br>在convertBytesToPrincipals方法中使用了解密方法,继续网上追溯<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240206235707082.png" alt="image-20240206235707082"><br>在这个getRememberedPrincipals方法中调用了convertBytesToPrincipals方法，从名字我们就可以看出，这个getRememberedPrincipals是获取登陆凭证的一个函数</p>
+<p>好，那我们就在这个方法中下一个断点，一步一步跟踪。</p>
+<p><img src="file://C:/Users/24205/Desktop/day1%E7%BA%A2%E9%98%9F%E8%AF%BE/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/%E8%B5%84%E6%96%99/1-Shiro/assets/image-20220902000758049.png?lastModify=1707235646" alt="image-20220902000758049"></p>
+<p>首先rememberme传进来之后，就会进行base解密，之后和加密差不多，最后就是传入readObject()导致的反序列化漏洞。</p>
+<h1 id="漏洞攻击"><a href="#漏洞攻击" class="headerlink" title="漏洞攻击"></a>漏洞攻击</h1><p>就用工具即可<br><img src="/2024/02/07/shiro550%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/image-20240207001003892.png" alt="image-20240207001003892"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/02/01/%E5%B8%B8%E8%A7%81linux%E7%BB%B4%E6%9D%83%E6%96%B9%E6%B3%95-%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E4%B8%8E%E5%90%8E%E9%97%A8%E5%A4%84%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -497,110 +585,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">linux下php-rce下的小技巧</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-01-11 03:13:40 / 修改时间：03:14:12" itemprop="dateCreated datePublished" datetime="2024-01-11T03:13:40+08:00">2024-01-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="linux下php-rce下的小技巧"><a href="#linux下php-rce下的小技巧" class="headerlink" title="linux下php-rce下的小技巧"></a>linux下php-rce下的小技巧</h1><p>最近遇到一个机器，有命令执行漏洞</p>
-<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111021705807.png" alt="image-20240111021705807"></p>
-<p>我在bp里面一直试了两个多小时，终于解决了。没想到居然是用这么朴素的方法。。。</p>
-<p>由于只是一个rce</p>
-<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111022200983.png" alt="image-20240111022200983"></p>
-<p>我期间尝试过如下的方法</p>
-<h2 id="1-反弹shell"><a href="#1-反弹shell" class="headerlink" title="1.反弹shell"></a>1.反弹shell</h2><p>用各种反弹shell的命令尝试反弹shell，失败，原因大概有两个，不是命令太长就是命令中包含了&lt;字符，没错，就是这个字符，</p>
-<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111022439195.png" alt="image-20240111022439195"></p>
-<p>只要有这个东西还有些我没试出来的其他的字符，那就会直接报错，可能是这套系统的问题或者是对面有防火墙的问题。</p>
-<p>总之能想到的linux反弹shell，能搜到的，能找到的，我都试过了。无果</p>
-<h2 id="2-echo写文件"><a href="#2-echo写文件" class="headerlink" title="2.echo写文件"></a>2.echo写文件</h2><p>既然反弹shell没法，那我直接写文件不就对了吗，问题还是在&lt;上面，一旦echo创建的文件中含有&lt;这个字符，依然会直接报错，那就断绝了我们写php文件的想法</p>
-<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111023344212.png" alt="image-20240111023344212"></p>
-<h2 id="3-echo-gt-gt-写到文件末尾"><a href="#3-echo-gt-gt-写到文件末尾" class="headerlink" title="3.echo&gt;&gt;写到文件末尾"></a>3.echo&gt;&gt;写到文件末尾</h2><p>通过cat我读取到对面的php源码（图是我自己复制到txt方便看的）</p>
-<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111023745249.png" alt="image-20240111023745249"></p>
-<p>他的末尾都没有?&gt;结尾符号，那我们可以尝试通过echo&gt;&gt;，直接写到原有文件的末尾。这样我们就不用使用前面那个字符了。</p>
-<p>但是问题又出现了一旦检测到<code>$</code>符号后面跟了东西，那就会把$和跟的东西全部删掉然后写入</p>
-<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111024651789.png" alt="image-20240111024651789"></p>
-<p>访问目标文件，</p>
-<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111024705013.png" alt="image-20240111024705013"></p>
-<p>可以看到$后面跟了东西的，$和跟的东西都被删掉了。又没办法写文件进去了</p>
-<h2 id="4-wget下文件"><a href="#4-wget下文件" class="headerlink" title="4.wget下文件"></a>4.wget下文件</h2><p>没办法，不让写，那我们直接下进去呗</p>
-<p>然而，wget确实可以使用，下载也能下，但是！！下的东西里面他也会检测$和跟的东西都会被删掉。啊？</p>
-<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111025030683.png" alt="image-20240111025030683"></p>
-<p>可以看到，我的马什么都没。只有一个文本（我是cat看过的）</p>
-<p>然后我还试了脏数据绕过，加了很多文本在前面，结果如下</p>
-<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111025203676.png" alt="image-20240111025203676"></p>
-<p>翻到最后，马还是被它删了。</p>
-<h1 id="最后的解决办法"><a href="#最后的解决办法" class="headerlink" title="最后的解决办法"></a>最后的解决办法</h1><p>没想到是图片马，中间还尝试过一些其他的方法，上传过大马，翻配置文件链接数据库（对面只支持本地连接），都没用。</p>
-<p>然后我后面还想在机器上下载一个上传小马（半夜了脑子糊了），突然旁边搜到一个《php上传图片马绕过》，好好好，直接上传图片马。</p>
-<p>然后用mv命令将上传的图片马的后缀名改成php，<code>mv file.txt new_name.txt</code></p>
-<p>终于成了！</p>
-<p><img src="/2024/01/11/linux%E4%B8%8Bphp-rce%E4%B8%8B%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/image-20240111025616390.png" alt="image-20240111025616390"></p>
-<p>最后师傅们要是还有什么其他的方法欢迎评论区赐教</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -668,7 +656,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

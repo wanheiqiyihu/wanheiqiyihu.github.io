@@ -255,6 +255,101 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/10/17/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8D%E7%BC%96%E8%AF%91_%E5%8F%AA%E6%9C%89%E9%83%A8%E5%88%86%E6%BA%90%E7%A0%81-%E6%8C%96%E5%9D%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/17/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8D%E7%BC%96%E8%AF%91_%E5%8F%AA%E6%9C%89%E9%83%A8%E5%88%86%E6%BA%90%E7%A0%81-%E6%8C%96%E5%9D%91/" class="post-title-link" itemprop="url">微信小程序反编译_只有部分源码_挖坑</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-10-17 20:44:29 / 修改时间：20:47:34" itemprop="dateCreated datePublished" datetime="2022-10-17T20:44:29+08:00">2022-10-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nixiang/" itemprop="url" rel="index"><span itemprop="name">-nixiang</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="微信小程序反编译（只有部分源码-挖坑"><a href="#微信小程序反编译（只有部分源码-挖坑" class="headerlink" title="微信小程序反编译（只有部分源码_挖坑"></a>微信小程序反编译（只有部分源码_挖坑</h1><p>看到了两篇反编译的文章，觉得不错，故总结一下。</p>
+<p>首先感谢Azeng师傅和虫虫师傅的文章</p>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>1、电脑版微信、2、手机微信、3、wuWxapkg.js解包、4、电脑版解密工具（针对PC版的）、5、node.js环境</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node.js：https://nodejs.org/zh-cn/</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/10/17/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8D%E7%BC%96%E8%AF%91_%E5%8F%AA%E6%9C%89%E9%83%A8%E5%88%86%E6%BA%90%E7%A0%81-%E6%8C%96%E5%9D%91/image-20221017185831681.png" alt="image-20221017185831681"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wuWxapkg.js ：https://github.com/qwerty472123/wxappUnpacker</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/10/17/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8D%E7%BC%96%E8%AF%91_%E5%8F%AA%E6%9C%89%E9%83%A8%E5%88%86%E6%BA%90%E7%A0%81-%E6%8C%96%E5%9D%91/image-20221017185845669.png" alt="image-20221017185845669"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">2、使用wuWxapkg.js 需要安装依赖文件，按照下面一步步执行即可。</span><br><span class="line"></span><br><span class="line">npm config set registry https://registry.npm.taobao.org # 设置国内下载链接</span><br><span class="line">npm install esprima</span><br><span class="line">npm install css-tree</span><br><span class="line">npm install cssbeautify</span><br><span class="line">npm install vm2</span><br><span class="line">npm install uglify-es</span><br><span class="line">npm install js-beautify</span><br><span class="line">npm install escodegen</span><br><span class="line">npm install cheerio</span><br></pre></td></tr></table></figure>
+
+<h1 id="pc"><a href="#pc" class="headerlink" title="pc"></a>pc</h1><p>PC端小程序源码包存放位置在</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">微信文件保存位置\WeChatFiles\Applet\小程序id\\_\_APP\_\_.wxapkg</span><br></pre></td></tr></table></figure>
+
+<p>然后拿到包后，用解密软件解密一下</p>
+<p><img src="/2022/10/17/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8D%E7%BC%96%E8%AF%91_%E5%8F%AA%E6%9C%89%E9%83%A8%E5%88%86%E6%BA%90%E7%A0%81-%E6%8C%96%E5%9D%91/image-20221017201930140.png" alt="image-20221017201930140"></p>
+<p>解密之后反编译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node wuWxapkg.js C:\Users\Red-Tools\Desktop\test\wxf5447d76338832b7.wxapkg</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34060370/article/details/124597739">(111条消息) 微信小程序反编译报SyntaxError: Unexpected token ‘}‘ 不完美的解决方法_刘建杰的博客-CSDN博客_反编译的小程序源码报错</a></p>
+<h1 id="手机"><a href="#手机" class="headerlink" title="手机"></a>手机</h1><p>手机其实找wxapkg包比较麻烦，优点就是可以不用去解密。</p>
+<p>手机端小程序源码包存放地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/data/data/com.tencent.mm/MicroMsg/32位的用户号/appbrand/pkg # 这里不是从根目录开始的，而是从文件目录开始</span><br></pre></td></tr></table></figure>
+
+<p>2、获取到了wxapkg包，就可以直接拿wuWxapkg.js 来反编译了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node wuWxapkg.js C:\Users\Red-Tools\Desktop\test\wxf5447d76338832b7.wxapkg</span><br></pre></td></tr></table></figure>
+
+<p>ios位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/mobile/Containers/Data/Application/&#123;程序 UUID&#125;/Library/WechatPrivate/&#123;用户ID&#125;/WeApp/LocalCache/release/&#123;⼩程序ID&#125;/ </span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/10/12/python-shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -449,83 +544,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/10/09/%E7%BB%95%E7%81%AB%E7%BB%92%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/09/%E7%BB%95%E7%81%AB%E7%BB%92%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7/" class="post-title-link" itemprop="url">绕火绒添加用户</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-10-09 12:10:30 / 修改时间：12:24:34" itemprop="dateCreated datePublished" datetime="2022-10-09T12:10:30+08:00">2022-10-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/miansha/" itemprop="url" rel="index"><span itemprop="name">-miansha</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="绕火绒添加用户"><a href="#绕火绒添加用户" class="headerlink" title="绕火绒添加用户"></a>绕火绒添加用户</h1><p>添加用户的时候，直接使用net命令会被火绒拦截（额截错图了，将就吧）</p>
-<p><img src="/2022/10/09/%E7%BB%95%E7%81%AB%E7%BB%92%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7/image-20221003113438336.png" alt="image-20221003113438336"></p>
-<p>用以下命令即可绕过</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">copy c:\windows\system32\net1.exe  aaa.txt</span><br><span class="line">aaa.txt user xxx 123456 /add</span><br><span class="line"></span><br><span class="line">aaa.txt user administrator /active:yes #开启administrator用户</span><br></pre></td></tr></table></figure>
-
-<p>注意需要管理员权限，而且此方法不能绕过三六零。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/31/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/page/33/">33</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/33/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/31/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/page/33/">33</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/33/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -593,7 +615,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

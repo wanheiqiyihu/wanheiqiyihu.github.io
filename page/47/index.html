@@ -255,6 +255,163 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/01/21/knight-ctf-web-wp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/21/knight-ctf-web-wp/" class="post-title-link" itemprop="url">knight ctf web wp</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-01-21 17:23:05 / 修改时间：23:29:36" itemprop="dateCreated datePublished" datetime="2022-01-21T17:23:05+08:00">2022-01-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="knight-ctf-web-Programming-Misc-wp（部分）"><a href="#knight-ctf-web-Programming-Misc-wp（部分）" class="headerlink" title="knight ctf web Programming  Misc wp（部分）"></a>knight ctf web Programming  Misc wp（部分）</h1><p>今天去打了kinghtctf 哇本来以为什么都做不来就去看个热闹的，(p≧w≦q)没想到还是可以嘛</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165146417.png" alt="image-20220121165146417"></p>
+<p>web的现在只做了这么多出来，</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121203443257.png" alt="image-20220121203443257"></p>
+<p>七百多个人能拍这我已经满足了(<em>^▽^</em>)，现在总结一下遇到的题</p>
+<h2 id="Zero-is-not-the-limit"><a href="#Zero-is-not-the-limit" class="headerlink" title="Zero is not the limit"></a>Zero is not the limit</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165345068.png" alt="image-20220121165345068"></p>
+<p>打开这个样子</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165404956.png" alt="image-20220121165404956"></p>
+<p>当时找了又找什么都没找到，后来用dirsearch扫了一下，发现了user下面一大堆的东西，然后根据题目的提示，访问目录/user/-1就出来了</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165503058.png" alt="image-20220121165503058"></p>
+<h2 id="Find-Pass-Code-1"><a href="#Find-Pass-Code-1" class="headerlink" title="Find Pass Code - 1"></a>Find Pass Code - 1</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165521079.png" alt="image-20220121165521079"></p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165531857.png" alt="image-20220121165531857"></p>
+<p>在源码中找到提示</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165549544.png" alt="image-20220121165549544"></p>
+<p>设置source参数得到源码</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121165622243.png" alt="image-20220121165622243"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&quot;pass_code&quot;</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> (strcmp(<span class="variable">$_POST</span>[<span class="string">&quot;pass_code&quot;</span>], <span class="variable">$flag</span>) == <span class="number">0</span> ) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;KCTF Flag : <span class="subst">&#123;$flag&#125;</span>&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Oh....My....God. You entered the wrong pass code.&lt;br&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&quot;source&quot;</span>])) &#123;</span><br><span class="line">    <span class="keyword">print</span> show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一个简单的strcmp绕过，他不能处理数组类型，一旦输入数组那么就会return0然后就绕过啦啦啦。</p>
+<h2 id="Most-Secure-Calculator-1"><a href="#Most-Secure-Calculator-1" class="headerlink" title="Most Secure Calculator - 1"></a>Most Secure Calculator - 1</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121170321637.png" alt="image-20220121170321637"></p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121170327886.png" alt="image-20220121170327886"></p>
+<p>这个超简单，任意命令</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121170453019.png" alt="image-20220121170453019"></p>
+<p>但是吧flag给过滤了，加个引号啦啦啦(先用ls知道了flag在这里面的)</p>
+<p><code>system(&quot;cat flag.txt&quot;)</code></p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121170646552.png" alt="image-20220121170646552"></p>
+<h2 id="My-PHP-Site"><a href="#My-PHP-Site" class="headerlink" title="My PHP Site"></a>My PHP Site</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121170702350.png" alt="image-20220121170702350"></p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121170720077.png" alt="image-20220121170720077"></p>
+<p>看到那个file参数了吗，文件包含漏洞哦~</p>
+<p><code>[Tareq&#39;s Home Page](http://137.184.133.81:15002/?file=php://filter/read=convert.base64-encode/resource=index.php)</code>用伪协议直接读取</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121170907391.png" alt="image-20220121170907391"></p>
+<p>base解密</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>] == <span class="string">&quot;index.php&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;&lt;h1&gt;ERROR!!&lt;/h1&gt;&quot;</span>;</span><br><span class="line">        <span class="keyword">die</span>();</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">include</span> <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;h1&gt;You are missing the file parameter&lt;/h1&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#note :- secret location /home/tareq/s3crEt_fl49.txt</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">&quot;X-UA-Compatible&quot;</span> content=<span class="string">&quot;IE=edge&quot;</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">&quot;viewport&quot;</span> content=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br><span class="line">    &lt;title&gt;Tareq<span class="string">&#x27;s Home Page&lt;/title&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<p>看到那个note提示了吗，用伪协议读取他</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121171217272.png" alt="image-20220121171217272"></p>
+<p>出来啦，base解密就好了<code>KCTF&#123;L0C4L_F1L3_1ncLu710n&#125;</code></p>
+<h2 id="Find-Pass-Code-2"><a href="#Find-Pass-Code-2" class="headerlink" title="Find Pass Code - 2"></a>Find Pass Code - 2</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121171307229.png" alt="image-20220121171307229"></p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121171320185.png" alt="image-20220121171320185"></p>
+<p>根据提示还是使用source参数看源码，</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121171401661.png" alt="image-20220121171401661"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"><span class="variable">$old_pass_codes</span> = <span class="keyword">array</span>(<span class="string">&quot;0e215962017&quot;</span>, <span class="string">&quot;0e730083352&quot;</span>, <span class="string">&quot;0e807097110&quot;</span>, <span class="string">&quot;0e840922711&quot;</span>);</span><br><span class="line"><span class="variable">$old_pass_flag</span> = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&quot;pass_code&quot;</span>]) &amp;&amp; !is_array(<span class="variable">$_POST</span>[<span class="string">&quot;pass_code&quot;</span>])) &#123;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$old_pass_codes</span> <span class="keyword">as</span> <span class="variable">$old_pass_code</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$_POST</span>[<span class="string">&quot;pass_code&quot;</span>] === <span class="variable">$old_pass_code</span>) &#123;</span><br><span class="line">            <span class="variable">$old_pass_flag</span> = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$old_pass_flag</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Sorry ! It&#x27;s an old pass code.&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable">$_POST</span>[<span class="string">&quot;pass_code&quot;</span>] == md5(<span class="variable">$_POST</span>[<span class="string">&quot;pass_code&quot;</span>])) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;KCTF Flag : <span class="subst">&#123;$flag&#125;</span>&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Oh....My....God. You entered the wrong pass code.&lt;br&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&quot;source&quot;</span>])) &#123;</span><br><span class="line">    <span class="keyword">print</span> show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一个md5碰撞，但是他把我们常见的都给过滤掉了，加密前加密后都必须是<code>0e纯数字</code>的形式，网上搜半天也没有，我们就写了个脚本自己跑</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121171527103.png" alt="image-20220121171527103"></p>
+<p>最后跑出来了，这里就总结一下常见的这种md5碰撞可用的</p>
+<p>0e1137126905</p>
+<p>0e215962017</p>
+<p>0e730083352</p>
+<p>0e807097110</p>
+<p>0e840922711</p>
+<h2 id="Most-Secure-Calculator-2"><a href="#Most-Secure-Calculator-2" class="headerlink" title="Most Secure Calculator - 2"></a>Most Secure Calculator - 2</h2><p>哇这个是真的难，把这个做出来我是真的有成就感！！！</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121171726495.png" alt="image-20220121171726495"></p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121171737535.png" alt="image-20220121171737535"></p>
+<p>还是命令执行，但是过滤了所有的字母和大部分的符号，这怎么办呢！还好我以前就看过p神的那个无字母webshell，</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45521281/article/details/105656936">命令执行中关于PHP正则表达式的一些绕过方法_WHOAMIAnony的博客-CSDN博客_php正则绕过</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum-advanced.html">无字母数字webshell之提高篇 | 离别歌 (leavesongs.com)</a></p>
+<p>URL编码取反绕过（最简单的）</p>
+<p>注意： 该方法只适用于PHP7</p>
+<p><strong>对想要传入的参数，先进行URL解码再取反</strong></p>
+<p>例如传入构造一个phpinfo();（生成payload的时候先取反再URL编码）</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/asd.png" alt="img"></p>
+<h2 id="Keep-Calculating"><a href="#Keep-Calculating" class="headerlink" title="Keep Calculating"></a>Keep Calculating</h2><p>哈哈随便找了下又弄出来个题，正好最近在学py</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121175705128.png" alt="image-20220121175705128"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">1</span></span><br><span class="line">y = <span class="number">2</span></span><br><span class="line">answer = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> x &lt; <span class="number">667</span>:</span><br><span class="line">    <span class="built_in">print</span>(x)</span><br><span class="line">    answer += ((x * y) + (x * (<span class="number">10</span>**<span class="built_in">len</span>(<span class="string">f&#x27;<span class="subst">&#123;y&#125;</span>&#x27;</span>)))+y)</span><br><span class="line">    x += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(answer)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Reverse-The-Answer"><a href="#Reverse-The-Answer" class="headerlink" title="Reverse The Answer"></a>Reverse The Answer</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121181401026.png" alt="image-20220121181401026"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">1</span></span><br><span class="line">answer = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> x &lt; <span class="number">544</span>:</span><br><span class="line">    calculation = (x * (x + <span class="number">1</span>)) + (<span class="number">2</span> * (x + <span class="number">1</span>))</span><br><span class="line">    reverssed_calc = <span class="built_in">int</span>(<span class="built_in">str</span>(calculation)[::-<span class="number">1</span>])</span><br><span class="line">    <span class="built_in">print</span>(x,reverssed_calc)</span><br><span class="line">    <span class="keyword">if</span> reverssed_calc%<span class="number">4</span> == <span class="number">0</span>:</span><br><span class="line">        answer += reverssed_calc</span><br><span class="line">    x += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(answer)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Square-Sum"><a href="#Square-Sum" class="headerlink" title="Square Sum"></a>Square Sum</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121183643809.png" alt="image-20220121183643809"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data = <span class="number">25000</span></span><br><span class="line">result = []</span><br><span class="line"><span class="keyword">for</span> i1 <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">200</span>):</span><br><span class="line">    <span class="keyword">for</span> i2 <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">200</span>):</span><br><span class="line">        <span class="keyword">if</span> i1**<span class="number">2</span> + i2**<span class="number">2</span> == data:</span><br><span class="line">            buffer = [i1,i2]</span><br><span class="line">            result.append(buffer)</span><br><span class="line">result.sort()</span><br><span class="line"><span class="built_in">print</span>(result)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Something-In-Common"><a href="#Something-In-Common" class="headerlink" title="Something In Common"></a>Something In Common</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121184433577.png" alt="image-20220121184433577"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hcf</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;该函数返回两个数的最大公约数&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 获取最小值</span></span><br><span class="line">    <span class="keyword">if</span> x &gt; y:</span><br><span class="line">        smaller = y</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        smaller = x</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, smaller + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> ((x % i == <span class="number">0</span>) <span class="keyword">and</span> (y % i == <span class="number">0</span>)):</span><br><span class="line">            hcf = i</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> hcf</span><br><span class="line"><span class="comment"># 用户输入两个数字</span></span><br><span class="line">num1 = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;输入第一个数字: &quot;</span>))</span><br><span class="line">num2 = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;输入第二个数字: &quot;</span>))</span><br><span class="line"></span><br><span class="line">data = hcf(num1, num2)</span><br><span class="line">data_list = <span class="built_in">list</span>(<span class="built_in">str</span>(data))</span><br><span class="line">data_list = [<span class="built_in">int</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> data_list]</span><br><span class="line">result = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> data_list:</span><br><span class="line">    result += item</span><br><span class="line"><span class="built_in">print</span>(result*<span class="number">1234</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Find-The-Number"><a href="#Find-The-Number" class="headerlink" title="Find The Number"></a>Find The Number</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121185503423.png" alt="image-20220121185503423"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">g</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n&lt;<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>/<span class="number">2</span>**n+g(n-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">25</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Unzip-Me"><a href="#Unzip-Me" class="headerlink" title="Unzip Me"></a>Unzip Me</h2><p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121200432945.png" alt="image-20220121200432945"></p>
+<p>下载下来改下后缀名zip，然后一直解压，最后解压出来的东西用记事本打开</p>
+<p><img src="/2022/01/21/knight-ctf-web-wp/image-20220121200600434.png" alt="image-20220121200600434">下面那两个,是我自己写的，很容易就发现了嘛，两个字符交换下位置，就出来咯~</p>
+<p>今天晚上还要去realwordctf看热闹，不说了继续做题了</p>
+<p>还有好多我不会的东西，什么流量包什么的，以后一定要继续好好学，打算过段时间学学逆向。</p>
+<p>我不能休息我还能学    ⊂(‘ω’⊂ )))Σ≡=─༄༅༄༅༄༅༄༅༄༅</p>
+<p>还有汇编没怎么懂</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fate-/p/12880508.html">如何运行汇编程序 - ice–cream - 博客园 (cnblogs.com)</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/01/20/%E7%BE%A4%E5%8F%8B%E5%8F%91%E7%9A%84%E7%AD%BE%E5%88%B0%E9%A2%98-%E5%8F%88%E6%98%AF%E4%B8%80%E4%B8%AAflag%E9%9A%90%E8%97%8F%E5%B0%8F%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -430,133 +587,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/" class="post-title-link" itemprop="url">BUUCTF刷题日志2</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-01-17 21:00:19 / 修改时间：21:02:48" itemprop="dateCreated datePublished" datetime="2022-01-17T21:00:19+08:00">2022-01-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="BUUCTF刷题日志2"><a href="#BUUCTF刷题日志2" class="headerlink" title="BUUCTF刷题日志2"></a>BUUCTF刷题日志2</h1><h2 id="第一题-极客大挑战-2019-Upload"><a href="#第一题-极客大挑战-2019-Upload" class="headerlink" title="第一题 [极客大挑战 2019]Upload"></a>第一题 [极客大挑战 2019]Upload</h2><p>一个文件上传，过滤了php3，但是除了php3我们还有phtml，上传的时候改下content-type:image/jpeg</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117150427298.png" alt="image-20220117150427298"></p>
-<p>但是我们的马里面的&lt;?又被过滤了，所以用<code>&lt;script language=&quot;php&quot;&gt;   &lt;/script&gt; </code>来进行绕过</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151055301.png" alt="image-20220117151055301"></p>
-<p>添加一个gif的文件头进去，绕过这个判断</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151122705.png" alt="image-20220117151122705"></p>
-<p>上传成功</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117151158231.png" alt="image-20220117151158231"></p>
-<p>猜测路径为<code>/upload/新建文本文档.phtml</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117152049720.png" alt="image-20220117152049720"></p>
-<p>成功在根目录找到flag</p>
-<h2 id="第二题-文件上传"><a href="#第二题-文件上传" class="headerlink" title="第二题 文件上传"></a>第二题 文件上传</h2><p>一个前端绕过罢了，还是用phtml文件</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154044267.png" alt="image-20220117154044267"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154204041.png" alt="image-20220117154204041"></p>
-<p>在根目录找到flag</p>
-<h2 id="第三题-php解析特性-char绕过"><a href="#第三题-php解析特性-char绕过" class="headerlink" title="第三题 php解析特性 char绕过"></a>第三题 php解析特性 char绕过</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154748431.png" alt="image-20220117154748431"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117154838651.png" alt="image-20220117154838651"></p>
-<p>有前端验证</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117155745159.png" alt="image-20220117155745159"></p>
-<p>在源码中发现了calc.php<img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117161601913.png" alt="image-20220117161601913"></p>
-<p>写不来了，看了别人的wp，</p>
-<p>然后说waf无法识别加了空格的num参数，” num”和”num”，加了空格就不是num参数了，但是php解析的时候会自动把空格去掉，然后就绕过了waf。</p>
-<p>然后使用scandir()函数，scandir(“/“)但是/被过滤了，所以用char(“47”)来代替</p>
-<p><code>? num=print_r(scandir(chr(47)));</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117162229698.png" alt="image-20220117162229698"></p>
-<p>发现flag，然后就访问这个flag</p>
-<p>calc.php? <code>num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</code></p>
-<h2 id="第四题-sql注入-极客大挑战-2019-BabySQL"><a href="#第四题-sql注入-极客大挑战-2019-BabySQL" class="headerlink" title="第四题 sql注入[极客大挑战 2019]BabySQL"></a>第四题 sql注入[极客大挑战 2019]BabySQL</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170804546.png" alt="image-20220117170804546"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117170814134.png" alt="image-20220117170814134"></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171730895.png" alt="image-20220117171730895"></p>
-<p>但是可以双写绕过select和union</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117171950628.png" alt="image-20220117171950628"></p>
-<p>爆出列数有三个</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172055414.png" alt="image-20220117172055414"></p>
-<p>然后又是枯燥的爆表爆字段</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172428770.png" alt="image-20220117172428770"></p>
-<p>人嘛了，information里面的or都被过滤了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117172541108.png" alt="image-20220117172541108"></p>
-<p>反正一步一步爆，然后就出来了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117173343401.png" alt="image-20220117173343401"></p>
-<h2 id="第五题-备份文件-代码审计-弱类型"><a href="#第五题-备份文件-代码审计-弱类型" class="headerlink" title="第五题 备份文件 代码审计 弱类型"></a>第五题 备份文件 代码审计 弱类型</h2><p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117201827743.png" alt="image-20220117201827743"></p>
-<p>发现备份文件,又是代码审计</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$key</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric(<span class="variable">$key</span>)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&quot;Just num!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$key</span> = intval(<span class="variable">$key</span>);</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span> == <span class="variable">$str</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Try to find out source file!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>弱比较：如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行，在比较时该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</p>
-<p>所以我们直接传值key=123</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202715872.png" alt="image-20220117202715872"></p>
-<p>得到flag</p>
-<h2 id="第六题-模板注入"><a href="#第六题-模板注入" class="headerlink" title="第六题 模板注入"></a>第六题 模板注入</h2><p>经典老题目了</p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117202952675.png" alt="image-20220117202952675"></p>
-<p>flag中提示了flag的位置<code>flag in /fllllllllllllag</code></p>
-<p>welcome中提示了<code>render</code>模板渲染用的函数</p>
-<p>hints中提示了filehash的加密方法<code>md5(cookie_secret+md5(filename))</code></p>
-<p><img src="/2022/01/17/BUUCTF%E5%88%B7%E9%A2%98%E6%97%A5%E5%BF%972/image-20220117203315129.png" alt="image-20220117203315129"></p>
-<p>然后就开始模板注入，我们的目的就是获取cookie_secret</p>
-<p>[(33条消息) BUUCTF <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45642610/article/details/112519061">护网杯 2018]easy_tornado 1_wow小华的博客-CSDN博客</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/46/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><span class="page-number current">47</span><a class="page-number" href="/page/48/">48</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/48/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/46/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><span class="page-number current">47</span><a class="page-number" href="/page/48/">48</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/48/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -624,7 +658,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

