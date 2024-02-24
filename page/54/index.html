@@ -255,6 +255,104 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2021/12/30/%E4%BA%94%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83-%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88pass-is-%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/30/%E4%BA%94%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83-%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%88pass-is-%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%89/" class="post-title-link" itemprop="url">五、学习py：代码规范 知识补充（pass is 位运算）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-30 11:09:52 / 修改时间：11:10:34" itemprop="dateCreated datePublished" datetime="2021-12-30T11:09:52+08:00">2021-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">-python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="五、学习py：代码规范-知识补充（pass-is-位运算）"><a href="#五、学习py：代码规范-知识补充（pass-is-位运算）" class="headerlink" title="五、学习py：代码规范 知识补充（pass is 位运算）"></a>五、学习py：代码规范 知识补充（pass is 位运算）</h1><h2 id="1-代码规范"><a href="#1-代码规范" class="headerlink" title="1.代码规范"></a>1.代码规范</h2><h3 id="1-1名称"><a href="#1-1名称" class="headerlink" title="1.1名称"></a>1.1名称</h3><p>文件夹，小写&amp;小写下划线连接</p>
+<p>文件，小写&amp;小写下划线连接</p>
+<p>变量：全局变量首字母用大写</p>
+<p>局部变量首字母用小写</p>
+<h3 id="1-2注释"><a href="#1-2注释" class="headerlink" title="1.2注释"></a>1.2注释</h3><p>文件注释</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">这个文件的主要功能是：。。。。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>代码注释</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(&quot;dhk is a jocker!&quot;)#打印一串文字</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3todo"><a href="#1-3todo" class="headerlink" title="1.3todo"></a>1.3todo</h3><p>基于注释可以实现todo注释的效果，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def func():</span><br><span class="line">    #循环语句</span><br><span class="line">    for i in range(10):</span><br><span class="line">    print(i)</span><br><span class="line">    &quot;&quot;&quot;TODO v1版本为实现，后续在v1.1中会进行更新。</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4条件嵌套"><a href="#1-4条件嵌套" class="headerlink" title="1.4条件嵌套"></a>1.4条件嵌套</h3><p>写条件嵌套的时候最好不要超过第三层。</p>
+<h3 id="1-5简单的逻辑先处理"><a href="#1-5简单的逻辑先处理" class="headerlink" title="1.5简单的逻辑先处理"></a>1.5简单的逻辑先处理</h3><h3 id="1-6循环"><a href="#1-6循环" class="headerlink" title="1.6循环"></a>1.6循环</h3><p>尽量少循环多干事，提高代码效率</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">将字典中的键和值分别放在两个列表里</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">key_list = []</span><br><span class="line">value_list = []</span><br><span class="line">info = &#123;<span class="string">&quot;dhk&quot;</span>:<span class="number">2</span>,<span class="string">&quot;joker&quot;</span>:<span class="number">3</span>,<span class="string">&quot;动感&quot;</span>:<span class="number">4</span>&#125;</span><br><span class="line"><span class="comment">#循环结构</span></span><br><span class="line"><span class="keyword">for</span> key,value <span class="keyword">in</span> info.items():</span><br><span class="line">    key_list.append(kea)</span><br><span class="line">    value_list.append(value)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">将字典中的键和值分别放在两个列表里</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">info = &#123;<span class="string">&quot;dhk&quot;</span>:<span class="number">2</span>,<span class="string">&quot;joker&quot;</span>:<span class="number">3</span>,<span class="string">&quot;动感&quot;</span>:<span class="number">4</span>&#125;</span><br><span class="line">key_list = <span class="built_in">list</span>(info.keys())</span><br><span class="line">value_list = <span class="built_in">list</span>(info.values())</span><br></pre></td></tr></table></figure>
+
+<p>上面虽然看着下面的代码简洁一些，但是上面的代码只循环了一次，而下面的代码循环了两次，所以上面的代码要简介一些。</p>
+<h2 id="2-知识点的补充"><a href="#2-知识点的补充" class="headerlink" title="2.知识点的补充"></a>2.知识点的补充</h2><h3 id="2-1pass"><a href="#2-1pass" class="headerlink" title="2.1pass"></a>2.1pass</h3><p>一般python的代码块是基于:和缩进来实现，python中规定代码块中必须有代码才算完整，在没有代码的情况下为了保证语法的完整性可以用pass代替，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> 条件:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-is-比较"><a href="#2-2-is-比较" class="headerlink" title="2.2 is 比较"></a>2.2 is 比较</h3><p> is和==的区别是什么？</p>
+<p>== ，用于表示两个值是否相等</p>
+<p>is，用于表示内存地址是否一致</p>
+<p>ex：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">v1 = &quot;动感&quot;</span><br><span class="line">v2 = &quot;动感&quot;</span><br><span class="line">print(v1 == v2)#True</span><br><span class="line">print(v1 is v2)False</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3位运算"><a href="#2-3位运算" class="headerlink" title="2.3位运算"></a>2.3位运算</h3><p>因为计算机底层的运算就是二进制的运算，所以这里的位运算就是指对二进制的一个计算，实际上就是数电里面的那些运算规则。</p>
+<p>与 或 异或 同或 取反等等</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2021/12/29/%E5%9B%9B%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -671,120 +769,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2021/12/28/%E4%BA%8C%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5%EF%BC%88while%EF%BC%89break-continue-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96-%E8%BF%90%E7%AE%97%E7%AC%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/28/%E4%BA%8C%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5%EF%BC%88while%EF%BC%89break-continue-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96-%E8%BF%90%E7%AE%97%E7%AC%A6/" class="post-title-link" itemprop="url">二、学习py：循环语句（while）break continue 字符串格式化 运算符</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-12-28 18:19:04 / 修改时间：18:20:54" itemprop="dateCreated datePublished" datetime="2021-12-28T18:19:04+08:00">2021-12-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">-python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="二、学习py：循环语句（while）break-continue-字符串格式化-运算符"><a href="#二、学习py：循环语句（while）break-continue-字符串格式化-运算符" class="headerlink" title="二、学习py：循环语句（while）break continue 字符串格式化 运算符"></a>二、学习py：循环语句（while）break continue 字符串格式化 运算符</h2><h2 id="1-1while循环格式"><a href="#1-1while循环格式" class="headerlink" title="1.1while循环格式"></a>1.1while循环格式</h2><p>while  条件 :</p>
-<p>​    代码    </p>
-<p>其中若是while中的条件一直成立，则会一直执行代码块。</p>
-<h2 id="1-2-定义布尔类型的时候记得首字母大写"><a href="#1-2-定义布尔类型的时候记得首字母大写" class="headerlink" title="1.2.定义布尔类型的时候记得首字母大写"></a>1.2.定义布尔类型的时候记得首字母大写</h2><h2 id="1-3-break"><a href="#1-3-break" class="headerlink" title="1.3.break"></a>1.3.break</h2><p>用于在while循环中帮助你终止循环，也就是说while代码中，break后面的代码则不会执行，当前循环立即终止。（所以学会了两种方式终止循环，条件判断和break终止）</p>
-<h2 id="1-4-continue"><a href="#1-4-continue" class="headerlink" title="1.4.continue"></a>1.4.continue</h2><p>在循环中用于结束本次循环，开始下一次循环。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开始&quot;</span>)</span><br><span class="line"><span class="keyword">while</span> 	<span class="literal">True</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;你好&quot;</span>)</span><br><span class="line">    <span class="keyword">continue</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;hi&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>输出</p>
-<p>你好</p>
-<p>你好</p>
-<p>你好</p>
-<p>…</p>
-<h3 id="ex2"><a href="#ex2" class="headerlink" title="ex2:"></a>ex2:</h3><p><img src="/2021/12/28/%E4%BA%8C%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5%EF%BC%88while%EF%BC%89break-continue-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96-%E8%BF%90%E7%AE%97%E7%AC%A6/image-20211228165707621.png" alt="image-20211228165707621"></p>
-<h3 id="ex3"><a href="#ex3" class="headerlink" title="ex3"></a>ex3</h3><p><img src="/2021/12/28/%E4%BA%8C%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5%EF%BC%88while%EF%BC%89break-continue-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96-%E8%BF%90%E7%AE%97%E7%AC%A6/image-20211228170016635.png" alt="image-20211228170016635"></p>
-<h2 id="1-5-while-else"><a href="#1-5-while-else" class="headerlink" title="1.5 while else"></a>1.5 while else</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> 条件：</span><br><span class="line"></span><br><span class="line">​    代码</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">​    代码</span><br></pre></td></tr></table></figure>
-
-<p>注：如果用break跳出代码，else在条件成立的时候依然不会执行。也就是说else只会在条件不成立的时候执行。</p>
-<h2 id="2-字符串格式化"><a href="#2-字符串格式化" class="headerlink" title="2.字符串格式化"></a>2.字符串格式化</h2><p>使用更加便携的形式实现字符串的拼接。</p>
-<h2 id="2-1"><a href="#2-1" class="headerlink" title="2.1 %"></a>2.1 %</h2><h4 id="2-1-1基本格式化操作-基于循序"><a href="#2-1-1基本格式化操作-基于循序" class="headerlink" title="2.1.1基本格式化操作(基于循序)"></a>2.1.1基本格式化操作(基于循序)</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&quot;越江&quot;</span></span><br><span class="line"></span><br><span class="line">age = <span class="number">123</span></span><br><span class="line"></span><br><span class="line">text = <span class="string">&quot;我叫%s ，今年%s岁.&quot;</span> %(name,age)</span><br></pre></td></tr></table></figure>
-
-<p>占位符分类：</p>
-<p>%s：字符串</p>
-<p>%d：整型</p>
-<h4 id="2-1-2基于名字的排序"><a href="#2-1-2基于名字的排序" class="headerlink" title="2.1.2基于名字的排序"></a>2.1.2基于名字的排序</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">message = <span class="string">&quot;%(name)s，你好！&quot;</span>%&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;dhk&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="2-1-3如果内容中包含了百分号"><a href="#2-1-3如果内容中包含了百分号" class="headerlink" title="2.1.3如果内容中包含了百分号"></a>2.1.3如果内容中包含了百分号</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">&quot;%s,这个东西我下了90%%了，但是断网了！&quot;</span>%<span class="string">&quot;兄弟&quot;</span></span><br><span class="line"><span class="built_in">print</span>(text)</span><br></pre></td></tr></table></figure>
-
-<p>注：要在内容的百分号后面多加一个百分号（也就是要用两个百分号）。</p>
-<h2 id="2-2-format（推荐）"><a href="#2-2-format（推荐）" class="headerlink" title="2.2 format（推荐）"></a>2.2 format（推荐）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">&quot;我叫&#123;0&#125;,今年&#123;1&#125;岁,真正的名字叫做&#123;0&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;越江&quot;</span>,<span class="string">&quot;99&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">&quot;我叫&#123;n1&#125;&quot;</span>.<span class="built_in">format</span>(n1 = <span class="string">&quot;越江&quot;</span>)</span><br><span class="line"><span class="comment">#data = text.format(n1=&quot;越江&quot;)</span></span><br><span class="line"><span class="comment">#模板复用</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-3-f-其實我個人更喜歡這種"><a href="#2-3-f-其實我個人更喜歡這種" class="headerlink" title="2.3 f(其實我個人更喜歡這種)"></a>2.3 f(其實我個人更喜歡這種)</h2><p>到python3.6版本之后，更便捷。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dhk = <span class="string">&quot;動感&quot;</span></span><br><span class="line">age = <span class="number">12</span></span><br><span class="line">text = <span class="string">f&quot;<span class="subst">&#123;dhk&#125;</span>是一個小丑，今年<span class="subst">&#123;age:#b&#125;</span>岁了&quot;</span></span><br><span class="line"><span class="comment">#将数字转换成二进制进行显示（一个扩展罢了，其中进制的代表符号和数电里面一样。）</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="3-运算符"><a href="#3-运算符" class="headerlink" title="3.运算符"></a>3.运算符</h2><h3 id="3-1一些平时见过的运算符"><a href="#3-1一些平时见过的运算符" class="headerlink" title="3.1一些平时见过的运算符"></a>3.1一些平时见过的运算符</h3><p>// 取整除</p>
-<p>** 幂</p>
-<p>c += a  等效于 c = c = a（其他运算符也以此类推）</p>
-<h3 id="3-1-2成员运算"><a href="#3-1-2成员运算" class="headerlink" title="3.1.2成员运算"></a>3.1.2成员运算</h3><p>in 如果在指定序列中找到值返回True</p>
-<p>not in 就是in的取反</p>
-<h3 id="3-1-3逻辑运算的优先级"><a href="#3-1-3逻辑运算的优先级" class="headerlink" title="3.1.3逻辑运算的优先级"></a>3.1.3逻辑运算的优先级</h3><p>加减乘除&gt;比较&gt;not and or</p>
-<p>and 优先级是在 or 前面</p>
-<p>如果要改变则使用圆括号进行改变（就和小学的加减乘除一样。）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -856,7 +840,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">175</span>
+          <span class="site-state-item-count">176</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

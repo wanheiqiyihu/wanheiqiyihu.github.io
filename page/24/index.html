@@ -255,6 +255,188 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/12/31/JAVA%E5%9F%BA%E7%A1%80-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/31/JAVA%E5%9F%BA%E7%A1%80-2/" class="post-title-link" itemprop="url">JAVA基础-2</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-31 23:50:47 / 修改时间：23:51:30" itemprop="dateCreated datePublished" datetime="2022-12-31T23:50:47+08:00">2022-12-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">-java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="JAVA基础-2"><a href="#JAVA基础-2" class="headerlink" title="JAVA基础-2"></a>JAVA基础-2</h1><p>不会有人跨年还在学java吧？不会吧？</p>
+<p>java好无聊，我爱java，java好无聊，我爱java，java好无聊，我爱java，java好无聊，我爱java，java好无聊，我爱java，java好无聊，我爱java。</p>
+<h1 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.命令行参数：它是指给main方法传递的参数，叫做命令行参数</span><br><span class="line">2.如何给main方法的形参(String[] args)传值</span><br><span class="line">（1）命令行中</span><br><span class="line">java 类名 参数1 参数2 参数3</span><br><span class="line">（2）idea</span><br><span class="line">在run菜单，Edit Configurations</span><br><span class="line">填写mainclass，然后填写program arguments：参数之间使用空格分隔</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法的参数传递机制"><a href="#方法的参数传递机制" class="headerlink" title="方法的参数传递机制"></a>方法的参数传递机制</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">方法的实参负责给形参赋值：</span><br><span class="line">（1）形参是基本数据类型，那么实参给形参的是数据指，而且是书举止的“副本”。</span><br><span class="line">（2）形参是引用数据类型，那实参给形参传递的是地址值，而且是地址值的“副本”。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">方法的参数传递机制：</span><br><span class="line">1.方法的形参是基本数据类型时，形参的值的改变不会影响实参。</span><br><span class="line">2.方法的形参是数据应用类型时，形参地址值的改变不会影响实参，但是形参地址值里面的数据改变会影响实参。比如，修改数组元素的值，或修改对象的属性值。</span><br></pre></td></tr></table></figure>
+
+<p>一个扩展小栗子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">new</span> test().change(i);<span class="comment">//这是一个匿名对象，目的就是为了执行一次change方法。而方法影响的是基本数据类型，所以基本数据类型值不会变，他们都不是一个内存地址。</span></span><br><span class="line"></span><br><span class="line">        i = i++;<span class="comment">//先取i的值，放到操作数栈中。i自增为1。把操作数栈中的0赋值给i。所以最后结果还是0</span></span><br><span class="line">        System.out.println(<span class="string">&quot;i=&quot;</span>+i);<span class="comment">//输出0</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> i )</span></span>&#123;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="方法的重载（Overload）"><a href="#方法的重载（Overload）" class="headerlink" title="方法的重载（Overload）"></a>方法的重载（Overload）</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.方法的重载，当一个类中出现了方法名相同，新参列表不同的两个或多个方法，称为方法的重载。</span><br><span class="line">例如：</span><br><span class="line">定义方法求两个整数的最大值。</span><br><span class="line">定义方法求三个整数的最大值。</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法的递归调用"><a href="#方法的递归调用" class="headerlink" title="方法的递归调用"></a>方法的递归调用</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当方法自己调用自己就是递归。</span><br></pre></td></tr></table></figure>
+
+<p>必须有出口，不能无限递归，否则会出现把栈内存耗尽。</p>
+<p>额感觉没什么写的，和py差不多，可以参考以前的文章。</p>
+<h1 id="对象数组"><a href="#对象数组" class="headerlink" title="对象数组"></a>对象数组</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">之前的数组，都是存储的int类的，基本数据类型的数组。</span><br><span class="line">而这对象数组，元素是引用数据类型。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//演示：存储五个圆对象存储到数组当中</span></span><br><span class="line"><span class="comment">//首先创建一个圆对象，代码如下</span></span><br><span class="line"><span class="keyword">package</span> lianxi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Circle</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> R;<span class="comment">//半径</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">jisuanS</span><span class="params">(<span class="keyword">double</span> R)</span></span>&#123;</span><br><span class="line">        <span class="keyword">double</span> S = Math.PI*<span class="number">2</span>*R*R;</span><br><span class="line">        <span class="keyword">return</span> S;</span><br><span class="line">    &#125;<span class="comment">//计算面积</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">jisuanL</span><span class="params">(<span class="keyword">double</span> R)</span></span>&#123;</span><br><span class="line">        <span class="keyword">double</span> L = Math.PI*<span class="number">2</span>*R;</span><br><span class="line">        <span class="keyword">return</span> L;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">String <span class="title">info</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="string">&quot;半径:&quot;</span>+R+<span class="string">&quot;;面积：&quot;</span>+jisuanS(R)+<span class="string">&quot;;周长：&quot;</span>+jisuanL(R));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//接下来需要创建五个圆的对象，来存到数组当中去。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> lianxi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">diaoyong</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//先声明和创建数组，长度为5</span></span><br><span class="line">        <span class="comment">//元素的类型:Circle</span></span><br><span class="line">        <span class="comment">//以为数组的声明和动态初始化的公式</span></span><br><span class="line">        <span class="comment">//元素的数据类型[] 数组名 = new 元素的数据类型[长度]</span></span><br><span class="line">        Circle[] arr = <span class="keyword">new</span> Circle[<span class="number">5</span>];</span><br><span class="line">        <span class="comment">//元素类型是Cilrcle，那么必须赋值为Circle的对象</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i&lt; arr.length;i++)&#123;</span><br><span class="line">            arr[i] = <span class="keyword">new</span> Circle();</span><br><span class="line">            arr[i].R = Math.random()*<span class="number">9</span>+<span class="number">1</span>;<span class="comment">//[1,10)</span></span><br><span class="line">            System.out.println(arr[i].info());<span class="comment">//调用类中的方法</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="面向对象-中级"><a href="#面向对象-中级" class="headerlink" title="面向对象-中级"></a>面向对象-中级</h1><h2 id="面向对象的基本特征：封装性"><a href="#面向对象的基本特征：封装性" class="headerlink" title="面向对象的基本特征：封装性"></a>面向对象的基本特征：封装性</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">面向想对象这个编程思想，有三个基本特征：</span><br><span class="line">1.封装</span><br><span class="line">2.继承</span><br><span class="line">3.多态</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">什么封装性？</span><br><span class="line">1.隐私-&gt;安全，当某个类的代码，内部某些成员不希望外部知晓，或者是随意的更改，那么就可以进行适当的封装。</span><br><span class="line">2.外部使用更方便</span><br><span class="line">	生活中，洗衣机，只会留出几个简单的按钮和进水口出水口，放衣服的地方。隐藏了内部复杂的结构。</span><br><span class="line">	代码中同样如此，String类，它内部的结构和实现是很复杂的，但是我们就算不是特别清楚每一个内部实现。也不影响我们简单的使用。</span><br><span class="line"></span><br><span class="line">把代码（成员等）控制在它的合理的可见性范围内，就是一个封装。</span><br><span class="line"></span><br><span class="line">如何实现封装？</span><br><span class="line">必须依赖于权限修饰符，或者又称为访问控制修饰。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">权限修饰符有哪些？</span><br><span class="line">public\protected\private\和什么都没有写</span><br></pre></td></tr></table></figure>
+
+<p>可见性范围分为四种情况：</p>
+<p><img src="/2022/12/31/JAVA%E5%9F%BA%E7%A1%80-2/image-20221220172200991.png" alt="image-20221220172200991"></p>
+<h2 id="属性私有化和get、set方法"><a href="#属性私有化和get、set方法" class="headerlink" title="属性私有化和get、set方法"></a>属性私有化和get、set方法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">成员变量选择哪种权限修饰符？</span><br><span class="line">实际应用当中，习惯上，先声明为private，称为属性私有化</span><br><span class="line">但是如果确实这个成员变量需要扩大它的可见性范围，那么可以把private修改为其他合适的修饰符。</span><br><span class="line">例如：扩大到本包，那么就是缺省</span><br><span class="line">例如：扩大到其他包的子类中，那就是protected</span><br><span class="line">例如：扩大到任意位置，那么就是public</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">因为属性就是代表对象的数据，对象的数据是非常重要的。不应该完全暴露，至少要可控。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">如何使用私有化的属性</span><br><span class="line">如果这个属性确实要被外部使用，需要停工get或set方法。</span><br><span class="line">get方法：供调用者获取属性值的方法</span><br><span class="line">set方法：供调用者修改属性值的方法</span><br><span class="line"></span><br><span class="line">get/set方法要注意的地方：</span><br><span class="line">1.如果方法中有局部变量（通常是形参）与对象的实例变量“重名”，那么需要在实例变量前面加上&quot;this.&quot;</span><br><span class="line">2.get/set的方法名不能随便写，通常都是get+属性名，并且属性名首字母大写。</span><br><span class="line">3.如果属性（实例变量）是boolean类型，那么它对应的get方法换成is。符合英语用词的习惯。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">下面给两个栗子(*^▽^*)//java还是好无聊啊，但是还是坚持一下捏</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//pri类</span></span><br><span class="line"><span class="keyword">package</span> lianxi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">pri</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name = <span class="string">&quot;leo&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//调用pri类</span></span><br><span class="line"><span class="comment">//接下来需要创建五个圆的对象，来存到数组当中去。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> lianxi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">diaoyong</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        pri test = <span class="keyword">new</span> pri();</span><br><span class="line">        System.out.println(test.getName());</span><br><span class="line">        test.setName(<span class="string">&quot;wanheiqiyihu&quot;</span>);</span><br><span class="line">        System.out.println(test.getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*输出结果</span></span><br><span class="line"><span class="comment">leo</span></span><br><span class="line"><span class="comment">wanheiqiyihu</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="IDEA自定义代码模板"><a href="#IDEA自定义代码模板" class="headerlink" title="IDEA自定义代码模板"></a>IDEA自定义代码模板</h1><p><img src="/2022/12/31/JAVA%E5%9F%BA%E7%A1%80-2/image-20221221161107768.png" alt="image-20221221161107768"></p>
+<p>在这个功能点，就可以自定义一系列的代码模板。</p>
+<h1 id="面向对象的基本特征：继承"><a href="#面向对象的基本特征：继承" class="headerlink" title="面向对象的基本特征：继承"></a>面向对象的基本特征：继承</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.什么是继承？</span><br><span class="line">重复使用已有的类的代码（代码的复用）</span><br><span class="line">扩展已有类的代码</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">如何继承</span><br><span class="line">关键字:extends</span><br><span class="line">语法格式</span><br><span class="line">【修饰符】 class 子类名 extends 父类名&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">子类：SubClass,又称派生类</span><br><span class="line">父类：SuperClass,又称基类，超类</span><br></pre></td></tr></table></figure>
+
+<p>事物范围来说，子类小于父类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">继承的特点：</span><br><span class="line">1.子类会继承父类所有的实例变量和实例方法。</span><br><span class="line">A:虽然子类继承了父类所有的实例变量和实例方法，但是因为权限原因，某些成员在子类中不能直接使用。</span><br><span class="line">例如private修饰的成员，在子类中是不能直接使用的。</span><br><span class="line">权限修饰符缺省的成员，在跨包的子类中是不能直接使用的，本包子类可以。</span><br><span class="line">B:这里说的继承所有，是说，子类代表的这个事物，它具备父类中所描述的所有特征。</span><br><span class="line">C:既然是子类继承了所有的实例变量，那么在子类对象创建时，那么需要在子类对象的堆空间中开辟对应的内存来存它的值。</span><br><span class="line">D:所谓的继承，不是说，父类的代码在子类中完全重复一遍，而是在使用子类时，除了可以使用自己本类声明的成员，还可以去父类中寻找可以使用的成员。</span><br><span class="line"></span><br><span class="line">2.java只支持单继承，不支持多继承</span><br><span class="line">一个子类只能有一个“直接”父类。</span><br><span class="line">3.java支持多层继承</span><br><span class="line">也就是可以有爷爷等。</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看继承关系快捷键"><a href="#查看继承关系快捷键" class="headerlink" title="查看继承关系快捷键"></a>查看继承关系快捷键</h2><p>例如：选择A类名，按Ctrl + H就会显示A类的继承树。</p>
+<p><img src="/2022/12/31/JAVA%E5%9F%BA%E7%A1%80-2/image-20211230090701383.png" alt="image-20211230090701383">：A类的父类和子类</p>
+<p><img src="/2022/12/31/JAVA%E5%9F%BA%E7%A1%80-2/image-20211230090719430.png" alt="image-20211230090719430">：A类的父类</p>
+<p><img src="/2022/12/31/JAVA%E5%9F%BA%E7%A1%80-2/image-20211230090732532.png" alt="image-20211230090732532">：A类的所有子类</p>
+<p>例如：在类继承目录树中选中某个类，比如C类，按Ctrl+ Alt+U就会用图形化方式显示C类的继承祖宗</p>
+<p><img src="/2022/12/31/JAVA%E5%9F%BA%E7%A1%80-2/image-20211229180113255.png" alt="image-20211229180113255"></p>
+<h1 id="面向对象基本特征：多态"><a href="#面向对象基本特征：多态" class="headerlink" title="面向对象基本特征：多态"></a>面向对象基本特征：多态</h1><p>有的时候，我们在设计一个数组、或一个成员、或一个方法的形参、返回值类型时，无法确定它的具体的类型，只能确定他是某个系列的类型。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">什么是多态？</span><br><span class="line">父类类型 变量 = 子类的对象；</span><br><span class="line">下面有个栗子来弄一些</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/12/31/JAVA%E5%9F%BA%E7%A1%80-2/image-20221225121933795.png" alt="image-20221225121933795"></p>
+<p>多态的现象：子类重写了父类的方法，通过父类的变量调用重写的方法时，执行的是子类重写后的方法。</p>
+<p>编译时类型和运行时类型不一样，编译时时父类的类型，子类时是子类的类型，所以它会执行子类重写的代码。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">多态引用的好处与弊端</span><br><span class="line">弊端：编译时，只能调用父类声明的方法，不能调用子类扩展的方法。</span><br><span class="line">好处：运行时，看子类，如果子类重写了方法，一定是执行子类重写的方法体；变量引用的子类对象不同，执行的方法就不同，实现动态绑定。代码编写更灵活，功能更强大，可维护性和扩展性更好了。</span><br></pre></td></tr></table></figure>
+
+<p>所以，一般用多态的时候，需要子类重写方法才可以用，父类记得声明。</p>
+<h2 id="向上转型与向下转型"><a href="#向上转型与向下转型" class="headerlink" title="向上转型与向下转型"></a>向上转型与向下转型</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Person p1 = <span class="keyword">new</span> Man();</span><br><span class="line">p1.eat();</span><br><span class="line">p1.walk();</span><br><span class="line"></span><br><span class="line"><span class="comment">//p1.smoke();编译时看父类Person，Person类中没有这个方法，编译不通过。</span></span><br><span class="line">Man m = (Man) p1;<span class="comment">//强制类型转换</span></span><br><span class="line">m.smoke();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">向上转型：</span><br><span class="line">person p1 = new Man();</span><br><span class="line">	自动类型转换。</span><br><span class="line">	当把子类对象赋值给父类的变量时，在编译时会自动提升为父类的类型。</span><br><span class="line">向下转型：</span><br><span class="line">Person p1 = new ChineseMan();</span><br><span class="line">Man m = (Man)p1;</span><br><span class="line">	如果需要调用子类扩展的方法时，必须向下转型，通过强制类型转换完成。这样才能通过编译。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">向上转型：只要满足，对象是这个变量的子类类型就可以。</span><br><span class="line">向下转型：必须满足，对象的运行时类型&lt;=()中向下转的类型。</span><br></pre></td></tr></table></figure>
+
+<p>但是值得注意的是，成员变量并没有多态，比如说father里面有个a变量，son里面有个a变量，son中的a不会覆盖father中的a。而是son中有2个a变量，但是调用的时候，如果直接调用a，那么就是调用的son中的变量。如果想要调用father中的a，需要像下面这样调用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Son s = <span class="keyword">new</span> Son();</span><br><span class="line">sout(((Father)s).a);<span class="comment">//把s向上转型为Father类型，让编译器从Father中取a。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="虚方法"><a href="#虚方法" class="headerlink" title="虚方法"></a>虚方法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">什么是虚方法？</span><br><span class="line">凡是可以被子类重写的方法都叫做虚方法。</span><br><span class="line">不能重写的方法有：private等（后面还会学习static等</span><br></pre></td></tr></table></figure>
+
+<h2 id="多态现象发生的前提"><a href="#多态现象发生的前提" class="headerlink" title="多态现象发生的前提"></a>多态现象发生的前提</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1.继承</span><br><span class="line">2.有多态引用</span><br><span class="line">父类类型 变量 = 子类的对象;</span><br><span class="line">变形：</span><br><span class="line">	父类的类型[] 数组名 = new 父类的类型[长度]；</span><br><span class="line">	数组名[下标] = 子类的对象;</span><br><span class="line">	</span><br><span class="line">形参的类型是父类的类型，实参是子类的对象。</span><br><span class="line"></span><br><span class="line">方法的返回值类型是父类的类型，返回到实际结果是子类的对象。</span><br><span class="line"></span><br><span class="line">某个成员变量声明的是父类类型，实际接收到是子类对象。</span><br><span class="line">3.有虚方法</span><br></pre></td></tr></table></figure>
+
+<h1 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h1><p>类的第三个成员：构造器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">什么是构造器？</span><br><span class="line">【修饰符】 class 类名&#123;</span><br><span class="line">	【修饰符】 类名()&#123;//构造器</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	【修饰符】 类名(形参列表)&#123;//构造器</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">构造器的作用是什么？</span><br><span class="line">1.new对象，即new关键字后面出现的一定是构造器，也只能是构造器。</span><br><span class="line">2.在new对象的同时，给对象的“实例变量”初始化，即赋值。（初始化的时候就不用使用set方法了，但是在后续修改的时候还是需要使用set方法的）</span><br><span class="line"></span><br><span class="line">注意：</span><br><span class="line">1.构造器长得像方法，所以又称为构造方法</span><br><span class="line">2.和方法不同的地方</span><br><span class="line">A:构造器的名称不能随意乱写，只能也一定要和类名一致（大小写也要一样）</span><br><span class="line">B:构造器没有返回值类型</span><br><span class="line">C:构造器的修饰符只能是权限修饰符，可以有四中情况，private、缺省、protected、public</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">构造器的特点:</span><br><span class="line">1.如果一个类没有手动编写任意构造器，那么编译器会将自动添加一个默认的无参构造。而且此时构造器的权限修饰符默认和class类前面的权限修饰符一致。</span><br><span class="line">2.如果你手动编写了任意一种构造器，那么编译器就不会在自动添加一个默认的无参构造。</span><br><span class="line">3.所以如果某个类中编写了构造器，那么在其他类中调用这个类的时候，就不能使用new后面的无参构造了，只能使用编写的构造器进行new。</span><br><span class="line">4.构造器可以重载（可以手动添加无参构造器）</span><br></pre></td></tr></table></figure>
+
+<h2 id="初级栗子"><a href="#初级栗子" class="headerlink" title="初级栗子"></a>初级栗子</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> lianxi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name)</span></span>&#123;<span class="comment">//有参构造器</span></span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> lianxi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Student s1 = <span class="keyword">new</span> Student(<span class="string">&quot;dhk&quot;</span>);</span><br><span class="line">        System.out.println(s1.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面就是定义了Student类中的一个有参构造器，然后在主类中进行调用。</p>
+<h2 id="一些小知识"><a href="#一些小知识" class="headerlink" title="一些小知识"></a>一些小知识</h2><h3 id="本类构造器相互调用"><a href="#本类构造器相互调用" class="headerlink" title="本类构造器相互调用"></a>本类构造器相互调用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">this():调用本类的无参构造</span><br><span class="line">this(实参列表):调用本类的有参构造</span><br><span class="line">this()和this(实参列表)只能出现在构造器首行</span><br><span class="line">不能出现递归调用</span><br></pre></td></tr></table></figure>
+
+<h3 id="构造器在继承时的要求"><a href="#构造器在继承时的要求" class="headerlink" title="构造器在继承时的要求"></a>构造器在继承时的要求</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">问题：</span><br><span class="line">1.父类的构造器会不会继承到子类中？</span><br><span class="line">不会，不管是无参构造器还是有参构造器，都不会继承到子类中去。</span><br><span class="line">2.父类的构造器和子类有没有关系？</span><br><span class="line">A:子类在继承父类时，默认会在子类的构造器首行，加一句代码super();</span><br><span class="line">表示调用父类的无参构造。</span><br><span class="line"></span><br><span class="line">B:那么如果父类没有无参构造，子类构造器中没有做特别处理的话，编译是要报错的。</span><br><span class="line"></span><br><span class="line">C:那么如果父类没有无参构造，子类构造器中首行一定要明确调用父类的哪个有参构造。通过super(实参列表)的方式确定。</span><br><span class="line"></span><br><span class="line">D:如果父类既有无参构造又有有参构造，那么没写super(实参列表)的，就表示调用父类的无参构造。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">为什么子类的构造器一定要调用父类的构造器呢？</span><br><span class="line">因为子类会继承父类所有的成员变量，那么在new子类对象时，必须为这些继承成员变量“初始化”，而为这些成员变量初始化，最合适的就是通过父类的构造器。</span><br></pre></td></tr></table></figure>
+
+<h1 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h1><p>类的第四个成员（结构）—代码块</p>
+<h2 id="非静态代码块"><a href="#非静态代码块" class="headerlink" title="非静态代码块"></a>非静态代码块</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.作用：是用来给“实例变量”初始化的</span><br><span class="line">2.意义:把多个构造器中的代码抽取出来，写到代码中，减少代码的冗杂。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">小扩展：</span><br><span class="line">在System类中有一个方法可以获取当前系统时间</span><br><span class="line">long System.currentTimeMillis()//距离1970年1月1号0点0分0秒0毫秒的实践差值（时间戳）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如何使用？</span><br><span class="line">用大括号阔起来，就是一个代码块。new对象的时候就会自动执行这个代码块。每new一个对象执行一次。与构造器相比，是代码块部分先执行。值得注意的是，代码块的位置与执行顺序没有关联。</span><br></pre></td></tr></table></figure>
+
+<h1 id="实例初始化的过程"><a href="#实例初始化的过程" class="headerlink" title="实例初始化的过程"></a>实例初始化的过程</h1><p>此部分作为了解</p>
+<p>实例：对象</p>
+<p>实例初始化：对象初始化，就是给对象的“实例变量”初始化。</p>
+<p>实例变量：他就是成员变量，准确的说，他是指非静态的成员变量，又经常成为属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">但是很多文章和教科书都会把属性和实例变量做区分，区分为有get/set方法的实例变量叫属性。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">什么时候进行实例初始化呢？</span><br><span class="line">一定实在new对象的时候</span><br><span class="line"></span><br><span class="line">那些代码是和实例初始化有关的？</span><br><span class="line">1.实例变量声明后面的显示赋值</span><br><span class="line">2.非静态代码块</span><br><span class="line">3.构造器</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">实例初始化的过程</span><br><span class="line">1.实例初始化过程其实是在调用一个&lt;init&gt;的方法</span><br><span class="line">2.&lt;init&gt;方法不是由程序员显式声明的，而是由编译器根据上面三个代码部分（构造器等），按照一定的顺序组装而成的。</span><br><span class="line">3.一个类编写了几个构造器，构造器就会组成几个&lt;init&gt;方法，如果程序员没有手动编写任意构造器，那么编译器会更具自动添加到默认的无参构造自动组装一个无参的&lt;init&gt;方法。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;init&gt;方法如何组装以下三个部分代码：</span><br><span class="line">A:实例变量声明后面的显式赋值</span><br><span class="line">B:非静态代码块</span><br><span class="line">C:构造器</span><br><span class="line"></span><br><span class="line">（1）先把构造器首行的super()或super(实参列表)提前出来，放到&lt;init&gt;方法的首行</span><br><span class="line">（2）按照程序员编写的A和B的自然顺序，一次组装她两。</span><br><span class="line">（3）把构造器的代码组装在（2）的下面。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">总结</span><br><span class="line">1.new调用构造器，本质上是执行它对应的&lt;init&gt;方法</span><br><span class="line">2.每一个构造器都会有自己对应的&lt;init&gt;方法</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/12/31/%E5%86%85%E7%BD%91%E9%9A%A7%E9%81%93%E4%B9%8BNeo-reGeorg/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -454,143 +636,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/12/28/DNS%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/12/28/DNS%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">DNS隧道基础</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-12-28 18:09:36 / 修改时间：18:10:23" itemprop="dateCreated datePublished" datetime="2022-12-28T18:09:36+08:00">2022-12-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="DNS隧道基础"><a href="#DNS隧道基础" class="headerlink" title="DNS隧道基础"></a>DNS隧道基础</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DNS隧道，是隧道技术中的一种。当我们的HTTP、HTTPS这样的上层协议、正反向端口转发都失败的时候，可以尝试使用DNS隧道。DNS隧道很难防范，因为平时的业务也好，使用也罢，难免会用到DNS协议进行解析，所以防火墙大多对DNS的流量是放行状态。这时候，如果我们在不出网机器构造一个恶意的域名（***.xxx.ga），本地的DNS服务器无法给出回答时，就会以迭代查询的方式通过互联网定位到所查询域的权威DNS服务器。最后，这条DNS请求会落到我们提前搭建好的恶意DNS服务器上，于是乎，我们的不出网主机就和恶意DNS服务器交流上了。</span><br></pre></td></tr></table></figure>
-
-<p><strong>搭建DNS隧道的工具目前有iodine，dnscat，dns2tcp等</strong>。</p>
-<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><h2 id="DNS的集中资源记录类型"><a href="#DNS的集中资源记录类型" class="headerlink" title="DNS的集中资源记录类型"></a>DNS的集中资源记录类型</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1.主机记录（A记录）</span><br><span class="line">主机记录可以将DNS中的域名称对应到IPv4地址。</span><br><span class="line">2.PTR</span><br><span class="line">PTR可以定义某个对应的域名。</span><br><span class="line">3.CNAME记录，通常称别名解析</span><br><span class="line">CNAME记录可以将注册的不同域名都转到一个域名记录上，由这个域名记录同意解析管理，与A记录不同的是，CNAME别名记录设置的可以是一个域名的描述而不一定是IP地址。</span><br><span class="line">4.NS（Name Server）记录是域名服务器记录</span><br><span class="line">NS记录用来置顶该域名是由那个DNS服务器来进行解析的，可以吧一个域名的不同二级域名分别只想到不同的DNS系统来解析。</span><br><span class="line">5.TXT记录</span><br><span class="line">TXT记录一般是为某条记录设置说明，比如你新建了一条a.com的TXT记录，TXT记录内容“this is a test TXT record&quot;的字样了。</span><br></pre></td></tr></table></figure>
-
-<h2 id="DNS协议解析过程"><a href="#DNS协议解析过程" class="headerlink" title="DNS协议解析过程"></a>DNS协议解析过程</h2><p>dns协议解析过程分为两种，迭代查询和递归查询。</p>
-<p>迭代查询：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">本地域名服务器像根域名服务器发送请求报文，根域名服务器直接给出ip地址或者告诉本地域名服务器下一步应该去向另一个域名服务器A进行查询。同理,A域名服务器直接给出ip地址或者告诉本地域名服务器下一步应该去查询B域名服务器。过程以此类推，知道找到ip地址为止。</span><br></pre></td></tr></table></figure>
-
-<p>递归查询：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">客户机向本地域名服务器查询，如果本地域名服务器的缓存中没有需要查询的ip地址，那么本地域名服务器会以客户机的身份（代替本机查询），向根域名服务器发送请求报文。</span><br></pre></td></tr></table></figure>
-
-<h2 id="DNS隧道"><a href="#DNS隧道" class="headerlink" title="DNS隧道"></a>DNS隧道</h2><p>DNS隧道是隐蔽信道的一种，通过将其他协议封装在DNS协议中进行通信。封装由客户端完成，将DNS流量还原成正常的流量由服务器完成。DNS隧道攻击利用了防火墙放行DNS单特点以及协议解析流程来实现的。</p>
-<p>而DNS隧道也要分为两种，一种是直连型，一种是域名型DNS隧道（中继）。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">直连型DNS隧道：</span><br><span class="line">客户端直接和指定的目标DNS Server进行UDPsocket套接字连接，通过将数据编码封装在DNS协议中进行通信，这种方式速度快，但是隐蔽性比较弱，很容易被探测到，但如果客户端指定了信任的DNS解析服务器，那么将会被白名单限制在外。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">域名型DNS隧道（中继）：</span><br><span class="line">通过DNS迭代查询实现的中继隧道，比较隐蔽，但同时因为数据包到达目标DNS Server前需要经过多个节点，所以速度上较直连慢很多。中继过程中的一个关键点是对DNS缓存机制的规避，因为如果解析的域名在Local DNS 中已经有缓存，那么Local DNS 就不会继续发送数据包，所以在构造请求中，每次查询的域名需要不同或者是已过期的。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">DNS隧道建立的过程：</span><br><span class="line">Step 1：受控PC机将数据封装进DNS数据包里，像局域网内部的本地域名服务器请求查询aaa.com</span><br><span class="line">Step 2：本地域名服务器透过防火墙向根域名服务器发送查询请求</span><br><span class="line">Step 3：经过大量重定向，查询请求最终要aaa.com的权威域名服务器</span><br><span class="line">Step 4：aaa.com权威域名服务器是在攻击者的控制下，解析发送过来的DNS数据包并发送回应包</span><br><span class="line">Step 5：DNS回应包穿透防火墙</span><br><span class="line">Step 6：DNS回应包进入内网</span><br><span class="line">Step 7：本地域名服务器将回应包返回给受控PC机</span><br><span class="line">Step 8：受控PC机解析DNS回应包里的数据，得到新的指令</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DNS Beacon原理：</span><br><span class="line">利用DNS请求应答机制作为攻击渗透到命令控制通道，吧C&amp;C服务器指令封装到DNS相应报文中，以此控制被控段主机。</span><br></pre></td></tr></table></figure>
-
-<p>发送端将隐蔽数据信息切分并且编码后封装到DNS报文域名中进行传输，每一级域名长度为63，域名总长度不超过253，接收端收到DNS报文后提取域名中的隐蔽信息字段进行解码重组还原得到IP报文。主要的工具有DNSCat,Iodine等</p>
-<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><p>需要一个域名和一个公网服务器。</p>
-<h2 id="iodine-DNS隧道搭建"><a href="#iodine-DNS隧道搭建" class="headerlink" title="iodine DNS隧道搭建"></a>iodine DNS隧道搭建</h2><p>值得一提到是iodine（碘）的原子序数为53，这恰好是DNS端口号，故取名为iodine。</p>
-<p><code>apt install iodine</code>命令会同时安装服务端与客户端。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dnspod：https://www.dnspod.cn，在dnspod中添加刚申请的域名，然后dnspod会给出两条dns服务器地址。</span><br><span class="line"></span><br><span class="line">前往域名注册商处修改为 DNSPod 所属服务器。(阿里云中</span><br><span class="line">dns修改后有24-48小时dns生效时间。)</span><br></pre></td></tr></table></figure>
-
-<p>等了一天DNS生效，继续配置。</p>
-<p>dnspod得到域名的管理权之后，在里面添加两条解析记录。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">第一条A类记录，告诉域名系统，&quot;www.xxx&quot;的IP地址是&quot;121.xxx.xxx.xxx&quot;。</span><br><span class="line"></span><br><span class="line">第二条NS记录，告诉域名系统，&quot;ns.xxx&quot;的域名由&quot;www.xxx&quot;进行解析。</span><br><span class="line"></span><br><span class="line">到此前期准备工作就已经完成了，已经将域名绑定到了我们的公网服务器上。</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/12/28/DNS%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221228151559428.png" alt="image-20221228151559428"></p>
-<p>但是更改之后，也不会马上生效，需要等待一段时间，等各地的运营商的缓存刷新才可以。</p>
-<h3 id="服务端："><a href="#服务端：" class="headerlink" title="服务端："></a>服务端：</h3><p>在公网服务器上部署iodine服务端。(需要root权限运行)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">iodined -f -c -P 123.com 192.168.200.1 ns.xxx -DD</span><br><span class="line"></span><br><span class="line">\-f：在前台运行</span><br><span class="line"></span><br><span class="line">\-c：禁止检查所有传入请求的客户端IP地址。</span><br><span class="line"></span><br><span class="line">\-P：客户端和服务端之间用于验证身份的密码。</span><br><span class="line"></span><br><span class="line">\-D：指定调试级别，-DD指第二级。“D”的数量随级别增加。</span><br></pre></td></tr></table></figure>
-
-<p>其中ns.xxx就是在腾讯dns设置的ns记录那个</p>
-<p>这里的192.168.200.1为自定义局域网虚拟IP地址，建议不要与现有网段冲突。</p>
-<p>执行完该命令之后会新生成一个dns0虚拟网卡，ip地址就是刚才命令中输入的ip地址(192.168.200.1)。</p>
-<p><img src="/2022/12/28/DNS%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221228162144458.png" alt="image-20221228162144458"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">**ubuntu默认53端口是打开的，通过下面命令关闭掉53端口**</span><br><span class="line"></span><br><span class="line">rm /etc/resolv.conf&amp;&amp;echo &quot;nameserver x.x.x.x&quot; &gt;&gt; /etc/resolv.conf 配置dns服务器(x.x.x.x改为dns服务器,8.8.8.8等)</span><br><span class="line"></span><br><span class="line">systemctl stop systemd-resolved 停止该进程</span><br><span class="line"></span><br><span class="line">systemctl disable systemd-resolved 关闭开机自启动</span><br></pre></td></tr></table></figure>
-
-<h3 id="客户端："><a href="#客户端：" class="headerlink" title="客户端："></a>客户端：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">客户端我使用的kali，kali自带iodine工具。</span><br><span class="line"></span><br><span class="line">iodine -f -P 123.com ns.xxx -M 200</span><br><span class="line"></span><br><span class="line">-r：iodine有时会自动将DNS隧道切换为UDP隧道，该参数的作用是强制在任何情况下使用DNS隧道</span><br><span class="line"></span><br><span class="line">-M：指定上行主机的大小。</span><br><span class="line"></span><br><span class="line">-m：调节最大下行分片的大小。</span><br><span class="line"></span><br><span class="line">-f：在前台运行</span><br><span class="line"></span><br><span class="line">-T：指定DNS请求类型TYPE，可选项有NULL、PRIVATE、TXT、SRV、CNAME、MX、A。</span><br><span class="line"></span><br><span class="line">-O：指定数据编码规范。</span><br><span class="line"></span><br><span class="line">-P：客户端和服务端之间用于验证身份的密码。</span><br><span class="line"></span><br><span class="line">-L：指定是否开启懒惰模式，默认开启。</span><br><span class="line"></span><br><span class="line">-I：指定两个请求之间的时间间隔。</span><br></pre></td></tr></table></figure>
-
-<p>值得注意的是：dns服务使用的是udp的53端口，而不是tcp的。</p>
-<p>同时即使链接成功了也会产生编码错误，在客户端使用如下命令解决。</p>
-<p><code>iodine -f -P 123.com ns.xxx  -M 200 -O base64</code></p>
-<p><img src="/2022/12/28/DNS%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221228171835939.png" alt="image-20221228171835939"></p>
-<p>这边已经链接成功了，而且也给我们分配了一个虚拟ip,200.3</p>
-<p>现在我们通过客户端ping一下服务端的虚拟ip，发现ping的通，则dns隧道建立成功。</p>
-<p><img src="/2022/12/28/DNS%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221228172735624.png" alt="image-20221228172735624"></p>
-<p>（就是延迟有点高的啊）</p>
-<h3 id="frp搭建隧道"><a href="#frp搭建隧道" class="headerlink" title="frp搭建隧道"></a>frp搭建隧道</h3><p>先在服务器上打开frp</p>
-<p><img src="/2022/12/28/DNS%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221228173805409.png" alt="image-20221228173805409"></p>
-<p>随后在本地搭建frp客户端</p>
-<p><img src="/2022/12/28/DNS%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221228174532671.png" alt="image-20221228174532671"></p>
-<p>注意，这里的ip就不是公网上的了，而是dns隧道中服务器的虚拟ip，现在我们相当于在6005端口中又嵌套了一个socket隧道。（上面配置搞忘打一个中括号了，记得加上）</p>
-<p><img src="/2022/12/28/DNS%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221228175259660.png" alt="image-20221228175259660"></p>
-<p>直接访问公网的6005端口</p>
-<p><img src="/2022/12/28/DNS%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/image-20221228175505332.png" alt="image-20221228175505332"></p>
-<p>可以看到成功建立链接，就是有点小慢（毕竟是dns隧道。</p>
-<p>为了做实验，我还专门吧服务器的其他端口用防火墙拦截了，只留下了一个dns的端口，结果还是成功的。（当然对面的服务器必须把你开socket代理的端口打开才可以哦，是tcp的，）</p>
-<p>当然后续还有一些工具可以搭建dns隧道，后面我的博客中会陆续补充在工具分类里面。（<strong>dnscat2</strong>、<strong>dns2tcp</strong>）</p>
-<h1 id="各种工具的利用环境"><a href="#各种工具的利用环境" class="headerlink" title="各种工具的利用环境"></a>各种工具的利用环境</h1><h3 id="1-外-gt-内"><a href="#1-外-gt-内" class="headerlink" title="1.外-&gt;内"></a><strong>1.外-&gt;内</strong></h3><p>iodine和dnscat2使用环境：目标是内网，并且只有dns出网的情况下，通过自己的公网服务器搭建到目标的dns隧道，从而通过公网服务器代理进入目标内网，遨游目标内网。</p>
-<p><img src="/2022/12/28/DNS%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/640" alt="图片"></p>
-<h3 id><a href="#" class="headerlink" title></a></h3><h3 id="2-内-gt-外"><a href="#2-内-gt-外" class="headerlink" title="2.内-&gt;外"></a><strong>2.内-&gt;外</strong></h3><p>dns2tcp使用的环境是：自己在一个内网里面，自己所处的环境不出网，但是dns可以出网，就可以用过dns2tcp搭建一个dns隧道，从而可以访问到互联网环境。</p>
-<p>典型环境：在学校连接到wifi之后，必须要认证登陆，不然不能上网，但是浏览器又能加载出登陆界面，此情况就是dns出网，可以通过dns2tcp搭建dns隧道绕过认证登陆。</p>
-<p><img src="/2022/12/28/DNS%E9%9A%A7%E9%81%93%E5%9F%BA%E7%A1%80/640" alt="图片"></p>
-<p>（图是偷的外面的，有水印就别建议了）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -662,7 +707,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">175</span>
+          <span class="site-state-item-count">176</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

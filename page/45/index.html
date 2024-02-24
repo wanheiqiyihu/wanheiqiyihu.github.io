@@ -255,6 +255,133 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/02/10/WEB%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/10/WEB%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">WEB入门</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-10 11:42:17" itemprop="dateCreated datePublished" datetime="2022-02-10T11:42:17+08:00">2022-02-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-08 00:22:24" itemprop="dateModified" datetime="2022-12-08T00:22:24+08:00">2022-12-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="WEB入门"><a href="#WEB入门" class="headerlink" title="WEB入门"></a>WEB入门</h1><p>最近感觉基础薄弱，遂重新温习一下各类基础</p>
+<h1 id="1-WEB技术架构"><a href="#1-WEB技术架构" class="headerlink" title="1. WEB技术架构"></a>1. WEB技术架构</h1><p><img src="/2022/02/10/WEB%E5%85%A5%E9%97%A8/image-20220210105848463.png" alt="image-20220210105848463"></p>
+<h2 id="1-1-协议"><a href="#1-1-协议" class="headerlink" title="1.1 协议"></a>1.1 协议</h2><h3 id="1-1-1-http协议"><a href="#1-1-1-http协议" class="headerlink" title="1.1.1 http协议"></a>1.1.1 http协议</h3><h4 id="1-1-1-1-http简介"><a href="#1-1-1-1-http简介" class="headerlink" title="1.1.1.1 http简介"></a>1.1.1.1 http简介</h4><p>超文本传输协议（英文：<strong>H</strong>yper<strong>T</strong>ext <strong>T</strong>ransfer <strong>P</strong>rotocol，缩写：HTTP）是一种用于分布式、协作式和超媒体信息系统的应用层协议。HTTP是万维网的数据通信的基础。</p>
+<h4 id="1-1-1-2-http概述"><a href="#1-1-1-2-http概述" class="headerlink" title="1.1.1.2 http概述"></a>1.1.1.2 http概述</h4><p>HTTP是一个客户端终端（用户）和服务器端（网站）请求和应答的标准（TCP）。通过使用网页浏览器、网络爬虫或者其它的工具，客户端发起一个HTTP请求到服务器上指定端口（默认端口为80）。我们称这个客户端为用户代理程序（user agent）。应答的服务器上存储着一些资源，比如HTML文件和图像。我们称这个应答服务器为源服务器（origin server）。在用户代理和源服务器中间可能存在多个“中间层”，比如代理服务器、网关或者隧道（tunnel）。</p>
+<p>尽管TCP/IP协议是互联网上最流行的应用，HTTP协议中，并没有规定必须使用它或它支持的层。事实上，HTTP可以在任何互联网协议上，或其他网络上实现。HTTP假定其下层协议提供可靠的传输。因此，任何能够提供这种保证的协议都可以被其使用。因此也就是其在TCP/IP协议族使用TCP作为其传输层。</p>
+<p>通常，由HTTP客户端发起一个请求，创建一个到服务器指定端口（默认是80端口）的TCP连接。HTTP服务器则在那个端口监听客户端的请求。一旦收到请求，服务器会向客户端返回一个状态，比如”HTTP/1.1 200 OK”，以及返回的内容，如请求的文件、错误消息、或者其它信息。</p>
+<h4 id="1-1-1-3-http工作原理"><a href="#1-1-1-3-http工作原理" class="headerlink" title="1.1.1.3 http工作原理"></a>1.1.1.3 http工作原理</h4><p>HTTP协议定义Web客户端如何从Web服务器请求Web页面，以及服务器如何把Web页面传送给客户端。HTTP协议采用了请求/响应模型。客户端向服务器发送一个请求报文，请求报文包含请求的方法、URL、协议版本、请求头部和请求数据。服务器以一个状态行作为响应，响应的内容包括协议的版本、成功或者错误代码、服务器信息、响应头部和响应数据。</p>
+<p>以下是 HTTP 请求/响应的步骤：</p>
+<p>\1. 客户端连接到Web服务器<br>一个HTTP客户端，通常是浏览器，与Web服务器的HTTP端口（默认为80）建立一个TCP套接字连接。例如，<a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a>。</p>
+<p>\2. 发送HTTP请求<br>通过TCP套接字，客户端向Web服务器发送一个文本的请求报文，一个请求报文由请求行、请求头部、空行和请求数据4部分组成。</p>
+<p>\3. 服务器接受请求并返回HTTP响应<br>Web服务器解析请求，定位请求资源。服务器将资源复本写到TCP套接字，由客户端读取。一个响应由状态行、响应头部、空行和响应数据4部分组成。</p>
+<p>\4. 释放连接TCP连接<br>若connection 模式为close，则服务器主动关闭TCP连接，客户端被动关闭连接，释放TCP连接;若connection 模式为keepalive，则该连接会保持一段时间，在该时间内可以继续接收请求;</p>
+<p>\5. 客户端浏览器解析HTML内容<br>客户端浏览器首先解析状态行，查看表明请求是否成功的状态代码。然后解析每一个响应头，响应头告知以下为若干字节的HTML文档和文档的字符集。客户端浏览器读取响应数据HTML，根据HTML的语法对其进行格式化，并在浏览器窗口中显示。</p>
+<h4 id="1-1-1-4-HTTP状态码"><a href="#1-1-1-4-HTTP状态码" class="headerlink" title="1.1.1.4 HTTP状态码"></a>1.1.1.4 HTTP状态码</h4><p><img src="/2022/02/10/WEB%E5%85%A5%E9%97%A8/877318-20180418161321986-304902913.png" alt="img"></p>
+<h4 id="1-1-1-5-url"><a href="#1-1-1-5-url" class="headerlink" title="1.1.1.5 url"></a>1.1.1.5 url</h4><p>超文本传输协议（HTTP）的统一资源定位符将从因特网获取信息的五个基本元素包括在一个简单的地址中：</p>
+<ul>
+<li>传送协议。</li>
+<li>层级URL标记符号(为[//],固定不变)</li>
+<li>访问资源需要的凭证信息（可省略）</li>
+<li>服务器。（通常为域名，有时为IP地址）</li>
+<li>端口号。（以数字方式表示，若为HTTP的默认值“:80”可省略）</li>
+<li>路径。（以“/”字符区别路径中的每一个目录名称）</li>
+<li>查询。（GET模式的窗体参数，以“?”字符为起点，每个参数以“&amp;”隔开，再以“=”分开参数名称与数据，通常以UTF8的URL编码，避开字符冲突的问题）</li>
+<li>片段。以“#”字符为起点</li>
+</ul>
+<p>以<a target="_blank" rel="noopener" href="http://www.luffycity.com/news/index.html?id=250&amp;page=1">http://www.luffycity.com:80/news/index.html?id=250&amp;page=1</a> 为例</p>
+<h4 id="1-1-1-6-http响应格式"><a href="#1-1-1-6-http响应格式" class="headerlink" title="1.1.1.6 http响应格式"></a>1.1.1.6 http响应格式</h4><p><img src="/2022/02/10/WEB%E5%85%A5%E9%97%A8/867021-20180322001744323-654009411.jpg" alt="img"></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/an-wen/p/11180076.html">HTTP协议超级详解 - 爱文飞翔 - 博客园 (cnblogs.com)</a></p>
+<h3 id="1-1-2-https协议"><a href="#1-1-2-https协议" class="headerlink" title="1.1.2 https协议"></a>1.1.2 https协议</h3><p>基于HTTP协议，通过SSL或TLS提供加密处理数据、验证对方身份以及数据完整性保护</p>
+<p>通过抓包可以看到数据不是明文传输，而且HTTPS有如下特点：</p>
+<ol>
+<li>内容加密：采用混合加密技术，中间者无法直接查看明文内容</li>
+<li>验证身份：通过证书认证客户端访问的是自己的服务器</li>
+<li>保护数据完整性：防止传输的内容被中间人冒充或者篡改</li>
+</ol>
+<h4 id="1-1-2-1-ssl建立连接过程"><a href="#1-1-2-1-ssl建立连接过程" class="headerlink" title="1.1.2.1 ssl建立连接过程"></a>1.1.2.1 ssl建立连接过程</h4><p><img src="/2022/02/10/WEB%E5%85%A5%E9%97%A8/1.png" alt="在这里插入图片描述"></p>
+<p>client向server发送请求<a target="_blank" rel="noopener" href="https://baidu.com,然后连接到server的443端口,发送的信息主要是随机值1和客户端支持的加密算法./">https://baidu.com，然后连接到server的443端口，发送的信息主要是随机值1和客户端支持的加密算法。</a><br>server接收到信息之后给予client响应握手信息，包括随机值2和匹配好的协商加密算法，这个加密算法一定是client发送给server加密算法的子集。<br>随即server给client发送第二个响应报文是数字证书。服务端必须要有一套数字证书，可以自己制作，也可以向组织申请。区别就是自己颁发的证书需要客户端验证通过，才可以继续访问，而使用受信任的公司申请的证书则不会弹出提示页面，这套证书其实就是一对公钥和私钥。传送证书，这个证书其实就是公钥，只是包含了很多信息，如证书的颁发机构，过期时间、服务端的公钥，第三方证书认证机构(CA)的签名，服务端的域名信息等内容。<br>客户端解析证书，这部分工作是由客户端的TLS来完成的，首先会验证公钥是否有效，比如颁发机构，过期时间等等，如果发现异常，则会弹出一个警告框，提示证书存在问题。如果证书没有问题，那么就生成一个随即值（预主秘钥）。<br>客户端认证证书通过之后，接下来是通过随机值1、随机值2和预主秘钥组装会话秘钥。然后通过证书的公钥加密会话秘钥。<br>传送加密信息，这部分传送的是用证书加密后的会话秘钥，目的就是让服务端使用秘钥解密得到随机值1、随机值2和预主秘钥。<br>服务端解密得到随机值1、随机值2和预主秘钥，然后组装会话秘钥，跟客户端会话秘钥相同。<br>客户端通过会话秘钥加密一条消息发送给服务端，主要验证服务端是否正常接受客户端加密的消息。<br>同样服务端也会通过会话秘钥加密一条消息回传给客户端，如果客户端能够正常接受的话表明SSL层连接建立完成了。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoming100001/article/details/81109617">(39条消息) HTTP和HTTPS协议，看一篇就够了_不一样的博客-CSDN博客_https</a></p>
+<h2 id="1-2-系统"><a href="#1-2-系统" class="headerlink" title="1.2 系统"></a>1.2 系统</h2><p>在这只是先了解基础，后面会继续深入学习操作系统方面的东西</p>
+<h3 id="1-2-1-Linux系统"><a href="#1-2-1-Linux系统" class="headerlink" title="1.2.1 Linux系统"></a>1.2.1 Linux系统</h3><p>Linux，全称GNU/Linux，是一种免费使用和自由传播的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%B1%BBUNIX/9032872">类UNIX</a>操作系统，其内核由<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9E%97%E7%BA%B3%E6%96%AF%C2%B7%E6%9C%AC%E7%BA%B3%E7%AC%AC%E5%85%8B%E7%89%B9%C2%B7%E6%89%98%E7%93%A6%E5%85%B9/1034429">林纳斯·本纳第克特·托瓦兹</a>于1991年10月5日首次发布，它主要受到<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Minix/7106045">Minix</a>和Unix思想的启发，是一个基于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/POSIX">POSIX</a>的多用户、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%A4%9A%E4%BB%BB%E5%8A%A1/1011764">多任务</a>、支持<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%A4%9A%E7%BA%BF%E7%A8%8B/1190404">多线程</a>和多<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/CPU">CPU</a>的操作系统。它能运行主要的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Unix/219943">Unix</a>工具软件、应用程序和网络协议。它支持<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/32%E4%BD%8D/5812218">32位</a>和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/64%E4%BD%8D">64位</a>硬件。Linux继承了Unix以网络为核心的设计思想，是一个性能稳定的多用户网络操作系统。Linux有上百种不同的发行版，如基于社区开发的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/debian/748667">debian</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/archlinux/10857530">archlinux</a>，和基于商业开发的[Red Hat Enterprise Linux](<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Red">https://baike.baidu.com/item/Red</a> Hat Enterprise Linux/10770503)、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/SUSE/60409">SUSE</a>、[Oracle Linux](<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Oracle">https://baike.baidu.com/item/Oracle</a> Linux/6876458)等。</p>
+<h3 id="1-2-2-Unix系统"><a href="#1-2-2-Unix系统" class="headerlink" title="1.2.2 Unix系统"></a>1.2.2 Unix系统</h3><p>Unix是20世纪70年代初出现的一个操作系统，除了作为网络操作系统之外，还可以作为单机操作系统使用。Unix作为一种开发平台和台式操作系统获得了广泛使用，主要用于工程应用和科学计算等领域。</p>
+<h2 id="1-3-前端"><a href="#1-3-前端" class="headerlink" title="1.3 前端"></a>1.3 前端</h2><p><img src="/2022/02/10/WEB%E5%85%A5%E9%97%A8/v2-bd43cb8bd3dc72bb0df8de108d4de2e0_r.jpg" alt="preview"></p>
+<p>了解 web的大概框架，具体某个地方的东西会更深入的学习。</p>
+<h2 id="1-4-后端"><a href="#1-4-后端" class="headerlink" title="1.4 后端"></a>1.4 后端</h2><h2 id="1-5-中间件"><a href="#1-5-中间件" class="headerlink" title="1.5 中间件"></a>1.5 中间件</h2><h2 id="1-6-数据库"><a href="#1-6-数据库" class="headerlink" title="1.6 数据库"></a>1.6 数据库</h2><h1 id="2-web网站平台"><a href="#2-web网站平台" class="headerlink" title="2. web网站平台"></a>2. web网站平台</h1><p>内容管理系统（content management system，CMS），是一种位于WEB前端（Web 服务器）和后端办公系统或流程（内容创作、编辑）之间的软件系统。内容的创作人员、编辑人员、发布人员使用内容管理系统来提交、修改、审批、发布内容。这里指的“内容”可能包括文件、表格、图片、数据库中的数据甚至视频等一切你想要发布到Internet、Intranet以及Extranet网站的信息。<br>内容管理还可选地提供内容抓取工具，将第三方信息来源，比如将文本文件、HTML网页、Web服务、关系数据库等的内容自动抓取，并经分析处理后放到自身的内容库中。<br>随着个性化的发展，内容管理还辅助WEB前端将内容以个性化的方式提供给内容使用者，即提供个性化的门户框架，以基于WEB技术将内容更好地推送到用户的浏览器端.<br>内容管理系统是企业信息化建设和电子政务的新宠，也是一个相对较新的市场。对于内容管理，业界还没有一个统一的定义，不同的机构有不同的理解。</p>
+<h2 id="2-1-wordpress"><a href="#2-1-wordpress" class="headerlink" title="2.1 wordpress"></a>2.1 wordpress</h2><p><strong>WordPress是使用PHP语言开发的<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:1793643716%7D">内容管理系统</a>：</strong></p>
+<ul>
+<li>内容管理系统，英文叫做 Content Management System（CMS）。</li>
+<li>WordPress是全球最多人使用的，免费开源的<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E5%BB%BA%E7%AB%99%E7%A8%8B%E5%BA%8F&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:1793643716%7D">建站程序</a>。</li>
+</ul>
+<h2 id="2-2-joomla"><a href="#2-2-joomla" class="headerlink" title="2.2 joomla"></a>2.2 joomla</h2><p>Joomla!是一套全球知名的内容管理系统。Joomla!是使用PHP语言加上MySQL数据库所开发的软件系统，最新版本是3.9.27 。可以在Linux、 Windows、MacOSX等各种不同的平台上执行。</p>
+<h2 id="2-3-discuz"><a href="#2-3-discuz" class="headerlink" title="2.3 discuz!"></a>2.3 discuz!</h2><p>Crossday Discuz! Board（简称 Discuz!）是北京康盛新创科技有限责任公司推出的一套通用的社区论坛软件系统。自2001年6月面世以来，Discuz!已拥有15年以上的应用历史和200多万网站用户案例，是全球成熟度最高、覆盖率最大的论坛软件系统之一。</p>
+<h2 id="2-4-dedecms（织梦）"><a href="#2-4-dedecms（织梦）" class="headerlink" title="2.4 dedecms（织梦）"></a>2.4 dedecms（织梦）</h2><p>织梦内容管理系统(DedeCms) 以简单、实用、开源而闻名，是国内最知名的PHP开源网站管理系统，也是使用用户最多的PHP类CMS系统，在经历多年的发展，版本无论在功能，还是在易用性方面，都有了长足的发展和进步，DedeCms免费版的主要目标用户锁定在个人站长，功能更专注于个人网站或中小型门户的构建，当然也不乏有企业用户和学校等在使用该系统。</p>
+<h2 id="2-5-wamp"><a href="#2-5-wamp" class="headerlink" title="2.5 wamp"></a>2.5 wamp</h2><p>Windows下的Apache+Mysql/MariaDB+Perl/PHP/Python，一组常用来搭建动态网站或者服务器的开源软件，本身都是各自独立的程序，但是因为常被放在一起使用，拥有了越来越高的兼容度，共同组成了一个强大的Web应用程序平台。随着开源潮流的蓬勃发展，开放源代码的LAMP已经与J2EE和.Net商业软件形成三足鼎立之势，并且该软件开发的项目在软件方面的投资成本较低，因此受到整个IT界的关注。LAMP是基于Linux，Apache，MySQL/MariaDB和PHP的开放资源网络开发平台，PHP是一种有时候用Perl或Python可代替的编程语言。这个术语来自欧洲，在那里这些程序常用来作为一种标准开发环境。名字来源于每个程序的第一个字母。每个程序在所有权里都符合开放源代码标准：Linux是开放系统；Apache是最通用的网络服务器；mySQL是带有基于网络管理附加工具的关系数据库；PHP是流行的对象脚本语言，它包含了多数其它语言的优秀特征来使得它的网络开发更加有效。开发者在Windows操作系统下使用这些Linux环境里的工具称为使用WAMP。</p>
+<p>s</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/02/08/xray-rad-%E8%87%AA%E5%8A%A8%E5%8C%96edusrc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -418,289 +545,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/" class="post-title-link" itemprop="url">pikachu靶场通关</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-01 22:38:14" itemprop="dateCreated datePublished" datetime="2022-02-01T22:38:14+08:00">2022-02-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-02 10:08:18" itemprop="dateModified" datetime="2022-02-02T10:08:18+08:00">2022-02-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="pikachu靶场通关"><a href="#pikachu靶场通关" class="headerlink" title="pikachu靶场通关"></a>pikachu靶场通关</h1><h1 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h1><h2 id="1-基于表单的暴力破解"><a href="#1-基于表单的暴力破解" class="headerlink" title="1.基于表单的暴力破解"></a>1.基于表单的暴力破解</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220131122217344.png" alt="image-20220131122217344"></p>
-<p>burp跑一下</p>
-<h2 id="2-验证码绕过-on-server"><a href="#2-验证码绕过-on-server" class="headerlink" title="2.验证码绕过(on server)"></a>2.验证码绕过(on server)</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220131122833233.png" alt="image-20220131122833233"></p>
-<p>修改密码发了两次包都发现没有提示验证码错误，那我们可以重复利用这个验证码。</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220131123001877.png" alt="image-20220131123001877"></p>
-<p>跑出来了</p>
-<h2 id="3-验证码绕过-on-client"><a href="#3-验证码绕过-on-client" class="headerlink" title="3.验证码绕过(on client)"></a>3.验证码绕过(on client)</h2><p>根据题目提示是前端验证码</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220131123458283.png" alt="image-20220131123458283"></p>
-<p>那我们发包同样可以绕过</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220131123626609.png" alt="image-20220131123626609"></p>
-<p>成功</p>
-<h2 id="4-token防爆破"><a href="#4-token防爆破" class="headerlink" title="4.token防爆破?"></a>4.token防爆破?</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220131124113085.png" alt="image-20220131124113085"></p>
-<p>通过观察我们可以发现下一次的token是由这一次的返回包来决定的，</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201102136091.png" alt="image-20220201102136091"></p>
-<p>选这个</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201102210221.png" alt="image-20220201102210221"></p>
-<p>线程设置为1</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201102317701.png" alt="image-20220201102317701"></p>
-<p>设置一下获取的token</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201102409707.png" alt="image-20220201102409707"></p>
-<p>选择总是</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201103151781.png" alt="image-20220201103151781"></p>
-<p>选择递归搜索，把上一个token填进去</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201110843373.png" alt="image-20220201110843373"></p>
-<p>发现密码</p>
-<h1 id="xss跨站脚本漏洞"><a href="#xss跨站脚本漏洞" class="headerlink" title="xss跨站脚本漏洞"></a>xss跨站脚本漏洞</h1><h2 id="1-反射型xss-get"><a href="#1-反射型xss-get" class="headerlink" title="1.反射型xss(get)"></a>1.反射型xss(get)</h2><p>因为在输入框有输入限制，我们就直接在url中添加参数</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201112154043.png" alt="image-20220201112154043"></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201112158872.png" alt="image-20220201112158872"></p>
-<h2 id="2-反射性xss-post"><a href="#2-反射性xss-post" class="headerlink" title="2.反射性xss(post)"></a>2.反射性xss(post)</h2><p>先用123456的账号密码登录上去</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201113436342.png" alt="image-20220201113436342"></p>
-<p>然后就可以了</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201114104514.png" alt="image-20220201114104514"></p>
-<p>当然我们也有很多的绕过方式</p>
-<p><code>&lt;sCRIPT&gt;alert(&#39;1&#39;)&lt;/script&gt;</code></p>
-<p><code>&lt;sCRIPT&gt;alert(/xss/)&lt;/script&gt;</code>用<code>//</code>代替<code>&quot;&quot;</code></p>
-<p>都可以</p>
-<h2 id="3-存储型xss"><a href="#3-存储型xss" class="headerlink" title="3.存储型xss"></a>3.存储型xss</h2><p>还是用上面的payload<code>&lt;sCRIPT&gt;alert(/xss/)&lt;/script&gt;</code></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201114843672.png" alt="image-20220201114843672"></p>
-<h2 id="4-DOM型xss"><a href="#4-DOM型xss" class="headerlink" title="4.DOM型xss"></a>4.DOM型xss</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201115819085.png" alt="image-20220201115819085"></p>
-<p>通过审查元素我们可以发现我们在点击按钮之后，这个标签里面的属性就会改变我们要做的就是把它弄成超链接，</p>
-<p>onclick 事件会在对象被点击时发生，然后弹出我们的xss，记得闭合我们的标签符号</p>
-<p><code>&#39;onclick=&quot;alert(123)&quot;&gt;</code></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201120149233.png" alt="image-20220201120149233"></p>
-<h2 id="5-DOM型xss"><a href="#5-DOM型xss" class="headerlink" title="5.DOM型xss"></a>5.DOM型xss</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201121609094.png" alt="image-20220201121609094"></p>
-<p>可以看到上面的标签在点击下面的标签之后内容就会变成输入框里面的内容，我们还是用onclick事件。</p>
-<p><code>&#39;onclick=&quot;alert(123)&quot;&gt;</code></p>
-<h2 id="6-xss盲打"><a href="#6-xss盲打" class="headerlink" title="6.xss盲打"></a>6.xss盲打</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201130503164.png" alt="image-20220201130503164"></p>
-<p>先把payload注入进去</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201130521691.png" alt="image-20220201130521691"></p>
-<p>登录进去看看</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201130606293.png" alt="image-20220201130606293"></p>
-<p>存在漏洞</p>
-<h2 id="7-xss之过滤"><a href="#7-xss之过滤" class="headerlink" title="7.xss之过滤"></a>7.xss之过滤</h2><p>看题目就知道有过滤，我们直接使用上面提到的绕过的payload</p>
-<p>拼凑:<code>&lt;scri&lt;script&gt;pt&gt;alert(/xss/)&lt;/scr&lt;/script&gt;pt&gt;</code></p>
-<p><code>&lt;sCRIPT&gt;alert(/xss/)&lt;/scriPt&gt;</code></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201130839329.png" alt="image-20220201130839329"></p>
-<h2 id="8-xss之htmlspecialchars"><a href="#8-xss之htmlspecialchars" class="headerlink" title="8.xss之htmlspecialchars"></a>8.xss之htmlspecialchars</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201131532369.png" alt="image-20220201131532369"></p>
-<p>由于输入的地方出现了特殊字符，所以被记录下来了，但是发现记录的标签也可以进行注入，那我们继续使用onclick事件</p>
-<p><code>&#39;onclick=&#39;alert(/xss/)&#39;</code></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201131717082.png" alt="image-20220201131717082"></p>
-<h2 id="9-xss之href输出"><a href="#9-xss之href输出" class="headerlink" title="9.xss之href输出"></a>9.xss之href输出</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201131817651.png" alt="image-20220201131817651"></p>
-<p>用oncilck事件没有成功</p>
-<p>我们还是按常理输出，然后点击查看查看元素发现，这次的输出是在href中，但是这次代码将双引号进行了过滤，是不是这样不能执行xss代码了呢，当然不是，输出在a标签里的href属性，可以使用js协议来执行js</p>
-<p><code>javascript:alert(/xss/)</code></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201132454361.png" alt="image-20220201132454361"></p>
-<h2 id="10-xss之js输出"><a href="#10-xss之js输出" class="headerlink" title="10.xss之js输出"></a>10.xss之js输出</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201132657030.png" alt="image-20220201132657030"></p>
-<p>可以看到直接被拼接进了代码中，那我们直接对他进行闭合</p>
-<p><code>&#39;&lt;/script&gt;&lt;script&gt;alert(/xss/)&lt;/script&gt;</code></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201132823975.png" alt="image-20220201132823975"></p>
-<h1 id="CSRF-跨站请求伪造"><a href="#CSRF-跨站请求伪造" class="headerlink" title="CSRF(跨站请求伪造)"></a>CSRF(跨站请求伪造)</h1><p>Cross-site request forgery  简称为“CSRF”，在CSRF的攻击场景中攻击者会伪造一个请求（这个请求一般是一个链接），然后欺骗目标用户进行点击，用户一旦点击了这个请求，整个攻击就完成了。所以CSRF攻击也成为”one click”攻击。                         很多人搞不清楚CSRF的概念，甚至有时候会将其和XSS混淆,更有甚者会将其和越权问题混为一谈,这都是对原理没搞清楚导致的。</p>
-<h2 id="1-CSRF-get"><a href="#1-CSRF-get" class="headerlink" title="1.CSRF(get)"></a>1.CSRF(get)</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201154952242.png" alt="image-20220201154952242"></p>
-<p>发现请求是这样的，我们可以伪造这样的请求，登录lili的账号之后让lili点这个链接，然后就会发现lili的个人信息被修改了</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201155130031.png" alt="image-20220201155130031"></p>
-<h2 id="2-CSRF-post"><a href="#2-CSRF-post" class="headerlink" title="2.CSRF(post)"></a>2.CSRF(post)</h2><p>第二关post也一样，我们伪造一个就好了。</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201155542980.png" alt="image-20220201155542980"></p>
-<p>他的信息是在post里面的，那我们伪造一个包。</p>
-<p>但是我不知道怎么发出去，看了下答案，需要伪造一个站点，别人点你站点中的按钮的时候，就可以自动向那个网站发一个修改个人信息的请求。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript"> </span></span><br><span class="line"><span class="javascript"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript"> </span></span><br><span class="line"><span class="javascript"><span class="built_in">document</span>.getElementById(<span class="string">&quot;postsubmit&quot;</span>).click();</span></span><br><span class="line"><span class="javascript"> </span></span><br><span class="line"><span class="javascript">&#125;</span></span><br><span class="line"><span class="javascript"> </span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span> <span class="attr">action</span>=<span class="string">&quot;http://www.tests.com/vul/csrf/csrfpost/csrf_post_edit.php&quot;</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;sex&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;sex&quot;</span> <span class="attr">value</span>=<span class="string">&quot;body&quot;</span> /&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;phonenum&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;phonenum&quot;</span> <span class="attr">value</span>=<span class="string">&quot;123456789&quot;</span> /&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;add&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;add&quot;</span> <span class="attr">value</span>=<span class="string">&quot;usa&quot;</span> /&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;email&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;email&quot;</span> <span class="attr">value</span>=<span class="string">&quot;vince@pikachu.com&quot;</span> /&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;postsubmit&quot;</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">name</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;submit&quot;</span> /&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="token"><a href="#token" class="headerlink" title="token"></a>token</h3><p>如果有token的话看网上说的就无法绕过了。</p>
-<h1 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h1><p>又到了我最喜欢的sql注入时间</p>
-<h2 id="1-数字型注入"><a href="#1-数字型注入" class="headerlink" title="1.数字型注入"></a>1.数字型注入</h2><p>直接在hackbar里面用or 1=1</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201160657534.png" alt="image-20220201160657534"></p>
-<p>成功</p>
-<h2 id="2-字符型注入"><a href="#2-字符型注入" class="headerlink" title="2.字符型注入"></a>2.字符型注入</h2><p><code>kobe&#39; or &quot;1&quot; = &quot;1&quot;#</code></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201161344643.png" alt="image-20220201161344643"></p>
-<p>成功</p>
-<h2 id="3-搜索型注入"><a href="#3-搜索型注入" class="headerlink" title="3.搜索型注入"></a>3.搜索型注入</h2><p><code>kobe&#39; or &quot;1&quot; = &quot;1&quot;#</code></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201161811993.png" alt="image-20220201161811993"></p>
-<h2 id="4-xx型注入"><a href="#4-xx型注入" class="headerlink" title="4.xx型注入"></a>4.xx型注入</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201161919392.png" alt="image-20220201161919392"></p>
-<p>上面的payload被过滤了，但是依然报错，开始尝试绕过。</p>
-<p><code>&#39;)or 1=1 #</code></p>
-<p>成功绕过<img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201163008834.png" alt="image-20220201163008834"></p>
-<h2 id="5-insert-update"><a href="#5-insert-update" class="headerlink" title="5.insert/update"></a>5.insert/update</h2><p>首先了解下updatexml()函数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATEXML (XML_document, XPath_string, new_value);</span><br></pre></td></tr></table></figure>
-
-<p>第一个参数：XML_document是String格式，为XML文档对象的名称，文中为Doc</p>
-<p>第二个参数：XPath_string (Xpath格式的字符串) ，如果不了解Xpath语法，可以在网上查找教程。</p>
-<p>第三个参数：new_value，String格式，替换查找到的符合条件的数据</p>
-<p>作用：改变文档中符合条件的节点的值</p>
-<p>改变XML_document中符合XPATH_string的值</p>
-<p>而我们的注入语句为：<code>updatexml(1,concat(0x7e,(SELECT @@version),0x7e),1)</code></p>
-<p>其中的concat()函数是将其连成一个字符串，因此不会符合XPATH_string的格式，从而出现格式错误，爆出。</p>
-<p><code>xxx&#39; or updatexml(1,concat(0x7e,database()),0) or &#39;</code></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201171910421.png" alt="image-20220201171910421"></p>
-<h2 id="6-delete注入"><a href="#6-delete注入" class="headerlink" title="6.delete注入"></a>6.delete注入</h2><p>打开burpsuite然后点击删除，抓到包后发送到重发器然后在56后面加上我们的语句</p>
-<p>+or+updatexml(1,comcat(0x7e,database()),0)因为这里传的是数值型，我们就不用单引号闭合，直接or就行了，这样就完成了我们的注入</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201172931918.png" alt="image-20220201172931918"></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/20200423101230931.png" alt="img"></p>
-<h2 id="7-http头注入"><a href="#7-http头注入" class="headerlink" title="7.http头注入"></a>7.http头注入</h2><p>我们的信息被记录了，那有可能是记录在数据库了</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201174404449.png" alt="image-20220201174404449"></p>
-<p>可能又是insert</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201175400728.png" alt="image-20220201175400728"></p>
-<p>在user-agent完整注入</p>
-<h2 id="8-基于boolian的盲注"><a href="#8-基于boolian的盲注" class="headerlink" title="8.基于boolian的盲注"></a>8.基于boolian的盲注</h2><p>kobe’ and ascii(substr(database(),1,1))=112#</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201180541316.png" alt="image-20220201180541316"></p>
-<h2 id><a href="#" class="headerlink" title></a></h2><h2 id="9-时间盲注"><a href="#9-时间盲注" class="headerlink" title="9.时间盲注"></a>9.时间盲注</h2><p>时间盲注主要使用if语句，通过延迟信息进行判断，不看回显信息</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201181336356.png" alt="image-20220201181336356"></p>
-<p>右击审查元素</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201181340785.png" alt="image-20220201181340785"></p>
-<p>然后点击网络，再从上面提交上去，可以看到时间执行了5.12秒，说明有盲注</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201181344988.png" alt="image-20220201181344988"></p>
-<p>kobe’ and if ((substr(database(),1,1))=’a’,sleep=(5),null)#</p>
-<p>构造了另一条代码</p>
-<p>此时1ms就返回结果,说明数据库名第一位不是a<br>将a改为p,则一直不返回结果<br>说明数据库名第一位不是a</p>
-<h1 id="RCE"><a href="#RCE" class="headerlink" title="RCE"></a>RCE</h1><p>RCE漏洞，可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统。                    </p>
-<h2 id="1-ping"><a href="#1-ping" class="headerlink" title="1.ping"></a>1.ping</h2><p>命令执行</p>
-<p>经常遇到，但是由于我们是windows系统，我们要用whoami命令</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201182310878.png" alt="image-20220201182310878"></p>
-<p>最下面可以看到结果</p>
-<h2 id="2-exec-“eval”"><a href="#2-exec-“eval”" class="headerlink" title="2.exec “eval”"></a>2.exec “eval”</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201182644246.png" alt="image-20220201182644246"></p>
-<p>eval把字符串当做代码来执行。</p>
-<h1 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h1><p>文件包含，是一个功能。在各种开发语言中都提供了内置的文件包含函数，其可以使开发人员在一个代码文件中直接包含（引入）另外一个代码文件。</p>
-<h2 id="1-本地包含"><a href="#1-本地包含" class="headerlink" title="1.本地包含"></a>1.本地包含</h2><p>先在本地建立一个敏感文件</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201183902587.png" alt="image-20220201183902587"></p>
-<p>file传参的时候包含这个文件</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201183916344.png" alt="image-20220201183916344"></p>
-<h2 id="2-远程包含"><a href="#2-远程包含" class="headerlink" title="2.远程包含"></a>2.远程包含</h2><p><code>http://192.168.32.104/pikachu/vul/fileinclude/fi_remote.php?filename=http://192.168.32.104/pikachu\vul\fileinclude/test.php&amp;submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2</code></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201184427302.png" alt="image-20220201184427302"></p>
-<h1 id="不安全的文件下载"><a href="#不安全的文件下载" class="headerlink" title="不安全的文件下载"></a>不安全的文件下载</h1><p>文件下载功能在很多web系统上都会出现，一般我们当点击下载链接，便会向后台发送一个下载请求，一般这个请求会包含一个需要下载的文件名称，后台在收到请求后                        会开始执行下载代码，将该文件名对应的文件response给浏览器，从而完成下载。                        如果后台在收到请求的文件名后,将其直接拼进下载文件的路径中而不对其进行安全判断的话，则可能会引发不安全的文件下载漏洞。</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201185131158.png" alt="image-20220201185131158"></p>
-<p>下载抓包发现文件，我们把我们的敏感文件下载下来</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201185216830.png" alt="image-20220201185216830"></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201185219777.png" alt="image-20220201185219777"></p>
-<h1 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h1><p>这个也简单</p>
-<h2 id="1-客户端check"><a href="#1-客户端check" class="headerlink" title="1.客户端check"></a>1.客户端check</h2><p>看标题就知道是js嘛</p>
-<p>先用jpg上传，然后在burp包里修改文件的后缀名，就可以绕过前端检测</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201194924964.png" alt="image-20220201194924964"></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201195341874.png" alt="image-20220201195341874"></p>
-<p>获得shell</p>
-<h2 id="2-服务端check，MIME"><a href="#2-服务端check，MIME" class="headerlink" title="2.服务端check，MIME"></a>2.服务端check，MIME</h2><p>可以用一句话木马图片绕过，当然也可以直接修改mime</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201195459029.png" alt="image-20220201195459029"></p>
-<p>上传成功</p>
-<h2 id="3-getimagesize"><a href="#3-getimagesize" class="headerlink" title="3.getimagesize()"></a>3.getimagesize()</h2><p>getimagesize()简介<br>这个函数功能会对目标文件的16进制去进行一个读取，去读取头几个字符串是不是符合图片的要求的</p>
-<p>直接上传一个图片，然后在里面注入我们的恶意代码</p>
-<p>然后用之前的包含漏洞包含我们的图片就可以了</p>
-<h1 id="越权"><a href="#越权" class="headerlink" title="越权"></a>越权</h1><p>如果使用A用户的权限去操作B用户的数据，A的权限小于B的权限，如果能够成功操作，则称之为越权操作。越权漏洞形成的原因是后台使用了 不合理的权限校验规则导致的。                </p>
-<p>一般越权漏洞容易出现在权限页面（需要登录的页面）增、删、改、查的的地方，当用户对权限页面内的信息进行这些操作时，后台需要对当前用户的权限进行校验，看其是否具备操作的权限，从而给出响应，而如果校验的规则过于简单则容易出现越权漏洞。                </p>
-<h2 id="1-水平越权"><a href="#1-水平越权" class="headerlink" title="1.水平越权"></a>1.水平越权</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201204858787.png" alt="image-20220201204858787"></p>
-<p>得知这些账号</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201212328598.png" alt="image-20220201212328598"></p>
-<p>把lucy的包伪造成lili的</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201212413880.png" alt="image-20220201212413880"></p>
-<p>成功水平越权</p>
-<h2 id="2-垂直越权"><a href="#2-垂直越权" class="headerlink" title="2.垂直越权"></a>2.垂直越权</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201212454749.png" alt="image-20220201212454749"></p>
-<p>我们的目标就是用pikachu使用root的功能</p>
-<p>先登录admin获取一个创建用户的包</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201213354562.png" alt="image-20220201213354562"></p>
-<p>然后需要把我们普通用户的cookie替换上去，这样在登录普通用户的情况下就可以实现垂直越权</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201213501343.png" alt="image-20220201213501343"></p>
-<p>可以看到用户被添加进去了</p>
-<h1 id="目录遍历漏洞"><a href="#目录遍历漏洞" class="headerlink" title="目录遍历漏洞"></a>目录遍历漏洞</h1><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201214157517.png" alt="image-20220201214157517"></p>
-<p>目录遍历，可以读取目录中的任意文件。</p>
-<h1 id="敏感信息泄露"><a href="#敏感信息泄露" class="headerlink" title="敏感信息泄露"></a>敏感信息泄露</h1><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201215102010.png" alt="image-20220201215102010"></p>
-<p>源代码中有测试账号可以看到。</p>
-<p>直接就登录进去了，我还用dirsearch扫了半天。。</p>
-<h1 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h1><p>(๑╹◡╹)ﾉ”ez啦~</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201220501911.png" alt="image-20220201220501911"></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201220448090.png" alt="image-20220201220448090"></p>
-<p>我们先来一个正常的试一下。</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201220533182.png" alt="image-20220201220533182"></p>
-<p>报错了。</p>
-<p>好的不会了，序列化一生之敌！！！！！！！！！！！</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43233085/article/details/104143518">(38条消息) pikachu靶场 ：十二、PHP反序列化_CNwanku的博客-CSDN博客_pikachu 反序列化</a></p>
-<h1 id="xxe"><a href="#xxe" class="headerlink" title="xxe"></a>xxe</h1><p>XXE -“xml external entity injection”<br>                既”xml外部实体注入漏洞”。<br>                概括一下就是”攻击者通过向服务器注入指定的xml实体内容,从而让服务器按照指定的配置进行执行,导致问题”<br>                也就是说服务端接收和解析了来自用户端的xml数据,而又没有做严格的安全控制,从而导致xml外部实体注入。</p>
-<pre><code>            具体的关于xml实体的介绍,网络上有很多,自己动手先查一下。                
-            现在很多语言里面对应的解析xml的函数默认是禁止解析外部实体内容的,从而也就直接避免了这个漏洞。
-            以PHP为例,在PHP里面解析xml用的是libxml,其在≥2.9.0的版本中,默认是禁止解析xml外部实体内容的。
-            
-            本章提供的案例中,为了模拟漏洞,通过手动指定LIBXML_NOENT选项开启了xml外部实体解析。             
-</code></pre>
-<p>xxe我也不是很会，过几天学一学</p>
-<p><code>&lt;?xml version = &quot;1.0&quot;?&gt; &lt;!DOCTYPE note [   &lt;!ENTITY hacker &quot;xxe&quot;&gt; ]&gt; &lt;name&gt;&amp;hacker;&lt;/name&gt;</code></p>
-<p>这个是payload</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223315820.png" alt="image-20220201223315820"></p>
-<h1 id="url重定向"><a href="#url重定向" class="headerlink" title="url重定向"></a>url重定向</h1><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223138435.png" alt="image-20220201223138435"></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223147548.png" alt="image-20220201223147548"></p>
-<p>感觉和远程文件包含差不多</p>
-<h1 id="ssrf"><a href="#ssrf" class="headerlink" title="ssrf"></a>ssrf</h1><h2 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223415905.png" alt="image-20220201223415905"></p>
-<p>发现后面跟了个url参数</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223448116.png" alt="image-20220201223448116"></p>
-<p>伪造一个url</p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223500719.png" alt="image-20220201223500719"></p>
-<h2 id="file-get-content"><a href="#file-get-content" class="headerlink" title="file_get_content"></a>file_get_content</h2><p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223540152.png" alt="image-20220201223540152"></p>
-<p>又有参数<img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223600441.png" alt="image-20220201223600441"></p>
-<p>额</p>
-<p>搜了下正确的用法是用伪协议读取文件</p>
-<p><code>192.168.32.104/pikachu/vul/ssrf/ssrf_fgc.php?file=php://filter/read=convert.base64-encode/resource=http://127.0.0.1/phpinfo.php</code></p>
-<p><img src="/2022/02/01/pikachu%E9%9D%B6%E5%9C%BA%E9%80%9A%E5%85%B3/image-20220201223723101.png" alt="image-20220201223723101"></p>
-<p>base读取成功</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -772,7 +616,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">175</span>
+          <span class="site-state-item-count">176</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
