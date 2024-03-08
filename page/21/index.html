@@ -255,6 +255,95 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/02/19/%E9%80%9A%E8%BF%87linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9B%E5%85%A5%E5%86%85%E7%BD%91%E5%90%8E%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E8%BE%BE%E5%88%B0%E5%9F%9F%E6%8E%A7%E7%9A%84%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/19/%E9%80%9A%E8%BF%87linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9B%E5%85%A5%E5%86%85%E7%BD%91%E5%90%8E%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E8%BE%BE%E5%88%B0%E5%9F%9F%E6%8E%A7%E7%9A%84%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">通过linux服务器进入内网后如何快速达到域控的思路总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-02-19 13:12:01 / 修改时间：13:12:24" itemprop="dateCreated datePublished" datetime="2023-02-19T13:12:01+08:00">2023-02-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="通过linux服务器进入内网后如何快速达到域控的思路总结"><a href="#通过linux服务器进入内网后如何快速达到域控的思路总结" class="headerlink" title="通过linux服务器进入内网后如何快速达到域控的思路总结"></a><strong>通过linux服务器进入内网后如何快速达到域控的思路总结</strong></h1><p>此文章为转发，方便日后查阅。</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv20125695">通过linux服务器进入内网后如何快速达到域控的思路总结 - 哔哩哔哩 (bilibili.com)</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linux服务器的resolve.conf 中dns可能会设置为域控</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查/etc/krb5.conf  </span><br><span class="line"></span><br><span class="line">Azure 中的vm可以通过配置kerberos将vm加入托管域，使Azure AD域账户通过ssh登录linux服务器</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查smb.conf / 查mnt cifs挂载</span><br><span class="line"></span><br><span class="line">linux 主机连接windows 445 smb共享文件夹有两种方式，一种是通过samba-client客户端，一种是通过mount cifs去挂载共享文件夹的cifs文件系统，可以查看samba-client 的配置文件，或者查看.bash_history查看连接历史，这里连接的大概率不是域控主机，但可能是域内的nas或域内的服务器，小概率会是开发的测试机，不管怎么样，都离我们的目标更近了一步，而且nas里面有敏感信息正常吗，很正常啊</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">找ad登录验证的web服务器</span><br><span class="line"></span><br><span class="line">在大型组织的内网，很可能存在通过域进行身份验证的服务器，包括但不限于通过ad账号验证的erp、crm系统、邮箱系统或域账号管控系统，通过web端口扫描找到对应的服务器并尝试对web系统、数据库弱口令等各种姿势去getshell，在进入内网后的众多web系统中可以提高对他的渗透优先级</span><br><span class="line"></span><br><span class="line">拿到后可以在web源码或配置文件中找到ad服务器的ip端口等信息，如果数据库保存了账号密码明文很好，但大概率是加密后的账号密码，可以改源码加个后门把域账号密码明文保存下来</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">找ad账号验证的vdi管控或登录系统（Crtrix ADC、Vcenter、国内某些厂商的VDI管控平台等等）</span><br><span class="line"></span><br><span class="line">这里的vdi系统其实也是套web系统，但因为这些网络设备如果是登录系统拿到shell权限后大概率会跨网段进入域控和vdi主机所在的网段，如果是管控系统的话，如果都是vdi主机组的域，那基本就结束了，所以单独拿出来说一下。拿到对应的服务器权限后一般都会有一个本地与域控服务器通信的域控账号将设备注册到域控中，密码不出意外都是加密的，这里吹一波msf，在cs烂大街的情况下，还是有一堆痴心不改的老外愿意把这些关键设备的配置文件解密脚本更新到msf的插件中</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">找WSUS服务器/EDR终端管控服务器/SCCM服务器</span><br><span class="line"></span><br><span class="line">WSUS就是windows推送更新补丁包的服务器，拿到之后可以给域控分发补丁（exe或恶意命令）然后打域控，当然不是扫135看到WSUS就一定有域，这玩意也能放到工作组里用</span><br><span class="line"></span><br><span class="line">SCCM是 Microsoft 的一种解决方案，可在整个组织中以可扩展的方式增强管理。SCCM 允许大量功能，包括将 PowerShell 脚本推送到其客户端、将命令推送到其客户端、在客户端上打开远程终端会话、在其客户端上安装软件、更改其客户端上的策略等等。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano/cat /var/log/secure</span><br><span class="line"></span><br><span class="line">emm...如果拿到内网web系统，查下端口访问，可能能看到办公机访问的ip或办公网网关ip，对所在网段389或636,3268,3269（GC服务）端口扫描可能会有收获</span><br><span class="line"></span><br><span class="line">查看ssh连接历史的ip也是一个意思，快速定位可达windows主机的IP段，尽量少在内网大的网段扫描探测</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">135端口扫描</span><br><span class="line"></span><br><span class="line">OXID find是yyds啦</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openvpn配置文件</span><br><span class="line"></span><br><span class="line">适用的环境比较奇怪，现在的云主机比较多嘛，有时候源码在内网的gitlab上，或者有些其他需要与内网资源交互的奇特场景，会给服务器上配个vpn，拿到账号密码ip端口就去连内网去搞内网渗透去了，像vpn账号嘛、邮箱账号嘛、sso账号嘛和域控账号密码一毛一样很正常嘛，如果能在主机上能翻到ADFS sso账号简直中奖好嘛，这一块主要看操作的人在主机上留了什么东西了</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gitlab信息收集</span><br><span class="line"></span><br><span class="line">就像前面说的内网存在一些需要ad验证的web系统，如果拿到gitlab之类的源码平台搜索关键字ldap在源码中、注释中可能会找到测试的ad账号和服务器地址，如果最新的版本中找不到，记得在老的commit中翻一下，git系统的位置可以在拿到权限的服务器源码的.git的config之类的配置文件中找</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/02/17/%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91%E9%87%87%E7%94%A8%E7%BA%AFpy3%E5%B7%A5%E5%85%B7%E5%A4%8D%E7%8E%B0ms17010/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -412,110 +501,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/02/12/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB-EHole/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/02/12/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB-EHole/" class="post-title-link" itemprop="url">指纹识别-EHole</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-02-12 01:21:03 / 修改时间：01:21:39" itemprop="dateCreated datePublished" datetime="2023-02-12T01:21:03+08:00">2023-02-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">-tools</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="指纹识别-EHole"><a href="#指纹识别-EHole" class="headerlink" title="指纹识别-EHole"></a>指纹识别-EHole</h1><h1 id="EHole"><a href="#EHole" class="headerlink" title="EHole"></a>EHole</h1><p>因为这个工具是go写的，下下来之后需要自己编译一下。浅看了一下，先换源再编译。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">go env -w GO111MODULE=on</span><br><span class="line">go env -w GOPROXY=https://goproxy.cn,direct</span><br><span class="line">#此命令需要在go.mod同级目录下执行。</span><br><span class="line">go mod tidy</span><br><span class="line"></span><br><span class="line">最后</span><br><span class="line">go build</span><br></pre></td></tr></table></figure>
-
-<p>现在可以开始使用一些参数</p>
-<p>其实他readme文件里面写的也很清楚了啊</p>
-<h3 id="00x02-使用："><a href="#00x02-使用：" class="headerlink" title="[# 00x02] 使用："></a>[# 00x02] 使用：</h3><p>配合[红队中易被攻击的一些重点系统漏洞整理]食用效果更佳：<a target="_blank" rel="noopener" href="https://forum.ywhack.com/bountytips.php?Vulnerability">https://forum.ywhack.com/bountytips.php?Vulnerability</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">EHole version: 2.0</span><br><span class="line">Usage: Ehole [-f|-l] [parameter]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -f string</span><br><span class="line">        Fofa searches <span class="keyword">for</span> assets , supports IP and IP segments。(192.168.1.1 | 192.168.1.0/24)</span><br><span class="line">  -ftime string</span><br><span class="line">        fofa timeout (default <span class="string">&quot;10&quot;</span>)</span><br><span class="line">  -h    this <span class="built_in">help</span></span><br><span class="line">  -json string</span><br><span class="line">        out json</span><br><span class="line">  -l string</span><br><span class="line">        Probe based on <span class="built_in">local</span> file</span><br><span class="line">  -<span class="built_in">log</span> string</span><br><span class="line">        Log file name (default <span class="string">&quot;server.log&quot;</span>)</span><br><span class="line">  -t string</span><br><span class="line">        thread (default <span class="string">&quot;100&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>EHole(棱洞)2.0提供了<strong>两种</strong>指纹识别方式，可从本地读取识别，也可以从FOFA进行批量调用API识别(需要FOFA密钥)，同时支持结果JSON格式输出。</p>
-<p><strong>1.本地识别：</strong></p>
-<p><code>.\ehole.exe finger -l url.txt</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EHole -l url.txt   //URL地址需带上协议,每行一个</span><br></pre></td></tr></table></figure>
-
-<p><strong>2.FOFA识别:</strong></p>
-<p>注意：从FOFA识别需要配置FOFA 密钥以及邮箱，在config.ini内配置好密钥以及邮箱即可使用。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EHole -f 192.168.1.1/24  //支持单IP或IP段</span><br></pre></td></tr></table></figure>
-
-<p><strong>3.结果输出：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EHole -l url.txt -json export.json  //结果输出至export.json文件</span><br></pre></td></tr></table></figure>
-
-<h3 id="00x03-指纹编写："><a href="#00x03-指纹编写：" class="headerlink" title="[# 00x03] 指纹编写："></a>[# 00x03] 指纹编写：</h3><p>EHole(棱洞)2.0改变了原有的指纹识别规则，2.0版指纹从外部文件读入，识别方式：</p>
-<p><strong>指纹格式：</strong></p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">关键字匹配：</span><br><span class="line">&#123;</span><br><span class="line">		<span class="attr">&quot;cms&quot;</span>: <span class="string">&quot;seeyon&quot;</span>,</span><br><span class="line">		<span class="attr">&quot;method&quot;</span>: <span class="string">&quot;keyword&quot;</span>,</span><br><span class="line">		<span class="attr">&quot;location&quot;</span>: <span class="string">&quot;body&quot;</span>,</span><br><span class="line">		<span class="attr">&quot;keyword&quot;</span>: [<span class="string">&quot;/seeyon/USER-DATA/IMAGES/LOGIN/login.gif&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">faviconhash匹配：</span><br><span class="line">&#123;</span><br><span class="line">		<span class="attr">&quot;cms&quot;</span>: <span class="string">&quot;CapRover&quot;</span>,</span><br><span class="line">		<span class="attr">&quot;method&quot;</span>: <span class="string">&quot;faviconhash&quot;</span>,</span><br><span class="line">		<span class="attr">&quot;location&quot;</span>: <span class="string">&quot;body&quot;</span>,</span><br><span class="line">		<span class="attr">&quot;keyword&quot;</span>: [<span class="string">&quot;988422585&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>cms：系统名称</li>
-<li>method：识别方式 (支持三种识别方式，分别为：keyword、faviconhash、regula)</li>
-<li>location：位置（指纹识别位置，提供两个位置，一个为body，一个为header）</li>
-<li>keyword：关键字（favicon图标hash、正则表达式、关键字）</li>
-</ol>
-<p>⚠️注意：keyword支持多关键字匹配，需要所有关键字匹配上才能识别。如：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;keyword&quot;</span>: [<span class="string">&quot;sys/ui/extend/theme/default/style/icon.css&quot;</span>, <span class="string">&quot;sys/ui/extend/theme/default/style/profile.css&quot;</span>]</span><br></pre></td></tr></table></figure>
-
-<h3 id="00x04-使用效果："><a href="#00x04-使用效果：" class="headerlink" title="[# 00x04] 使用效果："></a>[# 00x04] 使用效果：</h3><p><img src="/2023/02/12/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB-EHole/image-20230212011502051.png" alt="image-20230212011502051"></p>
-<p><img src="/2023/02/12/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB-EHole/image-20230212011512364.png" alt="image-20230212011512364"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -587,7 +572,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-count">177</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

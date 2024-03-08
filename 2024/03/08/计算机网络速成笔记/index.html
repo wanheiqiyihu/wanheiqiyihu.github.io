@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wanheiqiyihu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="计算机网络速成笔记【期末复习】7天快速通过计算机网络期末考试｜谢希仁版｜考前急救｜高效通过｜粉丝投稿_哔哩哔哩_bilibili 是这个视频的笔记，方便学习，后面会有我完整的整个笔记。 第一章-计算机网络概念概念计算机网络的定义：计算机网络是指将地理位置不同的具有独立功能的多台计算机及其外部设备，通过通信线路连接起来，在网络操作系统，网络管理软件及网络通信协议的管理和协调下，实现资源共享和信息传递">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络速成笔记">
+<meta property="og:url" content="https://wanheiqiyihu.top/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="十三の博客">
+<meta property="og:description" content="计算机网络速成笔记【期末复习】7天快速通过计算机网络期末考试｜谢希仁版｜考前急救｜高效通过｜粉丝投稿_哔哩哔哩_bilibili 是这个视频的笔记，方便学习，后面会有我完整的整个笔记。 第一章-计算机网络概念概念计算机网络的定义：计算机网络是指将地理位置不同的具有独立功能的多台计算机及其外部设备，通过通信线路连接起来，在网络操作系统，网络管理软件及网络通信协议的管理和协调下，实现资源共享和信息传递">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240305155649194.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240307104812714.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240307112245517.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308002326646.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308004648417.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308121113349.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308121424511.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308171256323.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308172029629.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308172317667.png">
+<meta property="og:image" content="https://wanheiqiyihu.top/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308180020409.png">
+<meta property="article:published_time" content="2024-03-08T11:52:51.000Z">
+<meta property="article:modified_time" content="2024-03-08T11:53:55.299Z">
+<meta property="article:author" content="十三">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wanheiqiyihu.top/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240305155649194.png">
+
+<link rel="canonical" href="https://wanheiqiyihu.top/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>计算机网络速成笔记 | 十三の博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">十三の博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-ctf做题笔记">
+
+    <a href="/categories/Experience" rel="section"><i class="download fa-fw"></i>CTF做题笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-python">
+
+    <a href="/categories/python" rel="section"><i class="download fa-fw"></i>python</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/categories/java" rel="section"><i class="download fa-fw"></i>java</a>
+
+  </li>
+        <li class="menu-item menu-item-读书笔记">
+
+    <a href="/categories/readbook" rel="section"><i class="download fa-fw"></i>读书笔记</a>
+
+  </li>
+        <li class="menu-item menu-item-渗透测试">
+
+    <a href="/categories/penetration" rel="section"><i class="download fa-fw"></i>渗透测试</a>
+
+  </li>
+        <li class="menu-item menu-item-基础">
+
+    <a href="/categories/basic" rel="section"><i class="download fa-fw"></i>基础</a>
+
+  </li>
+        <li class="menu-item menu-item-轮子">
+
+    <a href="/categories/lunzi" rel="section"><i class="download fa-fw"></i>轮子</a>
+
+  </li>
+        <li class="menu-item menu-item-漏洞库">
+
+    <a href="/categories/fuxian" rel="section"><i class="download fa-fw"></i>漏洞库</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/categories/tools" rel="section"><i class="download fa-fw"></i>工具</a>
+
+  </li>
+        <li class="menu-item menu-item-代码审计">
+
+    <a href="/categories/daima" rel="section"><i class="download fa-fw"></i>代码审计</a>
+
+  </li>
+        <li class="menu-item menu-item-逆向">
+
+    <a href="/categories/nixiang" rel="section"><i class="download fa-fw"></i>逆向</a>
+
+  </li>
+        <li class="menu-item menu-item-应急响应">
+
+    <a href="/categories/yingji" rel="section"><i class="download fa-fw"></i>应急响应</a>
+
+  </li>
+        <li class="menu-item menu-item-免杀">
+
+    <a href="/categories/miansha" rel="section"><i class="download fa-fw"></i>免杀</a>
+
+  </li>
+        <li class="menu-item menu-item-靶场">
+
+    <a href="/categories/bachang" rel="section"><i class="download fa-fw"></i>靶场</a>
+
+  </li>
+        <li class="menu-item menu-item-cve申请">
+
+    <a href="/categories/cve" rel="section"><i class="download fa-fw"></i>cve申请</a>
+
+  </li>
+        <li class="menu-item menu-item-c语言">
+
+    <a href="/categories/c" rel="section"><i class="download fa-fw"></i>c语言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算机网络速成笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-03-08 19:52:51 / 修改时间：19:53:55" itemprop="dateCreated datePublished" datetime="2024-03-08T19:52:51+08:00">2024-03-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/basic/" itemprop="url" rel="index"><span itemprop="name">-basic</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="计算机网络速成笔记"><a href="#计算机网络速成笔记" class="headerlink" title="计算机网络速成笔记"></a>计算机网络速成笔记</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PK4y1X7ze/?spm_id_from=333.999.0.0&vd_source=9677a4fa7bea8dacd0d574fb0a2545f9">【期末复习】7天快速通过计算机网络期末考试｜谢希仁版｜考前急救｜高效通过｜粉丝投稿_哔哩哔哩_bilibili</a></p>
+<p>是这个视频的笔记，方便学习，后面会有我完整的整个笔记。</p>
+<h1 id="第一章-计算机网络概念"><a href="#第一章-计算机网络概念" class="headerlink" title="第一章-计算机网络概念"></a>第一章-计算机网络概念</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>计算机网络的定义</strong>：计算机网络是指将地理位置不同的具有独立功能的多台计算机及其外部设备，通过通信线路连接起来，在网络操作系统，网络管理软件及网络通信协议的管理和协调下，实现资源共享和信息传递的计算机系统。</p>
+<p><strong>计算机网络的组成</strong>：通信子网和资源子网。<br>资源子网:提供共享的软件和硬件资源<br>通信子网：提供信息交换的网络结点和通信线路。</p>
+<p><strong>计算机网络的类型：</strong><br>拓扑：星型，树形，总线型，环形，网状结构<br>范围：局域网、城域网、广域网、个人区域网 、互联网<br>传输方式：有线网络、无线网络</p>
+<h2 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a>计算机网络体系结构</h2><p><strong>传输方式:</strong><br>按照传输方向区分：单工、半双工、全双工<br>按照传输对象区分：单播、多播、广播</p>
+<p><strong>数据交换：</strong><br>电路交换：整个报文从源头到终点连续的传输<br>报文交换：整个报文先传输到相邻结点，全部存储下来再查找转发表，再转发到下一个结点。<br>分组交换：将一个报文分成多个分组，传送到相邻结点，再查找转发表，再转发到下一个结点</p>
+<p><strong>数据交换的优缺点:</strong><br>电路：传输可靠，独享带宽<br>报文：无法传输过大数据、共享带宽<br>分组:相对灵活、共享带宽</p>
+<p><strong>网络协议三要素：</strong>语法、语义、时序</p>
+<h2 id="OSI参考模型"><a href="#OSI参考模型" class="headerlink" title="OSI参考模型"></a>OSI参考模型</h2><p><img src="/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240305155649194.png" alt="image-20240305155649194"></p>
+<p>下层为上层服务</p>
+<h1 id="第二章-物理层"><a href="#第二章-物理层" class="headerlink" title="第二章-物理层"></a>第二章-物理层</h1><h2 id="物理层的基本概念"><a href="#物理层的基本概念" class="headerlink" title="物理层的基本概念"></a>物理层的基本概念</h2><p><strong>四大特性</strong>：<br>机械特性：接口是怎样的<br>电气特性：用多少伏的电<br>功能特性:先路上电平电压的特性<br>过程特性：实现不同功能所发射信号的顺序</p>
+<p><strong>两种信号</strong>：<br>模拟信号：特定频段的信号，有更加丰富的表现形式<br>数字信号：不是1就是0</p>
+<p><strong>调制和编码</strong>：<br>调制：模拟信号转换（将任意信号转化成模拟信号）<br>编码：数字信号转换<br>区别：数据可以通过编码手段转换成数字信号，也可以通过调制手段转换成模拟信号。<br>编码的步骤：采样、量化、编码</p>
+<p><strong>传输介质：</strong><br>双绞线：<br>光纤:多模光纤（传输距离2km）和单模光纤（传输距离100km）<br>同轴电缆：淘汰了<br>无线：</p>
+<p><strong>三大部分：</strong><br>源系统：发送数据的一端<br>传输系统：传输过程中的各种传输介质<br>目的系统：接收数据的电脑</p>
+<h2 id="基本通信技术"><a href="#基本通信技术" class="headerlink" title="基本通信技术"></a>基本通信技术</h2><p><strong>四中信道复用技术：</strong><br>频分复用：划分不同的频率来传输信号<br>时分复用：划分不同的时间来传输信号<br>波分复用：根据光波的波长进行传输<br>码分复用：在同一时间同一频率根据传输的数据码来区分</p>
+<p><strong>数据的传输方式：</strong></p>
+<p><strong>通过同时间传输数量分为：</strong><br>串行传输：使用一条数据线，将数据一位一位的依次传输，每一位数据占据一个固定的时间长度。<br>并行传输：数据以组的方式，在多条并行信道上同时进行传输，是在传输中有多个数据位同事在设备之间进行的传输。</p>
+<p><strong>通过数据报文的双方都行为分为：</strong><br>同步传输：在网络中，同步需要接收方和发送放需要同时做好准备。（每个字符都有自己的开始位和停止位）<br>异步传输：将比特分成小组进行传输。发送放可以在任何时候发送，而接收方从不知道他们会在什么时候到达。</p>
+<p><strong>通过传输的信号分为：</strong><br>基带传输：传输数字信号叫基带传输<br>频带传输：传输模拟信号叫做频带传输。</p>
+<h1 id="第三章-数据链路层"><a href="#第三章-数据链路层" class="headerlink" title="第三章-数据链路层"></a>第三章-数据链路层</h1><h2 id="概论"><a href="#概论" class="headerlink" title="概论"></a>概论</h2><p><strong>数据链路层的作用</strong>：提供相邻结点的可靠数据传输。</p>
+<p><strong>帧的概念：</strong><br>数据链路层的协议数据单元<br>帧的组成：帧头、数据、帧尾<br>帧头：源MAC地址、目的MAC地址、类型<br>帧尾：校验</p>
+<p><strong>以太网帧中的MAC和LLC：</strong><br>MAC：介质控制访问，数据帧的封装和卸装、帧的寻址和识别。mac子层的存在<strong>屏蔽了不同物理链路种类的差异性</strong><br>LLC：逻辑控制访问，传输可靠性保障和控制。<strong>实现数据包的分段和重组。</strong></p>
+<p>数据链路层分为上层LLC和下层MAC。<br>LLC对接网络层，MAC对接物理层</p>
+<p><strong>数据链路层的两种传输方式：</strong>单播和广播</p>
+<p><strong>三个基本问题：</strong><br>封装成帧：首部和尾部添加标记<br>透明传输：不管什么样的比特组合，都能在链路上传输<br>差错检测：收到正确的帧就要向发送端发送确认，发送段在一定的期限内若没有收到对方的确认，就认为出现了差错。要重发</p>
+<p><strong>局域网中的设备：</strong><br>集线器：物理层，可以扩大网络的传输距离，同事把所有结点集中在以它为中心的节点上。共享带宽（一层设备）<br>交换机：数据链路层。独享带宽。用于存储转发，作共享。（二层设备）<br>网桥：两个端口的交换机（在物理层和数据链路层之间）（1.5层设备）</p>
+<h2 id="数据链路层的通信协议"><a href="#数据链路层的通信协议" class="headerlink" title="数据链路层的通信协议"></a>数据链路层的通信协议</h2><p><strong>冲突域和广播域：</strong><br>冲突域：交换机的每个端口都是一个冲突域。冲突域只能发生在一个网段<br>广播域：交换机的所有端口都在一个广播域，广播域在一个或多个网段内发生。<br>区别：<br>1.广播域可以跨网段<br>2.冲突域是物理层，广播域是数据链路层<br>3.集线器所有端口都在同一个广播域、冲突域内。<br>4.同意冲突域共享带宽</p>
+<p><strong>虚拟局域网VLAN：</strong><br>作用：将一个物理的LAN划分成多个广播域的技术。<br>优点和目的：<br>1.划分广播域<br>2.增强局域网的安全性<br>3.提高健壮性<br>4.灵活构建工作组</p>
+<p><strong>划分VLAN的方式：</strong><br>基于端口：Access，trunk，hybird，原理：某个端口只允许VLANxxx的数据通过。<br>基于子网：<br>基于MAC地址：<br>基于协议：<br>基于匹配策略：</p>
+<h2 id="CSMA-CD"><a href="#CSMA-CD" class="headerlink" title="CSMA/CD"></a>CSMA/CD</h2><p>概念：载波侦听多路访问/冲突检测，是广播型信道中采用一种随机访问技术的竞争型访问方法，具有多目标地址的特点。总线型网络传输数据。</p>
+<p>四大要点：<br>1.先听再发<br>2.边发边听<br>3.冲突停止<br>4.延迟后发</p>
+<p>​    总的来说就是用来检测总线型网络是否冲突的一个方法</p>
+<h2 id="PPP协议"><a href="#PPP协议" class="headerlink" title="PPP协议"></a>PPP协议</h2><p>点对点通信是一对一信道，因此不会发生碰撞。<br>因此比较简单，采用PPP协议,其中ppp协议就是用户计算机和ISP进行通信时使用的数据链路层的协议.</p>
+<p>ppp最初设计是为两个对等结点之间的IP流量传输提供一种<strong>封装协议</strong></p>
+<h2 id="CRC-循环冗余校验"><a href="#CRC-循环冗余校验" class="headerlink" title="CRC-循环冗余校验"></a>CRC-循环冗余校验</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PK4y1X7ze?p=14&spm_id_from=pageDriver&vd_source=9677a4fa7bea8dacd0d574fb0a2545f9">CRC_哔哩哔哩_bilibili</a></p>
+<h1 id="第四章-网络层"><a href="#第四章-网络层" class="headerlink" title="第四章-网络层"></a>第四章-网络层</h1><p>作用：实现两个端系统之间的数据透明传输，具体功能包括寻址和路由选择、连接的建立、保持和终止等。（提供端到端的服务）</p>
+<p>单位：分组</p>
+<h2 id="网际层协议"><a href="#网际层协议" class="headerlink" title="网际层协议"></a>网际层协议</h2><p><strong>ARP地址解析协议</strong><br>根据IP地址获取物理地址</p>
+<p><strong>ICMP网际控制报文协议</strong><br>通过ICMP传输控制消息，控制消息是指网络通不通、主机是否可达、路由是否可用等网络本身的消息。ping</p>
+<p><strong>IGMP网际组管理协议</strong>：<br>是用于管理网路协议多播组成员的一种通信协议。IP主机和相邻的路由器利用IGMP来创建多播组的组成员。</p>
+<p><strong>RARP反地址解析协议</strong>：<br>根据物理地址找到IP地址</p>
+<h2 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h2><p><strong>概念</strong>：是由IP协议提供的一种统一的地址格式,它为互联网上的每一个网络和每一条主机分配一个逻辑地址,以此来屏蔽物理地址的差异</p>
+<p><strong>组成</strong>：一个IP地址由4个字节.32位组成,一般用点分十进制的方式表现</p>
+<p><strong>IP地址和MAC地址的区别</strong>：<br>1.IP地址是逻辑地址,MAC地址是物理地址<br>2.MAC地址是唯一的但是IP地址不是唯一的<br>3.MAC地址主要是工作在第二层，IP地址工作在网络层<br>4.MAC地址48位，IP地址32位<br>5.IP地址的分配取决于网络拓扑,MAC地址分配取决于制造商</p>
+<p><strong>组成2：</strong>由主机地址和网络地址组成的<br>主机地址：标识某一台设备的地址<br>网络地址：标识某一个网段的地址</p>
+<p><strong>子网掩码</strong>：它是一种用来指明一个IP地址都哪些位标识的是主机所在的子网,以及哪些位标识的是主机的位掩码.<strong>子网掩码不能单独存在，只能结合IP地址一起使用。它唯一的作用就是区分网络号和主机号。</strong></p>
+<p><img src="/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240307104812714.png" alt="image-20240307104812714"></p>
+<p>网络地址：主机号全为0的地址不可用<br>广播地址：主机号为全1的地址（实体收到广播地址的东西之后，会发给所有端口，不可用）<br>回环地址:127.0.0.1  也不可用</p>
+<p><img src="/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240307112245517.png" alt="image-20240307112245517"></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PK4y1X7ze/?p=17&spm_id_from=pageDriver&vd_source=9677a4fa7bea8dacd0d574fb0a2545f9">4.2 IP地址介绍+IP地址分类_哔哩哔哩_bilibili</a></p>
+<h2 id="子网划分"><a href="#子网划分" class="headerlink" title="子网划分"></a>子网划分</h2><p>通过修改子网掩码，起到更加精细划分网络号和主机号的作用。</p>
+<p>如何判断一个IP地址的网络号:通过子网掩码，比如192.168.1.0000 0000这个的子网掩码就是24位，因为他前面三个都是网络号，而192.168.1.1000 0000的子网掩码就是25位，因为多了一位子网号，也就是那个1。<br>那么就可以推测，192.168.1.1000 0000这个网段能容纳的个数就是127台设备他的子网掩码就是，255.255.255.128（最后是128是因为1000 0000的十进制就是128）</p>
+<p>同样的一个写法，但是子网掩码不同，能证明他连接的设备，信息点，是不同的，</p>
+<p><img src="/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308002326646.png" alt="image-20240308002326646"><br>这是一个例题，来<br>这个是一个C类网段，这是可以连接254台主机的<br>划分的子网数必须是2的次幂<br>那我们就给他31个给他，8个子网，也就是这样分配192.168.1.<strong>000</strong>0 0000加粗的是网络号，那么他的子网掩码就是27位，因为前面三个网络号再加3位网络号就是24+3，所以就是27.<br>而地址范围就是，每一个子网都列出来，如下<br><img src="/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308004648417.png" alt="image-20240308004648417"><br>记得27是子网掩码<br>而网络地址，只要主机号全0就是网络地址<br>广播地址，主机号全1都就是广播地址</p>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p><strong>概念</strong>：路由是指分组从源到目的地时，决定端到端路径的网络范围的进程。</p>
+<p>路由是网络层最主要的工作任务</p>
+<p><strong>路由表</strong>：是一个存储在路由器或者联网计算机中的电子表格或类数据库。路由表存储着只想特定网络地址的路径。</p>
+<p><strong>路由器</strong>：网络层的基本设备，作用是数据转发。一个端口代表一个网段，路由器中存放着通往各个网段的表格，叫做路由表</p>
+<p><strong>网关</strong>：用于两个高层协议不同的网络互联。网关既可以用于广域网互连，也可以用于局域网互连</p>
+<p><strong>路由的获取方式</strong>：直连路由，静态路由，动态路由</p>
+<p><strong>路由的配置方式</strong>：<br>静态路由：由管理员手工配置，配置方便。适用于小型网络<br>缺省路由：是一种特殊的路由，当报文没有在路由表中找到匹配的具体表项时才使用的路由。<br>动态路由：通过动态路由协议来实现不同网段的路由互通。</p>
+<h2 id="动态路由协议"><a href="#动态路由协议" class="headerlink" title="动态路由协议"></a>动态路由协议</h2><p><img src="/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308121113349.png" alt="image-20240308121113349"></p>
+<p>OSPF是基于划分区域来的，<br><img src="/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308121424511.png" alt="image-20240308121424511"></p>
+<h1 id="第五章-传输层"><a href="#第五章-传输层" class="headerlink" title="第五章-传输层"></a>第五章-传输层</h1><p>传输层的主要作用是提供一个端到端的服务。</p>
+<p>从通信和信息处理的角度看，传输层向上层应用层提供通信服务。</p>
+<p><img src="/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308171256323.png" alt="image-20240308171256323"></p>
+<p>传输层的两个重要协议，TCP和UDP<br><img src="/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308172029629.png" alt="image-20240308172029629"><br>TCP的三次握手和四次挥手</p>
+<p>UDP<br><img src="/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308172317667.png" alt="image-20240308172317667"></p>
+<p>TCP和UDP区别：<br>1.UDP是无连接的,TCP是基于连接的<br>2.TCP是可靠的,UDP是不可靠的 </p>
+<h1 id="第六章-应用层"><a href="#第六章-应用层" class="headerlink" title="第六章-应用层"></a>第六章-应用层</h1><p>应用层的作用，通过位于不同主机中的多个应用进程之间的通信和协同工作来完成。应用层的内容就是具体定义通信规则。</p>
+<p>应用层中常见的协议，如下图</p>
+<p><img src="/2024/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0/image-20240308180020409.png" alt="image-20240308180020409"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/02/24/socks%E4%BB%A3%E7%90%86%E6%A3%80%E6%B5%8B%E8%BD%AE%E5%AD%90/" rel="prev" title="# socks代理检测轮子">
+      <i class="fa fa-chevron-left"></i> # socks代理检测轮子
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%80%9F%E6%88%90%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">计算机网络速成笔记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">第一章-计算机网络概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.</span> <span class="nav-text">计算机网络体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.3.</span> <span class="nav-text">OSI参考模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E7%89%A9%E7%90%86%E5%B1%82"><span class="nav-number">3.</span> <span class="nav-text">第二章-物理层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%B1%82%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">3.1.</span> <span class="nav-text">物理层的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E9%80%9A%E4%BF%A1%E6%8A%80%E6%9C%AF"><span class="nav-number">3.2.</span> <span class="nav-text">基本通信技术</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="nav-number">4.</span> <span class="nav-text">第三章-数据链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%AE%BA"><span class="nav-number">4.1.</span> <span class="nav-text">概论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.2.</span> <span class="nav-text">数据链路层的通信协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSMA-CD"><span class="nav-number">4.3.</span> <span class="nav-text">CSMA&#x2F;CD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PPP%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.4.</span> <span class="nav-text">PPP协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CRC-%E5%BE%AA%E7%8E%AF%E5%86%97%E4%BD%99%E6%A0%A1%E9%AA%8C"><span class="nav-number">4.5.</span> <span class="nav-text">CRC-循环冗余校验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-number">5.</span> <span class="nav-text">第四章-网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E9%99%85%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">5.1.</span> <span class="nav-text">网际层协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP"><span class="nav-number">5.2.</span> <span class="nav-text">IP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86"><span class="nav-number">5.3.</span> <span class="nav-text">子网划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1"><span class="nav-number">5.4.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE"><span class="nav-number">5.5.</span> <span class="nav-text">动态路由协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="nav-number">6.</span> <span class="nav-text">第五章-传输层</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E5%BA%94%E7%94%A8%E5%B1%82"><span class="nav-number">7.</span> <span class="nav-text">第六章-应用层</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="十三"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">十三</p>
+  <div class="site-description" itemprop="description">潜心学习，不骄不躁</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">177</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">十三</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-tsumiki"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

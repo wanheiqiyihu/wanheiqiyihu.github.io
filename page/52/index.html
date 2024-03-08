@@ -255,6 +255,92 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="十三">
+      <meta itemprop="description" content="潜心学习，不骄不躁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十三の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/" class="post-title-link" itemprop="url">bugku—source  用 kali Linux 里面的工具下载git源码</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-01-04 19:17:11 / 修改时间：19:22:42" itemprop="dateCreated datePublished" datetime="2022-01-04T19:17:11+08:00">2022-01-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="bugku—source-用-kali-Linux-里面的工具下载git源码"><a href="#bugku—source-用-kali-Linux-里面的工具下载git源码" class="headerlink" title="bugku—source  用 kali Linux 里面的工具下载git源码"></a>bugku—source  用 kali Linux 里面的工具下载git源码</h1><p><img src="/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/image-20220104190602170.png" alt="image-20220104190602170"></p>
+<p>打开题目后发现git泄露</p>
+<p>用githack下载下来之后</p>
+<p><img src="/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/image-20220104190631477.png" alt="image-20220104190631477"></p>
+<p>根据题目的用linux环境，在Linux中去下载源码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -r url</span><br></pre></td></tr></table></figure>
+
+<p>-r表示递归的意思，就是把这个目录所有的文件下载下来</p>
+<p><img src="/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/image-20220104191045364.png" alt="image-20220104191045364"></p>
+<p>下载下来发现文件依然没有，用ls -a发现文件被隐藏了</p>
+<p><img src="/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/image-20220104191119817.png" alt="image-20220104191119817"></p>
+<p>访问.git/logs查看日志文件</p>
+<p><img src="/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/image-20220104191218579.png" alt="image-20220104191218579"></p>
+<p>然后git reflog</p>
+<p>查看文件的更新日志</p>
+<p><img src="/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/image-20220104191314799.png" alt="image-20220104191314799"></p>
+<p>然后用git show （加开头黄色那坨字符串）去一个一个查看</p>
+<p><img src="/2022/01/04/bugku%E2%80%94source-%E7%94%A8-kali-Linux-%E9%87%8C%E9%9D%A2%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BDgit%E6%BA%90%E7%A0%81/image-20220104191454285.png" alt="image-20220104191454285"></p>
+<p>发现flag</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/01/03/%E4%B8%83%E3%80%81%E5%AD%A6%E4%B9%A0py%EF%BC%9A%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -608,105 +694,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="https://wanheiqiyihu.top/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="十三">
-      <meta itemprop="description" content="潜心学习，不骄不躁">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十三の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/" class="post-title-link" itemprop="url">攻防世界 mfw git泄露</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-01-02 10:46:46 / 修改时间：10:49:16" itemprop="dateCreated datePublished" datetime="2022-01-02T10:46:46+08:00">2022-01-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Experience/" itemprop="url" rel="index"><span itemprop="name">-Experience</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="攻防世界-mfw-git泄露"><a href="#攻防世界-mfw-git泄露" class="headerlink" title="攻防世界 mfw git泄露"></a>攻防世界 mfw git泄露</h1><p>由于昨天才学了git，找一道题来练练手</p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102092755185.png" alt="image-20220102092755185"></p>
-<p>点进去在about页面发现git关键词，访问.git目录</p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102092836849.png" alt="image-20220102092836849"></p>
-<p>存在泄露</p>
-<p>用githack把源码下载下来</p>
-<p>下载下来后发现一个flag.php</p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102093430458.png" alt="image-20220102093430458"></p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102093531927.png" alt="image-20220102093531927"></p>
-<p>再看看其他的php</p>
-<p>在index.php中有这样一段php</p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102093735231.png" alt="image-20220102093735231"></p>
-<p>asserter()函数可以吧字符串当成php执行，这page又没有过滤，然后就想到用system来读取flag</p>
-<p>先试一下吧strpos给注释掉</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?page=%27).phpinfo();//</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102100454145.png" alt="image-20220102100454145"></p>
-<p>芜湖！</p>
-<p>最后用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?page=&#x27;).system(cat templates/flag.php);//</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102100753784.png" alt="image-20220102100753784"></p>
-<p>要打开源码才看得见</p>
-<p><img src="/2022/01/02/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-mfw-git%E6%B3%84%E9%9C%B2/image-20220102102441825.png" alt="image-20220102102441825"></p>
-<p>然后又看到了另一种方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload:?page=abc&#x27;) or system(&quot;cat templates/flag.php&quot;);//</span><br></pre></td></tr></table></figure>
-
-<p>$file =templates/ abc’) or system(“cat templates/flag.php”);// “.php”<br> 因为在strpos中只传入了abc，所以其肯定返回false，在利用or让其执行system函数，再用” // “将后面的语句注释掉</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xhds/p/12255609.html">PHP代码执行漏洞 - 笑花大王 - 博客园 (cnblogs.com)</a></p>
-<p>其他泄露：<br>.svn源码泄露：当可以访问到/.svn/entries的时候，就证明存在。<br>DS_Store 文件泄露：当访问/.ds_store可以访问的到，就证明存在。<br>.hg 源码泄露：当访问/.hg存在的时候，就证明存在该漏洞。<br>常见编辑器备份文件泄露：<br>http://[ip]/.test.php.swp<br>http://[ip]/test.php.bak<br>http://[ip]/test.jsp.old<br>http://[ip]/cgi~<br>http://[ip]/index.php~</p>
-<p>or用法补充</p>
-<p>经常看到这样的语句：<br>file=fopen(file=fopen(filename, ‘r’) or die(“抱歉，无法打开: filename”);or在这里是这样理解的，因为在PHP中并不区分数据类型，所以filename”);or在这里是这样理解的，因为在PHP中并不区分数据类型，所以file既可以是int也可以bool，所以这样的语句不会报错。但其处理过程可能有些朋友不大明白。<br>其实在大多数的语言中， bool or bool这样的语句中，如果前一个值为真后一个值就不会再判断了。这里也是的，所以如果fopen函数执行正确的话，会返回一个大于0的int值（这其实就是“真”），后面的语句就不会执行了。如果fopen函数执行失败，就会返回false，那么就会判断后面的表达式是否为真了。<br>结果执行了die()之后，不管返回什么，程序都已经停止执行了，并且显示指定的出错信息，也就达到了调试的目的。<br>就这样。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -778,7 +765,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-count">177</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
